@@ -45,11 +45,7 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
             return (
               <SwiperSlide key={index}>
                 <Link
-                  href={`${
-                    item?.category_url === null && item?.category_url === ""
-                      ? `/${item?.permalink}`
-                      : `/${item?.category_url}/${item?.permalink}`
-                  }`}
+                  href={`/${item?.category_url}/${item?.permalink}`}
                   style={{ color: "#27304e" }}
                 >
                   <div className="blog-card">
