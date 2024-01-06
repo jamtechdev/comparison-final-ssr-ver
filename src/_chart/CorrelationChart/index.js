@@ -181,7 +181,7 @@ function CorrelationChart(props) {
         tooltip.transition().duration(300).style("opacity", 1);
         tooltip
           .html(
-            `<div class="tooltip-font"><span style="margin-right:4px">${
+            `<div className="tooltip-font"><span style="margin-right:4px">${
               data.label
             }</span><span>${
               data.productCount ? `(${data.productCount})` : ""

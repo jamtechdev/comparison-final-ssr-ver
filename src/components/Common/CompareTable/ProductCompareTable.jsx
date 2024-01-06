@@ -267,19 +267,19 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                 {products[0].technical_score_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0].technical_score_descriptions?.importance && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>Importance: </b>
                         {products[0].technical_score_descriptions?.importance}
                       </p>
                     )}
                     {products[0].technical_score_descriptions?.description && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>What it is: </b>{" "}
                         {products[0].technical_score_descriptions?.description}
                       </p>
                     )}
                     {products[0].technical_score_descriptions?.when_matters && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>When it matters: </b>{" "}
                         {products[0].technical_score_descriptions?.when_matters}
                       </p>
@@ -301,20 +301,20 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                 {products[0].users_rating_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0].users_rating_descriptions?.importance && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>Importance: </b>
                         {products[0].users_rating_descriptions?.importance}
                       </p>
                     )}
                     {products[0].users_rating_descriptions?.description && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>What it is: </b>{" "}
                         {products[0].users_rating_descriptions?.description}
                       </p>
                     )}
                     {products[0].technical_score_descriptions
                       ?.when_it_matters && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>When it matters: </b>{" "}
                         {
                           products[0].technical_score_descriptions
@@ -338,7 +338,7 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                   <div className="tooltip-display-content">
                     {products[0].ratio_qulitiy_points_descriptions
                       ?.importance && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>Importance: </b>
                         {
                           products[0].ratio_qulitiy_points_descriptions
@@ -348,7 +348,7 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                     )}
                     {products[0].ratio_qulitiy_points_descriptions
                       ?.description && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>What it is: </b>{" "}
                         {
                           products[0].ratio_qulitiy_points_descriptions
@@ -358,7 +358,7 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                     )}
                     {products[0].technical_score_descriptions
                       ?.when_it_matters && (
-                      <p class="mb-2">
+                      <p className="mb-2">
                         <b>When it matters: </b>{" "}
                         {
                           products[0].technical_score_descriptions
@@ -434,7 +434,7 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                               <div className="tooltip-display-content">
                                 {catAttribute?.importance && (
                                   <p
-                                    class="mb-2"
+                                    className="mb-2"
                                     style={{ color: "rgb(133, 178, 241)" }}
                                   >
                                     <b style={{ color: "rgb(39 48 78 / 70%)" }}>
@@ -445,14 +445,14 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                                 )}
 
                                 {catAttribute?.description && (
-                                  <p class="mb-2">
+                                  <p className="mb-2">
                                     <b>What it is: </b>
                                     {catAttribute?.description}
                                   </p>
                                 )}
 
                                 {catAttribute?.when_matters && (
-                                  <p class="mb-2">
+                                  <p className="mb-2">
                                     <b>When it matters: </b>{" "}
                                     {catAttribute?.when_matters}
                                   </p>

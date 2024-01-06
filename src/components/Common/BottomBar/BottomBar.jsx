@@ -5,15 +5,10 @@ import React, { useState } from "react";
 const BottomBar = React.memo(
   ({
     isCollapsed,
-    setIsCollapsed,
     handleToggleCollapse,
     manageCollapsedDiv,
-    setManageCollapsedDiv,
     handleManageCollapsedDiv,
     compareGuideData,
-    setCompareGuideData,
-    handleComparedProduct,
-    guideComparePro,
   }) => {
     const router = useRouter();
     let routeParts = [];
