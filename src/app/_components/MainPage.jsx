@@ -10,6 +10,7 @@ import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import Image from 'next/image';
+
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
   const [isFocused, setIsFocused] = useState(false);

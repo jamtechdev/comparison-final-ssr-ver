@@ -45,7 +45,7 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
             return (
               <SwiperSlide key={index}>
                 <Link
-                  href={`/blog${
+                  href={`${
                     item?.category_url === null && item?.category_url === ""
                       ? `/${item?.permalink}`
                       : `/${item?.category_url}/${item?.permalink}`
@@ -64,7 +64,7 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
                         height={0}
                         sizes="100%"
                         alt=""
-                      />  
+                      />
                       <p className="dates">{item.published_at}</p>
                     </div>
                     <span className="blog-title">{item.title}</span>

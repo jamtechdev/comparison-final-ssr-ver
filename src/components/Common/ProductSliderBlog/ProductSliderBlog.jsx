@@ -1,4 +1,4 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+"use client";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Pagination } from "swiper";
@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import Link from "next/link";
-export default function ProductSlider({ favSlider }) {
+export default function ProductSliderBlog({ favSlider }) {
   const [showFullData, setShowFullData] = useState(false);
 
   const toggleShowFullData = () => {

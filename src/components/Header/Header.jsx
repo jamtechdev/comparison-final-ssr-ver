@@ -249,9 +249,9 @@ export default function Header({headerData}) {
               <li onClick={() => setIsOpen(true)} role="button">
                 Compare
               </li>
-              <li>
+              {/* <li>
                 <Link href="/blogs">Blog</Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="#">How we rank</Link>
               </li>
