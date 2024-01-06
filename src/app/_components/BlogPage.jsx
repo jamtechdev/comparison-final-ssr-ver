@@ -10,7 +10,7 @@ import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 
 export default function BlogPage({ slug, blogData }) {
-  console.log(blogData);
+
   return (
     <>
       <section className="product-header">

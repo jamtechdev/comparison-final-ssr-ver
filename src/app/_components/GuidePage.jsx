@@ -33,7 +33,7 @@ import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCom
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
 export default function GuidePage({ slug, guideData }) {
-    console.log(guideData)
+   
     useChart();
     const guide = guideData[0].data;
     const products = guideData[1].data.products

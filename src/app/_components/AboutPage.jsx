@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 function AboutPage({ aboutData }) {
-  console.log(aboutData, "aboutData");
   return (
     <>
       <section className="breadcrumb-section">
