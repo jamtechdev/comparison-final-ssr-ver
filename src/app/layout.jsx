@@ -1,0 +1,27 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./globals.css";
+import "../../public/font/font.css";
+import Layout from "@/components/Layout";
+import { getterService } from "@/_services";
+export default async function RootLayout({ children }) {
+  const footerData = await getterService.getFooterData()
+  const headerData = await getterService.getTopNavBarData()
+  return (
+    <html lang="en">
+      <link rel="icon" href={`https://panel.mondopedia.it/logos/app_favicon.ico`} sizes="any" />
+      <body>
+        <Layout footerData={footerData} headerData={headerData}>{children}</Layout>
+      </body>
+    </html>
+  );
+}
+export async function generateMetadata({ params }) {
+  return {
+    generator: 'Comparison web',
+    description: 'Comparison web',
+    applicationName: 'Comparison web',
+    referrer: 'origin-when-cross-origin',
+    keywords: ['compare', 'product'],
+    description: "Comparision web",
+  }
+}
