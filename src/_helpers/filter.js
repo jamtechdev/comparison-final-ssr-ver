@@ -284,11 +284,10 @@ export const filterProducts = (
   }
 };
 
-export const arrangeProducts = (
-  apiGuideData) => {
+export const arrangeProducts = (apiGuideData) => {
   let topCounts;
   let priceRangeAndBrandsArray;
-  let guides
+  let guides;
   const productListing = [...apiGuideData?.product_listing];
   const products = [...apiGuideData?.products];
 
@@ -303,17 +302,17 @@ export const arrangeProducts = (
   const newApiGuideData = { ...apiGuideData, products: sortedProducts };
   let priceArray = [];
   products.forEach((product, index) => {
-    priceArray.push(product.price);
+    priceArray.push(product.highest_price);
   });
-   //final guide 
-   guides = newApiGuideData
+  //final guide
+  guides = newApiGuideData;
   priceRangeAndBrandsArray = {
     priceRange: { min: Math.min(...priceArray), max: Math.max(...priceArray) },
     brands: [...apiGuideData.brands],
   };
   topCounts = { ...newApiGuideData.top_guide_counts };
 
-  return { guides, priceRangeAndBrandsArray, topCounts }
+  return { guides, priceRangeAndBrandsArray, topCounts };
 };
 
 export const arrangeCategories = (apiCategoryData, setCategoryAttributes) => {
@@ -324,7 +323,11 @@ export const arrangeCategories = (apiCategoryData, setCategoryAttributes) => {
   setCategoryAttributes(sortedCategoryData);
 };
 
-export const productsLastFilter = (filterObjPriceBrand, products,isInitialLoad) => {
+export const productsLastFilter = (
+  filterObjPriceBrand,
+  products,
+  isInitialLoad
+) => {
   if (!Object.keys(filterObjPriceBrand).length) {
     return products; // No filters, return the original products array
   } else {
@@ -333,8 +336,8 @@ export const productsLastFilter = (filterObjPriceBrand, products,isInitialLoad) 
     if (filterObjPriceBrand.price) {
       finalProducts = finalProducts.filter(
         (product) =>
-          filterObjPriceBrand.price.min <= product.price &&
-          product.price <= filterObjPriceBrand.price.max
+          filterObjPriceBrand.price.min <= product.highest_price &&
+          product.highest_price <= filterObjPriceBrand.price.max
       );
     }
 
@@ -350,6 +353,6 @@ export const productsLastFilter = (filterObjPriceBrand, products,isInitialLoad) 
       );
     }
 
-    return  finalProducts;
+    return finalProducts;
   }
 };
