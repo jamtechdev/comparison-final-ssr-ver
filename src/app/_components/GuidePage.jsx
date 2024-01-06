@@ -33,7 +33,6 @@ import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCom
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
 export default function GuidePage({ slug, guideData,attributesForTable }) {
-  console.log(attributesForTable,"attributesForTable")
     useChart();
     const [isShown, setIsShown] = useState(false);
     const guide = guideData[0].data;

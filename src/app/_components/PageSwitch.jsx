@@ -1,5 +1,6 @@
 import GuidePage from './GuidePage';
-import { arrangeProducts } from "@/_helpers"
+import BlogPage from "./BlogPage";
+import ProductPage from "./ProductPage";
 export default async function PageSwitch({ PageType, slug, pageData }) {
   let PageToRender;
   switch (PageType) {
@@ -9,6 +10,12 @@ export default async function PageSwitch({ PageType, slug, pageData }) {
       PageToRender = <GuidePage slug={slug} guideData={pageData} filters={attributes?.data
       } attributesForTable={attributes?.attribute_categories} />;
       break;
+    case "Blog":
+      PageToRender = <BlogPage slug={slug} blogData={pageData} />;
+      break;
+    case "Product":
+      PageToRender = <ProductPage slug={slug} productData={pageData} />;
+
     default:
       PageToRender = () => <div>No Page Found</div>;
       break;

@@ -45,11 +45,11 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
             return (
               <SwiperSlide key={index}>
                 <Link
-                  href={`/blog${
-                    item?.category_url === null && item?.category_url === ""
-                      ? `/${item?.permalink}`
-                      : `/${item?.category_url}/${item?.permalink}`
-                  }`}
+                  href={`/${
+                    item.category_url
+                      ? item.category_url
+                      : item.primary_category.toLowerCase()
+                  }/${item?.permalink}`}
                   style={{ color: "#27304e" }}
                 >
                   <div className="blog-card">
@@ -64,7 +64,7 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
                         height={0}
                         sizes="100%"
                         alt=""
-                      />  
+                      />
                       <p className="dates">{item.published_at}</p>
                     </div>
                     <span className="blog-title">{item.title}</span>
