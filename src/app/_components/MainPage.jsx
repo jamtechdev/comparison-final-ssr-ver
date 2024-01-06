@@ -154,26 +154,29 @@ export default function MainPage({ bannerCounts, favSlider }) {
         favSlider?.categories?.map((data, index) => {
           return (
             <div key={index}>
-              <Container className="small-p-0 ptb-80 bg-cat">
-                <Row>
-                  <Col md={12} xs={12}>
-                    <h2
-                      role="button"
-                      className="text-center electronics"
-                      style={{
-                        backgroundImage: `url(${data?.rectangle_image})`,
-                      }}
-                      onClick={() => {
-                        router.push(
-                          `/category-archive/${data?.primary_archive_category}`
-                        );
-                      }}
-                    >
-                      {data?.primary_archive_category}
-                    </h2>
-                  </Col>
-                </Row>
-              </Container>
+              <section className="ptb-80 bg-cat">
+                <Container className="small-p-0 ">
+                  <Row>
+                    <Col md={12} xs={12}>
+                      <h2
+                        role="button"
+                        className="text-center electronics"
+                        style={{
+                          backgroundImage: `url(${data?.rectangle_image})`,
+                        }}
+                        onClick={() => {
+                          router.push(
+                            `/category-archive/${data?.primary_archive_category}`
+                          );
+                        }}
+                      >
+                        {data?.primary_archive_category}
+                      </h2>
+                    </Col>
+                  </Row>
+                </Container>
+              </section>
+
               <Container className="mt-3">
                 <Row>
                   <Col md={12}>
