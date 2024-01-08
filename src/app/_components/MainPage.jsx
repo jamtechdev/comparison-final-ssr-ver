@@ -158,7 +158,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
             <div key={index}>
               <section className="ptb-80 bg-cat">
                 <Container className="small-p-0 ">
-                  <Row>
+                  <Row key={data?.id}>
                     <Col md={12} xs={12}>
                       <h2
                         role="button"
