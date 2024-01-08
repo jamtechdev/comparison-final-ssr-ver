@@ -50,8 +50,8 @@ async function fetchDataBasedOnPageType(slug, pageType) {
       break;
     case "Product":
       apiUrls = [
-        `${process.env.NEXT_PUBLIC_API_URL}/product`,
-        `${process.env.NEXT_PUBLIC_API_URL}/additionalProductData`,
+        `${process.env.NEXT_PUBLIC_API_URL}/product/${slug}`,
+        // `${process.env.NEXT_PUBLIC_API_URL}/product/${id}/attributes`,,
       ];
       break;
     default:

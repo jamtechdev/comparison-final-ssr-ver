@@ -14,7 +14,7 @@ export default function Category({ categories }) {
           xs={6}
           key={index}
           onClick={() => {
-            router.push(`/category-archive/${section?.primary_archive_category}`);
+            router.push(`/${section?.primary_archive_category.toLowerCase()}`);
           }}
         >
           <div className="category-section">
@@ -26,7 +26,7 @@ export default function Category({ categories }) {
               alt={IMAGE_ALT_TEXT}
             />
             <span className="category_name">
-              {section.primary_archive_category || 'NOT FOUND'}
+              {section.primary_archive_category || "NOT FOUND"}
             </span>
           </div>
         </Col>

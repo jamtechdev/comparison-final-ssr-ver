@@ -44,31 +44,29 @@ export default function ProductSlider({ favSlider }) {
             favSlider?.map((section, index) => {
               return (
                 <React.Fragment key={section?.short_name + index}>
-                <Link
-                  href={`/${section?.permalink}`}
-                  style={{ color: "#27304e" }}
-                 
-                >
-                  <SwiperSlide key={section?.short_name}>
-                    <div className="product-card">
-                      <Image
-                        src={
-                          section.bannerImage === null
-                            ? section?.bannerImage
-                            : `/images/nofound.png`
-                        }
-                        width={0}
-                        height={0}
-                        sizes="100%"
-                        alt="Not found"
-                      />
+                  <Link
+                    href={`/${section?.permalink}`}
+                    style={{ color: "#27304e" }}
+                  >
+                    <SwiperSlide key={section?.short_name}>
+                      <div className="product-card">
+                        <Image
+                          src={
+                            section.bannerImage === null
+                              ? section?.bannerImage
+                              : `/images/nofound.png`
+                          }
+                          width={0}
+                          height={0}
+                          sizes="100%"
+                          alt="Not found"
+                        />
 
-                      {section?.short_name}
-                    </div>
-                  </SwiperSlide>
-                </Link>
+                        {section?.short_name}
+                      </div>
+                    </SwiperSlide>
+                  </Link>
                 </React.Fragment>
-          
               );
             })}
         </Swiper>

@@ -10,6 +10,7 @@ import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
@@ -22,6 +23,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
   const handleSearch = (e) => {
     setsearch(e.target.value);
   };
+  const router = useRouter();
   return (
     <>
       <section className="hero_section home">
@@ -166,7 +168,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         }}
                         onClick={() => {
                           router.push(
-                            `/category-archive/${data?.primary_archive_category}`
+                            `/${data?.primary_archive_category.toLowerCase()}`
                           );
                         }}
                       >
@@ -176,6 +178,36 @@ export default function MainPage({ bannerCounts, favSlider }) {
                   </Row>
                 </Container>
               </section>
+              {data?.categories?.length > 0 && (
+                <section className="mt-3">
+                  <Container>
+                    <Row>
+                      <Col md={12}>
+                        <h3 className="site-main-heading">
+                          Product categories
+                        </h3>
+                        <div className="product-categories-container">
+                          {data?.categories?.map((item, index) => {
+                            return (
+                              <div
+                                className="product-categories-item"
+                                key={index}
+                                onClick={() => {
+                                  router.push(
+                                    `/${item?.category_url.toLowerCase()}`
+                                  );
+                                }}
+                              >
+                                {item?.title}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </Col>
+                    </Row>
+                  </Container>
+                </section>
+              )}
 
               <Container className="mt-3">
                 <Row>
