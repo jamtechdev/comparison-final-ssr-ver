@@ -63,8 +63,7 @@ async function fetchDataBasedOnPageType(slug, pageType) {
   const responses = await Promise.all(
     apiUrls.map(async (apiUrl) => {
       const response = await fetch(apiUrl, {
-        cache: "no-store",
-        method: "GET",
+        method: 'GET',
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,

@@ -6,7 +6,7 @@ import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 function AuthorPage(authorData) {
-  console.log(authorData.authorData?.latest_guides, "data");
+
   return (
     <>
       <section className="breadcrumb-section">

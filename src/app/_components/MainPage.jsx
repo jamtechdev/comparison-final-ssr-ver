@@ -9,7 +9,7 @@ import Category from "@/components/Common/Category/Category";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
@@ -45,10 +45,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                   aria-label="Search"
                 />
                 <Button className="search-btn">Search</Button>
-                <SearchList
-                  search={search}
-                  isFocused={isFocused}
-                />
+                <SearchList search={search} isFocused={isFocused} />
               </Form>
             </Col>
           </Row>
@@ -60,9 +57,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                     <Col className="p-2" lg={3} md={6} xs={6} key={index}>
                       <div className="hero-card-content">
                         <span className="count">{section?.count}</span>
-                        <span className="card-heading">
-                          {section?.heading}
-                        </span>
+                        <span className="card-heading">{section?.heading}</span>
                         <span className="card-subheading">
                           {section?.subheading}
                         </span>
@@ -86,10 +81,11 @@ export default function MainPage({ bannerCounts, favSlider }) {
         <Row>
           <Col md={12}>
             <h2 className="site-main-heading">Favourite Guides</h2>
-            {favSlider &&
-              favSlider.favorite_guides && (
-                <><LatesGuid favSlider={favSlider.favorite_guides} /></>
-              )}
+            {favSlider && favSlider.favorite_guides && (
+              <>
+                <LatesGuid favSlider={favSlider.favorite_guides} />
+              </>
+            )}
           </Col>
         </Row>
       </Container>
@@ -158,26 +154,29 @@ export default function MainPage({ bannerCounts, favSlider }) {
         favSlider?.categories?.map((data, index) => {
           return (
             <div key={index}>
-              <Container className="small-p-0 ptb-80 bg-cat">
-                <Row>
-                  <Col md={12} xs={12}>
-                    <h2
-                      role="button"
-                      className="text-center electronics"
-                      style={{
-                        backgroundImage: `url(${data?.rectangle_image})`,
-                      }}
-                      onClick={() => {
-                        router.push(
-                          `/category-archive/${data?.primary_archive_category}`
-                        );
-                      }}
-                    >
-                      {data?.primary_archive_category}
-                    </h2>
-                  </Col>
-                </Row>
-              </Container>
+              <section className="ptb-80 bg-cat">
+                <Container className="small-p-0 ">
+                  <Row>
+                    <Col md={12} xs={12}>
+                      <h2
+                        role="button"
+                        className="text-center electronics"
+                        style={{
+                          backgroundImage: `url(${data?.rectangle_image})`,
+                        }}
+                        onClick={() => {
+                          router.push(
+                            `/category-archive/${data?.primary_archive_category}`
+                          );
+                        }}
+                      >
+                        {data?.primary_archive_category}
+                      </h2>
+                    </Col>
+                  </Row>
+                </Container>
+              </section>
+
               <Container className="mt-3">
                 <Row>
                   <Col md={12}>
@@ -198,8 +197,6 @@ export default function MainPage({ bannerCounts, favSlider }) {
                 </Row>
               </Container>
 
-
-
               <Container className="mt-3">
                 <Row>
                   <Col md={12}>
@@ -209,34 +206,25 @@ export default function MainPage({ bannerCounts, favSlider }) {
                       id="Review-tab"
                       className="mb-3 site_tabs"
                     >
-                      <Tab
-                        eventKey="tab-1"
-                        title="Most Popular Reviews"
-                      >
-                        <ReviewSlider
-                          favSlider={data?.popular_reviews}
-                        />
+                      <Tab eventKey="tab-1" title="Most Popular Reviews">
+                        <ReviewSlider favSlider={data?.popular_reviews} />
                       </Tab>
                       <Tab eventKey="tab-2" title="Latest Reviews">
-                        <ReviewSlider
-                          favSlider={data?.latest_reviews}
-                        />
+                        <ReviewSlider favSlider={data?.latest_reviews} />
                       </Tab>
                     </Tabs>
                   </Col>
                 </Row>
               </Container>
 
-
               {data?.blog_posts && data?.blog_posts?.length > 0 && (
-
                 <Container className="my-3">
                   <Row>
                     <Col md={12}>
                       <h3 className="site-main-heading">Blog Posts</h3>
                       <BlogSlider blogData={data.blog_posts} />
                     </Col>
-                    <Col md={12} className="text-center">
+                    {/* <Col md={12} className="text-center">
                       <Button
                         className="view-blog"
                         onClick={() => {
@@ -248,7 +236,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         View All Blog Posts
                         <i className="ri-arrow-right-s-line"></i>
                       </Button>
-                    </Col>
+                    </Col> */}
                   </Row>
                 </Container>
               )}

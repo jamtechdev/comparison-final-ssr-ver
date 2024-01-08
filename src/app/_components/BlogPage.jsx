@@ -1,3 +1,4 @@
+"use client";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
@@ -5,33 +6,35 @@ import Image from "next/image";
 import Link from "next/link";
 
 import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSliderBlog";
+import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
+import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 
 export default function BlogPage({ slug, blogData }) {
-  console.log(blogData);
+
   return (
     <>
-      {/* <section className="product-header">
+      <section className="product-header">
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
                 firstPageName="Blog"
-                secondPageName={blogData?.data?.title}
+                secondPageName={blogData[0]?.data?.title}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>
-              <h1 className="site-main-heading">{blogData?.data?.title}</h1>
+              <h1 className="site-main-heading">{blogData[0]?.data?.title}</h1>
             </Col>
 
             <Col md={12} lg={12} xl={3}>
               <div className="user-info-section">
-                {blogData?.data?.author && (
+                {blogData[0]?.data?.author && (
                   <div className="user-section">
-                    {blogData?.data?.author?.image && (
+                    {blogData[0]?.data?.author?.image && (
                       <img
                         src={
-                          blogData?.data?.author?.image
-                            ? blogData?.data?.author?.image
+                          blogData[0]?.data?.author?.image
+                            ? blogData[0]?.data?.author?.image
                             : "/images/user.png"
                         }
                         width={0}
@@ -43,8 +46,8 @@ export default function BlogPage({ slug, blogData }) {
 
                     <div className="user-detail">
                       <p>
-                        <Link href={`/author/${blogData?.data?.author?.id}`}>
-                          {blogData?.data?.author?.name}{" "}
+                        <Link href={`/author/${blogData[0]?.data?.author?.id}`}>
+                          {blogData[0]?.data?.author?.name}{" "}
                         </Link>
                       </p>
                     </div>
@@ -52,7 +55,7 @@ export default function BlogPage({ slug, blogData }) {
                 )}
                 <span>
                   updated:
-                  <i>{blogData?.data?.updated_at}</i>
+                  <i>{blogData[0]?.data?.updated_at}</i>
                 </span>
               </div>
             </Col>
@@ -85,9 +88,13 @@ export default function BlogPage({ slug, blogData }) {
                 <p
                   dangerouslySetInnerHTML={{
                     __html:
-                      blogData.data?.text_part && blogData.data?.text_part,
+                      blogData[0]?.data?.text_part &&
+                      blogData[0]?.data?.text_part,
                   }}
-                ></p>
+                >
+                  {/* {blog.data?.text_part}
+                      <br /> */}
+                </p>
 
                 <div className="kitchen">
                   <Image
@@ -119,8 +126,8 @@ export default function BlogPage({ slug, blogData }) {
                   <div className="avatar">
                     <img
                       src={
-                        blogData?.data?.author?.image
-                          ? blogData?.data?.author?.image
+                        blogData[0]?.data?.author?.image
+                          ? blogData[0]?.data?.author?.image
                           : "/images/user.png"
                       }
                       width={0}
@@ -130,10 +137,10 @@ export default function BlogPage({ slug, blogData }) {
                     />
                   </div>
                   <div className="label">
-                    <Link href={`/author/${blogData?.data?.author?.id}`}>
-                      <p className="name">{blogData?.data?.author?.name}</p>
+                    <Link href={`/author/${blogData[0]?.data?.author?.id}`}>
+                      <p className="name">{blogData[0]?.data?.author?.name}</p>
                     </Link>
-                    <p>{blogData?.data?.author?.summary}</p>
+                    <p>{blogData[0]?.data?.author?.summary}</p>
                   </div>
                 </div>
               </div>
@@ -152,7 +159,7 @@ export default function BlogPage({ slug, blogData }) {
                 </Col>
                 <Col md={12}>
                   <ProductSliderBlog
-                    favSlider={blogData?.data?.related_guides}
+                    favSlider={blogData[0]?.data?.related_guides}
                   />
                 </Col>
               </Row>
@@ -169,7 +176,7 @@ export default function BlogPage({ slug, blogData }) {
               </h2>
             </Col>
             <Col md={12}>
-              <BlogSlider blogData={blogData?.data?.related_blogs} />
+              <BlogSlider blogData={blogData[0]?.data?.related_blogs} />
             </Col>
           </Row>
         </Container>
@@ -183,11 +190,11 @@ export default function BlogPage({ slug, blogData }) {
               </h2>
             </Col>
             <Col md={12}>
-              <ProductSliderBlog favSlider={blogData?.data?.related_guides} />
+              <ProductSlider favSlider={blogData[0]?.data?.related_guides} />
             </Col>
           </Row>
         </Container>
-      </section> */}
+      </section>
     </>
   );
 }
