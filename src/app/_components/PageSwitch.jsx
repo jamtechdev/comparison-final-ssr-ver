@@ -4,6 +4,7 @@ import { arrangeProducts } from "@/_helpers";
 import ProductPage from "./ProductPage";
 export default function PageSwitch({ PageType, slug, pageData }) {
   let PageToRender;
+  console.log(PageType);
   switch (PageType) {
     case "Guide":
       PageToRender = <GuidePage slug={slug} guideData={pageData} />;
@@ -13,7 +14,7 @@ export default function PageSwitch({ PageType, slug, pageData }) {
       break;
     case "Product":
       PageToRender = <ProductPage slug={slug} productData={pageData} />;
-
+break;
     default:
       PageToRender = () => <div>No Page Found</div>;
       break;

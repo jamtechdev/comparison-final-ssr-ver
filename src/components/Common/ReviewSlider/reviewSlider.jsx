@@ -39,9 +39,10 @@ export default function ReviewSlider({ favSlider }) {
         className="product-slider"
       >
         {favSlider?.map(function (item, index) {
+          item.url = item?.category.replace(/\s+/g, "-").toLowerCase();
           return (
             <SwiperSlide key={index}>
-              <Link href={`/product/${item?.permalink}`}>
+              <Link href={`/${item?.url}/${item?.permalink}`}>
                 <div className="review-wrapper">
                   <div className="review-card">
                     <img
