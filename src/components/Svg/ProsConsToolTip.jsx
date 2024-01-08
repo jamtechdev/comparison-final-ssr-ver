@@ -6,23 +6,23 @@ const ProsConsToolTip = (props) => {
   return (
     <>
       {hover_phrase && (
-        <div className="tooltip-display-content">
-          <p
-            class="mb-2 prosconsColor"
+        <span className="tooltip-display-content">
+          <span
+            className="mb-2 prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}
-          ></p>
+          ></span>
           {info_not_verified && (
             <>
               <hr />
-              <p class="mb-2">
+              <span className="mb-2">
                 <i>
                   (Information is not verified. If you believe this is a
                   mistake, please, contact our team.)
                 </i>
-              </p>
+              </span>
             </>
           )}
-        </div>
+        </span>
       )}
     </>
   );

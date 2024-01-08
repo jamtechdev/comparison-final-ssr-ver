@@ -88,21 +88,20 @@ export const getAttributeHalf = (product, half) => {
   if (!product?.attributes) {
     return null;
   }
-  const attributeKeys = Object.keys(product.attributes);
+  const attributeKeys = Object.keys(product.attributes_new);
   const halfLength = Math.ceil(attributeKeys.length / 2);
-
   if (half === "first") {
     const firstHalfKeys = attributeKeys.slice(0, halfLength);
     const firstHalfAttributes = {};
     firstHalfKeys.forEach((key) => {
-      firstHalfAttributes[key] = product.attributes[key];
+      firstHalfAttributes[key] = product.attributes_new[key];
     });
     return firstHalfAttributes;
   } else if (half === "second") {
     const secondHalfKeys = attributeKeys.slice(halfLength);
     const secondHalfAttributes = {};
     secondHalfKeys.forEach((key) => {
-      secondHalfAttributes[key] = product.attributes[key];
+      secondHalfAttributes[key] = product.attributes_new[key];
     });
     return secondHalfAttributes;
   } else {
