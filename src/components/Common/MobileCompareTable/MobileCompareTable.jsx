@@ -1,3 +1,4 @@
+"use client"
 import { useCallback, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Button, Col, Row, Table } from "react-bootstrap";

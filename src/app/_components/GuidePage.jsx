@@ -121,7 +121,6 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
           </Row>
         </Container>
       </section>
-
       <Container>
         <Row>
           <Col

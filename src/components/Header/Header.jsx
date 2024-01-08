@@ -12,11 +12,11 @@ import {
   Row,
   Accordion,
   Navbar,
-  Modal
+  Modal,
 } from "react-bootstrap";
 import SearchList from "../Search/SearchList";
 import CompareModal from "../../components/Modal/Modal";
-export default function Header({headerData}) {
+export default function Header({ headerData }) {
   const [isFocused, setIsFocused] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -61,8 +61,9 @@ export default function Header({headerData}) {
   };
   return (
     <header
-      className={`sticky ${scrollDirection === "down" ? "top-sticky-not" : "top-sticky"
-        }`}
+      className={`sticky ${
+        scrollDirection === "down" ? "top-sticky-not" : "top-sticky"
+      }`}
     >
       <Container>
         <Row className="py-2 align-items-center logo-header">
@@ -208,15 +209,15 @@ export default function Header({headerData}) {
             </div>
           </Col>
           <Col lg={2} md={4} xs={4}>
-              <Link href="/">
-                <img
-                  src={`https://panel.mondopedia.it/logos/app_logo.png`}
-                  className="logo"
-                  width={155}
-                  height={52}
-                  alt="Logo"
-                />
-              </Link>
+            <Link href="/">
+              <img
+                src={`https://panel.mondopedia.it/logos/app_logo.png`}
+                className="logo"
+                width={155}
+                height={52}
+                alt="Logo"
+              />
+            </Link>
           </Col>
           <Col lg={4} md={4} xs={4} className="form-search">
             {pathname !== "/" && (
@@ -266,46 +267,54 @@ export default function Header({headerData}) {
         </Row>
       </Container>
       <nav className={styles.categories_nav_item}>
-      <nav className={styles.categories_nav_item}>
-  <div className={"nav-dropdown-item " + styles.inner_container}>
-    {headerData &&
-      headerData?.map((item, headerDataKey) => (
-        <div className="cat-nav-item" key={headerDataKey}>
-          <div
-            className="dropdown-toggle nav-link"
-            onClick={() => {
-              router.push(`/category-archive/${item?.primary_category}`);
-            }}
-          >
-            {item?.primary_category}
-          </div>
-          <Container className="dropdown-menu">
-            <Row>
-              <Col md={12}>
-                <div className="nav-list-section">
-                  <span>{item?.secondary_category}</span>
-                  <ul>
-                    {item?.guides &&
-                      item?.guides?.map((guide, guideIndex) => (
-                        <li
-                          key={guideIndex}
-                          onClick={() => {
-                            router.push(`/${guide?.permalink}`);
-                          }}
-                        >
-                          {guide?.title}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      ))}
-  </div>
-</nav>
+        <nav className={styles.categories_nav_item}>
+          <div className={"nav-dropdown-item " + styles.inner_container}>
+            {headerData &&
+              headerData?.map((item, headerDataKey) => (
+                <div className="cat-nav-item" key={headerDataKey}>
+                  <div
+                    className="dropdown-toggle nav-link"
+                    onClick={() => {
+                      router.push(
+                        `/category-archive/${item?.primary_category}`
+                      );
+                    }}
+                  >
+                    {item?.primary_category}
+                  </div>
 
+                  <Container className="dropdown-menu">
+                    <Row>
+                      {item?.secondaryCategory_guides?.map((items, index) => {
+                        return (
+                          <>
+                            <Col md={3} key={index}>
+                              <div className="nav-list-section">
+                                <span>{items?.secondary_category}</span>
+                                <ul>
+                                  {items?.guides &&
+                                    items?.guides?.map((guide, guideIndex) => (
+                                      <li
+                                        key={guideIndex}
+                                        onClick={() => {
+                                          router.push(`/${guide?.permalink}`);
+                                        }}
+                                      >
+                                        {guide?.title}
+                                      </li>
+                                    ))}
+                                </ul>
+                              </div>
+                            </Col>
+                          </>
+                        );
+                      })}
+                    </Row>
+                  </Container>
+                </div>
+              ))}
+          </div>
+        </nav>
       </nav>
       {isOpen && <CompareModal setIsOpen={setIsOpen} />}
     </header>

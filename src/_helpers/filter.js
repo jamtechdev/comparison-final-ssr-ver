@@ -108,6 +108,32 @@ export const getAttributeHalf = (product, half) => {
   }
 };
 
+// this funcation designed to extract and return half of the attributes from a given product object.
+export const getAttributeProductHalf = (product, half) => {
+  if (!product?.attributes) {
+    return null;
+  }
+  const attributeKeys = Object.keys(product.attributes);
+  const halfLength = Math.ceil(attributeKeys.length / 2);
+  if (half === "first") {
+    const firstHalfKeys = attributeKeys.slice(0, halfLength);
+    const firstHalfAttributes = {};
+    firstHalfKeys.forEach((key) => {
+      firstHalfAttributes[key] = product.attributes[key];
+    });
+    return firstHalfAttributes;
+  } else if (half === "second") {
+    const secondHalfKeys = attributeKeys.slice(halfLength);
+    const secondHalfAttributes = {};
+    secondHalfKeys.forEach((key) => {
+      secondHalfAttributes[key] = product.attributes[key];
+    });
+    return secondHalfAttributes;
+  } else {
+    throw new Error("Invalid 'half' argument. Use 'first' or 'second'.");
+  }
+};
+
 export const handleFilterValueChange = (
   filterObj,
   setFilterObj,
