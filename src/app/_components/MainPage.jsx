@@ -256,19 +256,6 @@ export default function MainPage({ bannerCounts, favSlider }) {
                       <h3 className="site-main-heading">Blog Posts</h3>
                       <BlogSlider blogData={data.blog_posts} />
                     </Col>
-                    {/* <Col md={12} className="text-center">
-                      <Button
-                        className="view-blog"
-                        onClick={() => {
-                          router.push(
-                            `/all-blog/${data?.primary_archive_category}`
-                          );
-                        }}
-                      >
-                        View All Blog Posts
-                        <i className="ri-arrow-right-s-line"></i>
-                      </Button>
-                    </Col> */}
                   </Row>
                 </Container>
               )}
