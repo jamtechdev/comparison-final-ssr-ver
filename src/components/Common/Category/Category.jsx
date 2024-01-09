@@ -4,7 +4,6 @@ import Link from "next/link";
 
 const IMAGE_ALT_TEXT = "Category Images";
 export default function Category({ categories }) {
-  console.log(categories, "categories--------->>>>>>>>>>>>>>>>>>>>>>>");
   return (
     <Row>
       {categories?.map((section, index) => (
@@ -18,7 +17,6 @@ export default function Category({ categories }) {
           //   router.push(`/${section?.primary_archive_category}`);
           // }}
         >
-          {console.log(section, "section--->>>>>>>>")}
           <div className="category-section">
             <Link href={`/${section?.primary_archive_category}`}>
             <Image

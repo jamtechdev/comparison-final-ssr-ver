@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -45,28 +45,31 @@ export default function ProductSlider({ favSlider }) {
             favSlider?.map((section, index) => {
               return (
                 <React.Fragment key={section?.short_name + index}>
-                  <Link
-                    href={`/${section?.permalink}`}
-                    style={{ color: "#27304e" }}
-                  >
+                
                     <SwiperSlide key={section?.short_name}>
-                      <div className="product-card">
-                        <Image
-                          src={
-                            section.bannerImage === null
-                              ? section?.bannerImage
-                              : `/images/nofound.png`
-                          }
-                          width={0}
-                          height={0}
-                          sizes="100%"
-                          alt="Not found"
-                        />
+                      <Link
+                        href={`/${section?.category_url}/${section?.permalink}`}
+                        style={{ color: "#27304e" }}
+                      >
+                        {" "}
+                        <div className="product-card">
+                          <Image
+                            src={
+                              section.bannerImage === null
+                                ? section?.bannerImage
+                                : `/images/nofound.png`
+                            }
+                            width={0}
+                            height={0}
+                            sizes="100%"
+                            alt="Not found"
+                          />
 
-                        {section?.short_name}
-                      </div>
+                          {section?.short_name}
+                        </div>
+                      </Link>
                     </SwiperSlide>
-                  </Link>
+               
                 </React.Fragment>
               );
             })}

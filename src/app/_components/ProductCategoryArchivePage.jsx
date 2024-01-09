@@ -17,7 +17,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 </Col>
 
                 <Col md={12}>
-                  <h1 className="heading-primary-category-archive secondary-category-archive text-capitalize">
+                  <h1 className="heading-primary secondary text-capitalize">
                     {slug}
                   </h1>
                 </Col>
@@ -29,7 +29,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
               {/*-------------POPULAR GUIDE -------------------*/}
               <Row className="py-3">
                 <Col md={12}>
-                  <h2 className=" secondary-category-archive">
+                  <h2 className=" secondary">
                     Popular guides
                   </h2>
                 </Col>
@@ -48,31 +48,9 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                 className="px-2 mb-3"
                                 key={`guide-${index}`}
                               >
-                                {/* <div className="blog-card" role="button">
-                                <Link href={`/guide/${item?.permalink}`}>
-                                  <div className="blog-card-img">
-                                    <Image
-                                      src={
-                                        item?.bannerImage
-                                          ? item?.bannerImage
-                                          : "/images/cat7.png"
-                                      }
-                                      width={0}
-                                      height={0}
-                                      sizes="100%"
-                                      alt=""
-                                      className="card-img"
-                                    />
-                                  </div>
-                                  <p className="dates">SEPTEMBER 20 2022</p>
-                                  <span className="blog-title">
-                                    {item?.title}
-                                  </span>
-                                </Link>
-                              </div> */}
-                                <div className="product-card-2">
+                                <div className="product-card">
                                   <Link
-                                    href={`${item?.permalink}`}
+                                    href={`${item?.category_url}/${item?.permalink}`}
                                     style={{ color: "#27304e" }}
                                   >
                                     <Image
@@ -86,7 +64,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                       sizes="100%"
                                       alt=""
                                     />
-                                    <span>{item?.title}</span>
+                                    <span>{item?.short_name}</span>
                                   </Link>
                                 </div>
                               </Col>
@@ -121,29 +99,8 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                 className="px-2 mb-3"
                                 key={`review-${index}`}
                               >
-                                {/* <div className="blog-card" role="button">
-                                <div className="blog-card-img">
-                                  <Image
-                                    src={
-                                      item?.main_image
-                                        ? item?.main_image
-                                        : "/images/cat7.png"
-                                    }
-                                    width={0}
-                                    height={0}
-                                    sizes="100%"
-                                    alt=""
-                                    className="card-img"
-                                  />
-                                </div>
-                                <p className="dates">SEPTEMBER 20 2022</p>
-                                <span className="blog-title">{item?.name}</span>
-                                <p className="category">{item?.category}</p>
-                              </div> */}
-
                                 <Link
-                                  // href={`/${url}/${item?.permalink}`}
-                                  href={`#`}
+                                  href={`/${item?.category_url}/${item?.permalink}`}
                                 >
                                   <div className="review-wrapper">
                                     <div className="review-card">
