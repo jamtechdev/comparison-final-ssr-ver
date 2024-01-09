@@ -37,7 +37,7 @@ import ProductTabs from "@/components/Product/ProductTabs";
 import ProductCompareTable from "@/components/Common/CompareTable/ProductCompareTable";
 // import Link from "next/link";
 
-function ProductPage({ productData }) {
+function ProductPage({ productData, productCatAttribute, compareByCatID }) {
   let initialDisplay = 5;
   // const [product, setProduct] = useState(null);
   // const [showFullPrice, setShowFullPrice] = useState(false);
@@ -188,7 +188,6 @@ function ProductPage({ productData }) {
                         alt=""
                       />
                     )}
-
                     <div className="user-detail">
                       <p>
                         <Link href={`/author/${product?.author?.id}`}>
@@ -245,7 +244,8 @@ function ProductPage({ productData }) {
                 </div>
                 {resultOverallScore && (
                   <small>
-                    {resultOverallScore} (better than <i>58%</i>)
+                    {resultOverallScore} (better than{" "}
+                    <i>{`${product?.overall_score_better_then * 100}%`}</i>)
                   </small>
                 )}
               </div>
@@ -276,7 +276,8 @@ function ProductPage({ productData }) {
                   ></span>
                 </div>
                 <small>
-                  {resultTechnicalScoreColor} (better than <i>94%</i>)
+                  {resultTechnicalScoreColor} (better than{" "}
+                  <i>{`${product?.technical_score_is_better_than * 100}%`}</i>)
                 </small>
               </div>
             </div>
@@ -303,7 +304,8 @@ function ProductPage({ productData }) {
                   ></span>
                 </div>
                 <small>
-                  {resultUsersRatingColor} (better than <i>84%</i>)
+                  {resultUsersRatingColor} (better than{" "}
+                  <i>{`${product?.reviews_is_better_than * 100}%`}</i>)
                 </small>
               </div>
             </div>
@@ -661,17 +663,17 @@ function ProductPage({ productData }) {
           </Row>
         </Container>
       </section>
-      {/* <section className="mt-3">
+      <section className="mt-3">
         <Container>
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Best Alternatives</h2>
-              <ReviewSlider />
+              {/* <ReviewSlider /> */}
             </Col>
           </Row>
         </Container>
-      </section> */}
-      {/* <section>
+      </section>
+      <section>
         <Container>
           <Row className="table-section-mobile">
             <Col md={12}>
@@ -680,15 +682,15 @@ function ProductPage({ productData }) {
                 vacuum cleaners
               </h2>
             </Col>
-            <Col md={12}>
+            {/* <Col md={12}>
               <ProductCompareTable
-                products={product}
-                producrCatID={product?.category_id}
+                products={compareByCatID}
+                categoryAttributes={ProductCompareTable}
               />
-            </Col>
+            </Col> */}
           </Row>
         </Container>
-      </section> */}
+      </section>
     </>
   );
 }

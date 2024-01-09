@@ -2,12 +2,14 @@ import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "@/app/not-found";
 export default async function Page({ params: { slug }, searchParams }) {
   const slugType = await getSlugType(slug);
+  console.log(slug, "slug sir check page 1___________");
   if (slugType.type) {
     const pageData = await fetchDataBasedOnPageType(
       slug,
       slugType.type,
       searchParams
     );
+    console.log(pageData,"pageData sir check page 1__________" );
     if (pageData != null) {
       return (
         <PageSwitch

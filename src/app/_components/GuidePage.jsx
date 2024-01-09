@@ -1,10 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { guideService } from "@/_services";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import useChart from "@/hooks/useChart";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import Link from "next/link";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
@@ -15,7 +12,7 @@ import ProductSkeleton from "@/components/Common/ProductListing/ProductSkeleton"
 import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
-import {isAreObjectsEqual} from "@/_helpers"
+import { isAreObjectsEqual } from "@/_helpers"
 import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 export default function GuidePage({ slug, guideData, attributesForTable, filters, searchParams }) {
   useChart();
@@ -23,10 +20,9 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
   const guide = guideData[0].data;
   const products = guideData[1].data.products
   const productPagination = guideData[1].data.pagination
-  console.log(guideData[1].data,">>>")
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [prevSearcParam, setPrevSearcParam] = useState({})
+  const [prevSearcParam, setPrevSearcParam] = useState({});
   const handleToggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -35,19 +31,19 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
     setManageCollapsedDiv(true);
   };
   const handelSetFilterActive = (status) => {
-    setIsFilterActive(status)
-  }
+    setIsFilterActive(status);
+  };
   useEffect(() => {
-    setPrevSearcParam(searchParams)
-  }, [])
+    setPrevSearcParam(searchParams);
+  }, []);
   useEffect(() => {
-    if (isAreObjectsEqual(searchParams,prevSearcParam)) {
-      handelSetFilterActive(true)
+    if (isAreObjectsEqual(searchParams, prevSearcParam)) {
+      handelSetFilterActive(true);
     }
     setTimeout(() => {
-      handelSetFilterActive(false)
-    }, 1000)
-  }, [searchParams])
+      handelSetFilterActive(false);
+    }, 1000);
+  }, [searchParams]);
   return (
     <>
       <section className="product-header">
@@ -132,25 +128,19 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
             className="sidebar-width"
             style={{ display: isShown ? "block" : "none" }}
           >
-            <Filter
-              categoryAttributes={filters} />
+            <Filter categoryAttributes={filters} />
             <div className="desktop-hide">
-              <Button
-                className="site_main_btn w-100 d-block btn-icon mb-4"
-              >
+              <Button className="site_main_btn w-100 d-block btn-icon mb-4">
                 <i className="ri-close-fill"></i>
                 Close Filter
               </Button>
             </div>
           </Col>
           <Col md={12} lg={9} xl={9} className="main-content">
-            <Row className="mobile-hide">
-            </Row>
+            <Row className="mobile-hide"></Row>
             <Row className="desktop-hide">
               <Col sm={6} xs={6}>
-                <Button
-                  className="site_main_btn w-100 d-block btn-icon"
-                >
+                <Button className="site_main_btn w-100 d-block btn-icon">
                   <i className="ri-filter-line"></i>
                   Filter
                 </Button>
@@ -159,10 +149,7 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                 <span className="filter-data">
                   Ratio Quality Price{" "}
                   <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <path d="M18.2073 9.04304 12.0002 2.83594 5.79312 9.04304 7.20733 10.4573 12.0002 5.66436 16.7931 10.4573 18.2073 9.04304ZM5.79297 14.9574 12.0001 21.1646 18.2072 14.9574 16.793 13.5432 12.0001 18.3361 7.20718 13.5432 5.79297 14.9574Z" />
                     </svg>
                   </div>
@@ -170,7 +157,9 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
               </Col>
             </Row>
             <Row className="m-0">
-              {isFilterActive ? (<ProductSkeleton />) :
+              {isFilterActive ? (
+                <ProductSkeleton />
+              ) : (
                 <>
                   {products ? (
                     <ProductListing
@@ -181,11 +170,11 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                   ) : (
                     <ProductSkeleton />
                   )}
-                </>}
-                <GuidePagination pagination={productPagination}/>
+                </>)}
+              <GuidePagination pagination={productPagination} />
             </Row>
           </Col>
-          
+
         </Row>
       </Container>
       <section className="ptb-25">
@@ -547,5 +536,5 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
         compareGuideData={null}
       />
     </>
-  )
+  );
 }

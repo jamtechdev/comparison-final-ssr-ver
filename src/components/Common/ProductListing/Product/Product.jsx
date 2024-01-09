@@ -16,28 +16,31 @@ import Link from "next/link";
 import Pagenation from "../../Pagination/pagination";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Product({ position, incomingProduct, handleToggleCollapse, handleManageCollapsedDiv }) {
+export default function Product({
+  position,
+  incomingProduct,
+  handleToggleCollapse,
+  handleManageCollapsedDiv,
+}) {
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
     incomingProduct.attributes.forEach((attribute) => {
       const categoryName = attribute.attribute_category.name;
-  
+
       if (!productAttributes[categoryName]) {
         productAttributes[categoryName] = [];
       }
-  
+
       productAttributes[categoryName].push(attribute);
     });
     // Update the original product object
     incomingProduct.attributes_new = productAttributes;
-  
+
     return incomingProduct;
   };
   const product = generateProductsWithAttributes();
   let initialDisplay = 5;
-  const [displayedAttributesCount, setDisplayedAttributesCount] = useState(
-    {}
-  );
+  const [displayedAttributesCount, setDisplayedAttributesCount] = useState({});
   const [loading, setloading] = useState(false);
   const [showFullSummary, setShowFullSummary] = useState(false);
   const toggleSummary = () => {
@@ -106,9 +109,9 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
       attributeValues.attribute_value == "yes" ||
       attributeValues.attribute_value == "no"
     ) {
-      if (attributeValues?.is_worse_than.toFixed(1) >= 0.6) {
+      if (attributeValues?.is_worse_than?.toFixed(1) >= 0.6) {
         return "red";
-      } else if (attributeValues?.is_better_than.toFixed(1) >= 0.6) {
+      } else if (attributeValues?.is_better_than?.toFixed(1) >= 0.6) {
         return "#0066b2";
       } else {
         return "#000";
@@ -121,7 +124,6 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
   return (
     <Fragment>
       <div className="best-product-listing">
-
         <div className="flex-box">
           <div className="left_box">
             <span className="ribbon-number">
@@ -131,9 +133,7 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
             <div className="box_content light-bg-color">{product?.name}</div>
           </div>
           {product?.assigned_title && (
-            <span className="best-tag-product">
-              {product?.assigned_title}
-            </span>
+            <span className="best-tag-product">{product?.assigned_title}</span>
           )}
         </div>
         <Row className="m-0">
@@ -169,12 +169,7 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
               sizes="100%"
             />
           </Col>
-          <Col
-            md={12}
-            lg={9}
-            xl={10}
-            className="p-0 product-listing-width-80"
-          >
+          <Col md={12} lg={9} xl={10} className="p-0 product-listing-width-80">
             <div className="product-listing-inner-content">
               <div className="col light-bg-color">
                 <div className="product-score-container">
@@ -187,33 +182,25 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                     </span>
                     {product?.overall_score_descriptions && (
                       <div className="score-detail tooltip-title">
-                        <span
-                          className="overall"
-                          style={{ color: "#27304E" }}
-                        >
+                        <span className="overall" style={{ color: "#27304E" }}>
                           Overall Score
                         </span>
                         <div className="tooltip-display-content">
-                          {product?.overall_score_descriptions
-                            .description && (
-                              <p className="mb-2">
-                                <b>What it is: </b>
-                                {
-                                  product?.overall_score_descriptions
-                                    ?.description
-                                }
-                              </p>
-                            )}
-                          {product?.overall_score_descriptions
-                            .when_matters && (
-                              <p className="mb-2">
-                                <b>When it matters: </b>
-                                {
-                                  product?.overall_score_descriptions
-                                    ?.when_matters
-                                }
-                              </p>
-                            )}
+                          {product?.overall_score_descriptions.description && (
+                            <p className="mb-2">
+                              <b>What it is: </b>
+                              {product?.overall_score_descriptions?.description}
+                            </p>
+                          )}
+                          {product?.overall_score_descriptions.when_matters && (
+                            <p className="mb-2">
+                              <b>When it matters: </b>
+                              {
+                                product?.overall_score_descriptions
+                                  ?.when_matters
+                              }
+                            </p>
+                          )}
                           <p>
                             <b>Score components:</b>
                           </p>
@@ -222,15 +209,11 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                             product.overall_score_descriptions.score_components?.map(
                               (data, index) => {
                                 return (
-
-                                  <div
-                                    className="scroe_section"
-                                    key={index}
-                                  >
+                                  <div className="scroe_section" key={index}>
                                     <p className="text-end">
-                                      {`${parseFloat(
-                                        data?.importance
-                                      ).toFixed(1)}%`}
+                                      {`${parseFloat(data?.importance).toFixed(
+                                        1
+                                      )}%`}
                                     </p>
                                     <div
                                       className="score-count"
@@ -238,22 +221,20 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         background:
                                           data?.attribute_evaluation >= 7.5
                                             ? "#093673"
-                                            : data?.attribute_evaluation >=
-                                              5 &&
-                                              data?.attribute_evaluation <
-                                              7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                            : data?.attribute_evaluation >= 5 &&
+                                              data?.attribute_evaluation < 7.5
+                                            ? "#437ECE"
+                                            : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                            data?.attribute_evaluation
-                                          )
+                                              data?.attribute_evaluation
+                                            )
                                           : data?.attribute_evaluation.toFixed(
-                                            1
-                                          )
+                                              1
+                                            )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
@@ -264,7 +245,6 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                         </div>
                       </div>
                     )}
-
                   </div>
                   {/* Technical Score start*/}
                   <div className="score-section">
@@ -284,24 +264,24 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                         <div className="tooltip-display-content">
                           {product?.technical_score_descriptions
                             .description && (
-                              <p className="mb-2">
-                                <b>What it is: </b>
-                                {
-                                  product?.technical_score_descriptions
-                                    ?.description
-                                }
-                              </p>
-                            )}
+                            <p className="mb-2">
+                              <b>What it is: </b>
+                              {
+                                product?.technical_score_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
                           {product?.technical_score_descriptions
                             .when_matters && (
-                              <p className="mb-2">
-                                <b>When it matters: </b>
-                                {
-                                  product?.technical_score_descriptions
-                                    ?.when_matters
-                                }
-                              </p>
-                            )}
+                            <p className="mb-2">
+                              <b>When it matters: </b>
+                              {
+                                product?.technical_score_descriptions
+                                  ?.when_matters
+                              }
+                            </p>
+                          )}
                           <p>
                             <b>Score components:</b>
                           </p>
@@ -310,15 +290,11 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                             product?.technical_score_descriptions.score_components?.map(
                               (data, index) => {
                                 return (
-
-                                  <div
-                                    className="scroe_section"
-                                    key={index}
-                                  >
+                                  <div className="scroe_section" key={index}>
                                     <p className="text-end">
-                                      {`${parseFloat(
-                                        data?.importance
-                                      ).toFixed(1)}%`}
+                                      {`${parseFloat(data?.importance).toFixed(
+                                        1
+                                      )}%`}
                                     </p>
                                     <div
                                       className="score-count"
@@ -326,27 +302,24 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         background:
                                           data?.attribute_evaluation >= 7.5
                                             ? "#093673"
-                                            : data?.attribute_evaluation >=
-                                              5 &&
-                                              data?.attribute_evaluation <
-                                              7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                            : data?.attribute_evaluation >= 5 &&
+                                              data?.attribute_evaluation < 7.5
+                                            ? "#437ECE"
+                                            : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                            data?.attribute_evaluation
-                                          )
+                                              data?.attribute_evaluation
+                                            )
                                           : data?.attribute_evaluation.toFixed(
-                                            1
-                                          )
+                                              1
+                                            )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
                                   </div>
-
                                 );
                               }
                             )}
@@ -374,22 +347,15 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                           {product?.users_rating_descriptions.description && (
                             <p className="mb-2">
                               <b>What it is: </b>
-                              {
-                                product?.users_rating_descriptions
-                                  ?.description
-                              }
+                              {product?.users_rating_descriptions?.description}
                             </p>
                           )}
-                          {product?.users_rating_descriptions
-                            .when_matters && (
-                              <p className="mb-2">
-                                <b>When it matters: </b>
-                                {
-                                  product?.users_rating_descriptions
-                                    ?.when_matters
-                                }
-                              </p>
-                            )}
+                          {product?.users_rating_descriptions.when_matters && (
+                            <p className="mb-2">
+                              <b>When it matters: </b>
+                              {product?.users_rating_descriptions?.when_matters}
+                            </p>
+                          )}
                           <p>
                             <b>Score components:</b>
                           </p>
@@ -398,14 +364,11 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                             product?.users_rating_descriptions.score_components?.map(
                               (data, index) => {
                                 return (
-                                  <div
-                                    className="scroe_section"
-                                    key={index}
-                                  >
+                                  <div className="scroe_section" key={index}>
                                     <p className="text-end">
-                                      {`${parseFloat(
-                                        data?.importance
-                                      ).toFixed(1)}%`}
+                                      {`${parseFloat(data?.importance).toFixed(
+                                        1
+                                      )}%`}
                                     </p>
                                     <div
                                       className="score-count"
@@ -413,22 +376,20 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         background:
                                           data?.attribute_evaluation >= 7.5
                                             ? "#093673"
-                                            : data?.attribute_evaluation >=
-                                              5 &&
-                                              data?.attribute_evaluation <
-                                              7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                            : data?.attribute_evaluation >= 5 &&
+                                              data?.attribute_evaluation < 7.5
+                                            ? "#437ECE"
+                                            : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                            data?.attribute_evaluation
-                                          )
+                                              data?.attribute_evaluation
+                                            )
                                           : data?.attribute_evaluation.toFixed(
-                                            1
-                                          )
+                                              1
+                                            )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
@@ -498,7 +459,7 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                               return (
                                 <React.Fragment key={dIndex}>
                                   {data.price !== null && (
-                                    <li >
+                                    <li>
                                       <>
                                         <img
                                           src={data?.logo}
@@ -548,9 +509,7 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                               </React.Fragment>
                             );
                           })}
-                      {product?.top_pros?.length > 0 &&
-                        !showFullData &&
-                        "..."}
+                      {product?.top_pros?.length > 0 && !showFullData && "..."}
                     </ul>
                   </div>
                 </div>
@@ -582,16 +541,11 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                               </React.Fragment>
                             );
                           })}
-                      {product?.top_pros?.length > 0 &&
-                        !showFullData &&
-                        "..."}
+                      {product?.top_pros?.length > 0 && !showFullData && "..."}
                     </ul>
                   </div>
                 </div>
-                <Button
-                  className="hide-show-btn"
-                  onClick={toggleShowFullData}
-                >
+                <Button className="hide-show-btn" onClick={toggleShowFullData}>
                   <i
                     className={
                       showFullData
@@ -730,8 +684,7 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                 <i className="ri-arrow-down-s-line"></i>
                               </div>
                               <div className="hide-btn">
-                                Hide All{" "}
-                                <i className="ri-arrow-up-s-line"></i>
+                                Hide All <i className="ri-arrow-up-s-line"></i>
                               </div>
                             </Accordion.Header>
                             <Accordion.Body>
@@ -751,26 +704,26 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                       <div className="tooltip-display-content">
                                         {product?.technical_score_descriptions
                                           .description && (
-                                            <p className="mb-2">
-                                              <b>What it is: </b>
-                                              {
-                                                product
-                                                  ?.technical_score_descriptions
-                                                  ?.description
-                                              }
-                                            </p>
-                                          )}
+                                          <p className="mb-2">
+                                            <b>What it is: </b>
+                                            {
+                                              product
+                                                ?.technical_score_descriptions
+                                                ?.description
+                                            }
+                                          </p>
+                                        )}
                                         {product?.technical_score_descriptions
                                           .when_matters && (
-                                            <p className="mb-2">
-                                              <b>When it matters: </b>
-                                              {
-                                                product
-                                                  ?.technical_score_descriptions
-                                                  ?.when_matters
-                                              }
-                                            </p>
-                                          )}
+                                          <p className="mb-2">
+                                            <b>When it matters: </b>
+                                            {
+                                              product
+                                                ?.technical_score_descriptions
+                                                ?.when_matters
+                                            }
+                                          </p>
+                                        )}
                                         <p>
                                           <b>Score components:</b>
                                         </p>
@@ -794,14 +747,14 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                                       style={{
                                                         background:
                                                           data?.attribute_evaluation >=
-                                                            7.5
+                                                          7.5
                                                             ? "#093673"
                                                             : data?.attribute_evaluation >=
-                                                              5 &&
+                                                                5 &&
                                                               data?.attribute_evaluation <
-                                                              7.5
-                                                              ? "#437ECE"
-                                                              : "#85B2F1",
+                                                                7.5
+                                                            ? "#437ECE"
+                                                            : "#85B2F1",
                                                       }}
                                                     >
                                                       {`${parseFloat(
@@ -809,9 +762,7 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                                       ).toFixed(1)}`}
                                                     </div>
                                                     <p>
-                                                      {
-                                                        data?.attribute_category
-                                                      }
+                                                      {data?.attribute_category}
                                                     </p>
                                                   </div>
                                                 </React.Fragment>
@@ -826,26 +777,38 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                       className="tooltip-title"
                                       style={{
                                         color:
-                                          product.technical_score_is_better_than * 100 >= 70
-                                            ? '#437ece'
-                                            : product.technical_score_is_worse_than * 100 > 70
-                                              ? '#ce434b'
-                                              : '#27304e',
-                                        fontSize: '15px',
-                                        textDecoration: 'underline',
-                                        textDecorationStyle: 'dotted',
-                                        textDecorationThickness: '1.5px',
+                                          product.technical_score_is_better_than *
+                                            100 >=
+                                          70
+                                            ? "#437ece"
+                                            : product.technical_score_is_worse_than *
+                                                100 >
+                                              70
+                                            ? "#ce434b"
+                                            : "#27304e",
+                                        fontSize: "15px",
+                                        textDecoration: "underline",
+                                        textDecorationStyle: "dotted",
+                                        textDecorationThickness: "1.5px",
                                         textDecorationColor:
-                                          product.technical_score_is_better_than * 100 >= 70
-                                            ? '#437ece'
-                                            : product.technical_score_is_worse_than * 100 > 70
-                                              ? '#ce434b'
-                                              : '#27304e',
-                                        textUnderlineOffset: '5px',
+                                          product.technical_score_is_better_than *
+                                            100 >=
+                                          70
+                                            ? "#437ece"
+                                            : product.technical_score_is_worse_than *
+                                                100 >
+                                              70
+                                            ? "#ce434b"
+                                            : "#27304e",
+                                        textUnderlineOffset: "5px",
                                       }}
                                     >
                                       {product.technical_score}
-                                      <ProsConsToolTip hover_phrase={product.technical_score_phase} />
+                                      <ProsConsToolTip
+                                        hover_phrase={
+                                          product.technical_score_phase
+                                        }
+                                      />
                                     </span>
                                   </div>
                                 </div>
@@ -866,26 +829,24 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                       <div className="tooltip-display-content">
                                         {product?.users_rating_descriptions
                                           .description && (
-                                            <p className="mb-2">
-                                              <b>What it is: </b>
-                                              {
-                                                product
-                                                  ?.users_rating_descriptions
-                                                  ?.description
-                                              }
-                                            </p>
-                                          )}
+                                          <p className="mb-2">
+                                            <b>What it is: </b>
+                                            {
+                                              product?.users_rating_descriptions
+                                                ?.description
+                                            }
+                                          </p>
+                                        )}
                                         {product?.users_rating_descriptions
                                           .when_matters && (
-                                            <p className="mb-2">
-                                              <b>When it matters: </b>
-                                              {
-                                                product
-                                                  ?.users_rating_descriptions
-                                                  ?.when_matters
-                                              }
-                                            </p>
-                                          )}
+                                          <p className="mb-2">
+                                            <b>When it matters: </b>
+                                            {
+                                              product?.users_rating_descriptions
+                                                ?.when_matters
+                                            }
+                                          </p>
+                                        )}
                                         <p>
                                           <b>Score components:</b>
                                         </p>
@@ -909,14 +870,14 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                                       style={{
                                                         background:
                                                           data?.attribute_evaluation >=
-                                                            7.5
+                                                          7.5
                                                             ? "#093673"
                                                             : data?.attribute_evaluation >=
-                                                              5 &&
+                                                                5 &&
                                                               data?.attribute_evaluation <
-                                                              7.5
-                                                              ? "#437ECE"
-                                                              : "#85B2F1",
+                                                                7.5
+                                                            ? "#437ECE"
+                                                            : "#85B2F1",
                                                       }}
                                                     >
                                                       {`${parseFloat(
@@ -924,9 +885,7 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                                       ).toFixed(1)}`}
                                                     </div>
                                                     <p>
-                                                      {
-                                                        data?.attribute_category
-                                                      }
+                                                      {data?.attribute_category}
                                                     </p>
                                                   </div>
                                                 </React.Fragment>
@@ -943,13 +902,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         color:
                                           product.reviews_is_better_than *
                                             100 >=
-                                            70
+                                          70
                                             ? "#437ece"
                                             : product.reviews_is_worse_than *
-                                              100 >
+                                                100 >
                                               70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                            ? "#ce434b"
+                                            : "#27304e",
                                         fontSize: "15px",
                                         textDecoration: "underline",
                                         textDecorationStyle: "dotted",
@@ -957,13 +916,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         textDecorationColor:
                                           product.reviews_is_better_than *
                                             100 >=
-                                            70
+                                          70
                                             ? "#437ece"
                                             : product.reviews_is_worse_than *
-                                              100 >
+                                                100 >
                                               70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                            ? "#ce434b"
+                                            : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -995,13 +954,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                           color:
                                             product.expert_reviews_is_better_than *
                                               100 >=
-                                              70
+                                            70
                                               ? "#437ece"
                                               : product.expert_reviews_is_worse_than *
-                                                100 >
+                                                  100 >
                                                 70
-                                                ? "#ce434b"
-                                                : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                           fontSize: "15px",
                                           textDecoration: "underline",
                                           textDecorationStyle: "dotted",
@@ -1009,13 +968,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                           textDecorationColor:
                                             product.expert_reviews_is_better_than *
                                               100 >=
-                                              70
+                                            70
                                               ? "#437ece"
                                               : product.expert_reviews_is_worse_than *
-                                                100 >
+                                                  100 >
                                                 70
-                                                ? "#ce434b"
-                                                : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                           textUnderlineOffset: "5px",
                                         }}
                                       >
@@ -1049,13 +1008,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         color:
                                           product.ratio_quality_price_points_better_then *
                                             100 >=
-                                            70
+                                          70
                                             ? "#437ece"
                                             : product.ratio_quality_price_points_worse_then *
-                                              100 >
+                                                100 >
                                               70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                            ? "#ce434b"
+                                            : "#27304e",
                                         fontSize: "15px",
                                         textDecoration: "underline",
                                         textDecorationStyle: "dotted",
@@ -1063,13 +1022,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         textDecorationColor:
                                           product.ratio_quality_price_points_better_then *
                                             100 >=
-                                            70
+                                          70
                                             ? "#437ece"
                                             : product.ratio_quality_price_points_worse_then *
-                                              100 >
+                                                100 >
                                               70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                            ? "#ce434b"
+                                            : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1102,13 +1061,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         color:
                                           product.popularity_points_better_then *
                                             100 >=
-                                            70
+                                          70
                                             ? "#437ece"
                                             : product.popularity_points_worse_then *
-                                              100 >
+                                                100 >
                                               70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                            ? "#ce434b"
+                                            : "#27304e",
                                         fontSize: "15px",
                                         textDecoration: "underline",
                                         textDecorationStyle: "dotted",
@@ -1116,13 +1075,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         textDecorationColor:
                                           product.popularity_points_better_then *
                                             100 >=
-                                            70
+                                          70
                                             ? "#437ece"
                                             : product.popularity_points_worse_then *
-                                              100 >
+                                                100 >
                                               70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                            ? "#ce434b"
+                                            : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1139,32 +1098,35 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                             </Accordion.Body>
                           </Accordion.Item>
                           {/* Dynaic accordian items of first accordin */}
-                          {Object.keys(
-                            getAttributeHalf(product, "first")
-                          ).map((attribute, index) => {
-                            return (
-                              <Fragment key={index}>
-                                <Accordion.Item eventKey={index} key={index}>
-                                  <Accordion.Header as="div">
-                                    <div className="table-accordion-header">
-                                      {attribute}
-                                      <Questiontool
-                                        attributes={
-                                          product.attributes_new[attribute][0]?.attribute_category
-                                        }
-                                      />
-                                    </div>
-                                    <span
+                          {Object.keys(getAttributeHalf(product, "first")).map(
+                            (attribute, index) => {
+                              return (
+                                <Fragment key={index}>
+                                  <Accordion.Item eventKey={index} key={index}>
+                                    <Accordion.Header as="div">
+                                      <div className="table-accordion-header">
+                                        {attribute}
+                                        <Questiontool
+                                          attributes={
+                                            product.attributes_new[attribute][0]
+                                              ?.attribute_category
+                                          }
+                                        />
+                                      </div>
+                                      <span
                                         className="count dark-color"
                                         style={{
                                           background:
                                             product.attributes_new[attribute][0]
                                               .attribute_evaluation >= 7.5
                                               ? "#093673"
-                                              : product.attributes_new[attribute][0]
-                                                  .attribute_evaluation >= 5 &&
-                                                product.attributes_new[attribute][0]
-                                                  .attribute_evaluation < 7.5
+                                              : product.attributes_new[
+                                                  attribute
+                                                ][0].attribute_evaluation >=
+                                                  5 &&
+                                                product.attributes_new[
+                                                  attribute
+                                                ][0].attribute_evaluation < 7.5
                                               ? "#437ECE"
                                               : "#85B2F1",
                                         }}
@@ -1172,8 +1134,9 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         {product.attributes_new[attribute][0]
                                           .attribute_evaluation != null
                                           ? parseInt(
-                                              product.attributes_new[attribute][0]
-                                                .attribute_evaluation
+                                              product.attributes_new[
+                                                attribute
+                                              ][0].attribute_evaluation
                                             ) >= 10
                                             ? Math.trunc(
                                                 parseInt(
@@ -1183,26 +1146,22 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                                 )
                                               )
                                             : parseInt(
-                                                product.attributes_new[attribute][0]
-                                                  .attribute_evaluation
+                                                product.attributes_new[
+                                                  attribute
+                                                ][0].attribute_evaluation
                                               ).toFixed(1)
                                           : "0.0"}
                                       </span>
-                                    <div
-                                      className="show-btn"
-                                    >
-                                      Show All{" "}
-                                      <i className="ri-arrow-down-s-line"></i>
-                                    </div>
-                                    <div
-                                      className="hide-btn"
-                                    >
-                                      Hide All{" "}
-                                      <i className="ri-arrow-up-s-line"></i>
-                                    </div>
-
-                                  </Accordion.Header>
-                                  <Accordion.Body>
+                                      <div className="show-btn">
+                                        Show All{" "}
+                                        <i className="ri-arrow-down-s-line"></i>
+                                      </div>
+                                      <div className="hide-btn">
+                                        Hide All{" "}
+                                        <i className="ri-arrow-up-s-line"></i>
+                                      </div>
+                                    </Accordion.Header>
+                                    <Accordion.Body>
                                       {loading == false ? (
                                         product.attributes_new[attribute]
                                           .slice(
@@ -1420,7 +1379,8 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                       )}
 
                                       {loading == false
-                                        ? product.attributes_new[attribute].length >
+                                        ? product.attributes_new[attribute]
+                                            .length >
                                             (displayedAttributesCount[
                                               product.name
                                             ] &&
@@ -1448,8 +1408,9 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                               <i
                                                 className={`ri-${
                                                   initialDisplay <
-                                                  product.attributes_new[attribute]
-                                                    .length
+                                                  product.attributes_new[
+                                                    attribute
+                                                  ].length
                                                     ? "add"
                                                     : "subtract"
                                                 }-line`}
@@ -1458,17 +1419,17 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                           )
                                         : ""}
                                     </Accordion.Body>
-                                </Accordion.Item>
-                              </Fragment>
-                            );
-                          })}
+                                  </Accordion.Item>
+                                </Fragment>
+                              );
+                            }
+                          )}
                         </Accordion>
                         {/* Left According end*/}
-          {/* Right */}
-          <Accordion className="table-accordion w-50 p-0 right-accordion">
-                            {Object.keys(
-                              getAttributeHalf(product, "second")
-                            ).map((attribute, index) => {
+                        {/* Right */}
+                        <Accordion className="table-accordion w-50 p-0 right-accordion">
+                          {Object.keys(getAttributeHalf(product, "second")).map(
+                            (attribute, index) => {
                               return (
                                 <Fragment key={index}>
                                   <Accordion.Item eventKey={index} key={index}>
@@ -1489,10 +1450,13 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                             product.attributes_new[attribute][0]
                                               .attribute_evaluation >= 7.5
                                               ? "#093673"
-                                              : product.attributes_new[attribute][0]
-                                                  .attribute_evaluation >= 5 &&
-                                                product.attributes_new[attribute][0]
-                                                  .attribute_evaluation < 7.5
+                                              : product.attributes_new[
+                                                  attribute
+                                                ][0].attribute_evaluation >=
+                                                  5 &&
+                                                product.attributes_new[
+                                                  attribute
+                                                ][0].attribute_evaluation < 7.5
                                               ? "#437ECE"
                                               : "#85B2F1",
                                         }}
@@ -1500,8 +1464,9 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         {product.attributes_new[attribute][0]
                                           .attribute_evaluation != null
                                           ? parseInt(
-                                              product.attributes_new[attribute][0]
-                                                .attribute_evaluation
+                                              product.attributes_new[
+                                                attribute
+                                              ][0].attribute_evaluation
                                             ).toFixed(1)
                                           : "0.0"}
                                       </span>
@@ -1743,7 +1708,8 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                         />
                                       )}
                                       {loading == false
-                                        ? product.attributes_new[attribute].length >
+                                        ? product.attributes_new[attribute]
+                                            .length >
                                             (displayedAttributesCount[
                                               product.name
                                             ] &&
@@ -1771,7 +1737,9 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                               <i
                                                 className={`ri-${
                                                   initialDisplay <
-                                                  product.attributes_new[attribute].length
+                                                  product.attributes_new[
+                                                    attribute
+                                                  ].length
                                                     ? "add"
                                                     : "subtract"
                                                 }-line`}
@@ -1783,11 +1751,12 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
                                   </Accordion.Item>
                                 </Fragment>
                               );
-                            })}
-                          </Accordion>
+                            }
+                          )}
+                        </Accordion>
                       </Accordion.Body>
                     </Col>
-                    </Row>
+                  </Row>
                 </Accordion.Item>
               </Accordion>
             </Row>
@@ -1797,5 +1766,3 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
     </Fragment>
   );
 }
-
-
