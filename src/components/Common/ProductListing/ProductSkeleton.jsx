@@ -4,7 +4,6 @@ import RightPointingArrow from "../../Svg/RightPointingArrow";
 import { Fragment } from "react";
 import Image from "next/image";
 import { Accordion, Button, Col, Row } from "react-bootstrap";
-
 export default function ProductSkeleton() {
   return (
     <Fragment>
@@ -66,7 +65,6 @@ export default function ProductSkeleton() {
                   </ul>
                 </div>
               </div>
-
               <div className="col light-bg-color">
                 <div className="pros-corns-section pros">
                   <p className="buy-avoid">

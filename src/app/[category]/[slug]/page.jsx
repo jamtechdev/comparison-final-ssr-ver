@@ -1,10 +1,9 @@
 import PageSwitch from "@/app/_components/PageSwitch";
-export default async function Page({ params: { slug } }) {
+export default async function Page({ params: { slug },searchParams }) {
   const slugType = await getSlugType(slug);
-  const pageData = await fetchDataBasedOnPageType(slug, slugType.type);
-
+  const pageData = await fetchDataBasedOnPageType(slug, slugType.type,searchParams);
   return (
-    <PageSwitch PageType={slugType.type} slug={slug} pageData={pageData} />
+    <PageSwitch PageType={slugType.type} slug={slug} pageData={pageData} searchParams={searchParams} />
   );
 }
 export async function generateMetadata({ params: { slug } }) {
@@ -34,13 +33,13 @@ async function getSlugType(slug) {
   }
   return response.json();
 }
-async function fetchDataBasedOnPageType(slug, pageType) {
+async function fetchDataBasedOnPageType(slug, pageType,searchParams) {
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${slug}`,
-        `${process.env.NEXT_PUBLIC_API_URL}/guide/products/${slug}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/guide/products/${slug}?query=${JSON.stringify(searchParams)}`,
       ];
       break;
     case "Blog":

@@ -2,23 +2,15 @@ import GuidePage from "./GuidePage";
 import BlogPage from "./BlogPage";
 import ProductPage from "./ProductPage";
 import CategoryArchive from "./CategoryArchive";
-
-import ProductCategoryArchivePage from "./ProductCategoryArchivePage";
-export default function PageSwitch({ PageType, slug, pageData }) {
+export default async function PageSwitch({ PageType, slug, pageData,searchParams }) {
   let PageToRender;
   console.log(PageType, "pageType");
   switch (PageType) {
     case "Guide":
       const guide = pageData[0].data;
-      const attributes = getCategoryAttributes(guide?.category_id, slug);
-      PageToRender = (
-        <GuidePage
-          slug={slug}
-          guideData={pageData}
-          filters={attributes?.data}
-          attributesForTable={attributes?.attribute_categories}
-        />
-      );
+      const attributes = await getCategoryAttributes(guide?.category_id, slug)
+      PageToRender = <GuidePage slug={slug} guideData={pageData} filters={attributes?.data
+      } attributesForTable={attributes?.attribute_categories} searchParams={searchParams}/>;
       break;
     case "Blog":
       PageToRender = <BlogPage slug={slug} blogData={pageData} />;

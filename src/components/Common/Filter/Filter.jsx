@@ -1,333 +1,164 @@
+"use client";
 /* eslint-disable react/display-name */
 import React, { useState, useRef, useEffect } from "react";
 import { Accordion, Form } from "react-bootstrap";
-import {
-  filterArrayOfObject,
-  handleFilterValueChange,
-  isCheckboxChecked,
-  capitalize,
-  filterProducts,
-} from "../../../_helpers";
+import { getFilteredAttributeValues } from "../../../_helpers";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider.js";
-const Filter = React.memo(
-  ({
-    categoryAttributes,
-    setFilterObj,
-    filterObj,
-    products,
-    sortRangeAttributeArray,
-    priceRangeAndBrandsArray,
-    setFilterObjPriceBrand,
-    filterObjPriceBrand,
-  }) => {
-    let initialNoOfCategories = 5;
-
-    const [pagination, setPagination] = useState({});
-    const remainigProductsCalculateFilter = (category, attribute, value) => {
-      let newobj = {};
-      // if (!newobj[category]) {
-      newobj[category] = {};
-      // }
-      // if (!newobj[category][attribute]) {
-      newobj[category][attribute] = [];
-      // }
-      newobj[category][attribute].push(value);
-      return filterProducts({ ...filterObj, ...newobj }, products).length;
-    };
-
-    const handlePagination = (categoryName) => {
-      let updatedPage =
-        pagination[categoryName] + initialNoOfCategories ||
-        initialNoOfCategories * 2;
-      setPagination({ ...pagination, [categoryName]: updatedPage });
-    };
-    // let refObj = useRef({})
-
-    const handleFilterChange = (category, attribute, value, e) => {
-      handleFilterValueChange(
-        filterObj,
-        setFilterObj,
-        category,
-        attribute,
-        value,
-        e
-      );
-    };
-
-    const handleRangeChange = (
-      category,
-      attribute,
-      value,
-      initial_min,
-      initial_max
-    ) => {
-      let obj = { ...filterObj };
-      if (!obj[category]) {
-        obj[category] = {};
-      }
-      if (!obj[category][attribute]) {
-        obj[category][attribute] = [{ min: 0, max: 100 }];
-      }
-
-      if (
-        initial_max - initial_min >= 1 &&
-        initial_max == value.max &&
-        initial_min == value.min
-      ) {
-        delete obj[category][attribute];
-        if (Object.keys(obj[category]).length === 0) {
-          delete obj[category];
-        }
-      } else if (
-        initial_max - initial_min < 1 &&
-        value.max == 100 &&
-        value.min == 0
-      ) {
-        delete obj[category][attribute];
-        if (Object.keys(obj[category]).length === 0) {
-          delete obj[category];
-        }
-      } else {
-        obj[category][attribute][0] = {
-          min: value.min,
-          max: value.max,
-        };
-      }
-      setFilterObj({ ...obj });
-    };
-    const handlefilterObjPriceBrand = (type, value) => {
-      let obj = { ...filterObjPriceBrand };
-      if (type == "price") {
-      
-        obj["price"] = { ...value };
-        if (
-          obj.price.min == priceRangeAndBrandsArray.priceRange.min &&
-          obj.price.max == priceRangeAndBrandsArray.priceRange.max
-        ) {
-          delete obj["price"];
-        }
-      } else if (type == "available") {
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import debounce from 'lodash.debounce';
+export default function Filter({ categoryAttributes }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  let price = categoryAttributes.price;
+  let brands = categoryAttributes.brands;
+  let attributeCategories = categoryAttributes.attribute_categories
+  let initialNoOfCategories = 5;
+  let updatedParams = {};
+  const [pagination, setPagination] = useState({});
+  const handlePagination = (categoryName) => {
+    let updatedPage =
+      pagination[categoryName] + initialNoOfCategories ||
+      initialNoOfCategories * 2;
+    setPagination({ ...pagination, [categoryName]: updatedPage });
+  };
+  const handelFilterActions = (key, value) => {
+     console.log(key,value);
+    const currentParams = new URLSearchParams(searchParams.toString());
+    // console.log(JSON.stringify(currentParams),"currentParams")
+    const url = new URL(window.location.href);
+    switch (key) {
+      case "price":
+        updatedParams.price = value;
+        break;
+      case "available":
         if (value) {
-          obj["available"] = true;
+          updatedParams.available = value;
         } else {
-          delete obj["available"];
+          deleteQueryFormURL(key, updatedParams, currentParams, url)
         }
-      } else if (type == "brand") {
-        if (!obj["brand"]) {
-          obj["brand"] = [];
-        }
-        if (value.isChecked) {
-          obj["brand"].push(value.brand);
+        break;
+      case "brand":
+        if (Object.values(value).length > 0) {
+          updatedParams.brand = Object.values(value).join()
         } else {
-          obj["brand"] = obj["brand"].filter((item) => item !== value.brand);
-          if (obj["brand"].length == 0) {
-            delete obj["brand"];
-          }
+          deleteQueryFormURL(key, updatedParams, currentParams, url)
         }
-      }
-      setFilterObjPriceBrand({ ...obj });
-      // console.log(filterObjPriceBrand)
-    };
-
-    return (
-      <div className="filter-container">
-        <div className="filter-section">
-          <div className="tech-features-price">
-            Price
-            {priceRangeAndBrandsArray.priceRange.min != null && (
-              <MultiRangeSlider
-                min={priceRangeAndBrandsArray.priceRange?.min}
-                max={priceRangeAndBrandsArray.priceRange.max}
-                onChange={({ min, max }) => {
-                  handlefilterObjPriceBrand("price", { min, max });
-                }}
-                unit="€"
-              />
-            )}
-          </div>
+        break;
+      default:
+        return;
+    }
+    // console.log(updatedParams)
+    Object.entries(updatedParams).forEach(([paramKey, paramValue]) => {
+      currentParams.set(paramKey, paramValue);
+      url.searchParams.set(paramKey, paramValue);
+    });
+    // Update the URL without triggering a page reload (hack)
+    window.history.pushState({}, '', url.toString());
+    //call the next router for srr
+    router.push(`?${currentParams.toString()}`, { scroll: false });
+  };
+  const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
+    delete updatedParams[key];
+    currentParams.delete([key]);
+    url.searchParams.delete([key]);
+  }
+  //router.replace(pathname, { scroll: false });
+  return (
+    <div className="filter-container">
+      <div className="filter-section">
+        <div className="tech-features-price">
+          Price
+          {price?.[0]?.min_price != null && (
+            <MultiRangeSlider
+              min={price[0]?.min_price}
+              max={price[0]?.max_price}
+              unit="€"
+              onChange={({ min, max }) => {
+                handelFilterActions("price", `${min},${max}`);
+              }}
+            />
+          )}
         </div>
-        <Accordion className="filter-accordion">
-          {/* {priceRangeAndBrandsArray.priceRange.min != null &&
-          <Accordion.Item eventKey="999999">
-            <Accordion.Header as="div" className="accordion-header">
-              Price <i className="ri-arrow-down-s-fill"></i>
-            </Accordion.Header>
-            <Accordion.Body>
-              <MultiRangeSlider
-                min={priceRangeAndBrandsArray.priceRange.min}
-                max={priceRangeAndBrandsArray.priceRange.max}
-                onChange={({ min, max }) => {
-                  handlefilterObjPriceBrand("price", { min, max })
-                  // console.log(priceRangeAndBrandsArray.priceRange)
-                  // handleRangeChange(category.name, attribute.name, { min, max }, resultFilteredArrayOfObject.minValue, resultFilteredArrayOfObject.maxValue);
-                }}
-                unit=""
-              />
-            </Accordion.Body>
-          </Accordion.Item>
-        } */}
-          <Accordion.Item eventKey="888888">
-            <Accordion.Header as="div" className="accordion-header">
-              {" "}
-              Available
-              <Form.Check
-                required
-                className="custom-switch"
-                type="switch"
-                // checked={isCheckboxChecked(filterObj, category.name, attribute.name, value)}
-                id={`Available`}
-                onChange={(e) =>
-                  handlefilterObjPriceBrand("available", e.target.checked)
-                }
-                // onChange={(e) => handleFilterChange(category.name, attribute.name, value, e)}
-              />
-            </Accordion.Header>
-          </Accordion.Item>
-          <Accordion.Item eventKey="777777">
-            <Accordion.Header as="div" className="accordion-header">
-              Brand <i className="ri-arrow-down-s-fill"></i>
-            </Accordion.Header>
-            <Accordion.Body className="brand-list-section">
-              {priceRangeAndBrandsArray.brands?.map((brand, brandIndex) => {
-                return (
-                  <Form.Check
-                    required
-                    label={<span>{brand}</span>}
-                    // checked={isCheckboxChecked(filterObj, category.name, attribute.name, value)}
-                    key={brandIndex}
-                    id={brand}
-                    onChange={(e) =>
-                      handlefilterObjPriceBrand("brand", {
-                        isChecked: e.target.checked,
-                        brand: brand,
-                      })
+      </div>
+      <Accordion className="filter-accordion">
+        <Accordion.Item eventKey="888888">
+          <Accordion.Header as="div" className="accordion-header">
+            {" "}
+            Available
+            <Form.Check
+              required
+              className="custom-switch"
+              type="switch"
+              id={`Available`}
+              onChange={(e) =>
+                handelFilterActions("available", e.target.checked)
+              }
+            />
+          </Accordion.Header>
+        </Accordion.Item>
+        <Accordion.Item eventKey="777777">
+          <Accordion.Header as="div" className="accordion-header">
+            Brand <i className="ri-arrow-down-s-fill"></i>
+          </Accordion.Header>
+          <Accordion.Body className="brand-list-section">
+            {brands?.map((brand, brandIndex) => {
+              return (
+                <Form.Check
+                  required
+                  label={<span>{brand}</span>}
+                  key={brandIndex}
+                  id={brand}
+                  onChange={(e) =>
+                    handelFilterActions("brand", { brand: brand })
+                  }
+                />
+              );
+            })}
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+      {/* Dynaimc Value Accordians */}
+      {attributeCategories?.map((category, index) => {
+        let countAttribute = 1;
+        return (
+          <div className="filter-section" key={index}>
+            <div className="tech-features">{category.name}</div>
+            <Accordion className="filter-accordion">
+              {category?.attributes?.map((attribute, attrIndex) => {
+                if (
+                  countAttribute <=
+                  (pagination[category.name] || initialNoOfCategories)
+                ) {
+                  let filteredArrayOfAttributeValues = getFilteredAttributeValues(attribute);
+                  if (filteredArrayOfAttributeValues?.type == "dropdown") {
+                    countAttribute++;
+                    // check if values contain only yes then Toggle Switch
+                    if (
+                      filteredArrayOfAttributeValues.values.length == 1 &&
+                      filteredArrayOfAttributeValues.values[0] == "yes"
+                    ) {
+                      const value = filteredArrayOfAttributeValues.values[0];
+                      const groupName = `${category.name}-${attribute.name}`;
+                      return (
+                        <Accordion.Item eventKey={attrIndex} key={attrIndex}>
+                          <Accordion.Header
+                            as="div"
+                            className="accordion-header"
+                          >
+                            {attribute.name}
+                            <Form.Check
+                              required
+                              className="custom-switch"
+                              type="switch"
+                              id={`${groupName}-${value}`}
+                            />
+                          </Accordion.Header>
+                        </Accordion.Item>
+                      );
                     }
-                    // onChange={(e) => handleFilterChange(category.name, attribute.name, value, e)}
-                  />
-                );
-              })}
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-        {categoryAttributes?.map((category, index) => {
-          let countAttribute = 1;
-          return (
-            <div className="filter-section" key={index}>
-              <div className="tech-features">{category.name}</div>
-              <Accordion className="filter-accordion">
-                {category?.attributes?.map((attribute, attrIndex) => {
-                  if (
-                    countAttribute <=
-                    (pagination[category.name] || initialNoOfCategories)
-                  ) {
-                    let resultFilteredArrayOfObject = filterArrayOfObject(
-                      attribute,
-                      sortRangeAttributeArray
-                    );
-                    // console.log(resultFilteredArrayOfObject)
-                    if (resultFilteredArrayOfObject?.type == "dropdown") {
-                      countAttribute++;
-                      // check if values contain only yes then Toggle Switch
-                      if (
-                        resultFilteredArrayOfObject.values.length == 1 &&
-                        resultFilteredArrayOfObject.values[0] == "yes"
-                      ) {
-                        // console.log(resultFilteredArrayOfObject.values[0]);
-                        const value = resultFilteredArrayOfObject.values[0];
-                        const groupName = `${category.name}-${attribute.name}`;
-                        return (
-                          <Accordion.Item eventKey={attrIndex} key={attrIndex}>
-                            <Accordion.Header
-                              as="div"
-                              className="accordion-header"
-                            >
-                              {attribute.name}
-                              <Form.Check
-                                required
-                                className="custom-switch"
-                                type="switch"
-                                checked={isCheckboxChecked(
-                                  filterObj,
-                                  category.name,
-                                  attribute.name,
-                                  value
-                                )}
-                                id={`${groupName}-${value}`}
-                                onChange={(e) =>
-                                  handleFilterChange(
-                                    category.name,
-                                    attribute.name,
-                                    value,
-                                    e
-                                  )
-                                }
-                              />
-                            </Accordion.Header>
-                          </Accordion.Item>
-                        );
-                      }
-                      // if not toggle show dropdown
-                      else {
-                        return (
-                          <Accordion.Item eventKey={attrIndex} key={attrIndex}>
-                            <Accordion.Header
-                              as="div"
-                              className="accordion-header"
-                            >
-                              {attribute.name}{" "}
-                              <i className="ri-arrow-down-s-fill"></i>
-                            </Accordion.Header>
-                            <Accordion.Body>
-                              {resultFilteredArrayOfObject.values?.map(
-                                (value, valIndex) => {
-                                  const groupName = `${category.name}-${attribute.name}`;
-                                  // console.log("category", category.name, " attr ", attribute.name, " value ", value)
-                                  // console.log()
-                                  let countProduct =
-                                    remainigProductsCalculateFilter(
-                                      category.name,
-                                      attribute.name,
-                                      value
-                                    );
-                                  return (
-                                    <Form.Check
-                                      required
-                                      label={
-                                        <span>
-                                          {value.toString()}{" "}
-                                          <span
-                                            dangerouslySetInnerHTML={{
-                                              __html: `<p>(${countProduct})</p>`,
-                                            }}
-                                          />
-                                        </span>
-                                      }
-                                      checked={isCheckboxChecked(
-                                        filterObj,
-                                        category.name,
-                                        attribute.name,
-                                        value
-                                      )}
-                                      key={valIndex}
-                                      id={`${groupName}-${value}`}
-                                      onChange={(e) =>
-                                        handleFilterChange(
-                                          category.name,
-                                          attribute.name,
-                                          value,
-                                          e
-                                        )
-                                      }
-                                    />
-                                  );
-                                }
-                              )}
-                            </Accordion.Body>
-                          </Accordion.Item>
-                        );
-                      }
-                    } else if (resultFilteredArrayOfObject?.type == "range") {
-                      countAttribute++;
+                    // if not toggle show dropdown
+                    else {
                       return (
                         <Accordion.Item eventKey={attrIndex} key={attrIndex}>
                           <Accordion.Header
@@ -338,41 +169,75 @@ const Filter = React.memo(
                             <i className="ri-arrow-down-s-fill"></i>
                           </Accordion.Header>
                           <Accordion.Body>
-                            <MultiRangeSlider
-                              min={
-                                resultFilteredArrayOfObject.maxValue -
-                                  resultFilteredArrayOfObject.minValue >=
-                                1
-                                  ? resultFilteredArrayOfObject.minValue
-                                  : 0
-                              }
-                              max={
-                                resultFilteredArrayOfObject.maxValue -
-                                  resultFilteredArrayOfObject.minValue >=
-                                1
-                                  ? resultFilteredArrayOfObject.maxValue
-                                  : 100
-                              }
-                              onChange={({ min, max }) => {
-                                handleRangeChange(
-                                  category.name,
-                                  attribute.name,
-                                  { min, max },
-                                  resultFilteredArrayOfObject.minValue,
-                                  resultFilteredArrayOfObject.maxValue
+                            {filteredArrayOfAttributeValues.values?.map(
+                              (value, valIndex) => {
+                                const groupName = `${category.name}-${attribute.name}`;
+                                return (
+                                  <Form.Check
+                                    required
+                                    label={
+                                      <span>
+                                        {value.toString()}{" "}
+                                        <span
+                                          dangerouslySetInnerHTML={{
+                                            __html: `<p>(${0})</p>`,
+                                          }}
+                                        />
+                                      </span>
+                                    }
+
+                                    key={valIndex}
+                                    id={`${groupName}-${value}`}
+                                  />
                                 );
-                              }}
-                              unit={resultFilteredArrayOfObject.unit}
-                            />
+                              }
+                            )}
                           </Accordion.Body>
                         </Accordion.Item>
                       );
                     }
+                  } else if (filteredArrayOfAttributeValues?.type == "range") {
+                    countAttribute++;
+                    return (
+                      <Accordion.Item eventKey={attrIndex} key={attrIndex}>
+                        <Accordion.Header
+                          as="div"
+                          className="accordion-header"
+                        >
+                          {attribute.name}{" "}
+                          <i className="ri-arrow-down-s-fill"></i>
+                        </Accordion.Header>
+                        <Accordion.Body>
+                          <MultiRangeSlider
+                            min={
+                              filteredArrayOfAttributeValues.maxValue -
+                                filteredArrayOfAttributeValues.minValue >=
+                                1
+                                ? filteredArrayOfAttributeValues.minValue
+                                : 0
+                            }
+                            max={
+                              filteredArrayOfAttributeValues.maxValue -
+                                filteredArrayOfAttributeValues.minValue >=
+                                1
+                                ? filteredArrayOfAttributeValues.maxValue
+                                : 100
+                            }
+                            unit={filteredArrayOfAttributeValues.unit}
+                            onChange={({ min, max }) => {
+                              handelFilterActions("price", `${min},${max}`);
+                            }}
+                          />
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    );
                   }
-                })}
-              </Accordion>
-              {countAttribute >
-                (pagination[category.name] || initialNoOfCategories) && (
+
+                }
+              })}
+            </Accordion>
+            {countAttribute >
+              (pagination[category.name] || initialNoOfCategories) && (
                 <span
                   className="show_more"
                   onClick={() => handlePagination(category.name)}
@@ -380,12 +245,10 @@ const Filter = React.memo(
                   SHOW MORE <i className="ri-add-line"></i>
                 </span>
               )}
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
-);
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
-export default Filter;
