@@ -41,9 +41,11 @@ export default function LatesGuid({ favSlider }) {
                 sizes="100%"
                 alt=""
               />
+              <div className="product-name-wrapper">
               <span>
                 {section?.short_name}
               </span>
+              </div>
             </Link>
         </SwiperSlide>
       ))}
