@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { Col, Row } from "react-bootstrap";
 const IMAGE_ALT_TEXT = "Category Images";
 export default function Category({ categories }) {
+  console.log();
   const router = useRouter();
   return (
     <Row>
@@ -14,7 +15,7 @@ export default function Category({ categories }) {
           xs={6}
           key={index}
           onClick={() => {
-            router.push(`/${section?.primary_archive_category.toLowerCase()}`);
+            router.push(`/${section?.primary_archive_category}`);
           }}
         >
           <div className="category-section">

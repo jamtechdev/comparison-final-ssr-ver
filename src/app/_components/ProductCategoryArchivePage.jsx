@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
   return (
@@ -12,40 +13,42 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
             <Container>
               <Row>
                 <Col md={12}>
-                  <Breadcrumb firstPageName="Blog Archive" secondPageName="" />
+                  <BreadCrumb firstPageName="Blog Archive" secondPageName="" />
                 </Col>
 
                 <Col md={12}>
-                  <h1 className="heading-primary text-capitalize">{slug}</h1>
+                  <h1 className="heading-primary-category-archive secondary-category-archive text-capitalize">
+                    {slug}
+                  </h1>
                 </Col>
               </Row>
             </Container>
           </section>
-          <section className="blog_post_section py-5">
+          <section className="blog_post_section py-3">
             <Container>
               {/*-------------POPULAR GUIDE -------------------*/}
-              <Row>
+              <Row className="py-3">
                 {categoryData[0]?.data?.popular_guides?.length > 0 && (
                   <Col md={12}>
-                    <h2 className="heading-primary secondary">
+                    <h2 className=" secondary-category-archive">
                       Popular guides
                     </h2>
                   </Col>
                 )}
                 <Col md={12}>
-                  <Row className="mt-3">
+                  <Row className="">
                     {categoryData[0]?.data?.popular_guides?.length > 0 &&
                       categoryData[0]?.data?.popular_guides?.map(
                         (item, index) => {
                           return (
                             <Col
-                              lg={3}
-                              md={4}
+                              lg={2}
+                              md={3}
                               xs={6}
                               className="px-2 mb-3"
                               key={`guide-${index}`}
                             >
-                              <div className="blog-card" role="button">
+                              {/* <div className="blog-card" role="button">
                                 <Link href={`/guide/${item?.permalink}`}>
                                   <div className="blog-card-img">
                                     <Image
@@ -66,7 +69,25 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                     {item?.title}
                                   </span>
                                 </Link>
-                                {/* <p className="category">{`item?.category`}</p> */}
+                              </div> */}
+                              <div className="product-card-2">
+                                <Link
+                                  href={`${item?.permalink}`}
+                                  style={{ color: "#27304e" }}
+                                >
+                                  <Image
+                                    src={
+                                      item?.bannerImage
+                                        ? item?.bannerImage
+                                        : `/images/nofound.png`
+                                    }
+                                    width={0}
+                                    height={0}
+                                    sizes="100%"
+                                    alt=""
+                                  />
+                                  <span>{item?.title}</span>
+                                </Link>
                               </div>
                             </Col>
                           );
@@ -76,28 +97,25 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 </Col>
               </Row>
               {/*---------------- POPULAR REVIEWS -----------------------*/}
-              <Row>
+              <Row className="py-3">
+                <Col md={12}>
+                  <h2 className="heading-primary secondary">Popular reviews</h2>
+                </Col>
                 {categoryData[0]?.data?.popular_reviews?.length > 0 && (
                   <Col md={12}>
-                    <h2 className="heading-primary secondary">
-                      Popular reviews
-                    </h2>
-                  </Col>
-                )}
-                <Col md={12}>
-                  <Row className="mt-3">
-                    {categoryData[0]?.data?.popular_reviews?.length > 0 &&
-                      categoryData[0]?.data?.popular_reviews?.map(
-                        (item, index) => {
-                          return (
-                            <Col
-                              lg={3}
-                              md={4}
-                              xs={6}
-                              className="px-2 my-3"
-                              key={`review-${index}`}
-                            >
-                              <div className="blog-card" role="button">
+                    <Row className="mt-3">
+                      {categoryData[0]?.data?.popular_reviews?.length > 0 &&
+                        categoryData[0]?.data?.popular_reviews?.map(
+                          (item, index) => {
+                            return (
+                              <Col
+                                lg={2}
+                                md={3}
+                                xs={6}
+                                className="px-2 mb-3"
+                                key={`review-${index}`}
+                              >
+                                {/* <div className="blog-card" role="button">
                                 <div className="blog-card-img">
                                   <Image
                                     src={
@@ -115,16 +133,59 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                 <p className="dates">SEPTEMBER 20 2022</p>
                                 <span className="blog-title">{item?.name}</span>
                                 <p className="category">{item?.category}</p>
-                              </div>
-                            </Col>
-                          );
-                        }
-                      )}
-                  </Row>
-                </Col>
+                              </div> */}
+
+                                <Link
+                                  // href={`/${url}/${item?.permalink}`}
+                                  href={`#`}
+                                >
+                                  <div className="review-wrapper">
+                                    <div className="review-card">
+                                      <Image
+                                        src={
+                                          item?.main_image ||
+                                          "/images/nofound.png"
+                                        }
+                                        width={0}
+                                        height={0}
+                                        sizes="100%"
+                                        alt=""
+                                      />
+                                      <div className="footer_content">
+                                        <span>{item?.name}</span>
+                                        <p>{item?.category}</p>
+                                      </div>
+                                      <span
+                                        className="rating_count"
+                                        style={{
+                                          background:
+                                            item.rating >= 7.5
+                                              ? "#093673"
+                                              : item.rating >= 5 &&
+                                                item.rating < 7.5
+                                              ? "#437ECE"
+                                              : "#85B2F1",
+                                        }}
+                                      >
+                                        {item?.overall_score}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Link>
+                              </Col>
+                            );
+                          }
+                        )}
+                    </Row>
+                  </Col>
+                )}
+                {/* {
+                  categoryData[0]?.data?.popular_reviews?.length == 0 && 
+                  <h2 className="">NO Data Found</h2>
+                } */}
               </Row>
               {/*-------------------- POPULAR ARTICLES --------------------------------*/}
-              <Row>
+              <Row className="py-3">
                 {categoryData[0]?.data?.popular_blogs?.length > 0 && (
                   <Col md={12}>
                     <h2 className="heading-primary secondary">
@@ -140,9 +201,9 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                           return (
                             <Col
                               lg={3}
-                              md={4}
+                              md={3}
                               xs={6}
-                              className="px-2 my-3"
+                              className="px-2 mb-3"
                               key={`articles-${index}`}
                             >
                               <div className="blog-card" role="button">

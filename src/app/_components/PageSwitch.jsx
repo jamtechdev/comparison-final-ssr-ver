@@ -2,6 +2,7 @@ import GuidePage from "./GuidePage";
 import BlogPage from "./BlogPage";
 import ProductPage from "./ProductPage";
 import CategoryArchive from "./CategoryArchive";
+import ProductCategoryArchivePage from "./ProductCategoryArchivePage";
 export default async function PageSwitch({ PageType, slug, pageData,searchParams }) {
   let PageToRender;
   console.log(PageType, "pageType");
@@ -18,7 +19,7 @@ export default async function PageSwitch({ PageType, slug, pageData,searchParams
     case "Product":
       PageToRender = <ProductPage slug={slug} productData={pageData} />;
       break;
-    case "PrimaryAchiveCategory":
+    case "PrimaryArchiveCategory":
       PageToRender = <CategoryArchive slug={slug} ArchiveData={pageData} />;
       break;
     case "ProductCategory":
@@ -26,7 +27,6 @@ export default async function PageSwitch({ PageType, slug, pageData,searchParams
         <ProductCategoryArchivePage slug={slug} categoryData={pageData} />
       );
       break;
-
     default:
       PageToRender = () => <div>No Page Found</div>;
       break;

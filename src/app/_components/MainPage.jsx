@@ -166,12 +166,14 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         style={{
                           backgroundImage: `url(${data?.rectangle_image})`,
                         }}
+                       
                         onClick={() => {
                           router.push(
                             `/${data?.primary_archive_category.toLowerCase()}`
                           );
                         }}
                       >
+                        {console.log(data?.primary_archive_category, "data?.primary_archive_category")}
                         {data?.primary_archive_category}
                       </h2>
                     </Col>
