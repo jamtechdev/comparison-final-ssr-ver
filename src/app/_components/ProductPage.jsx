@@ -344,6 +344,19 @@ function ProductPage({ productData, productCatAttributes, compareByCatID }) {
                 )}
               </div>
             </Col>
+            <Col lg={12} md={12} xl={12}>
+              <div className="alternatives mt-4">
+                <h6>Similar Alternatives:</h6>
+                <ul>
+                  <li className="active">
+                    <span>9 kg</span>
+                  </li>
+                  <li>
+                    <span>10 kg</span>
+                  </li>
+                </ul>
+              </div>
+            </Col>
           </Row>
         </Container>
       </section>

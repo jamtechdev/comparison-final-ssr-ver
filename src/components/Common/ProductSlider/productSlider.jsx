@@ -11,7 +11,7 @@ import React from "react";
 export default function ProductSlider({ favSlider }) {
   return (
     <>
-      <section className="product-slider">
+      <div className="product-slider">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={30}
@@ -47,7 +47,7 @@ export default function ProductSlider({ favSlider }) {
                 <React.Fragment key={section?.short_name + index}>
                     <SwiperSlide key={section?.short_name}>
                       <Link
-                        href={`/${section?.category_url}/${section?.permalink}`}
+                        href={`/${section?.category}/${section?.permalink}`}
                         style={{ color: "#27304e" }}
                       >
                         {" "}
@@ -85,7 +85,7 @@ export default function ProductSlider({ favSlider }) {
         ) : (
           ""
         )}
-      </section>
+      </div>
     </>
   );
 }
