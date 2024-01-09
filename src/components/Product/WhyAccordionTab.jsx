@@ -13,6 +13,7 @@ import {
   Tabs,
 } from "react-bootstrap";
 import Image from "next/image";
+import QuestionIcon from "../Svg/QuestionIcon";
 
 const WhyAccordionTab = React.memo(({ product }) => {
   const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
@@ -89,57 +90,46 @@ const WhyAccordionTab = React.memo(({ product }) => {
                         <ul>
                           {product && tabvalue?.pros == "total"
                             ? product?.total_average_pros
-                              ?.slice(0, 8)
-                              ?.map((item, index) => {
-                                return (
-                                  <li key={index}>
-                                    {typeof item?.difference_value ==
-                                      "number"
-                                      ? item?.difference
-                                      : item?.phrase}
-                                    <span className="question-marker-icon">
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                      </svg>
-                                    </span>
-                                    <small className="d-block">
-                                      {item?.difference_value == "yes" ||
+                                ?.slice(0, 8)
+                                ?.map((item, index) => {
+                                  return (
+                                    <li key={index}>
+                                      {typeof item?.difference_value == "number"
+                                        ? item?.difference
+                                        : item?.phrase}
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                      />
+
+                                      <small className="d-block">
+                                        {item?.difference_value == "yes" ||
                                         item?.difference_value == "no"
-                                        ? ""
-                                        : item?.vs}
-                                    </small>
-                                  </li>
-                                );
-                              })
+                                          ? ""
+                                          : item?.vs}
+                                      </small>
+                                    </li>
+                                  );
+                                })
                             : product?.average_pros[tabvalue?.pros]
-                              ?.slice(0, 8)
-                              ?.map((item, index) => {
-                                return (
-                                  <li key={index}>
-                                    {typeof item?.difference_value ==
-                                      "number"
-                                      ? item?.difference
-                                      : item?.phrase}
-                                    <span className="question-marker-icon">
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                      </svg>
-                                    </span>
-                                    <small className="d-block">
-                                      {item?.difference_value == "yes" ||
+                                ?.slice(0, 8)
+                                ?.map((item, index) => {
+                                  return (
+                                    <li key={index}>
+                                      {typeof item?.difference_value == "number"
+                                        ? item?.difference
+                                        : item?.phrase}
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                      />
+                                      <small className="d-block">
+                                        {item?.difference_value == "yes" ||
                                         item?.difference_value == "no"
-                                        ? ""
-                                        : item?.vs}
-                                    </small>
-                                  </li>
-                                );
-                              })}
+                                          ? ""
+                                          : item?.vs}
+                                      </small>
+                                    </li>
+                                  );
+                                })}
                         </ul>
                       </Tab.Pane>
                     </Tab.Content>
@@ -203,61 +193,45 @@ const WhyAccordionTab = React.memo(({ product }) => {
                         <ul className="compare-crons">
                           {product && tabvalue?.cons == "total"
                             ? product?.total_average_cons
-                              ?.slice(0, 8)
-                              ?.map((item, index) => {
-                                return (
-
-                                  <li key={index}>
-                                    {typeof item?.difference_value ==
-                                      "number"
-                                      ? item?.difference
-                                      : item?.phrase}
-                                    <span className="question-marker-icon">
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                      </svg>
-                                    </span>
-                                    <small className="d-block">
-                                      {item?.difference_value == "yes" ||
+                                ?.slice(0, 8)
+                                ?.map((item, index) => {
+                                  return (
+                                    <li key={index}>
+                                      {typeof item?.difference_value == "number"
+                                        ? item?.difference
+                                        : item?.phrase}
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                      />
+                                      <small className="d-block">
+                                        {item?.difference_value == "yes" ||
                                         item?.difference_value == "no"
-                                        ? ""
-                                        : item?.vs}
-                                    </small>
-                                  </li>
-
-                                );
-                              })
+                                          ? ""
+                                          : item?.vs}
+                                      </small>
+                                    </li>
+                                  );
+                                })
                             : product?.average_cons[tabvalue?.cons]
-                              ?.slice(0, 8)
-                              ?.map((item, index) => {
-                                return (
-
-                                  <li key={index}>
-                                    {typeof item?.difference_value ==
-                                      "number"
-                                      ? item?.difference
-                                      : item?.phrase}
-                                    <span className="question-marker-icon">
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                      </svg>
-                                    </span>
-                                    <small className="d-block">
-                                      {item?.difference_value == "yes" ||
+                                ?.slice(0, 8)
+                                ?.map((item, index) => {
+                                  return (
+                                    <li key={index}>
+                                      {typeof item?.difference_value == "number"
+                                        ? item?.difference
+                                        : item?.phrase}
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                      />
+                                      <small className="d-block">
+                                        {item?.difference_value == "yes" ||
                                         item?.difference_value == "no"
-                                        ? ""
-                                        : item?.vs}
-                                    </small>
-                                  </li>
-
-                                );
-                              })}
+                                          ? ""
+                                          : item?.vs}
+                                      </small>
+                                    </li>
+                                  );
+                                })}
                         </ul>
                       </Tab.Pane>
                     </Tab.Content>
@@ -277,7 +251,6 @@ const WhyAccordionTab = React.memo(({ product }) => {
                           Object.keys(product?.average_cons).map(
                             (item, index) => {
                               return (
-
                                 <Nav.Item key={index}>
                                   <Nav.Link
                                     eventKey={item}
@@ -288,7 +261,6 @@ const WhyAccordionTab = React.memo(({ product }) => {
                                     {item}
                                   </Nav.Link>
                                 </Nav.Item>
-
                               );
                             }
                           )}
