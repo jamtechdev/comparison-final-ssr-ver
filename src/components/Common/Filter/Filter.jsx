@@ -5,14 +5,14 @@ import { Accordion, Form } from "react-bootstrap";
 import { getFilteredAttributeValues } from "../../../_helpers";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider.js";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import debounce from 'lodash.debounce';
+import debounce from "lodash.debounce";
 export default function Filter({ categoryAttributes }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   let price = categoryAttributes.price;
   let brands = categoryAttributes.brands;
-  let attributeCategories = categoryAttributes.attribute_categories
+  let attributeCategories = categoryAttributes.attribute_categories;
   let initialNoOfCategories = 5;
   let updatedParams = {};
   const [pagination, setPagination] = useState({});
@@ -23,7 +23,6 @@ export default function Filter({ categoryAttributes }) {
     setPagination({ ...pagination, [categoryName]: updatedPage });
   };
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    console.log(filterName)
     const currentParams = new URLSearchParams(searchParams.toString());
     // console.log(JSON.stringify(currentParams),"currentParams")
     const url = new URL(window.location.href);
@@ -36,27 +35,29 @@ export default function Filter({ categoryAttributes }) {
         if (value) {
           updatedParams.available = value;
         } else {
-          deleteQueryFormURL(key, updatedParams, currentParams, url)
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
         }
         break;
       case "brand":
         if (isChecked) {
           if (Object.values(value).length > 0) {
             let existingValue = url.searchParams.get([key]);
-            updatedParams[key] = existingValue ? `${existingValue},${Object.values(value).join()}` : Object.values(value).join()
+            updatedParams[key] = existingValue
+              ? `${existingValue},${Object.values(value).join()}`
+              : Object.values(value).join();
           } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url)
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
           }
         } else {
           let existingValue = url.searchParams.get([key]);
           let valuesArray = existingValue ? existingValue.split(",") : [];
-          let valueToRemove = Object.values(value)[0]
-          valuesArray = valuesArray.filter(v => v != valueToRemove);
+          let valueToRemove = Object.values(value)[0];
+          valuesArray = valuesArray.filter((v) => v != valueToRemove);
           const updatedValue = valuesArray.join(",");
           if (updatedValue) {
-            updatedParams[key] = updatedValue
+            updatedParams[key] = updatedValue;
           } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url)
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
           }
         }
         break;
@@ -64,7 +65,7 @@ export default function Filter({ categoryAttributes }) {
         if (isChecked) {
           updatedParams[key] = value;
         } else {
-          deleteQueryFormURL(key, updatedParams, currentParams, url)
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
         }
         break;
       case "range":
@@ -74,20 +75,22 @@ export default function Filter({ categoryAttributes }) {
         if (isChecked) {
           if (Object.values(value).length > 0) {
             let existingValue = url.searchParams.get([key]);
-            updatedParams[key] = existingValue ? `${existingValue},${Object.values(value).join()}` : Object.values(value).join()
+            updatedParams[key] = existingValue
+              ? `${existingValue},${Object.values(value).join()}`
+              : Object.values(value).join();
           } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url)
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
           }
         } else {
           let existingValue = url.searchParams.get([key]);
           let valuesArray = existingValue ? existingValue.split(",") : [];
-          let valueToRemove = Object.values(value)[0]
-          valuesArray = valuesArray.filter(v => v != valueToRemove);
+          let valueToRemove = Object.values(value)[0];
+          valuesArray = valuesArray.filter((v) => v != valueToRemove);
           const updatedValue = valuesArray.join(",");
           if (updatedValue) {
-            updatedParams[key] = updatedValue
+            updatedParams[key] = updatedValue;
           } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url)
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
           }
         }
         break;
@@ -100,16 +103,16 @@ export default function Filter({ categoryAttributes }) {
       url.searchParams.set(paramKey, paramValue);
     });
     // Update the URL without triggering a page reload (hack)
-    window.history.pushState({}, '', url.toString());
+    window.history.pushState({}, "", url.toString());
     //call the next router for srr
     router.push(`?${currentParams.toString()}`, { scroll: false });
   };
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
-    console.log("Delete", key)
+    console.log("Delete", key);
     delete updatedParams[key];
     currentParams.delete([key]);
     url.searchParams.delete([key]);
-  }
+  };
   //router.replace(pathname, { scroll: false });
   return (
     <div className="filter-container">
@@ -157,7 +160,12 @@ export default function Filter({ categoryAttributes }) {
                   key={brandIndex}
                   id={brand}
                   onChange={(e) =>
-                    handelFilterActions("brand", "brand", { brand: brand }, e.target.checked)
+                    handelFilterActions(
+                      "brand",
+                      "brand",
+                      { brand: brand },
+                      e.target.checked
+                    )
                   }
                 />
               );
@@ -177,7 +185,8 @@ export default function Filter({ categoryAttributes }) {
                   countAttribute <=
                   (pagination[category.name] || initialNoOfCategories)
                 ) {
-                  let filteredArrayOfAttributeValues = getFilteredAttributeValues(attribute);
+                  let filteredArrayOfAttributeValues =
+                    getFilteredAttributeValues(attribute);
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
                     // check if values contain only yes then Toggle Switch
@@ -204,9 +213,9 @@ export default function Filter({ categoryAttributes }) {
                                   "radioSwitch",
                                   attribute.name,
                                   value,
-                                  e.target.checked)
+                                  e.target.checked
+                                )
                               }
-
                             />
                           </Accordion.Header>
                         </Accordion.Item>
@@ -240,7 +249,6 @@ export default function Filter({ categoryAttributes }) {
                                         />
                                       </span>
                                     }
-
                                     key={valIndex}
                                     id={`${groupName}-${value}`}
                                     onChange={(e) =>
@@ -263,10 +271,7 @@ export default function Filter({ categoryAttributes }) {
                     countAttribute++;
                     return (
                       <Accordion.Item eventKey={attrIndex} key={attrIndex}>
-                        <Accordion.Header
-                          as="div"
-                          className="accordion-header"
-                        >
+                        <Accordion.Header as="div" className="accordion-header">
                           {attribute.name}{" "}
                           <i className="ri-arrow-down-s-fill"></i>
                         </Accordion.Header>
@@ -275,43 +280,45 @@ export default function Filter({ categoryAttributes }) {
                             min={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                                1
+                              1
                                 ? filteredArrayOfAttributeValues.minValue
                                 : 0
                             }
                             max={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                                1
+                              1
                                 ? filteredArrayOfAttributeValues.maxValue
                                 : 100
                             }
                             unit={filteredArrayOfAttributeValues.unit}
                             onChange={({ min, max }) => {
-                              handelFilterActions("range", attribute.name, `${min},${max}`);
+                              handelFilterActions(
+                                "range",
+                                attribute.name,
+                                `${min},${max}`
+                              );
                             }}
                           />
                         </Accordion.Body>
                       </Accordion.Item>
                     );
                   }
-
                 }
               })}
             </Accordion>
             {countAttribute >
               (pagination[category.name] || initialNoOfCategories) && (
-                <span
-                  className="show_more"
-                  onClick={() => handlePagination(category.name)}
-                >
-                  SHOW MORE <i className="ri-add-line"></i>
-                </span>
-              )}
+              <span
+                className="show_more"
+                onClick={() => handlePagination(category.name)}
+              >
+                SHOW MORE <i className="ri-add-line"></i>
+              </span>
+            )}
           </div>
         );
       })}
     </div>
   );
 }
-

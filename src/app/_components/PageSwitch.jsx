@@ -40,7 +40,7 @@ export default async function PageSwitch({
         <ProductPage
           slug={slug}
           productData={pageData}
-          productCatAttribute={productCatAttribute?.attribute_categories}
+          productCatAttributes={productCatAttribute}
           compareByCatID={getProductCompare}
         />
       );

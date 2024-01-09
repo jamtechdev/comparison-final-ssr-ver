@@ -188,7 +188,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         </h3>
                         <div className="product-categories-container">
                           {data?.categories?.map((item, index) => {
-                            {console.log(item?.category_url, "item?.category_url-----------------");}
+                           
                             return (
                               <div
                                 className="product-categories-item"
