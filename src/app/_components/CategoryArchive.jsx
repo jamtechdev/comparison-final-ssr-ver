@@ -1,4 +1,3 @@
-"use client";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import React from "react";

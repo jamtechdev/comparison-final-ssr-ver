@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { Col, Row } from "react-bootstrap";
 const IMAGE_ALT_TEXT = "Category Images";
 export default function Category({ categories }) {
+  console.log();
   const router = useRouter();
   return (
     <Row>

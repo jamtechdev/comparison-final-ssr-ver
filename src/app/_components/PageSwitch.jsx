@@ -27,7 +27,6 @@ export default async function PageSwitch({ PageType, slug, pageData,searchParams
         <ProductCategoryArchivePage slug={slug} categoryData={pageData} />
       );
       break;
-
     default:
       PageToRender = () => <div>No Page Found</div>;
       break;
