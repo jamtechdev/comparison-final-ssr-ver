@@ -11,49 +11,25 @@ import {
   Tabs,
 } from "react-bootstrap";
 import Link from "next/link";
-
-// import Compare from "../../components/Common/Compare/Compare";
-import ReviewSlider from "../../components/Common/ReviewSlider/reviewSlider";
-// import ComparisonsSlider from "../../components/Common/ComparisonsSlider/comparisonsSlider";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
+import Compare from "@/components/Common/Compare/Compare";
 import MobileAccordion from "../../components/Common/MobileAccordion/mobileAccordion";
-// import ProductSlider from "../../components/Common/ProductSlider/productSlider";
-// import ProductCompareTable from "../../components/Common/CompareTable/ProductCompareTable";
-import {
-  capitalize,
-  getAttributeHalf,
-  removeDecimalAboveNine,
-} from "../../_helpers";
-import Skeleton from "react-loading-skeleton";
 import ThumbSlider from "@/components/Common/ThumbSlider/ThumbSlider";
 import Image from "next/image";
-import QuestionIcon from "@/components/Svg/QuestionIcon";
-import ProductReviewTab from "@/components/Product/ProductReviewTab";
 import WhyAccordionTab from "@/components/Product/WhyAccordionTab";
 import TechnicalAccordion from "../../components/Product/TechnicalAccordion";
 import CompareDropDown from "@/components/Product/CompareDropDown";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import ProductTabs from "@/components/Product/ProductTabs";
 import ProductCompareTable from "@/components/Common/CompareTable/ProductCompareTable";
+import ComparisonsSlider from "@/components/Common/ComparisonsSlider/comparisonsSlider";
+
 // import Link from "next/link";
 
-function ProductPage({ productData, productCatAttribute, compareByCatID }) {
+function ProductPage({ productData, productCatAttributes, compareByCatID }) {
   let initialDisplay = 5;
-  // const [product, setProduct] = useState(null);
-  // const [showFullPrice, setShowFullPrice] = useState(false);
-  // const [showFullRanking, setShowFullRanking] = useState(false);
-  // const [displayedAttributesCount, setDisplayedAttributesCount] = useState({});
-  // const [loading, setloading] = useState(false);
-  // const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
-  // const [storeValue, setStoreValue] = useState("");
-  // const [attributes, setAttributes] = useState([]);
-  // const [getDataByCompareId, setCompareId] = useState(null);
-  // const [categoryAttribute, setCategoryAttributes] = useState(null);
-
   const productsWithAttributeGroup = {};
-
   const productCopy = productData[0].data;
-
   const productAttributes = {};
   productData[0].data?.attributes?.forEach((attribute) => {
     // Extract the category name for the attribute
@@ -73,24 +49,8 @@ function ProductPage({ productData, productCatAttribute, compareByCatID }) {
   productsWithAttributeGroup[productData[0]?.data?.name] = productCopy;
   const finalProducts = Object?.values(productsWithAttributeGroup);
   let product = finalProducts[0];
-
-  //  const compareByCatID = await productService?.getCompareProductByCatID(
-  //    finalProducts[0]?.category_id
-  //  );
-
-  //  const categoryAttributes = await productService?.getCategoryAttributesById(
-  //    finalProducts[0]?.category_id
-  //  );
-
-  //  setCategoryAttributes(categoryAttributes);
-  //  setCompareId(compareByCatID);
-  //  setProduct(finalProducts[0]);
-  //  setStoreValue(data?.data?.data?.attributes[0].description);
-  //  setAttributes(data?.data?.data?.attributes);
-
   let loading = false;
   let displayedAttributesCount = {};
-
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -120,8 +80,6 @@ function ProductPage({ productData, productCatAttribute, compareByCatID }) {
 
   let showFullPrice = false;
   let showFullRanking = false;
-  let storeValue = "";
-  let attributes = [];
   const resultOverallScore = getEvaluation(finalProducts[0]?.overall_score);
   const resultTechnicalScoreColor = getEvaluation(
     finalProducts[0]?.technical_score
@@ -148,7 +106,6 @@ function ProductPage({ productData, productCatAttribute, compareByCatID }) {
         ? ""
         : `(${item?.value})`;
     }
-
     // return ""; // Return null for strings
   };
 
@@ -668,6 +625,7 @@ function ProductPage({ productData, productCatAttribute, compareByCatID }) {
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Best Alternatives</h2>
+              <p>No Data Found</p>
               {/* <ReviewSlider /> */}
             </Col>
           </Row>
@@ -682,12 +640,32 @@ function ProductPage({ productData, productCatAttribute, compareByCatID }) {
                 vacuum cleaners
               </h2>
             </Col>
-            {/* <Col md={12}>
+            <Col md={12}>
               <ProductCompareTable
-                products={compareByCatID}
-                categoryAttributes={ProductCompareTable}
+                products={compareByCatID?.data}
+                categoryAttributes={productCatAttributes?.data}
               />
-            </Col> */}
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      <section className="mt-3 ptb-80 bg-color">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">Compare With Other Products</h2>
+              <Compare />
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      <section className="mt-3 mobile-popular-comparison">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">Popular comparisons</h2>
+              <ComparisonsSlider />
+            </Col>
           </Row>
         </Container>
       </section>

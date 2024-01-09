@@ -4,8 +4,6 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 function CategoryArchive({ slug, ArchiveData }) {
-    console.log(ArchiveData[0].data, "ArchiveData");
-
   return (
     <>
       <section className="breadcrumb-section">
