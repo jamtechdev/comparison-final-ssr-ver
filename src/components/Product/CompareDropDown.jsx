@@ -49,7 +49,7 @@ function CompareDropDown({ attributeDropDown, product }) {
           <Row className="mt-3">
             <Col md={4} lg={3}>
               <p className="text-end mobile-content-left para_content_text">
-                <p>{selectedCategory}</p>
+               {selectedCategory}
               </p>
             </Col>
             <Col md={8} lg={9}>

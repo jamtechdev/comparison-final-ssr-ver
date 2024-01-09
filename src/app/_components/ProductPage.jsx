@@ -422,7 +422,7 @@ function ProductPage({ productData }) {
         product={product?.name}
       />
 
-      <section className="ptb-80 bg-color">
+      {/* <section className="ptb-80 bg-color">
         <Container>
           <Row>
             <Col md={12}>
@@ -474,8 +474,8 @@ function ProductPage({ productData }) {
             </Col>
           </Row>
         </Container>
-      </section>
-      {product?.text_part && (
+      </section> */}
+      {/* {product?.text_part && (
         <section className="ptb-80">
           <Container>
             <Row>
@@ -628,7 +628,7 @@ function ProductPage({ productData }) {
             </Row>
           </Container>
         </section>
-      )}
+      )} */}
       {/* Baad me Karna Hai */}
       {/* <section className="ptb-80 bg-color">
         <Container>
@@ -646,7 +646,7 @@ function ProductPage({ productData }) {
         </Container>
       </section> */}
 
-      <section className="mt-3">
+      {/* <section className="mt-3">
         <Container>
           <Row>
             <Col md={12}>
@@ -655,7 +655,7 @@ function ProductPage({ productData }) {
             </Col>
           </Row>
         </Container>
-      </section>
+      </section> */}
 
       {/* <GetCompareId finalProducts={finalProducts} /> */}
     </>

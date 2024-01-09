@@ -1,19 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
-'use client'
+"use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import Image from "next/image";
-import { useCallback, useRef, useState } from "react";
-import { Form } from "react-bootstrap";
+import { useCallback, useState } from "react";
 
-export default function ThumbSlider({ productData }) {
+export default function ThumbSlider() {
   const product = [
     {
-      image: "/images/review-image.png",
-    },
-    {
       image: "/images/review-image2.png",
     },
     {
@@ -23,52 +18,45 @@ export default function ThumbSlider({ productData }) {
       image: "/images/review-image.png",
     },
     {
-      image: "/images/review-image.png",
-    },
-    {
-      image: "/images/review-image2.png",
-    },
-    {
       image: "/images/review-image3.png",
-    },
-    {
-      image: "/images/review-image.png",
     },
     {
       image: "/images/review-image2.png",
     },
   ];
-  const [swiperRef, setSwiperRef] = useState();
+  const [swiper, setSwiper] = useState(null);
 
-  const handlePrevious = useCallback(() => {
-    swiperRef?.slidePrev();
-  }, [swiperRef]);
-
-  const handleNext = useCallback(() => {
-    swiperRef?.slideNext();
-  }, [swiperRef]);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const swiperRefs = useRef(null);
-
-  const handleThumbnailClick = (index) => {
-    setSelectedImageIndex(index);
-    swiperRef.current.slideTo(index); // Move Swiper to the clicked thumbnail
+  const setSwiperRef = (swiper) => {
+    setSwiper(swiper);
   };
 
-  const handleSwiperSlideChange = (swiper) => {
-    setSelectedImageIndex(swiper.activeIndex);
+  const handleThumbClick = (index) => {
+    if (swiper) {
+      swiper.slideTo(index); // Navigate to the clicked thumbnail's corresponding slide
+    }
+  };
+
+  const handlePrevious = () => {
+    if (swiper) {
+      swiper.slidePrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (swiper) {
+      swiper.slideNext();
+    }
   };
   return (
     <section className="thumb-section-container">
       <ul className="thumb-images">
-        {product?.slice(0, 4)?.map((item, index) => (
-          <li key={index} onClick={() => handleThumbnailClick(index)}>
-            <img
-              src={`${item?.image}`}
-              width={50}
-              height={50}
-              alt={`Thumbnail ${index}`}
-            />
+        {product.map((item, index) => (
+          <li
+            key={index}
+            onClick={() => handleThumbClick(index)}
+            style={{ cursor: "pointer" }}
+          >
+            <Image src={item.image} width={0} height={0} sizes="100%" alt="" />
           </li>
         ))}
       </ul>
@@ -76,40 +64,44 @@ export default function ThumbSlider({ productData }) {
         <Swiper
           modules={[Navigation]}
           spaceBetween={30}
-          onSlideChange={handleSwiperSlideChange}
-          ref={swiperRefs}
+          loop={true}
+          onSwiper={setSwiperRef}
           breakpoints={{
-            640: { slidesPerView: 1, spaceBetween: 10 },
-            768: { slidesPerView: 1, spaceBetween: 10 },
-            1024: { slidesPerView: 1, spaceBetween: 20 },
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
           }}
         >
-          {product?.map((item, index) => (
+          {product.map((item, index) => (
             <SwiperSlide key={index}>
-              <img
-                src={`${item?.image}`}
-                width="100%"
-                height="auto"
-                alt={`Swiper Slide ${index}`}
+              <Image
+                src={item.image}
+                width={0}
+                height={0}
+                sizes="100%"
+                alt=""
               />
             </SwiperSlide>
           ))}
         </Swiper>
-        <span
-          className="swiper-prev"
-          onClick={() => swiperRef.current?.slidePrev()}
-        >
+        <span className="swiper-prev" onClick={handlePrevious}>
           <i className="ri-arrow-left-s-line"></i>
         </span>
-        <span
-          className="swiper-next"
-          onClick={() => swiperRef.current?.slideNext()}
-        >
+        <span className="swiper-next" onClick={handleNext}>
           <i className="ri-arrow-right-s-line"></i>
         </span>
       </section>
       <div className="alternatives">
-        <p>Similar Alternatives:</p>
+        <h6>Similar Alternatives:</h6>
         <ul>
           <li className="active">
             <span>9 kg</span>
@@ -118,28 +110,6 @@ export default function ThumbSlider({ productData }) {
             <span>10 kg</span>
           </li>
         </ul>
-      </div>
-
-      <div className="alternatives">
-        <p className="version-availabel">Color available:</p>
-        <Form className="color-section">
-          {productData?.available_colors?.map((data, key) => {
-            return (
-              <>
-                <div className="color-item">
-                  <Form.Check
-                    inline
-                    label={data?.color}
-                    name="color"
-                    type="radio"
-                    defaultChecked={key === 0}
-                    id={`inline-${data?.color}-${key}`}
-                  />
-                </div>
-              </>
-            );
-          })}
-        </Form>
       </div>
     </section>
   );
