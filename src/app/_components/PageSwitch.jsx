@@ -21,7 +21,7 @@ export default async function PageSwitch({ PageType, slug, pageData,searchParams
     case "Product":
       PageToRender = <ProductPage slug={slug} productData={pageData} />;
       break;
-    case "PrimaryAchiveCategory":
+    case "PrimaryArchiveCategory":
       PageToRender = <CategoryArchive slug={slug} ArchiveData={pageData} />;
       break;
     case "ProductCategory":

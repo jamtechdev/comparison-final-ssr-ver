@@ -12,7 +12,6 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 
-// import ThumbSlider from "../../components/Common/ThumbSlider/ThumbSlider";
 // import Compare from "../../components/Common/Compare/Compare";
 import ReviewSlider from "../../components/Common/ReviewSlider/reviewSlider";
 // import ComparisonsSlider from "../../components/Common/ComparisonsSlider/comparisonsSlider";
@@ -33,6 +32,9 @@ import ProductReviewTab from "@/components/Product/ProductReviewTab";
 import WhyAccordionTab from "@/components/Product/WhyAccordionTab";
 import TechnicalAccordion from "../../components/Product/TechnicalAccordion";
 import CompareDropDown from "@/components/Product/CompareDropDown";
+import ProductSlider from "@/components/Common/ProductSlider/productSlider";
+import ProductTabs from "@/components/Product/ProductTabs";
+import ProductCompareTable from "@/components/Common/CompareTable/ProductCompareTable";
 // import Link from "next/link";
 
 function ProductPage({ productData }) {
@@ -421,7 +423,7 @@ function ProductPage({ productData }) {
         product={product?.name}
       />
 
-      {/* <section className="ptb-80 bg-color">
+      <section className="ptb-80 bg-color">
         <Container>
           <Row>
             <Col md={12}>
@@ -432,6 +434,9 @@ function ProductPage({ productData }) {
                 <div className="pros-header">
                   Who SHOULD BUY {product?.name}?
                 </div>
+                {product?.should_buy.length === 0 && (
+                  <h3 className="no-data text-center mt-2">No data Found</h3>
+                )}
                 <ul>
                   {product &&
                     product?.should_buy?.map((item, index) => {
@@ -454,6 +459,9 @@ function ProductPage({ productData }) {
                 <div className="pros-header">
                   Who SHOULD NOT BUY {product?.name}?
                 </div>
+                {product?.should_not_buy.length === 0 && (
+                  <h3 className="no-data text-center mt-2">No data Found</h3>
+                )}
                 <ul className="cross">
                   {product &&
                     product?.should_not_buy?.map((item, index) => {
@@ -473,178 +481,186 @@ function ProductPage({ productData }) {
             </Col>
           </Row>
         </Container>
-      </section> */}
-      {/* {product?.text_part && (
-        <section className="ptb-80">
-          <Container>
-            <Row>
-              <Col md={12}>
-                <h2 className="site-main-heading">Review of {product?.name}</h2>
-              </Col>
-            </Row>
-            <Row className="mt-3">
-              <Col md={4} lg={2}>
-                <div className="outline-section">
-                  <p>Outline</p>
-                  <ol>
-                    <li>Overall</li>
-                    <li>Technical</li>
-                    <li>VS Average</li>
-                    <li className="outline-active">
-                      Review
-                      <ol>
-                        <li>Subtile</li>
-                        <li>Subtile</li>
-                      </ol>
-                    </li>
-                    <li>Pros/Cons</li>
-                  </ol>
-                </div>
-              </Col>
-              <Col md={8} lg={8}>
-                <p className="review-content">
-                  <br />
-                  {product?.text_part}
-                  <br />
-                </p>
-                <Row className="mt-3">
-                  <Col md={12} lg={6}>
-                    <div className="best-price-section mobile-best-price-section">
-                      <h3 className="site-main-heading">Best Prices</h3>
-                      <ul className="best-list-item">
-                        {product &&
-                          product?.price_websites
-                            .slice(0, showFullPrice ? 8 : 4)
-                            .map((item, index) => {
-                              return (
-                                <li key={index}>
+      </section>
+      <section className="ptb-80">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">Review of {product?.name}</h2>
+            </Col>
+          </Row>
+          <Row className="mt-3">
+            <Col md={4} lg={2}>
+              <div className="outline-section">
+                <p>Outline</p>
+                <ol>
+                  <li>Overall</li>
+                  <li>Technical</li>
+                  <li>VS Average</li>
+                  <li className="outline-active">
+                    Review
+                    <ol>
+                      <li>Subtile</li>
+                      <li>Subtile</li>
+                    </ol>
+                  </li>
+                  <li>Pros/Cons</li>
+                </ol>
+              </div>
+            </Col>
+            <Col md={8} lg={8}>
+              <p className="review-content">
+                <br />
+                {product?.text_part === null && (
+                  <span className="text-center">No Data Found</span>
+                )}
+                {product?.text_part}
+                <br />
+              </p>
+              <Row className="mt-3">
+                <Col md={12} lg={6}>
+                  <div className="best-price-section mobile-best-price-section">
+                    <h3 className="site-main-heading">Best Prices</h3>
+                    <ul className="best-list-item">
+                      {product &&
+                        product?.price_websites
+                          .slice(0, showFullPrice ? 8 : 4)
+                          .map((item, index) => {
+                            return (
+                              <li key={index}>
+                                <img
+                                  // src="/images/amazon.png"
+                                  src={item?.logo}
+                                  width={0}
+                                  height={0}
+                                  sizes="100%"
+                                  alt=""
+                                />
+                                <span>{item?.price} €</span>
+                              </li>
+                            );
+                          })}
+                    </ul>
+                    {product?.price_websites.length > 5 && (
+                      <Button className="see_all_btn">
+                        See All <i className="ri-arrow-down-s-line"></i>
+                      </Button>
+                    )}
+                  </div>
+                </Col>
+                <Col md={12} lg={6}>
+                  <div className="best-price-section mobile-best-price-section ranking">
+                    <h3 className="site-main-heading">Best Rankings</h3>
+                    <ul className="best-list-item">
+                      {product &&
+                        product?.guide_ratings
+                          .slice(0, showFullRanking ? 8 : 4)
+                          .map((item, index) => {
+                            return (
+                              <li key={index}>
+                                <p>
                                   <img
-                                    // src="/images/amazon.png"
-                                    src={item?.logo}
+                                    src="/images/double-arrow.png"
                                     width={0}
                                     height={0}
                                     sizes="100%"
                                     alt=""
                                   />
-                                  <span>{item?.price} €</span>
-                                </li>
-                              );
-                            })}
-                      </ul>
-                      {product?.price_websites.length > 5 && (
-                        <Button className="see_all_btn">
-                          See All <i className="ri-arrow-down-s-line"></i>
-                        </Button>
-                      )}
-                    </div>
-                  </Col>
-                  <Col md={12} lg={6}>
-                    <div className="best-price-section mobile-best-price-section ranking">
-                      <h3 className="site-main-heading">Best Rankings</h3>
-                      <ul className="best-list-item">
-                        {product &&
-                          product?.guide_ratings
-                            .slice(0, showFullRanking ? 8 : 4)
-                            .map((item, index) => {
-                              return (
-                                <li key={index}>
-                                  <p>
-                                    <img
-                                      src="/images/double-arrow.png"
-                                      width={0}
-                                      height={0}
-                                      sizes="100%"
-                                      alt=""
-                                    />
-                                    N.{item.position} in{" "}
-                                    <Link href={`/${item?.permalink}`}>
-                                      <small>{item.guide_name}</small>
-                                    </Link>
-                                  </p>
-                                </li>
-                              );
-                            })}
-                      </ul>
-                      <Button className="see_all_btn">
+                                  N.{item.position} in{" "}
+                                  <Link href={`/${item?.permalink}`}>
+                                    <small>{item.guide_name}</small>
+                                  </Link>
+                                </p>
+                              </li>
+                            );
+                          })}
+                    </ul>
+                    {product?.guide_ratings.length > 5 && (
+                      <Button
+                        className="see_all_btn"
+                        // onClick={() => {
+                        //   showFullRanking = !showFullRanking;
+                        // }}
+                      >
                         See All <i className="ri-arrow-down-s-line"></i>
                       </Button>
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-              <Col md={12} lg={2}>
-                <div className="ranking-section">
-                  <div className="site-main-heading">In Rankings</div>
-                  <div className="product-card card-mobile">
-                    <Image
-                      src="/images/p1.png"
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      alt="F"
-                    />
-                    <span>Best Monitors</span>
+                    )}
                   </div>
-                  <ProductSlider className="slider-show" />
-                </div>
-              </Col>
-            </Row>
-            <Row className="mt-5">
-              <Col md={6}>
-                <div className="pros-corns-section pros light-background">
-                  <h3 className="pros-header">Pros</h3>
-                  <ul>
-                    {product &&
-                      product?.top_pros?.map((data, key) => {
-                        return (
-                          <>
-                            <li key={key}>
-                              {data?.name} {renderValue(data)}
-                            </li>
-                          </>
-                        );
-                      })}
-                  </ul>
-                </div>
-              </Col>
-              <Col md={6}>
-                <div className="pros-corns-section corns light-background">
-                  <h3 className="pros-header">Cons</h3>
-                  <ul className="cross">
-                    {product &&
-                      product?.top_cons?.map((data, key) => {
-                        return (
-                          <>
-                            <li key={key}>
-                              {data?.name} {renderValue(data)}
-                            </li>
-                          </>
-                        );
-                      })}
-                  </ul>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-      )} */}
-      {/* Baad me Karna Hai */}
-      {/* <section className="ptb-80 bg-color">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">3rd Party Reviews</h2>
+                </Col>
+              </Row>
             </Col>
-            <Col md={12} className="site_tabs_hide">
-              <ProductReviewTab />
+            <Col md={12} lg={2}>
+              <div className="ranking-section">
+                <div className="site-main-heading">In Rankings</div>
+                <div className="product-card card-mobile">
+                  <Image
+                    src="/images/p1.png"
+                    width={0}
+                    height={0}
+                    sizes="100%"
+                    alt="F"
+                  />
+                  <span>Best Monitors</span>
+                </div>
+                <ProductSlider className="slider-show" />
+              </div>
             </Col>
-            <Col md={12} className="">
-              <MobileAccordion />
+          </Row>
+          <Row className="mt-5">
+            <Col md={6}>
+              <div className="pros-corns-section pros light-background">
+                <h3 className="pros-header">Pros</h3>
+                <ul>
+                  {product &&
+                    product?.top_pros?.map((data, key) => {
+                      return (
+                        <>
+                          <li
+                            key={key}
+                            style={{ color: "rgba(39, 48, 78, 0.80)" }}
+                          >
+                            {data?.name} {renderValue(data)}
+                          </li>
+                        </>
+                      );
+                    })}
+                </ul>
+              </div>
+            </Col>
+            <Col md={6}>
+              <div className="pros-corns-section corns light-background">
+                <h3 className="pros-header">Cons</h3>
+                <ul className="cross">
+                  {product &&
+                    product?.top_cons?.map((data, key) => {
+                      return (
+                        <>
+                          <li
+                            key={key}
+                            style={{ color: "rgba(39, 48, 78, 0.80)" }}
+                          >
+                            {data?.name} {renderValue(data)}
+                          </li>
+                        </>
+                      );
+                    })}
+                </ul>
+              </div>
             </Col>
           </Row>
         </Container>
-      </section> */}
-
+      </section>
+      <ProductTabs />
+      <section className="ptb-80">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">Reviews of Our Users</h2>
+              <p className="no-review">No reviews yet.</p>
+            </Col>
+          </Row>
+        </Container>
+      </section>
       {/* <section className="mt-3">
         <Container>
           <Row>
@@ -655,8 +671,24 @@ function ProductPage({ productData }) {
           </Row>
         </Container>
       </section> */}
-
-      {/* <GetCompareId finalProducts={finalProducts} /> */}
+      {/* <section>
+        <Container>
+          <Row className="table-section-mobile">
+            <Col md={12}>
+              <h2 className="site-main-heading pt-5">
+                Comparing Samsung New VR Headset Oculus 2.0 with best robot
+                vacuum cleaners
+              </h2>
+            </Col>
+            <Col md={12}>
+              <ProductCompareTable
+                products={product}
+                producrCatID={product?.category_id}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </section> */}
     </>
   );
 }
