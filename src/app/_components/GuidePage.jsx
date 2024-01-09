@@ -1,10 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { guideService } from "@/_services";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import useChart from "@/hooks/useChart";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import Link from "next/link";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
@@ -15,19 +12,14 @@ import ProductSkeleton from "@/components/Common/ProductListing/ProductSkeleton"
 import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
-import { isAreObjectsEqual } from "@/_helpers";
-export default function GuidePage({
-  slug,
-  guideData,
-  attributesForTable,
-  filters,
-  searchParams,
-}) {
+import { isAreObjectsEqual } from "@/_helpers"
+import GuidePagination from "@/components/Common/Pagination/GuidePagination";
+export default function GuidePage({ slug, guideData, attributesForTable, filters, searchParams }) {
   useChart();
   const [isShown, setIsShown] = useState(false);
   const guide = guideData[0].data;
-  const products = guideData[1].data.products;
-  const productPagination = guideData[1].data.pagination;
+  const products = guideData[1].data.products
+  const productPagination = guideData[1].data.pagination
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [prevSearcParam, setPrevSearcParam] = useState({});
@@ -178,10 +170,11 @@ export default function GuidePage({
                   ) : (
                     <ProductSkeleton />
                   )}
-                </>
-              )}
+                </>)}
+              <GuidePagination pagination={productPagination} />
             </Row>
           </Col>
+
         </Row>
       </Container>
       <section className="ptb-25">

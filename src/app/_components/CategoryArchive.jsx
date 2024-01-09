@@ -4,7 +4,11 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 function CategoryArchive({ slug, ArchiveData }) {
+<<<<<<< HEAD
 
+=======
+    // console.log(ArchiveData[0].data, "ArchiveData");
+>>>>>>> 8d1f0247a537284f7ae2e0e54c77d3ccd6901b22
 
   return (
     <>
