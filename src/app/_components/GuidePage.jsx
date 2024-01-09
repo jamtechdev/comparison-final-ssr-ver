@@ -16,12 +16,14 @@ import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCom
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
 import {isAreObjectsEqual} from "@/_helpers"
+import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 export default function GuidePage({ slug, guideData, attributesForTable, filters, searchParams }) {
   useChart();
   const [isShown, setIsShown] = useState(false);
   const guide = guideData[0].data;
   const products = guideData[1].data.products
   const productPagination = guideData[1].data.pagination
+  console.log(guideData[1].data,">>>")
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [prevSearcParam, setPrevSearcParam] = useState({})
@@ -180,9 +182,10 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                     <ProductSkeleton />
                   )}
                 </>}
-
+                <GuidePagination pagination={productPagination}/>
             </Row>
           </Col>
+          
         </Row>
       </Container>
       <section className="ptb-25">

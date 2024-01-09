@@ -4,12 +4,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { Accordion, Form } from "react-bootstrap";
 import { getFilteredAttributeValues } from "../../../_helpers";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider.js";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import debounce from 'lodash.debounce';
+import {useRouter, useSearchParams } from "next/navigation";
 export default function Filter({ categoryAttributes }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
   let price = categoryAttributes.price;
   let brands = categoryAttributes.brands;
   let attributeCategories = categoryAttributes.attribute_categories
@@ -23,9 +21,7 @@ export default function Filter({ categoryAttributes }) {
     setPagination({ ...pagination, [categoryName]: updatedPage });
   };
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    console.log(filterName)
     const currentParams = new URLSearchParams(searchParams.toString());
-    // console.log(JSON.stringify(currentParams),"currentParams")
     const url = new URL(window.location.href);
 
     switch (filterName) {

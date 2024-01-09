@@ -55,12 +55,13 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
-      console.log(searchParams);
+      let productApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
+      if (searchParams?.page) {
+        productApiUrl += `&page=${searchParams.page}`;
+      }
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${slug}`,
-        `${
-          process.env.NEXT_PUBLIC_API_URL
-        }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`,
+        productApiUrl
       ];
       break;
     case "Blog":
