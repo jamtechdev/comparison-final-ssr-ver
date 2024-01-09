@@ -167,17 +167,6 @@ export default function ThumbSlider({ productData }) {
           <i className="ri-arrow-right-s-line"></i>
         </span>
       </section>
-      <div className="alternatives">
-        <h6>Similar Alternatives:</h6>
-        <ul>
-          <li className="active">
-            <span>9 kg</span>
-          </li>
-          <li>
-            <span>10 kg</span>
-          </li>
-        </ul>
-      </div>
     </section>
   );
 }

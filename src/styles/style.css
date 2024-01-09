@@ -51,9 +51,13 @@ header.sticky {
 }
 
 .nav-list-section ul {
-  line-height: 30px;
+  line-height: 18px;
   font-size: 14px;
   font-weight: 400;
+}
+
+.nav-list-section ul li{
+  margin: 0 0 8px;
 }
 
 .nav-list-section ul li:hover {

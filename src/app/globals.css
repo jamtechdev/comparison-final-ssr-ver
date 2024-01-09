@@ -611,6 +611,7 @@ body
 
 .table-accordion .accordion-button div.table-accordion-header {
   width: calc(50% - 50px);
+  text-transform: uppercase !important;
 }
 
 .ranking-item-list-sec {

@@ -7,7 +7,7 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
   return (
     <div>
-      {categoryData !=null && (
+      {categoryData != null && (
         <>
           <section className="breadcrumb-section">
             <Container>
@@ -17,7 +17,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 </Col>
 
                 <Col md={12}>
-                  <h1 className="heading-primary secondary text-capitalize">
+                  <h1 className="heading-primary text-capitalize">
                     {slug}
                   </h1>
                 </Col>
@@ -29,9 +29,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
               {/*-------------POPULAR GUIDE -------------------*/}
               <Row className="py-3">
                 <Col md={12}>
-                  <h2 className=" secondary">
-                    Popular guides
-                  </h2>
+                  <h2 className="heading-primary secondary">Popular guides</h2>
                 </Col>
                 {/* if data found */}
                 {categoryData[0]?.data?.popular_guides?.length > 0 && (
@@ -52,20 +50,22 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                   <Link
                                     href={`${item?.category_url}/${item?.permalink}`}
                                     style={{ color: "#27304e" }}
-                                  >
-                                    <Image
-                                      src={
-                                        item?.bannerImage
-                                          ? item?.bannerImage
-                                          : `/images/nofound.png`
-                                      }
-                                      width={0}
-                                      height={0}
-                                      sizes="100%"
-                                      alt=""
-                                    />
+                                    className="product-link-cover"
+                                  ></Link>
+                                  <Image
+                                    src={
+                                      item?.bannerImage === null
+                                        ? item?.bannerImage
+                                        : `/images/nofound.png`
+                                    }
+                                    width={0}
+                                    height={0}
+                                    sizes="100%"
+                                    alt=""
+                                  />
+                                  <div className="product-name-wrapper">
                                     <span>{item?.short_name}</span>
-                                  </Link>
+                                  </div>
                                 </div>
                               </Col>
                             );
