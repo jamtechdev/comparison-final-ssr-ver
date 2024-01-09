@@ -24,6 +24,7 @@ export default async function Page({ params: { slug }, searchParams }) {
     return <NotFound />;
   }
 }
+
 export async function generateMetadata({ params: { slug } }) {
   return {
     title: slug,
@@ -36,7 +37,6 @@ export async function generateMetadata({ params: { slug } }) {
 }
 
 async function getSlugType(slug) {
-  console.log(slug, "slug");
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
     {
@@ -55,6 +55,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
+      console.log(searchParams);
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${slug}`,
         `${

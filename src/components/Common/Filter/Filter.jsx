@@ -22,11 +22,12 @@ export default function Filter({ categoryAttributes }) {
       initialNoOfCategories * 2;
     setPagination({ ...pagination, [categoryName]: updatedPage });
   };
-  const handelFilterActions = (filterName,key, value, isChecked = false) => {
-    console.log(key, value,isChecked);
+  const handelFilterActions = (filterName, key, value, isChecked = false) => {
+    console.log(filterName)
     const currentParams = new URLSearchParams(searchParams.toString());
     // console.log(JSON.stringify(currentParams),"currentParams")
     const url = new URL(window.location.href);
+
     switch (filterName) {
       case "price":
         updatedParams.price = value;
@@ -41,16 +42,56 @@ export default function Filter({ categoryAttributes }) {
       case "brand":
         if (isChecked) {
           if (Object.values(value).length > 0) {
-            updatedParams.brand = Object.values(value).join()
+            let existingValue = url.searchParams.get([key]);
+            updatedParams[key] = existingValue ? `${existingValue},${Object.values(value).join()}` : Object.values(value).join()
           } else {
             deleteQueryFormURL(key, updatedParams, currentParams, url)
           }
         } else {
+          let existingValue = url.searchParams.get([key]);
+          let valuesArray = existingValue ? existingValue.split(",") : [];
+          let valueToRemove = Object.values(value)[0]
+          valuesArray = valuesArray.filter(v => v != valueToRemove);
+          const updatedValue = valuesArray.join(",");
+          if (updatedValue) {
+            updatedParams[key] = updatedValue
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url)
+          }
+        }
+        break;
+      case "radioSwitch":
+        if (isChecked) {
+          updatedParams[key] = value;
+        } else {
           deleteQueryFormURL(key, updatedParams, currentParams, url)
         }
         break;
+      case "range":
+        updatedParams[key] = value;
+        break;
+      case "dropdown":
+        if (isChecked) {
+          if (Object.values(value).length > 0) {
+            let existingValue = url.searchParams.get([key]);
+            updatedParams[key] = existingValue ? `${existingValue},${Object.values(value).join()}` : Object.values(value).join()
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url)
+          }
+        } else {
+          let existingValue = url.searchParams.get([key]);
+          let valuesArray = existingValue ? existingValue.split(",") : [];
+          let valueToRemove = Object.values(value)[0]
+          valuesArray = valuesArray.filter(v => v != valueToRemove);
+          const updatedValue = valuesArray.join(",");
+          if (updatedValue) {
+            updatedParams[key] = updatedValue
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url)
+          }
+        }
+        break;
       default:
-
         return;
     }
     // console.log(updatedParams)
@@ -64,6 +105,7 @@ export default function Filter({ categoryAttributes }) {
     router.push(`?${currentParams.toString()}`, { scroll: false });
   };
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
+    console.log("Delete", key)
     delete updatedParams[key];
     currentParams.delete([key]);
     url.searchParams.delete([key]);
@@ -80,7 +122,7 @@ export default function Filter({ categoryAttributes }) {
               max={price[0]?.max_price}
               unit="€"
               onChange={({ min, max }) => {
-                handelFilterActions("price","price", `${min},${max}`);
+                handelFilterActions("price", "price", `${min},${max}`);
               }}
             />
           )}
@@ -97,7 +139,7 @@ export default function Filter({ categoryAttributes }) {
               type="switch"
               id={`Available`}
               onChange={(e) =>
-                handelFilterActions("available","available", e.target.checked)
+                handelFilterActions("available", "available", e.target.checked)
               }
             />
           </Accordion.Header>
@@ -115,7 +157,7 @@ export default function Filter({ categoryAttributes }) {
                   key={brandIndex}
                   id={brand}
                   onChange={(e) =>
-                    handelFilterActions("brand","brand", { brand: brand }, e.target.checked)
+                    handelFilterActions("brand", "brand", { brand: brand }, e.target.checked)
                   }
                 />
               );
@@ -158,13 +200,13 @@ export default function Filter({ categoryAttributes }) {
                               type="switch"
                               id={`${groupName}-${value}`}
                               onChange={(e) =>
-                                handelFilterActions(   
-                                  "others",                              
+                                handelFilterActions(
+                                  "radioSwitch",
                                   attribute.name,
                                   value,
                                   e.target.checked)
                               }
-                              
+
                             />
                           </Accordion.Header>
                         </Accordion.Item>
@@ -202,11 +244,12 @@ export default function Filter({ categoryAttributes }) {
                                     key={valIndex}
                                     id={`${groupName}-${value}`}
                                     onChange={(e) =>
-                                      handelFilterActions(       
-                                        "others",                           
+                                      handelFilterActions(
+                                        "dropdown",
                                         attribute.name,
-                                        value,
-                                        e.target.checked)
+                                        { key: value },
+                                        e.target.checked
+                                      )
                                     }
                                   />
                                 );
@@ -245,7 +288,7 @@ export default function Filter({ categoryAttributes }) {
                             }
                             unit={filteredArrayOfAttributeValues.unit}
                             onChange={({ min, max }) => {
-                              handelFilterActions("price", `${min},${max}`);
+                              handelFilterActions("range", attribute.name, `${min},${max}`);
                             }}
                           />
                         </Accordion.Body>
