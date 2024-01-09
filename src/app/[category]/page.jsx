@@ -4,8 +4,7 @@ export default async function Page({ params: { category } }) {
   const slugType = await getSlugType(category);
   if (slugType.type) {
     const pageData = await fetchDataBasedOnPageType(category, slugType.type);
-    console.log(category, "slug chcke___________");
-    console.log(pageData, "________pageData");
+    console.log(slugType, "slug check by sir___________" ,category);
     if (pageData != null) {
       return (
         <PageSwitch
