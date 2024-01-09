@@ -250,9 +250,6 @@ export default function Header({ headerData }) {
               <li onClick={() => setIsOpen(true)} role="button">
                 Compare
               </li>
-              {/* <li>
-                <Link href="/blogs">Blog</Link>
-              </li> */}
               <li>
                 <Link href="#">How we rank</Link>
               </li>
@@ -286,8 +283,7 @@ export default function Header({ headerData }) {
                   <Container className="dropdown-menu">
                     <Row>
                       {item?.secondaryCategory_guides?.map((items, index) => {
-                        return (
-                          <>
+                        return (    
                             <Col md={3} key={index}>
                               <div className="nav-list-section">
                                 <span>{items?.secondary_category}</span>
@@ -306,7 +302,6 @@ export default function Header({ headerData }) {
                                 </ul>
                               </div>
                             </Col>
-                          </>
                         );
                       })}
                     </Row>

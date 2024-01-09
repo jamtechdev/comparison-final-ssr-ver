@@ -2,7 +2,6 @@ import { GetCompareId } from "@/components/Product/GetCompareId.jsx";
 import React, { Fragment } from "react";
 import {
   Row,
-  Breadcrumb,
   Button,
   Col,
   Container,
@@ -16,6 +15,7 @@ import Link from "next/link";
 // import Compare from "../../components/Common/Compare/Compare";
 import ReviewSlider from "../../components/Common/ReviewSlider/reviewSlider";
 // import ComparisonsSlider from "../../components/Common/ComparisonsSlider/comparisonsSlider";
+import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import MobileAccordion from "../../components/Common/MobileAccordion/mobileAccordion";
 // import ProductSlider from "../../components/Common/ProductSlider/productSlider";
 // import ProductCompareTable from "../../components/Common/CompareTable/ProductCompareTable";
@@ -159,7 +159,7 @@ function ProductPage({ productData }) {
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
-              <Breadcrumb
+              <BreadCrumb
                 firstPageName="Electronics"
                 secondPageName={product?.name}
               />
@@ -415,7 +415,7 @@ function ProductPage({ productData }) {
           <WhyAccordionTab product={product} />
         </Container>
       </section>
-      
+
       <CompareDropDown
         attributeDropDown={productCopy?.attributes}
         product={product?.name}

@@ -22,12 +22,12 @@ export default function Filter({ categoryAttributes }) {
       initialNoOfCategories * 2;
     setPagination({ ...pagination, [categoryName]: updatedPage });
   };
-  const handelFilterActions = (key, value) => {
-     console.log(key,value);
+  const handelFilterActions = (filterName,key, value, isChecked = false) => {
+    console.log(key, value,isChecked);
     const currentParams = new URLSearchParams(searchParams.toString());
     // console.log(JSON.stringify(currentParams),"currentParams")
     const url = new URL(window.location.href);
-    switch (key) {
+    switch (filterName) {
       case "price":
         updatedParams.price = value;
         break;
@@ -39,13 +39,18 @@ export default function Filter({ categoryAttributes }) {
         }
         break;
       case "brand":
-        if (Object.values(value).length > 0) {
-          updatedParams.brand = Object.values(value).join()
+        if (isChecked) {
+          if (Object.values(value).length > 0) {
+            updatedParams.brand = Object.values(value).join()
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url)
+          }
         } else {
           deleteQueryFormURL(key, updatedParams, currentParams, url)
         }
         break;
       default:
+
         return;
     }
     // console.log(updatedParams)
@@ -75,7 +80,7 @@ export default function Filter({ categoryAttributes }) {
               max={price[0]?.max_price}
               unit="€"
               onChange={({ min, max }) => {
-                handelFilterActions("price", `${min},${max}`);
+                handelFilterActions("price","price", `${min},${max}`);
               }}
             />
           )}
@@ -92,7 +97,7 @@ export default function Filter({ categoryAttributes }) {
               type="switch"
               id={`Available`}
               onChange={(e) =>
-                handelFilterActions("available", e.target.checked)
+                handelFilterActions("available","available", e.target.checked)
               }
             />
           </Accordion.Header>
@@ -110,7 +115,7 @@ export default function Filter({ categoryAttributes }) {
                   key={brandIndex}
                   id={brand}
                   onChange={(e) =>
-                    handelFilterActions("brand", { brand: brand })
+                    handelFilterActions("brand","brand", { brand: brand }, e.target.checked)
                   }
                 />
               );
@@ -152,6 +157,14 @@ export default function Filter({ categoryAttributes }) {
                               className="custom-switch"
                               type="switch"
                               id={`${groupName}-${value}`}
+                              onChange={(e) =>
+                                handelFilterActions(   
+                                  "others",                              
+                                  attribute.name,
+                                  value,
+                                  e.target.checked)
+                              }
+                              
                             />
                           </Accordion.Header>
                         </Accordion.Item>
@@ -188,6 +201,13 @@ export default function Filter({ categoryAttributes }) {
 
                                     key={valIndex}
                                     id={`${groupName}-${value}`}
+                                    onChange={(e) =>
+                                      handelFilterActions(       
+                                        "others",                           
+                                        attribute.name,
+                                        value,
+                                        e.target.checked)
+                                    }
                                   />
                                 );
                               }
