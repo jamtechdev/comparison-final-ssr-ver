@@ -12,9 +12,7 @@ export default function BreadCrum({firstPageName,secondPageName}) {
             {firstPageName}
           </Breadcrumb.Item>
         )}
-        {secondPageName == "" ? (
-          ""
-        ) : (
+        {secondPageName == "" ? ("") : (
           <Breadcrumb.Item className="breadcrumb-items breadcrumb-active">
             {secondPageName}
           </Breadcrumb.Item>
