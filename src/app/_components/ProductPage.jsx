@@ -13,11 +13,9 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 
-// import ThumbSlider from "../../components/Common/ThumbSlider/ThumbSlider";
 // import Compare from "../../components/Common/Compare/Compare";
 import ReviewSlider from "../../components/Common/ReviewSlider/reviewSlider";
 // import ComparisonsSlider from "../../components/Common/ComparisonsSlider/comparisonsSlider";
-// import BreadCrumb from "../../components/Common/BreadCrumb/breadcrum";
 import MobileAccordion from "../../components/Common/MobileAccordion/mobileAccordion";
 // import ProductSlider from "../../components/Common/ProductSlider/productSlider";
 // import ProductCompareTable from "../../components/Common/CompareTable/ProductCompareTable";
@@ -417,6 +415,7 @@ function ProductPage({ productData }) {
           <WhyAccordionTab product={product} />
         </Container>
       </section>
+      
       <CompareDropDown
         attributeDropDown={productCopy?.attributes}
         product={product?.name}

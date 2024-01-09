@@ -4,7 +4,9 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import Image from "next/image";
 
 function CompareDropDown({ attributeDropDown, product }) {
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(
+    Object.keys(attributeDropDown)[0] || ""
+  );
   const [selectedObjectDescription, setSelectedObjectDescription] =
     useState("");
   const handleCategoryChange = (event) => {
@@ -12,13 +14,11 @@ function CompareDropDown({ attributeDropDown, product }) {
     setSelectedCategory(category);
 
     // Assuming each category has an array of objects with a "name" property
-    const firstObject = attributes[category]?.[0] || {};
+    const firstObject = attributeDropDown[category]?.[0] || {};
     const { name, description } = firstObject;
 
-    setSelectedObjectName(name || "");
     setSelectedObjectDescription(description || "");
   };
-
   return (
     <>
       <section className="ptb-80">
@@ -49,7 +49,8 @@ function CompareDropDown({ attributeDropDown, product }) {
           <Row className="mt-3">
             <Col md={4} lg={3}>
               <p className="text-end mobile-content-left para_content_text">
-               {selectedCategory}
+                {selectedCategory}
+                {selectedObjectDescription}
               </p>
             </Col>
             <Col md={8} lg={9}>
