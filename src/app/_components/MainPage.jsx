@@ -10,6 +10,8 @@ import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
@@ -22,6 +24,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
   const handleSearch = (e) => {
     setsearch(e.target.value);
   };
+  const router = useRouter();
   return (
     <>
       <section className="hero_section home">
@@ -176,6 +179,35 @@ export default function MainPage({ bannerCounts, favSlider }) {
                   </Row>
                 </Container>
               </section>
+              <Container className="mt-3">
+                <Row>
+                  <Col md={12}>
+                    <h3 className="site-main-heading">Product Categories</h3>
+                    <div>
+                      <Row>
+                        {data?.categories?.map((item, index) => {
+                          return (
+                            <>
+                              <Col
+                                md={3}
+                                role="button"
+                                key={`proCat-${index}`}
+                              >
+                                <Link
+                                 style={{ color: "#27304e" }}
+                                  href={`/${item?.category_url}`}
+                                >
+                                  {item.title}
+                                </Link>
+                              </Col>
+                            </>
+                          );
+                        })}
+                      </Row>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
 
               <Container className="mt-3">
                 <Row>
