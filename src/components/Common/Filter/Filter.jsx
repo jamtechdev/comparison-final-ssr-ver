@@ -4,12 +4,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { Accordion, Form } from "react-bootstrap";
 import { getFilteredAttributeValues } from "../../../_helpers";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider.js";
-<<<<<<< HEAD
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import debounce from "lodash.debounce";
-=======
-import {useRouter, useSearchParams } from "next/navigation";
->>>>>>> 8d1f0247a537284f7ae2e0e54c77d3ccd6901b22
+
 export default function Filter({ categoryAttributes }) {
   const router = useRouter();
   const searchParams = useSearchParams();
