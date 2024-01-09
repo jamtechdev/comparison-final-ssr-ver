@@ -45,7 +45,6 @@ export default function ProductSlider({ favSlider }) {
             favSlider?.map((section, index) => {
               return (
                 <React.Fragment key={section?.short_name + index}>
-                
                     <SwiperSlide key={section?.short_name}>
                       <Link
                         href={`/${section?.category_url}/${section?.permalink}`}
@@ -65,7 +64,7 @@ export default function ProductSlider({ favSlider }) {
                             alt="Not found"
                           />
 
-                          {section?.short_name}
+                          <div className="product-name-wrapper"><span>{section?.short_name}</span></div>
                         </div>
                       </Link>
                     </SwiperSlide>
