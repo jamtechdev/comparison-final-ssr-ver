@@ -12,7 +12,6 @@ export default async function Page({ params: { category } }) {
   );
 }
 async function getSlugType(category) {
-  console.log(category, "category");
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${category}`,
     {
@@ -34,7 +33,7 @@ export async function generateMetadata() {
     applicationName: "Comparison web",
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
-    description: "Category page powered by comparision web",
+    description: "Category page powerb by comparision web",
   };
 }
 async function fetchDataBasedOnPageType(slug, pageType) {

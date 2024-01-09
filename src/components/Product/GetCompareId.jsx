@@ -1,14 +1,19 @@
 "use client"
-import React  from "react";
-
-export const GetCompareId = ({ finalProducts }) => {
+import React, { useState, useEffect } from "react";
+import { productService } from "../../_services";
+export const GetCompareId = React.memo(({ finalProducts }) => {
   const [getDataByCompareId, setCompareId] = useState(null);
-
+  const [categoryAttribute, setCategoryAttributes] = useState(null);
   const fetchData = async () => {
     const compareByCatID = await productService?.getCompareProductByCatID(
       finalProducts[0]?.category_id
     );
     setCompareId(compareByCatID);
+    const categoryAttributes =
+      await productService?.getCategoryAttributesById(
+        finalProducts[0]?.category_id
+      );
+    setCategoryAttributes(categoryAttribute)
   };
 
   useEffect(() => {
@@ -38,4 +43,4 @@ export const GetCompareId = ({ finalProducts }) => {
       </section>
     )
   );
-};
+})

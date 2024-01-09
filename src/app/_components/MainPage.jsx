@@ -11,7 +11,6 @@ import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
@@ -159,7 +158,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
             <div key={index}>
               <section className="ptb-80 bg-cat">
                 <Container className="small-p-0 ">
-                  <Row>
+                  <Row key={data?.id}>
                     <Col md={12} xs={12}>
                       <h2
                         role="button"
@@ -167,47 +166,50 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         style={{
                           backgroundImage: `url(${data?.rectangle_image})`,
                         }}
+                       
                         onClick={() => {
                           router.push(
-                            `/category-archive/${data?.primary_archive_category}`
+                            `/${data?.primary_archive_category.toLowerCase()}`
                           );
                         }}
                       >
+                        {console.log(data?.primary_archive_category, "data?.primary_archive_category")}
                         {data?.primary_archive_category}
                       </h2>
                     </Col>
                   </Row>
                 </Container>
               </section>
-              <Container className="mt-3">
-                <Row>
-                  <Col md={12}>
-                    <h3 className="site-main-heading">Product Categories</h3>
-                    <div>
-                      <Row>
-                        {data?.categories?.map((item, index) => {
-                          return (
-                            <>
-                              <Col
-                                md={3}
-                                role="button"
-                                key={`proCat-${index}`}
+              {data?.categories?.length > 0 && (
+                <section className="mt-3">
+                  <Container>
+                    <Row>
+                      <Col md={12}>
+                        <h3 className="site-main-heading">
+                          Product categories
+                        </h3>
+                        <div className="product-categories-container">
+                          {data?.categories?.map((item, index) => {
+                            return (
+                              <div
+                                className="product-categories-item"
+                                key={index}
+                                onClick={() => {
+                                  router.push(
+                                    `/${item?.category_url.toLowerCase()}`
+                                  );
+                                }}
                               >
-                                <Link
-                                 style={{ color: "#27304e" }}
-                                  href={`/${item?.category_url}`}
-                                >
-                                  {item.title}
-                                </Link>
-                              </Col>
-                            </>
-                          );
-                        })}
-                      </Row>
-                    </div>
-                  </Col>
-                </Row>
-              </Container>
+                                {item?.title}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </Col>
+                    </Row>
+                  </Container>
+                </section>
+              )}
 
               <Container className="mt-3">
                 <Row>

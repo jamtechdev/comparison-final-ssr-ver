@@ -1,8 +1,8 @@
+"use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Pagination } from "swiper";
-import { Navigation } from "swiper";
+import { Pagination, Navigation } from "swiper";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,19 +38,15 @@ export default function ReviewSlider({ favSlider }) {
         }}
         className="product-slider"
       >
-        {favSlider?.map(function (item, index) {
-          item.url = item?.category.replace(/\s+/g, "-").toLowerCase();
+        {favSlider?.map((item, index) => {
+          const url = item?.category.replace(/\s+/g, "-").toLowerCase();
           return (
             <SwiperSlide key={index}>
-              <Link href={`/${item?.url}/${item?.permalink}`}>
+              <Link href={`/${url}/${item?.permalink}`}>
                 <div className="review-wrapper">
                   <div className="review-card">
-                    <img
-                      src={
-                        item?.main_image
-                          ? item?.main_image
-                          : "/images/nofound.png"
-                      }
+                    <Image
+                      src={item?.main_image || "/images/nofound.png"}
                       width={0}
                       height={0}
                       sizes="100%"
@@ -80,7 +76,7 @@ export default function ReviewSlider({ favSlider }) {
           );
         })}
       </Swiper>
-      {favSlider?.length > 6 ? (
+      {favSlider?.length > 6 && (
         <>
           <span className="swiper-prev">
             <i className="ri-arrow-left-s-line"></i>
@@ -89,8 +85,6 @@ export default function ReviewSlider({ favSlider }) {
             <i className="ri-arrow-right-s-line"></i>
           </span>
         </>
-      ) : (
-        ""
       )}
     </section>
   );

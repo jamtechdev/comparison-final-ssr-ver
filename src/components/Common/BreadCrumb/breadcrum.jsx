@@ -1,22 +1,25 @@
-import { Breadcrumb, Container, Row, Col } from "react-bootstrap";
+import {
+  BreadcrumbItem,
+  Breadcrumb,
+} from "react-bootstrap";
 export default function BreadCrumb(props) {
   return (
     <>
       <Breadcrumb className="breadcrumb-group">
-        <Breadcrumb.Item className="breadcrumb-items">Home</Breadcrumb.Item>
+        <BreadcrumbItem className="breadcrumb-items">Home</BreadcrumbItem>
         {props.firstPageName == "" ? (
           ""
         ) : (
-          <Breadcrumb.Item className="breadcrumb-items">
+          <BreadcrumbItem className="breadcrumb-items">
             {props.firstPageName}
-          </Breadcrumb.Item>
+          </BreadcrumbItem>
         )}
         {props.secondPageName == "" ? (
           ""
         ) : (
-          <Breadcrumb.Item className="breadcrumb-items breadcrumb-active">
+          <BreadcrumbItem className="breadcrumb-items breadcrumb-active">
             {props.secondPageName}
-          </Breadcrumb.Item>
+          </BreadcrumbItem>
         )}
       </Breadcrumb>
     </>

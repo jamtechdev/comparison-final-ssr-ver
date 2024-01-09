@@ -1,6 +1,6 @@
-export const filterArrayOfObject = (obj, sortRangeAttributeArray) => {
+//Updated
+export const getFilteredAttributeValues = (obj) => {
   let uniq = [];
-  // console.log(obj.algorithm);
   if (obj.algorithm == "absolute_value") {
     for (let i = 0; i < obj.values.length; i++) {
       if (
@@ -16,10 +16,6 @@ export const filterArrayOfObject = (obj, sortRangeAttributeArray) => {
     if (uniq.includes("no") || uniq.includes("yes")) {
       uniq = ["yes"];
     }
-    // else if (uniq.includes('yes') && !uniq.includes('no')) {
-    //   uniq.push('no');
-    // }
-
     if (uniq.length > 0)
       return {
         type: "dropdown",
@@ -29,7 +25,6 @@ export const filterArrayOfObject = (obj, sortRangeAttributeArray) => {
     obj.algorithm == "highest_to_lowest" ||
     obj.algorithm == "lowest_to_highest"
   ) {
-    // console.log(obj.values)
     for (let i = 0; i < obj.values.length; i++) {
       if (
         !uniq.includes(obj.values[i].name) &&
@@ -52,16 +47,6 @@ export const filterArrayOfObject = (obj, sortRangeAttributeArray) => {
           values: sortedArray,
         };
     } else {
-      if (
-        !sortRangeAttributeArray.some(
-          (item) =>
-            item.algo === obj.algorithm && item.rangeAttributes === obj.name
-        )
-      )
-        sortRangeAttributeArray.push({
-          algo: obj.algorithm,
-          rangeAttributes: obj.name,
-        });
       return {
         type: "range",
         values: sortedArray,
@@ -84,6 +69,20 @@ export const removeDecimalAboveNine = (value) => {
 export const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
+export const  isAreObjectsEqual = (obj1, obj2)=>{
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+  for (let key of keys1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export const getAttributeHalf = (product, half) => {
   if (!product?.attributes) {
     return null;
@@ -102,6 +101,32 @@ export const getAttributeHalf = (product, half) => {
     const secondHalfAttributes = {};
     secondHalfKeys.forEach((key) => {
       secondHalfAttributes[key] = product.attributes_new[key];
+    });
+    return secondHalfAttributes;
+  } else {
+    throw new Error("Invalid 'half' argument. Use 'first' or 'second'.");
+  }
+};
+
+// this funcation designed to extract and return half of the attributes from a given product object.
+export const getAttributeProductHalf = (product, half) => {
+  if (!product?.attributes) {
+    return null;
+  }
+  const attributeKeys = Object.keys(product.attributes);
+  const halfLength = Math.ceil(attributeKeys.length / 2);
+  if (half === "first") {
+    const firstHalfKeys = attributeKeys.slice(0, halfLength);
+    const firstHalfAttributes = {};
+    firstHalfKeys.forEach((key) => {
+      firstHalfAttributes[key] = product.attributes[key];
+    });
+    return firstHalfAttributes;
+  } else if (half === "second") {
+    const secondHalfKeys = attributeKeys.slice(halfLength);
+    const secondHalfAttributes = {};
+    secondHalfKeys.forEach((key) => {
+      secondHalfAttributes[key] = product.attributes[key];
     });
     return secondHalfAttributes;
   } else {
