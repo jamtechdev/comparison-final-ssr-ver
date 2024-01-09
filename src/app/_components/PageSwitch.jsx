@@ -6,9 +6,11 @@ import ProductCategoryArchivePage from "./ProductCategoryArchivePage";
 export default async function PageSwitch({ PageType, slug, pageData,searchParams }) {
   let PageToRender;
   console.log(PageType, "pageType");
+  console.log(pageData, "pageData________----------------________________________");
+
   switch (PageType) {
     case "Guide":
-      const guide = pageData[0].data;
+      const guide = pageData[0]?.data;
       const attributes = await getCategoryAttributes(guide?.category_id, slug)
       PageToRender = <GuidePage slug={slug} guideData={pageData} filters={attributes?.data
       } attributesForTable={attributes?.attribute_categories} searchParams={searchParams}/>;

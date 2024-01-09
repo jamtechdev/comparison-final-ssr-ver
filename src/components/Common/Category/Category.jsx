@@ -1,34 +1,38 @@
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { Col, Row } from "react-bootstrap";
+import Link from "next/link";
+
 const IMAGE_ALT_TEXT = "Category Images";
 export default function Category({ categories }) {
-  console.log();
-  const router = useRouter();
+  console.log(categories, "categories--------->>>>>>>>>>>>>>>>>>>>>>>");
   return (
     <Row>
-      {categories.map((section, index) => (
+      {categories?.map((section, index) => (
         <Col
           xl={3}
           lg={4}
           md={6}
           xs={6}
           key={index}
-          onClick={() => {
-            router.push(`/${section?.primary_archive_category}`);
-          }}
+          // onClick={() => {
+          //   router.push(`/${section?.primary_archive_category}`);
+          // }}
         >
+          {console.log(section, "section--->>>>>>>>")}
           <div className="category-section">
+            <Link href={`/${section?.primary_archive_category}`}>
             <Image
-              src={section.square_image}
+              src={section?.square_image}
               width={0}
               height={0}
               sizes="100%"
               alt={IMAGE_ALT_TEXT}
             />
             <span className="category_name">
-              {section.primary_archive_category || "NOT FOUND"}
+              {section?.primary_archive_category || "NOT FOUND"}
             </span>
+            </Link>
+            
           </div>
         </Col>
       ))}

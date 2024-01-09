@@ -1,15 +1,23 @@
 import PageSwitch from "@/app/_components/PageSwitch";
-
-// export default async function Page({ params: { category } }) {
-//   return <h1>{category}</h1>;
-// }
+import NotFound from "../not-found";
 export default async function Page({ params: { category } }) {
   const slugType = await getSlugType(category);
-  const pageData = await fetchDataBasedOnPageType(category, slugType.type);
-
-  return (
-    <PageSwitch PageType={slugType.type} slug={category} pageData={pageData} />
-  );
+  if (slugType.type) {
+    const pageData = await fetchDataBasedOnPageType(category, slugType.type);
+    if (pageData != null) {
+      return (
+        <PageSwitch
+          PageType={slugType.type}
+          slug={category}
+          pageData={pageData}
+        />
+      );
+    } else {
+      return <NotFound />;
+    }
+  } else {
+    return <NotFound />;
+  }
 }
 async function getSlugType(category) {
   const response = await fetch(

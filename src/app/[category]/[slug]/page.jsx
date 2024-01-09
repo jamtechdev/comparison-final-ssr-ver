@@ -1,10 +1,28 @@
 import PageSwitch from "@/app/_components/PageSwitch";
-export default async function Page({ params: { slug },searchParams }) {
+import NotFound from "@/app/not-found";
+export default async function Page({ params: { slug }, searchParams }) {
   const slugType = await getSlugType(slug);
-  const pageData = await fetchDataBasedOnPageType(slug, slugType.type,searchParams);
-  return (
-    <PageSwitch PageType={slugType.type} slug={slug} pageData={pageData} searchParams={searchParams} />
-  );
+  if (slugType.type) {
+    const pageData = await fetchDataBasedOnPageType(
+      slug,
+      slugType.type,
+      searchParams
+    );
+    if (pageData != null) {
+      return (
+        <PageSwitch
+          PageType={slugType.type}
+          slug={slug}
+          pageData={pageData}
+          searchParams={searchParams}
+        />
+      );
+    } else {
+      return <NotFound />;
+    }
+  } else {
+    return <NotFound />;
+  }
 }
 export async function generateMetadata({ params: { slug } }) {
   return {
@@ -33,13 +51,15 @@ async function getSlugType(slug) {
   }
   return response.json();
 }
-async function fetchDataBasedOnPageType(slug, pageType,searchParams) {
+async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${slug}`,
-        `${process.env.NEXT_PUBLIC_API_URL}/guide/products/${slug}?query=${JSON.stringify(searchParams)}`,
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`,
       ];
       break;
     case "Blog":
