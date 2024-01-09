@@ -1,25 +1,23 @@
-import {
-  BreadcrumbItem,
-  Breadcrumb,
-} from "react-bootstrap";
-export default function BreadCrumb(props) {
+"use client"
+import { Breadcrumb, Container, Row, Col } from "react-bootstrap";
+export default function BreadCrum({firstPageName,secondPageName}) {
   return (
     <>
       <Breadcrumb className="breadcrumb-group">
-        <BreadcrumbItem className="breadcrumb-items">Home</BreadcrumbItem>
-        {props.firstPageName == "" ? (
+        <Breadcrumb.Item className="breadcrumb-items">Home</Breadcrumb.Item>
+        {firstPageName == "" ? (
           ""
         ) : (
-          <BreadcrumbItem className="breadcrumb-items">
-            {props.firstPageName}
-          </BreadcrumbItem>
+          <Breadcrumb.Item className="breadcrumb-items">
+            {firstPageName}
+          </Breadcrumb.Item>
         )}
-        {props.secondPageName == "" ? (
+        {secondPageName == "" ? (
           ""
         ) : (
-          <BreadcrumbItem className="breadcrumb-items breadcrumb-active">
-            {props.secondPageName}
-          </BreadcrumbItem>
+          <Breadcrumb.Item className="breadcrumb-items breadcrumb-active">
+            {secondPageName}
+          </Breadcrumb.Item>
         )}
       </Breadcrumb>
     </>

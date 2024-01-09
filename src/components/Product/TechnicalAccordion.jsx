@@ -41,10 +41,10 @@ const TechnicalAccordion = React.memo(
                     <div className="spec-item">
                       <>
                         <div className="spec-col">
-                          <p className="query">
+                          <div className="query">
                             Technical Score
                             <QuestionIcon />
-                          </p>
+                          </div>
                         </div>
                         <div className="spec-col">
                           <span className="success-text">
@@ -63,10 +63,10 @@ const TechnicalAccordion = React.memo(
                 {product?.reviews && (
                   <div className="spec-item">
                     <div className="spec-col">
-                      <p className="query">
+                      <div className="query">
                         User&rsquo;s Rating
                         <QuestionIcon />
-                      </p>
+                      </div>
                     </div>
                     <div className="spec-col ">
                       <span>{product?.reviews}</span>
@@ -78,10 +78,10 @@ const TechnicalAccordion = React.memo(
                 <div className="spec-section">
                   <div className="spec-item">
                     <div className="spec-col">
-                      <p className="query text-ellipse">
+                      <div className="query text-ellipse">
                         Expert reviews
                         <QuestionIcon />
-                      </p>
+                      </div>
                     </div>
                     <div className="spec-col">
                       <span>
@@ -98,10 +98,10 @@ const TechnicalAccordion = React.memo(
                 <div className="spec-section">
                   <div className="spec-item">
                     <div className="spec-col">
-                      <p className="query">
+                      <div className="query">
                         Ratio Quality-Price
                         <QuestionIcon />
-                      </p>
+                      </div>
                     </div>
                     <div className="spec-col ">
                       <span>{product?.ratio_quality_price_points}</span>
@@ -114,10 +114,10 @@ const TechnicalAccordion = React.memo(
                 <div className="spec-section">
                   <div className="spec-item">
                     <div className="spec-col">
-                      <p className="query text-ellipse">
+                      <div className="query text-ellipse">
                         Popularity
                         <QuestionIcon />
-                      </p>
+                      </div>
                     </div>
                     <div className="spec-col">
                       <span>{product?.popularity_points}</span>
@@ -194,10 +194,10 @@ const TechnicalAccordion = React.memo(
                                   >
                                     <div className="spec-item">
                                       <div className="spec-col">
-                                        <p className="query">
+                                        <div className="query">
                                           {attributeValues.attribute}
                                           <QuestionIcon />
-                                        </p>
+                                        </div>
                                       </div>
                                       <div className="spec-col">
                                         <span className="success-text">
@@ -334,10 +334,10 @@ const TechnicalAccordion = React.memo(
                                 <div className="spec-section" key={valueIndex}>
                                   <div className="spec-item">
                                     <div className="spec-col">
-                                      <p className="query">
+                                      <div className="query">
                                         {attributeValues.attribute}
                                         <QuestionIcon />
-                                      </p>
+                                      </div>
                                     </div>
                                     <div className="spec-col">
                                       <span className="success-text">

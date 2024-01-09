@@ -1,4 +1,3 @@
-
 import PageSwitch from "@/app/_components/PageSwitch";
 export default async function Page({ params: { slug },searchParams }) {
   const slugType = await getSlugType(slug);
@@ -19,7 +18,7 @@ export async function generateMetadata({ params: { slug } }) {
 }
 
 async function getSlugType(slug) {
-  console.log(slug , 'slug');
+  console.log(slug, "slug");
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
     {
@@ -62,7 +61,7 @@ async function fetchDataBasedOnPageType(slug, pageType,searchParams) {
   const responses = await Promise.all(
     apiUrls.map(async (apiUrl) => {
       const response = await fetch(apiUrl, {
-        method: 'GET',
+        method: "GET",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
