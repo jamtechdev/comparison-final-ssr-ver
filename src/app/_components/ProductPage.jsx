@@ -415,13 +415,12 @@ function ProductPage({ productData }) {
           <WhyAccordionTab product={product} />
         </Container>
       </section>
-
       <CompareDropDown
         attributeDropDown={productCopy?.attributes}
         product={product?.name}
       />
 
-      {/* <section className="ptb-80 bg-color">
+      <section className="ptb-80 bg-color">
         <Container>
           <Row>
             <Col md={12}>
@@ -473,7 +472,7 @@ function ProductPage({ productData }) {
             </Col>
           </Row>
         </Container>
-      </section> */}
+      </section>
       {/* {product?.text_part && (
         <section className="ptb-80">
           <Container>

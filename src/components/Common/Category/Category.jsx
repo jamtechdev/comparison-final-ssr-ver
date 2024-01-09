@@ -14,7 +14,7 @@ export default function Category({ categories }) {
           xs={6}
           key={index}
           onClick={() => {
-            router.push(`/${section?.primary_archive_category.toLowerCase()}`);
+            router.push(`/${section?.primary_archive_category}`);
           }}
         >
           <div className="category-section">

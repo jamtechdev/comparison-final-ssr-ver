@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Image from "next/image";
 
@@ -9,14 +9,21 @@ function CompareDropDown({ attributeDropDown, product }) {
   );
   const [selectedObjectDescription, setSelectedObjectDescription] =
     useState("");
+
+  useEffect(() => {
+    // Set the initial description based on the first category
+    const firstObject = attributeDropDown[selectedCategory]?.[0] || {};
+    const { description } = firstObject;
+    setSelectedObjectDescription(description || "");
+  }, [selectedCategory, attributeDropDown]);
+
   const handleCategoryChange = (event) => {
     const category = event.target.value;
     setSelectedCategory(category);
 
-    // Assuming each category has an array of objects with a "name" property
+    // Update the description based on the selected category
     const firstObject = attributeDropDown[category]?.[0] || {};
-    const { name, description } = firstObject;
-
+    const { description } = firstObject;
     setSelectedObjectDescription(description || "");
   };
   return (
