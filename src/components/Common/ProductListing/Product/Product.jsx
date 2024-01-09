@@ -106,9 +106,9 @@ export default function Product({ position, incomingProduct, handleToggleCollaps
       attributeValues.attribute_value == "yes" ||
       attributeValues.attribute_value == "no"
     ) {
-      if (attributeValues?.is_worse_than.toFixed(1) >= 0.6) {
+      if (attributeValues?.is_worse_than?.toFixed(1) >= 0.6) {
         return "red";
-      } else if (attributeValues?.is_better_than.toFixed(1) >= 0.6) {
+      } else if (attributeValues?.is_better_than?.toFixed(1) >= 0.6) {
         return "#0066b2";
       } else {
         return "#000";
