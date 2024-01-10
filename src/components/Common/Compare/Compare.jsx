@@ -49,7 +49,6 @@ export default function ComparisonsSlider({
     }
   }, [searchValue3]);
   // Your function to construct and push the route
-
   const handleComparison = (e) => {
     const routeParts = [
       receivedValue?.permalink,
@@ -68,7 +67,9 @@ export default function ComparisonsSlider({
         );
       }
       if (validRouteParts.length >= 3) {
-        router.push(`/${receivedValue3?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`);
+        router.push(
+          `/${receivedValue3?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
+        );
       }
     }
     if (modelOpen == true) {
@@ -218,7 +219,6 @@ export default function ComparisonsSlider({
               handleComparison(e);
               localStorage.removeItem("catIdGuide");
             }}
-            disabled={!receivedValue2 || search2 === ""}
           >
             Compare
           </Button>
