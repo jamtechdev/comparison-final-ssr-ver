@@ -1,12 +1,8 @@
 import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "@/app/not-found";
-export default async function Page({ params: { category, slug }, searchParams }) {
+export default async function Page({ params: { slug }, searchParams }) {
   try {
-    const categoryslugType = await getSlugType(category);
     const slugType = await getSlugType(slug);
-    if (categoryslugType.error) {
-      return <NotFound />
-    }
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
       const pageData = await fetchDataBasedOnPageType(
@@ -79,8 +75,9 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
-      let productApiUrl = `${process.env.NEXT_PUBLIC_API_URL
-        }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
+      let productApiUrl = `${
+        process.env.NEXT_PUBLIC_API_URL
+      }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
       if (searchParams?.page) {
         productApiUrl += `&page=${searchParams.page}`;
       }
@@ -106,6 +103,11 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
       apiUrls = permalinks.map(
         (permalink) => `${process.env.NEXT_PUBLIC_API_URL}/product/${permalink}`
       );
+
+      apiUrls.push(
+        `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${permalinks[0]}&permalink2=${permalinks[1]}`
+      );
+
       break;
     default:
       return null;
