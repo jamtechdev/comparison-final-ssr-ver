@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ProductSlider({ favSlider, slug }) {
+export default function ProductSlider({ favSlider, slug,indexSlider }) {
   return (
     <>
       <div className="product-slider">

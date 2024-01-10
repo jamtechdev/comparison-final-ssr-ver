@@ -33,7 +33,7 @@ function CategoryArchive({ slug, ArchiveData }) {
                     </div>
                   </Col>
                   <Col md={12}>
-                    <ProductSlider favSlider={item?.guides} />
+                    <ProductSlider favSlider={item?.guides} indexSlider={`${index}`} />
                   </Col>
                 </Row>
               );

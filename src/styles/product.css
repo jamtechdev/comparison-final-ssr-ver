@@ -191,13 +191,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  justify-content: space-between;
 }
 
 .thumb-images li {
   border: 1px solid rgba(39, 48, 78, 0.2);
   border-radius: 10px;
-  width: 65px;
-  height: 65px;
+  width: 70px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -469,7 +470,7 @@
 }
 
 .table-accordion .accordion-body {
-  padding: 0rem 1.25rem;
+  padding: 0.5rem 0.25rem !important;
   font-family: "Lato", sans-serif !important;
 }
 
