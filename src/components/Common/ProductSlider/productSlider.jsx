@@ -90,3 +90,5 @@ export default function ProductSlider({ favSlider }) {
     </>
   );
 }
+
+// FOR PUSHING PURPOSE
