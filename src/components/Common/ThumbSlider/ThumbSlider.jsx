@@ -20,9 +20,6 @@ export default function ThumbSlider({ productData }) {
     {
       image: "/images/nofound.png",
     },
-    {
-      image: "/images/nofound.png",
-    },
   ];
   const [swiper, setSwiper] = useState(null);
 

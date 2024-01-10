@@ -367,7 +367,7 @@ function ProductPage({ productData, productCatAttributes, compareByCatID }) {
               <h2 className="site-main-heading">Technical Specifications</h2>
             </Col>
             <Col md={12} xs={12}>
-              <Row className="m-0">
+              <Row className="m-0 technical-specifications">
                 {product && (
                   <TechnicalAccordion
                     product={product}
@@ -623,7 +623,7 @@ function ProductPage({ productData, productCatAttributes, compareByCatID }) {
         </Container>
       </section>
       <ProductTabs />
-      <section className="ptb-80">
+      {/* <section className="ptb-80">
         <Container>
           <Row>
             <Col md={12}>
@@ -632,7 +632,7 @@ function ProductPage({ productData, productCatAttributes, compareByCatID }) {
             </Col>
           </Row>
         </Container>
-      </section>
+      </section> */}
       <section className="mt-3">
         <Container>
           <Row>

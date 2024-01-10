@@ -8,7 +8,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ProductSlider({ favSlider, slug }) {
+export default function ProductSlider({ favSlider, slug,indexSlider }) {
+    const prevButtonClass = `prev-${indexSlider}`;
+    const nextButtonClass = `next-${indexSlider}`;
   return (
     <>
       <div className="product-slider">
@@ -17,8 +19,8 @@ export default function ProductSlider({ favSlider, slug }) {
           spaceBetween={30}
           loop={true}
           navigation={{
-            nextEl: ".product-slider .swiper-next",
-            prevEl: ".product-slider .swiper-prev",
+            nextEl: `.${nextButtonClass}`,
+            prevEl: `.${prevButtonClass}`,
           }}
           pagination={true}
           breakpoints={{
@@ -78,10 +80,10 @@ export default function ProductSlider({ favSlider, slug }) {
         </Swiper>
         {favSlider?.length > 6 ? (
           <>
-            <span className="swiper-prev">
+            <span className={`swiper-prev prev-${indexSlider}`}>
               <i className="ri-arrow-left-s-line"></i>
             </span>
-            <span className="swiper-next">
+            <span className={`swiper-next next-${indexSlider}`}>
               <i className="ri-arrow-right-s-line"></i>
             </span>
           </>
