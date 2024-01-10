@@ -27,23 +27,19 @@ function CompareSearchList({
     setChildValue(item.name);
     // Send the value to the parent component
     onSendValue(item);
-    localStorage.setItem("onSendValue1", JSON.stringify(item));
   };
   const handleChange2 = (item) => {
     setChildValue2(item.name);
     // Send the value to the parent component
-    localStorage.setItem("onSendValue2", JSON.stringify(item));
     onSendValue2(item);
   };
   const handleChange3 = (item) => {
     setChildValue3(item.name);
     // Send the value to the parent component
     onSendValue3(item);
-    localStorage.setItem("onSendValue3", JSON.stringify(item));
   };
   useEffect(() => {
     if (compareProSearchList != "" && compareProSearchList != undefined) {
-      console.log("11111111111111111");
       homePage
         .getAllSearchedProducts(compareProSearchList)
         .then((res) => {
@@ -61,7 +57,6 @@ function CompareSearchList({
       compareProSearchListForCat != undefined &&
       catId != undefined
     ) {
-      console.log("2222222222");
       homePage
         .getAllSearchedProductsByCategory(catId, compareProSearchListForCat)
         .then((res) => {
@@ -79,7 +74,6 @@ function CompareSearchList({
       compareProSearchListForCat3 != undefined &&
       catId3 != undefined
     ) {
-      console.log("33333333333333");
       homePage
         .getAllSearchedProductsByCategory(catId3, compareProSearchListForCat3)
         .then((res) => {
@@ -120,24 +114,6 @@ function CompareSearchList({
                 >
                   {capitalizeFirstLetter(item?.name)}
                 </h2>
-                {/* <ul>
-                  <Link
-                    href="#"
-               
-                  >
-                    <li>
-                      <span>{item?.name}</span>
-
-                      {item?.main_image && (
-                        <img
-                          src={item?.main_image}
-                          alt={`Image ${itemIndex}`}
-                        />
-                      )}
-                    </li>
-                  </Link>
-                 
-                </ul> */}
               </div>
             ))}
           {filteredProData2 &&
@@ -152,24 +128,6 @@ function CompareSearchList({
                 >
                   {capitalizeFirstLetter(item?.name)}
                 </h2>
-                {/* <ul>
-                  <Link
-                    href="#"
-               
-                  >
-                    <li>
-                      <span>{item?.name}</span>
-
-                      {item?.main_image && (
-                        <img
-                          src={item?.main_image}
-                          alt={`Image ${itemIndex}`}
-                        />
-                      )}
-                    </li>
-                  </Link>
-                 
-                </ul> */}
               </div>
             ))}
           {filteredProData3 &&
@@ -184,24 +142,6 @@ function CompareSearchList({
                 >
                   {capitalizeFirstLetter(item?.name)}
                 </h2>
-                {/* <ul>
-                  <Link
-                    href="#"
-               
-                  >
-                    <li>
-                      <span>{item?.name}</span>
-
-                      {item?.main_image && (
-                        <img
-                          src={item?.main_image}
-                          alt={`Image ${itemIndex}`}
-                        />
-                      )}
-                    </li>
-                  </Link>
-                 
-                </ul> */}
               </div>
             ))}
           {(filteredProData2 == "" || filteredProData3) && (

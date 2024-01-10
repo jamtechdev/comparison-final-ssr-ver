@@ -17,15 +17,9 @@ const CompareModal = ({
 
   const ProductId = useSelector((state) => state.comparePro.compareProduct);
   const [oftenData, setOffenData] = useState([]);
-
   useEffect(() => {
-    // Code that uses localStorage
-    var checkId = localStorage?.getItem("catIdGuide");
-    if (checkId) {
-      setGuideCatID(checkId);
-    }
-  }, []);
-  useEffect(() => {
+    console.log(ProductId,guideCatID)
+    if(ProductId.length <=0 || (!guideCatID)){return};
     productService
       .getComparedoftenProduct(
         ProductId[0]?.catID ? ProductId[0]?.catID : guideCatID
@@ -46,7 +40,6 @@ const CompareModal = ({
   }, [ProductId, guideCatID]);
 
   const handleProductClick = (item) => {
-    localStorage.setItem("Modalheck", JSON.stringify(item));
     if (!searchValue2) {
       setSearchValue2(item);
     } else {

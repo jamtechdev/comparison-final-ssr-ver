@@ -3,17 +3,20 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import SearchList from "../../Search/SearchList";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 import CompareSearchList from "@/components/Search/CompareSearchList";
-export default function ComparisonsSlider({
+export default function Compare({
   searchValue1,
   searchValue2,
   searchValue3,
   setIsOpen,
   modelOpen,
 }) {
+  console.log(  searchValue1,
+    searchValue2,
+    searchValue3,"Compare")
   const dispatch = useDispatch();
   const [product1Filled, setProduct1Filled] = useState(false);
   const [product2Filled, setProduct2Filled] = useState(false);
@@ -29,6 +32,10 @@ export default function ComparisonsSlider({
   const [receivedValue2, setReceivedValue2] = useState("");
   const [receivedValue3, setReceivedValue3] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
+  //get the first slug form url to pass it as category in comparison url
+  const match = pathname.match(/\/([^\/]*)\//);
+  const categoryInURL = match ? match[1] :"";
   useEffect(() => {
     if (searchValue1 != "") {
       setSearch(searchValue1?.name);
@@ -55,20 +62,23 @@ export default function ComparisonsSlider({
       receivedValue2?.permalink,
       receivedValue3?.permalink,
     ];
+    console.log(receivedValue?.permalink,
+      receivedValue2?.permalink,
+      receivedValue3?.permalink, pathname)
     // Filter out undefined or null values
     const validRouteParts = routeParts.filter((part) => part);
     // Construct the route
     if (validRouteParts.length >= 1) {
       const sortedRouteParts = validRouteParts.slice().sort(); // Create a sorted copy of the array
-      router.push(`/${receivedValue?.category_url}/${sortedRouteParts[0]}`);
+      router.push(`/${receivedValue?.category_url ? receivedValue?.category_url : categoryInURL}/${sortedRouteParts[0]}`);
       if (validRouteParts.length >= 2) {
         router.push(
-          `/${receivedValue2?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
+          `/${receivedValue2?.category_url ? receivedValue2?.category_url : categoryInURL}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
         );
       }
       if (validRouteParts.length >= 3) {
         router.push(
-          `/${receivedValue3?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
+          `/${receivedValue3?.category_url ? receivedValue3?.category_url : categoryInURL}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
         );
       }
     }
@@ -217,7 +227,6 @@ export default function ComparisonsSlider({
             className="site_main_btn"
             onClick={(e) => {
               handleComparison(e);
-              localStorage.removeItem("catIdGuide");
             }}
           >
             Compare

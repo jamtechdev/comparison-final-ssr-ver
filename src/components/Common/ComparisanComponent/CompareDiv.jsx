@@ -16,8 +16,6 @@ import Image from "next/image";
 import Compare from "@/components/Common/Compare/Compare";
 import CompareModal from "@/components/Modal/Modal";
 import ComparisonTable from "../CompareTable/ComparisonTable";
-// import ComparisonTable from "../CompareTable/ComparisonTable";
-
 function CompareDiv({ comparisonData, categroyAttributes }) {
   const [compareProDataFirst, setCompareProDataFirst] = useState(
     comparisonData[0]?.data || ""
@@ -48,19 +46,11 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
       document.body.style.overflow = "unset";
     }
   }, [isOpen]);
-
   const combinedArray = [
     compareProDataFirst,
     compareProDataSec,
     compareProDataThird,
   ];
-
-  //   console.log(
-  //     compareProDataFirst?.overall_score,
-  //     compareProDataSec?.overall_score,
-  //     compareProDataThird?.overall_score
-  //   );
-
   return (
     <>
       <section className="product-header">
@@ -69,13 +59,11 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
             <Col md={12}>
               <BreadCrumb
                 firstPageName="Iteck’s Store"
-                secondPageName={`${compareProDataFirst?.name || ""} vs ${
-                  compareProDataSec?.name || ""
-                } ${
-                  compareProDataThird?.name
+                secondPageName={`${compareProDataFirst?.name || ""} vs ${compareProDataSec?.name || ""
+                  } ${compareProDataThird?.name
                     ? `vs ${compareProDataThird?.name}`
                     : ""
-                }`}
+                  }`}
               />
             </Col>
             <Col md={12}>
@@ -97,20 +85,19 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                     compareProDataSec &&
                     compareProDataThird &&
                     compareProDataFirst.overall_score >
-                      compareProDataSec.overall_score &&
+                    compareProDataSec.overall_score &&
                     compareProDataFirst.overall_score >
-                      compareProDataThird?.overall_score && (
+                    compareProDataThird?.overall_score && (
                       <div className="comparison-tag">Winner</div>
                     )}
                   {compareProDataFirst &&
                     compareProDataSec &&
                     compareProDataFirst.overall_score >
-                      compareProDataSec.overall_score && (
+                    compareProDataSec.overall_score && (
                       <div className="comparison-tag">Winner</div>
                     )}
                   <div className="comparison-card">
                     <Image
-                      // src="/images/compare.png"
                       src={
                         compareProDataFirst?.main_image
                           ? compareProDataFirst?.main_image
@@ -123,7 +110,6 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                     />
                     <div className="comparison-card-footer">
                       <h2 className="product-title">
-                        {/* Samsung Galaxy S23 Ultra{" "} */}
                         {compareProDataFirst?.name}
                       </h2>
                     </div>
@@ -135,8 +121,8 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                             ? "#093673"
                             : compareProDataFirst.overall_score >= 5 &&
                               compareProDataFirst.overall_score < 7.5
-                            ? "#437ECE"
-                            : "#85B2F1",
+                              ? "#437ECE"
+                              : "#85B2F1",
                       }}
                     >
                       {compareProDataFirst?.overall_score}
@@ -154,21 +140,21 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                             return item.price === 0 ? (
                               <></>
                             ) : (
-                              <>
-                                <div
-                                  className="comparison-product-item"
-                                  key={index}
-                                >
-                                  <Image
-                                    src={item.logo}
-                                    width={0}
-                                    height={0}
-                                    sizes="100%"
-                                    alt=""
-                                  />
-                                  <span>{item.price} €</span>
-                                </div>
-                              </>
+
+                              <div
+                                className="comparison-product-item"
+                                key={index}
+                              >
+                                <Image
+                                  src={item.logo}
+                                  width={0}
+                                  height={0}
+                                  sizes="100%"
+                                  alt=""
+                                />
+                                <span>{item.price} €</span>
+                              </div>
+
                             );
                           }
                         )}
@@ -195,10 +181,6 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                       className="add-product"
                       onClick={() => {
                         setIsOpen(true);
-                        localStorage.setItem(
-                          "catIdGuide",
-                          JSON.stringify(compareProDataFirst.category_id)
-                        );
                       }}
                     >
                       <div className="add-product-inner-content">
@@ -218,15 +200,15 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                       compareProDataSec &&
                       compareProDataThird &&
                       compareProDataSec.overall_score >
-                        compareProDataFirst.overall_score &&
+                      compareProDataFirst.overall_score &&
                       compareProDataSec.overall_score >
-                        compareProDataThird.overall_score && (
+                      compareProDataThird.overall_score && (
                         <div className="comparison-tag">Winner</div>
                       )}
                     {compareProDataFirst &&
                       compareProDataSec &&
                       compareProDataSec.overall_score >
-                        compareProDataFirst.overall_score && (
+                      compareProDataFirst.overall_score && (
                         <div className="comparison-tag">Winner</div>
                       )}
                     <div className="comparison-card">
@@ -254,8 +236,8 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                               ? "#093673"
                               : compareProDataSec.overall_score >= 5 &&
                                 compareProDataSec.overall_score < 7.5
-                              ? "#437ECE"
-                              : "#85B2F1",
+                                ? "#437ECE"
+                                : "#85B2F1",
                         }}
                       >
                         {compareProDataSec?.overall_score}
@@ -265,28 +247,6 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                         onClick={() => handleRemoveClick(2)}
                       ></i>
                     </div>
-                    {/* <div className="comparison-product-spec">
-                  <div className="comparison-product-item">
-                    <Image
-                      src="/images/amazon.png"
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      alt=""
-                    />
-                    <span>155.87 €</span>
-                  </div>
-                  <div className="comparison-product-item">
-                    <Image
-                      src="/images/amazon.png"
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      alt=""
-                    />
-                    <span>155.87 €</span>
-                  </div>
-                </div> */}
                     <div className="comparison-product-spec">
                       {compareProDataSec?.price_websites?.length > 0 ? (
                         <>
@@ -295,21 +255,19 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                               return item.price === 0 ? (
                                 <></>
                               ) : (
-                                <>
-                                  <div
-                                    className="comparison-product-item"
-                                    key={index}
-                                  >
-                                    <Image
-                                      src={item.logo}
-                                      width={0}
-                                      height={0}
-                                      sizes="100%"
-                                      alt=""
-                                    />
-                                    <span>{item.price} €</span>
-                                  </div>
-                                </>
+                                <div
+                                  className="comparison-product-item"
+                                  key={index}
+                                >
+                                  <Image
+                                    src={item.logo}
+                                    width={0}
+                                    height={0}
+                                    sizes="100%"
+                                    alt=""
+                                  />
+                                  <span>{item.price} €</span>
+                                </div>
                               );
                             }
                           )}
@@ -339,9 +297,9 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                       compareProDataSec &&
                       compareProDataThird &&
                       compareProDataThird?.overall_score >
-                        compareProDataSec?.overall_score &&
+                      compareProDataSec?.overall_score &&
                       compareProDataThird?.overall_score >
-                        compareProDataFirst?.overall_score && (
+                      compareProDataFirst?.overall_score && (
                         <div className="comparison-tag">Winner</div>
                       )}{" "}
                     <div className="comparison-card">
@@ -370,8 +328,8 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                               ? "#093673"
                               : compareProDataThird.overall_score >= 5 &&
                                 compareProDataThird.overall_score < 7.5
-                              ? "#437ECE"
-                              : "#85B2F1",
+                                ? "#437ECE"
+                                : "#85B2F1",
                         }}
                       >
                         {compareProDataThird.overall_score}
@@ -389,21 +347,19 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                               return item.price === 0 ? (
                                 <></>
                               ) : (
-                                <>
-                                  <div
-                                    className="comparison-product-item"
-                                    key={index}
-                                  >
-                                    <Image
-                                      src={item.logo}
-                                      width={0}
-                                      height={0}
-                                      sizes="100%"
-                                      alt=""
-                                    />
-                                    <span>{item.price} €</span>
-                                  </div>
-                                </>
+                                <div
+                                  className="comparison-product-item"
+                                  key={index}
+                                >
+                                  <Image
+                                    src={item.logo}
+                                    width={0}
+                                    height={0}
+                                    sizes="100%"
+                                    alt=""
+                                  />
+                                  <span>{item.price} €</span>
+                                </div>
                               );
                             }
                           )}
@@ -428,11 +384,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                     <div
                       className="add-product"
                       onClick={() => {
-                        setIsOpen(true),
-                          localStorage.setItem(
-                            "catIdGuide",
-                            JSON.stringify(compareProDataFirst.category_id)
-                          );
+                        setIsOpen(true)
                       }}
                     >
                       <div className="add-product-inner-content">

@@ -61,9 +61,8 @@ export default function Header({ headerData }) {
   };
   return (
     <header
-      className={`sticky ${
-        scrollDirection === "down" ? "top-sticky-not" : "top-sticky"
-      }`}
+      className={`sticky ${scrollDirection === "down" ? "top-sticky-not" : "top-sticky"
+        }`}
     >
       <Container>
         <Row className="py-2 align-items-center logo-header">
@@ -88,45 +87,45 @@ export default function Header({ headerData }) {
                   <Accordion>
                     {headerData &&
                       headerData?.map((item, headerDataKey) => (
-                       
-                          <Accordion.Item eventKey={headerDataKey} key={headerDataKey}>
-                            <Accordion.Header as="div">
-                              {item?.primary_category}
-                            </Accordion.Header>
-                            <Accordion.Body>
-                              <Row>
-                                {item?.secondaryCategory_guides?.map(
-                                  (items, index) => {
-                                    return (
-                                      <Col lg={3} md={6} xs={12} key={index}>
-                                        <div className="nav-list-section">
-                                          <span>
-                                            {items?.secondary_category}
-                                          </span>
-                                          <ul>
-                                            {items?.guides &&
-                                              items?.guides?.map(
-                                                (guide, guideIndex) => (
-                                                  <li key={guideIndex}>
-                                                    <Link
-                                                      href={`/${guide?.category_url}/${guide?.permalink}`}
-                                                      style={{ color: "#fff" }}
-                                                    >
-                                                      {guide?.title}
-                                                    </Link>
-                                                  </li>
-                                                )
-                                              )}
-                                          </ul>
-                                        </div>
-                                      </Col>
-                                    );
-                                  }
-                                )}
-                              </Row>
-                            </Accordion.Body>
-                          </Accordion.Item>
-                        
+
+                        <Accordion.Item eventKey={headerDataKey} key={headerDataKey}>
+                          <Accordion.Header as="div">
+                            {item?.primary_category}
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Row>
+                              {item?.secondaryCategory_guides?.map(
+                                (items, index) => {
+                                  return (
+                                    <Col lg={3} md={6} xs={12} key={index}>
+                                      <div className="nav-list-section">
+                                        <span>
+                                          {items?.secondary_category}
+                                        </span>
+                                        <ul>
+                                          {items?.guides &&
+                                            items?.guides?.map(
+                                              (guide, guideIndex) => (
+                                                <li key={guideIndex}>
+                                                  <Link
+                                                    href={`/${guide?.category_url}/${guide?.permalink}`}
+                                                    style={{ color: "#fff" }}
+                                                  >
+                                                    {guide?.title}
+                                                  </Link>
+                                                </li>
+                                              )
+                                            )}
+                                        </ul>
+                                      </div>
+                                    </Col>
+                                  );
+                                }
+                              )}
+                            </Row>
+                          </Accordion.Body>
+                        </Accordion.Item>
+
                       ))}
                   </Accordion>
                   <Navbar className="nav-links-mobile">
