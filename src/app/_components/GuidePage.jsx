@@ -53,6 +53,7 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
   const removeFilters = () => {
 window.history.replaceState(null, "", window.location.pathname); 
 location.reload()
+console.log(window.location);
  }
 
   return (
