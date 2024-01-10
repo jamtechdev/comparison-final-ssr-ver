@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef } from "react";
 import useChart from "@/hooks/useChart";
 import Image from "next/image";
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Col, Container, Row, Table, Form } from "react-bootstrap";
 import Link from "next/link";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Filter from "@/components/Common/Filter/Filter";
@@ -36,7 +36,9 @@ export default function GuidePage({
   const handleToggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
-
+  const sortRangeAttributeArray = useRef([
+    { algo: "", rangeAttributes: "Overall" },
+  ]);
   const [manageCollapsedDiv, setManageCollapsedDiv] = useState(false);
   const handleManageCollapsedDiv = () => {
     setManageCollapsedDiv(true);
@@ -65,19 +67,46 @@ export default function GuidePage({
     delete searchParams[`${paramToRemove}`]
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
-
     const newUrl = urlObject.toString();
-
     // Update the URL in the address bar without triggering a page reload
     window.history.pushState({ path: newUrl }, "", newUrl);
-
     // You can also use window.location.href = newUrl; if you want to trigger a page reload
-
     // Optionally, you can perform additional actions, such as updating the UI, based on the new URL
     // updateUI();
 
     return newUrl;
   }
+
+
+    const handleSort = (sortAttribute) => {
+      console.log(sortAttribute, "sort attribute");
+let param =JSON.parse(sortAttribute);
+      // Get the current URL and its search parameters
+      const currentUrl = new URL(window.location.href);
+      const searchParams = new URLSearchParams(currentUrl.search);
+
+const sortValue = `${param.algo},${param.rangeAttributes}`;
+searchParams.set("sort", sortValue);
+
+
+      // Create the new URL with the updated query parameters
+      const newUrl = `${currentUrl.origin}${
+        currentUrl.pathname
+      }?${searchParams.toString()}`;
+
+      // Update the URL without triggering a page reload
+      window.history.pushState({ path: newUrl }, "", newUrl);
+
+      // sortRangeAttribute.current = JSON.parse(sortAttribute);
+      // setFilteredProducts([
+      //   ...filterProducts(
+      //     filterObj,
+      //     guide.products,
+      //     sortRangeAttribute.current
+      //   ),
+      // ]);
+      // console.log(JSON.parse(sortAttribute))
+    };
 
   return (
     <>
@@ -232,6 +261,98 @@ export default function GuidePage({
                       )}
                     </div>
                   </Col>
+                  <Col md={4}>
+                    <div className="filtered-data-select">
+                      <span>Order by :</span>
+                      <Form.Select
+                        aria-label="Default select example"
+                        onChange={(e) => handleSort(e.target.value)}
+                      >
+                        {/* <option>Autonomy</option> */}
+                        <option
+                          value={JSON.stringify({
+                            algo: "",
+                            rangeAttributes: "Overall",
+                          })}
+                        >
+                          Overall
+                        </option>
+
+                        <option
+                          value={JSON.stringify({
+                            algo: "high-low",
+                            rangeAttributes: "technical_score",
+                          })}
+                        >
+                          Technical score
+                        </option>
+                        <option
+                          value={JSON.stringify({
+                            algo: "low-high",
+                            rangeAttributes: "price",
+                          })}
+                        >
+                          Price (Lowest to Highest)
+                        </option>
+                        <option
+                          value={JSON.stringify({
+                            algo: "high-low",
+                            rangeAttributes: "price",
+                          })}
+                        >
+                          Price (Highest to Lowest)
+                        </option>
+                        <option
+                          value={JSON.stringify({
+                            algo: "high-low",
+                            rangeAttributes: "reviews",
+                          })}
+                        >{`User's rating`}</option>
+                        <option
+                          value={JSON.stringify({
+                            algo: "high-low",
+                            rangeAttributes: "ratio_quality_price_points",
+                          })}
+                        >
+                          Ratio quality-price
+                        </option>
+                        <option
+                          value={JSON.stringify({
+                            algo: "high-low",
+                            rangeAttributes: "popularity_points",
+                          })}
+                        >
+                          Popularity
+                        </option>
+
+                        {
+                          // Technical score --- will be ordered from highest to lowest, based on numbers in "Technical Score Points CONVERTED"
+                          // Price (Lowest to Highest) --- will be ordered from lowest to highest price, based on numbers in "Lowest Price"
+                          // Price (Highest to Lowest) --- will be ordered from highest to lowest price, based on numbers in "Highest Price"
+                          // User's rating --- will be ordered from highest to lowest price, based on numbers in "User's Rating"
+                          // Ratio quality-price ---- will be ordered from highest to lowest, based on numbers in "Ratio Quality Price Points"
+                          // Popularity --- will be ordered from highest to lowest, based on numbers in "Popularity points"
+
+                          sortRangeAttributeArray.current.map(
+                            (algoAttribute, attrIndex) => {
+                              if (algoAttribute.rangeAttributes != "Overall")
+                                return (
+                                  <option
+                                    value={JSON.stringify(algoAttribute)}
+                                    key={attrIndex}
+                                  >
+                                    {algoAttribute.rangeAttributes}
+                                    {algoAttribute.algo ==
+                                      "lowest_to_highest" &&
+                                      " (Lowest to Highest)"}
+                                  </option>
+                                );
+                            }
+                          )
+                        }
+                      </Form.Select>
+                    </div>
+                  </Col>
                   {products ? (
                     <ProductListing
                       products={products}
@@ -243,7 +364,8 @@ export default function GuidePage({
                   )}
                 </>
               )}
-            {products?.length > 20 &&   <GuidePagination pagination={productPagination} /> } 
+             
+            {productPagination.total_pages > 1 &&  <GuidePagination pagination={productPagination} /> } 
             </Row>
           </Col>
         </Row>
