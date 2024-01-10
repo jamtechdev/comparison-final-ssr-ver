@@ -51,9 +51,13 @@ header.sticky {
 }
 
 .nav-list-section ul {
-  line-height: 30px;
+  line-height: 18px;
   font-size: 14px;
   font-weight: 400;
+}
+
+.nav-list-section ul li{
+  margin: 0 0 8px;
 }
 
 .nav-list-section ul li:hover {
@@ -382,6 +386,11 @@ footer .search-icon {
   margin-top: 15px;
   text-align: center;
   min-height: 235px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
 }
 
 .product-card:hover {
@@ -391,11 +400,28 @@ footer .search-icon {
       rgb(67 126 206) 100%) !important;
 }
 
+.product-card a.product-link-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .product-card img {
   width: 100%;
   height: 135px;
   border-radius: 5px;
   object-fit: cover;
+}
+
+.product-card .product-name-wrapper{
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-card span {
@@ -405,10 +431,10 @@ footer .search-icon {
   font-family: "Lato", sans-serif !important;
   font-weight: 400 !important;
   line-height: 1.4;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-card span a {
@@ -420,8 +446,6 @@ footer .search-icon {
 
 
 .product-card-2 {
-
-
   border-radius: 4.129px;
   border: 0.826px solid #E3ECF6;
   /* border: 1px solid #e3ecf6; */

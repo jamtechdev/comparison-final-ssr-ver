@@ -48,12 +48,11 @@ const ComparisonTable = React.memo(({ products, categoryAttributes }) => {
       }
       productAttributes[categoryName].push(attribute);
     });
-    console.log(productAttributes);
+
     productCopy.attributes = productAttributes;
     productsWithAttributeGroup[product.name] = productCopy;
   });
   const finalProducts = Object.values(productsWithAttributeGroup);
-  console.log(finalProducts, "finalProducts");
 
   const getValue = (arr, attribute) => {
     const foundElement = arr.find((obj) => obj.attribute === attribute);

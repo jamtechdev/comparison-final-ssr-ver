@@ -491,6 +491,11 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                   guide?.recommended_guides.slice(0, 3)?.map((data, index) => {
                     return (
                       <div className="product-card" key={index}>
+                         <Link
+                         className="product-link-cover"
+                      href={`/${data?.permalink}`}
+                      style={{ color: "#326ebf" }}
+                    ></Link>
                         <img
                           src={
                             data?.bannerImage === null
@@ -503,12 +508,7 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                           alt=""
                         />
                         <span>
-                          <Link
-                            href={`/${data?.permalink}`}
-                            style={{ color: "#326ebf" }}
-                          >
                             {data?.short_name}
-                          </Link>
                         </span>
                       </div>
                     );

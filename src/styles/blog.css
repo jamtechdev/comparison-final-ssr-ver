@@ -51,7 +51,7 @@
 
 .heading-primary {
     font-weight: 500;
-    font-size: 30px;
+    font-size: 34px !important;
     line-height: 34px;
     color: var(--heading-color);
     margin: 0 0 15px !important;
@@ -67,7 +67,7 @@
 }
 
 .secondary {
-    font-size: 28px;
+    font-size: 26px !important;
 }
 
 .heading-primary-category-archive {

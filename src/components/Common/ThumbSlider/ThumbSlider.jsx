@@ -6,22 +6,22 @@ import { Navigation } from "swiper";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 
-export default function ThumbSlider() {
+export default function ThumbSlider({ productData }) {
   const product = [
     {
-      image: "/images/review-image2.png",
+      image: "/images/nofound.png",
     },
     {
-      image: "/images/review-image3.png",
+      image: "/images/nofound.png",
     },
     {
-      image: "/images/review-image.png",
+      image: "/images/nofound.png",
     },
     {
-      image: "/images/review-image3.png",
+      image: "/images/nofound.png",
     },
     {
-      image: "/images/review-image2.png",
+      image: "/images/nofound.png",
     },
   ];
   const [swiper, setSwiper] = useState(null);
@@ -49,40 +49,34 @@ export default function ThumbSlider() {
   };
   return (
     <section className="thumb-section-container">
-      <ul className="thumb-images">
-        {product.map((item, index) => (
-          <li
-            key={index}
-            onClick={() => handleThumbClick(index)}
-            style={{ cursor: "pointer" }}
-          >
-            <Image src={item.image} width={0} height={0} sizes="100%" alt="" />
-          </li>
-        ))}
-      </ul>
-      <section className="thumb-slider">
-        <Swiper
-          modules={[Navigation]}
-          spaceBetween={30}
-          loop={true}
-          onSwiper={setSwiperRef}
-          breakpoints={{
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 1,
-              spaceBetween: 20,
-            },
-          }}
-        >
-          {product.map((item, index) => (
-            <SwiperSlide key={index}>
+      {productData?.main_image === null ? (
+        <>
+          <ul className="thumb-images">
+            {product.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handleThumbClick(index)}
+                style={{ cursor: "pointer" }}
+              >
+                <Image
+                  src={item.image}
+                  width={0}
+                  height={0}
+                  sizes="100%"
+                  alt=""
+                />
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <ul className="thumb-images">
+          {productData?.main_image.map((item, index) => (
+            <li
+              key={index}
+              onClick={() => handleThumbClick(index)}
+              style={{ cursor: "pointer" }}
+            >
               <Image
                 src={item.image}
                 width={0}
@@ -90,9 +84,82 @@ export default function ThumbSlider() {
                 sizes="100%"
                 alt=""
               />
-            </SwiperSlide>
+            </li>
           ))}
-        </Swiper>
+        </ul>
+      )}
+
+      <section className="thumb-slider">
+        {productData?.main_image === null ? (
+          <>
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={30}
+              loop={true}
+              onSwiper={setSwiperRef}
+              breakpoints={{
+                640: {
+                  slidesPerView: 1,
+                  spaceBetween: 10,
+                },
+                768: {
+                  slidesPerView: 1,
+                  spaceBetween: 10,
+                },
+                1024: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+              }}
+            >
+              {product.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <Image
+                    src={item.image}
+                    width={0}
+                    height={0}
+                    sizes="100%"
+                    alt=""
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </>
+        ) : (
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={30}
+            loop={true}
+            onSwiper={setSwiperRef}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+              },
+              768: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+              },
+              1024: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+            }}
+          >
+            {productData?.main_image((item, index) => (
+              <SwiperSlide key={index}>
+                <Image
+                  src={item.image}
+                  width={0}
+                  height={0}
+                  sizes="100%"
+                  alt=""
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
+
         <span className="swiper-prev" onClick={handlePrevious}>
           <i className="ri-arrow-left-s-line"></i>
         </span>
@@ -100,17 +167,6 @@ export default function ThumbSlider() {
           <i className="ri-arrow-right-s-line"></i>
         </span>
       </section>
-      <div className="alternatives">
-        <h6>Similar Alternatives:</h6>
-        <ul>
-          <li className="active">
-            <span>9 kg</span>
-          </li>
-          <li>
-            <span>10 kg</span>
-          </li>
-        </ul>
-      </div>
     </section>
   );
 }

@@ -221,6 +221,7 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   position: relative;
   min-height: 330px;
+  height: 100%;
 }
 
 .best-price-section .site-main-heading {
@@ -999,7 +1000,8 @@
 .compare-accordion .accordion-button h3 {
   color: var(--primary-color);
 }
-.table-accordion .accordion-button div {
+
+.table-accordion .accordion-button  div {
   text-transform: uppercase;
   font-weight: 400 !important;
   font-size: 18px;
