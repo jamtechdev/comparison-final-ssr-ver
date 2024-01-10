@@ -6,12 +6,12 @@ import { getFilteredAttributeValues } from "../../../_helpers";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider.js";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function Filter({ categoryAttributes }) {
+export default function Filter({ categoryAttributes, removedParam }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  let price = categoryAttributes.price;
-  let brands = categoryAttributes.brands;
-  let attributeCategories = categoryAttributes.attribute_categories;
+  let price = categoryAttributes?.price;
+  let brands = categoryAttributes?.brands;
+  let attributeCategories = categoryAttributes?.attribute_categories;
   let initialNoOfCategories = 5;
   let updatedParams = {};
   const [pagination, setPagination] = useState({});
@@ -23,6 +23,7 @@ export default function Filter({ categoryAttributes }) {
   };
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
     const currentParams = new URLSearchParams(searchParams.toString());
+
     const url = new URL(window.location.href);
 
     switch (filterName) {
@@ -111,7 +112,22 @@ export default function Filter({ categoryAttributes }) {
     currentParams.delete([key]);
     url.searchParams.delete([key]);
   };
-  //router.replace(pathname, { scroll: false });
+
+  useEffect(() => {
+    if (removedParam) {
+      if (removedParam == "available") {
+        handelFilterActions("available", "available", false);
+        document.getElementById("Available").checked = false;
+      }
+
+       if (removedParam == "price") {
+        //  handelFilterActions("price", "price", 0, price[0]?.max_price);
+        //  document.getElementById("Available").checked = false;
+       }
+
+    }
+  }, [removedParam]);
+
   return (
     <div className="filter-container">
       <div className="filter-section">

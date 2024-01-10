@@ -13,25 +13,29 @@ import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCom
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
 import { isAreObjectsEqual } from "@/_helpers";
-// import { useRouter } from "next/router";
 import GuidePagination from "@/components/Common/Pagination/GuidePagination";
-export default function GuidePage({ slug, guideData, attributesForTable, filters, searchParams }) {
+
+export default function GuidePage({
+  slug,
+  guideData,
+  attributesForTable,
+  filters,
+  searchParams,
+}) {
   useChart();
 
   const [isShown, setIsShown] = useState(false);
-      // const router = useRouter();
 
-  const guide = guideData[0].data;
-  const products = guideData[1].data.products
-  const productPagination = guideData[1].data.pagination
+  const guide = guideData[0]?.data;
+  const products = guideData[1]?.data?.products;
+  const productPagination = guideData[1]?.data?.pagination;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [prevSearcParam, setPrevSearcParam] = useState({});
+  const [removedParam , setremovedParam] = useState()
   const handleToggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
-
-// console.log(searchParams);
 
   const [manageCollapsedDiv, setManageCollapsedDiv] = useState(false);
   const handleManageCollapsedDiv = () => {
@@ -52,28 +56,28 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
     }, 1000);
   }, [searchParams]);
 
-
   const removeFilters = () => {
-window.history.replaceState(null, "", window.location.pathname); 
-location.reload()
- }
+    window.history.replaceState(null, "", window.location.pathname);
+    location.reload();
+  };
 
+  function removeQueryParamAndNavigate(url, paramToRemove) {
+    delete searchParams[`${paramToRemove}`]
+    const urlObject = new URL(url);
+    urlObject.searchParams.delete(paramToRemove);
 
- const deleteParam= (e) =>{
+    const newUrl = urlObject.toString();
 
-  // const { pathname, query } = router;
-// console.log(query[`${e}`] ,  'hgfjfkrh');
-  // Remove the 'available' query parameter
-  // delete query[`${e}`];
+    // Update the URL in the address bar without triggering a page reload
+    window.history.pushState({ path: newUrl }, "", newUrl);
 
-  // Navigate to the updated URL without the 'available' query parameter
-  // router.push({
-  //   pathname,
-  //   query,
-  // });
+    // You can also use window.location.href = newUrl; if you want to trigger a page reload
 
+    // Optionally, you can perform additional actions, such as updating the UI, based on the new URL
+    // updateUI();
 
- }
+    return newUrl;
+  }
 
   return (
     <>
@@ -159,7 +163,7 @@ location.reload()
             className="sidebar-width"
             style={{ display: isShown ? "block" : "none" }}
           >
-            <Filter categoryAttributes={filters} />
+            <Filter categoryAttributes={filters} removedParam={removedParam} />
             <div className="desktop-hide">
               <Button className="site_main_btn w-100 d-block btn-icon mb-4">
                 <i className="ri-close-fill"></i>
@@ -200,7 +204,11 @@ location.reload()
                             <li
                               key={index}
                               onClick={() => {
-                                deleteParam(categoryName);
+                                setremovedParam(categoryName);
+                                removeQueryParamAndNavigate(
+                                  window.location.href,
+                                  categoryName
+                                );
                               }}
                             >
                               {" "}
@@ -235,7 +243,7 @@ location.reload()
                   )}
                 </>
               )}
-              <GuidePagination pagination={productPagination} />
+            {products?.length > 20 &&   <GuidePagination pagination={productPagination} /> } 
             </Row>
           </Col>
         </Row>
