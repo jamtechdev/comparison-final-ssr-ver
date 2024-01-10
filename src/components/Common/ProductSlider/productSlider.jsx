@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ProductSlider({ favSlider }) {
+export default function ProductSlider({ favSlider,slug }) {
   return (
     <>
       <div className="product-slider">
@@ -47,7 +47,7 @@ export default function ProductSlider({ favSlider }) {
                 <React.Fragment key={section?.short_name + index}>
                     <SwiperSlide key={section?.short_name}>
                       <Link
-                        href={`/${section?.category}/${section?.permalink}`}
+                        href={`/${section?.category ? section?.category : slug}/${section?.permalink}`}
                         style={{ color: "#27304e" }}
                       >
                         {" "}

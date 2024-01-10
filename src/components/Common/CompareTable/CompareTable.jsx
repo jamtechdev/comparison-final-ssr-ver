@@ -7,9 +7,8 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 
-const CompareTable = React.memo(({ products, categoryAttributes }) => {
+const CompareTable = React.memo(({ products, categoryAttributes,slug }) => {
   const router = useRouter();
-
   const [winPos, setWinPos] = useState(false);
   let initialNoOfCategories = 5;
   const [pagination, setPagination] = useState({});
@@ -158,11 +157,9 @@ const CompareTable = React.memo(({ products, categoryAttributes }) => {
             {finalProducts.slice(0, defaultNo).map((product, index) => {
               return (
                 <th key={index}>
-                  {/* <span className="best-tag-product">Best From All</span> */}
                   <p className="device-name">
                     <span>{index + 1}</span>
-                    {/* <a href="">/product/${product?.permalik</a> */}
-                    <a href={`/product/${product?.permalink}`}>
+                    <a href={`/${slug}/${product?.permalink}`}>
                       {product?.name}
                     </a>
 

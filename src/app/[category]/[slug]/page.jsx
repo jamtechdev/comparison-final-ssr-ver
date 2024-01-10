@@ -1,30 +1,26 @@
 import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "@/app/not-found";
 export default async function Page({ params: { slug }, searchParams }) {
-  const slugType = await getSlugType(slug);
-  if (slugType.type) {
-    const pageData = await fetchDataBasedOnPageType(
-      slug,
-      slugType.type,
-      searchParams
-    );
-    if (pageData != null) {
-      return (
-        <PageSwitch
-          PageType={slugType.type}
-          slug={slug}
-          pageData={pageData}
-          searchParams={searchParams}
-        />
-      );
-    } else {
-      return <NotFound />;
-    }
-  } else {
-    return <NotFound />;
-  }
-}
+  try {
+    const slugType = await getSlugType(slug);
+    // Bypass for comparison page
+    // if (slugType.error && slug.includes("-vs-")) {
+    //   return <PageSwitch PageType="comparison" slug={slug} pageData={{}} searchParams={{}} />;
+    // }
 
+    if (slugType.type) {
+      const pageData = await fetchDataBasedOnPageType(slug, slugType.type, searchParams);
+
+      if (pageData) {
+        return <PageSwitch PageType={slugType.type} slug={slug} pageData={pageData} searchParams={searchParams} />;
+      }
+    }
+  } catch (error) {
+    return <NotFound />;
+    //console.error("Error:", error);
+  }
+  return <NotFound />;
+}
 export async function generateMetadata({ params: { slug } }) {
   return {
     title: slug,

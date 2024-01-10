@@ -183,14 +183,13 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
             <Col md={12}>
               <div className="similar-guides">
                 <p>Similar Guides:</p>
-
                 <ul>
                   {guide?.recommended_guides &&
                     guide?.recommended_guides?.map((data, index) => {
                       return (
                         <li key={index}>
                           <Link
-                            href={`/${data?.permalink}`}
+                            href={`${slug}/${data?.permalink}`}
                             style={{ color: "#437ece" }}
                           >
                             {data?.short_name}
@@ -208,10 +207,11 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                 Comparing Samsung New VR Headset Oculus 2.0 with best robot
                 vacuum cleaners
               </h2>
-              {guide && guide?.products && (
+              {guide && products && (
                 <CompareTable
                   products={products}
                   categoryAttributes={attributesForTable}
+                  slug={slug}
                 />
               )}
             </Col>
@@ -493,7 +493,7 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                       <div className="product-card" key={index}>
                          <Link
                          className="product-link-cover"
-                      href={`/${data?.permalink}`}
+                      href={`${slug}/${data?.permalink}`}
                       style={{ color: "#326ebf" }}
                     ></Link>
                         <img
@@ -523,7 +523,7 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">See Also Guides</h2>
-              <ProductSlider favSlider={guide?.see_also_guides} />
+              <ProductSlider favSlider={guide?.see_also_guides} slug={slug}/>
             </Col>
           </Row>
         </Container>

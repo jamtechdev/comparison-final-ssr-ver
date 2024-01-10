@@ -10,7 +10,6 @@ export default async function PageSwitch({
   searchParams,
 }) {
   let PageToRender;
-
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
@@ -53,6 +52,9 @@ export default async function PageSwitch({
         <ProductCategoryArchivePage slug={slug} categoryData={pageData} />
       );
       break;
+   case "comparison":
+    PageToRender = () => <div>No Page Found</div>;
+    break;   
     default:
       PageToRender = () => <div>No Page Found</div>;
       break;
