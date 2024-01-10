@@ -47,7 +47,7 @@ export default function ProductSlider({ favSlider,slug }) {
                 <React.Fragment key={section?.short_name + index}>
                     <SwiperSlide key={section?.short_name}>
                       <Link
-                        href={`/${section?.category ? section?.category : slug}/${section?.permalink}`}
+                        href={`/${section?.category_url ? section?.category_url : slug}/${section?.permalink}`}
                         style={{ color: "#27304e" }}
                       >
                         {" "}
@@ -89,3 +89,5 @@ export default function ProductSlider({ favSlider,slug }) {
     </>
   );
 }
+
+// FOR PUSHING PURPOSE
