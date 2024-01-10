@@ -220,6 +220,7 @@ export default function ComparisonsSlider({
               handleComparison(e);
               localStorage.removeItem("catIdGuide");
             }}
+            disabled={!receivedValue2 || search2 === ""}
           >
             Compare
           </Button>

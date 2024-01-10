@@ -161,7 +161,6 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                 <th key={index}>
                   {/* <span className="best-tag-product">Best From All</span> */}
                   <p className="device-name">
-                   
                     {/* <a href="">/product/${product?.permalik</a> */}
                     <a href={`/${product?.category_url}/${product?.permalink}`}>
                       {product?.name}
@@ -453,14 +452,14 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                                 background:
                                   product.attributes[
                                     category.name
-                                  ][0].final_points?.toFixed(1) >= 7.5
+                                  ][0]?.final_points?.toFixed(1) >= 7.5
                                     ? "#093673"
                                     : product.attributes[
                                         category.name
-                                      ][0].final_points?.toFixed(1) >= 5 &&
+                                      ][0]?.final_points?.toFixed(1) >= 5 &&
                                       product.attributes[
                                         category.name
-                                      ][0].final_points?.toFixed(1) < 7.5
+                                      ][0]?.final_points?.toFixed(1) < 7.5
                                     ? "#437ECE"
                                     : " #85B2F1",
                               }}
