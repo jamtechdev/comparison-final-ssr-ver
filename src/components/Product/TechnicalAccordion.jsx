@@ -9,6 +9,7 @@ import {
 } from "../../_helpers";
 import Questiontool from "../Svg/Questiontool";
 import ProsConsToolTip from "../Svg/ProsConsToolTip";
+import Skeleton from "react-loading-skeleton";
 
 const TechnicalAccordion = React.memo(
   ({ product, overallScoreColor, initialDisplay }) => {
