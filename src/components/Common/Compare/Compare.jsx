@@ -68,9 +68,7 @@ export default function ComparisonsSlider({
         );
       }
       if (validRouteParts.length >= 3) {
-        router.push(
-          `/${receivedValue3?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
-        );
+        router.push(`/${receivedValue3?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`);
       }
     }
     if (modelOpen == true) {
