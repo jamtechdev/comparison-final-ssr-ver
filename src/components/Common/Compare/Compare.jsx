@@ -6,6 +6,7 @@ import SearchList from "../../Search/SearchList";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { addCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
+import CompareSearchList from "@/components/Search/CompareSearchList";
 export default function ComparisonsSlider({
   searchValue1,
   searchValue2,
@@ -48,6 +49,7 @@ export default function ComparisonsSlider({
     }
   }, [searchValue3]);
   // Your function to construct and push the route
+
   const handleComparison = (e) => {
     const routeParts = [
       receivedValue?.permalink,
@@ -59,16 +61,14 @@ export default function ComparisonsSlider({
     // Construct the route
     if (validRouteParts.length >= 1) {
       const sortedRouteParts = validRouteParts.slice().sort(); // Create a sorted copy of the array
-      router.push(`/comparison/${sortedRouteParts[0]}`);
+      router.push(`/${receivedValue?.category_url}/${sortedRouteParts[0]}`);
       if (validRouteParts.length >= 2) {
         router.push(
-          `/comparison/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
+          `/${receivedValue2?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
         );
       }
       if (validRouteParts.length >= 3) {
-        router.push(
-          `/comparison/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
-        );
+        router.push(`/${receivedValue3?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`);
       }
     }
     if (modelOpen == true) {
@@ -146,11 +146,15 @@ export default function ComparisonsSlider({
               onFocus={() => setIsFocused1(true)}
               onBlur={handleBlur}
               aria-label="Search"
-              value={search === "" && !isFocused1 && receivedValue ? receivedValue.name : search}
+              value={
+                search === "" && !isFocused1 && receivedValue
+                  ? receivedValue.name
+                  : search
+              }
             />
             {!searchValue1 && search?.length > 0 && isFocused1 && (
               <>
-                <SearchList
+                <CompareSearchList
                   compareProSearchList={search}
                   compareTabType={"comparetab"}
                   isFocused={isFocused1}
@@ -168,12 +172,12 @@ export default function ComparisonsSlider({
               onFocus={() => setIsFocused2(true)}
               onBlur={handleBlur}
               aria-label="Search"
-              value={search2 ||""}
+              value={search2 || ""}
               disabled={!receivedValue || search === ""}
             />
             {!searchValue2 && search2?.length > 0 && isFocused2 && (
               <>
-                <SearchList
+                <CompareSearchList
                   compareProSearchListForCat={search2}
                   compareTabType={"comparetab"}
                   isFocused={isFocused2}
@@ -197,7 +201,7 @@ export default function ComparisonsSlider({
             />
             {!searchValue3 && search3?.length > 0 && isFocused3 && (
               <>
-                <SearchList
+                <CompareSearchList
                   compareProSearchListForCat3={search3}
                   compareTabType={"comparetab"}
                   isFocused={isFocused3}
@@ -212,7 +216,7 @@ export default function ComparisonsSlider({
             className="site_main_btn"
             onClick={(e) => {
               handleComparison(e);
-              localStorage.removeItem("catIdGuide")
+              localStorage.removeItem("catIdGuide");
             }}
           >
             Compare
