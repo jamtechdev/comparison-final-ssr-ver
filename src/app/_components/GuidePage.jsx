@@ -1,4 +1,4 @@
-"use client";
+
 import { useEffect, useState } from "react";
 import useChart from "@/hooks/useChart";
 import Image from "next/image";
@@ -13,10 +13,14 @@ import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCom
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
 import { isAreObjectsEqual } from "@/_helpers";
+import { useRouter } from "next/router";
 import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 export default function GuidePage({ slug, guideData, attributesForTable, filters, searchParams }) {
   useChart();
+
   const [isShown, setIsShown] = useState(false);
+      const router = useRouter();
+
   const guide = guideData[0].data;
   const products = guideData[1].data.products
   const productPagination = guideData[1].data.pagination
@@ -48,12 +52,27 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
     }, 1000);
   }, [searchParams]);
 
-    //  const router = useRouter();
 
   const removeFilters = () => {
 window.history.replaceState(null, "", window.location.pathname); 
 location.reload()
-console.log(window.location);
+ }
+
+
+ const deleteParam= (e) =>{
+
+  const { pathname, query } = router;
+console.log(query[`${e}`] ,  'hgfjfkrh');
+  // Remove the 'available' query parameter
+  // delete query[`${e}`];
+
+  // Navigate to the updated URL without the 'available' query parameter
+  // router.push({
+  //   pathname,
+  //   query,
+  // });
+
+
  }
 
   return (
@@ -178,7 +197,12 @@ console.log(window.location);
                       <ul>
                         {Object.keys(searchParams).map(
                           (categoryName, index) => (
-                            <li key={index}>
+                            <li
+                              key={index}
+                              onClick={() => {
+                                deleteParam(categoryName);
+                              }}
+                            >
                               {" "}
                               {categoryName}{" "}
                               <span className="text0danger">
