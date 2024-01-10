@@ -12,7 +12,7 @@ import ProductSkeleton from "@/components/Common/ProductListing/ProductSkeleton"
 import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
-import { isAreObjectsEqual } from "@/_helpers"
+import { isAreObjectsEqual } from "@/_helpers";
 import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 export default function GuidePage({ slug, guideData, attributesForTable, filters, searchParams }) {
   useChart();
@@ -26,6 +26,9 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
   const handleToggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+// console.log(searchParams);
+
   const [manageCollapsedDiv, setManageCollapsedDiv] = useState(false);
   const handleManageCollapsedDiv = () => {
     setManageCollapsedDiv(true);
@@ -44,6 +47,8 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
       handelSetFilterActive(false);
     }, 1000);
   }, [searchParams]);
+
+  console.log(searchParams) , 'serach params';
   return (
     <>
       <section className="product-header">
@@ -161,6 +166,24 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                 <ProductSkeleton />
               ) : (
                 <>
+                  <Col md={8}>
+                    <div className="filtered-data">
+                      <ul>
+                        {Object.keys(searchParams).map((categoryName) => (
+                          <li> {categoryName}  <span className="text0danger"> ** </span></li>
+                        ))}
+                      </ul>
+                      {Object.keys(searchParams).length > 0 && (
+                        <span
+                        // onClick={() => {
+                        //   setFilterObj({});
+                        // }}
+                        >
+                          Remove all filters
+                        </span>
+                      )}
+                    </div>
+                  </Col>
                   {products ? (
                     <ProductListing
                       products={products}
@@ -170,11 +193,11 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                   ) : (
                     <ProductSkeleton />
                   )}
-                </>)}
+                </>
+              )}
               <GuidePagination pagination={productPagination} />
             </Row>
           </Col>
-
         </Row>
       </Container>
       <section className="ptb-25">
@@ -491,11 +514,11 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                   guide?.recommended_guides.slice(0, 3)?.map((data, index) => {
                     return (
                       <div className="product-card" key={index}>
-                         <Link
-                         className="product-link-cover"
-                      href={`${slug}/${data?.permalink}`}
-                      style={{ color: "#326ebf" }}
-                    ></Link>
+                        <Link
+                          className="product-link-cover"
+                          href={`${slug}/${data?.permalink}`}
+                          style={{ color: "#326ebf" }}
+                        ></Link>
                         <img
                           src={
                             data?.bannerImage === null
@@ -507,9 +530,7 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                           sizes="100%"
                           alt=""
                         />
-                        <span>
-                            {data?.short_name}
-                        </span>
+                        <span>{data?.short_name}</span>
                       </div>
                     );
                   })}
@@ -523,7 +544,7 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">See Also Guides</h2>
-              <ProductSlider favSlider={guide?.see_also_guides} slug={slug}/>
+              <ProductSlider favSlider={guide?.see_also_guides} slug={slug} />
             </Col>
           </Row>
         </Container>
