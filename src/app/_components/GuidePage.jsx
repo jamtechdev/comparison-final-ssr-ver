@@ -48,10 +48,12 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
     }, 1000);
   }, [searchParams]);
 
+    //  const router = useRouter();
 
   const removeFilters = () => {
-    console.log(window.location);
-  }
+window.history.replaceState(null, "", window.location.pathname); 
+location.reload()
+ }
 
   return (
     <>
@@ -173,15 +175,24 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                   <Col md={8}>
                     <div className="filtered-data">
                       <ul>
-                        {Object.keys(searchParams).map((categoryName) => (
-                          <li> {categoryName}  <span className="text0danger"> ** </span></li>
-                        ))}
+                        {Object.keys(searchParams).map(
+                          (categoryName, index) => (
+                            <li key={index}>
+                              {" "}
+                              {categoryName}{" "}
+                              <span className="text0danger">
+                                {" "}
+                                <i className="ri-close-fill"></i>{" "}
+                              </span>
+                            </li>
+                          )
+                        )}
                       </ul>
                       {Object.keys(searchParams).length > 0 && (
                         <span
-                        onClick={() => {
-                        removeFilters()
-                        }}
+                          onClick={() => {
+                            removeFilters();
+                          }}
                         >
                           Remove all filters
                         </span>
