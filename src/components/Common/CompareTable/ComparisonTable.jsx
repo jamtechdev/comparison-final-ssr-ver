@@ -120,13 +120,13 @@ const ComparisonTable = React.memo(({ products, categoryAttributes }) => {
                   {/* {console.log(item.unit, "lcuifer")} */}
                   {item?.attribute_value.split("⭐")[0]}{" "}
                   {item?.unit?.split("-")[0] && item?.unit?.split("-")[0]}
-                  <span className="tooltip-title-2">
+                  <div className="tooltip-title-2">
                     <img
                       style={{ float: "right", paddingRight: "5px" }}
                       src="/icons/star.png"
                     />
                     <ProsConsToolTip hover_phrase={item.start_phase} />
-                  </span>
+                  </div>
                 </div>
               </>
             ) : (

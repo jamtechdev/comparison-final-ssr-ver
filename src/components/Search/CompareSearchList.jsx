@@ -27,16 +27,19 @@ function CompareSearchList({
     setChildValue(item.name);
     // Send the value to the parent component
     onSendValue(item);
+    localStorage.setItem("onSendValue1", JSON.stringify(item));
   };
   const handleChange2 = (item) => {
     setChildValue2(item.name);
     // Send the value to the parent component
+    localStorage.setItem("onSendValue2", JSON.stringify(item));
     onSendValue2(item);
   };
   const handleChange3 = (item) => {
     setChildValue3(item.name);
     // Send the value to the parent component
     onSendValue3(item);
+    localStorage.setItem("onSendValue3", JSON.stringify(item));
   };
   useEffect(() => {
     if (compareProSearchList != "" && compareProSearchList != undefined) {

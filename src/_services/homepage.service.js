@@ -5,11 +5,14 @@ export const homePage = {
   getAllSearchedProducts,
   getAllSearchedProductsByCategory,
   getMainPageBannerCounts,
-  getFavouriteGuides
+  getFavouriteGuides,
 };
 // api headers
 const headers = {
-  headers: { 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, 'Content-type': 'application/json' },
+  headers: {
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+    "Content-type": "application/json",
+  },
 };
 
 // counter api
@@ -44,32 +47,35 @@ async function getAllSearchedProductsByCategory(catId, query) {
 }
 
 async function getMainPageBannerCounts() {
- 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/homepage/counts`, {
-    next: { revalidate: 600 },
-    headers: {
-      'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, 'Content-type': 'application/json'
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/homepage/counts`,
+    {
+      next: { revalidate: 600 },
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+        "Content-type": "application/json",
+      },
     }
-  });
- 
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch data', response)
+    throw new Error("Failed to fetch data", response);
   }
   let result = await response.json();
   return result.data;
 }
 
 async function getFavouriteGuides() {
-  
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/homepage`, {
     next: { revalidate: 600 },
     headers: {
-      'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, 'Content-type': 'application/json'
-    }
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      "Content-type": "application/json",
+    },
   });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch data', response)
+    throw new Error("Failed to fetch data", response);
   }
   let result = await response.json();
   return result.data;

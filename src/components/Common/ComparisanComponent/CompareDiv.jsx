@@ -15,8 +15,8 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Image from "next/image";
 import Compare from "@/components/Common/Compare/Compare";
 import CompareModal from "@/components/Modal/Modal";
+import ComparisonTable from "../CompareTable/ComparisonTable";
 // import ComparisonTable from "../CompareTable/ComparisonTable";
-import ProductCompareTable from "../CompareTable/ProductCompareTable";
 
 function CompareDiv({ comparisonData, categroyAttributes }) {
   const [compareProDataFirst, setCompareProDataFirst] = useState(
@@ -54,6 +54,13 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
     compareProDataSec,
     compareProDataThird,
   ];
+
+  //   console.log(
+  //     compareProDataFirst?.overall_score,
+  //     compareProDataSec?.overall_score,
+  //     compareProDataThird?.overall_score
+  //   );
+
   return (
     <>
       <section className="product-header">
@@ -89,16 +96,16 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                   {compareProDataFirst &&
                     compareProDataSec &&
                     compareProDataThird &&
-                    compareProDataFirst?.overall_score >
-                      compareProDataSec?.overall_score &&
-                    compareProDataFirst?.overall_score >
+                    compareProDataFirst.overall_score >
+                      compareProDataSec.overall_score &&
+                    compareProDataFirst.overall_score >
                       compareProDataThird?.overall_score && (
                       <div className="comparison-tag">Winner</div>
                     )}
                   {compareProDataFirst &&
                     compareProDataSec &&
-                    compareProDataFirst?.overall_score >
-                      compareProDataSec?.overall_score && (
+                    compareProDataFirst.overall_score >
+                      compareProDataSec.overall_score && (
                       <div className="comparison-tag">Winner</div>
                     )}
                   <div className="comparison-card">
@@ -210,16 +217,16 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                     {compareProDataFirst &&
                       compareProDataSec &&
                       compareProDataThird &&
-                      compareProDataSec?.overall_score >
-                        compareProDataFirst?.overall_score &&
-                      compareProDataSec?.overall_score >
-                        compareProDataThird?.overall_score && (
+                      compareProDataSec.overall_score >
+                        compareProDataFirst.overall_score &&
+                      compareProDataSec.overall_score >
+                        compareProDataThird.overall_score && (
                         <div className="comparison-tag">Winner</div>
                       )}
                     {compareProDataFirst &&
                       compareProDataSec &&
-                      compareProDataSec?.overall_score >
-                        compareProDataFirst?.overall_score && (
+                      compareProDataSec.overall_score >
+                        compareProDataFirst.overall_score && (
                         <div className="comparison-tag">Winner</div>
                       )}
                     <div className="comparison-card">
@@ -753,12 +760,12 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
             <Col md={12}>
               <h2 className="site-main-heading">Table Comparison</h2>
             </Col>
-            {/* <Col md={12} className="table-section-mobile">
-              <ProductCompareTable
+            <Col md={12} className="table-section-mobile">
+              <ComparisonTable
                 products={combinedArray}
                 categoryAttributes={categroyAttributes}
               />
-            </Col> */}
+            </Col>
             {/* <Col md={12} className="table-section-desktop">
               isko baad me krna h hai
               <MobileCompareTable />
@@ -824,11 +831,13 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
             name: compareProDataFirst?.name,
             permalink: compareProDataFirst?.permalink,
             category_id: compareProDataFirst.category_id,
+            category_url: compareProDataFirst.category_url,
           }}
           compareProDataSec={{
             name: compareProDataSec?.name,
             permalink: compareProDataSec?.permalink,
-            category_id: compareProDataSec.category_id,
+            category_id: compareProDataSec.category_url,
+            category_url: compareProDataSec.category_url,
           }}
         />
       )}

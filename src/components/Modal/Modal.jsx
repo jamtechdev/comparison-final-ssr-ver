@@ -46,7 +46,7 @@ const CompareModal = ({
   }, [ProductId, guideCatID]);
 
   const handleProductClick = (item) => {
-    console.log(item);
+    localStorage.setItem("Modalheck", JSON.stringify(item));
     if (!searchValue2) {
       setSearchValue2(item);
     } else {
