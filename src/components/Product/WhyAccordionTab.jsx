@@ -17,6 +17,7 @@ import QuestionIcon from "../Svg/QuestionIcon";
 
 const WhyAccordionTab = React.memo(
   ({ product, pageType, product1, product2 }) => {
+    // console.log(pageType,">>>>>")
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
 
     const handleTabChanage = (value, key) => {

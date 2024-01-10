@@ -1,7 +1,11 @@
 import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "@/app/not-found";
-export default async function Page({ params: { slug }, searchParams }) {
+export default async function Page({ params: { category, slug }, searchParams }) {
   try {
+ const categoryslugType = await getSlugType(category);
+    if (categoryslugType.error) {
+      return <NotFound />
+    }    
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
