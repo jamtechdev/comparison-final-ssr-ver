@@ -67,14 +67,10 @@ export default function GuidePage({
     delete searchParams[`${paramToRemove}`]
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
-
     const newUrl = urlObject.toString();
-
     // Update the URL in the address bar without triggering a page reload
     window.history.pushState({ path: newUrl }, "", newUrl);
-
     // You can also use window.location.href = newUrl; if you want to trigger a page reload
-
     // Optionally, you can perform additional actions, such as updating the UI, based on the new URL
     // updateUI();
 
@@ -368,9 +364,8 @@ searchParams.set("sort", sortValue);
                   )}
                 </>
               )}
-              {products?.length > 20 && (
-                <GuidePagination pagination={productPagination} />
-              )}
+             
+            {productPagination.total_pages > 1 &&  <GuidePagination pagination={productPagination} /> } 
             </Row>
           </Col>
         </Row>

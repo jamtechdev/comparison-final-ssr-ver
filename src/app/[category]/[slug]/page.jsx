@@ -63,6 +63,7 @@ async function getSlugType(slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
     {
+      cache:"no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -113,6 +114,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   const responses = await Promise.all(
     apiUrls.map(async (apiUrl) => {
       const response = await fetch(apiUrl, {
+        cache:"no-cache",
         method: "GET",
         headers: {
           "Content-type": "application/json",
