@@ -88,8 +88,8 @@ export default function Header({ headerData }) {
                   <Accordion>
                     {headerData &&
                       headerData?.map((item, headerDataKey) => (
-                        <>
-                          <Accordion.Item eventKey={headerDataKey}>
+                       
+                          <Accordion.Item eventKey={headerDataKey} key={headerDataKey}>
                             <Accordion.Header as="div">
                               {item?.primary_category}
                             </Accordion.Header>
@@ -126,7 +126,7 @@ export default function Header({ headerData }) {
                               </Row>
                             </Accordion.Body>
                           </Accordion.Item>
-                        </>
+                        
                       ))}
                   </Accordion>
                   <Navbar className="nav-links-mobile">

@@ -2,7 +2,6 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-
 function CategoryArchive({ slug, ArchiveData }) {
   return (
     <>
@@ -33,7 +32,7 @@ function CategoryArchive({ slug, ArchiveData }) {
                     </div>
                   </Col>
                   <Col md={12}>
-                    <ProductSlider favSlider={item?.guides} indexSlider={`${index}`} />
+                    <ProductSlider favSlider={item?.guides} indexSlider={index} />
                   </Col>
                 </Row>
               );
