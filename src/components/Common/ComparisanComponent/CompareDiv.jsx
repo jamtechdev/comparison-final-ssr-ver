@@ -15,9 +15,10 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Image from "next/image";
 import Compare from "@/components/Common/Compare/Compare";
 import CompareModal from "@/components/Modal/Modal";
-import ComparisonTable from "../CompareTable/ComparisonTable";
+// import ComparisonTable from "../CompareTable/ComparisonTable";
+import ProductCompareTable from "../CompareTable/ProductCompareTable";
 
-function CompareDiv({ comparisonData }) {
+function CompareDiv({ comparisonData, categroyAttributes }) {
   const [compareProDataFirst, setCompareProDataFirst] = useState(
     comparisonData[0]?.data || ""
   );
@@ -47,6 +48,12 @@ function CompareDiv({ comparisonData }) {
       document.body.style.overflow = "unset";
     }
   }, [isOpen]);
+
+  const combinedArray = [
+    compareProDataFirst,
+    compareProDataSec,
+    compareProDataThird,
+  ];
   return (
     <>
       <section className="product-header">
@@ -740,25 +747,25 @@ function CompareDiv({ comparisonData }) {
           </Row>
         </Container>
       </section>
-      {/* <section className="ptb-80">
+      <section className="ptb-80">
         <Container>
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Table Comparison</h2>
             </Col>
-            <Col md={12} className="table-section-mobile">
-              <ComparisonTable
+            {/* <Col md={12} className="table-section-mobile">
+              <ProductCompareTable
                 products={combinedArray}
                 categoryAttributes={categroyAttributes}
               />
-            </Col>
-            <Col md={12} className="table-section-desktop">
+            </Col> */}
+            {/* <Col md={12} className="table-section-desktop">
               isko baad me krna h hai
               <MobileCompareTable />
-            </Col>
+            </Col> */}
           </Row>
         </Container>
-      </section> */}
+      </section>
       <section className="ptb-80 bg-color">
         <Container>
           <Row>

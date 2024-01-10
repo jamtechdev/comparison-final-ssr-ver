@@ -54,7 +54,16 @@ export default async function PageSwitch({
       );
       break;
     case "Comparison":
-      PageToRender = <Comparison comparisonData={pageData} />;
+      const compareData = pageData[0]?.data;
+      const compareDataCatAttribute = await getProductCategroyAttributes(
+        compareData?.category_id
+      );
+      PageToRender = (
+        <Comparison
+          comparisonData={pageData}
+          categroyAttributes={compareDataCatAttribute}
+        />
+      );
       break;
     default:
       PageToRender = () => <div>No Page Found</div>;

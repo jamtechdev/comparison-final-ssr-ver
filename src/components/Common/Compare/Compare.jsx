@@ -49,6 +49,7 @@ export default function ComparisonsSlider({
     }
   }, [searchValue3]);
   // Your function to construct and push the route
+
   const handleComparison = (e) => {
     const routeParts = [
       receivedValue?.permalink,
@@ -60,13 +61,15 @@ export default function ComparisonsSlider({
     // Construct the route
     if (validRouteParts.length >= 1) {
       const sortedRouteParts = validRouteParts.slice().sort(); // Create a sorted copy of the array
-      router.push(`/${sortedRouteParts[0]}`);
+      router.push(`/${receivedValue?.category_url}/${sortedRouteParts[0]}`);
       if (validRouteParts.length >= 2) {
-        router.push(`/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`);
+        router.push(
+          `/${receivedValue2?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
+        );
       }
       if (validRouteParts.length >= 3) {
         router.push(
-          `/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
+          `/${receivedValue3?.category_url}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
         );
       }
     }
