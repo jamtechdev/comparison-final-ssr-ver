@@ -496,7 +496,7 @@ export default function Product({
                             return (
                               <React.Fragment key={index}>
                                 <li className="tooltip-title">
-                                  <span className="">
+                                  <span className="pros-crons-text">
                                     {data?.name} {renderValue(data)}
                                   </span>
                                   <ProsConsToolTip

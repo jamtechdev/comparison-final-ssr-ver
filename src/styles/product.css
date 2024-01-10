@@ -802,7 +802,7 @@
   font-family: "Lato", sans-serif !important;
 }
 
-.pros-corns-section ul li span{
+.pros-corns-section ul li span.pros-crons-text{
   opacity: 70%;
 }
 

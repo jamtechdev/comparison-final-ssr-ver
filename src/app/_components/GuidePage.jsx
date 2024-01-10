@@ -48,7 +48,11 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
     }, 1000);
   }, [searchParams]);
 
-  console.log(searchParams) , 'serach params';
+
+  const removeFilters = () => {
+    console.log(window.location);
+  }
+
   return (
     <>
       <section className="product-header">
@@ -175,9 +179,9 @@ export default function GuidePage({ slug, guideData, attributesForTable, filters
                       </ul>
                       {Object.keys(searchParams).length > 0 && (
                         <span
-                        // onClick={() => {
-                        //   setFilterObj({});
-                        // }}
+                        onClick={() => {
+                        removeFilters()
+                        }}
                         >
                           Remove all filters
                         </span>
