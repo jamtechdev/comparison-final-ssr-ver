@@ -86,116 +86,48 @@ export default function Header({ headerData }) {
                 </Modal.Header>
                 <Modal.Body className="p-0">
                   <Accordion>
-                    <Accordion.Item eventKey="0">
-                      <Accordion.Header as="div">Electronics</Accordion.Header>
-                      <Accordion.Body>
-                        <Row>
-                          <Col lg={3} md={6} xs={12}>
-                            <div className="nav-list-section">
-                              <span>Cleaning</span>
-                              <ul>
-                                <li>Washing machines</li>
-                                <li className="nav-active">Tumble dryers</li>
-                                <li>Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                              </ul>
-                            </div>
-                          </Col>
-                          <Col lg={3} md={6} xs={12}>
-                            <div className="nav-list-section">
-                              <span>Cleaning</span>
-                              <ul>
-                                <li>Washing machines</li>
-                                <li>Tumble dryers</li>
-                                <li>Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                              </ul>
-                            </div>
-                          </Col>
-                          <Col lg={3} md={6} xs={12}>
-                            <div className="nav-list-section">
-                              <span>Cleaning</span>
-                              <ul>
-                                <li>Washing machines</li>
-                                <li>Tumble dryers</li>
-                                <li>Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                              </ul>
-                            </div>
-                          </Col>
-                          <Col lg={3} md={6} xs={12}>
-                            <div className="nav-list-section">
-                              <span>Cleaning</span>
-                              <ul>
-                                <li>Washing machines</li>
-                                <li>Tumble dryers</li>
-                                <li>Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                              </ul>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="1">
-                      <Accordion.Header as="div">Home</Accordion.Header>
-                      <Accordion.Body>
-                        <Row>
-                          <Col lg={3} md={6} xs={12}>
-                            <div className="nav-list-section">
-                              <span>Cleaning</span>
-                              <ul>
-                                <li>Washing machines</li>
-                                <li className="nav-active">Tumble dryers</li>
-                                <li>Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                              </ul>
-                            </div>
-                          </Col>
-                          <Col lg={3} md={6} xs={12}>
-                            <div className="nav-list-section">
-                              <span>Cleaning</span>
-                              <ul>
-                                <li>Washing machines</li>
-                                <li>Tumble dryers</li>
-                                <li>Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                              </ul>
-                            </div>
-                          </Col>
-                          <Col lg={3} md={6} xs={12}>
-                            <div className="nav-list-section">
-                              <span>Cleaning</span>
-                              <ul>
-                                <li>Washing machines</li>
-                                <li>Tumble dryers</li>
-                                <li>Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                              </ul>
-                            </div>
-                          </Col>
-                          <Col lg={3} md={6} xs={12}>
-                            <div className="nav-list-section">
-                              <span>Cleaning</span>
-                              <ul>
-                                <li>Washing machines</li>
-                                <li>Tumble dryers</li>
-                                <li>Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                                <li>Robot Vacuum Cleaners</li>
-                              </ul>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Accordion.Body>
-                    </Accordion.Item>
+                    {headerData &&
+                      headerData?.map((item, headerDataKey) => (
+                        <>
+                          <Accordion.Item eventKey={headerDataKey}>
+                            <Accordion.Header as="div">
+                              {item?.primary_category}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                              <Row>
+                                {item?.secondaryCategory_guides?.map(
+                                  (items, index) => {
+                                    return (
+                                      <Col lg={3} md={6} xs={12} key={index}>
+                                        <div className="nav-list-section">
+                                          <span>
+                                            {items?.secondary_category}
+                                          </span>
+                                          <ul>
+                                            {items?.guides &&
+                                              items?.guides?.map(
+                                                (guide, guideIndex) => (
+                                                  <li key={guideIndex}>
+                                                    <Link
+                                                      href={`/${guide?.category_url}/${guide?.permalink}`}
+                                                      style={{ color: "#fff" }}
+                                                    >
+                                                      {guide?.title}
+                                                    </Link>
+                                                  </li>
+                                                )
+                                              )}
+                                          </ul>
+                                        </div>
+                                      </Col>
+                                    );
+                                  }
+                                )}
+                              </Row>
+                            </Accordion.Body>
+                          </Accordion.Item>
+                        </>
+                      ))}
                   </Accordion>
                   <Navbar className="nav-links-mobile">
                     <Navbar.Brand href="#how-we-rank">How we rank</Navbar.Brand>
@@ -269,39 +201,37 @@ export default function Header({ headerData }) {
             {headerData &&
               headerData?.map((item, headerDataKey) => (
                 <div className="cat-nav-item" key={headerDataKey}>
-                  <div
-                    className="dropdown-toggle nav-link"
-                    onClick={() => {
-                      router.push(
-                        `/category-archive/${item?.primary_category}`
-                      );
-                    }}
-                  >
-                    {item?.primary_category}
+                  <div className="dropdown-toggle nav-link">
+                    <Link
+                      href={`/${item?.primary_category}`}
+                      style={{ color: "#fff" }}
+                    >
+                      {item?.primary_category}
+                    </Link>
                   </div>
 
                   <Container className="dropdown-menu">
                     <Row>
                       {item?.secondaryCategory_guides?.map((items, index) => {
-                        return (    
-                            <Col md={3} key={index}>
-                              <div className="nav-list-section">
-                                <span>{items?.secondary_category}</span>
-                                <ul>
-                                  {items?.guides &&
-                                    items?.guides?.map((guide, guideIndex) => (
-                                      <li
-                                        key={guideIndex}
-                                        onClick={() => {
-                                          router.push(`/${guide?.permalink}`);
-                                        }}
+                        return (
+                          <Col md={3} key={index}>
+                            <div className="nav-list-section">
+                              <span>{items?.secondary_category}</span>
+                              <ul>
+                                {items?.guides &&
+                                  items?.guides?.map((guide, guideIndex) => (
+                                    <li key={guideIndex}>
+                                      <Link
+                                        href={`/${guide?.category_url}/${guide?.permalink}`}
+                                        style={{ color: "#fff" }}
                                       >
                                         {guide?.title}
-                                      </li>
-                                    ))}
-                                </ul>
-                              </div>
-                            </Col>
+                                      </Link>
+                                    </li>
+                                  ))}
+                              </ul>
+                            </div>
+                          </Col>
                         );
                       })}
                     </Row>

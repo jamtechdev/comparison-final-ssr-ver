@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ProductSlider({ favSlider,slug }) {
+export default function ProductSlider({ favSlider, slug,indexSlider }) {
   return (
     <>
       <div className="product-slider">
@@ -45,30 +45,33 @@ export default function ProductSlider({ favSlider,slug }) {
             favSlider?.map((section, index) => {
               return (
                 <React.Fragment key={section?.short_name + index}>
-                    <SwiperSlide key={section?.short_name}>
-                      <Link
-                        href={`/${section?.category_url ? section?.category_url : slug}/${section?.permalink}`}
-                        style={{ color: "#27304e" }}
-                      >
-                        {" "}
-                        <div className="product-card">
-                          <Image
-                            src={
-                              section.bannerImage === null
-                                ? section?.bannerImage
-                                : `/images/nofound.png`
-                            }
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt="Not found"
-                          />
+                  <SwiperSlide key={section?.short_name}>
+                    <Link
+                      href={`/${
+                        section?.category_url ? section?.category_url : slug
+                      }/${section?.permalink}`}
+                      style={{ color: "#27304e" }}
+                    >
+                      {" "}
+                      <div className="product-card">
+                        <Image
+                          src={
+                            section.bannerImage === null
+                              ? section?.bannerImage
+                              : `/images/nofound.png`
+                          }
+                          width={0}
+                          height={0}
+                          sizes="100%"
+                          alt="Not found"
+                        />
 
-                          <div className="product-name-wrapper"><span>{section?.short_name}</span></div>
+                        <div className="product-name-wrapper">
+                          <span>{section?.short_name}</span>
                         </div>
-                      </Link>
-                    </SwiperSlide>
-               
+                      </div>
+                    </Link>
+                  </SwiperSlide>
                 </React.Fragment>
               );
             })}
