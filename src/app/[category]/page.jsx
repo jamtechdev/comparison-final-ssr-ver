@@ -47,7 +47,6 @@ export async function generateMetadata() {
 async function fetchDataBasedOnPageType(slug, pageType) {
   let apiUrls = [];
   switch (pageType) {
-    
     case "PrimaryArchiveCategory":
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/guide/archive-page/${slug}`,

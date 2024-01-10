@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { homePage } from "../../_services/homepage.service";
 import Link from "next/link";
-const SearchList = ({
-  search,
-  isFocused
-}) => {
+const SearchList = ({ search, isFocused }) => {
   const [filteredData, setFilteredData] = useState([]);
   useEffect(() => {
     if (search !== "" && search !== undefined) {
@@ -24,12 +21,7 @@ const SearchList = ({
   };
   return (
     <>
-      <div
-        className={
-          (isFocused && search?.length > 0) ? ""
-            : "d-none"
-        }
-      >
+      <div className={isFocused && search?.length > 0 ? "" : "d-none"}>
         <div className="search-dropdown-list">
           {filteredData &&
             Object.keys(filteredData).map((category, index) => (

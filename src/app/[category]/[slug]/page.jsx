@@ -4,15 +4,38 @@ export default async function Page({ params: { slug }, searchParams }) {
   try {
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
-    // if (slugType.error && slug.includes("-vs-")) {
-    //   return <PageSwitch PageType="comparison" slug={slug} pageData={{}} searchParams={{}} />;
-    // }
+    if (slugType.error && slug.includes("-vs-")) {
+      const pageData = await fetchDataBasedOnPageType(
+        slug,
+        "Comparison",
+        searchParams
+      );
+      return (
+        <PageSwitch
+          PageType="Comparison"
+          slug={slug}
+          pageData={pageData}
+          searchParams={{}}
+        />
+      );
+    }
 
     if (slugType.type) {
-      const pageData = await fetchDataBasedOnPageType(slug, slugType.type, searchParams);
+      const pageData = await fetchDataBasedOnPageType(
+        slug,
+        slugType.type,
+        searchParams
+      );
 
       if (pageData) {
-        return <PageSwitch PageType={slugType.type} slug={slug} pageData={pageData} searchParams={searchParams} />;
+        return (
+          <PageSwitch
+            PageType={slugType.type}
+            slug={slug}
+            pageData={pageData}
+            searchParams={searchParams}
+          />
+        );
       }
     }
   } catch (error) {
@@ -51,13 +74,15 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
-      let productApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
+      let productApiUrl = `${
+        process.env.NEXT_PUBLIC_API_URL
+      }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
       if (searchParams?.page) {
         productApiUrl += `&page=${searchParams.page}`;
       }
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${slug}`,
-        productApiUrl
+        productApiUrl,
       ];
       break;
     case "Blog":
@@ -71,6 +96,12 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
         `${process.env.NEXT_PUBLIC_API_URL}/product/${slug}`,
         // `${process.env.NEXT_PUBLIC_API_URL}/product/${id}/attributes`,,
       ];
+      break;
+    case "Comparison":
+      const permalinks = slug.split("-vs-");
+      apiUrls = permalinks.map(
+        (permalink) => `${process.env.NEXT_PUBLIC_API_URL}/product/${permalink}`
+      );
       break;
     default:
       return null;

@@ -3,6 +3,7 @@ import BlogPage from "./BlogPage";
 import ProductPage from "./ProductPage";
 import CategoryArchive from "./CategoryArchive";
 import ProductCategoryArchivePage from "./ProductCategoryArchivePage";
+import Comparison from "./Comparison";
 export default async function PageSwitch({
   PageType,
   slug,
@@ -52,9 +53,9 @@ export default async function PageSwitch({
         <ProductCategoryArchivePage slug={slug} categoryData={pageData} />
       );
       break;
-   case "comparison":
-    PageToRender = () => <div>No Page Found</div>;
-    break;   
+    case "Comparison":
+      PageToRender = <Comparison comparisonData={pageData} />;
+      break;
     default:
       PageToRender = () => <div>No Page Found</div>;
       break;
