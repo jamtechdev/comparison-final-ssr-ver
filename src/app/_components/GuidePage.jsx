@@ -1,4 +1,4 @@
-
+"use client";
 import { useEffect, useState } from "react";
 import useChart from "@/hooks/useChart";
 import Image from "next/image";
@@ -13,13 +13,13 @@ import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCom
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
 import { isAreObjectsEqual } from "@/_helpers";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 export default function GuidePage({ slug, guideData, attributesForTable, filters, searchParams }) {
   useChart();
 
   const [isShown, setIsShown] = useState(false);
-      const router = useRouter();
+      // const router = useRouter();
 
   const guide = guideData[0].data;
   const products = guideData[1].data.products
@@ -61,8 +61,8 @@ location.reload()
 
  const deleteParam= (e) =>{
 
-  const { pathname, query } = router;
-console.log(query[`${e}`] ,  'hgfjfkrh');
+  // const { pathname, query } = router;
+// console.log(query[`${e}`] ,  'hgfjfkrh');
   // Remove the 'available' query parameter
   // delete query[`${e}`];
 
