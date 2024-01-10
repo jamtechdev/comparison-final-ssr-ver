@@ -627,11 +627,13 @@
 }
 
 .filtered-data span {
-  font-weight: 400;
-  font-size: 15px;
+font-weight: 400;
+  font-size: 18px;
   line-height: 34px;
   color: var(--heading-color);
   opacity: 80%;
+  display: flex;
+  padding: 2px 0 0;
 }
 
 .filtered-data-select {
