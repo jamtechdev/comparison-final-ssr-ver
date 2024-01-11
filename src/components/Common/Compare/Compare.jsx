@@ -14,31 +14,28 @@ export default function Compare({
   setIsOpen,
   modelOpen,
 }) {
+  console.log(  searchValue1,
+    searchValue2,
+    searchValue3,"Compare")
   const dispatch = useDispatch();
   const [product1Filled, setProduct1Filled] = useState(false);
   const [product2Filled, setProduct2Filled] = useState(false);
-
   const [search, setSearch] = useState("");
   const [search2, setSearch2] = useState("");
   const [search3, setSearch3] = useState("");
-
   const [catId, setCatId] = useState("");
   const [catId3, setCatId3] = useState("");
-
   const [isFocused1, setIsFocused1] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
   const [isFocused3, setIsFocused3] = useState(false);
-
   const [receivedValue, setReceivedValue] = useState("");
   const [receivedValue2, setReceivedValue2] = useState("");
   const [receivedValue3, setReceivedValue3] = useState("");
-
   const router = useRouter();
   const pathname = usePathname();
   //get the first slug form url to pass it as category in comparison url
   const match = pathname.match(/\/([^\/]*)\//);
-  const categoryInURL = match ? match[1] : "";
-
+  const categoryInURL = match ? match[1] :"";
   useEffect(() => {
     if (searchValue1 != "") {
       setSearch(searchValue1?.name);
@@ -65,7 +62,6 @@ export default function Compare({
       receivedValue2?.permalink,
       receivedValue3?.permalink,
     ];
-
     // Filter out undefined or null values
     const validRouteParts = routeParts.filter((part) => part);
     // Construct the route

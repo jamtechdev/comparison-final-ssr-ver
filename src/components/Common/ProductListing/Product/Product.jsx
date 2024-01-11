@@ -13,9 +13,6 @@ import {
   getAttributeHalf,
 } from "../../../../_helpers/filter";
 import Link from "next/link";
-import Pagenation from "../../Pagination/pagination";
-import { useDispatch, useSelector } from "react-redux";
-
 export default function Product({
   position,
   incomingProduct,

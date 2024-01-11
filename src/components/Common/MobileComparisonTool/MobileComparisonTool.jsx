@@ -6,8 +6,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Pagination } from "swiper";
 import { Navigation } from "swiper";
-import Modal from "../../Modal/Modal";
-import CompareModal from "../../Modal/Modal";
+import Modal from "../Comparison/CompareModal";
+import CompareModal from "../Comparison/CompareModal";
 
 export default function MobileCompareTable() {
   const [swiperRef, setSwiperRef] = useState();

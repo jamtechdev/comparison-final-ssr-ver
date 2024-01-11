@@ -7,10 +7,10 @@ const ProsConsToolTip = (props) => {
     <>
       {hover_phrase && (
         <div className="tooltip-display-content">
-          <span
+          <div
             className="mb-2 prosconsColor"
-           // dangerouslySetInnerHTML={{ __html: hover_phrase }}
-          ></span>
+            dangerouslySetInnerHTML={{ __html: hover_phrase }}
+          ></div>
           {info_not_verified && (
             <>
               <hr />
