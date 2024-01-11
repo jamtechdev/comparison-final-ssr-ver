@@ -15,12 +15,13 @@ export default async function PageSwitch({
     case "Guide":
       const guide = pageData[0]?.data;
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
+
       PageToRender = (
         <GuidePage
           slug={slug}
           guideData={pageData}
           filters={attributes?.data}
-          attributesForTable={attributes?.attribute_categories}
+          attributesForTable={attributes?.data?.attribute_categories}
           searchParams={searchParams}
         />
       );
@@ -77,6 +78,8 @@ async function getCategoryAttributes(category_id, slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/guide/${category_id}/${slug}/attributes`,
     {
+      next: { revalidate: 600 },
+      cache:"no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -93,6 +96,8 @@ async function getProductCategroyAttributes(category_id) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/${category_id}/attributes`,
     {
+      next: { revalidate: 600 },
+      cache:"no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -110,6 +115,8 @@ async function getCompareProductByCatID(category_id) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}`,
     {
+      next: { revalidate: 600 },
+      cache:"no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",

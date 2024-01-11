@@ -27,7 +27,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
     comparisonData[1]?.data || ""
   );
   const [compareProDataThird, setCompareProDataThird] = useState(
-    comparisonData[2]?.data || ""
+    comparisonData[3]?.data || ""
   );
   const handleRemoveClick = (id) => {
     if (id == 3) {

@@ -23,6 +23,7 @@ async function getSlugType(category) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${category}`,
     {
+      next: { revalidate: 600 },
       cache: "no-cache",
       method: "GET",
       headers: {
@@ -65,6 +66,7 @@ async function fetchDataBasedOnPageType(slug, pageType) {
   const responses = await Promise.all(
     apiUrls.map(async (apiUrl) => {
       const response = await fetch(apiUrl, {
+        next: { revalidate: 600 },
         cache: "no-cache",
         method: "GET",
         headers: {

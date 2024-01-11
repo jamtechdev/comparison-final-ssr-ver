@@ -5,7 +5,7 @@ import Image from "next/image";
 import { productService } from "../../_services";
 import { useSelector } from "react-redux";
 
-const CompareModal = ({
+const CompareModal = ({ 
   setIsOpen,
   compareProDataFirst,
   compareProDataSec,
@@ -18,8 +18,8 @@ const CompareModal = ({
   const ProductId = useSelector((state) => state.comparePro.compareProduct);
   const [oftenData, setOffenData] = useState([]);
   useEffect(() => {
-    console.log(ProductId,guideCatID)
-    if(ProductId.length <=0 || (!guideCatID)){return};
+    console.log(ProductId)
+    if(ProductId.length <=0){return};
     productService
       .getComparedoftenProduct(
         ProductId[0]?.catID ? ProductId[0]?.catID : guideCatID
