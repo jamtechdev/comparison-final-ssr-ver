@@ -13,7 +13,7 @@ export default function ProductSlider({ favSlider, slug,indexSlider }) {
     const nextButtonClass = `next-${indexSlider}`;
   return (
     <>
-      <div className="product-slider">
+      <div className="product-slider m-0">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={30}
@@ -41,7 +41,7 @@ export default function ProductSlider({ favSlider, slug,indexSlider }) {
               spaceBetween: 20,
             },
           }}
-          className="product-slider"
+          className="product-slider mt-2"
         >
           {favSlider?.length > 0 &&
             favSlider?.map((section, index) => {

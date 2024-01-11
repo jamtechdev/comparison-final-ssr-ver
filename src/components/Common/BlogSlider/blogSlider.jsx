@@ -39,42 +39,44 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
         }}
         className="blog-slider"
       >
-        {blogPageType != "listPage" &&
+        {
+          // blogPageType != "listPage" &&
           blogData &&
-          blogData?.map(function (item, index) {
-            return (
-              <SwiperSlide key={index}>
-                <Link
-                  href={`/${
-                    item.category_url
-                      ? item.category_url
-                      : item.primary_category.toLowerCase()
-                  }/${item?.permalink}`}
-                  style={{ color: "#27304e" }}
-                >
-                  <div className="blog-card">
-                    <div className="blog-card-img">
-                      <img
-                        src={
-                          item.banner_image
-                            ? item.banner_image
-                            : "/images/nofound.png"
-                        }
-                        width={0}
-                        height={0}
-                        sizes="100%"
-                        alt=""
-                      />
-                      <p className="dates">{item.published_at}</p>
+            blogData?.map(function (item, index) {
+              return (
+                <SwiperSlide key={index}>
+                  <Link
+                    href={`/${
+                      item.category_url
+                        ? item.category_url
+                        : item.primary_category.toLowerCase()
+                    }/${item?.permalink}`}
+                    style={{ color: "#27304e" }}
+                  >
+                    <div className="blog-card">
+                      <div className="blog-card-img">
+                        <Image
+                          src={
+                            item.banner_image
+                              ? item.banner_image
+                              : "/images/nofound.png"
+                          }
+                          width={0}
+                          height={0}
+                          sizes="100%"
+                          alt=""
+                        />
+                        <p className="dates">{item.published_at}</p>
+                      </div>
+                      <span className="blog-title">{item.title}</span>
+                      <p className="category">{item.category}</p>
                     </div>
-                    <span className="blog-title">{item.title}</span>
-                    <p className="category">{item.category}</p>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-        {blogPageType == "listPage" &&
+                  </Link>
+                </SwiperSlide>
+              );
+            })
+        }
+        {/* {blogPageType == "listPage" &&
           blogDataList &&
           blogDataList?.map(function (item, index) {
             return (
@@ -108,9 +110,9 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
                 </Link>
               </SwiperSlide>
             );
-          })}
+          })} */}
       </Swiper>
-      {blogData?.length > 6 ? (
+      {blogData?.length >= 8 ? (
         <>
           <span className="swiper-prev">
             <i className="ri-arrow-left-s-line"></i>

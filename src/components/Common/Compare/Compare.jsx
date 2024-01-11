@@ -145,8 +145,11 @@ export default function Compare({
     <>
       <div className="compare-section">
         <div className="compare-section-img">
-          <Image src="/images/vs.svg" width={40} height={40} alt="" />
-          <Image src="/images/vs.svg" width={40} height={40} alt="" />
+          <div className="up-direction-section"></div>
+          <Image src="/images/vs.svg" width={35} height={35} alt="" />
+          <div className="middle-direction-section"></div>
+          <Image src="/images/vs.svg" width={35} height={35} alt="" />
+          <div className="down-direction-section"></div>
         </div>
         <div className="compare-section-form">
           <div className="position-relative w-100">
