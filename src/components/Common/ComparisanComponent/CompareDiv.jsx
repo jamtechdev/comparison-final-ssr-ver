@@ -19,7 +19,11 @@ import ComparisonTable from "../CompareTable/ComparisonTable";
 import WhyAccordionTab from "@/components/Product/WhyAccordionTab";
 // import ComparisonTable from "../CompareTable/ComparisonTable";
 
-function CompareDiv({ comparisonData, categroyAttributes }) {
+function CompareDiv({
+  comparisonData,
+  categroyAttributes,
+  graphComparisonProsCons,
+}) {
   const [compareProDataFirst, setCompareProDataFirst] = useState(
     comparisonData[0]?.data || ""
   );
@@ -27,7 +31,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
     comparisonData[1]?.data || ""
   );
   const [compareProDataThird, setCompareProDataThird] = useState(
-    comparisonData[3]?.data || ""
+    comparisonData[2]?.data || ""
   );
   const handleRemoveClick = (id) => {
     if (id == 3) {
@@ -54,6 +58,15 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
     compareProDataSec,
     compareProDataThird,
   ];
+  // if value is an integer and not equal to 10, add decimal that value
+  const formatValue = (value) => {
+    if (value % 1 === 0 && value !== 10) {
+      return `${value}.0`;
+    }
+    return value;
+  };
+  console.log(formatValue(5.1), "checkValue");
+
   return (
     <>
       <section className="product-header">
@@ -130,7 +143,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                             : "#85B2F1",
                       }}
                     >
-                      {compareProDataFirst?.overall_score}
+                      {formatValue(compareProDataFirst?.overall_score)}
                     </span>
                     <i
                       className="ri-close-circle-line close_icon"
@@ -140,8 +153,9 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                   <div className="comparison-product-spec">
                     {compareProDataFirst?.price_websites?.length > 0 ? (
                       <>
-                        {compareProDataFirst?.price_websites?.map(
-                          (item, index) => {
+                        {compareProDataFirst?.price_websites
+                          ?.slice(0, 2)
+                          ?.map((item, index) => {
                             return item.price === 0 ? (
                               <></>
                             ) : (
@@ -159,8 +173,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                                 <span>{item.price} €</span>
                               </div>
                             );
-                          }
-                        )}
+                          })}
                       </>
                     ) : (
                       <>
@@ -243,7 +256,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                               : "#85B2F1",
                         }}
                       >
-                        {compareProDataSec?.overall_score}
+                        {formatValue(compareProDataSec?.overall_score)}
                       </span>
                       <i
                         className="ri-close-circle-line close_icon"
@@ -253,8 +266,9 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                     <div className="comparison-product-spec">
                       {compareProDataSec?.price_websites?.length > 0 ? (
                         <>
-                          {compareProDataSec?.price_websites?.map(
-                            (item, index) => {
+                          {compareProDataSec?.price_websites
+                            ?.slice(0, 2)
+                            ?.map((item, index) => {
                               return item.price === 0 ? (
                                 <></>
                               ) : (
@@ -272,8 +286,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                                   <span>{item.price} €</span>
                                 </div>
                               );
-                            }
-                          )}
+                            })}
                         </>
                       ) : (
                         <>
@@ -335,7 +348,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                               : "#85B2F1",
                         }}
                       >
-                        {compareProDataThird.overall_score}
+                        {formatValue(compareProDataThird?.overall_score)}
                       </span>
                       <i
                         className="ri-close-circle-line close_icon"
@@ -345,8 +358,9 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                     <div className="comparison-product-spec">
                       {compareProDataThird?.price_websites?.length > 0 ? (
                         <>
-                          {compareProDataThird?.price_websites?.map(
-                            (item, index) => {
+                          {compareProDataThird?.price_websites
+                            ?.slice(0, 2)
+                            ?.map((item, index) => {
                               return item.price === 0 ? (
                                 <></>
                               ) : (
@@ -364,8 +378,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
                                   <span>{item.price} €</span>
                                 </div>
                               );
-                            }
-                          )}
+                            })}
                         </>
                       ) : (
                         <>
@@ -410,18 +423,6 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
           </Row>
         </Container>
       </section>
-      {/* <section className="ptb-80 bg-color">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                {compareProDataFirst?.name} vs {compareProDataSec?.name}{" "}
-              </h2>
-            </Col>
-          </Row>
-          <WhyAccordionTab product={product} />
-        </Container>
-      </section> */}
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -432,7 +433,8 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
           <WhyAccordionTab
             product1={compareProDataFirst?.name}
             product2={compareProDataSec?.name}
-            product={comparisonData[2]?.data}
+            product3={compareProDataThird?.name}
+            product={graphComparisonProsCons}
             pageType={"comparison"}
           />
         </Container>

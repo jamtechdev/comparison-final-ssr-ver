@@ -56,6 +56,11 @@ export default async function PageSwitch({
       break;
     case "Comparison":
       const compareData = pageData[0]?.data;
+
+      const graphComparisonProsCons = await getGraphComparisonProsCons(
+        pageData
+      );
+
       const compareDataCatAttribute = await getProductCategroyAttributes(
         compareData?.category_id
       );
@@ -63,6 +68,7 @@ export default async function PageSwitch({
         <Comparison
           comparisonData={pageData}
           categroyAttributes={compareDataCatAttribute}
+          graphComparisonProsCons={graphComparisonProsCons}
         />
       );
       break;
@@ -79,7 +85,7 @@ async function getCategoryAttributes(category_id, slug) {
     `${process.env.NEXT_PUBLIC_API_URL}/guide/${category_id}/${slug}/attributes`,
     {
       next: { revalidate: 600 },
-      cache:"no-cache",
+      cache: "no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -97,7 +103,7 @@ async function getProductCategroyAttributes(category_id) {
     `${process.env.NEXT_PUBLIC_API_URL}/product/${category_id}/attributes`,
     {
       next: { revalidate: 600 },
-      cache:"no-cache",
+      cache: "no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -116,7 +122,7 @@ async function getCompareProductByCatID(category_id) {
     `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}`,
     {
       next: { revalidate: 600 },
-      cache:"no-cache",
+      cache: "no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -127,4 +133,40 @@ async function getCompareProductByCatID(category_id) {
   if (!response.ok) {
   }
   return response.json();
+}
+
+async function getGraphComparisonProsCons(data) {
+  if (data.length === 2) {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}`,
+      {
+        next: { revalidate: 600 },
+        cache: "no-cache",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+        },
+      }
+    );
+    if (!response.ok) {
+    }
+    return response.json();
+  } else {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}&permalink3=${data[2]?.data?.permalink}`,
+      {
+        next: { revalidate: 600 },
+        cache: "no-cache",
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+        },
+      }
+    );
+    if (!response.ok) {
+    }
+    return response.json();
+  }
 }

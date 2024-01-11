@@ -1,11 +1,14 @@
 import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "@/app/not-found";
-export default async function Page({ params: { category, slug }, searchParams }) {
+export default async function Page({
+  params: { category, slug },
+  searchParams,
+}) {
   try {
- const categoryslugType = await getSlugType(category);
+    const categoryslugType = await getSlugType(category);
     if (categoryslugType.error) {
-      return <NotFound />
-    }    
+      return <NotFound />;
+    }
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
@@ -64,7 +67,7 @@ async function getSlugType(slug) {
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
     {
       next: { revalidate: 600 },
-      cache:"no-cache",
+      cache: "no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -108,11 +111,6 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
       apiUrls = permalinks.map(
         (permalink) => `${process.env.NEXT_PUBLIC_API_URL}/product/${permalink}`
       );
-
-      apiUrls.push(
-        `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${permalinks[0]}&permalink2=${permalinks[1]}`
-      );
-
       break;
     default:
       return null;
@@ -122,7 +120,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
     apiUrls.map(async (apiUrl) => {
       const response = await fetch(apiUrl, {
         next: { revalidate: 600 },
-        cache:"no-cache",
+        cache: "no-cache",
         method: "GET",
         headers: {
           "Content-type": "application/json",

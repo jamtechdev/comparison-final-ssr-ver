@@ -95,7 +95,21 @@ const WhyAccordionTab = React.memo(
                     sizes="100%"
                   />
                 </Tab>
-                <Tab eventKey="tab-3" title="Average">
+                {product3 && (
+                  <Tab eventKey="tab-3" title={product3 && product3}>
+                    <Image
+                      className="site_image"
+                      src="/images/chart.png"
+                      width={0}
+                      height={0}
+                      alt=""
+                      sizes="100%"
+                    />
+                  </Tab>
+                )}
+                {/* Baad me puchenge sir se */}
+
+                {/* <Tab eventKey="tab-4" title="Average">
                   <Image
                     className="site_image"
                     src="/images/chart.png"
@@ -104,7 +118,7 @@ const WhyAccordionTab = React.memo(
                     alt=""
                     sizes="100%"
                   />
-                </Tab>
+                </Tab> */}
               </Tabs>
             </>
           )}
@@ -123,8 +137,7 @@ const WhyAccordionTab = React.memo(
                   <>
                     {" "}
                     <h3 className="font-20">
-                      Why is {product1 && product1} BETTER than{" "}
-                      {product2 && product2}?
+                      Why is {product1 && product1} BETTER than others ?
                     </h3>
                   </>
                 )}
@@ -241,8 +254,7 @@ const WhyAccordionTab = React.memo(
                   <>
                     {" "}
                     <h3 className="font-20">
-                      Why is {product1 && product1} WORSE than{" "}
-                      {product2 && product2}?
+                      Why is {product1 && product1} WORSE than others ?
                     </h3>
                   </>
                 )}
