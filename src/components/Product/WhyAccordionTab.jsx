@@ -14,9 +14,10 @@ import {
 } from "react-bootstrap";
 import Image from "next/image";
 import QuestionIcon from "../Svg/QuestionIcon";
+import ProsConsToolTip from "../Svg/ProsConsToolTip";
 
 const WhyAccordionTab = React.memo(
-  ({ product, pageType, product1, product2 }) => {
+  ({ product, pageType, product1, product2, product3 }) => {
     // console.log(pageType,">>>>>")
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
 
@@ -39,50 +40,108 @@ const WhyAccordionTab = React.memo(
     return (
       <Row>
         <Col md={12} lg={6}>
-          <Tabs
-            defaultActiveKey="tab-1"
-            id="Review-tab"
-            className="site_tabs graph-tab"
-          >
-            <Tab eventKey="tab-1" title={product && product?.name}>
-              <Image
-                className="site_image"
-                src="/images/chart.png"
-                width={0}
-                height={0}
-                alt=""
-                sizes="100%"
-              />
-            </Tab>
-            <Tab eventKey="tab-2" title="Average">
-              <Image
-                className="site_image"
-                src="/images/chart.png"
-                width={0}
-                height={0}
-                alt=""
-                sizes="100%"
-              />
-            </Tab>
-          </Tabs>
+          {pageType === undefined ? (
+            <>
+              <Tabs
+                defaultActiveKey="tab-1"
+                id="Review-tab"
+                className="site_tabs graph-tab"
+              >
+                <Tab eventKey="tab-1" title={product && product?.name}>
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+                <Tab eventKey="tab-2" title="Average">
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+              </Tabs>
+            </>
+          ) : (
+            <>
+              <Tabs
+                defaultActiveKey="tab-1"
+                id="Review-tab"
+                className="site_tabs graph-tab"
+              >
+                <Tab eventKey="tab-1" title={product1 && product1}>
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+                <Tab eventKey="tab-2" title={product2 && product2}>
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+                {product3 && (
+                  <Tab eventKey="tab-3" title={product3 && product3}>
+                    <Image
+                      className="site_image"
+                      src="/images/chart.png"
+                      width={0}
+                      height={0}
+                      alt=""
+                      sizes="100%"
+                    />
+                  </Tab>
+                )}
+                {/* Baad me puchenge sir se */}
+
+                {/* <Tab eventKey="tab-4" title="Average">
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab> */}
+              </Tabs>
+            </>
+          )}
         </Col>
         <Col md={12} lg={6}>
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
-                <h3 className="font-20">
-                  Why is {product && product?.name} BETTER than average?
-                </h3>
-                {/* {pageType === "comparison" ? (
-                  <h3 className="font-20">
-                    Why is {product1 && product1} BETTER than{" "}
-                    {product2 && product} ?
-                  </h3>
+                {pageType === undefined ? (
+                  <>
+                    <h3 className="font-20">
+                      Why is {product && product?.name} BETTER than average?
+                    </h3>
+                  </>
                 ) : (
-                  <h3 className="font-20">
-                    Why is {product && product?.name} BETTER than average?
-                  </h3>
-                )} */}
+                  <>
+                    {" "}
+                    <h3 className="font-20">
+                      Why is {product1 && product1} BETTER than others ?
+                    </h3>
+                  </>
+                )}
 
                 <div className="show-btn">
                   Show All <i className="ri-arrow-down-s-line"></i>
@@ -102,20 +161,29 @@ const WhyAccordionTab = React.memo(
                         <Tab.Pane eventKey={tabvalue?.pros}>
                           <ul>
                             {product && tabvalue?.pros == "total"
-                              ? product?.total_average_pros
-                                  ?.slice(0, 8)
-                                  ?.map((item, index) => {
+                              ? product?.total_average_pros?.map(
+                                  (item, index) => {
                                     return (
-                                      <li key={index}>
+                                      <li key={index} className="tooltip-title">
                                         {typeof item?.difference_value ==
                                         "number"
                                           ? item?.difference
                                           : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
 
-                                        <small className="d-block">
+                                        <small className="d-block ">
                                           {item?.difference_value == "yes" ||
                                           item?.difference_value == "no"
                                             ? ""
@@ -123,25 +191,40 @@ const WhyAccordionTab = React.memo(
                                         </small>
                                       </li>
                                     );
-                                  })
+                                  }
+                                )
                               : product?.average_pros[tabvalue?.pros]
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {
                                     return (
                                       <li key={index}>
-                                        {typeof item?.difference_value ==
-                                        "number"
-                                          ? item?.difference
-                                          : item?.phrase}
+                                        <span className="tooltip-title">
+                                          {typeof item?.difference_value ==
+                                          "number"
+                                            ? item?.difference
+                                            : item?.phrase}
+
+                                          {item?.hover_phase && (
+                                            <>
+                                              <div className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </div>
+                                            </>
+                                          )}
+
+                                          <small className="d-block">
+                                            {item?.difference_value == "yes" ||
+                                            item?.difference_value == "no"
+                                              ? ""
+                                              : item?.vs}
+                                          </small>
+                                        </span>
+
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
-                                        <small className="d-block">
-                                          {item?.difference_value == "yes" ||
-                                          item?.difference_value == "no"
-                                            ? ""
-                                            : item?.vs}
-                                        </small>
                                       </li>
                                     );
                                   })}
@@ -186,9 +269,21 @@ const WhyAccordionTab = React.memo(
             </Accordion.Item>
             <Accordion.Item eventKey="2">
               <Accordion.Header as="div">
-                <h3 className="font-20">
-                  Why is {product && product?.name} WORSE than others?
-                </h3>
+                {pageType === undefined ? (
+                  <>
+                    <h3 className="font-20">
+                      Why is {product && product?.name} WORSE than others?
+                    </h3>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <h3 className="font-20">
+                      Why is {product1 && product1} WORSE than others ?
+                    </h3>
+                  </>
+                )}
+
                 <div className="show-btn">
                   Show All <i className="ri-arrow-down-s-line"></i>
                 </div>
@@ -207,15 +302,24 @@ const WhyAccordionTab = React.memo(
                         <Tab.Pane eventKey={tabvalue?.cons}>
                           <ul className="compare-crons">
                             {product && tabvalue?.cons == "total"
-                              ? product?.total_average_cons
-                                  ?.slice(0, 8)
-                                  ?.map((item, index) => {
+                              ? product?.total_average_cons?.map(
+                                  (item, index) => {
                                     return (
-                                      <li key={index}>
+                                      <li key={index} className="tooltip-title">
                                         {typeof item?.difference_value ==
                                         "number"
                                           ? item?.difference
                                           : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
@@ -227,25 +331,37 @@ const WhyAccordionTab = React.memo(
                                         </small>
                                       </li>
                                     );
-                                  })
+                                  }
+                                )
                               : product?.average_cons[tabvalue?.cons]
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {
                                     return (
-                                      <li key={index}>
+                                      <li key={index} className="tooltip-title">
                                         {typeof item?.difference_value ==
                                         "number"
                                           ? item?.difference
                                           : item?.phrase}
-                                        <QuestionIcon
-                                          attributes={item?.when_matters}
-                                        />
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+
                                         <small className="d-block">
                                           {item?.difference_value == "yes" ||
                                           item?.difference_value == "no"
                                             ? ""
                                             : item?.vs}
                                         </small>
+                                        <QuestionIcon
+                                          attributes={item?.when_matters}
+                                        />
                                       </li>
                                     );
                                   })}

@@ -89,6 +89,8 @@
     top: 8px;
     right: 8px;
     font-size: 20px;
+    min-width: 45px;
+    text-align: center;
 }
 
 .comparison-product-spec {

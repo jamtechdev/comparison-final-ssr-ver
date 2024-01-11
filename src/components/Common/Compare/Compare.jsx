@@ -62,23 +62,36 @@ export default function Compare({
       receivedValue2?.permalink,
       receivedValue3?.permalink,
     ];
-    console.log(receivedValue?.permalink,
-      receivedValue2?.permalink,
-      receivedValue3?.permalink, pathname)
     // Filter out undefined or null values
     const validRouteParts = routeParts.filter((part) => part);
     // Construct the route
     if (validRouteParts.length >= 1) {
       const sortedRouteParts = validRouteParts.slice().sort(); // Create a sorted copy of the array
-      router.push(`/${receivedValue?.category_url ? receivedValue?.category_url : categoryInURL}/${sortedRouteParts[0]}`);
+      router.push(
+        `/${
+          receivedValue?.category_url
+            ? receivedValue?.category_url
+            : categoryInURL
+        }/${sortedRouteParts[0]}`
+      );
       if (validRouteParts.length >= 2) {
         router.push(
-          `/${receivedValue2?.category_url ? receivedValue2?.category_url : categoryInURL}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
+          `/${
+            receivedValue2?.category_url
+              ? receivedValue2?.category_url
+              : categoryInURL
+          }/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
         );
       }
       if (validRouteParts.length >= 3) {
         router.push(
-          `/${receivedValue3?.category_url ? receivedValue3?.category_url : categoryInURL}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
+          `/${
+            receivedValue3?.category_url
+              ? receivedValue3?.category_url
+              : categoryInURL
+          }/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${
+            sortedRouteParts[2]
+          }`
         );
       }
     }
@@ -145,8 +158,11 @@ export default function Compare({
     <>
       <div className="compare-section">
         <div className="compare-section-img">
-          <Image src="/images/vs.svg" width={40} height={40} alt="" />
-          <Image src="/images/vs.svg" width={40} height={40} alt="" />
+          <div className="up-direction-section"></div>
+          <Image src="/images/vs.svg" width={35} height={35} alt="" />
+          <div className="middle-direction-section"></div>
+          <Image src="/images/vs.svg" width={35} height={35} alt="" />
+          <div className="down-direction-section"></div>
         </div>
         <div className="compare-section-form">
           <div className="position-relative w-100">

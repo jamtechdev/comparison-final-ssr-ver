@@ -11,7 +11,7 @@ import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CompareForm from "@/components/Common/Comparison/CompareForm";
-
+import Link from "next/link";
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -160,20 +160,20 @@ export default function MainPage({ bannerCounts, favSlider }) {
                 <Container className="small-p-0 ">
                   <Row key={data?.id}>
                     <Col md={12} xs={12}>
-                      <h2
-                        role="button"
+                      <Link
+                        href={`/${data?.primary_archive_category?.toLowerCase()}`}
                         className="text-center electronics"
-                        style={{
-                          backgroundImage: `url(${data?.rectangle_image})`,
-                        }}
-                        onClick={() => {
-                          router.push(
-                            `/${data?.primary_archive_category.toLowerCase()}`
-                          );
-                        }}
                       >
-                        {data?.primary_archive_category}
-                      </h2>
+                        <h2
+                          role="button"
+                          style={{
+                            backgroundImage: `url(${data?.rectangle_image})`,
+                          }}
+                         
+                        >
+                          {data?.primary_archive_category}
+                        </h2>
+                      </Link>
                     </Col>
                   </Row>
                 </Container>
@@ -186,19 +186,41 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         <h3 className="site-main-heading">
                           Product categories
                         </h3>
+                        {/* <div className="product-categories-container">
+                          {data?.categories?.map((item, index) => {
+                            return (
+                              <Link
+                                href={`/${item?.category_url.toLowerCase()}`}
+                              >
+                                <div
+                                  className="product-categories-item"
+                                  key={index}
+
+                                >
+                                  <span > {item?.title}</span>
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div> */}
                         <div className="product-categories-container">
                           {data?.categories?.map((item, index) => {
                             return (
                               <div
-                                className="product-categories-item"
                                 key={index}
-                                onClick={() => {
-                                  router.push(
-                                    `/${item?.category_url.toLowerCase()}`
-                                  );
-                                }}
+                                style={{ display: "inline-block" }}
                               >
-                                {item?.title}
+                                <span
+                                  className="product-categories-item"
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  <Link
+                                    style={{ color: "#27304e" }}
+                                    href={`/${item?.category_url?.toLowerCase()}`}
+                                  >
+                                    {item?.title}
+                                  </Link>
+                                </span>
                               </div>
                             );
                           })}
@@ -254,7 +276,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                   <Row>
                     <Col md={12}>
                       <h3 className="site-main-heading">Blog Posts</h3>
-                      <BlogSlider blogData={data.blog_posts} />
+                      <BlogSlider blogData={data?.blog_posts} />
                     </Col>
                   </Row>
                 </Container>

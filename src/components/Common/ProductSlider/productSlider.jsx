@@ -8,12 +8,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ProductSlider({ favSlider, slug,indexSlider }) {
-    const prevButtonClass = `prev-${indexSlider}`;
-    const nextButtonClass = `next-${indexSlider}`;
+export default function ProductSlider({ favSlider, slug, indexSlider }) {
+  const prevButtonClass = `prev-${indexSlider}`;
+  const nextButtonClass = `next-${indexSlider}`;
   return (
     <>
-      <div className="product-slider">
+      <div className="product-slider m-0">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={30}
@@ -41,7 +41,7 @@ export default function ProductSlider({ favSlider, slug,indexSlider }) {
               spaceBetween: 20,
             },
           }}
-          className="product-slider"
+          className="product-slider mt-2"
         >
           {favSlider?.length > 0 &&
             favSlider?.map((section, index) => {
@@ -58,9 +58,10 @@ export default function ProductSlider({ favSlider, slug,indexSlider }) {
                       <div className="product-card">
                         <Image
                           src={
-                            section.bannerImage === null
-                              ? section?.bannerImage
-                              : `/images/nofound.png`
+                            section?.bannerImage === null ||
+                            section?.bannerImage === ""
+                              ? `/images/nofound.png`
+                              : section?.bannerImage
                           }
                           width={0}
                           height={0}
