@@ -14,6 +14,7 @@ import {
 } from "react-bootstrap";
 import Image from "next/image";
 import QuestionIcon from "../Svg/QuestionIcon";
+import ProsConsToolTip from "../Svg/ProsConsToolTip";
 
 const WhyAccordionTab = React.memo(
   ({ product, pageType, product1, product2, product3 }) => {
@@ -163,16 +164,26 @@ const WhyAccordionTab = React.memo(
                               ? product?.total_average_pros?.map(
                                   (item, index) => {
                                     return (
-                                      <li key={index}>
+                                      <li key={index} className="tooltip-title">
                                         {typeof item?.difference_value ==
                                         "number"
                                           ? item?.difference
                                           : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
 
-                                        <small className="d-block">
+                                        <small className="d-block ">
                                           {item?.difference_value == "yes" ||
                                           item?.difference_value == "no"
                                             ? ""
@@ -187,19 +198,33 @@ const WhyAccordionTab = React.memo(
                                   ?.map((item, index) => {
                                     return (
                                       <li key={index}>
-                                        {typeof item?.difference_value ==
-                                        "number"
-                                          ? item?.difference
-                                          : item?.phrase}
+                                        <span className="tooltip-title">
+                                          {typeof item?.difference_value ==
+                                          "number"
+                                            ? item?.difference
+                                            : item?.phrase}
+
+                                          {item?.hover_phase && (
+                                            <>
+                                              <div className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </div>
+                                            </>
+                                          )}
+
+                                          <small className="d-block">
+                                            {item?.difference_value == "yes" ||
+                                            item?.difference_value == "no"
+                                              ? ""
+                                              : item?.vs}
+                                          </small>
+                                        </span>
+
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
-                                        <small className="d-block">
-                                          {item?.difference_value == "yes" ||
-                                          item?.difference_value == "no"
-                                            ? ""
-                                            : item?.vs}
-                                        </small>
                                       </li>
                                     );
                                   })}
@@ -280,11 +305,21 @@ const WhyAccordionTab = React.memo(
                               ? product?.total_average_cons?.map(
                                   (item, index) => {
                                     return (
-                                      <li key={index}>
+                                      <li key={index} className="tooltip-title">
                                         {typeof item?.difference_value ==
                                         "number"
                                           ? item?.difference
                                           : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
@@ -302,20 +337,31 @@ const WhyAccordionTab = React.memo(
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {
                                     return (
-                                      <li key={index}>
+                                      <li key={index} className="tooltip-title">
                                         {typeof item?.difference_value ==
                                         "number"
                                           ? item?.difference
                                           : item?.phrase}
-                                        <QuestionIcon
-                                          attributes={item?.when_matters}
-                                        />
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+
                                         <small className="d-block">
                                           {item?.difference_value == "yes" ||
                                           item?.difference_value == "no"
                                             ? ""
                                             : item?.vs}
                                         </small>
+                                        <QuestionIcon
+                                          attributes={item?.when_matters}
+                                        />
                                       </li>
                                     );
                                   })}
