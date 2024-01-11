@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState , useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import useChart from "@/hooks/useChart";
 import Image from "next/image";
 import { Button, Col, Container, Row, Table, Form } from "react-bootstrap";
@@ -32,7 +32,7 @@ export default function GuidePage({
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [prevSearcParam, setPrevSearcParam] = useState({});
-  const [removedParam , setremovedParam] = useState()
+  const [removedParam, setremovedParam] = useState();
   const handleToggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -64,7 +64,7 @@ export default function GuidePage({
   };
 
   function removeQueryParamAndNavigate(url, paramToRemove) {
-    delete searchParams[`${paramToRemove}`]
+    delete searchParams[`${paramToRemove}`];
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
     const newUrl = urlObject.toString();
@@ -77,36 +77,34 @@ export default function GuidePage({
     return newUrl;
   }
 
+  const handleSort = (sortAttribute) => {
+    console.log(sortAttribute, "sort attribute");
+    let param = JSON.parse(sortAttribute);
+    // Get the current URL and its search parameters
+    const currentUrl = new URL(window.location.href);
+    const searchParams = new URLSearchParams(currentUrl.search);
 
-    const handleSort = (sortAttribute) => {
-      console.log(sortAttribute, "sort attribute");
-let param =JSON.parse(sortAttribute);
-      // Get the current URL and its search parameters
-      const currentUrl = new URL(window.location.href);
-      const searchParams = new URLSearchParams(currentUrl.search);
+    const sortValue = `${param.algo},${param.rangeAttributes}`;
+    searchParams.set("sort", sortValue);
 
-const sortValue = `${param.algo},${param.rangeAttributes}`;
-searchParams.set("sort", sortValue);
+    // Create the new URL with the updated query parameters
+    const newUrl = `${currentUrl.origin}${
+      currentUrl.pathname
+    }?${searchParams.toString()}`;
 
+    // Update the URL without triggering a page reload
+    window.history.pushState({ path: newUrl }, "", newUrl);
 
-      // Create the new URL with the updated query parameters
-      const newUrl = `${currentUrl.origin}${
-        currentUrl.pathname
-      }?${searchParams.toString()}`;
-
-      // Update the URL without triggering a page reload
-      window.history.pushState({ path: newUrl }, "", newUrl);
-
-      // sortRangeAttribute.current = JSON.parse(sortAttribute);
-      // setFilteredProducts([
-      //   ...filterProducts(
-      //     filterObj,
-      //     guide.products,
-      //     sortRangeAttribute.current
-      //   ),
-      // ]);
-      // console.log(JSON.parse(sortAttribute))
-    };
+    // sortRangeAttribute.current = JSON.parse(sortAttribute);
+    // setFilteredProducts([
+    //   ...filterProducts(
+    //     filterObj,
+    //     guide.products,
+    //     sortRangeAttribute.current
+    //   ),
+    // ]);
+    // console.log(JSON.parse(sortAttribute))
+  };
 
   return (
     <>
@@ -364,8 +362,10 @@ searchParams.set("sort", sortValue);
                   )}
                 </>
               )}
-             
-            {productPagination.total_pages > 1 &&  <GuidePagination pagination={productPagination} /> } 
+
+              {productPagination.total_pages > 1 && (
+                <GuidePagination pagination={productPagination} />
+              )}
             </Row>
           </Col>
         </Row>

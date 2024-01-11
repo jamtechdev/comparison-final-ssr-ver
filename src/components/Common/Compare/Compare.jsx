@@ -65,22 +65,37 @@ export default function Compare({
       receivedValue2?.permalink,
       receivedValue3?.permalink,
     ];
-    console.log(routeParts,"Hello>>>")
-    return;
+
     // Filter out undefined or null values
     const validRouteParts = routeParts.filter((part) => part);
     // Construct the route
     if (validRouteParts.length >= 1) {
       const sortedRouteParts = validRouteParts.slice().sort(); // Create a sorted copy of the array
-      router.push(`/${receivedValue?.category_url ? receivedValue?.category_url : categoryInURL}/${sortedRouteParts[0]}`);
+      router.push(
+        `/${
+          receivedValue?.category_url
+            ? receivedValue?.category_url
+            : categoryInURL
+        }/${sortedRouteParts[0]}`
+      );
       if (validRouteParts.length >= 2) {
         router.push(
-          `/${receivedValue2?.category_url ? receivedValue2?.category_url : categoryInURL}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
+          `/${
+            receivedValue2?.category_url
+              ? receivedValue2?.category_url
+              : categoryInURL
+          }/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}`
         );
       }
       if (validRouteParts.length >= 3) {
         router.push(
-          `/${receivedValue3?.category_url ? receivedValue3?.category_url : categoryInURL}/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${sortedRouteParts[2]}`
+          `/${
+            receivedValue3?.category_url
+              ? receivedValue3?.category_url
+              : categoryInURL
+          }/${sortedRouteParts[0]}-vs-${sortedRouteParts[1]}-vs-${
+            sortedRouteParts[2]
+          }`
         );
       }
     }

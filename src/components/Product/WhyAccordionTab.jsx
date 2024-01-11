@@ -70,19 +70,21 @@ const WhyAccordionTab = React.memo(
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
-                <h3 className="font-20">
-                  Why is {product && product?.name} BETTER than average?
-                </h3>
-                {/* {pageType === "comparison" ? (
-                  <h3 className="font-20">
-                    Why is {product1 && product1} BETTER than{" "}
-                    {product2 && product} ?
-                  </h3>
+                {pageType === undefined ? (
+                  <>
+                    <h3 className="font-20">
+                      Why is {product && product?.name} BETTER than average?
+                    </h3>
+                  </>
                 ) : (
-                  <h3 className="font-20">
-                    Why is {product && product?.name} BETTER than average?
-                  </h3>
-                )} */}
+                  <>
+                    {" "}
+                    <h3 className="font-20">
+                      Why is {product1 && product1} BETTER than{" "}
+                      {product2 && product2}?
+                    </h3>
+                  </>
+                )}
 
                 <div className="show-btn">
                   Show All <i className="ri-arrow-down-s-line"></i>
@@ -102,9 +104,8 @@ const WhyAccordionTab = React.memo(
                         <Tab.Pane eventKey={tabvalue?.pros}>
                           <ul>
                             {product && tabvalue?.pros == "total"
-                              ? product?.total_average_pros
-                                  ?.slice(0, 8)
-                                  ?.map((item, index) => {
+                              ? product?.total_average_pros?.map(
+                                  (item, index) => {
                                     return (
                                       <li key={index}>
                                         {typeof item?.difference_value ==
@@ -123,7 +124,8 @@ const WhyAccordionTab = React.memo(
                                         </small>
                                       </li>
                                     );
-                                  })
+                                  }
+                                )
                               : product?.average_pros[tabvalue?.pros]
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {
@@ -186,9 +188,22 @@ const WhyAccordionTab = React.memo(
             </Accordion.Item>
             <Accordion.Item eventKey="2">
               <Accordion.Header as="div">
-                <h3 className="font-20">
-                  Why is {product && product?.name} WORSE than others?
-                </h3>
+                {pageType === undefined ? (
+                  <>
+                    <h3 className="font-20">
+                      Why is {product && product?.name} WORSE than others?
+                    </h3>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <h3 className="font-20">
+                      Why is {product1 && product1} WORSE than{" "}
+                      {product2 && product2}?
+                    </h3>
+                  </>
+                )}
+
                 <div className="show-btn">
                   Show All <i className="ri-arrow-down-s-line"></i>
                 </div>
@@ -207,9 +222,8 @@ const WhyAccordionTab = React.memo(
                         <Tab.Pane eventKey={tabvalue?.cons}>
                           <ul className="compare-crons">
                             {product && tabvalue?.cons == "total"
-                              ? product?.total_average_cons
-                                  ?.slice(0, 8)
-                                  ?.map((item, index) => {
+                              ? product?.total_average_cons?.map(
+                                  (item, index) => {
                                     return (
                                       <li key={index}>
                                         {typeof item?.difference_value ==
@@ -227,7 +241,8 @@ const WhyAccordionTab = React.memo(
                                         </small>
                                       </li>
                                     );
-                                  })
+                                  }
+                                )
                               : product?.average_cons[tabvalue?.cons]
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {

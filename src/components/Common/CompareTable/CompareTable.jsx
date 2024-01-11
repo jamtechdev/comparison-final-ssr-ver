@@ -102,7 +102,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     if (occurrences == 1 || occurrences == 2) {
       arrayOfObjects.forEach((obj) => {
         const numericValue = parseFloat(obj.attribute_value);
-        if (numericValue === topValue && !obj.attribute_value.includes("⭐")) {
+        if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
           obj.attribute_value += "⭐";
         }
       });
