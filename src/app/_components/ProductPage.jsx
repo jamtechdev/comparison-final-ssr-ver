@@ -667,7 +667,7 @@ function ProductPage({ productData, productCatAttributes, compareByCatID }) {
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare With Other Products</h2>
-              <Compare />
+              {/* <Compare /> */}
             </Col>
           </Row>
         </Container>

@@ -1,55 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Compare from "../Common/Compare/Compare";
 import Image from "next/image";
-import { productService } from "../../_services";
+import { productService } from "@/_services";
 import { useSelector } from "react-redux";
-
-const CompareModal = ({ 
-  setIsOpen,
-  compareProDataFirst,
-  compareProDataSec,
+import CompareForm from "./CompareForm";
+const CompareModal = ({
+  setIsOpen
 }) => {
-  const [searchValue1, setSearchValue1] = useState("");
-  const [searchValue2, setSearchValue2] = useState("");
-  const [searchValue3, setSearchValue3] = useState("");
-  const [guideCatID, setGuideCatID] = useState();
-
-  const ProductId = useSelector((state) => state.comparePro.compareProduct);
-  const [oftenData, setOffenData] = useState([]);
-  useEffect(() => {
-    console.log(ProductId)
-    if(ProductId.length <=0){return};
-    productService
-      .getComparedoftenProduct(
-        ProductId[0]?.catID ? ProductId[0]?.catID : guideCatID
-      )
-      .then((res) => {
-        console.log(res.data.data, "response");
-        setOffenData(res.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    if (compareProDataFirst?.name) {
-      setSearchValue1(compareProDataFirst);
-    }
-    if (compareProDataSec?.name) {
-      setSearchValue2(compareProDataSec);
-    }
-  }, [ProductId, guideCatID]);
-
-  const handleProductClick = (item) => {
-    if (!searchValue2) {
-      setSearchValue2(item);
-    } else {
-      setSearchValue3(item);
-    }
-  };
-  const setIsOpenClick = () => {
+  const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
+  const [oftenProducts, setOftenProducts] = useState();
+  const [categoryId, setCategoryId] = useState(reduxData?.category ? reduxData?.category :undefined);
+  const handelCloseCompareModel = () => {
     setIsOpen(false);
     // window.location.reload(true);
   };
+  const handelCategoryForOffenProduct = (id) => {
+    setCategoryId(id)
+  }
+  useEffect(() => {
+    if (categoryId) {
+      productService.getComparedoftenProduct(categoryId)
+        .then((res) => {
+          setOftenProducts(res.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [categoryId])
   return (
     <section className="add-product-modal">
       <div className="add-product-modal-header">
@@ -65,18 +43,12 @@ const CompareModal = ({
             </Col>
             <Col md={12}>
               <h2 className="site-main-heading">Add to Comparison</h2>
-              <Compare
-                searchValue1={searchValue1}
-                searchValue2={searchValue2}
-                setIsOpen={setIsOpenClick}
-                modelOpen={true}
-                searchValue3={searchValue3}
-              />
+              <CompareForm location="ON_MODEL" handelCloseCompareModel={handelCloseCompareModel} handelCategoryForOffenProduct={handelCategoryForOffenProduct} />
             </Col>
           </Row>
         </Container>
       </div>
-      {oftenData?.length != 0 && (
+      {oftenProducts?.length > 0 && (
         <Container className="mt-4">
           <Row>
             <Col md={12}>
@@ -84,7 +56,7 @@ const CompareModal = ({
             </Col>
           </Row>
           <Row>
-            {oftenData?.map(function (item, index) {
+            {oftenProducts?.map(function (item, index) {
               return (
                 <Col
                   xl={2}
@@ -94,7 +66,7 @@ const CompareModal = ({
                   xs={6}
                   className="my-3"
                   key={index}
-                  onClick={() => handleProductClick(item)}
+                // onClick={() => handleProductClick(item)}
                 >
                   <div className="review-wrapper">
                     <div className="review-card">
@@ -122,8 +94,8 @@ const CompareModal = ({
                               ? "#093673"
                               : item?.overall_score >= 5 &&
                                 item?.overall_score < 7.5
-                              ? "#437ECE"
-                              : " #85B2F1",
+                                ? "#437ECE"
+                                : " #85B2F1",
                         }}
                       >
                         {item?.overall_score || ""}

@@ -3,7 +3,6 @@ import { Button, Col, Container, Form, Row, Tab, Tabs } from "react-bootstrap";
 import React, { useState } from "react";
 import SearchList from "@/components/Search/SearchList";
 import LatesGuid from "@/components/Common/ProductSlider/LatesGuid";
-import Compare from "@/components/Common/Compare/Compare";
 import Sponsor from "@/components/Common/Sponsor/Sponsor";
 import Category from "@/components/Common/Category/Category";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
@@ -11,6 +10,7 @@ import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import CompareForm from "@/components/Common/Comparison/CompareForm";
 
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
@@ -97,7 +97,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare Products</h2>
-              <Compare />
+              <CompareForm location="ON_MAIN_PAGE" handelCloseCompareModel={()=>{}}/>
             </Col>
           </Row>
         </Container>

@@ -13,10 +13,10 @@ import {
 } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Image from "next/image";
-import Compare from "@/components/Common/Compare/Compare";
-import CompareModal from "@/components/Modal/Modal";
+import CompareModal from "@/components/Common/Comparison/CompareModal";
 import ComparisonTable from "../CompareTable/ComparisonTable";
 import WhyAccordionTab from "@/components/Product/WhyAccordionTab";
+import CompareForm from "../Comparison/CompareForm";
 // import ComparisonTable from "../CompareTable/ComparisonTable";
 
 function CompareDiv({ comparisonData, categroyAttributes }) {
@@ -461,7 +461,7 @@ function CompareDiv({ comparisonData, categroyAttributes }) {
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare Other Products</h2>
-              <Compare />
+              <CompareForm />
             </Col>
           </Row>
         </Container>

@@ -94,13 +94,11 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
     case "Blog":
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug}`,
-        // `${process.env.NEXT_PUBLIC_API_URL}/additionalBlogData`,
       ];
       break;
     case "Product":
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/product/${slug}`,
-        // `${process.env.NEXT_PUBLIC_API_URL}/product/${id}/attributes`,,
       ];
       break;
     case "Comparison":
