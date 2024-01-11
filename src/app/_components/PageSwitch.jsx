@@ -15,12 +15,13 @@ export default async function PageSwitch({
     case "Guide":
       const guide = pageData[0]?.data;
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
+
       PageToRender = (
         <GuidePage
           slug={slug}
           guideData={pageData}
           filters={attributes?.data}
-          attributesForTable={attributes?.attribute_categories}
+          attributesForTable={attributes?.data?.attribute_categories}
           searchParams={searchParams}
         />
       );
