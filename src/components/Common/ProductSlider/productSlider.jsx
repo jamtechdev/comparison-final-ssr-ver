@@ -8,9 +8,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ProductSlider({ favSlider, slug,indexSlider }) {
-    const prevButtonClass = `prev-${indexSlider}`;
-    const nextButtonClass = `next-${indexSlider}`;
+export default function ProductSlider({ favSlider, slug, indexSlider }) {
+  const prevButtonClass = `prev-${indexSlider}`;
+  const nextButtonClass = `next-${indexSlider}`;
   return (
     <>
       <div className="product-slider m-0">
