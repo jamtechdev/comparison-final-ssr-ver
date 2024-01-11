@@ -724,7 +724,6 @@ export default function GuidePage({
         handleToggleCollapse={handleToggleCollapse}
         manageCollapsedDiv={manageCollapsedDiv}
         handleManageCollapsedDiv={handleManageCollapsedDiv}
-        compareGuideData={null}
       />
     </>
   );

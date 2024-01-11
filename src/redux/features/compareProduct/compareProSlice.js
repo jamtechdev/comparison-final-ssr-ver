@@ -13,10 +13,11 @@ export const compareProSlice = createSlice({
     },
     addCompareProductForGuide: (state, action) => {
       const comparedProGuide = {
-        proName: action.payload.name,
-        catID: action.payload.category_id,
-        permaLink: action.payload.permalink,
-        image: action.payload.main_image,
+        name: action.payload.name,
+        category_id: action.payload.category_id,
+        category_url: action.payload.category_url,
+        permalink: action.payload.permalink,
+        image: action.payload.image
       };
       state.guideCompareProduct.push(comparedProGuide);
     },

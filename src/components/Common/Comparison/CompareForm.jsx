@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import SearchList from "../../Search/SearchList";
 import { useRouter, usePathname } from "next/navigation";
-import { useDispatch } from "react-redux";
+
 import { addCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 import CompareSearchList from "@/components/Search/CompareSearchList";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 export default function CompareForm({ location, handelCategoryForOffenProduct, handelCloseCompareModel }) {
     const router = useRouter();
     const dispatch = useDispatch();
@@ -80,8 +80,11 @@ export default function CompareForm({ location, handelCategoryForOffenProduct, h
         <>
             <div className="compare-section">
                 <div className="compare-section-img">
-                    <Image src="/images/vs.svg" width={40} height={40} alt="" />
-                    <Image src="/images/vs.svg" width={40} height={40} alt="" />
+                <div className="up-direction-section"></div>
+                    <Image src="/images/vs.svg" width={35} height={35} alt="VS" />
+                    <div className="middle-direction-section"></div>  
+                    <Image src="/images/vs.svg" width={35} height={35} alt="VS" />
+                    <div className="down-direction-section"></div>
                 </div>
                 <div className="compare-section-form">
                     <div className="position-relative w-100">
