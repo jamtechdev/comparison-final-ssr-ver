@@ -16,7 +16,7 @@ import Image from "next/image";
 import QuestionIcon from "../Svg/QuestionIcon";
 
 const WhyAccordionTab = React.memo(
-  ({ product, pageType, product1, product2 }) => {
+  ({ product, pageType, product1, product2, product3 }) => {
     // console.log(pageType,">>>>>")
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
 
@@ -39,32 +39,75 @@ const WhyAccordionTab = React.memo(
     return (
       <Row>
         <Col md={12} lg={6}>
-          <Tabs
-            defaultActiveKey="tab-1"
-            id="Review-tab"
-            className="site_tabs graph-tab"
-          >
-            <Tab eventKey="tab-1" title={product && product?.name}>
-              <Image
-                className="site_image"
-                src="/images/chart.png"
-                width={0}
-                height={0}
-                alt=""
-                sizes="100%"
-              />
-            </Tab>
-            <Tab eventKey="tab-2" title="Average">
-              <Image
-                className="site_image"
-                src="/images/chart.png"
-                width={0}
-                height={0}
-                alt=""
-                sizes="100%"
-              />
-            </Tab>
-          </Tabs>
+          {pageType === undefined ? (
+            <>
+              <Tabs
+                defaultActiveKey="tab-1"
+                id="Review-tab"
+                className="site_tabs graph-tab"
+              >
+                <Tab eventKey="tab-1" title={product && product?.name}>
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+                <Tab eventKey="tab-2" title="Average">
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+              </Tabs>
+            </>
+          ) : (
+            <>
+              <Tabs
+                defaultActiveKey="tab-1"
+                id="Review-tab"
+                className="site_tabs graph-tab"
+              >
+                <Tab eventKey="tab-1" title={product1 && product1}>
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+                <Tab eventKey="tab-2" title={product2 && product2}>
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+                <Tab eventKey="tab-3" title="Average">
+                  <Image
+                    className="site_image"
+                    src="/images/chart.png"
+                    width={0}
+                    height={0}
+                    alt=""
+                    sizes="100%"
+                  />
+                </Tab>
+              </Tabs>
+            </>
+          )}
         </Col>
         <Col md={12} lg={6}>
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
