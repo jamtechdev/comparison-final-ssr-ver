@@ -77,6 +77,8 @@ async function getCategoryAttributes(category_id, slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/guide/${category_id}/${slug}/attributes`,
     {
+      next: { revalidate: 600 },
+      cache:"no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -93,6 +95,8 @@ async function getProductCategroyAttributes(category_id) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/${category_id}/attributes`,
     {
+      next: { revalidate: 600 },
+      cache:"no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -110,6 +114,8 @@ async function getCompareProductByCatID(category_id) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}`,
     {
+      next: { revalidate: 600 },
+      cache:"no-cache",
       method: "GET",
       headers: {
         "Content-type": "application/json",
