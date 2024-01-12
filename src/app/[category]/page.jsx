@@ -36,14 +36,35 @@ async function getSlugType(category) {
   }
   return response.json();
 }
-export async function generateMetadata() {
+
+async function getSlugMetaData(category) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/meta-data/${category}`,
+    {
+      next: { revalidate: 600 },
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      },
+    }
+  );
+  if (!response.ok) {
+  }
+  return response.json();
+}
+export async function generateMetadata({ params: { category } }) {
+
+  const meta_data = await getSlugMetaData(category)
+  
   return {
-    title: "Category Page",
+    title: meta_data?.data?.title,
     generator: "Comparison web",
     applicationName: "Comparison web",
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
-    description: "Category page powerb by comparision web",
+    description: meta_data?.data?.meta_description,
   };
 }
 async function fetchDataBasedOnPageType(slug, pageType) {
