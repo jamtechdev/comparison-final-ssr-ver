@@ -179,27 +179,7 @@ export default function GuidePage({
               <p className="product-inner-content">{guide?.text_first_part}</p>
             </Col>
           </Row>
-          {guideData[0]?.data?.show_catchy_titles_in_text == 1 && (
-            <Row className="catchy_titles_section mb-3">
-              <Col md={7} className="mx-auto p-0">
-                <p> {guideData[0]?.data?.catchy_titles_box_title} </p>
-                <ul className="text-center">
-                  {guideData[0]?.data?.catchy_titles?.map((item, index) => {
-                    return (
-                      <li key={index}>
-                        <span className="catchy_titles_section_title">
-                          {item?.title}:
-                        </span>
-                        <span className="catchy_titles_section_product_name">
-                          {item?.product?.name}
-                        </span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </Col>
-            </Row>
-          )}
+
           <Row className="pt-3 best-page-card">
             {Object.values(guide.top_guide_counts).map(function (item, index) {
               return (
@@ -216,6 +196,29 @@ export default function GuidePage({
       </section>
       <section className="ptb-25">
         <Container>
+          <Row className="catchy_titles_section mb-3">
+            <Col md={7} className="mx-auto p-0">
+              <p>
+                {" "}
+                {guideData[0]?.data?.show_catchy_titles_in_text == 1 &&
+                  guideData[0]?.data?.catchy_titles_box_title}{" "}
+              </p>
+              <ul className="text-center">
+                {guideData[0]?.data?.catchy_titles?.map((item, index) => {
+                  return (
+                    <li key={index}>
+                      <span className="catchy_titles_section_title">
+                        {item?.title}:
+                      </span>
+                      <span className="catchy_titles_section_product_name">
+                        {item?.product?.name}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Col>
+          </Row>
           <Row>
             <Col md={12}>
               <p className="para_content_text">{guide?.text_second_part}</p>
@@ -232,7 +235,11 @@ export default function GuidePage({
             className="sidebar-width"
             style={{ display: isShown ? "block" : "none" }}
           >
-            <Filter categoryAttributes={filters} searchParam={searchParams} removedParam={removedParam} />
+            <Filter
+              categoryAttributes={filters}
+              searchParam={searchParams}
+              removedParam={removedParam}
+            />
             <div className="desktop-hide">
               <Button className="site_main_btn w-100 d-block btn-icon mb-4">
                 <i className="ri-close-fill"></i>
