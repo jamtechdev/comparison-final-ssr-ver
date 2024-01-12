@@ -156,15 +156,15 @@ export default function Filter({
           countAttribute++;
           // check if values contain only yes then Toggle Switch
           if (
-            filteredArrayOfAttributeValues.values.length == 1 &&
-            filteredArrayOfAttributeValues.values[0] == "yes"
+            filteredArrayOfAttributeValues?.values?.length == 1 &&
+            filteredArrayOfAttributeValues?.values[0] == "yes"
           ) {
-            const value = filteredArrayOfAttributeValues.values[0];
+            const value = filteredArrayOfAttributeValues?.values[0];
             handelFilterActions("radioSwitch", removedParam, "no", false);
             document.getElementById(`${removedParam}`).checked = false;
           } else {
             {
-              filteredArrayOfAttributeValues.values?.map((value, valIndex) => {
+              filteredArrayOfAttributeValues?.values?.map((value, valIndex) => {
                 handelFilterActions(
                   "dropdown",
                   removedParam,
