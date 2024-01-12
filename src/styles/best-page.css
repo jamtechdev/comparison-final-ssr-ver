@@ -622,6 +622,7 @@
   gap: 10px;
   align-items: center;
   padding-left: 10px;
+  flex-wrap: wrap;
 }
 
 .filtered-data span {
