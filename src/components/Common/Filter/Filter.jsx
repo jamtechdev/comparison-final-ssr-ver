@@ -119,7 +119,6 @@ export default function Filter({ categoryAttributes, removedParam }) {
         handelFilterActions("available", "available", false);
         document.getElementById("Available").checked = false;
       }
-
        if (removedParam == "price") {
         //  handelFilterActions("price", "price", 0, price[0]?.max_price);
         //  document.getElementById("Available").checked = false;
