@@ -22,6 +22,7 @@ export default function GuidePage({
   filters,
   searchParams,
 }) {
+  console.log(guideData , slug , attributesForTable , searchParams , 'guide data');
   useChart();
 
   const [isShown, setIsShown] = useState(false);
@@ -73,28 +74,26 @@ export default function GuidePage({
     // You can also use window.location.href = newUrl; if you want to trigger a page reload
     // Optionally, you can perform additional actions, such as updating the UI, based on the new URL
     // updateUI();
-
     return newUrl;
   }
 
   const handleSort = (sortAttribute) => {
     console.log(sortAttribute, "sort attribute");
     let param = JSON.parse(sortAttribute);
-    // Get the current URL and its search parameters
+    if(param.algo){
     const currentUrl = new URL(window.location.href);
-    const searchParams = new URLSearchParams(currentUrl.search);
-
+    const searchParam = new URLSearchParams(currentUrl.search);
     const sortValue = `${param.algo},${param.rangeAttributes}`;
-    searchParams.set("sort", sortValue);
-
-    // Create the new URL with the updated query parameters
+    searchParam.set("sort", sortValue);
     const newUrl = `${currentUrl.origin}${
       currentUrl.pathname
-    }?${searchParams.toString()}`;
-
-    // Update the URL without triggering a page reload
+    }?${searchParam.toString()}`;
+    searchParams.sort = `${param.algo},${param.rangeAttributes}`;
     window.history.pushState({ path: newUrl }, "", newUrl);
-
+  }else{
+ removeQueryParamAndNavigate(window.location.href, 'sort');
+delete searchParams.sort
+  }
     // sortRangeAttribute.current = JSON.parse(sortAttribute);
     // setFilteredProducts([
     //   ...filterProducts(
@@ -331,16 +330,16 @@ export default function GuidePage({
                           // Ratio quality-price ---- will be ordered from highest to lowest, based on numbers in "Ratio Quality Price Points"
                           // Popularity --- will be ordered from highest to lowest, based on numbers in "Popularity points"
 
-                          sortRangeAttributeArray.current.map(
+                          sortRangeAttributeArray?.current.map(
                             (algoAttribute, attrIndex) => {
-                              if (algoAttribute.rangeAttributes != "Overall")
+                              if (algoAttribute?.rangeAttributes != "Overall")
                                 return (
                                   <option
                                     value={JSON.stringify(algoAttribute)}
                                     key={attrIndex}
                                   >
-                                    {algoAttribute.rangeAttributes}
-                                    {algoAttribute.algo ==
+                                    {algoAttribute?.rangeAttributes}
+                                    {algoAttribute?.algo ==
                                       "lowest_to_highest" &&
                                       " (Lowest to Highest)"}
                                   </option>
@@ -363,7 +362,7 @@ export default function GuidePage({
                 </>
               )}
 
-              {productPagination.total_pages > 1 && (
+              {productPagination?.total_pages > 1 && (
                 <GuidePagination pagination={productPagination} />
               )}
             </Row>
@@ -403,7 +402,7 @@ export default function GuidePage({
               {guide && products && (
                 <CompareTable
                   products={products}
-                  categoryAttributes={attributesForTable}
+                  categoryAttributes={attributesForTable && attributesForTable}
                   slug={slug}
                 />
               )}
