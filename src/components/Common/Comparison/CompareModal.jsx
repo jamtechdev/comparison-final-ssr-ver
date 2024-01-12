@@ -2,21 +2,36 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import { productService } from "@/_services";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CompareForm from "./CompareForm";
+import { updateCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 const CompareModal = ({
   setIsOpen
 }) => {
+  const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const [oftenProducts, setOftenProducts] = useState();
-  const [categoryId, setCategoryId] = useState(reduxData?.category ? reduxData?.category :undefined);
+  const [categoryId, setCategoryId] = useState(reduxData?.category ? reduxData?.category : undefined);
   const handelCloseCompareModel = () => {
     setIsOpen(false);
     // window.location.reload(true);
   };
+
   const handelCategoryForOffenProduct = (id) => {
     setCategoryId(id)
   }
+
+  const handelOffenProductClick = (product) => {
+    if (reduxData?.productSecond === undefined) {
+      dispatch(updateCompareProduct({ key: 'productSecond', data: product }));
+    return;
+    }
+    if (reduxData?.productThird === undefined) {
+      dispatch(updateCompareProduct({ key: 'productThird', data: product }));
+      return;
+    }
+  }
+  
   useEffect(() => {
     if (categoryId) {
       productService.getComparedoftenProduct(categoryId)
@@ -43,7 +58,10 @@ const CompareModal = ({
             </Col>
             <Col md={12}>
               <h2 className="site-main-heading">Add to Comparison</h2>
-              <CompareForm location="ON_MODEL" handelCloseCompareModel={handelCloseCompareModel} handelCategoryForOffenProduct={handelCategoryForOffenProduct} />
+              <CompareForm location="ON_MODEL"
+                handelCloseCompareModel={handelCloseCompareModel}
+                handelCategoryForOffenProduct={handelCategoryForOffenProduct}
+              />
             </Col>
           </Row>
         </Container>
@@ -66,7 +84,7 @@ const CompareModal = ({
                   xs={6}
                   className="my-3"
                   key={index}
-                // onClick={() => handleProductClick(item)}
+                  onClick={() => handelOffenProductClick(item)}
                 >
                   <div className="review-wrapper">
                     <div className="review-card">

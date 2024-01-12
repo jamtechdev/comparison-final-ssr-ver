@@ -58,13 +58,13 @@
   border: 1px solid #ddd;
   padding: 2px 0;
   text-align: center;
-  vertical-align: top !important;
+  vertical-align: middle !important;
   color: var(--heading-color);
   position: relative;
 }
 
-.compare-container tbody tr td.\34 -class {
-  vertical-align: middle !important;
+.compare-container tbody tr td.table-amazon-section {
+  vertical-align: top !important;
 }
 
 .compare-container tbody tr td {

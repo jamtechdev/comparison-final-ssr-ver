@@ -6,7 +6,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 import { addCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 import CompareSearchList from "@/components/Search/CompareSearchList";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 export default function CompareForm({ location, handelCategoryForOffenProduct, handelCloseCompareModel }) {
     const router = useRouter();
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export default function CompareForm({ location, handelCategoryForOffenProduct, h
     const [isFocusedProductFirst, setFocusedProductFirst] = useState(false);
     const [isFocusedProductSecond, setFocusedProductSecond] = useState(false);
     const [isFocusedProductThird, setFocusedProductThird] = useState(false);
-
+    const [isHandelChildValue, setIsHandelChildValue] = useState(false);
     const handleFieldChange = (fieldName, value) => {
         // Update the state based on the field being changed
         setFormFields((prevFields) => ({
@@ -38,6 +38,7 @@ export default function CompareForm({ location, handelCategoryForOffenProduct, h
             ...prevFields,
             [inputPostion]: data,
         }));
+        setIsHandelChildValue(true)
     }
     const handelComparison = () => {
         const isValidObject = (fieldValue) => typeof fieldValue === 'object' && Object.keys(fieldValue).length > 0;
@@ -64,25 +65,34 @@ export default function CompareForm({ location, handelCategoryForOffenProduct, h
             ["category"]: id,
         }));
 
-        if (location === "ON_MODEL") { handelCategoryForOffenProduct(id); handelCloseCompareModel() }
+        if (location === "ON_MODEL") { handelCategoryForOffenProduct(id) }
     }
     const handleBlur = () => {
+        setIsHandelChildValue(false)
         setTimeout(() => {
             setFocusedProductFirst(false);
             setFocusedProductSecond(false);
             setFocusedProductThird(false);
         }, 200);
     };
-    // useEffect(() => {
-    //     console.log(reduxData, ">>>");
-    // }, []);
+    useEffect(() => {
+        if (isHandelChildValue) {
+            dispatch(addCompareProduct(formFields))
+        }
+    }, [isHandelChildValue])
+    useEffect(() => {
+        setFormFields((prevFields) => ({
+            ...prevFields,
+            ...reduxData,
+        }));
+    }, [reduxData]);
     return (
         <>
             <div className="compare-section">
                 <div className="compare-section-img">
-                <div className="up-direction-section"></div>
+                    <div className="up-direction-section"></div>
                     <Image src="/images/vs.svg" width={35} height={35} alt="VS" />
-                    <div className="middle-direction-section"></div>  
+                    <div className="middle-direction-section"></div>
                     <Image src="/images/vs.svg" width={35} height={35} alt="VS" />
                     <div className="down-direction-section"></div>
                 </div>
