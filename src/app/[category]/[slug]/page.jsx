@@ -51,14 +51,35 @@ export default async function Page({
   }
   return <NotFound />;
 }
+
+async function getSlugMetaData(slug) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/meta-data/${slug}`,
+    {
+      next: { revalidate: 600 },
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      },
+    }
+  );
+  if (!response.ok) {
+  }
+  return response.json();
+}
+
 export async function generateMetadata({ params: { slug } }) {
+  const meta_data = await getSlugMetaData(slug)
+  
   return {
-    title: slug,
+    title: meta_data?.data?.title,
     generator: "Comparison web",
     applicationName: "Comparison web",
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
-    description: "Blog page powerb by comparision web",
+    description: meta_data?.data?.meta_description,
   };
 }
 
