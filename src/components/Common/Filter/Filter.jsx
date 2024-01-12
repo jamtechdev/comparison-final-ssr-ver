@@ -6,7 +6,11 @@ import { getFilteredAttributeValues } from "../../../_helpers";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider.js";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function Filter({ categoryAttributes, removedParam }) {
+export default function Filter({
+  categoryAttributes,
+  removedParam,
+  searchParam,
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   let price = categoryAttributes?.price;
@@ -96,7 +100,6 @@ export default function Filter({ categoryAttributes, removedParam }) {
       default:
         return;
     }
-    // console.log(updatedParams)
     Object.entries(updatedParams).forEach(([paramKey, paramValue]) => {
       currentParams.set(paramKey, paramValue);
       url.searchParams.set(paramKey, paramValue);
@@ -107,7 +110,6 @@ export default function Filter({ categoryAttributes, removedParam }) {
     router.push(`?${currentParams.toString()}`, { scroll: false });
   };
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
-    console.log("Delete", key);
     delete updatedParams[key];
     currentParams.delete([key]);
     url.searchParams.delete([key]);
@@ -119,11 +121,69 @@ export default function Filter({ categoryAttributes, removedParam }) {
         handelFilterActions("available", "available", false);
         document.getElementById("Available").checked = false;
       }
-       if (removedParam == "price") {
-        //  handelFilterActions("price", "price", 0, price[0]?.max_price);
-        //  document.getElementById("Available").checked = false;
-       }
+ if ( removedParam == "brand") {
+     Object.values(searchParam)[0]
+       .split(",")
+       .map((item) => {
+         handelFilterActions("brand", "brand", { brand: item }, false);
+         document.getElementById(`${item}`).checked = false;
+       });
+ }
 
+
+
+      if (removedParam !== "available" && removedParam != "brand") {
+    
+        
+        let arrayToGetFilteredObject = [];
+        attributeCategories.map((item, index) => {
+          let filteredArray = item.attributes.filter(
+            (attribute) => attribute.name === removedParam
+          );
+          if (filteredArray.length > 0) {
+            filteredArray && arrayToGetFilteredObject.push(filteredArray);
+            return filteredArray;
+          }
+        });
+
+        let filteredArrayOfAttributeValues = getFilteredAttributeValues(
+          arrayToGetFilteredObject[0][0]
+        );
+
+      
+        let countAttribute = 1;
+        if (filteredArrayOfAttributeValues?.type == "dropdown") {
+          countAttribute++;
+          // check if values contain only yes then Toggle Switch
+          if (
+            filteredArrayOfAttributeValues.values.length == 1 &&
+            filteredArrayOfAttributeValues.values[0] == "yes"
+          ) {
+            const value = filteredArrayOfAttributeValues.values[0];
+            handelFilterActions("radioSwitch", removedParam, "no", false);
+            document.getElementById(`${removedParam}`).checked = false;
+          } else {
+            {
+              filteredArrayOfAttributeValues.values?.map((value, valIndex) => {
+                handelFilterActions(
+                  "dropdown",
+                  removedParam,
+                  { key: value },
+                  false
+                );
+
+                document.getElementById(
+                  `${removedParam}${value}`
+                ).checked = false;
+              });
+            }
+          }
+        }
+       
+        // const checkForValueType = arrayToGetFilteredObject[0][0].values.some(
+        //   (value) => value.name === "yes" || value.name === "no"
+        // );
+      }
     }
   }, [removedParam]);
 
@@ -220,7 +280,7 @@ export default function Filter({ categoryAttributes, removedParam }) {
                               required
                               className="custom-switch"
                               type="switch"
-                              id={`${groupName}-${value}`}
+                              id={`${attribute.name}`}
                               onChange={(e) =>
                                 handelFilterActions(
                                   "radioSwitch",
@@ -263,7 +323,7 @@ export default function Filter({ categoryAttributes, removedParam }) {
                                       </span>
                                     }
                                     key={valIndex}
-                                    id={`${groupName}-${value}`}
+                                    id={`${attribute.name}${value}`}
                                     onChange={(e) =>
                                       handelFilterActions(
                                         "dropdown",
