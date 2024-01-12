@@ -1,11 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  Col,
-  Container,
-  Row,
-  Form,
-} from "react-bootstrap";
+import { Col, Container, Row, Form } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Image from "next/image";
 import CompareModal from "@/components/Common/Comparison/CompareModal";
@@ -168,7 +163,7 @@ function CompareDiv({
                           })}
                       </>
                     ) : (
-                      <>           
+                      <>
                         <div className="not-availabel">
                           <span className="txt">NOT AVAILABLE</span>
                           <span className="price">
@@ -422,9 +417,11 @@ function CompareDiv({
             </Col>
           </Row>
           <WhyAccordionTab
-            product1={compareProDataFirst?.name}
-            product2={compareProDataSec?.name}
-            product3={compareProDataThird?.name}
+            sendProductProps={[
+              compareProDataFirst,
+              compareProDataSec,
+              compareProDataThird && compareProDataThird,
+            ]}
             product={graphComparisonProsCons}
             pageType={"comparison"}
           />
@@ -454,7 +451,10 @@ function CompareDiv({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare Other Products</h2>
-              <CompareForm  location="ON_MAIN_PAGE" handelCloseCompareModel ={()=>{}}/>
+              <CompareForm
+                location="ON_MAIN_PAGE"
+                handelCloseCompareModel={() => {}}
+              />
             </Col>
           </Row>
         </Container>

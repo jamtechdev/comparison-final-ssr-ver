@@ -18,6 +18,7 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
           modules={[Navigation, Pagination]}
           spaceBetween={30}
           loop={true}
+          rewind={true}
           navigation={{
             nextEl: `.${nextButtonClass}`,
             prevEl: `.${prevButtonClass}`,

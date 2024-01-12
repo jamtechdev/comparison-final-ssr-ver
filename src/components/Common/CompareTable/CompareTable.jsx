@@ -166,6 +166,12 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             {finalProducts.slice(0, defaultNo).map((product, index) => {
               return (
                 <th key={index}>
+                  {product?.catchy_title && (
+                    <span className="best-tag-product">
+                      {product?.catchy_title?.title}
+                    </span>
+                  )}
+
                   <p className="device-name">
                     <span>{index + 1}</span>
                     <a href={`/${slug}/${product?.permalink}`}>

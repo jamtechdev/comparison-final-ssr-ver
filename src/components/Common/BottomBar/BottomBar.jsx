@@ -61,8 +61,13 @@ export default function BottomBar({
               )}
             </div>
           </div>
-          {!isCollapsed && (
-            <div className="bottom_bar_body">
+          <div
+              className={
+                isCollapsed === true
+                  ? "bottom_bar_body bottom_bar_body_collapse"
+                  : "bottom_bar_body"
+              }
+            >
               <ul className="bottom_bar_compare_list">
                 {compareGuideData?.map((item, index) => {
                   return (
@@ -108,7 +113,6 @@ export default function BottomBar({
                 )}
               </div>
             </div>
-          )}
         </section>
       )}
     </>
