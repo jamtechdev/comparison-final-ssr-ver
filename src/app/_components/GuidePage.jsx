@@ -723,7 +723,6 @@ delete searchParams.sort
         handleToggleCollapse={handleToggleCollapse}
         manageCollapsedDiv={manageCollapsedDiv}
         handleManageCollapsedDiv={handleManageCollapsedDiv}
-        compareGuideData={null}
       />
     </>
   );

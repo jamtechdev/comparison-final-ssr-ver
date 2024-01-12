@@ -463,7 +463,7 @@ function CompareDiv({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare Other Products</h2>
-              <CompareForm />
+              <CompareForm  location="ON_MAIN_PAGE" handelCloseCompareModel ={()=>{}}/>
             </Col>
           </Row>
         </Container>

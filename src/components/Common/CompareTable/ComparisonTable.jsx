@@ -160,7 +160,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                 <th key={index}>
                   <p className="device-name">
                     <span>{index + 1}</span>
-                    <a href={`/product/${product?.permalink}`}>
+                    <a href={`/${product?.category_url}/${product?.permalink}`}>
                       {product?.name}
                     </a>
 

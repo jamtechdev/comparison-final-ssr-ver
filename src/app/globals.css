@@ -182,7 +182,7 @@ select {
 .site_tabs .nav-item button {
   color: var(--heading-color) !important;
   font-weight: 400 !important;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 44px;
   opacity: 0.7;
   padding: 0 20px;

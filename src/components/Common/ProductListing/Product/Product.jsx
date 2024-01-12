@@ -11,14 +11,17 @@ import {
   removeDecimalAboveNine,
   capitalize,
   getAttributeHalf,
-} from "../../../../_helpers/filter";
+} from "@/_helpers/filter";
 import Link from "next/link";
+import { useSelector,useDispatch } from "react-redux";
+import { addCompareProductForGuide } from "@/redux/features/compareProduct/compareProSlice";
 export default function Product({
   position,
   incomingProduct,
   handleToggleCollapse,
   handleManageCollapsedDiv,
 }) {
+  const dispatch = useDispatch();
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
     incomingProduct.attributes.forEach((attribute) => {
@@ -117,7 +120,17 @@ export default function Product({
       return "#000";
     }
   };
+const handleComparedProduct = (product)=>{
+let productData= {
+  name:product.name,
+  category_id:product.category_id,
+  category_url:product.category_url,
+  permalink:product.permalink,
+  image:product.main_image ? product.main_image : "/images/nofound.png"
 
+}
+dispatch(addCompareProductForGuide(productData))
+}
   return (
     <Fragment>
       <div className="best-product-listing">
@@ -147,7 +160,7 @@ export default function Product({
                 onClick={(e) => {
                   handleToggleCollapse(e);
                   handleManageCollapsedDiv(e);
-                  //handleComparedProduct(product);
+                  handleComparedProduct(product);
                 }}
               >
                 Compare
