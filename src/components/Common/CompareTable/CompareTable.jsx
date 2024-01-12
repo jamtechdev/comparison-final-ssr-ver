@@ -137,6 +137,15 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     );
   };
 
+  //if value is an integer and not equal to 10, add decimal that value
+  const formatValue = (value) => {
+    if (value % 1 === 0 && value !== 10) {
+      return `${value}.0`;
+    }
+
+    return value;
+  };
+
   return (
     <div
       className={
@@ -223,7 +232,10 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             </th>
             {finalProducts.slice(0, defaultNo).map((product, priceIndex) => {
               return (
-                <td key={priceIndex} className={`${priceIndex}-class table-amazon-section`}>
+                <td
+                  key={priceIndex}
+                  className={`${priceIndex}-class table-amazon-section`}
+                >
                   <div className="best-price-section">
                     {product.price_websites &&
                       product?.price_websites?.every(
@@ -304,7 +316,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                           : " #85B2F1",
                     }}
                   >
-                    {product.overall_score}
+                    {formatValue(product.overall_score)}
                   </span>
                 </td>
               );
