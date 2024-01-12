@@ -17,9 +17,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 </Col>
 
                 <Col md={12}>
-                  <h1 className="heading-primary text-capitalize">
-                    {slug}
-                  </h1>
+                  <h1 className="heading-primary text-capitalize">{slug}</h1>
                 </Col>
               </Row>
             </Container>
@@ -34,7 +32,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 {/* if data found */}
                 {categoryData[0]?.data?.popular_guides?.length > 0 && (
                   <Col md={12}>
-                    <Row className="">
+                    <Row>
                       {categoryData[0]?.data?.popular_guides?.length > 0 &&
                         categoryData[0]?.data?.popular_guides?.map(
                           (item, index) => {
@@ -55,8 +53,8 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                   <Image
                                     src={
                                       item?.bannerImage === null
-                                        ? item?.bannerImage
-                                        : `/images/nofound.png`
+                                        ? `/images/nofound.png`
+                                        : item?.bannerImage
                                     }
                                     width={0}
                                     height={0}
@@ -87,7 +85,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 {/* if data found */}
                 {categoryData[0]?.data?.popular_reviews?.length > 0 && (
                   <Col md={12}>
-                    <Row className="mt-3">
+                    <Row>
                       {categoryData[0]?.data?.popular_reviews?.length > 0 &&
                         categoryData[0]?.data?.popular_reviews?.map(
                           (item, index) => {
@@ -157,7 +155,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 {/* if data found */}
                 {categoryData[0]?.data?.popular_blogs?.length > 0 && (
                   <Col md={12}>
-                    <Row className="mt-3">
+                    <Row>
                       {categoryData[0]?.data?.popular_blogs?.length > 0 &&
                         categoryData[0]?.data?.popular_blogs?.map(
                           (item, index) => {
@@ -180,9 +178,9 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                     <div className="blog-card-img">
                                       <Image
                                         src={
-                                          item?.banner_image
-                                            ? item?.banner_image
-                                            : "/images/cat7.png"
+                                          item?.banner_image === null
+                                            ? "/images/cat7.png"
+                                            : item?.banner_image
                                         }
                                         width={0}
                                         height={0}

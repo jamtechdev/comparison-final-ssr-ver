@@ -1080,6 +1080,7 @@ footer .search-icon {
   font-style: normal;
   font-weight: 400;
   line-height: 43.503px;
+  text-underline-offset: 5px;
 }
 
 .product-categories-item:hover{

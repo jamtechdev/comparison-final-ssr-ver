@@ -10,6 +10,7 @@ export default function ReviewSlider({ favSlider }) {
   return (
     <section className="review-slider">
       <Swiper
+        slidesPerView={6}
         modules={[Navigation, Pagination]}
         spaceBetween={30}
         loop={true}
@@ -76,7 +77,7 @@ export default function ReviewSlider({ favSlider }) {
           );
         })}
       </Swiper>
-      {favSlider?.length > 6 && (
+      {favSlider?.length >= 6 && (
         <>
           <span className="swiper-prev">
             <i className="ri-arrow-left-s-line"></i>

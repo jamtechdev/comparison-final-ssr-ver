@@ -223,7 +223,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             </th>
             {finalProducts.slice(0, defaultNo).map((product, priceIndex) => {
               return (
-                <td key={priceIndex} className={`${priceIndex}-class`}>
+                <td key={priceIndex} className={`${priceIndex}-class table-amazon-section`}>
                   <div className="best-price-section">
                     {product.price_websites &&
                       product?.price_websites?.every(
