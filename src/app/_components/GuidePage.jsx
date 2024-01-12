@@ -22,7 +22,6 @@ export default function GuidePage({
   filters,
   searchParams,
 }) {
-  console.log(guideData , slug , attributesForTable , searchParams , 'guide data');
   useChart();
 
   const [isShown, setIsShown] = useState(false);
@@ -41,12 +40,16 @@ export default function GuidePage({
     { algo: "", rangeAttributes: "Overall" },
   ]);
   const [manageCollapsedDiv, setManageCollapsedDiv] = useState(false);
+  const [params , setparams] = useState(searchParams)
   const handleManageCollapsedDiv = () => {
     setManageCollapsedDiv(true);
   };
   const handelSetFilterActive = (status) => {
     setIsFilterActive(status);
   };
+
+  useChart();
+
   useEffect(() => {
     setPrevSearcParam(searchParams);
   }, []);
@@ -77,18 +80,32 @@ export default function GuidePage({
     return newUrl;
   }
 
+
+  useEffect(() => {
+setparams(() => {
+  return {
+  ...searchParams
+  }
+})
+  } , [searchParams])
   const handleSort = (sortAttribute) => {
-    console.log(sortAttribute, "sort attribute");
     let param = JSON.parse(sortAttribute);
     if(param.algo){
     const currentUrl = new URL(window.location.href);
     const searchParam = new URLSearchParams(currentUrl.search);
     const sortValue = `${param.algo},${param.rangeAttributes}`;
     searchParam.set("sort", sortValue);
+    searchParams.sort = sortValue;
+    setparams((prev) => {
+return {
+  ...prev,
+  sort: `${param.algo},${param.rangeAttributes}`,
+};
+    })
     const newUrl = `${currentUrl.origin}${
       currentUrl.pathname
     }?${searchParam.toString()}`;
-    searchParams.sort = `${param.algo},${param.rangeAttributes}`;
+    // searchParams.sort = `${param.algo},${param.rangeAttributes}`;
     window.history.pushState({ path: newUrl }, "", newUrl);
   }else{
  removeQueryParamAndNavigate(window.location.href, 'sort');
@@ -225,7 +242,7 @@ delete searchParams.sort
                   <Col md={8}>
                     <div className="filtered-data">
                       <ul>
-                        {Object.keys(searchParams).map(
+                        {Object.keys(params).map(
                           (categoryName, index) => (
                             <li
                               key={index}
@@ -238,7 +255,7 @@ delete searchParams.sort
                               }}
                             >
                               {" "}
-                              {categoryName}{" "}
+                              {categoryName} ( {Object.values(params)[index]} )_
                               <span className="text0danger">
                                 {" "}
                                 <i className="ri-close-fill"></i>{" "}
@@ -247,7 +264,7 @@ delete searchParams.sort
                           )
                         )}
                       </ul>
-                      {Object.keys(searchParams).length > 0 && (
+                      {Object.keys(params).length > 0 && (
                         <span
                           onClick={() => {
                             removeFilters();

@@ -35,8 +35,8 @@ export default function LatesGuid({ favSlider }) {
                   <Image
                     src={
                       section.bannerImage === null
-                        ? section?.bannerImage
-                        : `/images/nofound.png`
+                        ? `/images/nofound.png`
+                        : section?.bannerImage
                     }
                     width={0}
                     height={0}
