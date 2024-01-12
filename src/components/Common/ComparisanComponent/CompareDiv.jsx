@@ -36,15 +36,25 @@ function CompareDiv({
     products[2] || []
   );
   const handelRemoveProductFormComparison = (index) => {
-    const productsCopy = products.filter((item, i) => i != index);
-    console.log(productsCopy, "copy")
-    const permaLinkArray = productsCopy.filter(product => product && product.permalink !== '')
-      .map(product => product.permalink);
-    const permalinkSlug = permaLinkArray.join('-vs-');
-    console.log(permalinkSlug, ">>")
+    let permalink = "";
     if (index === 0) {
       setCompareProDataFirst([])
-      return;
+      // console.log(compareProDataSec.length > 0 && compareProDataThird.length > 0)
+   
+      // if (compareProDataSec.length > 0 && compareProDataThird.length > 0) {
+      //   permalink = `${compareProDataSec.permalink}-vs-${compareProDataThird.permalink}`
+      //   console.log(permalink, "Only second and third")
+      //   return;
+      // } else if (compareProDataSec.length > 0) {
+      //   permalink = `${compareProDataSec.permalink}`
+      //   console.log(permalink, "Only second")
+      //   return;
+      // } else if (compareProDataThird.length > 0) {
+      //   permalink = `${compareProDataThird.permalink}`
+      //   console.log(permalink, "Only third")
+      //   return;
+      // }
+       return;
     }
     if (index === 1) {
       setCompareProDataSec([])
