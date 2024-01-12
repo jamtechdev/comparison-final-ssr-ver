@@ -11,6 +11,19 @@ export const compareProSlice = createSlice({
       state.compareProduct = [];
       state.compareProduct.push(action.payload);
     },
+    updateCompareProduct: (state, action) => {
+      const { key, data } = action.payload || {};
+      console.log(key)
+      // Check if key is defined and data is an object
+      if (key && typeof data === 'object') {
+        if (key === "productSecond") {
+          state.compareProduct[0].productSecond = data
+        }
+        if (key === "productThird") {
+          state.compareProduct[0].productThird = data
+        }
+      }
+    },
     addCompareProductForGuide: (state, action) => {
       const comparedProGuide = {
         name: action.payload.name,
@@ -24,7 +37,7 @@ export const compareProSlice = createSlice({
   },
 });
 
-export const { addCompareProduct, addCompareProductForGuide } =
+export const { addCompareProduct, addCompareProductForGuide, updateCompareProduct } =
   compareProSlice.actions;
 
 export default compareProSlice.reducer;

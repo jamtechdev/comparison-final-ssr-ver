@@ -4,12 +4,7 @@ import {
   Col,
   Container,
   Row,
-  Accordion,
-  Tab,
-  Nav,
   Form,
-  Button,
-  Tabs,
 } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Image from "next/image";
@@ -17,7 +12,6 @@ import CompareModal from "@/components/Common/Comparison/CompareModal";
 import ComparisonTable from "../CompareTable/ComparisonTable";
 import WhyAccordionTab from "@/components/Product/WhyAccordionTab";
 import CompareForm from "../Comparison/CompareForm";
-// import ComparisonTable from "../CompareTable/ComparisonTable";
 
 function CompareDiv({
   comparisonData,
@@ -65,8 +59,6 @@ function CompareDiv({
     }
     return value;
   };
-  console.log(formatValue(5.1), "checkValue");
-
   return (
     <>
       <section className="product-header">
@@ -176,8 +168,7 @@ function CompareDiv({
                           })}
                       </>
                     ) : (
-                      <>
-                        {" "}
+                      <>           
                         <div className="not-availabel">
                           <span className="txt">NOT AVAILABLE</span>
                           <span className="price">
