@@ -1,4 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 const initialState = {
   compareProduct: [],
   guideCompareProduct: [],
@@ -26,18 +27,41 @@ export const compareProSlice = createSlice({
     },
     addCompareProductForGuide: (state, action) => {
       const comparedProGuide = {
+        id: action.payload.id,
         name: action.payload.name,
         category_id: action.payload.category_id,
         category_url: action.payload.category_url,
         permalink: action.payload.permalink,
-        image: action.payload.image
+        image: action.payload.image,
       };
-      state.guideCompareProduct.push(comparedProGuide);
+      // here check item in compare list or not
+      const existingItem = state.guideCompareProduct.find(
+        (item) => item.id === comparedProGuide.id
+      );
+      if (existingItem) {
+        toast.error("Item already exists in compare list");
+      } else {
+        state.guideCompareProduct.push(comparedProGuide);
+      }
+    },
+    removeCompareProductForGuide: (state, action) => {
+      state.guideCompareProduct = state.guideCompareProduct.filter(
+        (item) => item.id !== action.payload
+      );
+    },
+    resetGuideCompareProduct: (state) => {
+      state.guideCompareProduct = [];
+      // ... reset other state properties if needed
     },
   },
 });
 
-export const { addCompareProduct, addCompareProductForGuide, updateCompareProduct } =
-  compareProSlice.actions;
+export const {
+  addCompareProduct,
+  addCompareProductForGuide,
+  removeCompareProductForGuide,
+  resetGuideCompareProduct,
+  updateCompareProduct
+} = compareProSlice.actions;
 
 export default compareProSlice.reducer;

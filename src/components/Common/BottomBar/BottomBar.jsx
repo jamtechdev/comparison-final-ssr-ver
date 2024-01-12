@@ -1,7 +1,11 @@
+import {
+  removeCompareProductForGuide,
+  resetGuideCompareProduct,
+} from "@/redux/features/compareProduct/compareProSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function BottomBar({
   isCollapsed,
@@ -9,18 +13,32 @@ export default function BottomBar({
   manageCollapsedDiv,
   handleManageCollapsedDiv,
 }) {
-  const compareGuideData = useSelector((state) => state.comparePro.guideCompareProduct);
+  const compareGuideData = useSelector(
+    (state) => state.comparePro.guideCompareProduct
+  );
   const router = useRouter();
+
+  const dispatch = useDispatch();
+  // this function will remove item from compare list
+  const removeItem = (id) => {
+    dispatch(removeCompareProductForGuide(id));
+  };
+
   const handelComparison = () => {
-    const categoryInURL = compareGuideData[0]?.category_url
-        const sortedPermalinksArray = [...compareGuideData].sort((a, b) => a.permalink.localeCompare(b.permalink));
-        const permalinks = sortedPermalinksArray.map(item => item.permalink);
-        const permalinkSlug = permalinks.join('-vs-');
-        router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, { scroll: false });
-}
+    const categoryInURL = compareGuideData[0]?.category_url;
+    const sortedPermalinksArray = [...compareGuideData].sort((a, b) =>
+      a.permalink.localeCompare(b.permalink)
+    );
+    const permalinks = sortedPermalinksArray.map((item) => item.permalink);
+    const permalinkSlug = permalinks.join("-vs-");
+    dispatch(resetGuideCompareProduct());
+    router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
+      scroll: false,
+    });
+  };
   return (
     <>
-      {manageCollapsedDiv && (
+      {compareGuideData?.length > 0 && (
         <section className="bottom_bar">
           <div
             className="bottom_bar_head"
@@ -36,7 +54,11 @@ export default function BottomBar({
                 <div>Comparison</div>
                 <span>{compareGuideData?.length}</span>
               </div>
-              <i className="ri-arrow-up-s-line"></i>
+              {isCollapsed ? (
+                <i className="ri-arrow-down-s-line"></i>
+              ) : (
+                <i className="ri-arrow-up-s-line"></i>
+              )}
             </div>
           </div>
           {!isCollapsed && (
@@ -52,21 +74,31 @@ export default function BottomBar({
                         alt=""
                       />
                       <p>{item.name}</p>
-                      <i className="ri-close-fill"></i>
+                      <i
+                        className="ri-close-fill"
+                        onClick={() => removeItem(item.id)}
+                      ></i>
                     </li>
                   );
                 })}
               </ul>
               <div className="bottom_bar_compare_list_footer">
-                {compareGuideData?.length == 3 && (
-                  <span>
-                    <i
-                      className="ri-add-fill "
-                      style={{ cursor: "not-allowed" }}
-                    ></i>
-                  </span>
-                )}
-              {compareGuideData?.length > 1 && (
+                {compareGuideData?.length > 1 &&
+                  compareGuideData?.length < 3 && (
+                    <span>
+                      <i
+                        className="ri-add-fill"
+                        style={{
+                          cursor:
+                            compareGuideData?.length < 3
+                              ? "pointer"
+                              : "not-allowed",
+                        }}
+                      ></i>
+                    </span>
+                  )}
+
+                {compareGuideData?.length > 1 && (
                   <button
                     className="btn btn-primary"
                     onClick={handelComparison}
@@ -74,7 +106,6 @@ export default function BottomBar({
                     Compare
                   </button>
                 )}
-     
               </div>
             </div>
           )}

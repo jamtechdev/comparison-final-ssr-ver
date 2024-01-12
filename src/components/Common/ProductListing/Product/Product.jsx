@@ -7,14 +7,16 @@ import ProsConsToolTip from "../../../Svg/ProsConsToolTip";
 import RightPointingArrow from "../../../Svg/RightPointingArrow";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+
 import {
   removeDecimalAboveNine,
   capitalize,
   getAttributeHalf,
 } from "@/_helpers/filter";
 import Link from "next/link";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addCompareProductForGuide } from "@/redux/features/compareProduct/compareProSlice";
+import toast, { Toaster } from "react-hot-toast";
 export default function Product({
   position,
   incomingProduct,
@@ -101,7 +103,6 @@ export default function Product({
         ? ""
         : `(${item?.value})`;
     }
-
     // return ""; // Return null for strings
   };
   const getColorAttr = (attributeValues) => {
@@ -120,19 +121,40 @@ export default function Product({
       return "#000";
     }
   };
-const handleComparedProduct = (product)=>{
-let productData= {
-  name:product.name,
-  category_id:product.category_id,
-  category_url:product.category_url,
-  permalink:product.permalink,
-  image:product.main_image ? product.main_image : "/images/nofound.png"
+  // use redux to check getCompareproduct length and add to compare list
+  const guideComparePro = useSelector(
+    (state) => state.comparePro.guideCompareProduct
+  );
+  // console.log(guideComparePro?.length, "checkRedux");
+  const handleComparedProduct = (product, position) => {
+    if (guideComparePro?.length < 3) {
+      let productData = {
+        id: position,
+        name: product.name,
+        category_id: product.category_id,
+        category_url: product.category_url,
+        permalink: product.permalink,
+        image: product.main_image ? product.main_image : "/images/nofound.png",
+      };
+      dispatch(addCompareProductForGuide(productData));
+    } else {
+      toast.error("Maximum 3 products can be compared.");
+      // alert("Maximum 3 products can be compared.");
+    }
+  };
 
-}
-dispatch(addCompareProductForGuide(productData))
-}
+  //if value is an integer and not equal to 10, add decimal that value
+  const formatValue = (value) => {
+    if (value % 1 === 0 && value !== 10) {
+      return `${value}.0`;
+    }
+
+    return value;
+  };
+
   return (
     <Fragment>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="best-product-listing">
         <div className="flex-box">
           <div className="left_box">
@@ -140,7 +162,14 @@ dispatch(addCompareProductForGuide(productData))
               <p>{position}</p>
               <RightPointingArrow />
             </span>
-            <div className="box_content light-bg-color">{product?.name}</div>
+            <div className="box_content light-bg-color">
+              <Link
+                href={`/${product?.category_url}/${product?.permalink}`}
+                style={{ color: "#27304E" }}
+              >
+                {product?.name}
+              </Link>
+            </div>
           </div>
           {product?.assigned_title && (
             <span className="best-tag-product">{product?.assigned_title}</span>
@@ -153,18 +182,16 @@ dispatch(addCompareProductForGuide(productData))
             xl={2}
             className="border-right p-0 product-listing-width-20"
           >
-            <span className="compare-section-plus">
+            <span
+              className="compare-section-plus"
+              onClick={(e) => {
+                // handleToggleCollapse(e);
+                handleManageCollapsedDiv(e);
+                handleComparedProduct(product, position);
+              }}
+            >
               <i className="ri-add-fill"></i>
-              <p
-                className="compare-text"
-                onClick={(e) => {
-                  handleToggleCollapse(e);
-                  handleManageCollapsedDiv(e);
-                  handleComparedProduct(product);
-                }}
-              >
-                Compare
-              </p>
+              <p className="compare-text">Compare</p>
             </span>
             <img
               className="compare_image"
@@ -687,7 +714,7 @@ dispatch(addCompareProductForGuide(productData))
                                 className="count"
                                 style={{ background: overallScoreColor }}
                               >
-                                {product.overall_score}
+                                {formatValue(product?.overall_score)}
                               </span>
                               <div className="show-btn">
                                 Show All{" "}
