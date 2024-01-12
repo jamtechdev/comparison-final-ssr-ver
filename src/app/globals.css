@@ -890,10 +890,19 @@ button.searchBarInner.btn.btn-primary {
   border: 1px solid rgba(0, 0, 0, 0.2);
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 8px;
+  padding: 0px;
   width: 238px;
   max-width: 95%;
-  margin-left: auto;
+  margin-left: auto; 
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.bottom_bar_body.bottom_bar_body_collapse {
+  max-height: 0 !important;
+  padding: 0;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 .bottom_bar_compare_list {
@@ -907,7 +916,9 @@ button.searchBarInner.btn.btn-primary {
   align-items: center;
   gap: 10px;
   border-bottom: 1px solid #d4d6dc;
-  padding: 4px 0;
+  padding: 8px;
+  max-width: 95%;
+  margin: auto;
 }
 
 .bottom_bar_compare_list li img {
@@ -939,7 +950,7 @@ button.searchBarInner.btn.btn-primary {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 8px 0;
+  padding:8px;
 }
 
 .bottom_bar_compare_list_footer span {
@@ -966,3 +977,66 @@ button.searchBarInner.btn.btn-primary {
 }
 
 /* Bottom-bar-end */
+
+.catchy_titles_section .mx-auto.col-md-7 {
+  border-radius: 15px;
+  background: rgba(244, 247, 251, 0.60);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.catchy_titles_section .mx-auto.col-md-7 p{
+  border-radius: 15px 15px 0px 0px;
+  background: #437ECE;
+  padding: 5px 25px;
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 147%;
+}
+
+.catchy_titles_section.row ul {
+  padding: 12px !important;
+}
+
+.catchy_titles_section.row ul li{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.catchy_titles_section.row ul li > span{
+  width: 50%;
+}
+
+.catchy_titles_section.row span.catchy_titles_section_title {
+  text-align: end;
+}
+
+.catchy_titles_section.row span.catchy_titles_section_title {
+  text-align: end;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 180%;
+}
+
+.catchy_titles_section.row span.catchy_titles_section_product_name{
+  text-align: start;
+  color: var(--secondary-color);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%;
+}
+
+.catchy_titles_section.row span.catchy_titles_section_title:before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: #000;
+  display: inline-block;
+  border-radius: 50px;
+  margin: 0 8px 4px 0;
+}

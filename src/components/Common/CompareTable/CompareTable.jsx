@@ -73,6 +73,8 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
 
   const [isSticky, ref] = useDetectSticky();
 
+
+
   const addAsterisksToTopValue = (defaultNo, category, catAttribute) => {
     const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
     const filterData = copiedFinalProducts
@@ -84,8 +86,16 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
       );
 
     const arrayOfObjects = [...filterData];
-    const numericValues = arrayOfObjects
-      .map((obj) => parseFloat(obj.attribute_value))
+    let numericValues = [];
+
+    numericValues = arrayOfObjects
+      .map((obj) => {
+        if (!isNaN(parseFloat(obj.attribute_value))) {
+          return parseFloat(obj.attribute_value);
+        } else {
+          return obj.attribute_value;
+        }
+      })
       .filter((value) => !isNaN(value));
 
     if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
@@ -94,19 +104,35 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
       numericValues.sort((a, b) => a - b);
     }
 
+    // Adding logic for String case
+    if (numericValues.length === 0) {
+      const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
+
+      if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
+        const targetString = stringArray[0] === "yes" ? "yes" : "no";
+        numericValues = stringArray.filter((value) => value === targetString);
+      }
+    }
+
     const topValue = numericValues[0];
     const occurrences = numericValues?.filter(
       (value) => value === topValue
     ).length;
 
-    if (occurrences == 1 || occurrences == 2) {
+    if (occurrences === 1 || occurrences === 2) {
       arrayOfObjects.forEach((obj) => {
-        const numericValue = parseFloat(obj.attribute_value);
+        const numericValue =
+          typeof topValue === "string"
+            ? obj.attribute_value
+            : parseFloat(obj.attribute_value);
         if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
           obj.attribute_value += "⭐";
         }
       });
     }
+
+    // Adjust this function according to your context as I don't have the complete code
+    // It would be good to ensure that you have the required variables (finalProducts) in scope.
 
     return (
       <>
@@ -137,6 +163,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     );
   };
 
+
   //if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {
@@ -145,6 +172,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
 
     return value;
   };
+
 
   return (
     <div
@@ -166,6 +194,12 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             {finalProducts.slice(0, defaultNo).map((product, index) => {
               return (
                 <th key={index}>
+                  {product?.catchy_title && (
+                    <span className="best-tag-product">
+                      {product?.catchy_title?.title}
+                    </span>
+                  )}
+
                   <p className="device-name">
                     <span>{index + 1}</span>
                     <a href={`/${slug}/${product?.permalink}`}>

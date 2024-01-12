@@ -97,7 +97,10 @@ export default function MainPage({ bannerCounts, favSlider }) {
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare Products</h2>
-              <CompareForm location="ON_MAIN_PAGE" handelCloseCompareModel={()=>{}}/>
+              <CompareForm
+                location="ON_MAIN_PAGE"
+                handelCloseCompareModel={() => {}}
+              />
             </Col>
           </Row>
         </Container>
@@ -169,7 +172,6 @@ export default function MainPage({ bannerCounts, favSlider }) {
                           style={{
                             backgroundImage: `url(${data?.rectangle_image})`,
                           }}
-                         
                         >
                           {data?.primary_archive_category}
                         </h2>

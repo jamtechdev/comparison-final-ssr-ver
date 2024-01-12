@@ -143,9 +143,11 @@ function CompareDiv({
             </Col>
           </Row>
           <WhyAccordionTab
-            product1={compareProDataFirst?.name}
-            product2={compareProDataSec?.name}
-            product3={compareProDataThird?.name}
+            sendProductProps={[
+              compareProDataFirst,
+              compareProDataSec,
+              compareProDataThird && compareProDataThird,
+            ]}
             product={graphComparisonProsCons}
             pageType={"comparison"}
           />

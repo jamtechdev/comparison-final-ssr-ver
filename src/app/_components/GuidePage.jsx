@@ -40,7 +40,7 @@ export default function GuidePage({
     { algo: "", rangeAttributes: "Overall" },
   ]);
   const [manageCollapsedDiv, setManageCollapsedDiv] = useState(false);
-  const [params , setparams] = useState(searchParams)
+  const [params, setparams] = useState(searchParams);
   const handleManageCollapsedDiv = () => {
     setManageCollapsedDiv(true);
   };
@@ -68,7 +68,13 @@ export default function GuidePage({
   };
 
   function removeQueryParamAndNavigate(url, paramToRemove) {
-    delete searchParams[`${paramToRemove}`];
+
+    // delete searchParams[`${paramToRemove}`];
+  setparams(() => {
+    return {
+      ...searchParams
+    }
+  })
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
     const newUrl = urlObject.toString();
@@ -80,37 +86,36 @@ export default function GuidePage({
     return newUrl;
   }
 
-
   useEffect(() => {
-setparams(() => {
-  return {
-  ...searchParams
-  }
-})
-  } , [searchParams])
+    setparams(() => {
+      return {
+        ...searchParams,
+      };
+    });
+  }, [searchParams]);
   const handleSort = (sortAttribute) => {
     let param = JSON.parse(sortAttribute);
-    if(param.algo){
-    const currentUrl = new URL(window.location.href);
-    const searchParam = new URLSearchParams(currentUrl.search);
-    const sortValue = `${param.algo},${param.rangeAttributes}`;
-    searchParam.set("sort", sortValue);
-    searchParams.sort = sortValue;
-    setparams((prev) => {
-return {
-  ...prev,
-  sort: `${param.algo},${param.rangeAttributes}`,
-};
-    })
-    const newUrl = `${currentUrl.origin}${
-      currentUrl.pathname
-    }?${searchParam.toString()}`;
-    // searchParams.sort = `${param.algo},${param.rangeAttributes}`;
-    window.history.pushState({ path: newUrl }, "", newUrl);
-  }else{
- removeQueryParamAndNavigate(window.location.href, 'sort');
-delete searchParams.sort
-  }
+    if (param.algo) {
+      const currentUrl = new URL(window.location.href);
+      const searchParam = new URLSearchParams(currentUrl.search);
+      const sortValue = `${param.algo},${param.rangeAttributes}`;
+      searchParam.set("sort", sortValue);
+      searchParams.sort = sortValue;
+      setparams((prev) => {
+        return {
+          ...prev,
+          sort: `${param.algo},${param.rangeAttributes}`,
+        };
+      });
+      const newUrl = `${currentUrl.origin}${
+        currentUrl.pathname
+      }?${searchParam.toString()}`;
+      // searchParams.sort = `${param.algo},${param.rangeAttributes}`;
+      window.history.pushState({ path: newUrl }, "", newUrl);
+    } else {
+      removeQueryParamAndNavigate(window.location.href, "sort");
+      delete searchParams.sort;
+    }
     // sortRangeAttribute.current = JSON.parse(sortAttribute);
     // setFilteredProducts([
     //   ...filterProducts(
@@ -174,6 +179,7 @@ delete searchParams.sort
               <p className="product-inner-content">{guide?.text_first_part}</p>
             </Col>
           </Row>
+
           <Row className="pt-3 best-page-card">
             {Object.values(guide.top_guide_counts).map(function (item, index) {
               return (
@@ -190,6 +196,29 @@ delete searchParams.sort
       </section>
       <section className="ptb-25">
         <Container>
+          <Row className="catchy_titles_section mb-3">
+            <Col md={7} className="mx-auto p-0">
+              <p>
+                {" "}
+                {guideData[0]?.data?.show_catchy_titles_in_text == 1 &&
+                  guideData[0]?.data?.catchy_titles_box_title}{" "}
+              </p>
+              <ul className="text-center">
+                {guideData[0]?.data?.catchy_titles?.map((item, index) => {
+                  return (
+                    <li key={index}>
+                      <span className="catchy_titles_section_title">
+                        {item?.title}:
+                      </span>
+                      <span className="catchy_titles_section_product_name">
+                        {item?.product?.name}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Col>
+          </Row>
           <Row>
             <Col md={12}>
               <p className="para_content_text">{guide?.text_second_part}</p>
@@ -206,7 +235,11 @@ delete searchParams.sort
             className="sidebar-width"
             style={{ display: isShown ? "block" : "none" }}
           >
-            <Filter categoryAttributes={filters} removedParam={removedParam} />
+            <Filter
+              categoryAttributes={filters}
+              searchParam={searchParams}
+              removedParam={removedParam}
+            />
             <div className="desktop-hide">
               <Button className="site_main_btn w-100 d-block btn-icon mb-4">
                 <i className="ri-close-fill"></i>
@@ -242,27 +275,25 @@ delete searchParams.sort
                   <Col md={8}>
                     <div className="filtered-data">
                       <ul>
-                        {Object.keys(params).map(
-                          (categoryName, index) => (
-                            <li
-                              key={index}
-                              onClick={() => {
-                                setremovedParam(categoryName);
-                                removeQueryParamAndNavigate(
-                                  window.location.href,
-                                  categoryName
-                                );
-                              }}
-                            >
+                        {Object.keys(params).map((categoryName, index) => (
+                          <li
+                            key={index}
+                            onClick={() => {
+                              setremovedParam(categoryName);
+                              removeQueryParamAndNavigate(
+                                window.location.href,
+                                categoryName
+                              );
+                            }}
+                          >
+                            {" "}
+                            {categoryName} ( {Object.values(params)[index]} )_
+                            <span className="text0danger">
                               {" "}
-                              {categoryName} ( {Object.values(params)[index]} )_
-                              <span className="text0danger">
-                                {" "}
-                                <i className="ri-close-fill"></i>{" "}
-                              </span>
-                            </li>
-                          )
-                        )}
+                              <i className="ri-close-fill"></i>{" "}
+                            </span>
+                          </li>
+                        ))}
                       </ul>
                       {Object.keys(params).length > 0 && (
                         <span
@@ -413,8 +444,9 @@ delete searchParams.sort
           <Row className="table-section-mobile">
             <Col md={12}>
               <h2 className="site-main-heading pt-5">
-                Comparing Samsung New VR Headset Oculus 2.0 with best robot
-                vacuum cleaners
+                {guideData[0]?.data?.big_table_subtitle
+                  ? guideData[0]?.data?.big_table_subtitle
+                  : "No title found"}
               </h2>
               {guide && products && (
                 <CompareTable
@@ -441,7 +473,9 @@ delete searchParams.sort
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">
-                Review of Samsung New VR Headset Oculus 2.0
+                {guideData[0]?.data?.main_text_subtitle
+                  ? guideData[0]?.data?.main_text_subtitle
+                  : "No title found"}
               </h2>
             </Col>
           </Row>

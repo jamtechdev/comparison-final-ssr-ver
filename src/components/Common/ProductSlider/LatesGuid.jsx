@@ -13,6 +13,7 @@ export default function LatesGuid({ favSlider }) {
           modules={[Navigation, Pagination]}
           spaceBetween={30}
           loop={true}
+          rewind={true}
           navigation={{
             nextEl: ".product-slider .swiper-next",
             prevEl: ".product-slider .swiper-prev",

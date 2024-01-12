@@ -164,7 +164,7 @@ async function getGraphComparisonProsCons(data) {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
       }
-    );
+    );  
     if (!response.ok) {
     }
     return response.json();
