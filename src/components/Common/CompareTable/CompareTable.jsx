@@ -73,8 +73,6 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
 
   const [isSticky, ref] = useDetectSticky();
 
-
-
   const addAsterisksToTopValue = (defaultNo, category, catAttribute) => {
     const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
     const filterData = copiedFinalProducts
@@ -163,16 +161,13 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     );
   };
 
-
   //if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {
       return `${value}.0`;
     }
-
     return value;
   };
-
 
   return (
     <div
