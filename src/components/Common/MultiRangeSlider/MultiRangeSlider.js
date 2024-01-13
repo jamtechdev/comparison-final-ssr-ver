@@ -28,6 +28,12 @@ const MultiRangeSlider = ({
     if (rangeVal?.maxVal) {
     setMaxVal(rangeVal?.maxVal);
   setMinVal(rangeVal?.minVal);
+  const minPercent = getPercent(rangeVal?.minVal);
+
+  if (range.current) {
+    range.current.style.left = `${minPercent}%`;
+    range.current.style.width = `100%`;
+  }
     }
   },[rangeVal])
   useEffect(() => {

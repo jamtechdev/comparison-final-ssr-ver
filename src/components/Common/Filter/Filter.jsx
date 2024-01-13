@@ -36,7 +36,11 @@ export default function Filter({
 
     switch (filterName) {
       case "price":
-        updatedParams.price = value;
+        if (!isChecked) {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        } else {
+          updatedParams.price = value;
+        }
         break;
       case "available":
         if (value) {
@@ -140,7 +144,27 @@ export default function Filter({
           });
       }
 
-      if (removedParam !== "available" && removedParam != "brand") {
+      if (removedParam.toLowerCase() == "price") {
+        handelFilterActions(
+          "price",
+          "price",
+          `${price[0]?.min_price},${price[0]?.max_price}`,
+          false
+        );
+        setSliderValues((pre) => {
+          return {
+            ...pre,
+            maxVal: price[0]?.max_price,
+            minVal: price[0]?.min_price,
+          };
+        });
+      }
+
+      if (
+        removedParam !== "available" &&
+        removedParam != "brand" &&
+        removedParam.toLowerCase() != "price"
+      ) {
         let arrayToGetFilteredObject = [];
         attributeCategories.map((item, index) => {
           let filteredArray = item.attributes.filter(
@@ -229,11 +253,12 @@ export default function Filter({
           Price
           {price?.[0]?.min_price != null && (
             <MultiRangeSlider
+              rangeVal={sliderValues}
               min={price[0]?.min_price}
               max={price[0]?.max_price}
               unit="€"
               onChange={({ min, max }) => {
-                handelFilterActions("price", "price", `${min},${max}`);
+                handelFilterActions("price", "price", `${min},${max}`, true);
               }}
             />
           )}
