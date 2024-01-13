@@ -13,6 +13,10 @@ export default function Filter({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [sliderValues, setSliderValues] = useState({
+    minVal: 0,
+    maxVal: 0,
+  });
   let price = categoryAttributes?.price;
   let brands = categoryAttributes?.brands;
   let attributeCategories = categoryAttributes?.attribute_categories;
@@ -72,7 +76,12 @@ export default function Filter({
         }
         break;
       case "range":
-        updatedParams[key] = value;
+        if (!isChecked) {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        } else {
+          updatedParams[key] = value;
+        }
+
         break;
       case "dropdown":
         if (isChecked) {
@@ -121,20 +130,17 @@ export default function Filter({
         handelFilterActions("available", "available", false);
         document.getElementById("Available").checked = false;
       }
- if ( removedParam == "brand") {
-     Object.values(searchParam)[0]
-       .split(",")
-       .map((item) => {
-         handelFilterActions("brand", "brand", { brand: item }, false);
-         document.getElementById(`${item}`).checked = false;
-       });
- }
-
-
+      if (removedParam == "brand") {
+        Object.values(searchParam)[0]
+          .split(",")
+          .map((item) => {
+            console.log(item, "items");
+            handelFilterActions("brand", "brand", { brand: item }, false);
+            document.getElementById(`${item}`).checked = false;
+          });
+      }
 
       if (removedParam !== "available" && removedParam != "brand") {
-    
-        
         let arrayToGetFilteredObject = [];
         attributeCategories.map((item, index) => {
           let filteredArray = item.attributes.filter(
@@ -150,7 +156,6 @@ export default function Filter({
           arrayToGetFilteredObject[0][0]
         );
 
-      
         let countAttribute = 1;
         if (filteredArrayOfAttributeValues?.type == "dropdown") {
           countAttribute++;
@@ -178,8 +183,38 @@ export default function Filter({
               });
             }
           }
+        } else {
+          let min =
+            filteredArrayOfAttributeValues.maxValue -
+              filteredArrayOfAttributeValues.minValue >=
+            1
+              ? filteredArrayOfAttributeValues.minValue
+              : 0;
+
+          let max =
+            filteredArrayOfAttributeValues.maxValue -
+              filteredArrayOfAttributeValues.minValue >=
+            1
+              ? filteredArrayOfAttributeValues.maxValue
+              : 100;
+          // alert(min)
+
+          setSliderValues((prevVal) => {
+            return {
+              ...prevVal,
+              minVal: min,
+              maxVal: max,
+            };
+          });
+          // thumb thumb--left ${classForSlider}
+
+          handelFilterActions("range", removedParam, `${min},${max}`, false);
+          document.getElementById(`thumb thumb--left ${removedParam}`).value =
+            min;
+          document.getElementById(`thumb thumb--right ${removedParam}`).value =
+            max;
         }
-       
+
         // const checkForValueType = arrayToGetFilteredObject[0][0].values.some(
         //   (value) => value.name === "yes" || value.name === "no"
         // );
@@ -350,6 +385,8 @@ export default function Filter({
                         </Accordion.Header>
                         <Accordion.Body>
                           <MultiRangeSlider
+                            rangeVal={sliderValues}
+                            classForSlider={attribute.name}
                             min={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
@@ -369,7 +406,8 @@ export default function Filter({
                               handelFilterActions(
                                 "range",
                                 attribute.name,
-                                `${min},${max}`
+                                `${min},${max}`,
+                                true
                               );
                             }}
                           />

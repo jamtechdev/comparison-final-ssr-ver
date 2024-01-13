@@ -75,6 +75,8 @@ export default function GuidePage({
       ...searchParams
     }
   })
+
+  console.log(searchParams , 'serachpramas');
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
     const newUrl = urlObject.toString();

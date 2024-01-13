@@ -2,7 +2,14 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import "./multiRangeSlider.css";
 
-const MultiRangeSlider = ({ min, max, onChange, unit }) => {
+const MultiRangeSlider = ({
+  min,
+  max,
+  onChange,
+  unit,
+  classForSlider,
+  rangeVal,
+}) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef(min);
@@ -16,6 +23,13 @@ const MultiRangeSlider = ({ min, max, onChange, unit }) => {
     Math.round(((value - min) / (max - min)) * 100)
   );
 
+
+  useEffect(() => {
+    if (rangeVal?.maxVal) {
+    setMaxVal(rangeVal?.maxVal);
+  setMinVal(rangeVal?.minVal);
+    }
+  },[rangeVal])
   useEffect(() => {
     const minPercent = getPercent(minVal);
     const maxPercent = getPercent(maxValRef.current);
@@ -29,8 +43,8 @@ const MultiRangeSlider = ({ min, max, onChange, unit }) => {
   useEffect(() => {
     const minPercent = getPercent(minValRef.current);
     const maxPercent = getPercent(maxVal);
-
     if (range.current) {
+      //  range.current.style.left = `${maxPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
   }, [maxVal, getPercent]);
@@ -49,7 +63,8 @@ const MultiRangeSlider = ({ min, max, onChange, unit }) => {
           minValRef.current = value;
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
-        className="thumb thumb--left"
+        id={`thumb thumb--left ${classForSlider}`}
+        className={`thumb thumb--left ${classForSlider}`}
         style={{ zIndex: minVal > max - step && "5" }}
       />
       <input
@@ -64,7 +79,8 @@ const MultiRangeSlider = ({ min, max, onChange, unit }) => {
           maxValRef.current = value;
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
-        className="thumb thumb--right"
+        id={`thumb thumb--right ${classForSlider}`}
+        className={`thumb thumb--right ${classForSlider}`}
       />
 
       <div className="slider">
