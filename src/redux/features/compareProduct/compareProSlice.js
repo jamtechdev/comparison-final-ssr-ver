@@ -14,7 +14,6 @@ export const compareProSlice = createSlice({
     },
     updateCompareProduct: (state, action) => {
       const { key, data } = action.payload || {};
-      console.log(key)
       // Check if key is defined and data is an object
       if (key && typeof data === 'object') {
         if (key === "productSecond") {

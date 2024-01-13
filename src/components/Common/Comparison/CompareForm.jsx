@@ -55,7 +55,9 @@ export default function CompareForm({ location, handelCategoryForOffenProduct, h
             const permalinks = sortedPermalinksArray.map(item => item.permalink);
             const permalinkSlug = permalinks.join('-vs-');
             dispatch(addCompareProduct(formFields))
+           setTimeout(()=>{
             handelCloseCompareModel()
+           },1000)
             router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, { scroll: false });
         }
     }

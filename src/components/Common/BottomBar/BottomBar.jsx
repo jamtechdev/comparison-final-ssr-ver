@@ -62,57 +62,53 @@ export default function BottomBar({
             </div>
           </div>
           <div
-              className={
-                isCollapsed === true
-                  ? "bottom_bar_body bottom_bar_body_collapse"
-                  : "bottom_bar_body"
-              }
-            >
-              <ul className="bottom_bar_compare_list">
-                {compareGuideData?.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <Image
-                        src={item.image ? item.image : "/images/vs.svg"}
-                        width={0}
-                        height={0}
-                        alt=""
-                      />
-                      <p>{item.name}</p>
-                      <i
-                        className="ri-close-fill"
-                        onClick={() => removeItem(item.id)}
-                      ></i>
-                    </li>
-                  );
-                })}
-              </ul>
-              <div className="bottom_bar_compare_list_footer">
-                {compareGuideData?.length > 1 &&
-                  compareGuideData?.length < 3 && (
-                    <span>
-                      <i
-                        className="ri-add-fill"
-                        style={{
-                          cursor:
-                            compareGuideData?.length < 3
-                              ? "pointer"
-                              : "not-allowed",
-                        }}
-                      ></i>
-                    </span>
-                  )}
+            className={
+              isCollapsed === true
+                ? "bottom_bar_body bottom_bar_body_collapse"
+                : "bottom_bar_body"
+            }
+          >
+            <ul className="bottom_bar_compare_list">
+              {compareGuideData?.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <Image
+                      src={item.image ? item.image : "/images/vs.svg"}
+                      width={0}
+                      height={0}
+                      alt=""
+                    />
+                    <p>{item.name}</p>
+                    <i
+                      className="ri-close-fill"
+                      onClick={() => removeItem(item.id)}
+                    ></i>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="bottom_bar_compare_list_footer">
+              {compareGuideData?.length > 1 && compareGuideData?.length < 3 && (
+                <span>
+                  <i
+                    className="ri-add-fill"
+                    style={{
+                      cursor:
+                        compareGuideData?.length < 3
+                          ? "pointer"
+                          : "not-allowed",
+                    }}
+                  ></i>
+                </span>
+              )}
 
-                {compareGuideData?.length > 1 && (
-                  <button
-                    className="btn btn-primary"
-                    onClick={handelComparison}
-                  >
-                    Compare
-                  </button>
-                )}
-              </div>
+              {compareGuideData?.length > 1 && (
+                <button className="btn btn-primary" onClick={handelComparison}>
+                  Compare
+                </button>
+              )}
             </div>
+          </div>
         </section>
       )}
     </>
