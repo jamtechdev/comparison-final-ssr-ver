@@ -27,7 +27,14 @@ export default function GuidePage({
   const [isShown, setIsShown] = useState(false);
 
   const guide = guideData[0]?.data;
-  const products = guideData[1]?.data?.products;
+
+  const products = guideData[1]?.data?.products || [];
+  const sortedProducts = products.sort(
+    (a, b) => b.overall_score - a.overall_score
+  );
+
+  console.log(guideData, "guideData[1]?.data");
+
   const productPagination = guideData[1]?.data?.pagination;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
@@ -139,16 +146,15 @@ export default function GuidePage({
     // console.log(JSON.parse(sortAttribute))
   };
 
+  console.log(products, "products ");
+
   return (
     <>
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
-              <BreadCrumb
-                firstPageName={categorySlug}
-                secondPageName={slug}
-              />
+              <BreadCrumb firstPageName={categorySlug} secondPageName={slug} />
             </Col>
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{guide?.title}</h1>
@@ -208,30 +214,32 @@ export default function GuidePage({
       </section>
       <section className="ptb-25">
         <Container>
-          <Row className="catchy_titles_section mb-3">
-            { Boolean(guide?.show_catchy_titles_in_text) && <>
+          {guideData[0]?.data?.show_catchy_titles_in_text == 1 && (
+            <Row className="catchy_titles_section mb-3">
               <Col md={7} className="mx-auto p-0">
-              <p>
-                {guide?.show_catchy_titles_in_text == 1 &&
-                  guide?.catchy_titles_box_title}
-              </p>
-              <ul className="text-center">
-              {guide?.catchy_titles?.map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <span className="catchy_titles_section_title">
-                        {item?.title}:
-                      </span>
-                      <span className="catchy_titles_section_product_name">
-                        {item?.product?.name}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </Col>
-            </>}
-          </Row>
+                <p>
+                  {" "}
+                  {guideData[0]?.data?.catchy_titles_box_title
+                    ? guideData[0]?.data?.catchy_titles_box_title
+                    : " No title found"}{" "}
+                </p>
+                <ul className="text-center">
+                  {guideData[0]?.data?.catchy_titles?.map((item, index) => {
+                    return (
+                      <li key={index}>
+                        <span className="catchy_titles_section_title">
+                          {item?.title}:
+                        </span>
+                        <span className="catchy_titles_section_product_name">
+                          {item?.product?.name}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </Col>
+            </Row>
+          )}
           <Row>
             <Col md={12}>
               <p className="para_content_text">{guide?.text_second_part}</p>
@@ -721,7 +729,7 @@ export default function GuidePage({
                               sizes="100%"
                               alt=""
                             />
-           x                 <span>155.87 €</span>
+                            x <span>155.87 €</span>
                           </div>
                         </td>
                       </tr>

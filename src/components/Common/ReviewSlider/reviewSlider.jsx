@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ReviewSlider({ favSlider }) {
-  
   // if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {
@@ -22,7 +21,8 @@ export default function ReviewSlider({ favSlider }) {
         modules={[Navigation, Pagination]}
         spaceBetween={30}
         loop={true}
-        rewind={true}
+        // rewind={true}
+        onSwiper={(swiper) => console.log(swiper, "swiper works")}
         navigation={{
           nextEl: ".review-slider .swiper-next",
           prevEl: ".review-slider .swiper-prev",
@@ -48,10 +48,10 @@ export default function ReviewSlider({ favSlider }) {
         }}
         className="product-slider"
       >
-        {favSlider?.map((item, index) => {
+        {favSlider?.map((item) => {
           const url = item?.category.replace(/\s+/g, "-").toLowerCase();
           return (
-            <SwiperSlide key={index}>
+            <SwiperSlide>
               <Link href={`/${url}/${item?.permalink}`}>
                 <div className="review-wrapper">
                   <div className="review-card">
@@ -88,10 +88,20 @@ export default function ReviewSlider({ favSlider }) {
       </Swiper>
       {favSlider?.length >= 6 && (
         <>
-          <span className="swiper-prev">
+          <span
+            className="swiper-prev"
+            onClick={(e) => {
+              console.log(e, "left");
+            }}
+          >
             <i className="ri-arrow-left-s-line"></i>
           </span>
-          <span className="swiper-next">
+          <span
+            className="swiper-next"
+            onClick={(e) => {
+              console.log(e, "right");
+            }}
+          >
             <i className="ri-arrow-right-s-line"></i>
           </span>
         </>
