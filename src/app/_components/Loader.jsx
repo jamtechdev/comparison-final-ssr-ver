@@ -1,7 +1,7 @@
-"use client"
-import { Oval } from "react-loader-spinner";
+"use client";
+import { Oval, RotatingLines } from "react-loader-spinner";
 
-const Loader = () => {
+const Loader = ({ pageType }) => {
   return (
     <div
       style={{
@@ -19,10 +19,10 @@ const Loader = () => {
         width={50} // Specify the width of the loader
       /> */}
 
-      <Oval
+      {/* <Oval
         height={80}
         width={80}
-        color="#63b22d"
+        color="#"
         wrapperStyle={{}}
         wrapperClass=""
         visible={true}
@@ -30,7 +30,35 @@ const Loader = () => {
         secondaryColor="#4fa94d"
         strokeWidth={2}
         strokeWidthSecondary={2}
-      />
+      /> */}
+      {pageType === "comparison" ? (
+        <RotatingLines
+          height={80}
+          width={80}
+          color="red"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="oval-loading"
+          secondaryColor="#437ECE"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
+      ) : (
+        <Oval
+          height={80}
+          width={80}
+          color="#"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="oval-loading"
+          secondaryColor="#4fa94d"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
+      )}
+
       {/* Other content */}
     </div>
   );
