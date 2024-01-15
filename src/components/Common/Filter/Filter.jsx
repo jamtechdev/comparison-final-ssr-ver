@@ -163,7 +163,8 @@ export default function Filter({
       if (
         removedParam !== "available" &&
         removedParam != "brand" &&
-        removedParam.toLowerCase() != "price"
+        removedParam.toLowerCase() != "price" &&
+        removedParam.toLowerCase() != "sort"
       ) {
         let arrayToGetFilteredObject = [];
         attributeCategories.map((item, index) => {
@@ -242,6 +243,10 @@ export default function Filter({
         // const checkForValueType = arrayToGetFilteredObject[0][0].values.some(
         //   (value) => value.name === "yes" || value.name === "no"
         // );
+      }
+
+      if(removedParam.toLowerCase() == "sort"){
+delete searchParams.sort
       }
     }
   }, [removedParam]);
