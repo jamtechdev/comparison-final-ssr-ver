@@ -68,15 +68,14 @@ export default function GuidePage({
   };
 
   function removeQueryParamAndNavigate(url, paramToRemove) {
-
     // delete searchParams[`${paramToRemove}`];
-  setparams(() => {
-    return {
-      ...searchParams
-    }
-  })
+    setparams(() => {
+      return {
+        ...searchParams,
+      };
+    });
 
-  console.log(searchParams , 'serachpramas');
+    console.log(searchParams, "serachpramas");
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
     const newUrl = urlObject.toString();
@@ -431,7 +430,7 @@ export default function GuidePage({
                       return (
                         <li key={index}>
                           <Link
-                            href={`${slug}/${data?.permalink}`}
+                            href={`${data?.category_url}/${data?.permalink}`}
                             style={{ color: "#437ece" }}
                           >
                             {data?.short_name}
@@ -738,7 +737,7 @@ export default function GuidePage({
                       <div className="product-card" key={index}>
                         <Link
                           className="product-link-cover"
-                          href={`${slug}/${data?.permalink}`}
+                          href={`${data?.category_url}/${data?.permalink}`}
                           style={{ color: "#326ebf" }}
                         ></Link>
                         <img

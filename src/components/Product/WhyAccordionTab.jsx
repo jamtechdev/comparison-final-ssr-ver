@@ -41,7 +41,7 @@ const WhyAccordionTab = React.memo(
     const [activeTab, setActiveTab] = useState("tab-1");
     // Initialize with the default active tab
     // Remove undefined values from the array
-    let filteredArray = sendProductProps.filter(
+    let filteredArray = sendProductProps?.filter(
       (item) =>
         item !== "" &&
         typeof item !== "undefined" &&
