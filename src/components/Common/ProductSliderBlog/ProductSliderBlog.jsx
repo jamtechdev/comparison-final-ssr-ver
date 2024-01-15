@@ -1,8 +1,7 @@
 "use client";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Pagination } from "swiper";
-import { Navigation } from "swiper";
+import { Navigation, Pagination } from 'swiper/modules';
 import Image from "next/image";
 import { Button } from "react-bootstrap";
 import { useState } from "react";

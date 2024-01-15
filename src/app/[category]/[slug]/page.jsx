@@ -75,7 +75,7 @@ async function getSlugMetaData(slug) {
 export async function generateMetadata({ params: { slug } }) {
   if(slug.includes("-vs-")){
     return {
-      title: slug,
+      title: slug || "Comparision web",
       generator: "Comparison web",
       applicationName: "Comparison web",
       referrer: "origin-when-cross-origin",
@@ -86,12 +86,12 @@ export async function generateMetadata({ params: { slug } }) {
      const meta_data = await getSlugMetaData(slug)
   
     return {
-      title: meta_data?.data?.title,
+      title: meta_data?.data?.title || "Comparision web",
       generator: "Comparison web",
       applicationName: "Comparison web",
       referrer: "origin-when-cross-origin",
       keywords: ["compare", "product"],
-      description: meta_data?.data?.meta_description,
+      description: meta_data?.data?.meta_description || "Comparision web",
     };
   }
   

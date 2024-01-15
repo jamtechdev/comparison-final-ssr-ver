@@ -10,4 +10,13 @@ export default async function Page() {
     </React.Suspense>
   );
 }
-  
+export async function generateMetadata(params) {
+  return {
+    title:  "Comparision web",
+    generator: "Comparison web",
+    applicationName: "Comparison web",
+    referrer: "origin-when-cross-origin",
+    keywords: ["compare", "product"],
+    description:  "Comparision web",
+  };
+}

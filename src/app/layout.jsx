@@ -15,13 +15,4 @@ export default async function RootLayout({ children }) {
     </html>
   );
 }
-export async function generateMetadata({ params }) {
-  return {
-    generator: 'Comparison web',
-    description: 'Comparison web',
-    applicationName: 'Comparison web',
-    referrer: 'origin-when-cross-origin',
-    keywords: ['compare', 'product'],
-    description: "Comparision web",
-  }
-}
+

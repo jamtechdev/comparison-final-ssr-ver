@@ -58,12 +58,12 @@ export async function generateMetadata({ params: { category } }) {
 
   const meta_data = await getSlugMetaData(category)
   return {
-    title: meta_data?.data?.title,
+    title: meta_data?.data?.title || "Comparison web",
     generator: "Comparison web",
     applicationName: "Comparison web",
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
-    description: meta_data?.data?.meta_description,
+    description: meta_data?.data?.meta_description || "Comparison web description",
   };
 }
 async function fetchDataBasedOnPageType(slug, pageType) {

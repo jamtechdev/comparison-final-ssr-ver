@@ -2,9 +2,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Pagination } from "swiper";
-import { Navigation } from "swiper";
 import Image from "next/image";
+import { Navigation, Pagination } from 'swiper/modules';
 import { useCallback, useState } from "react";
 
 export default function MobileProductSlider() {
