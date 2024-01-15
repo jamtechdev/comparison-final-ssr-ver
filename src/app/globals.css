@@ -178,11 +178,11 @@ select {
   width: 70%;
   height: 100%;
 }
-
+/* fontsize increase */
 .site_tabs .nav-item button {
   color: rgb(39 48 78 / 80%) !important;
   font-weight: 400 !important;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 20px;
   opacity: 1;
   padding: 8px 20px;
