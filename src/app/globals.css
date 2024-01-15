@@ -188,8 +188,11 @@ select {
   padding: 8px 20px;
   border: none;
   position: relative;
-  max-width: 150px;
   height: 100%;
+}
+
+.site_tabs.graph-tab.compare-graph-tabs .nav-item button{
+  max-width: 150px;
 }
 
 .site_tabs .nav-item button:focus,
@@ -1060,4 +1063,12 @@ button.searchBarInner.btn.btn-primary {
   display: inline-block;
   border-radius: 50px;
   margin: 0 8px 4px 0;
+}
+
+.comparison-tool .not-availabel {
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 100%;
+  min-height: 104px;
 }

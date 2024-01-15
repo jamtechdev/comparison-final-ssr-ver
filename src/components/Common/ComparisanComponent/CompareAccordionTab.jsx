@@ -16,6 +16,8 @@ import Image from "next/image";
 
 // import ProsConsToolTip from "@/component/Svg/ProsConsToolTip";
 import QuestionIcon from "@/components/Svg/QuestionIcon";
+import { LoaderIcon } from "react-hot-toast";
+import Loader from "@/app/_components/Loader";
 
 const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   const [activatab, setActiveTab] = useState("tab-1");
@@ -46,6 +48,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   const handleTabChange = (eventKey) => {
     // console.log(eventKey);
     setActiveTab(eventKey);
+    setIsLoading(false);
   };
   useEffect(() => {
     // Extract the numerical index from the eventKey
@@ -76,6 +79,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
+
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 1000);
   }, [activatab]);
 
   // this funcation spilt the vs value from ApiData
@@ -100,7 +107,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     }
   };
   useEffect(() => {
-    // Find all buttons that are children of an element with role="presentation" add data-count
+    // Find all buttons that are children of an element with role="presentation" add attribute
     const attributeAdd = document.querySelectorAll(
       '[role="presentation"] button'
     );
@@ -120,7 +127,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
           <Tabs
             defaultActiveKey="tab-1"
             id="Review-tab"
-            className="site_tabs graph-tab"
+            className="site_tabs graph-tab compare-graph-tabs"
             activeKey={activatab}
             onSelect={handleTabChange}
             data-count="4.0"
@@ -214,6 +221,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                   defaultActiveKey={tabvalue?.pros}
                 >
                   <Row>
+                    {!isLoading && <Loader pageType={"comparison"} />}
                     <Col md={8} xl={8} className="dividers">
                       <Tab.Content className="compare-tab-content">
                         <Tab.Pane eventKey={tabvalue?.pros}>
