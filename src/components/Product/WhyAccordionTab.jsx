@@ -56,7 +56,7 @@ const WhyAccordionTab = React.memo(
     }; // Assuming you have a state for data
 
     useEffect(() => {
-      if (filteredArray.length === 2) {
+      if (filteredArray?.length === 2) {
         if (activeTab === "tab-2") {
           // Call API with the specified parameters for tab-2
           const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${filteredArray[1]?.permalink}&permalink2=${filteredArray[0]?.permalink}`;
@@ -94,7 +94,7 @@ const WhyAccordionTab = React.memo(
               console.error("Error calling API:", error);
             });
         }
-      } else if (filteredArray.length === 3) {
+      } else if (filteredArray?.length === 3) {
         if (activeTab === "tab-2") {
           // Call API with the specified parameters for tab-2 with three permalinks
           const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${filteredArray[1]?.permalink}&permalink2=${filteredArray[0]?.permalink}&permalink3=${filteredArray[2]?.permalink}`;
