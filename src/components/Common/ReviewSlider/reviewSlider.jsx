@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ReviewSlider({ favSlider }) {
-  
   // if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {
@@ -22,6 +21,7 @@ export default function ReviewSlider({ favSlider }) {
         modules={[Navigation, Pagination]}
         spaceBetween={30}
         loop={true}
+        // rewind={true}
         onSwiper={(swiper) => console.log(swiper, "swiper works")}
         navigation={{
           nextEl: ".review-slider .swiper-next",
@@ -91,7 +91,7 @@ export default function ReviewSlider({ favSlider }) {
           <span
             className="swiper-prev"
             onClick={(e) => {
-              console.log(e ,'left');
+              console.log(e, "left");
             }}
           >
             <i className="ri-arrow-left-s-line"></i>
@@ -99,7 +99,7 @@ export default function ReviewSlider({ favSlider }) {
           <span
             className="swiper-next"
             onClick={(e) => {
-              console.log(e ,'right');
+              console.log(e, "right");
             }}
           >
             <i className="ri-arrow-right-s-line"></i>
