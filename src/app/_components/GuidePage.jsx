@@ -70,13 +70,24 @@ export default function GuidePage({
   function removeQueryParamAndNavigate(url, paramToRemove) {
 
     // delete searchParams[`${paramToRemove}`];
-  setparams(() => {
-    return {
-      ...searchParams
-    }
-  })
 
-  console.log(searchParams , 'serachpramas');
+    if (paramToRemove != "sort") {
+      setparams(() => {
+        return {
+          ...searchParams,
+        };
+      });
+    } else {
+      delete params.sort;
+      let removeSortParam = params;
+
+      setparams(() => {
+        return {
+          ...removeSortParam,
+        };
+      });
+    }
+
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
     const newUrl = urlObject.toString();
