@@ -118,7 +118,7 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
               <>
                 <div>
                   {item?.attribute_value.split("⭐")[0]}{" "}
-                  {item.unit.split("-")[0] && item.unit.split("-")[0]}
+                  {item.unit?.split("-")[0] && item.unit.split("-")[0]}
                   <span className="tooltip-title-2">
                     <img
                       style={{ float: "right", paddingRight: "5px" }}
