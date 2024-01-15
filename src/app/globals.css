@@ -182,7 +182,7 @@ select {
 .site_tabs .nav-item button {
   color: var(--heading-color) !important;
   font-weight: 400 !important;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 44px;
   opacity: 0.7;
   padding: 0 20px;
@@ -893,7 +893,7 @@ button.searchBarInner.btn.btn-primary {
   padding: 0px;
   width: 238px;
   max-width: 95%;
-  margin-left: auto; 
+  margin-left: auto;
   max-height: 500px;
   overflow: hidden;
   transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
@@ -950,7 +950,7 @@ button.searchBarInner.btn.btn-primary {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding:8px;
+  padding: 8px;
 }
 
 .bottom_bar_compare_list_footer span {
@@ -980,13 +980,13 @@ button.searchBarInner.btn.btn-primary {
 
 .catchy_titles_section .mx-auto.col-md-7 {
   border-radius: 15px;
-  background: rgba(244, 247, 251, 0.60);
+  background: rgba(244, 247, 251, 0.6);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.catchy_titles_section .mx-auto.col-md-7 p{
+.catchy_titles_section .mx-auto.col-md-7 p {
   border-radius: 15px 15px 0px 0px;
-  background: #437ECE;
+  background: #437ece;
   padding: 5px 25px;
   color: #fff;
   font-size: 16px;
@@ -999,14 +999,14 @@ button.searchBarInner.btn.btn-primary {
   padding: 12px !important;
 }
 
-.catchy_titles_section.row ul li{
+.catchy_titles_section.row ul li {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
 }
 
-.catchy_titles_section.row ul li > span{
+.catchy_titles_section.row ul li > span {
   width: 50%;
 }
 
@@ -1022,7 +1022,7 @@ button.searchBarInner.btn.btn-primary {
   line-height: 180%;
 }
 
-.catchy_titles_section.row span.catchy_titles_section_product_name{
+.catchy_titles_section.row span.catchy_titles_section_product_name {
   text-align: start;
   color: var(--secondary-color);
   font-size: 18px;
@@ -1032,7 +1032,7 @@ button.searchBarInner.btn.btn-primary {
 }
 
 .catchy_titles_section.row span.catchy_titles_section_title:before {
-  content: '';
+  content: "";
   width: 5px;
   height: 5px;
   background: #000;

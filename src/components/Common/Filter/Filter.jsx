@@ -13,6 +13,10 @@ export default function Filter({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [sliderValues, setSliderValues] = useState({
+    minVal: 0,
+    maxVal: 0,
+  });
   let price = categoryAttributes?.price;
   let brands = categoryAttributes?.brands;
   let attributeCategories = categoryAttributes?.attribute_categories;
@@ -32,7 +36,11 @@ export default function Filter({
 
     switch (filterName) {
       case "price":
-        updatedParams.price = value;
+        if (!isChecked) {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        } else {
+          updatedParams.price = value;
+        }
         break;
       case "available":
         if (value) {
@@ -72,7 +80,12 @@ export default function Filter({
         }
         break;
       case "range":
-        updatedParams[key] = value;
+        if (!isChecked) {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        } else {
+          updatedParams[key] = value;
+        }
+
         break;
       case "dropdown":
         if (isChecked) {
@@ -121,20 +134,38 @@ export default function Filter({
         handelFilterActions("available", "available", false);
         document.getElementById("Available").checked = false;
       }
- if ( removedParam == "brand") {
-     Object.values(searchParam)[0]
-       .split(",")
-       .map((item) => {
-         handelFilterActions("brand", "brand", { brand: item }, false);
-         document.getElementById(`${item}`).checked = false;
-       });
- }
+      if (removedParam == "brand") {
+        Object.values(searchParam)[0]
+          .split(",")
+          .map((item) => {
+            console.log(item, "items");
+            handelFilterActions("brand", "brand", { brand: item }, false);
+            document.getElementById(`${item}`).checked = false;
+          });
+      }
 
+      if (removedParam.toLowerCase() == "price") {
+        handelFilterActions(
+          "price",
+          "price",
+          `${price[0]?.min_price},${price[0]?.max_price}`,
+          false
+        );
+        setSliderValues((pre) => {
+          return {
+            ...pre,
+            maxVal: price[0]?.max_price,
+            minVal: price[0]?.min_price,
+          };
+        });
+      }
 
-
-      if (removedParam !== "available" && removedParam != "brand") {
-    
-        
+      if (
+        removedParam !== "available" &&
+        removedParam != "brand" &&
+        removedParam.toLowerCase() != "price" &&
+        removedParam.toLowerCase() != "sort"
+      ) {
         let arrayToGetFilteredObject = [];
         attributeCategories.map((item, index) => {
           let filteredArray = item.attributes.filter(
@@ -150,7 +181,6 @@ export default function Filter({
           arrayToGetFilteredObject[0][0]
         );
 
-      
         let countAttribute = 1;
         if (filteredArrayOfAttributeValues?.type == "dropdown") {
           countAttribute++;
@@ -178,11 +208,45 @@ export default function Filter({
               });
             }
           }
+        } else {
+          let min =
+            filteredArrayOfAttributeValues.maxValue -
+              filteredArrayOfAttributeValues.minValue >=
+            1
+              ? filteredArrayOfAttributeValues.minValue
+              : 0;
+
+          let max =
+            filteredArrayOfAttributeValues.maxValue -
+              filteredArrayOfAttributeValues.minValue >=
+            1
+              ? filteredArrayOfAttributeValues.maxValue
+              : 100;
+          // alert(min)
+
+          setSliderValues((prevVal) => {
+            return {
+              ...prevVal,
+              minVal: min,
+              maxVal: max,
+            };
+          });
+          // thumb thumb--left ${classForSlider}
+
+          handelFilterActions("range", removedParam, `${min},${max}`, false);
+          document.getElementById(`thumb thumb--left ${removedParam}`).value =
+            min;
+          document.getElementById(`thumb thumb--right ${removedParam}`).value =
+            max;
         }
-       
+
         // const checkForValueType = arrayToGetFilteredObject[0][0].values.some(
         //   (value) => value.name === "yes" || value.name === "no"
         // );
+      }
+
+      if(removedParam.toLowerCase() == "sort"){
+delete searchParams.sort
       }
     }
   }, [removedParam]);
@@ -194,11 +258,12 @@ export default function Filter({
           Price
           {price?.[0]?.min_price != null && (
             <MultiRangeSlider
+              rangeVal={sliderValues}
               min={price[0]?.min_price}
               max={price[0]?.max_price}
               unit="€"
               onChange={({ min, max }) => {
-                handelFilterActions("price", "price", `${min},${max}`);
+                handelFilterActions("price", "price", `${min},${max}`, true);
               }}
             />
           )}
@@ -350,6 +415,8 @@ export default function Filter({
                         </Accordion.Header>
                         <Accordion.Body>
                           <MultiRangeSlider
+                            rangeVal={sliderValues}
+                            classForSlider={attribute.name}
                             min={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
@@ -369,7 +436,8 @@ export default function Filter({
                               handelFilterActions(
                                 "range",
                                 attribute.name,
-                                `${min},${max}`
+                                `${min},${max}`,
+                                true
                               );
                             }}
                           />
