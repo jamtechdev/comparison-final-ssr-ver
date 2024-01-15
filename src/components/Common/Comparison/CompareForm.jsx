@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import SearchList from "../../Search/SearchList";
 import { useRouter, usePathname } from "next/navigation";
-
 import { addCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 import CompareSearchList from "@/components/Search/CompareSearchList";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,7 +26,7 @@ export default function CompareForm({
   const [isFocusedProductSecond, setFocusedProductSecond] = useState(false);
   const [isFocusedProductThird, setFocusedProductThird] = useState(false);
   const [isHandelChildValue, setIsHandelChildValue] = useState(false);
-  const [isLoading,setIsLoading]=useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const handleFieldChange = (fieldName, value) => {
     // Update the state based on the field being changed
     setFormFields((prevFields) => ({
@@ -46,13 +45,13 @@ export default function CompareForm({
     setIsHandelChildValue(true);
   };
   const handelComparison = () => {
-      const isValidObject = (fieldValue) =>
+    const isValidObject = (fieldValue) =>
       typeof fieldValue === "object" && Object.keys(fieldValue).length > 0;
-      const isProductFieldsValid =
+    const isProductFieldsValid =
       isValidObject(formFields.productFirst) &&
       isValidObject(formFields.productSecond);
-      if (isProductFieldsValid) {
-        setIsLoading(true)
+    if (isProductFieldsValid) {
+      setIsLoading(true)
       const permalinksArray = [
         formFields.productFirst,
         formFields.productSecond,
@@ -68,10 +67,10 @@ export default function CompareForm({
       dispatch(addCompareProduct(formFields));
       setTimeout(() => {
         handelCloseCompareModel();
-      }, 1000);
+      }, 2500);
       router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
-          scroll: false,
-        });
+        scroll: false,
+      });
     }
   };
   const handelCategoryUpdate = (id) => {
@@ -137,7 +136,7 @@ export default function CompareForm({
                 searchedKeyWord={formFields.productFirst}
                 inputPostion={"productFirst"}
                 handelCategoryUpdate={handelCategoryUpdate}
-              ></CompareSearchList>
+              />
             )}
           </div>
           <div className="position-relative w-100">
@@ -164,7 +163,7 @@ export default function CompareForm({
                 searchedKeyWord={formFields.productSecond}
                 inputPostion={"productSecond"}
                 category_id={formFields.category}
-              ></CompareSearchList>
+              />
             )}
           </div>
           <div className="position-relative">
@@ -191,23 +190,23 @@ export default function CompareForm({
                 searchedKeyWord={formFields.productThird}
                 inputPostion={"productThird"}
                 category_id={formFields.category}
-              ></CompareSearchList>
+              />
             )}
           </div>
           <Button disabled={isLoading} onClick={handelComparison} className="site_main_btn d-flex justify-content-center align-items-center gap-2">
-          {isLoading && <>
-            <RotatingLines
-              visible={true}
-              height="20"
-              width="20"
-              strokeColor="#fff"
-              strokeWidth="5"
-              animationDuration="0.75"
-              ariaLabel="rotating-lines-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-            /> 
-          </>}
+            {isLoading && <>
+              <RotatingLines
+                visible={true}
+                height="20"
+                width="20"
+                strokeColor="#fff"
+                strokeWidth="5"
+                animationDuration="0.75"
+                ariaLabel="rotating-lines-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            </>}
             Compare
           </Button>
         </div>

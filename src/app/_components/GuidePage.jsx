@@ -17,13 +17,13 @@ import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 
 export default function GuidePage({
   slug,
+  categorySlug,
   guideData,
   attributesForTable,
   filters,
   searchParams,
 }) {
   useChart();
-
   const [isShown, setIsShown] = useState(false);
 
   const guide = guideData[0]?.data;
@@ -154,10 +154,7 @@ export default function GuidePage({
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
-              <BreadCrumb
-                firstPageName="Electronics"
-                secondPageName="Samsung New VR Headset Oculus 2.0"
-              />
+              <BreadCrumb firstPageName={categorySlug} secondPageName={slug} />
             </Col>
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{guide?.title}</h1>
@@ -453,8 +450,9 @@ export default function GuidePage({
                       return (
                         <li key={index}>
                           <Link
-                            href={`${data?.category_url}/${data?.permalink}`}
+                            href={`/${data?.category_url}/${data?.permalink}`}
                             style={{ color: "#437ece" }}
+                            scroll={false}
                           >
                             {data?.short_name}
                           </Link>
@@ -731,7 +729,7 @@ export default function GuidePage({
                               sizes="100%"
                               alt=""
                             />
-                            <span>155.87 €</span>
+                            x <span>155.87 €</span>
                           </div>
                         </td>
                       </tr>
@@ -760,7 +758,7 @@ export default function GuidePage({
                       <div className="product-card" key={index}>
                         <Link
                           className="product-link-cover"
-                          href={`${data?.category_url}/${data?.permalink}`}
+                          href={`/${data?.category_url}/${data?.permalink}`}
                           style={{ color: "#326ebf" }}
                         ></Link>
                         <img

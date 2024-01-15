@@ -7,6 +7,7 @@ import Comparison from "./Comparison";
 export default async function PageSwitch({
   PageType,
   slug,
+  categorySlug,
   pageData,
   searchParams,
 }) {
@@ -15,10 +16,10 @@ export default async function PageSwitch({
     case "Guide":
       const guide = pageData[0]?.data;
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
-
       PageToRender = (
         <GuidePage
           slug={slug}
+          categorySlug={categorySlug}
           guideData={pageData}
           filters={attributes?.data}
           attributesForTable={attributes?.data?.attribute_categories}
@@ -66,6 +67,8 @@ export default async function PageSwitch({
       );
       PageToRender = (
         <Comparison
+          slug={slug}
+          categorySlug={categorySlug}
           comparisonData={pageData}
           categroyAttributes={compareDataCatAttribute}
           graphComparisonProsCons={graphComparisonProsCons}
@@ -164,7 +167,7 @@ async function getGraphComparisonProsCons(data) {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
       }
-    );  
+    );
     if (!response.ok) {
     }
     return response.json();

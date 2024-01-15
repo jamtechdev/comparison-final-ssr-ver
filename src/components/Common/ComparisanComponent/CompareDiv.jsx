@@ -15,16 +15,19 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Image from "next/image";
 import CompareModal from "@/components/Common/Comparison/CompareModal";
 import ComparisonTable from "../CompareTable/ComparisonTable";
-
+import { deleteCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 import CompareForm from "../Comparison/CompareForm";
 import CompareCard from "./CompareCard";
 import CompareAccordionTab from "./CompareAccordionTab";
-
+import { useDispatch } from "react-redux"
 function CompareDiv({
   comparisonData,
   categroyAttributes,
   graphComparisonProsCons,
+  slug,
+  categorySlug,
 }) {
+  const dispatch = useDispatch();
   const products = comparisonData.map((item) => item.data);
   const [isOpen, setIsOpen] = useState(false);
   const [compareProDataFirst, setCompareProDataFirst] = useState(
@@ -35,31 +38,18 @@ function CompareDiv({
     products[2] || []
   );
   const handelRemoveProductFormComparison = (index) => {
-    let permalink = "";
     if (index === 0) {
       setCompareProDataFirst([]);
-      // console.log(compareProDataSec.length > 0 && compareProDataThird.length > 0)
-
-      // if (compareProDataSec.length > 0 && compareProDataThird.length > 0) {
-      //   permalink = `${compareProDataSec.permalink}-vs-${compareProDataThird.permalink}`
-      //   console.log(permalink, "Only second and third")
-      //   return;
-      // } else if (compareProDataSec.length > 0) {
-      //   permalink = `${compareProDataSec.permalink}`
-      //   console.log(permalink, "Only second")
-      //   return;
-      // } else if (compareProDataThird.length > 0) {
-      //   permalink = `${compareProDataThird.permalink}`
-      //   console.log(permalink, "Only third")
-      //   return;
-      // }
+      dispatch(deleteCompareProduct({ key: "productFirst" }))
       return;
     }
     if (index === 1) {
       setCompareProDataSec([]);
+      dispatch(deleteCompareProduct({ key: "productSecond" }))
       return;
     }
     if (index === 2) {
+      dispatch(deleteCompareProduct({ key: "productThird" }))
       setCompareProDataThird([]);
       return;
     }
@@ -92,14 +82,12 @@ function CompareDiv({
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
-                firstPageName="Iteck’s Store"
-                secondPageName={`${compareProDataFirst?.name || ""} vs ${
-                  compareProDataSec?.name || ""
-                } ${
-                  compareProDataThird?.name
+                firstPageName={categorySlug}
+                secondPageName={`${compareProDataFirst?.name || ""} vs ${compareProDataSec?.name || ""
+                  } ${compareProDataThird?.name
                     ? `vs ${compareProDataThird?.name}`
                     : ""
-                }`}
+                  }`}
               />
             </Col>
             <Col md={12}>
@@ -200,7 +188,7 @@ function CompareDiv({
               <h2 className="site-main-heading">Compare Other Products</h2>
               <CompareForm
                 location="ON_MAIN_PAGE"
-                handelCloseCompareModel={() => {}}
+                handelCloseCompareModel={() => { }}
               />
             </Col>
           </Row>

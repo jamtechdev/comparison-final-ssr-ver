@@ -178,17 +178,21 @@ select {
   width: 70%;
   height: 100%;
 }
-
+/* fontsize increase */
 .site_tabs .nav-item button {
-  color: var(--heading-color) !important;
+  color: rgb(39 48 78 / 80%) !important;
   font-weight: 400 !important;
   font-size: 18px;
-  line-height: 44px;
-  opacity: 0.7;
-  padding: 0 20px;
+  line-height: 20px;
+  opacity: 1;
+  padding: 8px 20px;
   border: none;
   position: relative;
-  font-family: "BR Hendrix Medium";
+  height: 100%;
+}
+
+.site_tabs.graph-tab.compare-graph-tabs .nav-item button{
+  max-width: 150px;
 }
 
 .site_tabs .nav-item button:focus,
@@ -226,6 +230,26 @@ select {
 
 .site_tabs.graph-tab .nav-item button.active {
   color: var(--secondary-color) !important;
+}
+
+.site_tabs.graph-tab .nav-item button:after {
+  content: attr(data-count);
+  position: absolute;
+  top: calc(100% - (-13px));
+  left: 0;
+  right: 0;
+  background: var(--color-bg);
+  padding: 8px;
+  border-radius: 5px;
+  color: var(--white-color);
+  min-width: 38px;
+  display: block;
+  width: fit-content;
+  margin: auto;
+}
+
+.graph-tab-content {
+  padding: 50px 0 0;
 }
 
 .question-marker-icon {
@@ -1039,4 +1063,12 @@ button.searchBarInner.btn.btn-primary {
   display: inline-block;
   border-radius: 50px;
   margin: 0 8px 4px 0;
+}
+
+.comparison-tool .not-availabel {
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 100%;
+  min-height: 104px;
 }
