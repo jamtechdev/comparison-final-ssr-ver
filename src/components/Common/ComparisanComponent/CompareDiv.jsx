@@ -15,56 +15,45 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Image from "next/image";
 import CompareModal from "@/components/Common/Comparison/CompareModal";
 import ComparisonTable from "../CompareTable/ComparisonTable";
-import WhyAccordionTab from "@/components/Product/WhyAccordionTab";
+import { deleteCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 import CompareForm from "../Comparison/CompareForm";
 import CompareCard from "./CompareCard";
-
+import CompareAccordionTab from "./CompareAccordionTab";
+import { useDispatch } from "react-redux"
 function CompareDiv({
   comparisonData,
   categroyAttributes,
   graphComparisonProsCons,
+  slug,
+  categorySlug,
 }) {
-  const products = comparisonData.map(item => item.data);
+  const dispatch = useDispatch();
+  const products = comparisonData.map((item) => item.data);
   const [isOpen, setIsOpen] = useState(false);
   const [compareProDataFirst, setCompareProDataFirst] = useState(
     products[0] || []
   );
-  const [compareProDataSec, setCompareProDataSec] = useState(
-    products[1] || []
-  );
+  const [compareProDataSec, setCompareProDataSec] = useState(products[1] || []);
   const [compareProDataThird, setCompareProDataThird] = useState(
     products[2] || []
   );
   const handelRemoveProductFormComparison = (index) => {
-    let permalink = "";
     if (index === 0) {
-      setCompareProDataFirst([])
-      // console.log(compareProDataSec.length > 0 && compareProDataThird.length > 0)
-   
-      // if (compareProDataSec.length > 0 && compareProDataThird.length > 0) {
-      //   permalink = `${compareProDataSec.permalink}-vs-${compareProDataThird.permalink}`
-      //   console.log(permalink, "Only second and third")
-      //   return;
-      // } else if (compareProDataSec.length > 0) {
-      //   permalink = `${compareProDataSec.permalink}`
-      //   console.log(permalink, "Only second")
-      //   return;
-      // } else if (compareProDataThird.length > 0) {
-      //   permalink = `${compareProDataThird.permalink}`
-      //   console.log(permalink, "Only third")
-      //   return;
-      // }
-       return;
+      setCompareProDataFirst([]);
+      dispatch(deleteCompareProduct({ key: "productFirst" }))
+      return;
     }
     if (index === 1) {
-      setCompareProDataSec([])
+      setCompareProDataSec([]);
+      dispatch(deleteCompareProduct({ key: "productSecond" }))
       return;
     }
     if (index === 2) {
-      setCompareProDataThird([])
+      dispatch(deleteCompareProduct({ key: "productThird" }))
+      setCompareProDataThird([]);
       return;
     }
-  }
+  };
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -78,6 +67,14 @@ function CompareDiv({
     compareProDataSec,
     compareProDataThird,
   ];
+  // This funcation rmeove undefined and empty object
+  let comparisonProductData = comparisonTableProductData.filter(
+    (item) =>
+      item !== "" &&
+      typeof item !== "undefined" &&
+      Object.keys(item).length !== 0
+  );
+
   return (
     <>
       <section className="product-header">
@@ -85,7 +82,7 @@ function CompareDiv({
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
-                firstPageName="Iteck’s Store"
+                firstPageName={categorySlug}
                 secondPageName={`${compareProDataFirst?.name || ""} vs ${compareProDataSec?.name || ""
                   } ${compareProDataThird?.name
                     ? `vs ${compareProDataThird?.name}`
@@ -113,7 +110,9 @@ function CompareDiv({
                   products={products}
                   productIndex={0}
                   setIsOpen={setIsOpen}
-                  handelRemoveProductFormComparison={handelRemoveProductFormComparison}
+                  handelRemoveProductFormComparison={
+                    handelRemoveProductFormComparison
+                  }
                 />
                 <div className="comparison-vs-img">
                   <Image src="/images/vs.svg" width={118} height={40} alt="" />
@@ -124,7 +123,9 @@ function CompareDiv({
                   products={products}
                   productIndex={1}
                   setIsOpen={setIsOpen}
-                  handelRemoveProductFormComparison={handelRemoveProductFormComparison}
+                  handelRemoveProductFormComparison={
+                    handelRemoveProductFormComparison
+                  }
                 />
                 <div className="comparison-vs-img">
                   <Image src="/images/vs.svg" width={118} height={40} alt="" />
@@ -135,7 +136,9 @@ function CompareDiv({
                   products={products}
                   productIndex={2}
                   setIsOpen={setIsOpen}
-                  handelRemoveProductFormComparison={handelRemoveProductFormComparison}
+                  handelRemoveProductFormComparison={
+                    handelRemoveProductFormComparison
+                  }
                 />
               </div>
             </Col>
@@ -152,12 +155,8 @@ function CompareDiv({
               <h2 className="site-main-heading">Graph Comparison</h2>
             </Col>
           </Row>
-          <WhyAccordionTab
-            sendProductProps={[
-              compareProDataFirst,
-              compareProDataSec,
-              compareProDataThird && compareProDataThird,
-            ]}
+          <CompareAccordionTab
+            sendProductProps={comparisonProductData}
             product={graphComparisonProsCons}
             pageType={"comparison"}
           />
@@ -171,7 +170,7 @@ function CompareDiv({
             </Col>
             <Col md={12} className="table-section-mobile">
               <ComparisonTable
-                products={comparisonTableProductData}
+                products={comparisonProductData}
                 categoryAttributes={categroyAttributes}
               />
             </Col>
@@ -187,7 +186,10 @@ function CompareDiv({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare Other Products</h2>
-              <CompareForm location="ON_MAIN_PAGE" handelCloseCompareModel={() => { }} />
+              <CompareForm
+                location="ON_MAIN_PAGE"
+                handelCloseCompareModel={() => { }}
+              />
             </Col>
           </Row>
         </Container>

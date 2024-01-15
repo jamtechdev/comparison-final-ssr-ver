@@ -1,6 +1,7 @@
 "use client";
 import { homePage } from "@/_services";
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 function CompareSearchList({
   isFocused,
   onSendValue,
@@ -9,6 +10,7 @@ function CompareSearchList({
   handelCategoryUpdate,
   category_id
 }) {
+  const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const [filteredProData, setFilteredProData] = useState([]);
   const handleChange = (data, inputPostion) => {
     if (inputPostion === "productFirst") { handelCategoryUpdate(data.category_id) }
@@ -22,8 +24,7 @@ function CompareSearchList({
         homePage
           .getAllSearchedProducts(searchedKeyWord)
           .then((res) => {
-            setFilteredProData(res.data.data);
-
+            setFilteredProData(res.data.data)
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
@@ -33,7 +34,36 @@ function CompareSearchList({
           .getAllSearchedProductsByCategory(category_id
             , searchedKeyWord)
           .then((res) => {
-            setFilteredProData(res.data.data);
+            if (inputPostion === "productSecond") {
+              if (res.data.data.length > 0) {
+                const filteredProducts = res.data.data.filter(item => 
+                  item.name !== reduxData?.productSecond?.name && 
+                  item.name !== reduxData?.productThird?.name);
+
+                setFilteredProData(filteredProducts)
+              }
+            }
+
+            if (inputPostion === "productSecond") {
+              if (res.data.data.length > 0) {
+                const filteredProducts = res.data.data.filter(item => 
+                  item.name !== reduxData?.productFirst?.name && 
+                  item.name !== reduxData?.productThird?.name);
+
+                setFilteredProData(filteredProducts)
+              }
+            }
+            if (inputPostion === "productThird") {
+              if (res.data.data.length > 0) {
+                const filteredProducts = res.data.data.filter(item =>
+                  item.name !== reduxData?.productFirst?.name &&
+                  item.name !== reduxData?.productSecond?.name
+                )
+                
+                setFilteredProData(filteredProducts)
+              }
+            }
+
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
@@ -71,6 +101,7 @@ function CompareSearchList({
                 </h2>
               </div>
             ))}
+          {filteredProData?.length < 0 || (!filteredProData) && <p>NO MATCH FOUND</p>}
         </div>
       </div>
     </>

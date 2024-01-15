@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { RotatingLines } from "react-loader-spinner";
 export default function BottomBar({
   isCollapsed,
   handleToggleCollapse,
@@ -16,6 +16,7 @@ export default function BottomBar({
   const compareGuideData = useSelector(
     (state) => state.comparePro.guideCompareProduct
   );
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function BottomBar({
   };
 
   const handelComparison = () => {
+    setIsLoading(true)
     const categoryInURL = compareGuideData[0]?.category_url;
     const sortedPermalinksArray = [...compareGuideData].sort((a, b) =>
       a.permalink.localeCompare(b.permalink)
@@ -103,7 +105,20 @@ export default function BottomBar({
               )}
 
               {compareGuideData?.length > 1 && (
-                <button className="btn btn-primary" onClick={handelComparison}>
+                <button disabled={isLoading} className="btn btn-primary" onClick={handelComparison}>
+                  {isLoading && <>
+                    <RotatingLines
+                      visible={true}
+                      height="20"
+                      width="20"
+                      strokeColor="#fff"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      ariaLabel="rotating-lines-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                    />
+                  </>}
                   Compare
                 </button>
               )}

@@ -24,6 +24,17 @@ export const compareProSlice = createSlice({
         }
       }
     },
+    deleteCompareProduct: (state, action) => {
+      if (state.compareProduct[0]?.productFirst && action.payload.key === "productFirst") {
+        state.compareProduct[0].productFirst = undefined
+      }
+      if (state.compareProduct[0]?.productSecond && action.payload.key === "productSecond") {
+        state.compareProduct[0].productSecond = undefined
+      }
+      if (state.compareProduct[0]?.productThird && action.payload.key === "productThird") {
+        state.compareProduct[0].productThird = undefined
+      }
+    },
     addCompareProductForGuide: (state, action) => {
       const comparedProGuide = {
         id: action.payload.id,
@@ -60,7 +71,8 @@ export const {
   addCompareProductForGuide,
   removeCompareProductForGuide,
   resetGuideCompareProduct,
-  updateCompareProduct
+  updateCompareProduct,
+  deleteCompareProduct
 } = compareProSlice.actions;
 
 export default compareProSlice.reducer;
