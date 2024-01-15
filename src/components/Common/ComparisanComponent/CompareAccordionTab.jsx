@@ -20,12 +20,12 @@ import QuestionIcon from "@/components/Svg/QuestionIcon";
 const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   const [activatab, setActiveTab] = useState("tab-1");
   const [apiData, setApiData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // extract the permalink from the sendProductProps
   const extractedUrls = sendProductProps.map((entry) => entry?.permalink);
 
   const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleAccordionChange = (value, key) => {
     if (key == "pros") {
@@ -78,7 +78,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
       });
   }, [activatab]);
 
-  // this funcation spilt the vs value
+  // this funcation spilt the vs value from ApiData
   const splitVsValue = (value) => {
     const splitValue = value.split("vs");
     const boldedPart = `<strong>${splitValue[0]}</strong>`;
@@ -89,22 +89,28 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     }
   };
 
-  // custom Data attr add
-  useEffect(() => {
-    // Get the list item with the specified role
-    const listItem = document.querySelector('[role="presentation"]');
-
-    // Check if the list item with the specified role exists
-    if (listItem) {
-      // Get the first child element of the list item
-      const firstChild = listItem.firstElementChild;
-
-      // Check if the first child element exists
-      if (firstChild) {
-        // Add the data-count attribute to the first child
-        firstChild.setAttribute("data-count", "4.0");
-      }
+  //  find button and add data Attribute to button
+  const getColorBasedOnScore = (score) => {
+    if (score >= 9.7) {
+      return "#FFC107";
+    } else if (score >= 8.7 && score < 9.2) {
+      return "#FFC107";
+    } else {
+      return "#FF8F0B";
     }
+  };
+  useEffect(() => {
+    // Find all buttons that are children of an element with role="presentation" add data-count
+    const attributeAdd = document.querySelectorAll(
+      '[role="presentation"] button'
+    );
+    attributeAdd.forEach((button, index) => {
+      button.setAttribute("data-count", sendProductProps[index]?.overall_score);
+      button.style.setProperty(
+        "--color-bg",
+        getColorBasedOnScore(sendProductProps[index]?.overall_score)
+      );
+    });
   }, []);
 
   return (
