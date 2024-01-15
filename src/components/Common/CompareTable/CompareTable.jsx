@@ -107,11 +107,11 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
       const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
 
       if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-        const targetString =
-          arrayOfObjects?.[0]?.attribute_value === "yes" && "yes";
+        const targetString = stringArray[0] === "yes" ? "yes" : "no";
         numericValues = stringArray.filter((value) => value === targetString);
       }
     }
+
     const topValue = numericValues[0];
     const occurrences = numericValues?.filter(
       (value) => value === topValue
@@ -131,7 +131,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
 
     // Adjust this function according to your context as I don't have the complete code
     // It would be good to ensure that you have the required variables (finalProducts) in scope.
-    console.log(arrayOfObjects, "array of objects");
+
     return (
       <>
         {arrayOfObjects.map((item, attrIndex) => (
