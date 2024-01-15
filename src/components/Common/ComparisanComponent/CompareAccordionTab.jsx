@@ -127,7 +127,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
           <Tabs
             defaultActiveKey="tab-1"
             id="Review-tab"
-            className="site_tabs graph-tab"
+            className="site_tabs graph-tab compare-graph-tabs"
             activeKey={activatab}
             onSelect={handleTabChange}
             data-count="4.0"

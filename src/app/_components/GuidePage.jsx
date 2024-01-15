@@ -750,7 +750,7 @@ export default function GuidePage({
                       <div className="product-card" key={index}>
                         <Link
                           className="product-link-cover"
-                          href={`${data?.category_url}/${data?.permalink}`}
+                          href={`/${data?.category_url}/${data?.permalink}`}
                           style={{ color: "#326ebf" }}
                         ></Link>
                         <img
