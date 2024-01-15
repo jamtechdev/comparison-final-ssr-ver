@@ -29,6 +29,7 @@ export default function Filter({
       initialNoOfCategories * 2;
     setPagination({ ...pagination, [categoryName]: updatedPage });
   };
+
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
     const currentParams = new URLSearchParams(searchParams.toString());
 
@@ -122,6 +123,7 @@ export default function Filter({
     //call the next router for srr
     router.push(`?${currentParams.toString()}`, { scroll: false });
   };
+
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
     delete updatedParams[key];
     currentParams.delete([key]);
@@ -245,8 +247,8 @@ export default function Filter({
         // );
       }
 
-      if(removedParam.toLowerCase() == "sort"){
-delete searchParams.sort
+      if (removedParam.toLowerCase() == "sort") {
+        delete searchParams.sort;
       }
     }
   }, [removedParam]);
