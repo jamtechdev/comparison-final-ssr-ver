@@ -230,12 +230,12 @@ select {
 }
 
 .site_tabs.graph-tab .nav-item button:after {
-  content:attr(data-count);
+  content: attr(data-count);
   position: absolute;
   top: calc(100% - (-13px));
   left: 0;
   right: 0;
-  background: var(--secondary-color);
+  background: var(--color-bg);
   padding: 8px;
   border-radius: 5px;
   color: var(--white-color);
