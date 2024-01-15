@@ -22,6 +22,7 @@ export default async function Page({
           PageType="Comparison"
           slug={slug}
           pageData={pageData}
+          categorySlug={category}
           searchParams={{}}
         />
       );
@@ -38,6 +39,7 @@ export default async function Page({
         return (
           <PageSwitch
             PageType={slugType.type}
+            categorySlug={category}
             slug={slug}
             pageData={pageData}
             searchParams={searchParams}

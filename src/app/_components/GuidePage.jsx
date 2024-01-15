@@ -17,13 +17,13 @@ import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 
 export default function GuidePage({
   slug,
+  categorySlug,
   guideData,
   attributesForTable,
   filters,
   searchParams,
 }) {
   useChart();
-
   const [isShown, setIsShown] = useState(false);
 
   const guide = guideData[0]?.data;
@@ -146,8 +146,8 @@ export default function GuidePage({
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
-                firstPageName="Electronics"
-                secondPageName="Samsung New VR Headset Oculus 2.0"
+                firstPageName={categorySlug}
+                secondPageName={slug}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>
@@ -209,14 +209,14 @@ export default function GuidePage({
       <section className="ptb-25">
         <Container>
           <Row className="catchy_titles_section mb-3">
-            <Col md={7} className="mx-auto p-0">
+            { Boolean(guide?.show_catchy_titles_in_text) && <>
+              <Col md={7} className="mx-auto p-0">
               <p>
-                {" "}
-                {guideData[0]?.data?.show_catchy_titles_in_text == 1 &&
-                  guideData[0]?.data?.catchy_titles_box_title}{" "}
+                {guide?.show_catchy_titles_in_text == 1 &&
+                  guide?.catchy_titles_box_title}
               </p>
               <ul className="text-center">
-                {guideData[0]?.data?.catchy_titles?.map((item, index) => {
+              {guide?.catchy_titles?.map((item, index) => {
                   return (
                     <li key={index}>
                       <span className="catchy_titles_section_title">
@@ -230,6 +230,7 @@ export default function GuidePage({
                 })}
               </ul>
             </Col>
+            </>}
           </Row>
           <Row>
             <Col md={12}>
@@ -441,8 +442,9 @@ export default function GuidePage({
                       return (
                         <li key={index}>
                           <Link
-                            href={`${data?.category_url}/${data?.permalink}`}
+                            href={`/${data?.category_url}/${data?.permalink}`}
                             style={{ color: "#437ece" }}
+                            scroll={false}
                           >
                             {data?.short_name}
                           </Link>
@@ -719,7 +721,7 @@ export default function GuidePage({
                               sizes="100%"
                               alt=""
                             />
-                            <span>155.87 €</span>
+           x                 <span>155.87 €</span>
                           </div>
                         </td>
                       </tr>

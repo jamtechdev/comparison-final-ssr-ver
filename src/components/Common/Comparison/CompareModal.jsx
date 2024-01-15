@@ -14,35 +14,38 @@ const CompareModal = ({
   const [categoryId, setCategoryId] = useState(reduxData?.category ? reduxData?.category : undefined);
   const handelCloseCompareModel = () => {
     setIsOpen(false);
-    // window.location.reload(true);
   };
-
   const handelCategoryForOffenProduct = (id) => {
     setCategoryId(id)
   }
-
   const handelOffenProductClick = (product) => {
     if (reduxData?.productSecond === undefined) {
       dispatch(updateCompareProduct({ key: 'productSecond', data: product }));
-    return;
+      return;
     }
     if (reduxData?.productThird === undefined) {
       dispatch(updateCompareProduct({ key: 'productThird', data: product }));
       return;
     }
   }
-  
   useEffect(() => {
     if (categoryId) {
       productService.getComparedoftenProduct(categoryId)
         .then((res) => {
-          setOftenProducts(res.data.data);
-        })
+            if (res.data.data.length > 0) {
+              const filteredProducts = res.data.data.filter(item =>
+                item.name !== reduxData?.productSecond?.name &&
+                item.name !== reduxData?.productThird?.name &&
+                item.name !== reduxData?.productFirst?.name);
+              setOftenProducts(filteredProducts)
+            }
+          })
         .catch((error) => {
           console.log(error);
         });
     }
   }, [categoryId])
+
   return (
     <section className="add-product-modal">
       <div className="add-product-modal-header">
