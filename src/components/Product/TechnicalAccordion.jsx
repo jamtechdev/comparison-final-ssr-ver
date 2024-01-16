@@ -522,15 +522,20 @@ const TechnicalAccordion = React.memo(
                                                     fontSize: "15px",
                                                   }}
                                                 >
-                                                  {(attributeValues.attribute_value !=
-                                                  null
-                                                    ? attributeValues.attribute_value
-                                                    : "") +
-                                                    " " +
-                                                    (attributeValues.unit !=
-                                                    null
-                                                      ? attributeValues.unit
-                                                      : "")}
+                                                 {(attributeValues.attribute_value !=
+                                                null
+                                                  ? attributeValues.attribute_value
+                                                  : "") +
+                                                  " " +
+                                                  (attributeValues.attribute_value ===
+                                                    "?" ||
+                                                  attributeValues.attribute_value ===
+                                                    "-"
+                                                    ? ""
+                                                    : attributeValues.unit !=
+                                                      null
+                                                    ? attributeValues.unit
+                                                    : "")}
                                                 </span>
                                               }
 
@@ -612,7 +617,13 @@ const TechnicalAccordion = React.memo(
                                                   ? attributeValues.attribute_value
                                                   : "") +
                                                   " " +
-                                                  (attributeValues.unit != null
+                                                  (attributeValues.attribute_value ===
+                                                    "?" ||
+                                                  attributeValues.attribute_value ===
+                                                    "-"
+                                                    ? ""
+                                                    : attributeValues.unit !=
+                                                      null
                                                     ? attributeValues.unit
                                                     : "")}
                                               </span>
@@ -808,12 +819,19 @@ const TechnicalAccordion = React.memo(
                                                   fontSize: "15px",
                                                 }}
                                               >
+                                                
                                                 {(attributeValues.attribute_value !=
                                                 null
                                                   ? attributeValues.attribute_value
                                                   : "") +
                                                   " " +
-                                                  (attributeValues.unit != null
+                                                  (attributeValues.attribute_value ===
+                                                    "?" ||
+                                                  attributeValues.attribute_value ===
+                                                    "-"
+                                                    ? ""
+                                                    : attributeValues.unit !=
+                                                      null
                                                     ? attributeValues.unit
                                                     : "")}
                                               </span>
@@ -897,7 +915,12 @@ const TechnicalAccordion = React.memo(
                                                 ? attributeValues.attribute_value
                                                 : "") +
                                                 " " +
-                                                (attributeValues.unit != null
+                                                (attributeValues.attribute_value ===
+                                                  "?" ||
+                                                attributeValues.attribute_value ===
+                                                  "-"
+                                                  ? ""
+                                                  : attributeValues.unit != null
                                                   ? attributeValues.unit
                                                   : "")}
                                             </span>

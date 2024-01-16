@@ -86,8 +86,16 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
       );
 
     const arrayOfObjects = [...filterData];
-    const numericValues = arrayOfObjects
-      .map((obj) => parseFloat(obj.attribute_value))
+    let numericValues = [];
+
+    numericValues = arrayOfObjects
+      .map((obj) => {
+        if (!isNaN(parseFloat(obj.attribute_value))) {
+          return parseFloat(obj.attribute_value);
+        } else {
+          return obj.attribute_value;
+        }
+      })
       .filter((value) => !isNaN(value));
 
     if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
@@ -96,19 +104,35 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
       numericValues.sort((a, b) => a - b);
     }
 
+    // Adding logic for String case
+    if (numericValues.length === 0) {
+      const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
+
+      if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
+        const targetString = stringArray[0] === "yes" ? "yes" : "no";
+        numericValues = stringArray.filter((value) => value === targetString);
+      }
+    }
+
     const topValue = numericValues[0];
     const occurrences = numericValues?.filter(
       (value) => value === topValue
     ).length;
 
-    if (occurrences == 1 || occurrences == 2) {
+    if (occurrences === 1 || occurrences === 2) {
       arrayOfObjects.forEach((obj) => {
-        const numericValue = parseFloat(obj.attribute_value);
-        if (numericValue === topValue && !obj.attribute_value.includes("⭐")) {
+        const numericValue =
+          typeof topValue === "string"
+            ? obj.attribute_value
+            : parseFloat(obj.attribute_value);
+        if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
           obj.attribute_value += "⭐";
         }
       });
     }
+
+    // Adjust this function according to your context as I don't have the complete code
+    // It would be good to ensure that you have the required variables (finalProducts) in scope.
 
     return (
       <>
@@ -118,7 +142,7 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
               <>
                 <div>
                   {item?.attribute_value.split("⭐")[0]}{" "}
-                  {item.unit?.split("-")[0] && item.unit.split("-")[0]}
+                  {item?.unit?.split("-")[0] && item?.unit?.split("-")[0]}
                   <span className="tooltip-title-2">
                     <img
                       style={{ float: "right", paddingRight: "5px" }}
@@ -130,7 +154,14 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
               </>
             ) : (
               <>
-                {item?.attribute_value} {item.unit && item.unit}
+                {item?.attribute_value === "-" || item?.attribute_value === null || item?.attribute_value === "?" ? (
+                  "-"
+                ) : (
+                  <>
+                    {" "}
+                    {item?.attribute_value} {item.unit ? item.unit : ""}
+                  </>
+                )}
               </>
             )}
           </td>
