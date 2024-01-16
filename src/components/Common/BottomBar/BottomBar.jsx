@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
+import CompareModal from "../Comparison/CompareModal";
 export default function BottomBar({
   isCollapsed,
   handleToggleCollapse,
@@ -16,7 +17,8 @@ export default function BottomBar({
   const compareGuideData = useSelector(
     (state) => state.comparePro.guideCompareProduct
   );
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -24,19 +26,30 @@ export default function BottomBar({
   const removeItem = (id) => {
     dispatch(removeCompareProductForGuide(id));
   };
+  // console.log(compareGuideData.length);
 
   const handelComparison = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     const categoryInURL = compareGuideData[0]?.category_url;
-    const sortedPermalinksArray = [...compareGuideData].sort((a, b) =>
-      a.permalink.localeCompare(b.permalink)
-    );
-    const permalinks = sortedPermalinksArray.map((item) => item.permalink);
-    const permalinkSlug = permalinks.join("-vs-");
-    dispatch(resetGuideCompareProduct());
-    router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
-      scroll: false,
-    });
+    if (compareGuideData?.length === 1) {
+      router.push(
+        `/${categoryInURL}/${compareGuideData[0]?.permalink}`,
+        undefined,
+        {
+          scroll: false,
+        }
+      );
+    } else {
+      const sortedPermalinksArray = [...compareGuideData].sort((a, b) =>
+        a.permalink.localeCompare(b.permalink)
+      );
+      const permalinks = sortedPermalinksArray.map((item) => item.permalink);
+      const permalinkSlug = permalinks.join("-vs-");
+      dispatch(resetGuideCompareProduct());
+      router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
+        scroll: false,
+      });
+    }
   };
   return (
     <>
@@ -57,9 +70,9 @@ export default function BottomBar({
                 <span>{compareGuideData?.length}</span>
               </div>
               {isCollapsed ? (
-                <i className="ri-arrow-down-s-line"></i>
-              ) : (
                 <i className="ri-arrow-up-s-line"></i>
+              ) : (
+                <i className="ri-arrow-down-s-line"></i>
               )}
             </div>
           </div>
@@ -84,13 +97,14 @@ export default function BottomBar({
                     <i
                       className="ri-close-fill"
                       onClick={() => removeItem(item.id)}
+                      style={{ cursor: "pointer" }}
                     ></i>
                   </li>
                 );
               })}
             </ul>
             <div className="bottom_bar_compare_list_footer">
-              {compareGuideData?.length > 1 && compareGuideData?.length < 3 && (
+              {compareGuideData?.length < 3 && (
                 <span>
                   <i
                     className="ri-add-fill"
@@ -100,13 +114,18 @@ export default function BottomBar({
                           ? "pointer"
                           : "not-allowed",
                     }}
+                    onClick={() => setIsOpen(true)}
                   ></i>
                 </span>
               )}
 
-              {compareGuideData?.length > 1 && (
-                <button disabled={isLoading} className="btn btn-primary" onClick={handelComparison}>
-                  {isLoading && <>
+              <button
+                disabled={isLoading}
+                className="btn btn-primary"
+                onClick={handelComparison}
+              >
+                {isLoading && (
+                  <>
                     <RotatingLines
                       visible={true}
                       height="20"
@@ -118,13 +137,30 @@ export default function BottomBar({
                       wrapperStyle={{}}
                       wrapperClass=""
                     />
-                  </>}
-                  Compare
-                </button>
-              )}
+                  </>
+                )}
+                Compare
+              </button>
             </div>
           </div>
         </section>
+      )}
+      {isOpen && (
+        <CompareModal
+          setIsOpen={setIsOpen}
+          compareProDataFirst={{
+            name: compareGuideData[0]?.name,
+            permalink: compareGuideData[0]?.permalink,
+            category_id: compareGuideData[0]?.category_id,
+            category_url: compareGuideData[0]?.category_url,
+          }}
+          compareProDataSec={{
+            name: compareGuideData[1]?.name,
+            permalink: compareGuideData[1]?.permalink,
+            category_id: compareGuideData[1]?.category_url,
+            category_url: compareGuideData[1]?.category_url,
+          }}
+        />
       )}
     </>
   );

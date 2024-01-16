@@ -1298,8 +1298,11 @@ export default function Product({
                                                                     ? attributeValues.attribute_value
                                                                     : "") +
                                                                     " " +
-                                                                    (attributeValues.unit !=
-                                                                    null
+                                                                    (attributeValues.attribute_value ===
+                                                                    "?"
+                                                                      ? ""
+                                                                      : attributeValues.unit !=
+                                                                        null
                                                                       ? attributeValues.unit
                                                                       : "")}
                                                                 </span>

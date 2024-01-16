@@ -8,62 +8,69 @@ function CompareSearchList({
   searchedKeyWord,
   inputPostion,
   handelCategoryUpdate,
-  category_id
+  category_id,
 }) {
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const [filteredProData, setFilteredProData] = useState([]);
   const handleChange = (data, inputPostion) => {
-    if (inputPostion === "productFirst") { handelCategoryUpdate(data.category_id) }
+    if (inputPostion === "productFirst") {
+      handelCategoryUpdate(data.category_id);
+    }
     onSendValue(inputPostion, data);
   };
   useEffect(() => {
-    if (typeof searchedKeyWord === "object") { return }
+    if (typeof searchedKeyWord === "object") {
+      return;
+    }
 
     if (searchedKeyWord.trim() != "" && searchedKeyWord != undefined) {
       if (inputPostion === "productFirst") {
         homePage
           .getAllSearchedProducts(searchedKeyWord)
           .then((res) => {
-            setFilteredProData(res.data.data)
+            setFilteredProData(res.data.data);
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
           });
       } else {
         homePage
-          .getAllSearchedProductsByCategory(category_id
-            , searchedKeyWord)
+          .getAllSearchedProductsByCategory(category_id, searchedKeyWord)
           .then((res) => {
             if (inputPostion === "productSecond") {
               if (res.data.data.length > 0) {
-                const filteredProducts = res.data.data.filter(item => 
-                  item.name !== reduxData?.productSecond?.name && 
-                  item.name !== reduxData?.productThird?.name);
+                const filteredProducts = res.data.data.filter(
+                  (item) =>
+                    item.name !== reduxData?.productSecond?.name &&
+                    item.name !== reduxData?.productThird?.name
+                );
 
-                setFilteredProData(filteredProducts)
+                setFilteredProData(filteredProducts);
               }
             }
 
             if (inputPostion === "productSecond") {
               if (res.data.data.length > 0) {
-                const filteredProducts = res.data.data.filter(item => 
-                  item.name !== reduxData?.productFirst?.name && 
-                  item.name !== reduxData?.productThird?.name);
+                const filteredProducts = res.data.data.filter(
+                  (item) =>
+                    item.name !== reduxData?.productFirst?.name &&
+                    item.name !== reduxData?.productThird?.name
+                );
 
-                setFilteredProData(filteredProducts)
+                setFilteredProData(filteredProducts);
               }
             }
             if (inputPostion === "productThird") {
               if (res.data.data.length > 0) {
-                const filteredProducts = res.data.data.filter(item =>
-                  item.name !== reduxData?.productFirst?.name &&
-                  item.name !== reduxData?.productSecond?.name
-                )
-                
-                setFilteredProData(filteredProducts)
+                const filteredProducts = res.data.data.filter(
+                  (item) =>
+                    item.name !== reduxData?.productFirst?.name &&
+                    item.name !== reduxData?.productSecond?.name
+                );
+
+                setFilteredProData(filteredProducts);
               }
             }
-
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
@@ -78,13 +85,7 @@ function CompareSearchList({
 
   return (
     <>
-      <div
-        className={
-          (isFocused && searchedKeyWord?.length > 0)
-            ? ""
-            : "d-none"
-        }
-      >
+      <div className={isFocused && searchedKeyWord?.length > 0 ? "" : "d-none"}>
         <div className="search-dropdown-list">
           {/* compare home page */}
           {filteredProData &&
@@ -98,11 +99,20 @@ function CompareSearchList({
                   style={{ cursor: "pointer" }}
                 >
                   {capitalizeFirstLetter(item?.name)}
-                  <span><i>(Smartphone)</i></span>
+                  <span>
+                    <i>
+                      (
+                      {item?.category_url
+                        ? item?.category_url.split("-").join(" ")
+                        : ""}
+                      )
+                    </i>
+                  </span>
                 </h2>
               </div>
             ))}
-          {filteredProData?.length < 0 || (!filteredProData) && <p>NO MATCH FOUND</p>}
+          {filteredProData?.length < 0 ||
+            (!filteredProData && <p>NO MATCH FOUND</p>)}
         </div>
       </div>
     </>
