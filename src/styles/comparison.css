@@ -16,6 +16,7 @@
   .comparison-product-spec
   .comparison-product-item:nth-child(even) {
   background: #f4f7fb;
+  height: 46px;
 }
 
 .comparison-card {
