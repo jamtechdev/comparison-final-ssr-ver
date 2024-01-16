@@ -19,7 +19,7 @@ import { deleteCompareProduct } from "@/redux/features/compareProduct/comparePro
 import CompareForm from "../Comparison/CompareForm";
 import CompareCard from "./CompareCard";
 import CompareAccordionTab from "./CompareAccordionTab";
-import { useDispatch } from "react-redux"
+import { useDispatch } from "react-redux";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -40,16 +40,16 @@ function CompareDiv({
   const handelRemoveProductFormComparison = (index) => {
     if (index === 0) {
       setCompareProDataFirst([]);
-      dispatch(deleteCompareProduct({ key: "productFirst" }))
+      dispatch(deleteCompareProduct({ key: "productFirst" }));
       return;
     }
     if (index === 1) {
       setCompareProDataSec([]);
-      dispatch(deleteCompareProduct({ key: "productSecond" }))
+      dispatch(deleteCompareProduct({ key: "productSecond" }));
       return;
     }
     if (index === 2) {
-      dispatch(deleteCompareProduct({ key: "productThird" }))
+      dispatch(deleteCompareProduct({ key: "productThird" }));
       setCompareProDataThird([]);
       return;
     }
@@ -83,11 +83,13 @@ function CompareDiv({
             <Col md={12}>
               <BreadCrumb
                 firstPageName={categorySlug}
-                secondPageName={`${compareProDataFirst?.name || ""} vs ${compareProDataSec?.name || ""
-                  } ${compareProDataThird?.name
+                secondPageName={`${compareProDataFirst?.name || ""} vs ${
+                  compareProDataSec?.name || ""
+                } ${
+                  compareProDataThird?.name
                     ? `vs ${compareProDataThird?.name}`
                     : ""
-                  }`}
+                }`}
               />
             </Col>
             <Col md={12}>
@@ -188,7 +190,7 @@ function CompareDiv({
               <h2 className="site-main-heading">Compare Other Products</h2>
               <CompareForm
                 location="ON_MAIN_PAGE"
-                handelCloseCompareModel={() => { }}
+                handelCloseCompareModel={() => {}}
               />
             </Col>
           </Row>
