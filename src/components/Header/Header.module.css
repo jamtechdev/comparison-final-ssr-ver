@@ -82,7 +82,7 @@
 .categories_nav_item .inner_container {
   max-width: 950px;
   display: flex;
-  justify-content: space-between;
+  gap: 40px;
   margin: auto;
   position: relative;
 }

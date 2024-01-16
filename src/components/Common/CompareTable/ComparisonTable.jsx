@@ -6,6 +6,7 @@ import QuestionIcon from "../../Svg/QuestionIcon";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
+import formatValue from "@/_helpers/formatValue";
 
 export default function ComparisonTable({ products, categoryAttributes }) {
   const router = useRouter();
@@ -80,20 +81,38 @@ export default function ComparisonTable({ products, categoryAttributes }) {
     const filterData = copiedFinalProducts
       .slice(0, defaultNo)
       .flatMap((product) =>
-        product.attributes[category.name]?.filter(
+        product.attributes[category.name].filter(
           (obj) => obj.attribute === catAttribute.name
         )
       );
 
     const arrayOfObjects = [...filterData];
-    const numericValues = arrayOfObjects
-      .map((obj) => parseFloat(obj?.attribute_value))
-      ?.filter((value) => !isNaN(value));
+    let numericValues = [];
+
+    numericValues = arrayOfObjects
+      .map((obj) => {
+        if (!isNaN(parseFloat(obj.attribute_value))) {
+          return parseFloat(obj.attribute_value);
+        } else {
+          return obj.attribute_value;
+        }
+      })
+      .filter((value) => !isNaN(value));
 
     if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
-      numericValues?.sort((a, b) => b - a);
+      numericValues.sort((a, b) => b - a);
     } else {
-      numericValues?.sort((a, b) => a - b);
+      numericValues.sort((a, b) => a - b);
+    }
+
+    // Adding logic for String case
+    if (numericValues.length === 0) {
+      const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
+
+      if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
+        const targetString = stringArray[0] === "yes" ? "yes" : "no";
+        numericValues = stringArray.filter((value) => value === targetString);
+      }
     }
 
     const topValue = numericValues[0];
@@ -101,35 +120,42 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       (value) => value === topValue
     ).length;
 
-    if (occurrences == 1 || occurrences == 2) {
+    if (occurrences === 1 || occurrences === 2) {
       arrayOfObjects.forEach((obj) => {
-        const numericValue = parseFloat(obj?.attribute_value);
-        if (numericValue === topValue && !obj?.attribute_value.includes("⭐")) {
+        const numericValue =
+          typeof topValue === "string"
+            ? obj.attribute_value
+            : parseFloat(obj.attribute_value);
+        if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
           obj.attribute_value += "⭐";
         }
       });
     }
 
+    // Adjust this function according to your context as I don't have the complete code
+    // It would be good to ensure that you have the required variables (finalProducts) in scope.
+
     return (
       <>
         {arrayOfObjects.map((item, attrIndex) => (
           <td key={attrIndex}>
-            {item?.attribute_value.includes("⭐") ? (
-              <div>
-                {item?.attribute_value.split("⭐")[0]}{" "}
-                {item?.unit?.split("-")[0] && item?.unit?.split("-")[0]}
-                <div className="tooltip-title-2">
-                  <img
-                    style={{ float: "right", paddingRight: "5px" }}
-                    src="/icons/star.png"
-                  />
-                  <ProsConsToolTip hover_phrase={item.start_phase} />
+            {item.attribute_value.includes("⭐") ? (
+              <>
+                <div>
+                  {item?.attribute_value.split("⭐")[0]}{" "}
+                  {item?.unit?.split("-")[0] && item?.unit?.split("-")[0]}
+                  <span className="tooltip-title-2">
+                    <img
+                      style={{ float: "right", paddingRight: "5px" }}
+                      src="/icons/star.png"
+                    />
+                    <ProsConsToolTip hover_phrase={item.start_phase} />
+                  </span>
                 </div>
-              </div>
-
+              </>
             ) : (
               <>
-                {item?.attribute_value} {item?.unit && item?.unit}
+                {item?.attribute_value} {item.unit && item.unit}
               </>
             )}
           </td>
@@ -137,6 +163,19 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       </>
     );
   };
+
+  const findProductsScoreLabelIndex = (products) => {
+    if (products.length === 0) {
+      return "";
+    }
+    const maxScore = Math.max(...products.map((obj) => obj.overall_score));
+    const winningProductIndex = products
+      .map((obj, index) => (obj.overall_score === maxScore ? index : undefined))
+      .filter((index) => index !== undefined);
+
+    return winningProductIndex.length === 1 ? winningProductIndex[0] : -1000;
+  };
+  const productScoreLabelIndex = findProductsScoreLabelIndex(finalProducts);
 
   return (
     <div
@@ -147,7 +186,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       }
       ref={ref}
     >
-      <Table className="compare-container">
+      <Table className="compare-container comparison-table">
         <thead
           id="testone"
           className={winPos ? "isSticky" : "nonSticky"}
@@ -158,6 +197,14 @@ export default function ComparisonTable({ products, categoryAttributes }) {
             {finalProducts.slice(0, defaultNo).map((product, index) => {
               return (
                 <th key={index}>
+                  {productScoreLabelIndex !== "" &&
+                    productScoreLabelIndex === index && (
+                      <span className="best-tag-product">Winner</span>
+                    )}
+                  {/* {productScoreLabelIndex === -1000 && index === 0 && (
+                    <div className="comparison-tag">draw! No clear winner</div>
+                  )} */}
+
                   <p className="device-name">
                     <span>{index + 1}</span>
                     <a href={`/${product?.category_url}/${product?.permalink}`}>
@@ -301,11 +348,11 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                           ? "#093673"
                           : product.overall_score >= 5 &&
                             product.overall_score < 7.5
-                            ? "#437ECE"
-                            : " #85B2F1",
+                          ? "#437ECE"
+                          : " #85B2F1",
                     }}
                   >
-                    {product.overall_score}
+                    {formatValue(product.overall_score)}
                   </span>
                 </td>
               );
@@ -325,14 +372,14 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                     )}
                     {products[0]?.technical_score_descriptions
                       ?.when_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.when_matters
-                          }
-                        </p>
-                      )}
+                      <p className="mb-2">
+                        <b>When it matters: </b>{" "}
+                        {
+                          products[0]?.technical_score_descriptions
+                            ?.when_matters
+                        }
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
@@ -357,14 +404,14 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                     )}
                     {products[0]?.technical_score_descriptions
                       ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+                      <p className="mb-2">
+                        <b>When it matters: </b>
+                        {
+                          products[0]?.technical_score_descriptions
+                            ?.when_it_matters
+                        }
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
@@ -381,24 +428,24 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                   <div className="tooltip-display-content">
                     {products[0]?.ratio_qulitiy_points_descriptions
                       ?.description && (
-                        <p className="mb-2">
-                          <b>What it is: </b>{" "}
-                          {
-                            products[0]?.ratio_qulitiy_points_descriptions
-                              ?.description
-                          }
-                        </p>
-                      )}
+                      <p className="mb-2">
+                        <b>What it is: </b>{" "}
+                        {
+                          products[0]?.ratio_qulitiy_points_descriptions
+                            ?.description
+                        }
+                      </p>
+                    )}
                     {products[0]?.technical_score_descriptions
                       ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+                      <p className="mb-2">
+                        <b>When it matters: </b>{" "}
+                        {
+                          products[0]?.technical_score_descriptions
+                            ?.when_it_matters
+                        }
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
@@ -442,9 +489,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                       .map((product, productIndex) => {
                         return (
                           <td key={productIndex}>
-                            <span
-                              className="count"
-                            >
+                            <span className="count">
                               {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
                               {product.attributes[
                                 category.name
@@ -467,22 +512,22 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                               {catAttribute.name}
                               {(catAttribute.description ||
                                 catAttribute.when_matters) && (
-                                  <div className="tooltip-display-content">
-                                    {catAttribute?.description && (
-                                      <p className="mb-2">
-                                        <b>What it is: </b>
-                                        {catAttribute?.description}
-                                      </p>
-                                    )}
+                                <div className="tooltip-display-content">
+                                  {catAttribute?.description && (
+                                    <p className="mb-2">
+                                      <b>What it is: </b>
+                                      {catAttribute?.description}
+                                    </p>
+                                  )}
 
-                                    {catAttribute?.when_matters && (
-                                      <p className="mb-2">
-                                        <b>When it matters: </b>{" "}
-                                        {catAttribute?.when_matters}
-                                      </p>
-                                    )}
-                                  </div>
-                                )}
+                                  {catAttribute?.when_matters && (
+                                    <p className="mb-2">
+                                      <b>When it matters: </b>{" "}
+                                      {catAttribute?.when_matters}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
                             </div>
                           </th>
                           {addAsterisksToTopValue(
@@ -495,17 +540,17 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                     })}
                   {category.attributes.length >
                     (pagination[category.name] || initialNoOfCategories) && (
-                      <tr className="text-center show_more_row">
-                        <td colSpan="6">
-                          <span
-                            className="show_more"
-                            onClick={() => handlePagination(category.name)}
-                          >
-                            SHOW MORE <i className="ri-add-line"></i>
-                          </span>
-                        </td>
-                      </tr>
-                    )}
+                    <tr className="text-center show_more_row">
+                      <td colSpan="6">
+                        <span
+                          className="show_more"
+                          onClick={() => handlePagination(category.name)}
+                        >
+                          SHOW MORE <i className="ri-add-line"></i>
+                        </span>
+                      </td>
+                    </tr>
+                  )}
                 </Fragment>
               );
             })}
@@ -520,4 +565,4 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       )}
     </div>
   );
-};
+}

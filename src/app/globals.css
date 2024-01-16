@@ -192,7 +192,8 @@ select {
 }
 
 .site_tabs.graph-tab.compare-graph-tabs .nav-item button{
-  max-width: 150px;
+  max-width: 200px;
+  font-size: 16px !important;
 }
 
 .site_tabs .nav-item button:focus,
@@ -447,14 +448,15 @@ input[type="checkbox"]:checked {
   font-weight: 600;
 }
 .not-availabel .price {
-  padding: 5px 10px;
+  padding: 0px 18px;
   border-radius: 100px;
   text-align: center;
-  font-size: 14px;
+  font-size: 17px;
   background-color: #d90808;
-  width: 72px;
   color: #fff;
   font-weight: 600;
+  line-height: 30px !important;
+  min-width: 100px !important;
 }
 
 /* .color-section{
@@ -1071,4 +1073,10 @@ button.searchBarInner.btn.btn-primary {
   padding: 0 20px;
   height: 100%;
   min-height: 104px;
+}
+
+table.compare-container.table.comparison-table .best-list-item li img {
+  width: 100%;
+  height: auto;
+  max-width: 30%;
 }

@@ -35,12 +35,12 @@ const Loader = ({ pageType }) => {
         <RotatingLines
           height={80}
           width={80}
-          color="red"
+          strokeColor="#27304e"
           wrapperStyle={{}}
           wrapperClass=""
           visible={true}
           ariaLabel="oval-loading"
-          secondaryColor="#437ECE"
+          secondaryColor="#27304e"
           strokeWidth={2}
           strokeWidthSecondary={2}
         />

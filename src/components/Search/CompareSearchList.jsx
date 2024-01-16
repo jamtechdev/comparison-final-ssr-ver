@@ -98,6 +98,7 @@ function CompareSearchList({
                   style={{ cursor: "pointer" }}
                 >
                   {capitalizeFirstLetter(item?.name)}
+                  <span><i>(Smartphone)</i></span>
                 </h2>
               </div>
             ))}

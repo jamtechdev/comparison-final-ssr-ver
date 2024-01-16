@@ -99,12 +99,19 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   //  find button and add data Attribute to button
   const getColorBasedOnScore = (score) => {
     if (score >= 9.7) {
-      return "#FFC107";
+      return "#28A28C";
     } else if (score >= 8.7 && score < 9.2) {
-      return "#FFC107";
+      return "#437ECE";
     } else {
       return "#FF8F0B";
     }
+  };
+  //if value is an integer and not equal to 10, add decimal that value
+  const formatValue = (value) => {
+    if (value % 1 === 0 && value !== 10) {
+      return `${value}.0`;
+    }
+    return value;
   };
   useEffect(() => {
     // Find all buttons that are children of an element with role="presentation" add attribute
@@ -112,7 +119,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
       '[role="presentation"] button'
     );
     attributeAdd.forEach((button, index) => {
-      button.setAttribute("data-count", sendProductProps[index]?.overall_score);
+      button.setAttribute(
+        "data-count",
+        formatValue(sendProductProps[index]?.overall_score)
+      );
       button.style.setProperty(
         "--color-bg",
         getColorBasedOnScore(sendProductProps[index]?.overall_score)
