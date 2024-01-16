@@ -15,24 +15,33 @@ export const compareProSlice = createSlice({
     updateCompareProduct: (state, action) => {
       const { key, data } = action.payload || {};
       // Check if key is defined and data is an object
-      if (key && typeof data === 'object') {
+      if (key && typeof data === "object") {
         if (key === "productSecond") {
-          state.compareProduct[0].productSecond = data
+          state.compareProduct[0].productSecond = data;
         }
         if (key === "productThird") {
-          state.compareProduct[0].productThird = data
+          state.compareProduct[0].productThird = data;
         }
       }
     },
     deleteCompareProduct: (state, action) => {
-      if (state.compareProduct[0]?.productFirst && action.payload.key === "productFirst") {
-        state.compareProduct[0].productFirst = undefined
+      if (
+        state.compareProduct[0]?.productFirst &&
+        action.payload.key === "productFirst"
+      ) {
+        state.compareProduct[0].productFirst = undefined;
       }
-      if (state.compareProduct[0]?.productSecond && action.payload.key === "productSecond") {
-        state.compareProduct[0].productSecond = undefined
+      if (
+        state.compareProduct[0]?.productSecond &&
+        action.payload.key === "productSecond"
+      ) {
+        state.compareProduct[0].productSecond = undefined;
       }
-      if (state.compareProduct[0]?.productThird && action.payload.key === "productThird") {
-        state.compareProduct[0].productThird = undefined
+      if (
+        state.compareProduct[0]?.productThird &&
+        action.payload.key === "productThird"
+      ) {
+        state.compareProduct[0].productThird = undefined;
       }
     },
     addCompareProductForGuide: (state, action) => {
@@ -61,6 +70,7 @@ export const compareProSlice = createSlice({
     },
     resetGuideCompareProduct: (state) => {
       state.guideCompareProduct = [];
+      state.compareProduct = [];
       // ... reset other state properties if needed
     },
   },
@@ -72,7 +82,7 @@ export const {
   removeCompareProductForGuide,
   resetGuideCompareProduct,
   updateCompareProduct,
-  deleteCompareProduct
+  deleteCompareProduct,
 } = compareProSlice.actions;
 
 export default compareProSlice.reducer;

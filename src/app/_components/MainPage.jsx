@@ -1,6 +1,6 @@
 "use client";
 import { Button, Col, Container, Form, Row, Tab, Tabs } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchList from "@/components/Search/SearchList";
 import LatesGuid from "@/components/Common/ProductSlider/LatesGuid";
 import Sponsor from "@/components/Common/Sponsor/Sponsor";
@@ -12,9 +12,14 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CompareForm from "@/components/Common/Comparison/CompareForm";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { resetGuideCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
+
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const dispatch = useDispatch();
+
   const handleBlur = () => {
     setTimeout(() => {
       setIsFocused(false);
@@ -24,6 +29,10 @@ export default function MainPage({ bannerCounts, favSlider }) {
     setsearch(e.target.value);
   };
   const router = useRouter();
+  useEffect(() => {
+    dispatch(resetGuideCompareProduct());
+  }, []);
+
   return (
     <>
       <section className="hero_section home">
