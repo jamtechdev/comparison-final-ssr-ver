@@ -28,7 +28,7 @@ export default async function PageSwitch({
       );
       break;
     case "Blog":
-      PageToRender = <BlogPage slug={slug} blogData={pageData} />;
+      PageToRender = <BlogPage slug={slug} categorySlug={categorySlug} blogData={pageData} />;
       break;
     case "Product":
       const product = pageData[0]?.data;
@@ -41,6 +41,7 @@ export default async function PageSwitch({
       PageToRender = (
         <ProductPage
           slug={slug}
+          categorySlug={categorySlug}
           productData={pageData}
           productCatAttributes={productCatAttribute}
           compareByCatID={getProductCompare}

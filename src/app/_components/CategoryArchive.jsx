@@ -10,8 +10,8 @@ function CategoryArchive({ slug, ArchiveData }) {
           <Row>
             <Col md={12}>
               <BreadCrumb
-                firstPageName={ArchiveData[0].data?.title}
-                secondPageName=""
+                firstPageName=""
+                secondPageName={slug}
               />
             </Col>
             <Col md={12}>

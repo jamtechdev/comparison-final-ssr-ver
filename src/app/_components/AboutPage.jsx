@@ -12,7 +12,7 @@ function AboutPage({ aboutData }) {
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName="" secondPageName="About us" />
+              <BreadCrumb firstPageName="" secondPageName="about-us" />
             </Col>
 
             <Col md={12}>
