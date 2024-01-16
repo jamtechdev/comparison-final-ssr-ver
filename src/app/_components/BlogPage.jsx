@@ -9,7 +9,7 @@ import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSlid
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 
-export default function BlogPage({ slug, blogData }) {
+export default function BlogPage({ slug, blogData, categorySlug}) {
   return (
     <>
       <section className="product-header">
@@ -17,8 +17,8 @@ export default function BlogPage({ slug, blogData }) {
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
-                firstPageName="Blog"
-                secondPageName={blogData[0]?.data?.title}
+                firstPageName={categorySlug}
+                secondPageName={slug}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>

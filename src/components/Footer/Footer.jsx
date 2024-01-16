@@ -145,9 +145,10 @@ export default function Footer({ footerData }) {
               {footerData &&
                 footerData?.column_four?.categories?.map((cat, index) => {
                   return (
-                    <li key={index}>
-                      <Link href="">{cat.title}</Link>
-                    </li>
+                    cat?.title && <li key={index}>
+                    <Link href={`/${cat.title}`}>{cat.title}</Link>
+                  </li>
+                    
                   );
                 })}
             </ul>

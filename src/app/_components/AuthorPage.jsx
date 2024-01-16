@@ -5,18 +5,17 @@ import LatesGuid from "@/components/Common/ProductSlider/LatesGuid";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-function AuthorPage(authorData) {
-
+function AuthorPage({ authorData, paramData }) {
   return (
     <>
       <section className="breadcrumb-section">
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName="" secondPageName="Blog Archive" />
+              <BreadCrumb firstPageName="author" secondPageName={paramData} />
             </Col>
             <Col md={12}>
-              <h1 className="heading-primary">{authorData.authorData.name}</h1>
+              <h1 className="heading-primary">{authorData.name}</h1>
             </Col>
           </Row>
         </Container>
@@ -29,8 +28,8 @@ function AuthorPage(authorData) {
                 <div className="author-page-section">
                   <img
                     src={
-                      authorData.authorData.image
-                        ? authorData.authorData.image
+                      authorData.image
+                        ? authorData.image
                         : "/images/nofound.png"
                     }
                     width={0}
@@ -39,13 +38,13 @@ function AuthorPage(authorData) {
                     alt=""
                   />
                   <div className="author-page-section-footer">
-                    <span>{authorData.authorData.name}</span>
+                    <span>{authorData?.name}</span>
                   </div>
                 </div>
-                {authorData?.authorData?.name}
+                {authorData?.name}
                 <br />
                 <br />
-                {authorData?.authorData?.name}
+                {authorData?.name}
                 <br />
                 <br />
               </div>
@@ -56,7 +55,7 @@ function AuthorPage(authorData) {
       <section>
         <Container>
           <Row className="my-3">
-            {authorData?.authorData?.latest_guides.length > 0 && (
+            {authorData?.latest_guides?.length > 0 && (
               <Col md={12}>
                 <h2 className="heading-primary secondary related-guides">
                   Latest Guides
@@ -65,16 +64,14 @@ function AuthorPage(authorData) {
             )}
 
             <Col md={12}>
-              {authorData?.authorData?.latest_guides.length > 0 && (
-                <LatesGuid
-                  favSlider={authorData?.authorData?.latest_guides.slice(0, 10)}
-                />
+              {authorData?.latest_guides?.length > 0 && (
+                <LatesGuid favSlider={authorData?.latest_guides.slice(0, 10)} />
               )}
             </Col>
           </Row>
         </Container>
       </section>
-      {authorData?.authorData?.latest_reviews?.length > 0 && (
+      {authorData?.latest_reviews?.length > 0 && (
         <section>
           <Container>
             <Row className="my-3">
@@ -84,12 +81,9 @@ function AuthorPage(authorData) {
                 </h2>
               </Col>
               <Col md={12}>
-                {authorData?.authorData?.latest_reviews?.length > 0 && (
+                {authorData?.latest_reviews?.length > 0 && (
                   <ReviewSlider
-                    favSlider={authorData?.authorData?.latest_reviews.slice(
-                      0,
-                      9
-                    )}
+                    favSlider={authorData?.latest_reviews.slice(0, 9)}
                   />
                 )}
               </Col>
@@ -101,7 +95,7 @@ function AuthorPage(authorData) {
       <section className="blog-slides">
         <Container>
           <Row className="my-3">
-            {authorData?.authorData?.blog_posts.length > 0 && (
+            {authorData?.blog_posts?.length > 0 && (
               <>
                 <Col md={12}>
                   <h2 className="heading-primary secondary blog-post">
@@ -109,9 +103,7 @@ function AuthorPage(authorData) {
                   </h2>
                 </Col>
                 <Col md={12}>
-                  <BlogSlider
-                    blogData={authorData?.authorData?.blog_posts.slice(0, 8)}
-                  />
+                  <BlogSlider blogData={authorData?.blog_posts?.slice(0, 8)} />
                 </Col>
               </>
             )}

@@ -13,7 +13,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
             <Container>
               <Row>
                 <Col md={12}>
-                  <BreadCrumb firstPageName="Blog Archive" secondPageName="" />
+                  <BreadCrumb firstPageName="" secondPageName={slug} />
                 </Col>
 
                 <Col md={12}>
