@@ -11,12 +11,31 @@ export default async function Page() {
   );
 }
 export async function generateMetadata(params) {
+  const meta_data = await getMetaData();
+
   return {
-    title:  "Comparision web",
+    title: meta_data?.data?.title || "Comparison web",
     generator: "Comparison web",
     applicationName: "Comparison web",
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
-    description:  "Comparision web",
+    description: meta_data?.data?.description || "Comparison web",
   };
+}
+async function getMetaData() {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/homepage/meta`,
+    {
+      next: { revalidate: 600 },
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      },
+    }
+  );
+  if (!response.ok) {
+  }
+  return response.json();
 }
