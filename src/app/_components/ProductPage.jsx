@@ -12,8 +12,6 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
-import Compare from "@/components/Common/Compare/Compare";
-import MobileAccordion from "../../components/Common/MobileAccordion/mobileAccordion";
 import ThumbSlider from "@/components/Common/ThumbSlider/ThumbSlider";
 import Image from "next/image";
 import WhyAccordionTab from "@/components/Product/WhyAccordionTab";

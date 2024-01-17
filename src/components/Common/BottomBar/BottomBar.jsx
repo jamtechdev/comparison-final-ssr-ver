@@ -26,7 +26,6 @@ export default function BottomBar({
   const removeItem = (id) => {
     dispatch(removeCompareProductForGuide(id));
   };
-  console.log(compareGuideData.length);
 
   const handelComparison = () => {
     setIsLoading(true);
@@ -142,7 +141,7 @@ export default function BottomBar({
                 Compare
               </button>
             </div>
-          </div>  
+          </div>
         </section>
       )}
       {isOpen && <CompareModal location="ON_GUIDE" setIsOpen={setIsOpen} />}

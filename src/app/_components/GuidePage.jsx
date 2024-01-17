@@ -9,7 +9,6 @@ import Filter from "@/components/Common/Filter/Filter";
 import ProductListing from "@/components/Common/ProductListing/ProductListing";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import ProductSkeleton from "@/components/Common/ProductListing/ProductSkeleton";
-import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
 import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
 import { isAreObjectsEqual } from "@/_helpers";
@@ -152,10 +151,7 @@ export default function GuidePage({
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
-              <BreadCrumb
-                firstPageName={categorySlug}
-                secondPageName={guide}
-              />
+              <BreadCrumb firstPageName={categorySlug} secondPageName={guide} />
             </Col>
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{guide?.heading_title}</h1>

@@ -8,7 +8,7 @@ import {
   BreadcrumbItem,
 } from "react-bootstrap";
 export default function BreadCrum({ firstPageName, secondPageName, pageType }) {
-  console.log(secondPageName);
+  // console.log(secondPageName);
   const router = useRouter();
   return (
     <>

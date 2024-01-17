@@ -18,7 +18,6 @@ export default function CompareForm({
   const getGuideCompareReduxData = useSelector(
     (state) => state.comparePro.guideCompareProduct
   );
-  console.log(reduxData);
   const [formFields, setFormFields] = useState({
     productFirst:
       reduxData?.productFirst || getGuideCompareReduxData?.[0] || null,
@@ -45,10 +44,8 @@ export default function CompareForm({
       productThird: getGuideCompareReduxData?.[2] || null,
     }));
   }, [getGuideCompareReduxData]);
-  console.log(formFields);
   const handleFieldChange = (fieldName, value) => {
     // Update the state based on the field being changed
-    console.log({ [fieldName]: value });
     setFormFields((prevFields) => ({
       ...prevFields,
       [fieldName]: value,
