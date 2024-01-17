@@ -4,47 +4,89 @@ import Image from "next/image";
 import { productService } from "@/_services";
 import { useSelector, useDispatch } from "react-redux";
 import CompareForm from "./CompareForm";
-import { updateCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
-const CompareModal = ({
-  setIsOpen
-}) => {
+import {
+  addCompareProductForGuide,
+  updateCompareProduct,
+} from "@/redux/features/compareProduct/compareProSlice";
+import toast from "react-hot-toast";
+const CompareModal = ({ setIsOpen, location }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
+  const getGuideCompareReduxData = useSelector(
+    (state) => state.comparePro.guideCompareProduct
+  );
   const [oftenProducts, setOftenProducts] = useState();
-  const [categoryId, setCategoryId] = useState(reduxData?.category ? reduxData?.category : undefined);
+  const [categoryId, setCategoryId] = useState(
+    reduxData?.category
+      ? reduxData?.category
+      : undefined || getGuideCompareReduxData[0]?.category_id
+  );
+
   const handelCloseCompareModel = () => {
     setIsOpen(false);
   };
   const handelCategoryForOffenProduct = (id) => {
-    setCategoryId(id)
-  }
-  const handelOffenProductClick = (product) => {
-    if (reduxData?.productSecond === undefined) {
-      dispatch(updateCompareProduct({ key: 'productSecond', data: product }));
-      return;
+    setCategoryId(id);
+  };
+  // console.log(reduxData);
+  const handelOffenProductClick = (product, index) => {
+    if (location === "ON_GUIDE") {
+      if (
+        getGuideCompareReduxData?.length < 3 &&
+        getGuideCompareReduxData?.length != 0
+      ) {
+        let productData = {
+          id: index,
+          name: product.name,
+          category_id: product.category_id,
+          category_url: product.category_url,
+          permalink: product.permalink,
+          image: product.main_image
+            ? product.main_image
+            : "/images/nofound.png",
+        };
+        dispatch(addCompareProductForGuide(productData));
+      } else {
+        toast.error("Maximum 3 products can be compared.");
+        // alert("Maximum 3 products can be compared.");
+      }
+    } else {
+      if (
+        reduxData?.productSecond === undefined ||
+        reduxData?.productSecond === null
+      ) {
+        dispatch(updateCompareProduct({ key: "productSecond", data: product }));
+        return;
+      }
+      if (
+        reduxData?.productThird === undefined ||
+        reduxData?.productThird === null
+      ) {
+        dispatch(updateCompareProduct({ key: "productThird", data: product }));
+        return;
+      }
     }
-    if (reduxData?.productThird === undefined) {
-      dispatch(updateCompareProduct({ key: 'productThird', data: product }));
-      return;
-    }
-  }
+  };
   useEffect(() => {
     if (categoryId) {
-      productService.getComparedoftenProduct(categoryId)
+      productService
+        .getComparedoftenProduct(categoryId)
         .then((res) => {
-            if (res.data.data.length > 0) {
-              const filteredProducts = res.data.data.filter(item =>
+          if (res.data.data.length > 0) {
+            const filteredProducts = res.data.data.filter(
+              (item) =>
                 item.name !== reduxData?.productSecond?.name &&
                 item.name !== reduxData?.productThird?.name &&
-                item.name !== reduxData?.productFirst?.name);
-              setOftenProducts(filteredProducts)
-            }
-          })
+                item.name !== reduxData?.productFirst?.name
+            );
+            setOftenProducts(filteredProducts);
+          }
+        })
         .catch((error) => {
           console.log(error);
         });
     }
-  }, [categoryId])
+  }, [categoryId]);
 
   return (
     <section className="add-product-modal">
@@ -61,7 +103,8 @@ const CompareModal = ({
             </Col>
             <Col md={12}>
               <h2 className="site-main-heading">Add to Comparison</h2>
-              <CompareForm location="ON_MODEL"
+              <CompareForm
+                location="ON_MODEL"
                 handelCloseCompareModel={handelCloseCompareModel}
                 handelCategoryForOffenProduct={handelCategoryForOffenProduct}
               />
@@ -87,7 +130,7 @@ const CompareModal = ({
                   xs={6}
                   className="my-3"
                   key={index}
-                  onClick={() => handelOffenProductClick(item)}
+                  onClick={() => handelOffenProductClick(item, index + 1)}
                 >
                   <div className="review-wrapper">
                     <div className="review-card">
@@ -115,8 +158,8 @@ const CompareModal = ({
                               ? "#093673"
                               : item?.overall_score >= 5 &&
                                 item?.overall_score < 7.5
-                                ? "#437ECE"
-                                : " #85B2F1",
+                              ? "#437ECE"
+                              : " #85B2F1",
                         }}
                       >
                         {item?.overall_score || ""}

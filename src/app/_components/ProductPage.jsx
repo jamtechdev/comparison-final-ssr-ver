@@ -26,7 +26,13 @@ import ComparisonsSlider from "@/components/Common/ComparisonsSlider/comparisons
 
 // import Link from "next/link";
 
-function ProductPage({ productData, productCatAttributes, compareByCatID,slug,categorySlug }) {
+function ProductPage({
+  productData,
+  productCatAttributes,
+  compareByCatID,
+  slug,
+  categorySlug,
+}) {
   let initialDisplay = 5;
   const productsWithAttributeGroup = {};
   const productCopy = productData[0].data;
@@ -121,7 +127,7 @@ function ProductPage({ productData, productCatAttributes, compareByCatID,slug,ca
             <Col md={12}>
               <BreadCrumb
                 firstPageName={categorySlug}
-                secondPageName={product?.heading_title}
+                secondPageName={product}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>

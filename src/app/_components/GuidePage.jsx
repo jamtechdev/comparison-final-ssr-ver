@@ -33,8 +33,6 @@ export default function GuidePage({
     (a, b) => b.overall_score - a.overall_score
   );
 
-  console.log(guideData, "guideData[1]?.data");
-
   const productPagination = guideData[1]?.data?.pagination;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
@@ -146,7 +144,7 @@ export default function GuidePage({
     // console.log(JSON.parse(sortAttribute))
   };
 
-  console.log(products, "products ");
+  // console.log(products, "products ");
 
   return (
     <>
@@ -154,10 +152,13 @@ export default function GuidePage({
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
-              <BreadCrumb firstPageName={categorySlug} secondPageName={guide?.title} />
+              <BreadCrumb
+                firstPageName={categorySlug}
+                secondPageName={guide}
+              />
             </Col>
             <Col md={12} lg={12} xl={9}>
-              <h1 className="site-main-heading">{guide?.title}</h1>
+              <h1 className="site-main-heading">{guide?.heading_title}</h1>
             </Col>
 
             <Col md={12} lg={12} xl={3}>

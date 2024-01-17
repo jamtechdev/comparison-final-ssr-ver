@@ -72,21 +72,33 @@ async function getSlugMetaData(slug) {
   return response.json();
 }
 
-export async function generateMetadata({ params: { slug } }) {
-  if(slug.includes("-vs-")){
+export async function generateMetadata({ params: { slug, category } }) {
+  if (slug.includes("-vs-")) {
+    // console.log(category)
+    const extractedUrls = slug.split("-vs-");
+    const convertStringToMetaData = `${extractedUrls[0]} vs ${extractedUrls[1]} (${category})`;
+    const convertedMetaData = convertStringToMetaData
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+      .replace(/-/g, " ")
+      .replace(/Vs/, "vs") // Ensure 'vs' is in lowercase
+      .replace(/\( /, "(") // Remove space after '('
+      .replace(/ \)/, ")");
+
     return {
-      title: slug || "Comparision web",
+      title: convertedMetaData || "Comparision web",
       generator: "Comparison web",
       applicationName: "Comparison web",
       referrer: "origin-when-cross-origin",
       keywords: ["compare", "product"],
       description: "compare-page",
     };
-  }else{
-     const meta_data = await getSlugMetaData(slug)
-  
+  } else {
+    const meta_data = await getSlugMetaData(slug);
+
     return {
-      title: meta_data?.data?.title || "Comparision web",
+      title: meta_data?.data?.heading_title || "Comparision web",
       generator: "Comparison web",
       applicationName: "Comparison web",
       referrer: "origin-when-cross-origin",
@@ -94,7 +106,6 @@ export async function generateMetadata({ params: { slug } }) {
       description: meta_data?.data?.meta_description || "Comparision web",
     };
   }
-  
 }
 
 async function getSlugType(slug) {
@@ -130,14 +141,10 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
       ];
       break;
     case "Blog":
-      apiUrls = [
-        `${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug}`,
-      ];
+      apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug}`];
       break;
     case "Product":
-      apiUrls = [
-        `${process.env.NEXT_PUBLIC_API_URL}/product/${slug}`,
-      ];
+      apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/product/${slug}`];
       break;
     case "Comparison":
       const permalinks = slug.split("-vs-");

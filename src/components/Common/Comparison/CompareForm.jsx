@@ -15,20 +15,40 @@ export default function CompareForm({
   const router = useRouter();
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
+  const getGuideCompareReduxData = useSelector(
+    (state) => state.comparePro.guideCompareProduct
+  );
+  console.log(reduxData);
   const [formFields, setFormFields] = useState({
-    productFirst: reduxData?.productFirst,
-    productSecond: reduxData?.productSecond,
-    productThird: reduxData?.productThird,
-    category: reduxData?.category,
+    productFirst:
+      reduxData?.productFirst || getGuideCompareReduxData?.[0] || null,
+    productSecond:
+      reduxData?.productSecond || getGuideCompareReduxData?.[1] || null,
+    productThird:
+      reduxData?.productThird || getGuideCompareReduxData?.[2] || null,
+    category:
+      reduxData?.category || getGuideCompareReduxData[0]?.category_id || null,
     location: reduxData?.location ? reduxData?.location : location,
   });
+
   const [isFocusedProductFirst, setFocusedProductFirst] = useState(false);
   const [isFocusedProductSecond, setFocusedProductSecond] = useState(false);
   const [isFocusedProductThird, setFocusedProductThird] = useState(false);
   const [isHandelChildValue, setIsHandelChildValue] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setFormFields((prevFormFields) => ({
+      ...prevFormFields,
+      productFirst: getGuideCompareReduxData?.[0] || null,
+      productSecond: getGuideCompareReduxData?.[1] || null,
+      productThird: getGuideCompareReduxData?.[2] || null,
+    }));
+  }, [getGuideCompareReduxData]);
+  console.log(formFields);
   const handleFieldChange = (fieldName, value) => {
     // Update the state based on the field being changed
+    console.log({ [fieldName]: value });
     setFormFields((prevFields) => ({
       ...prevFields,
       [fieldName]: value,
@@ -51,7 +71,7 @@ export default function CompareForm({
       isValidObject(formFields.productFirst) &&
       isValidObject(formFields.productSecond);
     if (isProductFieldsValid) {
-      setIsLoading(true)
+      setIsLoading(true);
       const permalinksArray = [
         formFields.productFirst,
         formFields.productSecond,
@@ -193,20 +213,26 @@ export default function CompareForm({
               />
             )}
           </div>
-          <Button disabled={isLoading} onClick={handelComparison} className="site_main_btn d-flex justify-content-center align-items-center gap-2">
-            {isLoading && <>
-              <RotatingLines
-                visible={true}
-                height="20"
-                width="20"
-                strokeColor="#fff"
-                strokeWidth="5"
-                animationDuration="0.75"
-                ariaLabel="rotating-lines-loading"
-                wrapperStyle={{}}
-                wrapperClass=""
-              />
-            </>}
+          <Button
+            disabled={isLoading}
+            onClick={handelComparison}
+            className="site_main_btn d-flex justify-content-center align-items-center gap-2"
+          >
+            {isLoading && (
+              <>
+                <RotatingLines
+                  visible={true}
+                  height="20"
+                  width="20"
+                  strokeColor="#fff"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  ariaLabel="rotating-lines-loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              </>
+            )}
             Compare
           </Button>
         </div>

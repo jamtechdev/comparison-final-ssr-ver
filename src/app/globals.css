@@ -191,7 +191,7 @@ select {
   height: 100%;
 }
 
-.site_tabs.graph-tab.compare-graph-tabs .nav-item button{
+.site_tabs.graph-tab.compare-graph-tabs .nav-item button {
   max-width: 200px;
   font-size: 16px !important;
 }
@@ -457,6 +457,16 @@ input[type="checkbox"]:checked {
   font-weight: 600;
   line-height: 30px !important;
   min-width: 100px !important;
+}
+.not-availabel .guide {
+  padding: 5px 10px;
+  border-radius: 100px;
+  text-align: center;
+  font-size: 14px;
+  background-color: #d90808;
+  width: 72px;
+  color: #fff;
+  font-weight: 600;
 }
 
 /* .color-section{
@@ -1079,4 +1089,7 @@ table.compare-container.table.comparison-table .best-list-item li img {
   width: 100%;
   height: auto;
   max-width: 30%;
+}
+.breadcrumb-group .breadcrumb-items.fristWord::first-letter {
+  text-transform: capitalize ;
 }

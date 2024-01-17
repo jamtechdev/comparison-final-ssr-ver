@@ -154,12 +154,22 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
               </>
             ) : (
               <>
-                {item?.attribute_value === "-" || item?.attribute_value === null || item?.attribute_value === "?" ? (
+                {item?.attribute_value === "-" ||
+                item?.attribute_value === null ||
+                item?.attribute_value === "?" ? (
                   "-"
                 ) : (
                   <>
-                    {" "}
-                    {item?.attribute_value} {item.unit ? item.unit : ""}
+                    {item?.attribute_value === "-" ||
+                    item?.attribute_value === null ||
+                    item?.attribute_value === "?" ? (
+                      item?.attribute_value
+                    ) : (
+                      <>
+                        {" "}
+                        {item?.attribute_value} {item.unit ? item.unit : ""}
+                      </>
+                    )}
                   </>
                 )}
               </>

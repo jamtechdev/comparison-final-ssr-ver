@@ -26,7 +26,7 @@ export default function BottomBar({
   const removeItem = (id) => {
     dispatch(removeCompareProductForGuide(id));
   };
-  // console.log(compareGuideData.length);
+  console.log(compareGuideData.length);
 
   const handelComparison = () => {
     setIsLoading(true);
@@ -142,26 +142,10 @@ export default function BottomBar({
                 Compare
               </button>
             </div>
-          </div>
+          </div>  
         </section>
       )}
-      {isOpen && (
-        <CompareModal
-          setIsOpen={setIsOpen}
-          compareProDataFirst={{
-            name: compareGuideData[0]?.name,
-            permalink: compareGuideData[0]?.permalink,
-            category_id: compareGuideData[0]?.category_id,
-            category_url: compareGuideData[0]?.category_url,
-          }}
-          compareProDataSec={{
-            name: compareGuideData[1]?.name,
-            permalink: compareGuideData[1]?.permalink,
-            category_id: compareGuideData[1]?.category_url,
-            category_url: compareGuideData[1]?.category_url,
-          }}
-        />
-      )}
+      {isOpen && <CompareModal location="ON_GUIDE" setIsOpen={setIsOpen} />}
     </>
   );
 }

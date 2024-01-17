@@ -28,7 +28,9 @@ export default async function PageSwitch({
       );
       break;
     case "Blog":
-      PageToRender = <BlogPage slug={slug} categorySlug={categorySlug} blogData={pageData} />;
+      PageToRender = (
+        <BlogPage slug={slug} categorySlug={categorySlug} blogData={pageData} />
+      );
       break;
     case "Product":
       const product = pageData[0]?.data;

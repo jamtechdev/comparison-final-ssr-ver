@@ -82,6 +82,7 @@ function CompareDiv({
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
+                pageType="comparision"
                 firstPageName={categorySlug}
                 secondPageName={`${compareProDataFirst?.name || ""} vs ${
                   compareProDataSec?.name || ""

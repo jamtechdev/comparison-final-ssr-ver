@@ -11,7 +11,7 @@ function CategoryArchive({ slug, ArchiveData }) {
             <Col md={12}>
               <BreadCrumb
                 firstPageName=""
-                secondPageName={ArchiveData[0].data?.title}
+                secondPageName={ArchiveData[0].data}
               />
             </Col>
             <Col md={12}>
@@ -32,7 +32,10 @@ function CategoryArchive({ slug, ArchiveData }) {
                     </div>
                   </Col>
                   <Col md={12}>
-                    <ProductSlider favSlider={item?.guides} indexSlider={index} />
+                    <ProductSlider
+                      favSlider={item?.guides}
+                      indexSlider={index}
+                    />
                   </Col>
                 </Row>
               );

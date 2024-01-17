@@ -106,6 +106,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
       return "#FF8F0B";
     }
   };
+
   //if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {
@@ -114,6 +115,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     return value;
   };
   useEffect(() => {
+    const getColor = ["#FF8F0B", "#437ECE", "#28A28C"];
     // Find all buttons that are children of an element with role="presentation" add attribute
     const attributeAdd = document.querySelectorAll(
       '[role="presentation"] button'
@@ -123,10 +125,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
         "data-count",
         formatValue(sendProductProps[index]?.overall_score)
       );
-      button.style.setProperty(
-        "--color-bg",
-        getColorBasedOnScore(sendProductProps[index]?.overall_score)
-      );
+      button.style.setProperty("--color-bg", getColor[index]);
     });
   }, []);
 

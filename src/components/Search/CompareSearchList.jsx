@@ -28,7 +28,17 @@ function CompareSearchList({
         homePage
           .getAllSearchedProducts(searchedKeyWord)
           .then((res) => {
-            setFilteredProData(res.data.data);
+            // Prioritize results starting with the entered letters
+            const startsWithResults = res.data.data.filter((item) =>
+              item.name.toLowerCase().startsWith(searchedKeyWord.toLowerCase())
+            );
+
+            // Include other results that contain the entered letters
+            const containsResults = res.data.data.filter(
+              (item) => !startsWithResults.includes(item)
+            );
+
+            setFilteredProData([...startsWithResults, ...containsResults]);
           })
           .catch((error) => {
             console.error("Error fetching data:", error);

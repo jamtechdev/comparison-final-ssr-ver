@@ -152,8 +152,10 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
               </>
             ) : (
               <>
-                {item?.attribute_value === "-" || item?.attribute_value === null || item?.attribute_value === "?" ? (
-                  "-"
+                {item?.attribute_value === "-" ||
+                item?.attribute_value === null ||
+                item?.attribute_value === "?" ? (
+                  item?.attribute_value
                 ) : (
                   <>
                     {" "}

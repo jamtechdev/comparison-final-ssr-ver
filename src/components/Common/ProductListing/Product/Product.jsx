@@ -125,6 +125,7 @@ export default function Product({
   const guideComparePro = useSelector(
     (state) => state.comparePro.guideCompareProduct
   );
+  console.log(guideComparePro);
   // console.log(guideComparePro?.length, "checkRedux");
   const handleComparedProduct = (product, position) => {
     if (guideComparePro?.length < 3) {
@@ -482,7 +483,7 @@ export default function Product({
                     ) && (
                       <div className="not-availabel">
                         <span className="txt">NOT AVAILABLE</span>
-                        <span className="price">~ {product?.price} €</span>
+                        <span className="guide">~ {product?.price} €</span>
                       </div>
                     )}
                   {product?.price_websites &&
