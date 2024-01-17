@@ -121,7 +121,7 @@ function ProductPage({ productData, productCatAttributes, compareByCatID,slug,ca
             <Col md={12}>
               <BreadCrumb
                 firstPageName={categorySlug}
-                secondPageName={slug}
+                secondPageName={product?.heading_title}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>

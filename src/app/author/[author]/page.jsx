@@ -7,7 +7,7 @@ export default async function Page(props) {
   const authorData = await aboutUsService.getAuthorById(params?.author);
   return (
     <React.Suspense fallback={<p>Loading....</p>}>
-      <AuthorPage authorData={authorData} paramData={params?.author} />
+      <AuthorPage authorData={authorData} />
     </React.Suspense>
   );
 }

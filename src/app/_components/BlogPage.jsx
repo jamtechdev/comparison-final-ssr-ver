@@ -18,7 +18,7 @@ export default function BlogPage({ slug, blogData, categorySlug}) {
             <Col md={12}>
               <BreadCrumb
                 firstPageName={categorySlug}
-                secondPageName={slug}
+                secondPageName={blogData[0]?.data?.title}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>

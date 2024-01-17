@@ -11,7 +11,7 @@ function CategoryArchive({ slug, ArchiveData }) {
             <Col md={12}>
               <BreadCrumb
                 firstPageName=""
-                secondPageName={slug}
+                secondPageName={ArchiveData[0].data?.title}
               />
             </Col>
             <Col md={12}>

@@ -5,14 +5,14 @@ import LatesGuid from "@/components/Common/ProductSlider/LatesGuid";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-function AuthorPage({ authorData, paramData }) {
+function AuthorPage({ authorData }) {
   return (
     <>
       <section className="breadcrumb-section">
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName="author" secondPageName={paramData} />
+              <BreadCrumb firstPageName="author" secondPageName={authorData.name} />
             </Col>
             <Col md={12}>
               <h1 className="heading-primary">{authorData.name}</h1>

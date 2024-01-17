@@ -154,7 +154,7 @@ export default function GuidePage({
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
-              <BreadCrumb firstPageName={categorySlug} secondPageName={slug} />
+              <BreadCrumb firstPageName={categorySlug} secondPageName={guide?.title} />
             </Col>
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{guide?.title}</h1>
