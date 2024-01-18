@@ -13,7 +13,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
             <Container>
               <Row>
                 <Col md={12}>
-                  <BreadCrumb firstPageName="" secondPageName={slug} />
+                  <BreadCrumb firstPageName={slug} secondPageName={slug} />
                 </Col>
 
                 <Col md={12}>
@@ -78,12 +78,15 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 )}
               </Row>
               {/*---------------- POPULAR REVIEWS -----------------------*/}
-              <Row className="py-3">
-                <Col md={12}>
-                  <h2 className="heading-primary secondary">Popular reviews</h2>
-                </Col>
-                {/* if data found */}
-                {categoryData[0]?.data?.popular_reviews?.length > 0 && (
+              {categoryData[0]?.data?.popular_reviews?.length > 0 && (
+                <Row className="py-3">
+                  <Col md={12}>
+                    <h2 className="heading-primary secondary">
+                      Popular reviews
+                    </h2>
+                  </Col>
+                  {/* if data found */}
+
                   <Col md={12}>
                     <Row>
                       {categoryData[0]?.data?.popular_reviews?.length > 0 &&
@@ -139,21 +142,23 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                         )}
                     </Row>
                   </Col>
-                )}
-                {/* if no data found */}
-                {categoryData[0]?.data?.popular_reviews?.length == 0 && (
-                  <p className="">No records to display</p>
-                )}
-              </Row>
+
+                  {/* if no data found */}
+                  {categoryData[0]?.data?.popular_reviews?.length == 0 && (
+                    <p className="">No records to display</p>
+                  )}
+                </Row>
+              )}
               {/*-------------------- POPULAR ARTICLES --------------------------------*/}
-              <Row className="py-3">
-                <Col md={12}>
-                  <h2 className="heading-primary secondary">
-                    Popular articles
-                  </h2>
-                </Col>
-                {/* if data found */}
-                {categoryData[0]?.data?.popular_blogs?.length > 0 && (
+              {categoryData[0]?.data?.popular_blogs?.length > 0 && (
+                <Row className="py-3">
+                  <Col md={12}>
+                    <h2 className="heading-primary secondary">
+                      Popular articles
+                    </h2>
+                  </Col>
+                  {/* if data found */}
+
                   <Col md={12}>
                     <Row>
                       {categoryData[0]?.data?.popular_blogs?.length > 0 &&
@@ -202,12 +207,13 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                         )}
                     </Row>
                   </Col>
-                )}
-                {/* if no data found */}
-                {categoryData[0]?.data?.popular_blogs?.length == 0 && (
-                  <p className="">No records to display</p>
-                )}
-              </Row>
+
+                  {/* if no data found */}
+                  {categoryData[0]?.data?.popular_blogs?.length == 0 && (
+                    <p className="">No records to display</p>
+                  )}
+                </Row>
+              )}
             </Container>
           </section>
         </>

@@ -20,6 +20,7 @@
 
 .breadcrumb-group .breadcrumb-active a {
     color: var(--breadcrumb-active) !important;
+    pointer-events: none;
 }
 
 .breadcrumb-group .breadcrumb-item a:hover {

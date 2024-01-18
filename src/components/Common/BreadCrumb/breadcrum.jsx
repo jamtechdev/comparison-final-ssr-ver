@@ -23,7 +23,8 @@ export default function BreadCrum({ firstPageName, secondPageName, pageType }) {
             className="breadcrumb-items fristWord"
             href={`/${firstPageName}`}
           >
-            {firstPageName.replace(/-/g, " ")}
+            {firstPageName.replace(/-/g, " ").charAt(0).toUpperCase() +
+              firstPageName.replace(/-/g, " ").slice(1).toLowerCase()}
           </BreadcrumbItem>
         )}
         {secondPageName == "" ? (
@@ -39,13 +40,12 @@ export default function BreadCrum({ firstPageName, secondPageName, pageType }) {
           </>
         ) : (
           <>
-            <BreadcrumbItem
-              className="breadcrumb-items breadcrumb-active"
-              href={`/${firstPageName}/${secondPageName?.permalink}`}
-            >
-              {secondPageName?.heading_title}
-            </BreadcrumbItem>
-          </>
+           <BreadcrumbItem className="breadcrumb-items breadcrumb-active">
+           {secondPageName?.heading_title}
+           </BreadcrumbItem>
+          
+          
+         </>
         )}
       </Breadcrumb>
     </>

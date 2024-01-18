@@ -125,7 +125,7 @@ export default function Product({
   const guideComparePro = useSelector(
     (state) => state.comparePro.guideCompareProduct
   );
-  console.log(guideComparePro);
+
   // console.log(guideComparePro?.length, "checkRedux");
   const handleComparedProduct = (product, position) => {
     if (guideComparePro?.length < 3) {

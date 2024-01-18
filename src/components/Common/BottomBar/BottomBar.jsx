@@ -44,7 +44,7 @@ export default function BottomBar({
       );
       const permalinks = sortedPermalinksArray.map((item) => item.permalink);
       const permalinkSlug = permalinks.join("-vs-");
-      dispatch(resetGuideCompareProduct());
+      // dispatch(resetGuideCompareProduct());
       router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
         scroll: false,
       });

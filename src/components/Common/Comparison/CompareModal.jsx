@@ -53,7 +53,8 @@ const CompareModal = ({ setIsOpen, location }) => {
     } else {
       if (
         reduxData?.productSecond === undefined ||
-        reduxData?.productSecond === null
+        reduxData?.productSecond === null ||
+        getGuideCompareReduxData[1]?.length != 0
       ) {
         dispatch(updateCompareProduct({ key: "productSecond", data: product }));
         return;

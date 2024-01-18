@@ -74,20 +74,27 @@ async function getSlugMetaData(slug) {
 
 export async function generateMetadata({ params: { slug, category } }) {
   if (slug.includes("-vs-")) {
-    // console.log(category)
+    console.log();
     const extractedUrls = slug.split("-vs-");
-    const convertStringToMetaData = `${extractedUrls[0]} vs ${extractedUrls[1]} (${category})`;
-    const convertedMetaData = convertStringToMetaData
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ")
+    const convertStringToMetaData = `${extractedUrls[0]
       .replace(/-/g, " ")
-      .replace(/Vs/, "vs") // Ensure 'vs' is in lowercase
-      .replace(/\( /, "(") // Remove space after '('
-      .replace(/ \)/, ")");
+      .replace(/\b(\w)/g, (match) => match.toUpperCase())} vs ${extractedUrls[1]
+      .replace(/-/g, " ")
+      .toUpperCase()} (${
+      category.replace(/-/g, " ").charAt(0).toUpperCase() +
+      category.replace(/-/g, " ").slice(1).toLowerCase()
+    })`;
+    // const convertedMetaData = convertStringToMetaData
+    //   .split(" ")
+    //   .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    //   .join(" ")
+    //   .replace(/-/g, " ")
+    //   .replace(/Vs/, "vs") // Ensure 'vs' is in lowercase
+    //   .replace(/\( /, "(") // Remove space after '('
+    //   .replace(/ \)/, ")");
 
     return {
-      title: convertedMetaData || "Comparision web",
+      title: convertStringToMetaData || "Comparision web",
       generator: "Comparison web",
       applicationName: "Comparison web",
       referrer: "origin-when-cross-origin",

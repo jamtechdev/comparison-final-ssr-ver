@@ -259,11 +259,11 @@
   background: #ff8f0b;
   border-radius: 50px;
   color: var(--white-color);
-  min-width: 140px;
+  min-width: 80px;
   text-align: center;
   padding: 0px 5px;
-  font-size: 18px;
-  line-height: 34px;
+  font-size: 17px;
+  line-height: 30px;
   cursor: pointer;
 }
 

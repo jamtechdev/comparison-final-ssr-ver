@@ -271,8 +271,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         />
 
                                         <small className="d-block tooltip-title">
-                                          {item?.difference_value == "yes" ||
-                                          item?.difference_value == "no" ? (
+                                          {item?.difference_value === "yes" ||
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
                                             ""
                                           ) : (
                                             <span
@@ -298,27 +300,40 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {
                                     return (
-                                      <li key={index} className="tooltip-title">
-                                        {typeof item?.difference_value ==
-                                        "number"
-                                          ? item?.difference
-                                          : item?.phrase}
+                                      <li key={index}>
+                                        <span className="tooltip-title">
+                                          {extractedUrls.length > 2
+                                            ? typeof item?.difference_value ==
+                                              "number"
+                                              ? item?.difference.replace(
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
+                                              : item?.phrase
+                                            : typeof item?.difference_value ==
+                                              "number"
+                                            ? item?.difference
+                                            : item?.phrase}
 
-                                        {item?.hover_phase && (
-                                          <>
-                                            <div className="tooltip-display-content">
-                                              <span className="mb-2 prosconsColor">
-                                                {item?.hover_phase}
-                                              </span>
-                                            </div>
-                                          </>
-                                        )}
+                                          {item?.hover_phase && (
+                                            <>
+                                              <div className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </div>
+                                            </>
+                                          )}
+                                        </span>
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
-                                        <small className="d-block">
-                                          {item?.difference_value == "yes" ||
-                                          item?.difference_value == "no" ? (
+
+                                        <small className="d-block tooltip-title">
+                                          {item?.difference_value === "yes" ||
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
                                             ""
                                           ) : (
                                             <span
@@ -326,6 +341,15 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                 __html: splitVsValue(item?.vs),
                                               }}
                                             ></span>
+                                          )}
+                                          {item?.hover_phase && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </span>
+                                            </>
                                           )}
                                         </small>
                                       </li>
@@ -449,27 +473,40 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                 apiData?.total_average_cons?.map(
                                   (item, index) => {
                                     return (
-                                      <li key={index} className="tooltip-title">
-                                        {typeof item?.difference_value ==
-                                        "number"
-                                          ? item?.difference
-                                          : item?.phrase}
+                                      <li key={index}>
+                                        <span className="tooltip-title">
+                                          {extractedUrls.length > 2
+                                            ? typeof item?.difference_value ==
+                                              "number"
+                                              ? item?.difference.replace(
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
+                                              : item?.phrase
+                                            : typeof item?.difference_value ==
+                                              "number"
+                                            ? item?.difference
+                                            : item?.phrase}
 
-                                        {item?.hover_phase && (
-                                          <>
-                                            <div className="tooltip-display-content">
-                                              <span className="mb-2 prosconsColor">
-                                                {item?.hover_phase}
-                                              </span>
-                                            </div>
-                                          </>
-                                        )}
+                                          {item?.hover_phase && (
+                                            <>
+                                              <div className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </div>
+                                            </>
+                                          )}
+                                        </span>
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
-                                        <small className="d-block">
-                                          {item?.difference_value == "yes" ||
-                                          item?.difference_value == "no" ? (
+
+                                        <small className="d-block tooltip-title">
+                                          {item?.difference_value === "yes" ||
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
                                             ""
                                           ) : (
                                             <span
@@ -477,6 +514,15 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                 __html: splitVsValue(item?.vs),
                                               }}
                                             ></span>
+                                          )}
+                                          {item?.hover_phase && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </span>
+                                            </>
                                           )}
                                         </small>
                                       </li>
@@ -488,25 +534,40 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {
                                     return (
-                                      <li key={index} className="tooltip-title">
-                                        {typeof item?.difference_value ==
-                                        "number"
-                                          ? item?.difference
-                                          : item?.phrase}
+                                      <li key={index}>
+                                        <span className="tooltip-title">
+                                          {extractedUrls.length > 2
+                                            ? typeof item?.difference_value ==
+                                              "number"
+                                              ? item?.difference.replace(
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
+                                              : item?.phrase
+                                            : typeof item?.difference_value ==
+                                              "number"
+                                            ? item?.difference
+                                            : item?.phrase}
 
-                                        {item?.hover_phase && (
-                                          <>
-                                            <div className="tooltip-display-content">
-                                              <span className="mb-2 prosconsColor">
-                                                {item?.hover_phase}
-                                              </span>
-                                            </div>
-                                          </>
-                                        )}
+                                          {item?.hover_phase && (
+                                            <>
+                                              <div className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </div>
+                                            </>
+                                          )}
+                                        </span>
+                                        <QuestionIcon
+                                          attributes={item?.when_matters}
+                                        />
 
-                                        <small className="d-block">
-                                          {item?.difference_value == "yes" ||
-                                          item?.difference_value == "no" ? (
+                                        <small className="d-block tooltip-title">
+                                          {item?.difference_value === "yes" ||
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
                                             ""
                                           ) : (
                                             <span
@@ -515,10 +576,16 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                               }}
                                             ></span>
                                           )}
+                                          {item?.hover_phase && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </span>
+                                            </>
+                                          )}
                                         </small>
-                                        <QuestionIcon
-                                          attributes={item?.when_matters}
-                                        />
                                       </li>
                                     );
                                   })

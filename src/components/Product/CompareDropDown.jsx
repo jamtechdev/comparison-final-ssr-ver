@@ -4,42 +4,54 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import Image from "next/image";
 
 function CompareDropDown({ attributeDropDown, product }) {
+  console.log(attributeDropDown)
   const [selectedCategory, setSelectedCategory] = useState(
     Object.keys(attributeDropDown)[0] || ""
   );
+  const [selectedAttribute, setSelectedAttribute] = useState("");
   const [selectedObjectDescription, setSelectedObjectDescription] =
     useState("");
-
-  useEffect(() => {
-    // Set the initial description based on the first category
-    const firstObject = attributeDropDown[selectedCategory]?.[0] || {};
-    const { description } = firstObject;
-    setSelectedObjectDescription(description || "");
-  }, [selectedCategory, attributeDropDown]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
     setSelectedCategory(category);
+    setSelectedAttribute(""); // Reset selected attribute when category changes
 
-    // Update the description based on the selected category
+    // Update the description based on the selected category and attribute
     const firstObject = attributeDropDown[category]?.[0] || {};
     const { description } = firstObject;
     setSelectedObjectDescription(description || "");
   };
+
+  const handleAttributeChange = (event) => {
+    const attribute = event.target.value;
+    setSelectedAttribute(attribute);
+
+    // Update the description based on the selected category and attribute
+  };
+  useEffect(() => {
+    const selectedObject =
+      attributeDropDown[selectedCategory]?.find(
+        (obj) => obj.attribute === selectedAttribute
+      ) || {};
+    const { description } = selectedObject;
+    setSelectedObjectDescription(description || "");
+  }, [selectedCategory, selectedAttribute, attributeDropDown]);
   return (
     <>
       <section className="ptb-80">
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">{product}</h2>
+              <h2 className="site-main-heading">
+                Comparison With All Other Vaccuum Cleaners
+              </h2>
             </Col>
-            <Col md={12}>
+            <Col md={4} lg={4}>
               <div className="filtered-data-select justify-content-start">
-                <span>Compare:</span>
-
+                <span>Attribute category:</span>
                 <Form.Select
-                  aria-label="Default select example"
+                  aria-label="Category select"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                 >
@@ -50,17 +62,32 @@ function CompareDropDown({ attributeDropDown, product }) {
                   ))}
                 </Form.Select>
               </div>
+              <div className="filtered-data-select justify-content-start mt-3">
+                <span>Attribute:</span>
+                {selectedCategory && (
+                  <Form.Select
+                    aria-label="Attribute select"
+                    value={selectedAttribute}
+                    onChange={handleAttributeChange}
+                  >
+                    {attributeDropDown[selectedCategory].map((obj) => (
+                      <option key={obj.attribute} value={obj.attribute}>
+                        {obj.attribute}
+                      </option>
+                    ))}
+                  </Form.Select>
+                )}
+              </div>
             </Col>
           </Row>
-
           <Row className="mt-3">
-            <Col md={4} lg={3}>
-              <p className="text-end mobile-content-left para_content_text">
+            <Col md={4} lg={4}>
+              <p className="text-end para_content_text">
                 {selectedCategory}
                 {selectedObjectDescription}
               </p>
             </Col>
-            <Col md={8} lg={9}>
+            <Col md={8} lg={8}>
               <Image
                 className="graph-bar"
                 src="/images/graph-bar.png"

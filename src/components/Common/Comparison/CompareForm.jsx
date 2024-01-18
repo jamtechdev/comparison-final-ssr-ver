@@ -44,8 +44,11 @@ export default function CompareForm({
       productThird: getGuideCompareReduxData?.[2] || null,
     }));
   }, [getGuideCompareReduxData]);
+  // console.log(reduxData)
+  // console.log(formFields);
   const handleFieldChange = (fieldName, value) => {
     // Update the state based on the field being changed
+
     setFormFields((prevFields) => ({
       ...prevFields,
       [fieldName]: value,

@@ -20,6 +20,8 @@ import CompareForm from "../Comparison/CompareForm";
 import CompareCard from "./CompareCard";
 import CompareAccordionTab from "./CompareAccordionTab";
 import { useDispatch } from "react-redux";
+import CompareDropDown from "@/components/Product/CompareDropDown";
+import { useRouter } from "next/navigation";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -37,23 +39,41 @@ function CompareDiv({
   const [compareProDataThird, setCompareProDataThird] = useState(
     products[2] || []
   );
+  const [otherPermalinks, setOtherPermalinks] = useState([]);
+  const router = useRouter();
   const handelRemoveProductFormComparison = (index) => {
+    // Remove the product from the comparison store last product url
+    let remainingProductUrl = "";
     if (index === 0) {
       setCompareProDataFirst([]);
       dispatch(deleteCompareProduct({ key: "productFirst" }));
-      return;
-    }
-    if (index === 1) {
+      remainingProductUrl = [compareProDataSec, compareProDataThird];
+    } else if (index === 1) {
       setCompareProDataSec([]);
       dispatch(deleteCompareProduct({ key: "productSecond" }));
-      return;
-    }
-    if (index === 2) {
+      remainingProductUrl = [compareProDataThird, compareProDataFirst];
+    } else if (index === 2) {
       dispatch(deleteCompareProduct({ key: "productThird" }));
       setCompareProDataThird([]);
-      return;
+      remainingProductUrl = [compareProDataFirst, compareProDataSec];
+    }
+    // Optionally, you can store the updated permalinks array in state
+    const updatedPermalinks = [...remainingProductUrl, ...otherPermalinks];
+    let removeEmptyArray = updatedPermalinks.filter(
+      (item) =>
+        item !== "" &&
+        typeof item !== "undefined" &&
+        Object.keys(item).length !== 0
+    );
+    // Log the last remaining product URL
+    if (removeEmptyArray.length === 1) {
+      const lastPermalink = removeEmptyArray[0];
+      router.push(
+        `/${lastPermalink?.category_url}/${lastPermalink?.permalink}`
+      );
     }
   };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -75,6 +95,22 @@ function CompareDiv({
       Object.keys(item).length !== 0
   );
 
+  const productCopy = comparisonProductData;
+  const productAttributes = {};
+  comparisonProductData[0]?.attributes?.forEach((attribute) => {
+    // Extract the category name for the attribute
+    const categoryName = attribute?.attribute_category?.name;
+    // Check if the category name exists in the productAttributes object
+
+    if (!productAttributes[categoryName]) {
+      // If not, create an empty array for the category
+      productAttributes[categoryName] = [];
+    }
+    // Push the current attribute to the array corresponding to its category
+    productAttributes[categoryName]?.push(attribute);
+  });
+  productCopy["attributes"] = productAttributes;
+  // console.log(productAttributes);;
   return (
     <>
       <section className="product-header">
@@ -197,49 +233,10 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
-      <section className="ptb-80">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                Comparison With All Other Vaccuum Cleaners
-              </h2>
-            </Col>
-            <Col md={12}>
-              <div className="filtered-data-select justify-content-start">
-                <span>Compare:</span>
-                <Form.Select aria-label="Default select example">
-                  <option>Power</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </Form.Select>
-              </div>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col md={4} lg={3}>
-              <p className="text-end para_content_text">
-                Power is since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. ever
-                galley of type and scrambled it to make a type specimen book.
-              </p>
-            </Col>
-            <Col md={8} lg={9}>
-              <Image
-                className="graph-bar"
-                src="/images/graph-bar.png"
-                width={0}
-                height={0}
-                alt=""
-                sizes="100%"
-              />
-            </Col>
-          </Row>
-        </Container>
-      </section>
+      <CompareDropDown attributeDropDown={productAttributes} />
       {isOpen && (
         <CompareModal
+          location={"comparison"}
           setIsOpen={setIsOpen}
           compareProDataFirst={{
             name: compareProDataFirst?.name,

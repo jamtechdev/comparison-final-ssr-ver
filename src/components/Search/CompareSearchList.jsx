@@ -11,6 +11,9 @@ function CompareSearchList({
   category_id,
 }) {
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
+  const getGuideCompareReduxData = useSelector(
+    (state) => state.comparePro.guideCompareProduct
+  );
   const [filteredProData, setFilteredProData] = useState([]);
   const handleChange = (data, inputPostion) => {
     if (inputPostion === "productFirst") {
@@ -51,8 +54,10 @@ function CompareSearchList({
               if (res.data.data.length > 0) {
                 const filteredProducts = res.data.data.filter(
                   (item) =>
-                    item.name !== reduxData?.productSecond?.name &&
-                    item.name !== reduxData?.productThird?.name
+                    (item.name !== reduxData?.productSecond?.name &&
+                      item.name !== reduxData?.productThird?.name) &&
+                    (item?.name !== getGuideCompareReduxData[1]?.name &&
+                      item?.name !== getGuideCompareReduxData[2]?.name)
                 );
 
                 setFilteredProData(filteredProducts);
@@ -63,8 +68,10 @@ function CompareSearchList({
               if (res.data.data.length > 0) {
                 const filteredProducts = res.data.data.filter(
                   (item) =>
-                    item.name !== reduxData?.productFirst?.name &&
-                    item.name !== reduxData?.productThird?.name
+                    (item.name !== reduxData?.productFirst?.name &&
+                      item.name !== reduxData?.productThird?.name) &&
+                    (item?.name !== getGuideCompareReduxData[0]?.name &&
+                      item?.name !== getGuideCompareReduxData[2]?.name)
                 );
 
                 setFilteredProData(filteredProducts);
@@ -74,8 +81,10 @@ function CompareSearchList({
               if (res.data.data.length > 0) {
                 const filteredProducts = res.data.data.filter(
                   (item) =>
-                    item.name !== reduxData?.productFirst?.name &&
-                    item.name !== reduxData?.productSecond?.name
+                    (item.name !== reduxData?.productFirst?.name &&
+                      item.name !== reduxData?.productSecond?.name) &&
+                    (item?.name !== getGuideCompareReduxData[0]?.name &&
+                      item?.name !== getGuideCompareReduxData[1]?.name)
                 );
 
                 setFilteredProData(filteredProducts);

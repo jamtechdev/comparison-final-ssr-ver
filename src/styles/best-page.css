@@ -121,13 +121,16 @@
   background: rgba(39, 48, 78, 0.9);
 }
 
-.compare-container .best-list-item li span {
-  min-width: 80px !important;
+.compare-container .best-list-item li span.price-wider {
+  max-width: 80px !important;
+  min-width: 120px !important;
   font-size: 15px;
-  line-height: 24px !important;
+  line-height: 28px !important;
   padding: 3px 10px !important;
 }
-
+.compare-container tbody tr:nth-child(2) td {
+  vertical-align: text-top !important;
+}
 .compare-container thead tr th {
   background: #f4f7fb;
   vertical-align: top;
@@ -652,6 +655,9 @@ font-weight: 400;
   line-height: 34px;
   color: var(--heading-color);
   opacity: 80%;
+  width: 100%;
+  max-width: 100%;
+  text-align: end;
 }
 
 .best-product-listing {

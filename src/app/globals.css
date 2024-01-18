@@ -230,7 +230,12 @@ select {
 }
 
 .site_tabs.graph-tab .nav-item button.active {
-  color: var(--secondary-color) !important;
+  color: var(--color-bg) !important;
+  border-bottom: 2px solid var(--color-bg) !important;
+}
+
+.site_tabs.graph-tab .nav-item button.active:before {
+  border-top: 0.3em solid var(--color-bg) !important;
 }
 
 .site_tabs.graph-tab .nav-item button:after {
@@ -1088,8 +1093,8 @@ button.searchBarInner.btn.btn-primary {
 table.compare-container.table.comparison-table .best-list-item li img {
   width: 100%;
   height: auto;
-  max-width: 30%;
+  max-width: 28%;
 }
 .breadcrumb-group .breadcrumb-items.fristWord::first-letter {
-  text-transform: capitalize ;
+  text-transform: capitalize;
 }

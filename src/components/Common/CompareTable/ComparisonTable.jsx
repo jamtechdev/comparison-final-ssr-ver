@@ -310,7 +310,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                                           sizes="100vw"
                                           alt=""
                                         />
-                                        <span>{data?.price} €</span>
+                                        <span className="price-wider">{data?.price} €</span>
                                       </>
                                     </li>
                                   )}
