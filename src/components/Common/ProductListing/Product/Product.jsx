@@ -15,7 +15,11 @@ import {
 } from "@/_helpers/filter";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import { addCompareProductForGuide } from "@/redux/features/compareProduct/compareProSlice";
+import {
+  addCompareProduct,
+  addCompareProductForGuide,
+  updateCompareProduct,
+} from "@/redux/features/compareProduct/compareProSlice";
 import toast, { Toaster } from "react-hot-toast";
 export default function Product({
   position,
@@ -121,26 +125,84 @@ export default function Product({
       return "#000";
     }
   };
-  // use redux to check getCompareproduct length and add to compare list
-  const guideComparePro = useSelector(
-    (state) => state.comparePro.guideCompareProduct
-  );
-
+  const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   // console.log(guideComparePro?.length, "checkRedux");
   const handleComparedProduct = (product, position) => {
-    if (guideComparePro?.length < 3) {
+    if (
+      reduxData === undefined ||
+      reduxData === null ||
+      reduxData?.productFirst === null
+    ) {
       let productData = {
         id: position,
         name: product.name,
+        delete_key: "productFirst",
+        category: product.category_id,
+        category_url: product.category_url,
+        permalink: product.permalink,
+        image: product.main_image ? product.main_image : "/images/nofound.png",
+      };
+      dispatch(
+        addCompareProduct({
+          productFirst: productData,
+          productSecond: null,
+          productThird: null,
+          category: product.category_id,
+          location: "ON_GUIDE",
+        })
+      );
+      return;
+    }
+    if (
+      reduxData?.productFrist !== null &&
+      reduxData?.productSecond === null &&
+      reduxData?.productThird === null
+    ) {
+      let productData = {
+        id: position,
+        name: product.name,
+        delete_key: "productSecond",
+        category: product.category_id,
+        category_url: product.category_url,
+        permalink: product.permalink,
+        image: product.main_image ? product.main_image : "/images/nofound.png",
+      };
+      dispatch(
+        updateCompareProduct({
+          key: "productSecond",
+          data: productData,
+        })
+      );
+      return;
+    }
+    if (
+      reduxData?.productThird === null &&
+      reduxData?.productFrist !== null &&
+      reduxData?.productSecond !== null
+    ) {
+      let productData = {
+        id: position,
+        name: product.name,
+        delete_key: "productThird",
         category_id: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
         image: product.main_image ? product.main_image : "/images/nofound.png",
       };
-      dispatch(addCompareProductForGuide(productData));
-    } else {
-      toast.error("Maximum 3 products can be compared.");
-      // alert("Maximum 3 products can be compared.");
+      dispatch(
+        updateCompareProduct({
+          key: "productThird",
+          data: productData,
+        })
+      );
+      return;
+    }
+    if (
+      reduxData?.productFrist !== null &&
+      reduxData?.productSecond !== null &&
+      reduxData?.productThird !== null
+    ) {
+      return toast.error("Maximum 3 products can be compared.");
     }
   };
 

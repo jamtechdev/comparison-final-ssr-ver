@@ -12,14 +12,9 @@ import toast from "react-hot-toast";
 const CompareModal = ({ setIsOpen, location }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
-  const getGuideCompareReduxData = useSelector(
-    (state) => state.comparePro.guideCompareProduct
-  );
   const [oftenProducts, setOftenProducts] = useState();
   const [categoryId, setCategoryId] = useState(
-    reduxData?.category
-      ? reduxData?.category
-      : undefined || getGuideCompareReduxData[0]?.category_id
+    reduxData?.category ? reduxData?.category : undefined
   );
 
   const handelCloseCompareModel = () => {
@@ -30,42 +25,38 @@ const CompareModal = ({ setIsOpen, location }) => {
   };
   // console.log(reduxData);
   const handelOffenProductClick = (product, index) => {
-    if (location === "ON_GUIDE") {
-      if (
-        getGuideCompareReduxData?.length < 3 &&
-        getGuideCompareReduxData?.length != 0
-      ) {
-        let productData = {
-          id: index,
-          name: product.name,
-          category_id: product.category_id,
-          category_url: product.category_url,
-          permalink: product.permalink,
-          image: product.main_image
-            ? product.main_image
-            : "/images/nofound.png",
-        };
-        dispatch(addCompareProductForGuide(productData));
-      } else {
-        toast.error("Maximum 3 products can be compared.");
-        // alert("Maximum 3 products can be compared.");
-      }
-    } else {
-      if (
-        reduxData?.productSecond === undefined ||
-        reduxData?.productSecond === null ||
-        getGuideCompareReduxData[1]?.length != 0
-      ) {
-        dispatch(updateCompareProduct({ key: "productSecond", data: product }));
-        return;
-      }
-      if (
-        reduxData?.productThird === undefined ||
-        reduxData?.productThird === null
-      ) {
-        dispatch(updateCompareProduct({ key: "productThird", data: product }));
-        return;
-      }
+    if (
+      reduxData?.productSecond === undefined ||
+      reduxData?.productSecond === null
+    ) {
+      let productData = {
+        name: product.name,
+        category_id: product.category_id,
+        category_url: product.category_url,
+        permalink: product.permalink,
+        image: product.main_image ? product.main_image : "/images/nofound.png",
+      };
+      dispatch(
+        updateCompareProduct({ key: "productSecond", data: productData })
+      );
+      return;
+    }
+    if (
+      reduxData?.productThird === undefined ||
+      reduxData?.productThird === null
+    ) {
+      let productData = {
+        name: product.name,
+        category_id: product.category_id,
+        category_url: product.category_url,
+        permalink: product.permalink,
+        image: product.main_image ? product.main_image : "/images/nofound.png",
+      };
+
+      dispatch(
+        updateCompareProduct({ key: "productThird", data: productData })
+      );
+      return;
     }
   };
   useEffect(() => {

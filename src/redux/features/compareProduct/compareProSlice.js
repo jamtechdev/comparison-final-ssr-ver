@@ -14,6 +14,7 @@ export const compareProSlice = createSlice({
     },
     updateCompareProduct: (state, action) => {
       const { key, data } = action.payload || {};
+      console.log(action.payload);
       // Check if key is defined and data is an object
       if (key && typeof data === "object") {
         if (key === "productSecond") {
@@ -27,21 +28,21 @@ export const compareProSlice = createSlice({
     deleteCompareProduct: (state, action) => {
       if (
         state.compareProduct[0]?.productFirst &&
-        action.payload.key === "productFirst"
+        action.payload.key === "productFirst" 
       ) {
-        state.compareProduct[0].productFirst = undefined;
+        state.compareProduct[0].productFirst = null;
       }
       if (
         state.compareProduct[0]?.productSecond &&
         action.payload.key === "productSecond"
       ) {
-        state.compareProduct[0].productSecond = undefined;
+        state.compareProduct[0].productSecond = null;
       }
       if (
         state.compareProduct[0]?.productThird &&
         action.payload.key === "productThird"
       ) {
-        state.compareProduct[0].productThird = undefined;
+        state.compareProduct[0].productThird = null;
       }
     },
     addCompareProductForGuide: (state, action) => {

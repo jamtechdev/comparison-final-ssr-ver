@@ -51,7 +51,7 @@ export default function ReviewSlider({ favSlider }) {
         {favSlider?.map((item) => {
           const url = item?.category.replace(/\s+/g, "-").toLowerCase();
           return (
-            <SwiperSlide>
+            <SwiperSlide key={item?.id}>
               <Link href={`/${url}/${item?.permalink}`}>
                 <div className="review-wrapper">
                   <div className="review-card">

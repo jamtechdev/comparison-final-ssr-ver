@@ -15,11 +15,15 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import Image from "next/image";
 import CompareModal from "@/components/Common/Comparison/CompareModal";
 import ComparisonTable from "../CompareTable/ComparisonTable";
-import { deleteCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
+import {
+  addCompareProduct,
+  deleteCompareProduct,
+  updateCompareProduct,
+} from "@/redux/features/compareProduct/compareProSlice";
 import CompareForm from "../Comparison/CompareForm";
 import CompareCard from "./CompareCard";
 import CompareAccordionTab from "./CompareAccordionTab";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CompareDropDown from "@/components/Product/CompareDropDown";
 import { useRouter } from "next/navigation";
 function CompareDiv({
@@ -39,7 +43,9 @@ function CompareDiv({
   const [compareProDataThird, setCompareProDataThird] = useState(
     products[2] || []
   );
+  const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const [otherPermalinks, setOtherPermalinks] = useState([]);
+
   const router = useRouter();
   const handelRemoveProductFormComparison = (index) => {
     // Remove the product from the comparison store last product url
@@ -94,6 +100,7 @@ function CompareDiv({
       typeof item !== "undefined" &&
       Object.keys(item).length !== 0
   );
+  console.log(comparisonProductData[1]?.name);
 
   const productCopy = comparisonProductData;
   const productAttributes = {};
@@ -110,7 +117,80 @@ function CompareDiv({
     productAttributes[categoryName]?.push(attribute);
   });
   productCopy["attributes"] = productAttributes;
-  // console.log(productAttributes);;
+  // console.log(productAttributes);
+  useEffect(() => {
+    if (
+      reduxData === undefined ||
+      reduxData === null ||
+      reduxData?.productFirst === null
+    ) {
+      let productData = {
+        name: comparisonProductData[0].name,
+        category: comparisonProductData[0].category_id,
+        category_url: comparisonProductData[0].category_url,
+        permalink: comparisonProductData[0].permalink,
+        image: comparisonProductData[0].main_image
+          ? comparisonProductData[0].main_image
+          : "/images/nofound.png",
+      };
+      dispatch(
+        addCompareProduct({
+          productFirst: productData,
+          productSecond: null,
+          productThird: null,
+          category: comparisonProductData[0].category_id,
+          location: "ON_GUIDE",
+        })
+      );
+      return;
+    }
+    if (
+      reduxData?.productFrist !== null &&
+      reduxData?.productSecond === null &&
+      reduxData?.productThird === null
+    ) {
+      let productData = {
+        name: comparisonProductData[1].name,
+        category: comparisonProductData[1].category_id,
+        category_url: comparisonProductData[1].category_url,
+        permalink: comparisonProductData[1].permalink,
+        image: comparisonProductData[1].main_image
+          ? comparisonProductData[1].main_image
+          : "/images/nofound.png",
+      };
+      dispatch(
+        updateCompareProduct({
+          key: "productSecond",
+          data: productData,
+        })
+      );
+      return;
+    }
+    if (comparisonProductData > 2) {
+      if (
+        reduxData?.productThird === null &&
+        reduxData?.productFrist !== null &&
+        reduxData?.productSecond !== null
+      ) {
+        let productData = {
+          name: comparisonProductData[2].name,
+          category_id: comparisonProductData[2].category_id,
+          category_url: comparisonProductData[2].category_url,
+          permalink: comparisonProductData[2].permalink,
+          image: comparisonProductData[2].main_image
+            ? comparisonProductData[2].main_image
+            : "/images/nofound.png",
+        };
+        dispatch(
+          updateCompareProduct({
+            key: "productThird",
+            data: productData,
+          })
+        );
+        return;
+      }
+    }
+  }, [reduxData]);
   return (
     <>
       <section className="product-header">

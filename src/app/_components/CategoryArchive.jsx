@@ -9,7 +9,7 @@ function CategoryArchive({ slug, ArchiveData }) {
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName={slug} secondPageName={''} />
+              <BreadCrumb firstPageName={slug} secondPageName={""} />
             </Col>
             <Col md={12}>
               <h1 className="heading-primary">{ArchiveData[0].data?.title}</h1>

@@ -15,18 +15,11 @@ export default function CompareForm({
   const router = useRouter();
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
-  const getGuideCompareReduxData = useSelector(
-    (state) => state.comparePro.guideCompareProduct
-  );
   const [formFields, setFormFields] = useState({
-    productFirst:
-      reduxData?.productFirst || getGuideCompareReduxData?.[0] || null,
-    productSecond:
-      reduxData?.productSecond || getGuideCompareReduxData?.[1] || null,
-    productThird:
-      reduxData?.productThird || getGuideCompareReduxData?.[2] || null,
-    category:
-      reduxData?.category || getGuideCompareReduxData[0]?.category_id || null,
+    productFirst: reduxData?.productFirst || null,
+    productSecond: reduxData?.productSecond || null,
+    productThird: reduxData?.productThird || null,
+    category: reduxData?.category || null,
     location: reduxData?.location ? reduxData?.location : location,
   });
 
@@ -36,19 +29,8 @@ export default function CompareForm({
   const [isHandelChildValue, setIsHandelChildValue] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setFormFields((prevFormFields) => ({
-      ...prevFormFields,
-      productFirst: getGuideCompareReduxData?.[0] || null,
-      productSecond: getGuideCompareReduxData?.[1] || null,
-      productThird: getGuideCompareReduxData?.[2] || null,
-    }));
-  }, [getGuideCompareReduxData]);
-  // console.log(reduxData)
-  // console.log(formFields);
   const handleFieldChange = (fieldName, value) => {
     // Update the state based on the field being changed
-
     setFormFields((prevFields) => ({
       ...prevFields,
       [fieldName]: value,
