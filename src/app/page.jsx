@@ -4,6 +4,7 @@ import { homePage } from "@/_services";
 export default async function Page() {
   const bannerCounts = await homePage.getMainPageBannerCounts();
   const favGuideSlider = await homePage.getFavouriteGuides();
+  // navneet
   return (
     <React.Suspense fallback={<p>Loading....</p>}>
       <MainPage bannerCounts={bannerCounts} favSlider={favGuideSlider} />
@@ -12,7 +13,6 @@ export default async function Page() {
 }
 export async function generateMetadata(params) {
   const meta_data = await getMetaData();
-
   return {
     title: meta_data?.data?.title || "Comparison web",
     generator: "Comparison web",
