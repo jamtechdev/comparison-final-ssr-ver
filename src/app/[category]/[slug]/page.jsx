@@ -6,12 +6,14 @@ export default async function Page({
 }) {
   try {
     const categoryslugType = await getSlugType(category);
+
     if (categoryslugType.error) {
       return <NotFound />;
     }
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
+  
       const pageData = await fetchDataBasedOnPageType(
         slug,
         "Comparison",
@@ -27,8 +29,9 @@ export default async function Page({
         />
       );
     }
-
+ 
     if (slugType.type) {
+    
       const pageData = await fetchDataBasedOnPageType(
         slug,
         slugType.type,
@@ -49,7 +52,7 @@ export default async function Page({
     }
   } catch (error) {
     return <NotFound />;
-    //console.error("Error:", error);
+    console.error("Error:", error);
   }
   return <NotFound />;
 }
@@ -68,6 +71,7 @@ async function getSlugMetaData(slug) {
     }
   );
   if (!response.ok) {
+    throw new Error(`Failed to fetch data from ${apiUrl}`);
   }
   return response.json();
 }
@@ -129,6 +133,7 @@ async function getSlugType(slug) {
     }
   );
   if (!response.ok) {
+    throw new Error(`Failed to fetch data from ${apiUrl}`);
   }
   return response.json();
 }
@@ -174,7 +179,9 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
       });
+     
       if (!response.ok) {
+        throw new Error(`Failed to fetch data from ${apiUrl}`);
       }
       return response.json();
     })

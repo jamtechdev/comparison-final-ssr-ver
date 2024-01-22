@@ -28,6 +28,7 @@ export default function GuidePage({
   const guide = guideData[0]?.data;
 
   const products = guideData[1]?.data?.products || [];
+
   const sortedProducts = products.sort(
     (a, b) => b.overall_score - a.overall_score
   );
@@ -146,7 +147,7 @@ export default function GuidePage({
   // console.log(products, "products ");
 
   return (
-    <>
+    <>{products.length > 0 ?    <>
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -794,6 +795,8 @@ export default function GuidePage({
         manageCollapsedDiv={manageCollapsedDiv}
         handleManageCollapsedDiv={handleManageCollapsedDiv}
       />
-    </>
+    </> :<> <div className="text-center p-5">
+    We regret to inform you that, at the moment, we do not currently have a product available that aligns with the content of this guide. Our team is actively working on expanding our product offerings, and we appreciate your understanding. If you have any specific product-related inquiries or if there's anything else we can assist you with, please feel free to reach out to our support team. Thank you for your patience and interest in our services.
+    </div></>}</>
   );
 }
