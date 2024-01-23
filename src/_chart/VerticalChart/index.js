@@ -10,18 +10,22 @@ function drawBarChart(props) {
     data,
     xScale,
     yScale,
-    width,
     height,
-    margin,
     barClass,
     tooltipRef,
   } = props;
   const toolTip = d3.select(tooltipRef.current);
   const svg = d3.select(svgRef.current).select("g");
+
+  // Remove zero after decimal point
+  let updatedData = data.map(({ label, ...rest }) => ({
+    ...rest,
+    label: label.split('-').map(Number).join('-')
+  }));
   
   svg
     .selectAll("bar")
-    .data(data)
+    .data(updatedData)
     .enter()
     .append("rect")
     .attr("class", classnames(["bar-chart__bar rect-hover", barClass]))

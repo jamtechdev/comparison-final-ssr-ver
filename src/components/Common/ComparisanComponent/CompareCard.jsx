@@ -8,7 +8,6 @@ const CompareCard = ({
   handelRemoveProductFormComparison,
 }) => {
   const handelRemoveProduct = (index) => {
-    console.log(index, ">>>");
     handelRemoveProductFormComparison(index);
   };
   const findProductsScoreLabelIndex = (products) => {

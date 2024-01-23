@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { v4 as uuidv4 } from "uuid";
 import { graphService } from "../_services/graph.service.js";
@@ -15,7 +15,6 @@ const useChart = () => {
   useEffect(() => {
     // Function to search for the pattern
     const searchForPattern = async () => {
-      // const content = document.body.textContent;
       const elementsWithNodeType1 = document.body.querySelectorAll("p");
       elementsWithNodeType1.forEach(async (element, index) => {
         const shortCode = element.textContent;
@@ -51,37 +50,28 @@ const useChart = () => {
         const res = await graphService.getGraphData({
           graph_shortcode: shortCodesMatched[indx].matchedString,
         });
-
         const chartData = await res.data.data;
 
-        
-        const xAixsLabel = chartData?.x_axis_label ?? "";
-        const yAixsLabel = chartData?.y_axis_label ?? "";
-        const yAxisUnit = chartData?.unitY ?? "";
-        const xAxisUnit = chartData?.unit ?? "";
-        const chartTitle = chartData?.title ?? "";
-        //console.log(chartData)
-        if (chartData.data.length > 0) {
-          /*test data start */
-          // const temp = {
-          //   // lable: ["lithium-ion", "nickel–cadmium", "lead-acid"],
-          //   // data: [5200, 2600, 2600]
-          //  data: [20, 30, 4, 83, 35, 22,35, 22],
-          //   lable: [55, 56, 57, 58, 59, 60,54, 61],
-          //  produt_count: [20, 0, 40, 0, 40, 0,0,4],
-          // // produt_name: ['tst', 'raincot', 'pen', 'pencil0', 'eraser', 'pen'],
-          // };
-          //   const plotData = await regenerateData(temp);
-          /**test data end */
+        if (chartData && chartData.data.length > 0) {
+          const xAixsLabel = chartData.x_axis_label ?? "";
+          const yAixsLabel = chartData.y_axis_label ?? "";
+          const yAxisUnit = chartData.unitY ?? "";
+          const xAxisUnit = chartData.unit ?? "";
+          const chartTitle = chartData.title ?? "";
+          const isGeneralAttributesOfCorrelationChart_x=chartData.is_general_attribute_x ?? false
+          const isGeneralAttributesOfCorrelationChart_y=chartData.is_general_attribute_y ?? false
+          const correlation_minX = Number(chartData.rang_min_x)??null
+          const correlation_maxX = Number(chartData.rang_max_x)??null
+          const correlation_minY = Number(chartData.rang_min_y)??null
+          const correlation_maxY = Number(chartData.rang_max_y)??null
           const plotData = await regenerateData(chartData);
+
           if (plotData && plotData.length > 0) {
-            // const parentDiv = document.createElement("div");
-            // parentDiv.classList.add("container-div");
-            // element.insertAdjacentElement("afterend", parentDiv);
             const container = document.createElement("div");
-            container.style.padding="20px"
+            container.style.padding = "20px";
             parentDiv.insertAdjacentElement("beforeend", container);
             const root = createRoot(container);
+            
             if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
               root.render(
                 <PiChart
@@ -91,9 +81,11 @@ const useChart = () => {
                   innerRadius={0}
                   containerId={`pie${uuidv4()}`}
                   chartTitle={chartTitle}
+                  xUnit={xAxisUnit}
                 />
               );
             }
+            
             if (shortCodesMatched[indx].pattern == ChartName.VerticalChart) {
               root.render(
                 <VerticalChart
@@ -113,7 +105,7 @@ const useChart = () => {
                     xUnit: { xAxisUnit },
                     yUnit: { yAxisUnit },
                     drawXGridlines: true,
-                    tick: 5,
+                    tick: 6,
                     isTextOrientationOblique:
                       plotData[0].label.length > 3 ? true : false,
                   }}
@@ -123,9 +115,8 @@ const useChart = () => {
                 />
               );
             }
+            
             if (shortCodesMatched[indx].pattern == ChartName.HorizontalChart) {
-              // const temp ={data:[1,3,5,9],lable:["Samsung","Apple","Nokia","Motorola"]}
-              // const plotData = regenerateData(temp);
               root.render(
                 <HorizontalChart
                   data={plotData}
@@ -139,6 +130,7 @@ const useChart = () => {
                 />
               );
             }
+            
             if (shortCodesMatched[indx].pattern == ChartName.CorrelationChart) {
               root.render(
                 <CorrelationChart
@@ -146,12 +138,18 @@ const useChart = () => {
                   height={300}
                   width={478}
                   chartTitle={shortCodesMatched[indx].chartTitle}
-                  xLabel="Noisiness"
-                  yLabel="Price"
-                  xTick={8}
-                  yTick={6}
+                  xLabel={xAixsLabel}
+                  yLabel={yAixsLabel}
+                  xTick={9}
+                  yTick={7}
                   xUnit={xAxisUnit}
                   yUnit={yAxisUnit}
+                  isGeneralAttribute_x={isGeneralAttributesOfCorrelationChart_x}
+                  isGeneralAttribute_y={isGeneralAttributesOfCorrelationChart_y}
+                  rangeMinX={correlation_minX}
+                  rangeMaxX={correlation_maxX}
+                  rangeMinY={correlation_minY}
+                  rangeMaxY={correlation_maxY}
                 />
               );
             }
@@ -160,22 +158,24 @@ const useChart = () => {
       }
     }
   }
+  
   async function regenerateData(chartData) {
     const dataForChart = [];
+
     if (
       chartData &&
       chartData.data &&
       chartData.data.length > 0 &&
       chartData.lable &&
-      (chartData.produt_count || chartData.produt_name)
+      (chartData.product_count || chartData.produt_name)
     ) {
       chartData.data.forEach((val, index) => {
         dataForChart.push({
           label: chartData.lable[index],
           value: Number(val),
         });
-        if (chartData.produt_count) {
-          dataForChart[index]["productCount"] = chartData.produt_count[index];
+        if (chartData.product_count) {
+          dataForChart[index]["productCount"] = chartData.product_count[index];
         }
         if (chartData.produt_name)
           dataForChart[index]["productName"] = chartData.produt_name[index];
@@ -202,10 +202,12 @@ const useChart = () => {
     }
     return dataForChart;
   }
+  
   function matchShortCodePatternsAgainstText(str) {
     const results = [];
     const patternRE = /\[[^\]]*]/g;
     const patterns = str.match(patternRE);
+    
     if (patterns && patterns.length > 0) {
       patterns.forEach((matchedPattern) => {
         const regex = new RegExp(shortCodepatternsRE);
@@ -218,11 +220,10 @@ const useChart = () => {
           });
         }
       });
-      // console.log(results);
     }
-
     return results;
   }
+  
   function getTheChartTypeFromShortCodePattern(shortCodestr) {
     const semicolonIndex = shortCodestr.indexOf(";");
     let chartType = "";
@@ -231,6 +232,7 @@ const useChart = () => {
     }
     return chartType;
   }
+
   function getChartTitle(shortCodestr) {
     let chartTitle = "";
     let result = shortCodestr.slice(1, -1);

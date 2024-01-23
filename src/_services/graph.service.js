@@ -11,11 +11,4 @@ async function getGraphData(params) {
       params: params
     }
   );
-  // return await axios.get(
-  //   `https://backend.mondopedia.it/api/v1/generate-graph`,
-  //   {
-  //     headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
-  //     params: params
-  //   }
-  // );
 }

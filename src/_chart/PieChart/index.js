@@ -2,9 +2,17 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
 import "./index.css";
+
 function PieChart(props) {
-  const { pieSize, svgSize, data, containerId, innerRadius, chartTitle } =
-    props;
+  const {
+    pieSize,
+    svgSize,
+    data,
+    containerId,
+    innerRadius,
+    chartTitle,
+    xUnit,
+  } = props;
 
   const outerRadius = pieSize / 2;
   const center = svgSize / 2;
@@ -27,8 +35,6 @@ function PieChart(props) {
       left: 50,
     };
 
-    const yMinValue = d3.min(data, (d) => d.value);
-    const yMaxValue = d3.max(data, (d) => d.value);
     const fixedColors = [
       "#437ECE",
       "#99D1FF",
@@ -37,10 +43,15 @@ function PieChart(props) {
       "#96DCF2",
       "#D8E5ED",
       "#E7F4FF",
-    ]
+    ];
     const customColorScale = d3.scaleOrdinal();
-    customColorScale.domain(data.map(d => d.label))
-    customColorScale.range([...fixedColors,...Array(Math.max(0, data.length - fixedColors.length)).fill().map(() => d3.interpolateSpectral(Math.random()))]);
+    customColorScale.domain(data.map((d) => d.label));
+    customColorScale.range([
+      ...fixedColors,
+      ...Array(Math.max(0, data.length - fixedColors.length))
+        .fill()
+        .map(() => d3.interpolateSpectral(Math.random())),
+    ]);
 
     const svg = d3
       .select(`#${containerId}`)
@@ -58,11 +69,6 @@ function PieChart(props) {
       .arc()
       .innerRadius(innerRadius || 0)
       .outerRadius(outerRadius);
-
-    // const arcHover = d3
-    //   .arc()
-    //   .innerRadius(innerRadius || 0)
-    //   .outerRadius(outerRadius + 10);
 
     const arcHover = d3
       .arc()
@@ -102,7 +108,7 @@ function PieChart(props) {
           font-weight: 400;
           color: rgba(39, 48, 78, 0.8);"><span style="margin-right:8px">${
             data.data.value
-          }%</span><span>${data.data.label}</span></div>`
+          }%</span><span>${data.data.label} ${xUnit}</span></div>`
           )
           .style("left", e.clientX - 20 + "px")
           .style("top", e.clientY - 50 + "px");
@@ -112,43 +118,10 @@ function PieChart(props) {
         tooltip.transition().duration(300).style("opacity", 0);
       });
 
-    //const label = d3.arc().outerRadius(outerRadius).innerRadius(innerRadius);
-    // const text = arc
-    //   .append("text")
-    //   .attr("text-anchor", "middle")
-    //   .attr("alignment-baseline", "middle")
-    //   .text((d) => d.data.label)
-    //   .style("fill", "#ffffff");
-    // text.attr("transform", (d) => {
-    //   const [x, y] = label.centroid(d);
-    //   return `translate(${x}, ${y})`;
-    // });
-    // const labelsData = [];
-    // text.each((d, i, texts) => {
-    //   labelsData.push({
-    //     el: texts[i],
-    //     centroid: label.centroid(d),
-    //     startAngle: d.startAngle,
-    //     endAngle: d.endAngle,
-    //   });
-    // });
     const legendMainContainer = d3.select(`#${containerId}`);
     const legendContainer = legendMainContainer
       .append("div")
       .attr("class", "legendBox");
-
-    // const legendItems = legendContainer
-    //   .selectAll("div") // Create a selection of <div> elements
-    //   .data(data) // Bind data to the selection
-    //   .enter()
-    //   .append("div")
-    //   .attr("class", "legend-item");
-
-    // legendItems
-    //   .append("div")
-    //   .style("width", "12px") // Customize the width of the colored square
-    //   .style("height", "12px") // Customize the height of the colored square
-    //   .style("background-color", (d) => customColorScale(d.value));
 
     const table = legendContainer.append("table");
     const tbody = table.append("tbody");
@@ -166,24 +139,24 @@ function PieChart(props) {
         if (i == 0) {
           d3.select(this)
             .append("div")
-            .attr("class","legend-avatar")
-            .style("width", "12px") 
-            .style("height", "12px") 
+            .attr("class", "legend-avatar")
+            .style("width", "12px")
+            .style("height", "12px")
             .style("background-color", d);
         }
         if (i == 1) {
-          d3.select(this).append('span').attr("class","legend-text").text((d) => `${d}%`);
+          d3.select(this)
+            .append("span")
+            .attr("class", "legend-text")
+            .text((d) => `${d}%`);
         }
         if (i == 2) {
-          d3.select(this).append('span').attr("class","legend-text").text((d) => `${d}`);
+          d3.select(this)
+            .append("span")
+            .attr("class", "legend-text")
+            .text((d) => `${d} ${xUnit}`);
         }
       });
-
-    // legendItems
-    //   .append("span")
-    //   .attr("class", "legendItemsDigit")
-    //   .text((d) => `${d.value}%`);
-    // legendItems.append("span").text((d) => `${d.label}`);
   }
 
   return (
@@ -194,7 +167,9 @@ function PieChart(props) {
         display: "flex",
       }}
     >
-      <span className="chartTitle" style={{"margin-bottom":"-15px"}}>{chartTitle}</span>
+      <span className="chartTitle" style={{ "margin-bottom": "-15px" }}>
+        {chartTitle}
+      </span>
       <div id={containerId} className="pieChart"></div>
     </div>
   );

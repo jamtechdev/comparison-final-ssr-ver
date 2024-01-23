@@ -20,7 +20,6 @@
       stroke-width: 1;
   
       &-label {
-        //stroke: rgba(39, 48, 78, 0.80);;
         font-size: 18px;
         font-weight: 400;
         font-style: italic;
@@ -41,9 +40,7 @@
       opacity: 0;
     }
   }
-  // .base__axis .axis_x path{
-  // display: none;
-  // }
+
   .base__axis {
     text{
       color: rgba(39, 49, 75, 0.70);
@@ -52,12 +49,6 @@
    path, line{
       display:none;
     }
-    // path{
-    //   display:none;
-    // }
-    // line{
-    //   display:none;
-    // }
   }
   .gridlines__x g:nth-child(2) line,
   .gridlines__x g:last-child line {
@@ -75,7 +66,6 @@
     position: fixed;
     text-align: center;
     padding: 8px;
-    //background-color: rgba(255, 255, 255, 1);
     background-color: rgba(255, 255, 255, 1);
     color: rgba(0, 0, 0, 0.3);
     border-radius: 4px;

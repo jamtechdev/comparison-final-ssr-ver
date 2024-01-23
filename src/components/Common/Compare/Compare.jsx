@@ -14,9 +14,6 @@ export default function Compare({
   setIsOpen,
   modelOpen,
 }) {
-  console.log(  searchValue1,
-    searchValue2,
-    searchValue3,"Compare")
   const dispatch = useDispatch();
   const [product1Filled, setProduct1Filled] = useState(false);
   const [product2Filled, setProduct2Filled] = useState(false);

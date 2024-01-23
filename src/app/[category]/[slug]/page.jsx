@@ -11,6 +11,7 @@ export default async function Page({
     if (categoryslugType.error) {
       return <NotFound />;
     }
+    
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {

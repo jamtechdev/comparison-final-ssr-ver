@@ -40,7 +40,6 @@ function drawTooltip(config) {
     .attr('height', height)
     .style('opacity', 0)
     .on('mouseover', () => {
-      //focus.style('display', null);
       tooltip
         .transition()
         .duration(300)
@@ -54,45 +53,9 @@ function drawTooltip(config) {
         .style('opacity', 0);
     })
     .on("mouseout", (d, data) => {
-     // d3.select(this).transition().duration(300).attr("d", arcGeneral);
       tooltip.transition().duration(300).style("opacity", 0);
     });
-   // .on('mousemove', mousemove);
 
-  // function mousemove() {
-  //   const bisect = d3.bisector((d) => d.label).left;
-  //   const xPos = d3.mouse(this)[0];
-  //   const invertedPoint = useScaleBands ? scaleBandInvert(xScale, xPos) : xScale.invert(xPos);
-  //   const x0 = bisect(data, invertedPoint);
-  //   const d0 = findHoverData ? findHoverData(d3.mouse(this), height, data, xScale, yScale) : data[x0];
-
-  //   focus.style('opacity', 1);
-
-  //   focus.attr(
-  //     'transform',
-  //     `translate(${xScale(d0.label)},${yScale(d0.value)})`,
-  //   );
-
-  //   tooltip
-  //     .transition()
-  //     .duration(300)
-  //     .style('opacity', 0.9);
-
-  //   tooltip
-  //     .html(d0.tooltipContent || d0.label)
-  //     .style(
-  //       'transform',
-  //       'translate(-50%,-100%)',
-  //     )
-  //     .style(
-  //       'left',
-  //       `${xScale(d0.label) + margin.left}px`,
-  //     )
-  //     .style(
-  //       'top',
-  //       `${yScale(d0.value) + margin.top - 10}px`,
-  //     );
-  // }
   function mousemove() {
     const bisect = d3.bisector((d) => d.label).left;
     const xPos = d3.mouse(this)[0];

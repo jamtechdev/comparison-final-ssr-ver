@@ -52,9 +52,6 @@ export default function GuidePage({
   const handelSetFilterActive = (status) => {
     setIsFilterActive(status);
   };
-
-  useChart();
-
   useEffect(() => {
     setPrevSearcParam(searchParams);
   }, []);

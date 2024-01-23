@@ -75,7 +75,7 @@ const CompareModal = ({ setIsOpen, location }) => {
           }
         })
         .catch((error) => {
-          console.log(error);
+          //console.log(error);
         });
     }
   }, [categoryId]);

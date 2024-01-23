@@ -1,8 +1,7 @@
-import React, { createRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import * as d3 from "d3";
 import classnames from "classnames";
 import drawAxis from "./axis";
-//import drawTooltip from "./tooltip"
 import "./index.scss";
 
 const BaseChart = (drawChart, extraProps) => {
@@ -99,7 +98,7 @@ const BaseChart = (drawChart, extraProps) => {
         }}
       >
         {" "}
-        <span className="chartTitle" style={{ "margin-bottom": "-6px" }}>
+        <span className="chartTitle" style={{ "margin-bottom": "6px" }}>
           {chartTitle}
         </span>
         <div className="base__container">

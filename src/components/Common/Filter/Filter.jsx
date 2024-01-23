@@ -140,7 +140,6 @@ export default function Filter({
         Object.values(searchParam)[0]
           .split(",")
           .map((item) => {
-            console.log(item, "items");
             handelFilterActions("brand", "brand", { brand: item }, false);
             document.getElementById(`${item}`).checked = false;
           });

@@ -16,7 +16,6 @@ export default async function PageSwitch({
     case "Guide":
       const guide = pageData[0]?.data;
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
-      console.log(guide,attributes,"AJ")
       PageToRender = (
         <GuidePage
           slug={slug}
