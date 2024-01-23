@@ -10,6 +10,7 @@ export default function Filter({
   categoryAttributes,
   removedParam,
   searchParam,
+  orderBy,
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -86,7 +87,13 @@ export default function Filter({
         } else {
           updatedParams[key] = value;
         }
-
+        break;
+      case "sort":
+        if (isChecked) {
+          updatedParams.sort = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url); // yet to do
+        }
         break;
       case "dropdown":
         if (isChecked) {
@@ -144,7 +151,6 @@ export default function Filter({
             document.getElementById(`${item}`).checked = false;
           });
       }
-
       if (removedParam.toLowerCase() == "price") {
         handelFilterActions(
           "price",
@@ -160,7 +166,9 @@ export default function Filter({
           };
         });
       }
-
+      if (removedParam == "sort") {
+        handelFilterActions("sort", "sort", ``, false);
+      }
       if (
         removedParam !== "available" &&
         removedParam != "brand" &&
@@ -177,11 +185,9 @@ export default function Filter({
             return filteredArray;
           }
         });
-
         let filteredArrayOfAttributeValues = getFilteredAttributeValues(
           arrayToGetFilteredObject[0][0]
         );
-
         let countAttribute = 1;
         if (filteredArrayOfAttributeValues?.type == "dropdown") {
           countAttribute++;
@@ -252,6 +258,12 @@ export default function Filter({
     }
   }, [removedParam]);
 
+  useEffect(() => {
+    console.log(orderBy, "order");
+    orderBy.ischecked == true
+      ? handelFilterActions("sort", "sort", `${orderBy.value}`, true)
+      : handelFilterActions("sort", "sort", `${orderBy.value}`, false);
+  }, [orderBy]);
   return (
     <div className="filter-container">
       <div className="filter-section">

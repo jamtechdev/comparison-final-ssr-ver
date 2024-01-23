@@ -150,12 +150,12 @@ function CompareDiv({
       reduxData?.productThird === null
     ) {
       let productData = {
-        name: comparisonProductData[1].name,
-        category: comparisonProductData[1].category_id,
-        category_url: comparisonProductData[1].category_url,
-        permalink: comparisonProductData[1].permalink,
-        image: comparisonProductData[1].main_image
-          ? comparisonProductData[1].main_image
+        name: comparisonProductData[1]?.name,
+        category: comparisonProductData[1]?.category_id,
+        category_url: comparisonProductData[1]?.category_url,
+        permalink: comparisonProductData[1]?.permalink,
+        image: comparisonProductData[1]?.main_image
+          ? comparisonProductData[1]?.main_image
           : "/images/nofound.png",
       };
       dispatch(

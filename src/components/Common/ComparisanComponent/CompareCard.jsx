@@ -28,6 +28,23 @@ const CompareCard = ({
     }
     return value;
   };
+
+  const urlChange = (i) => {
+    let x = window.location.pathname.split("/")[2].split("-vs-");
+    // Create a new array without the element at the specified index
+    const newArray = [...x.slice(0, i), ...x.slice(i + 1)];
+
+    if (newArray.length > 1) {
+      let newUrl = newArray.join("-vs-");
+      let path = `${window.location.origin}/${
+        window.location.pathname.split("/")[1]
+      }/${newUrl}`;
+      window.location.href = path;
+    }
+
+    newArray.length <= 1 && handelRemoveProduct(i);
+  };
+
   return (
     <div className="comparison-wrapper">
       {compareProduct.length <= 0 ? (
@@ -78,7 +95,10 @@ const CompareCard = ({
             </span>
             <i
               className="ri-close-circle-line close_icon"
-              onClick={() => handelRemoveProduct(productIndex)}
+              onClick={
+                () => urlChange(productIndex)
+                //
+              }
             ></i>
           </div>
           <div className="comparison-product-spec">
