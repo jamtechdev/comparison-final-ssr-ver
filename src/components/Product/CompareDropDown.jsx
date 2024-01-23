@@ -4,7 +4,7 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import Image from "next/image";
 
 function CompareDropDown({ attributeDropDown, product }) {
-  console.log(attributeDropDown)
+  console.log(attributeDropDown);
   const [selectedCategory, setSelectedCategory] = useState(
     Object.keys(attributeDropDown)[0] || ""
   );
@@ -83,7 +83,14 @@ function CompareDropDown({ attributeDropDown, product }) {
           <Row className="mt-3">
             <Col md={4} lg={4}>
               <p className="text-end para_content_text">
+                {selectedCategory && (
+                  <span style={{ fontWeight: 800 }}> What iT is : </span>
+                )}
                 {selectedCategory}
+                <br />
+                {selectedObjectDescription && (
+                  <span style={{ fontWeight: 800 }}>When it matters :</span>
+                )}{" "}
                 {selectedObjectDescription}
               </p>
             </Col>
