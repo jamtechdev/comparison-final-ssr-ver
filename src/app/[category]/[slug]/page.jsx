@@ -5,6 +5,7 @@ export default async function Page({
   searchParams,
 }) {
   try {
+ 
     const categoryslugType = await getSlugType(category);
 
     if (categoryslugType.error) {
@@ -13,7 +14,6 @@ export default async function Page({
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
-  
       const pageData = await fetchDataBasedOnPageType(
         slug,
         "Comparison",
@@ -71,14 +71,12 @@ async function getSlugMetaData(slug) {
     }
   );
   if (!response.ok) {
-    throw new Error(`Failed to fetch data from ${apiUrl}`);
   }
   return response.json();
 }
 
 export async function generateMetadata({ params: { slug, category } }) {
   if (slug.includes("-vs-")) {
-    console.log();
     const extractedUrls = slug.split("-vs-");
     const convertStringToMetaData = `${extractedUrls[0]
       .replace(/-/g, " ")
@@ -133,7 +131,6 @@ async function getSlugType(slug) {
     }
   );
   if (!response.ok) {
-    throw new Error(`Failed to fetch data from ${apiUrl}`);
   }
   return response.json();
 }
@@ -181,7 +178,6 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
       });
      
       if (!response.ok) {
-        throw new Error(`Failed to fetch data from ${apiUrl}`);
       }
       return response.json();
     })
