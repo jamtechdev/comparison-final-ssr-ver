@@ -100,7 +100,7 @@ function CompareDiv({
       typeof item !== "undefined" &&
       Object.keys(item).length !== 0
   );
-  console.log(comparisonProductData[1]?.name);
+  console.log(comparisonProductData, "comparison darta");
 
   const productCopy = comparisonProductData;
   const productAttributes = {};
