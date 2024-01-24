@@ -48,10 +48,10 @@ export default function ReviewSlider({ favSlider }) {
         }}
         className="product-slider"
       >
-        {favSlider?.map((item) => {
+        {favSlider?.map((item,index) => {
           const url = item?.category.replace(/\s+/g, "-").toLowerCase();
           return (
-            <SwiperSlide key={item?.id}>
+            <SwiperSlide key={index}>
               <Link href={`/${url}/${item?.permalink}`}>
                 <div className="review-wrapper">
                   <div className="review-card">
