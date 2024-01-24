@@ -50,7 +50,7 @@ async function getMainPageBannerCounts() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/homepage/counts`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 300 },
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         "Content-type": "application/json",
@@ -67,7 +67,7 @@ async function getMainPageBannerCounts() {
 
 async function getFavouriteGuides() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/homepage`, {
-    next: { revalidate: 600 },
+    next: { revalidate: 300 },
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
       "Content-type": "application/json",

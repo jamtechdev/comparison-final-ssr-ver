@@ -90,7 +90,7 @@ async function getCategoryAttributes(category_id, slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/guide/${category_id}/${slug}/attributes`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 300 },
       cache: "no-cache",
       method: "GET",
       headers: {
@@ -108,7 +108,7 @@ async function getProductCategroyAttributes(category_id) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/${category_id}/attributes`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 300 },
       cache: "no-cache",
       method: "GET",
       headers: {
@@ -127,7 +127,7 @@ async function getCompareProductByCatID(category_id) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 300 },
       cache: "no-cache",
       method: "GET",
       headers: {
@@ -146,7 +146,7 @@ async function getGraphComparisonProsCons(data) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}`,
       {
-        next: { revalidate: 600 },
+        next: { revalidate: 300 },
         cache: "no-cache",
         method: "GET",
         headers: {
@@ -162,7 +162,7 @@ async function getGraphComparisonProsCons(data) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}&permalink3=${data[2]?.data?.permalink}`,
       {
-        next: { revalidate: 600 },
+        next: { revalidate: 300 },
         cache: "no-cache",
         method: "GET",
         headers: {

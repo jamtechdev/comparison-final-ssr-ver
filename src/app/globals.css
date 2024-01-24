@@ -1098,3 +1098,38 @@ table.compare-container.table.comparison-table .best-list-item li img {
 .breadcrumb-group .breadcrumb-items.fristWord::first-letter {
   text-transform: capitalize;
 }
+
+.shortcode_table_wrapper{
+  width: 100%;
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.shortcode_table_wrapper thead tr th {
+  padding: 8px;
+  border: 1px solid #ddd;
+  background: #437ECE;
+  color: #fff;
+  font-size: 16px;
+}
+
+.shortcode_table_wrapper tbody tr td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.shortcode_table_wrapper tbody tr:nth-child(even){
+  background-color: #fafbfd;
+}
+
+.shortcode_info_wrapper {
+  border: 1px solid rgba(39, 48, 78, 0.2);
+  padding: 15px 30px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #f8fafd;
+  margin: 10px 0;
+}

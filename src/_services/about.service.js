@@ -6,7 +6,7 @@ export const aboutUsService = {
 
 async function aboutUsAPi() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/about-us`, {
-    next: { revalidate: 600 },
+    next: { revalidate: 300 },
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
       "Content-type": "application/json",
@@ -24,7 +24,7 @@ async function getAuthorById(authorId) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/author/${authorId}`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 300 },
       headers: {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         "Content-type": "application/json",

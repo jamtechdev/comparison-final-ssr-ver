@@ -205,9 +205,7 @@ export default function GuidePage({
                   </div>
                 </Col>
                 <Col md={12}>
-                  <p className="product-inner-content">
-                    {guide?.text_first_part}
-                  </p>
+                <div className="product-inner-content" dangerouslySetInnerHTML={{ __html:guide?.text_first_part }} />
                 </Col>
               </Row>
 
@@ -265,7 +263,7 @@ export default function GuidePage({
               )}
               <Row>
                 <Col md={12}>
-                  <p className="para_content_text">{guide?.text_second_part}</p>
+                <div className="para_content_text" dangerouslySetInnerHTML={{ __html: guide?.text_second_part }} />
                 </Col>
               </Row>
             </Container>
@@ -553,9 +551,7 @@ export default function GuidePage({
                   </div>
                 </Col>
                 <Col md={8} lg={8}>
-                  <p className="review-content">
-                    {guide?.text_third_part_main}
-                  </p>
+                <div className="review-content" dangerouslySetInnerHTML={{ __html: guide?.text_third_part_main }} />
                   <br />
                   <h3 className="site-main-heading">Connectivity</h3>
                   <p className="review-content">

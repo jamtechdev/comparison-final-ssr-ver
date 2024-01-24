@@ -485,14 +485,7 @@ function ProductPage({
               </div>
             </Col>
             <Col md={8} lg={8}>
-              <p className="review-content">
-                <br />
-                {product?.text_part === null && (
-                  <span className="text-center">No Data Found</span>
-                )}
-                {product?.text_part}
-                <br />
-              </p>
+              <div className="review-content" dangerouslySetInnerHTML={{ __html: product?.text_part }}/>
               <Row className="mt-3">
                 <Col md={12} lg={6}>
                   <div className="best-price-section mobile-best-price-section">
