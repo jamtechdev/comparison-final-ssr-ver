@@ -62,7 +62,7 @@ async function getSlugMetaData(slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/meta-data/${slug}`,
     {
-      next: { revalidate: 300 },
+      next: { revalidate: 10 },
       cache: "no-cache",
       method: "GET",
       headers: {
@@ -122,7 +122,7 @@ async function getSlugType(slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
     {
-      next: { revalidate: 300 },
+      next: { revalidate: 10 },
       cache: "no-cache",
       method: "GET",
       headers: {
@@ -169,7 +169,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   const responses = await Promise.all(
     apiUrls.map(async (apiUrl) => {
       const response = await fetch(apiUrl, {
-        next: { revalidate: 300 },
+        next: { revalidate: 10 },
         cache: "no-cache",
         method: "GET",
         headers: {

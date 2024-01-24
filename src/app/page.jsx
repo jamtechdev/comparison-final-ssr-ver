@@ -26,7 +26,7 @@ async function getMetaData() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/homepage/meta`,
     {
-      next: { revalidate: 300 },
+      next: { revalidate: 10 },
       cache: "no-cache",
       method: "GET",
       headers: {

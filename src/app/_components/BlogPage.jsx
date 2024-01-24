@@ -82,16 +82,7 @@ export default function BlogPage({ slug, blogData, categorySlug}) {
               </div>
             </Col>
             <Col lg={8} md={8} xs={12}>
-              <div className="content-para mt-1">
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      blogData[0]?.data?.text_part &&
-                      blogData[0]?.data?.text_part,
-                  }}
-                >
-                </p>
-              </div>
+              <div className="content-para mt-1"  dangerouslySetInnerHTML={{__html:blogData[0]?.data?.text_part}}/>
               <div className="social-icon items-icon">
                 <div className="twitter">
                   <i className="ri-twitter-fill"></i>
