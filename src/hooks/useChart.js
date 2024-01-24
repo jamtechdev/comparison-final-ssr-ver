@@ -15,7 +15,7 @@ const useChart = () => {
   useEffect(() => {
     // Function to search for the pattern
     const searchForPattern = async () => {
-      const elementsWithNodeType1 = document.body.querySelectorAll("p");
+      const elementsWithNodeType1 = document.body.querySelectorAll("p, div");
       elementsWithNodeType1.forEach(async (element, index) => {
         const shortCode = element.textContent;
         const shortCodesMatched = matchShortCodePatternsAgainstText(shortCode);

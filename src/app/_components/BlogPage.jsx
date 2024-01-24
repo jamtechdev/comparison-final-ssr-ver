@@ -4,11 +4,12 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
-
+import useChart from "@/hooks/useChart";
 import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSliderBlog";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 export default function BlogPage({ slug, blogData, categorySlug}) {
+  useChart();
   return (
     <>
       <section className="product-header">
