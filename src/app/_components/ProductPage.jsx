@@ -396,7 +396,7 @@ function ProductPage({
       </section>
       <CompareDropDown
         attributeDropDown={productCopy?.attributes}
-        product={product?.name}
+        product={product}
       />
 
       <section className="ptb-80 bg-color">
