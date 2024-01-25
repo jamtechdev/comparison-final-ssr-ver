@@ -154,10 +154,14 @@ export default function Product({
       return;
     }
     if (
-      reduxData?.productFrist !== null &&
+      reduxData?.productFirst !== null &&
       reduxData?.productSecond === null &&
       reduxData?.productThird === null
     ) {
+      if (reduxData?.productFirst?.permalink === product.permalink) {
+        toast.error("This product has already been added to compare list.");
+        return;
+      }
       let productData = {
         id: position,
         name: product.name,
@@ -177,9 +181,16 @@ export default function Product({
     }
     if (
       reduxData?.productThird === null &&
-      reduxData?.productFrist !== null &&
+      reduxData?.productFirst !== null &&
       reduxData?.productSecond !== null
     ) {
+      if (
+        reduxData?.productFirst?.permalink === product.permalink ||
+        reduxData?.productSecond?.permalink === product.permalink
+      ) {
+        toast.error("This product has already been added to compare list.");
+        return;
+      }
       let productData = {
         id: position,
         name: product.name,
@@ -198,7 +209,7 @@ export default function Product({
       return;
     }
     if (
-      reduxData?.productFrist !== null &&
+      reduxData?.productFirst !== null &&
       reduxData?.productSecond !== null &&
       reduxData?.productThird !== null
     ) {
