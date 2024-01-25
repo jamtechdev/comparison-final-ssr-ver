@@ -1100,9 +1100,11 @@ table.compare-container.table.comparison-table .best-list-item li img {
 }
 
 .shortcode_table_wrapper{
-  width: 95%;
+  display: block;
+  width:100%;
   margin: 0 0 10px;
   text-align: center;
+  padding: 10px 20px ;
 }
 
 .shortcode_table_wrapper td p{
