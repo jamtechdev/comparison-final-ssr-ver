@@ -5,10 +5,13 @@ export default async function Page({
   searchParams,
 }) {
   try {
+ 
     const categoryslugType = await getSlugType(category);
+
     if (categoryslugType.error) {
       return <NotFound />;
     }
+    
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
@@ -27,8 +30,9 @@ export default async function Page({
         />
       );
     }
-
+ 
     if (slugType.type) {
+    
       const pageData = await fetchDataBasedOnPageType(
         slug,
         slugType.type,
@@ -49,7 +53,7 @@ export default async function Page({
     }
   } catch (error) {
     return <NotFound />;
-    //console.error("Error:", error);
+    console.error("Error:", error);
   }
   return <NotFound />;
 }
@@ -58,7 +62,7 @@ async function getSlugMetaData(slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/meta-data/${slug}`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 10 },
       cache: "no-cache",
       method: "GET",
       headers: {
@@ -74,7 +78,6 @@ async function getSlugMetaData(slug) {
 
 export async function generateMetadata({ params: { slug, category } }) {
   if (slug.includes("-vs-")) {
-    console.log();
     const extractedUrls = slug.split("-vs-");
     const convertStringToMetaData = `${extractedUrls[0]
       .replace(/-/g, " ")
@@ -119,7 +122,7 @@ async function getSlugType(slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 10 },
       cache: "no-cache",
       method: "GET",
       headers: {
@@ -166,7 +169,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   const responses = await Promise.all(
     apiUrls.map(async (apiUrl) => {
       const response = await fetch(apiUrl, {
-        next: { revalidate: 600 },
+        next: { revalidate: 10 },
         cache: "no-cache",
         method: "GET",
         headers: {
@@ -174,6 +177,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
       });
+     
       if (!response.ok) {
       }
       return response.json();

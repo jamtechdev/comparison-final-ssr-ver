@@ -4,14 +4,14 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import Image from "next/image";
 
 function CompareDropDown({ attributeDropDown, product }) {
-  console.log(attributeDropDown)
   const [selectedCategory, setSelectedCategory] = useState(
     Object.keys(attributeDropDown)[0] || ""
   );
   const [selectedAttribute, setSelectedAttribute] = useState("");
   const [selectedObjectDescription, setSelectedObjectDescription] =
     useState("");
-
+  const [whenMatters, setwhenMatters] = useState("");
+  console.log(attributeDropDown);
   const handleCategoryChange = (event) => {
     const category = event.target.value;
     setSelectedCategory(category);
@@ -34,9 +34,12 @@ function CompareDropDown({ attributeDropDown, product }) {
       attributeDropDown[selectedCategory]?.find(
         (obj) => obj.attribute === selectedAttribute
       ) || {};
-    const { description } = selectedObject;
+    console.log(selectedObject, "selected object");
+    const { description, when_matters } = selectedObject;
+    setwhenMatters(when_matters ? when_matters : "");
     setSelectedObjectDescription(description || "");
   }, [selectedCategory, selectedAttribute, attributeDropDown]);
+
   return (
     <>
       <section className="ptb-80">
@@ -83,8 +86,19 @@ function CompareDropDown({ attributeDropDown, product }) {
           <Row className="mt-3">
             <Col md={4} lg={4}>
               <p className="text-end para_content_text">
-                {selectedCategory}
+                {selectedObjectDescription && (
+                  <span style={{ fontWeight: 800, fontSize: 17 }}>
+                    What it is:
+                  </span>
+                )}
                 {selectedObjectDescription}
+                <br />
+                {whenMatters && (
+                  <span style={{ fontWeight: 800, fontSize: 17 }}>
+                    When matters:
+                  </span>
+                )}
+                {whenMatters}
               </p>
             </Col>
             <Col md={8} lg={8}>

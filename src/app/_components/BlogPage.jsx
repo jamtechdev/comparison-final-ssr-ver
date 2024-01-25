@@ -4,12 +4,12 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
-
+import useChart from "@/hooks/useChart";
 import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSliderBlog";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
-
 export default function BlogPage({ slug, blogData, categorySlug}) {
+  useChart();
   return (
     <>
       <section className="product-header">
@@ -18,7 +18,7 @@ export default function BlogPage({ slug, blogData, categorySlug}) {
             <Col md={12}>
               <BreadCrumb
                 firstPageName={categorySlug}
-                secondPageName={blogData[0]?.data?.title}
+                secondPageName={{heading_title:blogData[0]?.data?.title}}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>
@@ -83,29 +83,7 @@ export default function BlogPage({ slug, blogData, categorySlug}) {
               </div>
             </Col>
             <Col lg={8} md={8} xs={12}>
-              <div className="content-para mt-1">
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      blogData[0]?.data?.text_part &&
-                      blogData[0]?.data?.text_part,
-                  }}
-                >
-                  {/* {blog.data?.text_part}
-                      <br /> */}
-                </p>
-
-                <div className="kitchen">
-                  <Image
-                    src="/images/kitchen.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                    className="kitchen-img"
-                  />
-                </div>
-              </div>
+              <div className="content-para mt-1"  dangerouslySetInnerHTML={{__html:blogData[0]?.data?.text_part}}/>
               <div className="social-icon items-icon">
                 <div className="twitter">
                   <i className="ri-twitter-fill"></i>

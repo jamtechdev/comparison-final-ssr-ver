@@ -1,15 +1,13 @@
-import React, { forwardRef, useEffect } from "react";
 import * as d3 from "d3";
 import classnames from "classnames";
 import { calculateNextStep } from "../utils/calculateTickStep";
-import {tickValues} from '../utils/computTicks'
+import { tickValues } from '../utils/computTicks'
+
 function drawAxis(config) {
   const {
     margin,
     width,
     height,
-    drawXAxis,
-    drawYAxis,
     drawXGridlines,
     drawYGridlines,
     xLabel,
@@ -27,10 +25,13 @@ function drawAxis(config) {
   } = config;
   
   const maxY = d3.max(data.map((d) => Number(d.value)));
-  const {nextStepVal:step} =calculateNextStep(maxY,tick)
+  const roundToNextNearest10 = num => Math.ceil(num / 10) * 10;
+  const maxLimit = roundToNextNearest10(maxY);
+  const {nextStepVal:step} =calculateNextStep(maxLimit,maxLimit/5)
   const {ticks:yTickValues} =tickValues(0,tick,step)
-  yScale.domain([0, yTickValues[yTickValues.length-1]]); //Reset yscal domain
+    yScale.domain([0, yTickValues[yTickValues.length-1]]); //Reset yscal domain
   const svg = d3.select(svgRef.current).select("g");
+  
   if (drawYGridlines) {
     svg
       .append("g")
@@ -43,7 +44,6 @@ function drawAxis(config) {
     const xgridGroups = svg
       .append("g")
       .attr("class", classnames(["base__gridlines gridlines__x", gridClass]))
-      //.call(d3.axisLeft(yScale).ticks(tick).tickSize(-width).tickFormat(""));
       .call(
         d3
           .axisLeft(yScale)
@@ -76,9 +76,7 @@ function drawAxis(config) {
     .call(
       d3
         .axisLeft(yScale)
-        //.ticks(tick)
         .tickValues(yTickValues)
-        // .tickSize(10)
         .tickFormat(customTickFormaYaxis)
     );
 
@@ -99,7 +97,6 @@ function drawAxis(config) {
       .attr("text-anchor", "middle")
       .attr("x", -margin.left / 2 - 20)
       .attr("y", height / 2)
-      //.attr("transform", "rotate(-90)")
       .text(yLabel.yAixsLabel);
 
   function customTickFormaYaxis(d) {

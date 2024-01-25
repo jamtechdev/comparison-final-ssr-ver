@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import "./index.css";
-import { calculateNextStep } from "../utils/calculateTickStep";
-import {tickValues} from '../utils/computTicks'
+import { calculateNextStep } from "../utils/calculateTickStepCorrelation";
+
 function CorrelationChart(props) {
   const {
     data: correlationChartData,
@@ -15,28 +15,105 @@ function CorrelationChart(props) {
     yTick,
     xUnit,
     yUnit,
+    isGeneralAttribute_x,
+    isGeneralAttribute_y,
+    rangeMinX,
+    rangeMaxX,
+    rangeMinY,
+    rangeMaxY,
   } = props;
 
   const svgContainer = useRef();
-  const maxX = d3.max(correlationChartData.map((d) => d.value));
-  const minX = d3.min(correlationChartData.map((d) => d.value));
-  const maxY = d3.max(correlationChartData.map((d) => Number(d.label)));
-  const minY = d3.min(correlationChartData.map((d) => Number(d.label)));
+  let maxY = rangeMaxY ?? d3.max(correlationChartData.map((d) => d.value));
+  let minY = rangeMinY ?? d3.min(correlationChartData.map((d) => d.value));
+  let maxX =
+    rangeMaxX ?? d3.max(correlationChartData.map((d) => Number(d.label)));
+  let minX =
+    rangeMinX ?? d3.min(correlationChartData.map((d) => Number(d.label)));
+  let x_tick = xTick;
+  let y_tick = yTick;
+
+  if (isGeneralAttribute_x) {
+    minX = 1;
+    maxX = 10;
+    x_tick = 10;
+  }
+  if (isGeneralAttribute_y) {
+    minY = 1;
+    maxY = 10;
+    y_tick = 10;
+  }
+  function tickValuesAdujst(start, end, noOfTicks, increment) {
+    let ticks = [];
+    let tempTick = [];
+    let nextTickVal = start;
+    let steps = noOfTicks;
+
+    while (steps >= 0 && nextTickVal <= end) {
+      tempTick.push(nextTickVal);
+      nextTickVal += increment;
+      steps--;
+    }
+
+    if (tempTick.length < noOfTicks) {
+      tempTick.push(nextTickVal);
+    }
+
+    let tickValNeedToBeAppend = noOfTicks - tempTick.length;
+    let tickValNeedToBeAppendFront = 0;
+    let tickValNeedToBeAppendEnd = 0;
+    
+    if (tickValNeedToBeAppend > 0) {
+      tickValNeedToBeAppendFront = Math.ceil(tickValNeedToBeAppend / 2);
+      tickValNeedToBeAppendEnd =
+        tickValNeedToBeAppend - tickValNeedToBeAppendFront;
+    }
+
+    let frontTick = [];
+    let endTick = [];
+
+    for (let i = tickValNeedToBeAppendFront; i > 0; i--) {
+      frontTick.push(i * increment);
+    }
+    for (let i = 1; i <= tickValNeedToBeAppendEnd; i++) {
+      endTick.push(i * increment);
+    }
+
+    let tempStartTick = tempTick[0];
+    let tempEndTick = tempTick[tempTick.length - 1];
+    
+    for (let i = 0; i < noOfTicks; i++) {
+      if (i <= frontTick.length - 1) {
+        ticks[i] = Number(Math.abs(frontTick[i] - tempStartTick).toFixed(2));
+      } else if (i > frontTick.length + tempTick.length - 1) {
+        ticks[i] = Number(
+          (
+            endTick[i - (frontTick.length + tempTick.length)] + tempEndTick
+          ).toFixed(2)
+        );
+      } else {
+        ticks[i] = Number(tempTick[i - frontTick.length].toFixed(2));
+      }
+    }
+
+    return { ticks };
+  }
 
   const margin = { top: 40, right: 35, bottom: 40, left: 35 };
-  const {nextStepVal:yStep} =calculateNextStep(maxY,yTick)
-  const {ticks:yTickValues} =tickValues(0,yTick,yStep)
+  const { nextStepVal: yStep } = calculateNextStep(maxY, minY, y_tick);
+  const { ticks: yTickValues } = tickValuesAdujst(minY, maxY, y_tick, yStep);
+  const { nextStepVal: xStep } = calculateNextStep(maxX, minX, x_tick);
+  const { ticks: xTickValues } = tickValuesAdujst(minX, maxX, x_tick, xStep);
 
-  const {nextStepVal:xStep} =calculateNextStep(maxX,xTick)
-  const {ticks:xTickValues} =tickValues(0,xTick,xStep)
   useEffect(() => {
     drawChart();
   }, [correlationChartData]);
+  
   function drawChart() {
     d3.select(svgContainer.current).select("svg").remove();
     // Remove the old tooltip
     d3.select(svgContainer.current).select(".tooltip").remove();
-     const translateX= margin.left+15
+    const translateX = margin.left + 15;
     const svg = d3
       .select(svgContainer.current)
       .append("svg")
@@ -52,7 +129,6 @@ function CorrelationChart(props) {
       .append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
-    //.attr("transform", `translate(${svgSize / 2}px, ${svgSize / 2}px)`);
 
     svg
       .append("rect")
@@ -61,29 +137,18 @@ function CorrelationChart(props) {
       .attr("height", height - margin.top - margin.bottom)
       .attr("width", width - margin.left - margin.right)
       .style("fill", "#fff");
-    // .style("stroke", "rgba(39, 48, 78, 0.1)");
 
     // Add X axis
     const xScale = d3
       .scaleLinear()
-      .domain([0, xTickValues[xTickValues.length-1]])
+      .domain([xTickValues[0], xTickValues[xTickValues.length - 1]])
       .range([margin.left, width - margin.right]);
-    //xScale.nice();
 
     const translateXaxis = {
       y: height - margin.top - margin.bottom,
       x: -margin.left,
     };
-    // const xAxisGroups = svg
-    //   .append("g")
-    //   .attr("transform", `translate(${translateXaxis.x},${translateXaxis.y})`)
-    //   .call(
-    //     d3
-    //       .axisBottom(xScale)
-    //       .ticks(xTick)
-    //       .tickSize(-(height - margin.top - margin.bottom))
-    //   );
-    //const xTickValues = d3.range(0, maxX + 1, maxX / xTick);
+  
     const xAxisGroups = svg
       .append("g")
       .attr("transform", `translate(${translateXaxis.x},${translateXaxis.y})`)
@@ -98,29 +163,18 @@ function CorrelationChart(props) {
       .selectAll("text")
       .attr("x", 0) // Adjust the horizontal position
       .attr("y", 10); // Adjust the vertical position
-    //.style("text-anchor", "middle"); // Center the text
 
     //Add Y axis
     const yScale = d3
       .scaleLinear()
-      .domain([0, yTickValues[yTickValues.length-1]])
+      .domain([yTickValues[0], yTickValues[yTickValues.length - 1]])
       .range([height - margin.top, margin.bottom]);
-   // yScale.nice();
 
     const translateYaxis = {
       y: -margin.top,
       x: 0,
     };
-    // const yAxisGroups = svg
-    //   .append("g")
-    //   .attr("transform", `translate(${translateYaxis.x},${translateYaxis.y})`)
-    //   .call(
-    //     d3
-    //       .axisLeft(yScale)
-    //       .ticks(yTick)
-    //       .tickSize(-(width - margin.left - margin.right))
-    //   );
-    //const yTickValues = d3.range(0, maxY + 1, maxY / yTick);
+
     const yAxisGroups = svg
       .append("g")
       .attr("transform", `translate(${translateYaxis.x},${translateYaxis.y})`)
@@ -135,7 +189,6 @@ function CorrelationChart(props) {
       .selectAll("text")
       .attr("x", -10) // Adjust the horizontal position
       .attr("y", 0); // Adjust the vertical position
-    // .style("text-anchor", "middle"); // Center the text
 
     svg.selectAll(".tick line").attr("stroke", "rgba(39, 48, 78, 0.1)");
     svg.selectAll("path").attr("display", "none");
@@ -155,7 +208,7 @@ function CorrelationChart(props) {
       .append("text")
       .attr("class", "axis-label")
       .attr("text-anchor", "middle")
-      .attr("x", -margin.left - 40)
+      .attr("x", -margin.left - 55)
       .attr("y", (height - margin.top) / 2)
       //.attr("transform", "rotate(-90)")
       .text(yLabel);
@@ -169,10 +222,10 @@ function CorrelationChart(props) {
       .enter()
       .append("circle")
       .attr("cx", function (d) {
-        return xScale(d.value) - margin.left;
+        return xScale(d.label) - margin.left;
       })
       .attr("cy", function (d) {
-        return yScale(d.label) - margin.top;
+        return yScale(d.value) - margin.top;
       })
       .attr("r", 7)
       .attr("class", "hover-effect")
@@ -181,9 +234,11 @@ function CorrelationChart(props) {
         tooltip.transition().duration(300).style("opacity", 1);
         tooltip
           .html(
-            `<div className="tooltip-font"><span style="margin-right:4px">${
-              data.label
-            }</span><span>${
+            `<div class="tooltip-font">
+            <span style="margin-right:4px">
+            ${data.label} ${xUnit} , ${data.value} ${yUnit}
+            </span>
+            <span>${
               data.productCount ? `(${data.productCount})` : ""
             }</span></div>`
           )
@@ -195,12 +250,22 @@ function CorrelationChart(props) {
       });
 
     function customTickFormaYaxis(d) {
-      const formateFunction = d3.format(".0f");
-      return `${formateFunction(d)} ${yUnit}`;
+      if (!Number.isInteger(d)) {
+        const formateFunction = d3.format(".2f");
+        return `${formateFunction(d)} ${yUnit}`;
+      } else {
+        const formateFunction = d3.format(".0f");
+        return `${formateFunction(d)} ${yUnit}`;
+      }
     }
     function customTickFormatXaxis(d) {
-      const formateFunction = d3.format(".0f");
-      return `${formateFunction(d)} ${xUnit}`;
+      if (!Number.isInteger(d)) {
+        const formateFunction = d3.format(".2f");
+        return `${formateFunction(d)} ${xUnit}`;
+      } else {
+        const formateFunction = d3.format(".0f");
+        return `${formateFunction(d)} ${xUnit}`;
+      }
     }
   }
   return (
@@ -217,7 +282,10 @@ function CorrelationChart(props) {
       >
         {chartTitle}
       </span>
-      <div ref={svgContainer} style={{ "background-color": "#fff","padding-right": "20px" }}></div>
+      <div
+        ref={svgContainer}
+        style={{ "background-color": "#fff", "padding-right": "20px" }}
+      ></div>
     </div>
   );
 }

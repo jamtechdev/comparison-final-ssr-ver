@@ -36,7 +36,7 @@ async function getFaq(data) {
 //New Service Migrations
 async function getFooterData() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/menu/footer`, {
-    next: { revalidate: 600 },
+    next: { revalidate: 10 },
     headers: {
       'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, 'Content-type': 'application/json'
     }
@@ -50,7 +50,7 @@ async function getFooterData() {
 
 async function getTopNavBarData() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/menu/header`, {
-    next: { revalidate: 600 },
+    next: { revalidate: 10 },
     headers: {
       'Authorization': `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`, 'Content-type': 'application/json'
     }

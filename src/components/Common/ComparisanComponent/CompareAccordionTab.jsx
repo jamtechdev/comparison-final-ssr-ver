@@ -115,7 +115,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     return value;
   };
   useEffect(() => {
-    const getColor = ["#FF8F0B", "#437ECE", "#28A28C"];
+    const getColor = ["#437ECE", "#FF8F0B", "#28A28C"];
     // Find all buttons that are children of an element with role="presentation" add attribute
     const attributeAdd = document.querySelectorAll(
       '[role="presentation"] button'
@@ -168,50 +168,48 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 {extractedUrls.length > 2 ? (
                   activatab === "tab-2" ? (
                     <>
-                      {" "}
                       <h3 className="font-20">
-                        Why is{" "}
-                        {sendProductProps[1]?.name && sendProductProps[1]?.name}{" "}
+                        Why is
+                        {sendProductProps[1]?.name && sendProductProps[1]?.name}
                         BETTER than other ?
                       </h3>
                     </>
                   ) : activatab === "tab-3" ? (
                     <h3 className="font-20">
-                      Why is{" "}
-                      {sendProductProps[2]?.name && sendProductProps[2]?.name}{" "}
+                      Why is
+                      {sendProductProps[2]?.name && sendProductProps[2]?.name}
                       BETTER than others ?
                     </h3>
                   ) : (
                     <>
                       <h3 className="font-20">
-                        Why is{" "}
-                        {sendProductProps[0]?.name && sendProductProps[0]?.name}{" "}
+                        Why is
+                        {sendProductProps[0]?.name && sendProductProps[0]?.name}
                         BETTER than other ?
                       </h3>
                     </>
                   )
                 ) : activatab === "tab-2" ? (
                   <>
-                    {" "}
                     <h3 className="font-20">
-                      Why is{" "}
-                      {sendProductProps[1]?.name && sendProductProps[1]?.name}{" "}
-                      BETTER than{" "}
+                      Why is
+                      {sendProductProps[1]?.name && sendProductProps[1]?.name}
+                      BETTER than
                       {sendProductProps[0]?.name && sendProductProps[0]?.name} ?
                     </h3>
                   </>
                 ) : activatab === "tab-3" ? (
                   <h3 className="font-20">
-                    Why is{" "}
-                    {sendProductProps[2]?.name && sendProductProps[2]?.name}{" "}
+                    Why is
+                    {sendProductProps[2]?.name && sendProductProps[2]?.name}
                     BETTER than others ?
                   </h3>
                 ) : (
                   <>
                     <h3 className="font-20">
-                      Why is{" "}
-                      {sendProductProps[0]?.name && sendProductProps[0]?.name}{" "}
-                      BETTER than{" "}
+                      Why is
+                      {sendProductProps[0]?.name && sendProductProps[0]?.name}
+                      BETTER than
                       {sendProductProps[1]?.name && sendProductProps[1]?.name} ?
                     </h3>
                   </>
@@ -249,11 +247,11 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                   /\d+\.\d+%/,
                                                   ""
                                                 )
-                                              : item?.phrase
+                                              : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
                                             ? item?.difference
-                                            : item?.phrase}
+                                            : item?.phrase.toFixed(2)}
 
                                           {item?.hover_phase && (
                                             <>
@@ -309,11 +307,11 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                   /\d+\.\d+%/,
                                                   ""
                                                 )
-                                              : item?.phrase
+                                              : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
                                             ? item?.difference
-                                            : item?.phrase}
+                                            : item?.phrase.toFixed(2)}
 
                                           {item?.hover_phase && (
                                             <>
@@ -402,50 +400,48 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 {extractedUrls.length > 2 ? (
                   activatab === "tab-2" ? (
                     <>
-                      {" "}
                       <h3 className="font-20">
-                        Why is{" "}
-                        {sendProductProps[1]?.name && sendProductProps[1]?.name}{" "}
+                        Why is
+                        {sendProductProps[1]?.name && sendProductProps[1]?.name}
                         WORSE than other ?
                       </h3>
                     </>
                   ) : activatab === "tab-3" ? (
                     <h3 className="font-20">
-                      Why is{" "}
-                      {sendProductProps[2]?.name && sendProductProps[2]?.name}{" "}
+                      Why is
+                      {sendProductProps[2]?.name && sendProductProps[2]?.name}
                       WORSE than others ?
                     </h3>
                   ) : (
                     <>
                       <h3 className="font-20">
-                        Why is{" "}
-                        {sendProductProps[0]?.name && sendProductProps[0]?.name}{" "}
+                        Why is
+                        {sendProductProps[0]?.name && sendProductProps[0]?.name}
                         WORSE than other ?
                       </h3>
                     </>
                   )
                 ) : activatab === "tab-2" ? (
                   <>
-                    {" "}
                     <h3 className="font-20">
-                      Why is{" "}
-                      {sendProductProps[1]?.name && sendProductProps[1]?.name}{" "}
-                      WORSE than{" "}
+                      Why is
+                      {sendProductProps[1]?.name && sendProductProps[1]?.name}
+                      WORSE than
                       {sendProductProps[0]?.name && sendProductProps[0]?.name} ?
                     </h3>
                   </>
                 ) : activatab === "tab-3" ? (
                   <h3 className="font-20">
-                    Why is{" "}
-                    {sendProductProps[2]?.name && sendProductProps[2]?.name}{" "}
+                    Why is
+                    {sendProductProps[2]?.name && sendProductProps[2]?.name}
                     WORSE than others ?
                   </h3>
                 ) : (
                   <>
                     <h3 className="font-20">
-                      Why is{" "}
-                      {sendProductProps[0]?.name && sendProductProps[0]?.name}{" "}
-                      WORSE than{" "}
+                      Why is
+                      {sendProductProps[0]?.name && sendProductProps[0]?.name}
+                      WORSE than
                       {sendProductProps[1]?.name && sendProductProps[1]?.name} ?
                     </h3>
                   </>
@@ -482,11 +478,11 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                   /\d+\.\d+%/,
                                                   ""
                                                 )
-                                              : item?.phrase
+                                              : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
                                             ? item?.difference
-                                            : item?.phrase}
+                                            : item?.phrase.toFixed(2)}
 
                                           {item?.hover_phase && (
                                             <>
@@ -543,11 +539,11 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                   /\d+\.\d+%/,
                                                   ""
                                                 )
-                                              : item?.phrase
+                                              : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
                                             ? item?.difference
-                                            : item?.phrase}
+                                            : item?.phrase.toFixed(2)}
 
                                           {item?.hover_phase && (
                                             <>

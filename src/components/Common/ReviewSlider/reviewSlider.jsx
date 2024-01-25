@@ -22,7 +22,7 @@ export default function ReviewSlider({ favSlider }) {
         spaceBetween={30}
         loop={true}
         // rewind={true}
-        onSwiper={(swiper) => console.log(swiper, "swiper works")}
+        onSwiper={(swiper) =>{}}
         navigation={{
           nextEl: ".review-slider .swiper-next",
           prevEl: ".review-slider .swiper-prev",
@@ -48,10 +48,10 @@ export default function ReviewSlider({ favSlider }) {
         }}
         className="product-slider"
       >
-        {favSlider?.map((item) => {
+        {favSlider?.map((item,index) => {
           const url = item?.category.replace(/\s+/g, "-").toLowerCase();
           return (
-            <SwiperSlide key={item?.id}>
+            <SwiperSlide key={index}>
               <Link href={`/${url}/${item?.permalink}`}>
                 <div className="review-wrapper">
                   <div className="review-card">
@@ -91,7 +91,7 @@ export default function ReviewSlider({ favSlider }) {
           <span
             className="swiper-prev"
             onClick={(e) => {
-              console.log(e, "left");
+             {}
             }}
           >
             <i className="ri-arrow-left-s-line"></i>
@@ -99,7 +99,7 @@ export default function ReviewSlider({ favSlider }) {
           <span
             className="swiper-next"
             onClick={(e) => {
-              console.log(e, "right");
+             {}
             }}
           >
             <i className="ri-arrow-right-s-line"></i>

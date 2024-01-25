@@ -75,7 +75,7 @@ const CompareModal = ({ setIsOpen, location }) => {
           }
         })
         .catch((error) => {
-          console.log(error);
+          //console.log(error);
         });
     }
   }, [categoryId]);
@@ -135,12 +135,13 @@ const CompareModal = ({ setIsOpen, location }) => {
                         width={0}
                         height={0}
                         sizes="100%"
-                        alt=""
+                        alt="Not Found"
                       />
 
                       <div className="footer_content">
                         <span>{item?.name || ""}</span>
                         <p>{item?.text_part || ""}</p>
+                        <p>{item?.category || ""}</p>
                       </div>
                       <span
                         className="rating_count"
