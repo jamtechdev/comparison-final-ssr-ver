@@ -33,14 +33,13 @@ const CompareCard = ({
     let x = window.location.pathname.split("/")[2].split("-vs-");
     // Create a new array without the element at the specified index
     const newArray = [...x.slice(0, i), ...x.slice(i + 1)];
-
     if (newArray.length > 1) {
       let newUrl = newArray.join("-vs-");
       let path = `${window.location.origin}/${
         window.location.pathname.split("/")[1]
       }/${newUrl}`;
       window.location.href = path;
-    }
+    } 
 
     newArray.length <= 1 && handelRemoveProduct(i);
   };

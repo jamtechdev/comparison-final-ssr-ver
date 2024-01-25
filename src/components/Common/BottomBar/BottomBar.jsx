@@ -26,7 +26,7 @@ export default function BottomBar({
   const dispatch = useDispatch();
   // this function will remove item from compare list
   const removeItem = (index) => {
-    console.log(index);
+    // console.log(index);
     if (index === "productFirst") {
       dispatch(deleteCompareProduct({ key: "productFirst" }));
       return;

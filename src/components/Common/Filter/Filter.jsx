@@ -259,7 +259,7 @@ export default function Filter({
   }, [removedParam]);
 
   useEffect(() => {
-    console.log(orderBy, "order");
+    // console.log(orderBy, "order");
     orderBy.ischecked == true
       ? handelFilterActions("sort", "sort", `${orderBy.value}`, true)
       : handelFilterActions("sort", "sort", `${orderBy.value}`, false);

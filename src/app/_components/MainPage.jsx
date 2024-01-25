@@ -212,26 +212,27 @@ export default function MainPage({ bannerCounts, favSlider }) {
                           })}
                         </div> */}
                         <div className="product-categories-container">
-                          {data?.categories?.map((item, index) => {
-                            return (
-                              <div
-                                key={index}
-                                style={{ display: "inline-block" }}
-                              >
-                                <span
-                                  className="product-categories-item"
-                                  style={{ cursor: "pointer" }}
+                          {data &&
+                            data?.categories?.map((item, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  style={{ display: "inline-block" }}
                                 >
-                                  <Link
-                                    style={{ color: "#27304e" }}
-                                    href={`/${item?.category_url?.toLowerCase()}`}
+                                  <span
+                                    className="product-categories-item"
+                                    style={{ cursor: "pointer" }}
                                   >
-                                    {item?.title}
-                                  </Link>
-                                </span>
-                              </div>
-                            );
-                          })}
+                                    <Link
+                                      style={{ color: "#27304e" }}
+                                      href={`/${item?.category_url?.toLowerCase()}`}
+                                    >
+                                      {item?.title}
+                                    </Link>
+                                  </span>
+                                </div>
+                              );
+                            })}
                         </div>
                       </Col>
                     </Row>
@@ -269,7 +270,23 @@ export default function MainPage({ bannerCounts, favSlider }) {
                       className="mb-3 site_tabs"
                     >
                       <Tab eventKey="tab-1" title="Most Popular Reviews">
-                        <ReviewSlider favSlider={data?.popular_reviews} />
+                        {data?.popular_reviews.length > 0 ? (
+                          <ReviewSlider favSlider={data?.popular_reviews} />
+                        ) : (
+                          <>
+                            <span
+                              className="d-flex justify-content-center mt-5 "
+                              style={{
+                                fontSize: "20px",
+                                fontWeight: "700",
+                                color: "#27304e",
+                              }}
+                            >
+                              No Popular Reviews Found
+                            </span>
+                          </>
+                        )}
+                        {/* <ReviewSlider favSlider={data?.popular_reviews} /> */}
                       </Tab>
                       <Tab eventKey="tab-2" title="Latest Reviews">
                         <ReviewSlider favSlider={data?.latest_reviews} />

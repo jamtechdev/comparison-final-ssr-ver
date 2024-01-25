@@ -19,18 +19,21 @@ export default function Category({ categories }) {
         >
           <div className="category-section">
             <Link href={`/${section?.primary_archive_category}`}>
-            <Image
-              src={section?.square_image}
-              width={0}
-              height={0}
-              sizes="100%"
-              alt={IMAGE_ALT_TEXT}
-            />
-            <span className="category_name">
-              {section?.primary_archive_category || "NOT FOUND"}
-            </span>
+              <Image
+                src={
+                  section?.square_image
+                    ? section?.square_image
+                    : "/images/nofound.png"
+                }
+                width={0}
+                height={0}
+                sizes="100%"
+                alt={IMAGE_ALT_TEXT}
+              />
+              <span className="category_name">
+                {section?.primary_archive_category || "NOT FOUND"}
+              </span>
             </Link>
-            
           </div>
         </Col>
       ))}

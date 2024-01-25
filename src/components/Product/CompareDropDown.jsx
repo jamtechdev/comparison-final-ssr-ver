@@ -11,7 +11,7 @@ function CompareDropDown({ attributeDropDown, product }) {
   const [selectedObjectDescription, setSelectedObjectDescription] =
     useState("");
   const [whenMatters, setwhenMatters] = useState("");
-  console.log(attributeDropDown);
+  // console.log(attributeDropDown);
   const handleCategoryChange = (event) => {
     const category = event.target.value;
     setSelectedCategory(category);
@@ -34,7 +34,7 @@ function CompareDropDown({ attributeDropDown, product }) {
       attributeDropDown[selectedCategory]?.find(
         (obj) => obj.attribute === selectedAttribute
       ) || {};
-    console.log(selectedObject, "selected object");
+    // console.log(selectedObject, "selected object");
     const { description, when_matters } = selectedObject;
     setwhenMatters(when_matters ? when_matters : "");
     setSelectedObjectDescription(description || "");
