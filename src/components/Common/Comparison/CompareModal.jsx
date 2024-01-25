@@ -140,7 +140,7 @@ const CompareModal = ({ setIsOpen, location }) => {
 
                       <div className="footer_content">
                         <span>{item?.name || ""}</span>
-                        <p>{item?.text_part || ""}</p>
+                        {/* <p dangerouslySetInnerHTML={{ __html: item?.text_part}}></p> */}
                         <p>{item?.category || ""}</p>
                       </div>
                       <span

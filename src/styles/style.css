@@ -1097,6 +1097,6 @@ footer .search-icon {
   text-underline-offset: 5px;
 }
 
-.product-categories-item:hover {
+.content-para .product-categories-item:hover {
   text-decoration: underline;
 }

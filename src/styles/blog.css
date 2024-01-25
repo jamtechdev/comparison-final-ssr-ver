@@ -457,6 +457,7 @@ button.view-blog i {
   line-height: 1.7;
   padding: 10px 0px;
   font-size: 18px;
+  text-align: justify;
 }
 
 .kitchen {
@@ -583,4 +584,9 @@ button.view-blog i {
 
 .productSlider-Container .product-slider {
   margin: 0px 0px 20px 0px !important;
+}
+
+.shortcode_info_text i {
+  font-size: 17px;
+  line-height: 1.5;
 }
