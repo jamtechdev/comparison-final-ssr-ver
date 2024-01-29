@@ -243,7 +243,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                           {extractedUrls.length > 2
                                             ? typeof item?.difference_value ==
                                               "number"
-                                              ? item?.phrase
+                                              ? item?.difference.replace(
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
                                               : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
@@ -302,7 +305,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                           {extractedUrls.length > 2
                                             ? typeof item?.difference_value ==
                                               "number"
-                                              ? item?.phrase
+                                              ? item?.difference.replace(
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
                                               : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
@@ -472,7 +478,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                           {extractedUrls.length > 2
                                             ? typeof item?.difference_value ==
                                               "number"
-                                              ? item?.phrase
+                                              ? item?.difference.replace(
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
                                               : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
@@ -532,7 +541,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                           {extractedUrls.length > 2
                                             ? typeof item?.difference_value ==
                                               "number"
-                                              ? item?.phrase
+                                              ? item?.difference.replace(
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
                                               : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
