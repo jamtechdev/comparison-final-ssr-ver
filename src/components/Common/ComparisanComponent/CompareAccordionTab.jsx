@@ -277,21 +277,19 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                           )}
                                         </small>
                                         <small>
-                                        {item?.difference_value === "yes" ||
-                                        item?.difference_value === "no" ||
-                                        item?.difference_value === 0 ||
-                                        item?.difference_value === null ? (
-                                          ""
-                                        ) : (
-                                          <span
-                                            dangerouslySetInnerHTML={{
-                                              __html: splitVsValue(item?.vs),
-                                            }}
-                                          ></span>
-                                        )}
-
+                                          {item?.difference_value === "yes" ||
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
+                                            ""
+                                          ) : (
+                                            <span
+                                              dangerouslySetInnerHTML={{
+                                                __html: splitVsValue(item?.vs),
+                                              }}
+                                            ></span>
+                                          )}
                                         </small>
-                                       
                                       </li>
                                     );
                                   })
@@ -326,6 +324,17 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         />
 
                                         <small className="d-block tooltip-title">
+                                          {item?.hover_phase && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </span>
+                                            </>
+                                          )}
+                                        </small>
+                                        <small>
                                           {item?.difference_value === "yes" ||
                                           item?.difference_value === "no" ||
                                           item?.difference_value === 0 ||
@@ -337,15 +346,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                 __html: splitVsValue(item?.vs),
                                               }}
                                             ></span>
-                                          )}
-                                          {item?.hover_phase && (
-                                            <>
-                                              <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
-                                                </span>
-                                              </span>
-                                            </>
                                           )}
                                         </small>
                                       </li>
@@ -494,6 +494,17 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         />
 
                                         <small className="d-block tooltip-title">
+                                          {item?.hover_phase && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </span>
+                                            </>
+                                          )}
+                                        </small>
+                                        <small>
                                           {item?.difference_value === "yes" ||
                                           item?.difference_value === "no" ||
                                           item?.difference_value === 0 ||
@@ -505,15 +516,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                 __html: splitVsValue(item?.vs),
                                               }}
                                             ></span>
-                                          )}
-                                          {item?.hover_phase && (
-                                            <>
-                                              <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
-                                                </span>
-                                              </span>
-                                            </>
                                           )}
                                         </small>
                                       </li>
@@ -552,6 +554,17 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         />
 
                                         <small className="d-block tooltip-title">
+                                          {item?.hover_phase && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </span>
+                                            </>
+                                          )}
+                                        </small>
+                                        <small>
                                           {item?.difference_value === "yes" ||
                                           item?.difference_value === "no" ||
                                           item?.difference_value === 0 ||
@@ -563,15 +576,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                                 __html: splitVsValue(item?.vs),
                                               }}
                                             ></span>
-                                          )}
-                                          {item?.hover_phase && (
-                                            <>
-                                              <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
-                                                </span>
-                                              </span>
-                                            </>
                                           )}
                                         </small>
                                       </li>
