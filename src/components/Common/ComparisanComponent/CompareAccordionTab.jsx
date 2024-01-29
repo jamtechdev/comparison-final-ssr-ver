@@ -266,18 +266,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         />
 
                                         <small className="d-block tooltip-title">
-                                          {item?.difference_value === "yes" ||
-                                          item?.difference_value === "no" ||
-                                          item?.difference_value === 0 ||
-                                          item?.difference_value === null ? (
-                                            ""
-                                          ) : (
-                                            <span
-                                              dangerouslySetInnerHTML={{
-                                                __html: splitVsValue(item?.vs),
-                                              }}
-                                            ></span>
-                                          )}
                                           {item?.hover_phase && (
                                             <>
                                               <span className="tooltip-display-content">
@@ -288,6 +276,22 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                             </>
                                           )}
                                         </small>
+                                        <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+
+                                        </small>
+                                       
                                       </li>
                                     );
                                   })
