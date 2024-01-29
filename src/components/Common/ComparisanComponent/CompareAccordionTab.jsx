@@ -233,130 +233,135 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                       <Tab.Content className="compare-tab-content">
                         <Tab.Pane eventKey={tabvalue?.pros}>
                           <ul>
-                            {apiData && tabvalue?.pros == "total"
-                              ? apiData?.total_average_pros
-                                  ?.slice(0, 8)
-                                  ?.map((item, index) => {
-                                    return (
-                                      <li key={index}>
-                                        <span className="tooltip-title">
-                                          {extractedUrls.length > 2
-                                            ? typeof item?.difference_value ==
-                                              "number"
-                                              ? item?.difference.replace(
-                                                  /\d+\.\d+%/,
-                                                  ""
-                                                )
-                                              : item?.phrase.toFixed(2)
-                                            : typeof item?.difference_value ==
-                                              "number"
-                                            ? item?.difference
-                                            : item?.phrase.toFixed(2)}
+                            {apiData && tabvalue?.pros == "total" ? (
+                              apiData?.total_average_pros
+                                ?.slice(0, 8)
+                                ?.map((item, index) => {
+                                  return (
+                                    <li key={index}>
+                                      <span className="tooltip-title">
+                                        {extractedUrls.length > 2
+                                          ? typeof item?.difference_value ==
+                                            "number"
+                                            ? item?.difference.replace(
+                                                /\d+\.\d+%/,
+                                                ""
+                                              )
+                                            : item?.phrase.toFixed(2)
+                                          : typeof item?.difference_value ==
+                                            "number"
+                                          ? item?.difference
+                                          : item?.phrase.toFixed(2)}
 
-                                          {item?.hover_phase && (
-                                            <>
-                                              <div className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
-                                                </span>
-                                              </div>
-                                            </>
-                                          )}
-                                        </span>
-
-                                        <QuestionIcon
-                                          attributes={item?.when_matters}
-                                        />
-
-                                        <small className="d-block tooltip-title">
-                                          {item?.hover_phase && (
-                                            <>
-                                              <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
-                                                </span>
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
                                               </span>
-                                            </>
-                                          )}
-                                        </small>
-                                        <small>
-                                          {item?.difference_value === "yes" ||
-                                          item?.difference_value === "no" ||
-                                          item?.difference_value === 0 ||
-                                          item?.difference_value === null ? (
-                                            ""
-                                          ) : (
-                                            <span
-                                              dangerouslySetInnerHTML={{
-                                                __html: splitVsValue(item?.vs),
-                                              }}
-                                            ></span>
-                                          )}
-                                        </small>
-                                      </li>
-                                    );
-                                  })
-                              : apiData?.average_pros[tabvalue?.pros]
-                                  ?.slice(0, 8)
-                                  ?.map((item, index) => {
-                                    return (
-                                      <li key={index}>
-                                        <span className="tooltip-title">
-                                          {extractedUrls.length > 2
-                                            ? typeof item?.difference_value ==
-                                              "number"
-                                              ? item?.difference.replace(
-                                                  /\d+\.\d+%/,
-                                                  ""
-                                                )
-                                              : item?.phrase.toFixed(2)
-                                            : typeof item?.difference_value ==
-                                              "number"
-                                            ? item?.difference
-                                            : item?.phrase.toFixed(2)}
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
 
-                                          {item?.hover_phase && (
-                                            <>
-                                              <div className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
-                                                </span>
-                                              </div>
-                                            </>
-                                          )}
-                                        </span>
-                                        <QuestionIcon
-                                          attributes={item?.when_matters}
-                                        />
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                      />
 
-                                        <small className="d-block tooltip-title">
-                                          {item?.hover_phase && (
-                                            <>
-                                              <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
-                                                </span>
+                                      <small className="d-block tooltip-title">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
                                               </span>
-                                            </>
-                                          )}
-                                        </small>
-                                        <small>
-                                          {item?.difference_value === "yes" ||
-                                          item?.difference_value === "no" ||
-                                          item?.difference_value === 0 ||
-                                          item?.difference_value === null ? (
-                                            ""
-                                          ) : (
-                                            <span
-                                              dangerouslySetInnerHTML={{
-                                                __html: splitVsValue(item?.vs),
-                                              }}
-                                            ></span>
-                                          )}
-                                        </small>
-                                      </li>
-                                    );
-                                  })}
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                  );
+                                })
+                            ) : apiData?.average_pros[tabvalue?.pros]?.length >
+                              0 ? (
+                              apiData?.average_pros[tabvalue?.pros]
+                                ?.slice(0, 8)
+                                ?.map((item, index) => {
+                                  return (
+                                    <li key={index}>
+                                      <span className="tooltip-title">
+                                        {extractedUrls.length > 2
+                                          ? typeof item?.difference_value ==
+                                            "number"
+                                            ? item?.difference.replace(
+                                                /\d+\.\d+%/,
+                                                ""
+                                              )
+                                            : item?.phrase.toFixed(2)
+                                          : typeof item?.difference_value ==
+                                            "number"
+                                          ? item?.difference
+                                          : item?.phrase.toFixed(2)}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                      />
+
+                                      <small className="d-block tooltip-title">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span className="tooltip-display-content">
+                                              <span className="mb-2 prosconsColor">
+                                                {item?.hover_phase}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                  );
+                                })
+                            ) : (
+                              <p>No Data Found</p>
+                            )}
                           </ul>
                         </Tab.Pane>
                       </Tab.Content>
@@ -531,7 +536,8 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                     );
                                   }
                                 )
-                              ) : (
+                              ) : apiData?.average_cons[tabvalue?.cons]
+                                  ?.length > 0 ? (
                                 apiData?.average_cons[tabvalue?.cons]
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {
@@ -593,6 +599,8 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                       </li>
                                     );
                                   })
+                              ) : (
+                                <p>No Data Found</p>
                               )
                             ) : (
                               <p className="text-center pt-2 pb-2 font-5 font-bold">
