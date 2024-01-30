@@ -5,13 +5,12 @@ export default async function Page({
   searchParams,
 }) {
   try {
- 
     const categoryslugType = await getSlugType(category);
 
     if (categoryslugType.error) {
       return <NotFound />;
     }
-    
+
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
@@ -30,9 +29,8 @@ export default async function Page({
         />
       );
     }
- 
+
     if (slugType.type) {
-    
       const pageData = await fetchDataBasedOnPageType(
         slug,
         slugType.type,
@@ -77,43 +75,46 @@ async function getSlugMetaData(slug) {
 }
 
 export async function generateMetadata({ params: { slug, category } }) {
-  if (slug.includes("-vs-")) {
-    const extractedUrls = slug.split("-vs-");
-    const convertStringToMetaData = `${extractedUrls[0]
-      .replace(/-/g, " ")
-      .replace(/\b(\w)/g, (match) => match.toUpperCase())} vs ${extractedUrls[1]
-      .replace(/-/g, " ")
-      .toUpperCase()} (${
-      category.replace(/-/g, " ").charAt(0).toUpperCase() +
-      category.replace(/-/g, " ").slice(1).toLowerCase()
-    })`;
-    // const convertedMetaData = convertStringToMetaData
-    //   .split(" ")
-    //   .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    //   .join(" ")
-    //   .replace(/-/g, " ")
-    //   .replace(/Vs/, "vs") // Ensure 'vs' is in lowercase
-    //   .replace(/\( /, "(") // Remove space after '('
-    //   .replace(/ \)/, ")");
+  const capitalizeFirstLetter = (str) =>
+    str.replace(/-/g, " ").replace(/\b(\w)/g, (match) => match.toUpperCase());
+
+  const generateComparisonMetaData = (extractedUrls, category) => {
+    const firstTitle = capitalizeFirstLetter(extractedUrls[0]);
+    const secondTitle = capitalizeFirstLetter(extractedUrls[1]);
+    const thirdTitle =
+      extractedUrls.length > 2 ? capitalizeFirstLetter(extractedUrls[2]) : "";
+
+    const title =
+      extractedUrls.length > 2
+        ? `${firstTitle} vs ${secondTitle} vs ${thirdTitle} (${capitalizeFirstLetter(
+            category
+          )})`
+        : `${firstTitle} vs ${secondTitle} (${capitalizeFirstLetter(
+            category
+          )})`;
 
     return {
-      title: convertStringToMetaData || "Comparision web",
+      title: title || "Comparison web",
       generator: "Comparison web",
       applicationName: "Comparison web",
       referrer: "origin-when-cross-origin",
       keywords: ["compare", "product"],
       description: "compare-page",
     };
+  };
+
+  if (slug.includes("-vs-")) {
+    const extractedUrls = slug.split("-vs-");
+    return generateComparisonMetaData(extractedUrls, category);
   } else {
     const meta_data = await getSlugMetaData(slug);
-
     return {
-      title: meta_data?.data?.heading_title || "Comparision web",
+      title: meta_data?.data?.heading_title || "Comparison web",
       generator: "Comparison web",
       applicationName: "Comparison web",
       referrer: "origin-when-cross-origin",
       keywords: ["compare", "product"],
-      description: meta_data?.data?.meta_description || "Comparision web",
+      description: meta_data?.data?.meta_description || "Comparison web",
     };
   }
 }
@@ -177,7 +178,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
         },
       });
-     
+
       if (!response.ok) {
       }
       return response.json();
