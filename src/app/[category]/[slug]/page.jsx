@@ -86,12 +86,11 @@ export async function generateMetadata({ params: { slug, category } }) {
 
     const title =
       extractedUrls.length > 2
-        ? `${firstTitle} vs ${secondTitle} vs ${thirdTitle} (${capitalizeFirstLetter(
-            category
-          )})`
-        : `${firstTitle} vs ${secondTitle} (${capitalizeFirstLetter(
-            category
-          )})`;
+        ? `${firstTitle} vs ${secondTitle} vs ${thirdTitle}`
+        : `${firstTitle} vs ${secondTitle}`;
+              // `(${capitalizeFirstLetter(
+              //       category
+              //     )})`;
 
     return {
       title: title || "Comparison web",
