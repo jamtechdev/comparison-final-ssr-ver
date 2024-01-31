@@ -34,14 +34,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
       if (value == "total") {
         setTabValue({ ...tabvalue, pros: "total" });
       } else if (value === "general") {
-
         setTabValue({ ...tabvalue, pros: value });
       } else {
         setTabValue({ ...tabvalue, pros: value });
       }
-
-
-
     } else {
       if (value == "total") {
         setTabValue({ ...tabvalue, cons: "total" });
@@ -67,8 +63,9 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     const apiUrlParams = updatedUrls.map((url, idx) => {
       return `permalink${idx + 1}=${url}`;
     });
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL
-      }/product/average?${apiUrlParams.join("&")}`;
+    const apiUrl = `${
+      process.env.NEXT_PUBLIC_API_URL
+    }/product/average?${apiUrlParams.join("&")}`;
     // Now you can use apiUrl to make your API call or perform any other actions
     const headers = {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
@@ -80,7 +77,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
       .then((response) => response.json())
       .then((data) => {
         setApiData(data.data);
-        console.log(data.data,"Check")
+        // console.log(data.data,"Check")
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -239,14 +236,81 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                       <Tab.Content className="compare-tab-content">
                         <Tab.Pane eventKey={tabvalue?.pros}>
                           <ul>
-                            {apiData && tabvalue?.pros == "total" ? (
-                              apiData?.total_average_pros
-                                ?.slice(0, 8)
-                                ?.map((item, index) => {
+                            {apiData && tabvalue?.pros == "total"
+                              ? apiData?.total_average_pros
+                                  ?.slice(0, 8)
+                                  ?.map((item, index) => {
+                                    return (
+                                      <li key={index}>
+                                        <span className="tooltip-title">
+                                          {extractedUrls.length > 2
+                                            ? typeof item?.difference_value ==
+                                              "number"
+                                              ? item?.difference.replace(
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
+                                              : item?.phrase.toFixed(2)
+                                            : typeof item?.difference_value ==
+                                              "number"
+                                            ? item?.difference
+                                            : item?.phrase.toFixed(2)}
+
+                                          {item?.hover_phase && (
+                                            <>
+                                              <div className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </div>
+                                            </>
+                                          )}
+                                        </span>
+
+                                        <QuestionIcon
+                                          attributes={item?.when_matters}
+                                        />
+
+                                        <small className="d-block tooltip-title">
+                                          {item?.hover_phase && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {item?.hover_phase}
+                                                </span>
+                                              </span>
+                                            </>
+                                          )}
+                                        </small>
+                                        <small>
+                                          {item?.difference_value === "yes" ||
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
+                                            ""
+                                          ) : (
+                                            <span
+                                              dangerouslySetInnerHTML={{
+                                                __html: splitVsValue(item?.vs),
+                                              }}
+                                            ></span>
+                                          )}
+                                        </small>
+                                      </li>
+                                    );
+                                  })
+                              : ""}
+                            {/* Gernal props */}
+
+                            {apiData &&
+                              apiData?.general?.pros &&
+                              tabvalue?.pros == "general" &&
+                              Object.keys(apiData?.general.pros).map(
+                                (item, index) => {
                                   return (
                                     <li key={index}>
                                       <span className="tooltip-title">
-                                        {extractedUrls.length > 2
+                                        {/* {extractedUrls.length > 2
                                           ? typeof item?.difference_value ==
                                             "number"
                                             ? item?.difference.replace(
@@ -257,13 +321,14 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                           : typeof item?.difference_value ==
                                             "number"
                                           ? item?.difference
-                                          : item?.phrase.toFixed(2)}
+                                          : item?.phrase.toFixed(2)} */}
+                                        {apiData?.general.pros[item][2]}
 
-                                        {item?.hover_phase && (
+                                        {apiData?.general.pros[item][2] && (
                                           <>
                                             <div className="tooltip-display-content">
                                               <span className="mb-2 prosconsColor">
-                                                {item?.hover_phase}
+                                                {apiData?.general.pros[item][2]}
                                               </span>
                                             </div>
                                           </>
@@ -271,39 +336,37 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                       </span>
 
                                       <QuestionIcon
-                                        attributes={item?.when_matters}
+                                        attributes={
+                                          apiData?.general.pros[item][1]
+                                        }
                                       />
 
                                       <small className="d-block tooltip-title">
-                                        {item?.hover_phase && (
+                                        {apiData?.general.pros[item][1] && (
                                           <>
                                             <span className="tooltip-display-content">
                                               <span className="mb-2 prosconsColor">
-                                                {item?.hover_phase}
+                                                {apiData?.general.pros[item][1]}
                                               </span>
                                             </span>
                                           </>
                                         )}
                                       </small>
                                       <small>
-                                        {item?.difference_value === "yes" ||
-                                        item?.difference_value === "no" ||
-                                        item?.difference_value === 0 ||
-                                        item?.difference_value === null ? (
-                                          ""
-                                        ) : (
-                                          <span
-                                            dangerouslySetInnerHTML={{
-                                              __html: splitVsValue(item?.vs),
-                                            }}
-                                          ></span>
-                                        )}
+                                        <span
+                                          dangerouslySetInnerHTML={{
+                                            __html: splitVsValue(
+                                              apiData?.general.pros[item][1]
+                                            ),
+                                          }}
+                                        ></span>
                                       </small>
                                     </li>
                                   );
-                                })
-                            ) : apiData?.average_pros[tabvalue?.pros]?.length >
-                              0 ? (
+                                }
+                              )}
+                            {apiData?.average_pros[tabvalue?.pros]?.length >
+                            0 ? (
                               apiData?.average_pros[tabvalue?.pros]
                                 ?.slice(0, 8)
                                 ?.map((item, index) => {
@@ -368,63 +431,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                             ) : (
                               <p>No Data Found</p>
                             )}
-                            {/* Gernal props */}
-                            {apiData && apiData?.general?.pros && tabvalue?.pros == "general"
-                              && Object.keys(apiData?.general.pros).map((item, index) => {
-                                return (
-                                  <li key={index}>
-                                    <span className="tooltip-title">
-                                        {/* {extractedUrls.length > 2
-                                          ? typeof item?.difference_value ==
-                                            "number"
-                                            ? item?.difference.replace(
-                                                /\d+\.\d+%/,
-                                                ""
-                                              )
-                                            : item?.phrase.toFixed(2)
-                                          : typeof item?.difference_value ==
-                                            "number"
-                                          ? item?.difference
-                                          : item?.phrase.toFixed(2)} */}
-                                      {apiData?.general.pros[item][2] }
-
-                                        {apiData?.general.pros[item][2] && (
-                                          <>
-                                            <div className="tooltip-display-content">
-                                            <span className="mb-2 prosconsColor">
-                                                {apiData?.general.pros[item][2]}
-                                              </span>
-                                            </div>
-                                          </>
-                                        )}
-                                      </span>
-
-                                      <QuestionIcon
-                                        attributes={apiData?.general.pros[item][1]}
-                                      />
-
-                                      <small className="d-block tooltip-title">
-                                        {apiData?.general.pros[item][1] && (
-                                          <>
-                                            <span className="tooltip-display-content">
-                                              <span className="mb-2 prosconsColor">
-                                                {apiData?.general.pros[item][1]}
-                                              </span>
-                                            </span>
-                                          </>
-                                        )}
-                                      </small>
-                                      <small>
-                                          <span
-                                            dangerouslySetInnerHTML={{
-                                              __html: splitVsValue(apiData?.general.pros[item][1]),
-                                            }}
-                                          ></span>
-                                      </small>
-                                    </li>
-                                  )
-                              })
-                            }
                           </ul>
                         </Tab.Pane>
                       </Tab.Content>
@@ -442,6 +448,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                               TOTAL
                             </Nav.Link>
                           </Nav.Item>
+
                           <Nav.Item>
                             <Nav.Link
                               eventKey="general"
@@ -449,7 +456,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                 handleAccordionChange("general", "pros")
                               }
                             >
-                              GENERAL
+                              General
                             </Nav.Link>
                           </Nav.Item>
                           {apiData &&
@@ -542,19 +549,27 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                   defaultActiveKey={tabvalue?.cons}
                 >
                   <Row>
+                    {!isLoading && <Loader pageType={"comparison"} />}
                     <Col md={8} xl={8} className="dividers">
                       <Tab.Content className="compare-tab-content">
                         <Tab.Pane eventKey={tabvalue?.cons}>
                           <ul className="compare-crons">
-                            {
-                              apiData && apiData?.general?.cons && tabvalue?.cons == "general"
-                                 ? Object.keys(apiData?.general.cons).map((item, index) => { 
-                                   if (apiData?.general.cons[item]?.cons?.length != 0) {
-                                     return (
-                                       <li key={index}>
-                                         <span className="tooltip-title">
-                                           {JSON.stringify(apiData?.general.cons[item])}
-                                           {/* {extractedUrls.length > 2
+                            {apiData &&
+                            apiData?.general?.cons &&
+                            tabvalue?.cons == "general" ? (
+                              Object.keys(apiData?.general.cons).map(
+                                (item, index) => {
+                                  if (
+                                    apiData?.general.cons[item]?.cons?.length !=
+                                    0
+                                  ) {
+                                    return (
+                                      <li key={index}>
+                                        <span className="tooltip-title">
+                                          {JSON.stringify(
+                                            apiData?.general.cons[item]
+                                          )}
+                                          {/* {extractedUrls.length > 2
                                             ? typeof item?.difference_value ==
                                               "number"
                                               ? item?.difference.replace(
@@ -567,32 +582,42 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                               ? item?.difference
                                               : item?.phrase.toFixed(2)} */}
 
-                                           {apiData?.general.cons[item][2] && (
-                                             <>
-                                               <div className="tooltip-display-content">
-                                                 <span className="mb-2 prosconsColor">
-                                                   {apiData?.general.cons[item][2]}
-                                                 </span>
-                                               </div>
-                                             </>
-                                           )}
-                                         </span>
-                                         <QuestionIcon
-                                           attributes={apiData?.general.cons[item][1]}
-                                         />
+                                          {apiData?.general.cons[item][2] && (
+                                            <>
+                                              <div className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {
+                                                    apiData?.general.cons[
+                                                      item
+                                                    ][2]
+                                                  }
+                                                </span>
+                                              </div>
+                                            </>
+                                          )}
+                                        </span>
+                                        <QuestionIcon
+                                          attributes={
+                                            apiData?.general.cons[item][1]
+                                          }
+                                        />
 
-                                         <small className="d-block tooltip-title">
-                                           {apiData?.general.cons[item][1] && (
-                                             <>
-                                               <span className="tooltip-display-content">
-                                                 <span className="mb-2 prosconsColor">
-                                                   {apiData?.general.cons[item][1]}
-                                                 </span>
-                                               </span>
-                                             </>
-                                           )}
-                                         </small>
-                                         {/* <small>
+                                        <small className="d-block tooltip-title">
+                                          {apiData?.general.cons[item][1] && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {
+                                                    apiData?.general.cons[
+                                                      item
+                                                    ][1]
+                                                  }
+                                                </span>
+                                              </span>
+                                            </>
+                                          )}
+                                        </small>
+                                        {/* <small>
                                           {item?.difference_value === "yes" ||
                                             item?.difference_value === "no" ||
                                             item?.difference_value === 0 ||
@@ -606,14 +631,13 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                             ></span>
                                           )}
                                         </small> */}
-                                       </li>
-                                     )
-                                   } else { 
-                           
-                                   }
-                              }) :
-                              (
-                            apiData?.total_average_cons?.length > 0 ? (
+                                      </li>
+                                    );
+                                  } else {
+                                  }
+                                }
+                              )
+                            ) : apiData?.total_average_cons?.length > 0 ? (
                               apiData && tabvalue?.cons == "total" ? (
                                 apiData?.total_average_cons?.map(
                                   (item, index) => {
@@ -624,14 +648,14 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                             ? typeof item?.difference_value ==
                                               "number"
                                               ? item?.difference.replace(
-                                                /\d+\.\d+%/,
-                                                ""
-                                              )
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
                                               : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
-                                              ? item?.difference
-                                              : item?.phrase.toFixed(2)}
+                                            ? item?.difference
+                                            : item?.phrase.toFixed(2)}
 
                                           {item?.hover_phase && (
                                             <>
@@ -660,9 +684,9 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         </small>
                                         <small>
                                           {item?.difference_value === "yes" ||
-                                            item?.difference_value === "no" ||
-                                            item?.difference_value === 0 ||
-                                            item?.difference_value === null ? (
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
                                             ""
                                           ) : (
                                             <span
@@ -688,14 +712,14 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                             ? typeof item?.difference_value ==
                                               "number"
                                               ? item?.difference.replace(
-                                                /\d+\.\d+%/,
-                                                ""
-                                              )
+                                                  /\d+\.\d+%/,
+                                                  ""
+                                                )
                                               : item?.phrase.toFixed(2)
                                             : typeof item?.difference_value ==
                                               "number"
-                                              ? item?.difference
-                                              : item?.phrase.toFixed(2)}
+                                            ? item?.difference
+                                            : item?.phrase.toFixed(2)}
 
                                           {item?.hover_phase && (
                                             <>
@@ -724,9 +748,9 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         </small>
                                         <small>
                                           {item?.difference_value === "yes" ||
-                                            item?.difference_value === "no" ||
-                                            item?.difference_value === 0 ||
-                                            item?.difference_value === null ? (
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
                                             ""
                                           ) : (
                                             <span
@@ -746,11 +770,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                               <p className="text-center pt-2 pb-2 font-5 font-bold">
                                 No Data Found
                               </p>
-                            )
-                              )
-                            }
-                        
-                           
+                            )}
                           </ul>
                         </Tab.Pane>
                       </Tab.Content>
@@ -768,16 +788,25 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                               TOTAL
                             </Nav.Link>
                           </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link
-                              eventKey="general"
-                              onClick={() =>
-                                handleAccordionChange("general", "cons")
-                              }
-                            >
-                              GENERAL
-                            </Nav.Link>
-                          </Nav.Item>
+                          {apiData &&
+                            Object?.values(apiData?.general.cons).some(
+                              (category) =>
+                                category.cons.length > 0 ? (
+                                  <Nav.Item>
+                                    <Nav.Link
+                                      eventKey="general"
+                                      onClick={() =>
+                                        handleAccordionChange("general", "cons")
+                                      }
+                                    >
+                                      General
+                                    </Nav.Link>
+                                  </Nav.Item>
+                                ) : (
+                                  ""
+                                )
+                            )}
+
                           {apiData &&
                             Object.keys(apiData?.average_cons).map(
                               (item, index) => {
