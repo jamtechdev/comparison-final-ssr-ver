@@ -108,7 +108,6 @@ function CompareDiv({
     // Extract the category name for the attribute
     const categoryName = attribute?.attribute_category?.name;
     // Check if the category name exists in the productAttributes object
-
     if (!productAttributes[categoryName]) {
       // If not, create an empty array for the category
       productAttributes[categoryName] = [];
@@ -117,22 +116,11 @@ function CompareDiv({
     productAttributes[categoryName]?.push(attribute);
   });
   productCopy["attributes"] = productAttributes;
-  // console.log(productAttributes);
+
+  // this useEffect work when anyone  direct vist comparsion product link than fetch data using paramURL & store in redux
   useEffect(() => {
-    if (
-      reduxData === undefined ||
-      reduxData === null ||
-      reduxData?.productFirst === null
-    ) {
-      let productData = {
-        name: comparisonProductData[0].name,
-        category: comparisonProductData[0].category_id,
-        category_url: comparisonProductData[0].category_url,
-        permalink: comparisonProductData[0].permalink,
-        image: comparisonProductData[0].main_image
-          ? comparisonProductData[0].main_image
-          : "/images/nofound.png",
-      };
+    if (!reduxData || reduxData.productFirst === null) {
+      const productData = createProductData(comparisonProductData[0]);
       dispatch(
         addCompareProduct({
           productFirst: productData,
@@ -144,53 +132,35 @@ function CompareDiv({
       );
       return;
     }
-    if (
-      reduxData?.productFrist !== null &&
-      reduxData?.productSecond === null &&
-      reduxData?.productThird === null
-    ) {
-      let productData = {
-        name: comparisonProductData[1]?.name,
-        category: comparisonProductData[1]?.category_id,
-        category_url: comparisonProductData[1]?.category_url,
-        permalink: comparisonProductData[1]?.permalink,
-        image: comparisonProductData[1]?.main_image
-          ? comparisonProductData[1]?.main_image
-          : "/images/nofound.png",
-      };
+    if (reduxData.productFirst !== null && reduxData.productSecond === null) {
+      const productData = createProductData(comparisonProductData[1]);
       dispatch(
-        updateCompareProduct({
-          key: "productSecond",
-          data: productData,
-        })
+        updateCompareProduct({ key: "productSecond", data: productData })
       );
       return;
     }
-    if (comparisonProductData > 2) {
-      if (
-        reduxData?.productThird === null &&
-        reduxData?.productFrist !== null &&
-        reduxData?.productSecond !== null
-      ) {
-        let productData = {
-          name: comparisonProductData[2].name,
-          category_id: comparisonProductData[2].category_id,
-          category_url: comparisonProductData[2].category_url,
-          permalink: comparisonProductData[2].permalink,
-          image: comparisonProductData[2].main_image
-            ? comparisonProductData[2].main_image
-            : "/images/nofound.png",
-        };
-        dispatch(
-          updateCompareProduct({
-            key: "productThird",
-            data: productData,
-          })
-        );
-        return;
-      }
+    if (
+      reduxData.productFirst !== null &&
+      reduxData.productSecond !== null &&
+      reduxData.productThird === null &&
+      comparisonProductData.length > 2
+    ) {
+      const productData = createProductData(comparisonProductData[2]);
+      dispatch(
+        updateCompareProduct({ key: "productThird", data: productData })
+      );
     }
   }, [reduxData]);
+
+  const createProductData = (product) => {
+    return {
+      name: product?.name,
+      category: product?.category_id,
+      category_url: product?.category_url,
+      permalink: product?.permalink,
+      image: product?.main_image ? product?.main_image : "/images/nofound.png",
+    };
+  };
   return (
     <>
       <section className="product-header">

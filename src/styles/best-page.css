@@ -163,7 +163,7 @@
 .compare-container thead tr th .device-name a {
   color: var(--heading-color);
 }
-.compare-container thead tr th .device-name:hover a {
+.compare-container thead tr th:hover .device-name a {
   color: #fff;
 }
 
@@ -396,20 +396,23 @@
   padding: 0 8px 0 0;
 }
 
-.brand-list-section{
-  max-height:150px;
+.brand-list-section {
+  max-height: 150px;
   overflow-y: auto;
 }
 
-.filter-container::-webkit-scrollbar, .brand-list-section::-webkit-scrollbar {
+.filter-container::-webkit-scrollbar,
+.brand-list-section::-webkit-scrollbar {
   width: 8px;
 }
 
-.filter-container::-webkit-scrollbar-track, .brand-list-section::-webkit-scrollbar-track  {
+.filter-container::-webkit-scrollbar-track,
+.brand-list-section::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-.filter-container::-webkit-scrollbar-thumb, .brand-list-section::-webkit-scrollbar-thumb {
+.filter-container::-webkit-scrollbar-thumb,
+.brand-list-section::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 50px;
 }
@@ -629,7 +632,7 @@
 }
 
 .filtered-data span {
-font-weight: 400;
+  font-weight: 400;
   font-size: 18px;
   line-height: 34px;
   color: var(--heading-color);

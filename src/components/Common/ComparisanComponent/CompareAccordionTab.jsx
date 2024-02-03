@@ -90,7 +90,8 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
 
   // this funcation spilt the vs value from ApiData
   const splitVsValue = (value) => {
-    const splitValue = value.split("vs");
+    const splitValue = value && value.trim().split("vs");
+    // console.log(splitValue[0])
     const boldedPart = `<strong>${splitValue[0]}</strong>`;
     if (splitValue?.length > 2) {
       return `${boldedPart} vs ${splitValue[1]} vs ${splitValue[2]}`;
@@ -132,6 +133,33 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     });
   }, []);
 
+  // Helping Funcation Accordion Heading
+
+  const getTabNumber = () => {
+    const tabNumbers = { "tab-2": 1, "tab-3": 2 };
+    return tabNumbers[activatab] || 0;
+  };
+  const getComparisonIndex = () => (getTabNumber() + 1) % 3;
+  const accordionHeader = (type) => {
+    const isPros = type === "pros";
+    const comparisonText = isPros ? "BETTER" : "WORSE";
+
+    const tabNumber = getTabNumber();
+    const comparisonIndex = getComparisonIndex();
+    return (
+      <h3 className="font-20">
+        Why is {sendProductProps[tabNumber]?.name} {comparisonText} than{" "}
+        {extractedUrls.length > 2
+          ? activatab === "tab-3"
+            ? "other"
+            : "other"
+          : activatab === "tab-2"
+          ? sendProductProps[0]?.name
+          : sendProductProps[1]?.name}
+        ?
+      </h3>
+    );
+  };
   return (
     <>
       <Row>
@@ -168,56 +196,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
-                {extractedUrls.length > 2 ? (
-                  activatab === "tab-2" ? (
-                    <>
-                      <h3 className="font-20">
-                        Why is
-                        {sendProductProps[1]?.name && sendProductProps[1]?.name}
-                        BETTER than other ?
-                      </h3>
-                    </>
-                  ) : activatab === "tab-3" ? (
-                    <h3 className="font-20">
-                      Why is
-                      {sendProductProps[2]?.name && sendProductProps[2]?.name}
-                      BETTER than others ?
-                    </h3>
-                  ) : (
-                    <>
-                      <h3 className="font-20">
-                        Why is
-                        {sendProductProps[0]?.name && sendProductProps[0]?.name}
-                        BETTER than other ?
-                      </h3>
-                    </>
-                  )
-                ) : activatab === "tab-2" ? (
-                  <>
-                    <h3 className="font-20">
-                      Why is
-                      {sendProductProps[1]?.name && sendProductProps[1]?.name}
-                      BETTER than
-                      {sendProductProps[0]?.name && sendProductProps[0]?.name} ?
-                    </h3>
-                  </>
-                ) : activatab === "tab-3" ? (
-                  <h3 className="font-20">
-                    Why is
-                    {sendProductProps[2]?.name && sendProductProps[2]?.name}
-                    BETTER than others ?
-                  </h3>
-                ) : (
-                  <>
-                    <h3 className="font-20">
-                      Why is
-                      {sendProductProps[0]?.name && sendProductProps[0]?.name}
-                      BETTER than
-                      {sendProductProps[1]?.name && sendProductProps[1]?.name} ?
-                    </h3>
-                  </>
-                )}
-
+                {accordionHeader("pros")}
                 <div className="show-btn">
                   Show All <i className="ri-arrow-down-s-line"></i>
                 </div>
@@ -301,7 +280,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                   })
                               : ""}
                             {/* Gernal props */}
-
                             {apiData &&
                               apiData?.general?.pros &&
                               tabvalue?.pros == "general" &&
@@ -310,18 +288,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                   return (
                                     <li key={index}>
                                       <span className="tooltip-title">
-                                        {/* {extractedUrls.length > 2
-                                          ? typeof item?.difference_value ==
-                                            "number"
-                                            ? item?.difference.replace(
-                                                /\d+\.\d+%/,
-                                                ""
-                                              )
-                                            : item?.phrase.toFixed(2)
-                                          : typeof item?.difference_value ==
-                                            "number"
-                                          ? item?.difference
-                                          : item?.phrase.toFixed(2)} */}
                                         {apiData?.general.pros[item][2]}
 
                                         {apiData?.general.pros[item][2] && (
@@ -334,13 +300,11 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                           </>
                                         )}
                                       </span>
-
                                       <QuestionIcon
                                         attributes={
                                           apiData?.general.pros[item][1]
                                         }
                                       />
-
                                       <small className="d-block tooltip-title">
                                         {apiData?.general.pros[item][1] && (
                                           <>
@@ -352,15 +316,19 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                           </>
                                         )}
                                       </small>
-                                      <small>
-                                        <span
-                                          dangerouslySetInnerHTML={{
-                                            __html: splitVsValue(
-                                              apiData?.general.pros[item][1]
-                                            ),
-                                          }}
-                                        ></span>
-                                      </small>
+                                      {apiData?.general.pros[item][2] && (
+                                        <>
+                                          <small>
+                                            <span
+                                              dangerouslySetInnerHTML={{
+                                                __html: splitVsValue(
+                                                  apiData?.general.pros[item][1]
+                                                ),
+                                              }}
+                                            ></span>
+                                          </small>
+                                        </>
+                                      )}
                                     </li>
                                   );
                                 }
@@ -403,7 +371,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                       <small className="d-block tooltip-title">
                                         {item?.hover_phase && (
                                           <>
-                                            <span className="tooltip-display-content">
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
                                               <span className="mb-2 prosconsColor">
                                                 {item?.hover_phase}
                                               </span>
@@ -486,56 +457,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
             <Accordion.Item eventKey="2">
               <Accordion.Header as="div">
                 {/* worse than */}
-                {extractedUrls.length > 2 ? (
-                  activatab === "tab-2" ? (
-                    <>
-                      <h3 className="font-20">
-                        Why is
-                        {sendProductProps[1]?.name && sendProductProps[1]?.name}
-                        WORSE than other ?
-                      </h3>
-                    </>
-                  ) : activatab === "tab-3" ? (
-                    <h3 className="font-20">
-                      Why is
-                      {sendProductProps[2]?.name && sendProductProps[2]?.name}
-                      WORSE than others ?
-                    </h3>
-                  ) : (
-                    <>
-                      <h3 className="font-20">
-                        Why is
-                        {sendProductProps[0]?.name && sendProductProps[0]?.name}
-                        WORSE than other ?
-                      </h3>
-                    </>
-                  )
-                ) : activatab === "tab-2" ? (
-                  <>
-                    <h3 className="font-20">
-                      Why is
-                      {sendProductProps[1]?.name && sendProductProps[1]?.name}
-                      WORSE than
-                      {sendProductProps[0]?.name && sendProductProps[0]?.name} ?
-                    </h3>
-                  </>
-                ) : activatab === "tab-3" ? (
-                  <h3 className="font-20">
-                    Why is
-                    {sendProductProps[2]?.name && sendProductProps[2]?.name}
-                    WORSE than others ?
-                  </h3>
-                ) : (
-                  <>
-                    <h3 className="font-20">
-                      Why is
-                      {sendProductProps[0]?.name && sendProductProps[0]?.name}
-                      WORSE than
-                      {sendProductProps[1]?.name && sendProductProps[1]?.name} ?
-                    </h3>
-                  </>
-                )}
-
+                {accordionHeader("cons")}
                 <div className="show-btn">
                   Show All <i className="ri-arrow-down-s-line"></i>
                 </div>
