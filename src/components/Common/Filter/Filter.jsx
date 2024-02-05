@@ -57,6 +57,15 @@ export default function Filter({
         } else {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
         }
+
+        break;
+      case "variants":
+        if (value) {
+          updatedParams.variants = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        }
+
         break;
       case "brand":
         if (isChecked) {
@@ -320,6 +329,21 @@ export default function Filter({
               id={`Available`}
               onChange={(e) =>
                 handelFilterActions("available", "available", e.target.checked)
+              }
+            />
+          </Accordion.Header>
+        </Accordion.Item>
+        <Accordion.Item eventKey="10101010">
+          <Accordion.Header as="div" className="accordion-header">
+            {" "}
+            Show all variants
+            <Form.Check
+              required
+              className="custom-switch"
+              type="switch"
+              id={`Variant`}
+              onChange={(e) =>
+                handelFilterActions("variants", "variants", e.target.checked)
               }
             />
           </Accordion.Header>
