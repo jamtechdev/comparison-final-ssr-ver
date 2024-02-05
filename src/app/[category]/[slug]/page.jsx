@@ -10,7 +10,6 @@ export default async function Page({
     if (categoryslugType.error) {
       return <NotFound />;
     }
-
     const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
@@ -135,20 +134,25 @@ async function getSlugType(slug) {
   }
   return response.json();
 }
+
 async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
+
       let productApiUrl = `${
         process.env.NEXT_PUBLIC_API_URL
       }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
+
       if (searchParams?.page) {
         productApiUrl += `&page=${searchParams.page}`;
       }
+
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${slug}`,
         productApiUrl,
       ];
+      
       break;
     case "Blog":
       apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug}`];

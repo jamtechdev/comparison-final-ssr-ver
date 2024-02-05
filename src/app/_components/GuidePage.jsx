@@ -152,7 +152,7 @@ export default function GuidePage({
     // console.log(JSON.parse(sortAttribute))
   };
 
-  // console.log(products, "products ");
+   console.log(products, "products Abhay");
 
   return (
     <>

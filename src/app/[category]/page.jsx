@@ -19,6 +19,7 @@ export default async function Page({ params: { category } }) {
     return <NotFound />;
   }
 }
+
 async function getSlugType(category) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${category}`,

@@ -44,6 +44,13 @@ export default function Filter({
           updatedParams.price = value;
         }
         break;
+        case "variant":
+          if (value) {
+            updatedParams.variant = value;
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
+          }
+          break;
       case "available":
         if (value) {
           updatedParams.available = value;
@@ -139,6 +146,10 @@ export default function Filter({
 
   useEffect(() => {
     if (removedParam) {
+      if (removedParam == "variant") {
+        handelFilterActions("variant", "variant", false);
+        document.getElementById("variant").checked = false;
+      }
       if (removedParam == "available") {
         handelFilterActions("available", "available", false);
         document.getElementById("Available").checked = false;
@@ -283,6 +294,21 @@ export default function Filter({
         </div>
       </div>
       <Accordion className="filter-accordion">
+      <Accordion.Item eventKey="888880">
+          <Accordion.Header as="div" className="accordion-header">
+            {" "}
+            Show all variants
+            <Form.Check
+              required
+              className="custom-switch"
+              type="switch"
+              id={`variant`}
+              onChange={(e) =>
+                handelFilterActions("variant", "variant", e.target.checked)
+              }
+            />
+          </Accordion.Header>
+        </Accordion.Item>
         <Accordion.Item eventKey="888888">
           <Accordion.Header as="div" className="accordion-header">
             {" "}

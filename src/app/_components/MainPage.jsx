@@ -29,7 +29,6 @@ export default function MainPage({ bannerCounts, favSlider }) {
     setsearch(e.target.value);
   };
   const router = useRouter();
-
   return (
     <>
       <section className="hero_section home">
