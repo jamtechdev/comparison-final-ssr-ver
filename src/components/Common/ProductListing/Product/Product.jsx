@@ -572,6 +572,7 @@ export default function Product({
                                   {data.price !== null && (
                                     <li>
                                       <>
+                                      <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
                                         <img
                                           src={data?.logo}
                                           width={0}
@@ -579,7 +580,9 @@ export default function Product({
                                           sizes="100vw"
                                           alt=""
                                         />
+                                     </Link> 
                                         <span>{data?.price} €</span>
+                                     
                                       </>
                                     </li>
                                   )}

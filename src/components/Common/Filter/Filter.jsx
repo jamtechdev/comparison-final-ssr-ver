@@ -12,6 +12,7 @@ export default function Filter({
   searchParam,
   orderBy,
 }) {
+  console.log(categoryAttributes)
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({
@@ -44,13 +45,13 @@ export default function Filter({
           updatedParams.price = value;
         }
         break;
-        case "variant":
-          if (value) {
-            updatedParams.variant = value;
-          } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url);
-          }
-          break;
+      case "variant":
+        if (value) {
+          updatedParams.variant = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        }
+        break;
       case "available":
         if (value) {
           updatedParams.available = value;
@@ -154,11 +155,38 @@ export default function Filter({
   };
 
   useEffect(() => {
+    if (searchParam?.direct) {
+      const filteredKeys = Object.keys(searchParam).filter(key => key !== 'direct');
+      if (filteredKeys.includes("variant")) {
+        document.getElementById("variant").checked = true;
+      }
+      if (filteredKeys.includes("available")) {
+        document.getElementById("available").checked = true;
+      }
+      if (filteredKeys.includes("brand")) {
+        Object.values(searchParam)[0]
+          .split(",")
+          .map((item) => {
+            document.getElementById(`${item}`).checked = true;
+          });
+      }
+      if (filteredKeys.includes("price")) {
+        setSliderValues((pre) => {
+          return {
+            ...pre,
+            maxVal: price[0]?.max_price,
+            minVal: price[0]?.min_price,
+          };
+        });
+      }
+    }
+
     if (removedParam) {
       if (removedParam == "variant") {
         handelFilterActions("variant", "variant", false);
         document.getElementById("variant").checked = false;
       }
+      //search param remove
       if (removedParam == "available") {
         handelFilterActions("available", "available", false);
         document.getElementById("Available").checked = false;
@@ -171,7 +199,8 @@ export default function Filter({
             document.getElementById(`${item}`).checked = false;
           });
       }
-      if (removedParam.toLowerCase() == "price") {
+
+      if (removedParam?.toLowerCase() == "price") {
         handelFilterActions(
           "price",
           "price",
@@ -239,14 +268,14 @@ export default function Filter({
           let min =
             filteredArrayOfAttributeValues.maxValue -
               filteredArrayOfAttributeValues.minValue >=
-            1
+              1
               ? filteredArrayOfAttributeValues.minValue
               : 0;
 
           let max =
             filteredArrayOfAttributeValues.maxValue -
               filteredArrayOfAttributeValues.minValue >=
-            1
+              1
               ? filteredArrayOfAttributeValues.maxValue
               : 100;
           // alert(min)
@@ -266,17 +295,13 @@ export default function Filter({
           document.getElementById(`thumb thumb--right ${removedParam}`).value =
             max;
         }
-
-        // const checkForValueType = arrayToGetFilteredObject[0][0].values.some(
-        //   (value) => value.name === "yes" || value.name === "no"
-        // );
       }
 
       if (removedParam.toLowerCase() == "sort") {
         delete searchParams.sort;
       }
     }
-  }, [removedParam]);
+  }, [removedParam, searchParam]);
 
   useEffect(() => {
     // console.log(orderBy, "order");
@@ -303,7 +328,7 @@ export default function Filter({
         </div>
       </div>
       <Accordion className="filter-accordion">
-      <Accordion.Item eventKey="888880">
+        <Accordion.Item eventKey="888880">
           <Accordion.Header as="div" className="accordion-header">
             {" "}
             Show all variants
@@ -329,21 +354,6 @@ export default function Filter({
               id={`Available`}
               onChange={(e) =>
                 handelFilterActions("available", "available", e.target.checked)
-              }
-            />
-          </Accordion.Header>
-        </Accordion.Item>
-        <Accordion.Item eventKey="10101010">
-          <Accordion.Header as="div" className="accordion-header">
-            {" "}
-            Show all variants
-            <Form.Check
-              required
-              className="custom-switch"
-              type="switch"
-              id={`Variant`}
-              onChange={(e) =>
-                handelFilterActions("variants", "variants", e.target.checked)
               }
             />
           </Accordion.Header>
@@ -443,6 +453,7 @@ export default function Filter({
                                     label={
                                       <span>
                                         {value.toString()}{" "}
+                                        {filteredArrayOfAttributeValues?.unit}
                                         <span
                                           dangerouslySetInnerHTML={{
                                             __html: `<p>(${0})</p>`,
@@ -483,14 +494,14 @@ export default function Filter({
                             min={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                              1
+                                1
                                 ? filteredArrayOfAttributeValues.minValue
                                 : 0
                             }
                             max={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                              1
+                                1
                                 ? filteredArrayOfAttributeValues.maxValue
                                 : 100
                             }
@@ -513,13 +524,13 @@ export default function Filter({
             </Accordion>
             {countAttribute >
               (pagination[category.name] || initialNoOfCategories) && (
-              <span
-                className="show_more"
-                onClick={() => handlePagination(category.name)}
-              >
-                SHOW MORE <i className="ri-add-line"></i>
-              </span>
-            )}
+                <span
+                  className="show_more"
+                  onClick={() => handlePagination(category.name)}
+                >
+                  SHOW MORE <i className="ri-add-line"></i>
+                </span>
+              )}
           </div>
         );
       })}

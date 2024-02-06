@@ -5,6 +5,7 @@ export default async function Page({
   searchParams,
 }) {
   try {
+    
     const categoryslugType = await getSlugType(category);
 
     if (categoryslugType.error) {

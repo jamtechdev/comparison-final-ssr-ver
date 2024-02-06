@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 const CompareCard = ({
   compareProduct,
   products,
@@ -104,6 +105,7 @@ const CompareCard = ({
             {compareProduct?.price_websites?.length > 0 ? (
               <>
                 <div className="comparison-product-item">
+                  
                   <Image
                     src={
                       compareProduct?.price_websites[0]?.price != null &&
@@ -112,7 +114,7 @@ const CompareCard = ({
                     width={0}
                     height={0}
                     sizes="100%"
-                    alt=""
+                    alt="price"
                   />
                   {compareProduct?.price_websites[0]?.price != null && (
                     <span>{compareProduct?.price_websites[0]?.price} €</span>
@@ -124,7 +126,7 @@ const CompareCard = ({
                     width={0}
                     height={0}
                     sizes="100%"
-                    alt=""
+                    alt="price"
                   />
                   {compareProduct?.price_websites[1]?.price != null && (
                     <span>{compareProduct?.price_websites[1]?.price} €</span>

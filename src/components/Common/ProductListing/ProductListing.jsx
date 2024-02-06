@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
 import "react-loading-skeleton/dist/skeleton.css";
 import Product from "./Product/Product";
-export default function ProductListing({products,handleToggleCollapse,handleManageCollapsedDiv}) {
+export default function ProductListing({ products, productPositionArray, handleToggleCollapse, handleManageCollapsedDiv }) {
+  function findProductPosition(name) {
+    const index = Object.values(productPositionArray).indexOf(name);
+    if (index !== -1) {
+      return index + 1;
+    } else {
+      return null;
+    }
+  }
   return (
     <div className="best-product-wrapper">
       {products.map((product, index) => (
         <Product
-        incomingProduct={product}
+          incomingProduct={product}
           key={index}
-          position={index + 1}
+          position={findProductPosition(product.name)}
           handleToggleCollapse={handleToggleCollapse}
           handleManageCollapsedDiv={handleManageCollapsedDiv}
         />

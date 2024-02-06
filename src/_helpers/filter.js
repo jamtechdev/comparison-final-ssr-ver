@@ -20,12 +20,14 @@ export const getFilteredAttributeValues = (obj) => {
       return {
         type: "dropdown",
         values: uniq,
+        unit:obj.unit
       };
   } else if (
     obj.algorithm == "highest_to_lowest" ||
     obj.algorithm == "lowest_to_highest"
   ) {
     for (let i = 0; i < obj.values.length; i++) {
+
       if (
         !uniq.includes(obj.values[i].name) &&
         obj.values[i].name != "" &&
@@ -45,6 +47,7 @@ export const getFilteredAttributeValues = (obj) => {
         return {
           type: "dropdown",
           values: sortedArray,
+          unit:obj.unit
         };
     } else {
       return {

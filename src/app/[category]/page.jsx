@@ -1,6 +1,8 @@
 import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "../not-found";
 export default async function Page({ params: { category } }) {
+  console.log(category);
+  return;
   const slugType = await getSlugType(category);
   if (slugType.type) {
     const pageData = await fetchDataBasedOnPageType(category, slugType.type);

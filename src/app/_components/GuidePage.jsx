@@ -13,7 +13,7 @@ import CompareTable from "@/components/Common/CompareTable/CompareTable";
 import BottomBar from "@/components/Common/BottomBar/BottomBar";
 import { isAreObjectsEqual } from "@/_helpers";
 import GuidePagination from "@/components/Common/Pagination/GuidePagination";
-
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function GuidePage({
   slug,
   categorySlug,
@@ -23,12 +23,18 @@ export default function GuidePage({
   searchParams,
 }) {
   useChart();
+  console.log(attributesForTable, "Abhay")
+  const router = useRouter();
+  const currentParams = new URLSearchParams(searchParams.toString());
   const [isShown, setIsShown] = useState(false);
 
   const guide = guideData[0]?.data;
 
   const products = guideData[1]?.data?.products || [];
 
+  //I introduce this new value to map the actial postion of product in guide order_values in backend.
+  const productPosition = guideData[1]?.data.product_names ||[]
+  
   const sortedProducts = products.sort(
     (a, b) => b.overall_score - a.overall_score
   );
@@ -152,8 +158,15 @@ export default function GuidePage({
     // console.log(JSON.parse(sortAttribute))
   };
 
-   console.log(products, "products Abhay");
+  // if (products.length <= 0 && (!currentParams.variant)) {
 
+  //   const queryString = Object.keys(searchParams)
+  //     .map(key => key + '=' +encodeURI(searchParams[key]))
+  //     .join('&');
+  //    window.history.pushState({}, "", `?${queryString}&variant=true&direct=true`);
+  //  router.push(`?${queryString}&variant=true&direct=true`, { scroll: false });
+  // }
+  console.log(products);  
   return (
     <>
       {products.length > 0 ? (
@@ -205,7 +218,7 @@ export default function GuidePage({
                   </div>
                 </Col>
                 <Col md={12}>
-                <div className="product-inner-content" dangerouslySetInnerHTML={{ __html:guide?.text_first_part }} />
+                  <div className="product-inner-content" dangerouslySetInnerHTML={{ __html: guide?.text_first_part }} />
                 </Col>
               </Row>
 
@@ -263,7 +276,7 @@ export default function GuidePage({
               )}
               <Row>
                 <Col md={12}>
-                <div className="para_content_text" dangerouslySetInnerHTML={{ __html: guide?.text_second_part }} />
+                  <div className="para_content_text" dangerouslySetInnerHTML={{ __html: guide?.text_second_part }} />
                 </Col>
               </Row>
             </Container>
@@ -321,7 +334,7 @@ export default function GuidePage({
                       <Col md={8}>
                         <div className="filtered-data">
                           <ul>
-                            {Object.keys(params).map((categoryName, index) => (
+                            {Object.keys(params).filter(key => key !== 'direct').map((categoryName, index) => (
                               <li
                                 key={index}
                                 onClick={() => {
@@ -449,6 +462,7 @@ export default function GuidePage({
                       </Col>
                       {products ? (
                         <ProductListing
+                        productPositionArray={productPosition}
                           products={products}
                           handleToggleCollapse={handleToggleCollapse}
                           handleManageCollapsedDiv={handleManageCollapsedDiv}
@@ -551,7 +565,7 @@ export default function GuidePage({
                   </div>
                 </Col>
                 <Col md={8} lg={8}>
-                <div className="review-content" dangerouslySetInnerHTML={{ __html: guide?.text_third_part_main }} />
+                  <div className="review-content" dangerouslySetInnerHTML={{ __html: guide?.text_third_part_main }} />
                   <br />
                   <h3 className="site-main-heading">Connectivity</h3>
                   <p className="review-content">

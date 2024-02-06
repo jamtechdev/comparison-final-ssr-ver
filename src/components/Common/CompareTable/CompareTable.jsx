@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useRef, useState, useEffect, Fragment } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button, Table } from "react-bootstrap";
 import QuestionIcon from "../../Svg/QuestionIcon";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
@@ -296,6 +297,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                                   {data.price !== null && (
                                     <li>
                                       <>
+                                      <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
                                         <img
                                           src={data?.logo}
                                           width={0}
@@ -303,6 +305,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                                           sizes="100vw"
                                           alt="price"
                                         />
+                                        </Link>
                                         <span>{data?.price} €</span>
                                       </>
                                     </li>

@@ -7,7 +7,7 @@ import QuestionIcon from "../../Svg/QuestionIcon";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
   const router = useRouter();
 
@@ -291,13 +291,15 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                                     {data.price !== null && (
                                       <li>
                                         <>
+                                        <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
                                           <img
                                             src={data?.logo}
                                             width={0}
                                             height={0}
                                             sizes="100vw"
-                                            alt=""
+                                            alt="price"
                                           />
+                                          </Link>
                                           <span>{data?.price} €</span>
                                         </>
                                       </li>

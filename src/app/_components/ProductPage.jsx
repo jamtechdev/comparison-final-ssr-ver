@@ -289,15 +289,17 @@ function ProductPage({
                       .map((item, index) => {
                         return (
                           <li key={index}>
+                             <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(item.url)}`}>
                             <Image
-                              // src="/images/amazon.png"
                               src={item?.logo}
                               width={0}
                               height={0}
                               sizes="100%"
-                              alt=""
+                              alt="price"
                             />
+                           </Link>
                             <span>{item?.price} €</span>
+                           
                           </li>
                         );
                       })}
@@ -497,15 +499,17 @@ function ProductPage({
                           .map((item, index) => {
                             return (
                               <li key={index}>
+                                  <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(item.url)}`}>
                                 <img
-                                  // src="/images/amazon.png"
                                   src={item?.logo}
                                   width={0}
                                   height={0}
                                   sizes="100%"
                                   alt=""
                                 />
+                                  </Link>
                                 <span>{item?.price} €</span>
+                              
                               </li>
                             );
                           })}

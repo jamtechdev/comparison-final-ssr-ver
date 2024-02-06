@@ -4,7 +4,6 @@ import { homePage } from "@/_services";
 export default async function Page() {
   const bannerCounts = await homePage.getMainPageBannerCounts();
   const favGuideSlider = await homePage.getFavouriteGuides();
-  // navneet
   return (
     <React.Suspense fallback={<p>Loading....</p>}>
       <MainPage bannerCounts={bannerCounts} favSlider={favGuideSlider} />

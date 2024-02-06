@@ -7,7 +7,7 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
-
+import Link from "next/link";
 export default function ComparisonTable({ products, categoryAttributes }) {
   const router = useRouter();
 
@@ -303,6 +303,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                                   {data.price !== null && (
                                     <li>
                                       <>
+                                      <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
                                         <img
                                           src={data?.logo}
                                           width={0}
@@ -310,6 +311,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                                           sizes="100vw"
                                           alt=""
                                         />
+                                        </Link>
                                         <span className="price-wider">{data?.price} €</span>
                                       </>
                                     </li>
