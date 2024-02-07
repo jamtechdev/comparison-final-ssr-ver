@@ -22,19 +22,21 @@ export default function GuidePage({
   filters,
   searchParams,
 }) {
-  useChart();
-  console.log(attributesForTable, "Abhay")
+  useChart("guide");
+  // console.log(attributesForTable, "Abhay");
   const router = useRouter();
   const currentParams = new URLSearchParams(searchParams.toString());
   const [isShown, setIsShown] = useState(false);
 
   const guide = guideData[0]?.data;
+  console.log(guideData,"guideData")
+
 
   const products = guideData[1]?.data?.products || [];
 
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
-  const productPosition = guideData[1]?.data.product_names ||[]
-  
+  const productPosition = guideData[1]?.data.product_names || [];
+
   const sortedProducts = products.sort(
     (a, b) => b.overall_score - a.overall_score
   );
@@ -166,7 +168,10 @@ export default function GuidePage({
   //    window.history.pushState({}, "", `?${queryString}&variant=true&direct=true`);
   //  router.push(`?${queryString}&variant=true&direct=true`, { scroll: false });
   // }
-  console.log(products);  
+  // console.log(products);
+
+
+  console.log(products ,"allproduct")
   return (
     <>
       {products.length > 0 ? (
@@ -218,7 +223,10 @@ export default function GuidePage({
                   </div>
                 </Col>
                 <Col md={12}>
-                  <div className="product-inner-content" dangerouslySetInnerHTML={{ __html: guide?.text_first_part }} />
+                  <div
+                    className="product-inner-content"
+                    dangerouslySetInnerHTML={{ __html: guide?.text_first_part }}
+                  />
                 </Col>
               </Row>
 
@@ -276,7 +284,12 @@ export default function GuidePage({
               )}
               <Row>
                 <Col md={12}>
-                  <div className="para_content_text" dangerouslySetInnerHTML={{ __html: guide?.text_second_part }} />
+                  <div
+                    className="para_content_text"
+                    dangerouslySetInnerHTML={{
+                      __html: guide?.text_second_part,
+                    }}
+                  />
                 </Col>
               </Row>
             </Container>
@@ -334,26 +347,28 @@ export default function GuidePage({
                       <Col md={8}>
                         <div className="filtered-data">
                           <ul>
-                            {Object.keys(params).filter(key => key !== 'direct').map((categoryName, index) => (
-                              <li
-                                key={index}
-                                onClick={() => {
-                                  setremovedParam(categoryName);
-                                  removeQueryParamAndNavigate(
-                                    window.location.href,
-                                    categoryName
-                                  );
-                                }}
-                              >
-                                {" "}
-                                {categoryName} ( {Object.values(params)[index]}{" "}
-                                )_
-                                <span className="text0danger">
+                            {Object.keys(params)
+                              .filter((key) => key !== "direct")
+                              .map((categoryName, index) => (
+                                <li
+                                  key={index}
+                                  onClick={() => {
+                                    setremovedParam(categoryName);
+                                    removeQueryParamAndNavigate(
+                                      window.location.href,
+                                      categoryName
+                                    );
+                                  }}
+                                >
                                   {" "}
-                                  <i className="ri-close-fill"></i>{" "}
-                                </span>
-                              </li>
-                            ))}
+                                  {categoryName} ({" "}
+                                  {Object.values(params)[index]} )_
+                                  <span className="text0danger">
+                                    {" "}
+                                    <i className="ri-close-fill"></i>{" "}
+                                  </span>
+                                </li>
+                              ))}
                           </ul>
                           {Object.keys(params).length > 0 && (
                             <span
@@ -462,7 +477,7 @@ export default function GuidePage({
                       </Col>
                       {products ? (
                         <ProductListing
-                        productPositionArray={productPosition}
+                          productPositionArray={productPosition}
                           products={products}
                           handleToggleCollapse={handleToggleCollapse}
                           handleManageCollapsedDiv={handleManageCollapsedDiv}
@@ -565,7 +580,12 @@ export default function GuidePage({
                   </div>
                 </Col>
                 <Col md={8} lg={8}>
-                  <div className="review-content" dangerouslySetInnerHTML={{ __html: guide?.text_third_part_main }} />
+                  <div
+                    className="review-content"
+                    dangerouslySetInnerHTML={{
+                      __html: guide?.text_third_part_main,
+                    }}
+                  />
                   <br />
                   <h3 className="site-main-heading">Connectivity</h3>
                   <p className="review-content">

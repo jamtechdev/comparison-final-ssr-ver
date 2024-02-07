@@ -1,6 +1,6 @@
 "use client";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,17 +8,34 @@ import useChart from "@/hooks/useChart";
 import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSliderBlog";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
-export default function BlogPage({ slug, blogData, categorySlug}) {
-  useChart();
+export default function BlogPage({ slug, blogData, categorySlug }) {
+  var textPart = `${blogData[0]?.data?.text_part}`;
+  var matches = textPart.match(/\[(.*?)\]/g);
+  // const filteredData = matches.filter((item) => item !== "[]");
+  // // remove empty Array from matches
+  // useEffect(() => {
+  //   // Find all elements with the class "container-div"
+  //   const chartElements = document.querySelectorAll(".container-div");
+  //   // If there are more elements than filteredData length
+  //   if (chartElements.length > filteredData.length) {
+  //     // Remove excess elements starting from the filteredData length
+  //     for (let i = filteredData.length; i < chartElements.length; i++) {
+  //       chartElements[i].parentNode.removeChild(chartElements[i]);
+  //     }
+  //   }
+  // }, [filteredData.length]);
+
   return (
     <>
+      {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
+      <div>{useChart()}</div>
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
                 firstPageName={categorySlug}
-                secondPageName={{heading_title:blogData[0]?.data?.title}}
+                secondPageName={{ heading_title: blogData[0]?.data?.title }}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>
@@ -83,7 +100,13 @@ export default function BlogPage({ slug, blogData, categorySlug}) {
               </div>
             </Col>
             <Col lg={8} md={8} xs={12}>
-              <div className="content-para mt-1"  dangerouslySetInnerHTML={{__html:blogData[0]?.data?.text_part}}/>
+              <div
+                id="shortCodeText"
+                className="content-para mt-1"
+                dangerouslySetInnerHTML={{
+                  __html: blogData[0]?.data?.text_part,
+                }}
+              />
               <div className="social-icon items-icon">
                 <div className="twitter">
                   <i className="ri-twitter-fill"></i>

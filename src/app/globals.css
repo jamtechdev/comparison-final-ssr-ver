@@ -1099,33 +1099,33 @@ table.compare-container.table.comparison-table .best-list-item li img {
   text-transform: capitalize;
 }
 
-.shortcode_table_wrapper{
+.shortcode_table_wrapper {
   display: block;
-  width:100%;
+  width: 100%;
   margin: 0 0 10px;
   text-align: center;
-  padding: 10px 20px ;
+  padding: 10px 20px;
 }
 
-.shortcode_table_wrapper td p{
- padding: 0 !important;
+.shortcode_table_wrapper td p {
+  padding: 0 !important;
 }
 
 .shortcode_table_wrapper thead tr th {
   padding: 8px;
   border: 1px solid #ddd;
-  background: #437ECE;
+  background: #437ece;
   color: #fff;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .shortcode_table_wrapper tbody tr td {
   border: 1px solid #ddd;
   padding: 8px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
-.shortcode_table_wrapper tbody tr:nth-child(even){
+.shortcode_table_wrapper tbody tr:nth-child(even) {
   background-color: #fafbfd;
 }
 
@@ -1164,18 +1164,25 @@ table.compare-container.table.comparison-table .best-list-item li img {
   text-align: center;
   padding: 0 5px;
   cursor: pointer;
-  min-width: 80px!important;
-  font-size: 15px!important;
-  line-height: 30px!important;
+  min-width: 80px !important;
+  font-size: 15px !important;
+  line-height: 30px !important;
+}
+.short_code_product_table_price_td_value:hover {
+  background: #ff7d00;
 }
 
 .short_code_product_table_price_name {
   display: flex;
   gap: 10px;
   padding: 0 10px;
+  line-height: 18px;
 }
 
-.short_code_product_table_price_name span{
+.short_code_product_table_price_name span {
   font-weight: 600;
   color: var(--secondary-color);
+  font-size: 17px;
+  display: flex;
+  align-items: center;
 }

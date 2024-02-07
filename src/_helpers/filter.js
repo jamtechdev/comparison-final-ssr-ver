@@ -20,14 +20,13 @@ export const getFilteredAttributeValues = (obj) => {
       return {
         type: "dropdown",
         values: uniq,
-        unit:obj.unit
+        unit: obj.unit,
       };
   } else if (
     obj.algorithm == "highest_to_lowest" ||
     obj.algorithm == "lowest_to_highest"
   ) {
     for (let i = 0; i < obj.values.length; i++) {
-
       if (
         !uniq.includes(obj.values[i].name) &&
         obj.values[i].name != "" &&
@@ -42,12 +41,38 @@ export const getFilteredAttributeValues = (obj) => {
     let sortedArray = numberedUniq.sort(function (a, b) {
       return a - b;
     });
+    // exract productCount
+    let countProduct = [];
+    console.log(uniq);
+    for (let i = 0; i < obj.values.length; i++) {
+      // Check if the name is not blank or "-"
+      const name = obj.values[i].name;
+      if (
+        !obj.values.includes(obj.values[i].name) &&
+        name !== "" &&
+        name !== "?" &&
+        name !== "-"
+      ) {
+        // Check if the product_count is not already included
+        countProduct.push(obj.values[i].product_count);
+      }
+    }
+    // console.log(countProduct, "productCount");
+    let numberProductCount = countProduct
+      .map((ele) => Number(ele))
+      .filter((element) => !isNaN(element));
+    let sortedProductCountArray = numberProductCount.sort(function (a, b) {
+      return a - b;
+    });
+    // console.log(sortedProductCountArray);
+
     if (sortedArray.length <= 4) {
       if (sortedArray.length > 0)
         return {
           type: "dropdown",
           values: sortedArray,
-          unit:obj.unit
+          unit: obj.unit,
+          product_count: sortedProductCountArray,
         };
     } else {
       return {
@@ -72,7 +97,7 @@ export const removeDecimalAboveNine = (value) => {
 export const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
-export const  isAreObjectsEqual = (obj1, obj2)=>{
+export const isAreObjectsEqual = (obj1, obj2) => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
   if (keys1.length !== keys2.length) {
@@ -84,7 +109,7 @@ export const  isAreObjectsEqual = (obj1, obj2)=>{
     }
   }
   return true;
-}
+};
 
 export const getAttributeHalf = (product, half) => {
   if (!product?.attributes) {

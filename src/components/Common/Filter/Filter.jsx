@@ -12,7 +12,7 @@ export default function Filter({
   searchParam,
   orderBy,
 }) {
-  console.log(categoryAttributes)
+  console.log(categoryAttributes);
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({
@@ -21,6 +21,7 @@ export default function Filter({
   });
   let price = categoryAttributes?.price;
   let brands = categoryAttributes?.brands;
+  let productCount = categoryAttributes?.attributes;
   let attributeCategories = categoryAttributes?.attribute_categories;
   let initialNoOfCategories = 5;
   let updatedParams = {};
@@ -156,7 +157,9 @@ export default function Filter({
 
   useEffect(() => {
     if (searchParam?.direct) {
-      const filteredKeys = Object.keys(searchParam).filter(key => key !== 'direct');
+      const filteredKeys = Object.keys(searchParam).filter(
+        (key) => key !== "direct"
+      );
       if (filteredKeys.includes("variant")) {
         document.getElementById("variant").checked = true;
       }
@@ -268,14 +271,14 @@ export default function Filter({
           let min =
             filteredArrayOfAttributeValues.maxValue -
               filteredArrayOfAttributeValues.minValue >=
-              1
+            1
               ? filteredArrayOfAttributeValues.minValue
               : 0;
 
           let max =
             filteredArrayOfAttributeValues.maxValue -
               filteredArrayOfAttributeValues.minValue >=
-              1
+            1
               ? filteredArrayOfAttributeValues.maxValue
               : 100;
           // alert(min)
@@ -398,6 +401,7 @@ export default function Filter({
                 ) {
                   let filteredArrayOfAttributeValues =
                     getFilteredAttributeValues(attribute);
+                  console.log(filteredArrayOfAttributeValues, "filter");
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
                     // check if values contain only yes then Toggle Switch
@@ -406,6 +410,7 @@ export default function Filter({
                       filteredArrayOfAttributeValues.values[0] == "yes"
                     ) {
                       const value = filteredArrayOfAttributeValues.values[0];
+                      // console.log(value);
                       const groupName = `${category.name}-${attribute.name}`;
                       return (
                         <Accordion.Item eventKey={attrIndex} key={attrIndex}>
@@ -443,10 +448,11 @@ export default function Filter({
                             {attribute.name}{" "}
                             <i className="ri-arrow-down-s-fill"></i>
                           </Accordion.Header>
+
                           <Accordion.Body>
                             {filteredArrayOfAttributeValues.values?.map(
                               (value, valIndex) => {
-                                const groupName = `${category.name}-${attribute.name}`;
+                                const groupName = `${category.attribute}-${attribute.values[0]}`;
                                 return (
                                   <Form.Check
                                     required
@@ -456,7 +462,16 @@ export default function Filter({
                                         {filteredArrayOfAttributeValues?.unit}
                                         <span
                                           dangerouslySetInnerHTML={{
-                                            __html: `<p>(${0})</p>`,
+                                            __html: `<p>(${
+                                              filteredArrayOfAttributeValues.values &&
+                                              filteredArrayOfAttributeValues.product_count &&
+                                              filteredArrayOfAttributeValues
+                                                .product_count[valIndex] !==
+                                                undefined
+                                                ? filteredArrayOfAttributeValues
+                                                    .product_count[valIndex]
+                                                : "0"
+                                            })</p>`,
                                           }}
                                         />
                                       </span>
@@ -494,14 +509,14 @@ export default function Filter({
                             min={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                                1
+                              1
                                 ? filteredArrayOfAttributeValues.minValue
                                 : 0
                             }
                             max={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                                1
+                              1
                                 ? filteredArrayOfAttributeValues.maxValue
                                 : 100
                             }
@@ -524,13 +539,13 @@ export default function Filter({
             </Accordion>
             {countAttribute >
               (pagination[category.name] || initialNoOfCategories) && (
-                <span
-                  className="show_more"
-                  onClick={() => handlePagination(category.name)}
-                >
-                  SHOW MORE <i className="ri-add-line"></i>
-                </span>
-              )}
+              <span
+                className="show_more"
+                onClick={() => handlePagination(category.name)}
+              >
+                SHOW MORE <i className="ri-add-line"></i>
+              </span>
+            )}
           </div>
         );
       })}
