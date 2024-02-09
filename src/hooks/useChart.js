@@ -17,7 +17,7 @@ export const searchForPatternAndReplace = (data) => {
     return `<h6 class="addClassData">${match}</h6>`;
   });
 
-  return updatedData + '<h6 class="addClassData"> [correlation-chart;Title sample;Robot Vacuum Cleaners;Runtime:80-130,Noisiness:55-70;Overall Score;Noisiness]</h6>';
+  return updatedData
 };
 
 
