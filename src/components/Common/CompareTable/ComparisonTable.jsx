@@ -156,8 +156,8 @@ export default function ComparisonTable({ products, categoryAttributes }) {
             ) : (
               <>
                 {item?.attribute_value === "-" ||
-                item?.attribute_value === null ||
-                item?.attribute_value === "?" ? (
+                  item?.attribute_value === null ||
+                  item?.attribute_value === "?" ? (
                   item?.attribute_value
                 ) : (
                   <>
@@ -303,16 +303,21 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                                   {data.price !== null && (
                                     <li>
                                       <>
-                                      <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
-                                        <img
-                                          src={data?.logo}
-                                          width={0}
-                                          height={0}
-                                          sizes="100vw"
-                                          alt=""
-                                        />
+                                        <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
+                                          <img
+                                            src={data?.logo}
+                                            width={0}
+                                            height={0}
+                                            sizes="100vw"
+                                            alt=""
+                                          />
                                         </Link>
-                                        <span className="price-wider">{data?.price} €</span>
+                                        <span className="price-wider">
+                                          <a rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
+                                            {data?.price} €
+                                          </a>
+                                        </span>
+
                                       </>
                                     </li>
                                   )}
@@ -359,8 +364,8 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                           ? "#093673"
                           : product.overall_score >= 5 &&
                             product.overall_score < 7.5
-                          ? "#437ECE"
-                          : " #85B2F1",
+                            ? "#437ECE"
+                            : " #85B2F1",
                     }}
                   >
                     {formatValue(product.overall_score)}
@@ -383,14 +388,14 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                     )}
                     {products[0]?.technical_score_descriptions
                       ?.when_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_matters
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_matters
+                          }
+                        </p>
+                      )}
                   </div>
                 )}
               </div>
@@ -415,14 +420,14 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                     )}
                     {products[0]?.technical_score_descriptions
                       ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>When it matters: </b>
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_it_matters
+                          }
+                        </p>
+                      )}
                   </div>
                 )}
               </div>
@@ -439,24 +444,24 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                   <div className="tooltip-display-content">
                     {products[0]?.ratio_qulitiy_points_descriptions
                       ?.description && (
-                      <p className="mb-2">
-                        <b>What it is: </b>{" "}
-                        {
-                          products[0]?.ratio_qulitiy_points_descriptions
-                            ?.description
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>What it is: </b>{" "}
+                          {
+                            products[0]?.ratio_qulitiy_points_descriptions
+                              ?.description
+                          }
+                        </p>
+                      )}
                     {products[0]?.technical_score_descriptions
                       ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_it_matters
+                          }
+                        </p>
+                      )}
                   </div>
                 )}
               </div>
@@ -523,22 +528,22 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                               {catAttribute.name}
                               {(catAttribute.description ||
                                 catAttribute.when_matters) && (
-                                <div className="tooltip-display-content">
-                                  {catAttribute?.description && (
-                                    <p className="mb-2">
-                                      <b>What it is: </b>
-                                      {catAttribute?.description}
-                                    </p>
-                                  )}
+                                  <div className="tooltip-display-content">
+                                    {catAttribute?.description && (
+                                      <p className="mb-2">
+                                        <b>What it is: </b>
+                                        {catAttribute?.description}
+                                      </p>
+                                    )}
 
-                                  {catAttribute?.when_matters && (
-                                    <p className="mb-2">
-                                      <b>When it matters: </b>{" "}
-                                      {catAttribute?.when_matters}
-                                    </p>
-                                  )}
-                                </div>
-                              )}
+                                    {catAttribute?.when_matters && (
+                                      <p className="mb-2">
+                                        <b>When it matters: </b>{" "}
+                                        {catAttribute?.when_matters}
+                                      </p>
+                                    )}
+                                  </div>
+                                )}
                             </div>
                           </th>
                           {addAsterisksToTopValue(
@@ -551,17 +556,17 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                     })}
                   {category.attributes.length >
                     (pagination[category.name] || initialNoOfCategories) && (
-                    <tr className="text-center show_more_row">
-                      <td colSpan="6">
-                        <span
-                          className="show_more"
-                          onClick={() => handlePagination(category.name)}
-                        >
-                          SHOW MORE <i className="ri-add-line"></i>
-                        </span>
-                      </td>
-                    </tr>
-                  )}
+                      <tr className="text-center show_more_row">
+                        <td colSpan="6">
+                          <span
+                            className="show_more"
+                            onClick={() => handlePagination(category.name)}
+                          >
+                            SHOW MORE <i className="ri-add-line"></i>
+                          </span>
+                        </td>
+                      </tr>
+                    )}
                 </Fragment>
               );
             })}

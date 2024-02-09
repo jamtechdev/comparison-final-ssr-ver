@@ -289,17 +289,22 @@ function ProductPage({
                       .map((item, index) => {
                         return (
                           <li key={index}>
-                             <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(item.url)}`}>
-                            <Image
-                              src={item?.logo}
-                              width={0}
-                              height={0}
-                              sizes="100%"
-                              alt="price"
-                            />
-                           </Link>
-                            <span>{item?.price} €</span>
-                           
+                            <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(item.url)}`}>
+                              <Image
+                                src={item?.logo}
+                                width={0}
+                                height={0}
+                                sizes="100%"
+                                alt="price"
+                              />
+                            </Link>
+                            <span>
+                              <a rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
+                                {data?.price} €
+                              </a>
+                            </span>
+
+
                           </li>
                         );
                       })}
@@ -341,9 +346,9 @@ function ProductPage({
                 {product?.guide_ratings.length > 5 && (
                   <Button
                     className="see_all_btn"
-                    // onClick={() => {
-                    //   showFullRanking = !showFullRanking;
-                    // }}
+                  // onClick={() => {
+                  //   showFullRanking = !showFullRanking;
+                  // }}
                   >
                     See All <i className="ri-arrow-down-s-line"></i>
                   </Button>
@@ -487,7 +492,7 @@ function ProductPage({
               </div>
             </Col>
             <Col md={8} lg={8}>
-              <div className="review-content" dangerouslySetInnerHTML={{ __html: product?.text_part }}/>
+              <div className="review-content" dangerouslySetInnerHTML={{ __html: product?.text_part }} />
               <Row className="mt-3">
                 <Col md={12} lg={6}>
                   <div className="best-price-section mobile-best-price-section">
@@ -499,17 +504,21 @@ function ProductPage({
                           .map((item, index) => {
                             return (
                               <li key={index}>
-                                  <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(item.url)}`}>
-                                <img
-                                  src={item?.logo}
-                                  width={0}
-                                  height={0}
-                                  sizes="100%"
-                                  alt=""
-                                />
-                                  </Link>
-                                <span>{item?.price} €</span>
-                              
+                                <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(item.url)}`}>
+                                  <img
+                                    src={item?.logo}
+                                    width={0}
+                                    height={0}
+                                    sizes="100%"
+                                    alt=""
+                                  />
+                                </Link>
+                                <span>
+                                  <a rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
+                                    {data?.price} €
+                                  </a>
+                                </span>
+
                               </li>
                             );
                           })}
@@ -551,9 +560,9 @@ function ProductPage({
                     {product?.guide_ratings.length > 5 && (
                       <Button
                         className="see_all_btn"
-                        // onClick={() => {
-                        //   showFullRanking = !showFullRanking;
-                        // }}
+                      // onClick={() => {
+                      //   showFullRanking = !showFullRanking;
+                      // }}
                       >
                         See All <i className="ri-arrow-down-s-line"></i>
                       </Button>

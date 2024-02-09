@@ -334,18 +334,18 @@ export default function Product({
                                             ? "#093673"
                                             : data?.attribute_evaluation >= 5 &&
                                               data?.attribute_evaluation < 7.5
-                                            ? "#437ECE"
-                                            : "#85B2F1",
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                              data?.attribute_evaluation
-                                            )
+                                            data?.attribute_evaluation
+                                          )
                                           : data?.attribute_evaluation.toFixed(
-                                              1
-                                            )
+                                            1
+                                          )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
@@ -375,24 +375,24 @@ export default function Product({
                         <div className="tooltip-display-content">
                           {product?.technical_score_descriptions
                             .description && (
-                            <p className="mb-2">
-                              <b>What it is: </b>
-                              {
-                                product?.technical_score_descriptions
-                                  ?.description
-                              }
-                            </p>
-                          )}
+                              <p className="mb-2">
+                                <b>What it is: </b>
+                                {
+                                  product?.technical_score_descriptions
+                                    ?.description
+                                }
+                              </p>
+                            )}
                           {product?.technical_score_descriptions
                             .when_matters && (
-                            <p className="mb-2">
-                              <b>When it matters: </b>
-                              {
-                                product?.technical_score_descriptions
-                                  ?.when_matters
-                              }
-                            </p>
-                          )}
+                              <p className="mb-2">
+                                <b>When it matters: </b>
+                                {
+                                  product?.technical_score_descriptions
+                                    ?.when_matters
+                                }
+                              </p>
+                            )}
                           <p>
                             <b>Score components:</b>
                           </p>
@@ -415,18 +415,18 @@ export default function Product({
                                             ? "#093673"
                                             : data?.attribute_evaluation >= 5 &&
                                               data?.attribute_evaluation < 7.5
-                                            ? "#437ECE"
-                                            : "#85B2F1",
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                              data?.attribute_evaluation
-                                            )
+                                            data?.attribute_evaluation
+                                          )
                                           : data?.attribute_evaluation.toFixed(
-                                              1
-                                            )
+                                            1
+                                          )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
@@ -489,18 +489,18 @@ export default function Product({
                                             ? "#093673"
                                             : data?.attribute_evaluation >= 5 &&
                                               data?.attribute_evaluation < 7.5
-                                            ? "#437ECE"
-                                            : "#85B2F1",
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                              data?.attribute_evaluation
-                                            )
+                                            data?.attribute_evaluation
+                                          )
                                           : data?.attribute_evaluation.toFixed(
-                                              1
-                                            )
+                                            1
+                                          )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
@@ -572,17 +572,22 @@ export default function Product({
                                   {data.price !== null && (
                                     <li>
                                       <>
-                                      <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
-                                        <img
-                                          src={data?.logo}
-                                          width={0}
-                                          height={0}
-                                          sizes="100vw"
-                                          alt=""
-                                        />
-                                     </Link> 
-                                        <span>{data?.price} €</span>
-                                     
+                                        <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
+                                          <img
+                                            src={data?.logo}
+                                            width={0}
+                                            height={0}
+                                            sizes="100vw"
+                                            alt=""
+                                          />
+                                        </Link>
+                                        <span>
+                                          <a rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
+                                            {data?.price} €
+                                          </a>
+                                        </span>
+
+
                                       </>
                                     </li>
                                   )}
@@ -818,26 +823,26 @@ export default function Product({
                                       <div className="tooltip-display-content">
                                         {product?.technical_score_descriptions
                                           .description && (
-                                          <p className="mb-2">
-                                            <b>What it is: </b>
-                                            {
-                                              product
-                                                ?.technical_score_descriptions
-                                                ?.description
-                                            }
-                                          </p>
-                                        )}
+                                            <p className="mb-2">
+                                              <b>What it is: </b>
+                                              {
+                                                product
+                                                  ?.technical_score_descriptions
+                                                  ?.description
+                                              }
+                                            </p>
+                                          )}
                                         {product?.technical_score_descriptions
                                           .when_matters && (
-                                          <p className="mb-2">
-                                            <b>When it matters: </b>
-                                            {
-                                              product
-                                                ?.technical_score_descriptions
-                                                ?.when_matters
-                                            }
-                                          </p>
-                                        )}
+                                            <p className="mb-2">
+                                              <b>When it matters: </b>
+                                              {
+                                                product
+                                                  ?.technical_score_descriptions
+                                                  ?.when_matters
+                                              }
+                                            </p>
+                                          )}
                                         <p>
                                           <b>Score components:</b>
                                         </p>
@@ -861,14 +866,14 @@ export default function Product({
                                                       style={{
                                                         background:
                                                           data?.attribute_evaluation >=
-                                                          7.5
+                                                            7.5
                                                             ? "#093673"
                                                             : data?.attribute_evaluation >=
-                                                                5 &&
+                                                              5 &&
                                                               data?.attribute_evaluation <
-                                                                7.5
-                                                            ? "#437ECE"
-                                                            : "#85B2F1",
+                                                              7.5
+                                                              ? "#437ECE"
+                                                              : "#85B2F1",
                                                       }}
                                                     >
                                                       {`${parseFloat(
@@ -893,13 +898,13 @@ export default function Product({
                                         color:
                                           product.technical_score_is_better_than *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.technical_score_is_worse_than *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         fontSize: "15px",
                                         textDecoration: "underline",
                                         textDecorationStyle: "dotted",
@@ -907,13 +912,13 @@ export default function Product({
                                         textDecorationColor:
                                           product.technical_score_is_better_than *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.technical_score_is_worse_than *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -943,24 +948,24 @@ export default function Product({
                                       <div className="tooltip-display-content">
                                         {product?.users_rating_descriptions
                                           .description && (
-                                          <p className="mb-2">
-                                            <b>What it is: </b>
-                                            {
-                                              product?.users_rating_descriptions
-                                                ?.description
-                                            }
-                                          </p>
-                                        )}
+                                            <p className="mb-2">
+                                              <b>What it is: </b>
+                                              {
+                                                product?.users_rating_descriptions
+                                                  ?.description
+                                              }
+                                            </p>
+                                          )}
                                         {product?.users_rating_descriptions
                                           .when_matters && (
-                                          <p className="mb-2">
-                                            <b>When it matters: </b>
-                                            {
-                                              product?.users_rating_descriptions
-                                                ?.when_matters
-                                            }
-                                          </p>
-                                        )}
+                                            <p className="mb-2">
+                                              <b>When it matters: </b>
+                                              {
+                                                product?.users_rating_descriptions
+                                                  ?.when_matters
+                                              }
+                                            </p>
+                                          )}
                                         <p>
                                           <b>Score components:</b>
                                         </p>
@@ -984,14 +989,14 @@ export default function Product({
                                                       style={{
                                                         background:
                                                           data?.attribute_evaluation >=
-                                                          7.5
+                                                            7.5
                                                             ? "#093673"
                                                             : data?.attribute_evaluation >=
-                                                                5 &&
+                                                              5 &&
                                                               data?.attribute_evaluation <
-                                                                7.5
-                                                            ? "#437ECE"
-                                                            : "#85B2F1",
+                                                              7.5
+                                                              ? "#437ECE"
+                                                              : "#85B2F1",
                                                       }}
                                                     >
                                                       {`${parseFloat(
@@ -1016,13 +1021,13 @@ export default function Product({
                                         color:
                                           product.reviews_is_better_than *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.reviews_is_worse_than *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         fontSize: "15px",
                                         textDecoration: "underline",
                                         textDecorationStyle: "dotted",
@@ -1030,13 +1035,13 @@ export default function Product({
                                         textDecorationColor:
                                           product.reviews_is_better_than *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.reviews_is_worse_than *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1068,13 +1073,13 @@ export default function Product({
                                           color:
                                             product.expert_reviews_is_better_than *
                                               100 >=
-                                            70
+                                              70
                                               ? "#437ece"
                                               : product.expert_reviews_is_worse_than *
-                                                  100 >
+                                                100 >
                                                 70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                                ? "#ce434b"
+                                                : "#27304e",
                                           fontSize: "15px",
                                           textDecoration: "underline",
                                           textDecorationStyle: "dotted",
@@ -1082,13 +1087,13 @@ export default function Product({
                                           textDecorationColor:
                                             product.expert_reviews_is_better_than *
                                               100 >=
-                                            70
+                                              70
                                               ? "#437ece"
                                               : product.expert_reviews_is_worse_than *
-                                                  100 >
+                                                100 >
                                                 70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                                ? "#ce434b"
+                                                : "#27304e",
                                           textUnderlineOffset: "5px",
                                         }}
                                       >
@@ -1122,13 +1127,13 @@ export default function Product({
                                         color:
                                           product.ratio_quality_price_points_better_then *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.ratio_quality_price_points_worse_then *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         fontSize: "15px",
                                         textDecoration: "underline",
                                         textDecorationStyle: "dotted",
@@ -1136,13 +1141,13 @@ export default function Product({
                                         textDecorationColor:
                                           product.ratio_quality_price_points_better_then *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.ratio_quality_price_points_worse_then *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1175,13 +1180,13 @@ export default function Product({
                                         color:
                                           product.popularity_points_better_then *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.popularity_points_worse_then *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         fontSize: "15px",
                                         textDecoration: "underline",
                                         textDecorationStyle: "dotted",
@@ -1189,13 +1194,13 @@ export default function Product({
                                         textDecorationColor:
                                           product.popularity_points_better_then *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.popularity_points_worse_then *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1235,35 +1240,35 @@ export default function Product({
                                               .attribute_evaluation >= 7.5
                                               ? "#093673"
                                               : product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation >=
-                                                  5 &&
+                                                attribute
+                                              ][0].attribute_evaluation >=
+                                                5 &&
                                                 product.attributes_new[
                                                   attribute
                                                 ][0].attribute_evaluation < 7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                                ? "#437ECE"
+                                                : "#85B2F1",
                                         }}
                                       >
                                         {product.attributes_new[attribute][0]
                                           .attribute_evaluation != null
                                           ? parseInt(
-                                              product.attributes_new[
-                                                attribute
-                                              ][0].attribute_evaluation
-                                            ) >= 10
+                                            product.attributes_new[
+                                              attribute
+                                            ][0].attribute_evaluation
+                                          ) >= 10
                                             ? Math.trunc(
-                                                parseInt(
-                                                  product.attributes_new[
-                                                    attribute
-                                                  ][0].attribute_evaluation
-                                                )
-                                              )
-                                            : parseInt(
+                                              parseInt(
                                                 product.attributes_new[
                                                   attribute
                                                 ][0].attribute_evaluation
-                                              ).toFixed(1)
+                                              )
+                                            )
+                                            : parseInt(
+                                              product.attributes_new[
+                                                attribute
+                                              ][0].attribute_evaluation
+                                            ).toFixed(1)
                                           : "0.0"}
                                       </span>
                                       <div className="show-btn">
@@ -1284,11 +1289,11 @@ export default function Product({
                                               product.name
                                             ] &&
                                               displayedAttributesCount[
-                                                product.name
+                                              product.name
                                               ][attribute]
                                               ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
+                                              product.name
+                                              ][attribute]
                                               : initialDisplay
                                           )
                                           .map(
@@ -1317,20 +1322,20 @@ export default function Product({
                                                         {attributeValues.attribute_value !=
                                                           "yes" &&
                                                           attributeValues.attribute_value !=
-                                                            "no" && (
+                                                          "no" && (
                                                             <div
                                                               className="tooltip-title"
                                                               style={{
                                                                 color:
                                                                   attributeValues.is_better_than *
                                                                     100 >=
-                                                                  70
+                                                                    70
                                                                     ? "#437ece"
                                                                     : attributeValues.is_worse_than *
-                                                                        100 >
+                                                                      100 >
                                                                       70
-                                                                    ? "#ce434b"
-                                                                    : "#27304e",
+                                                                      ? "#ce434b"
+                                                                      : "#27304e",
                                                                 fontSize:
                                                                   "15px",
                                                                 textDecoration:
@@ -1342,13 +1347,13 @@ export default function Product({
                                                                 textDecorationColor:
                                                                   attributeValues.is_better_than *
                                                                     100 >=
-                                                                  70
+                                                                    70
                                                                     ? "#437ece"
                                                                     : attributeValues.is_worse_than *
-                                                                        100 >
+                                                                      100 >
                                                                       70
-                                                                    ? "#ce434b"
-                                                                    : "#27304e",
+                                                                      ? "#ce434b"
+                                                                      : "#27304e",
                                                                 textUnderlineOffset:
                                                                   "5px",
                                                               }}
@@ -1359,29 +1364,29 @@ export default function Product({
                                                                     color:
                                                                       attributeValues.is_better_than *
                                                                         100 >=
-                                                                      70
+                                                                        70
                                                                         ? "#437ece"
                                                                         : attributeValues.is_worse_than *
-                                                                            100 >
+                                                                          100 >
                                                                           70
-                                                                        ? "#ce434b"
-                                                                        : "#27304e",
+                                                                          ? "#ce434b"
+                                                                          : "#27304e",
                                                                     fontSize:
                                                                       "15px",
                                                                   }}
                                                                 >
                                                                   {(attributeValues.attribute_value !=
-                                                                  null
+                                                                    null
                                                                     ? attributeValues.attribute_value
                                                                     : "") +
                                                                     " " +
                                                                     (attributeValues.attribute_value ===
-                                                                    "?"
+                                                                      "?"
                                                                       ? ""
                                                                       : attributeValues.unit !=
                                                                         null
-                                                                      ? attributeValues.unit
-                                                                      : "")}
+                                                                        ? attributeValues.unit
+                                                                        : "")}
                                                                 </span>
                                                               }
 
@@ -1397,79 +1402,79 @@ export default function Product({
                                                         {(attributeValues.attribute_value ==
                                                           "yes" ||
                                                           attributeValues.attribute_value ==
-                                                            "no") && (
-                                                          <div
-                                                            className="tooltip-title"
-                                                            style={{
-                                                              color:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_better_than *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
+                                                          "no") && (
+                                                            <div
+                                                              className="tooltip-title"
+                                                              style={{
+                                                                color:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
+                                                                    attributeValues.attribute_is_better_than *
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
                                                                       "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
+                                                                      attributeValues.attribute_is_worse_than *
                                                                       100 >
                                                                       60
-                                                                  ? "red"
-                                                                  : "#27304e",
-                                                              fontSize: "15px",
-                                                              textDecoration:
-                                                                "underline",
-                                                              textDecorationStyle:
-                                                                "dotted",
-                                                              textDecorationThickness:
-                                                                "1.5px",
-                                                              textDecorationColor:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_better_than *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
+                                                                      ? "red"
+                                                                      : "#27304e",
+                                                                fontSize: "15px",
+                                                                textDecoration:
+                                                                  "underline",
+                                                                textDecorationStyle:
+                                                                  "dotted",
+                                                                textDecorationThickness:
+                                                                  "1.5px",
+                                                                textDecorationColor:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
+                                                                    attributeValues.attribute_is_better_than *
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
                                                                       "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
+                                                                      attributeValues.attribute_is_worse_than *
                                                                       100 >
                                                                       60
-                                                                  ? "red"
-                                                                  : "#27304e",
-                                                              textUnderlineOffset:
-                                                                "5px",
-                                                            }}
-                                                          >
-                                                            {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
-                                                            {
-                                                              <span
-                                                                style={{
-                                                                  color:
-                                                                    getColorAttr(
-                                                                      attributeValues
-                                                                    ),
-                                                                }}
-                                                              >
-                                                                {(attributeValues.attribute_value !=
-                                                                null
-                                                                  ? attributeValues.attribute_value
-                                                                  : "") +
-                                                                  " " +
-                                                                  (attributeValues.unit !=
-                                                                  null
-                                                                    ? attributeValues.unit
-                                                                    : "")}
-                                                              </span>
-                                                            }
-                                                            {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
-                                                            <ProsConsToolTip
-                                                              hover_phrase={
-                                                                attributeValues &&
-                                                                attributeValues.hover_phase
+                                                                      ? "red"
+                                                                      : "#27304e",
+                                                                textUnderlineOffset:
+                                                                  "5px",
+                                                              }}
+                                                            >
+                                                              {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                                              {
+                                                                <span
+                                                                  style={{
+                                                                    color:
+                                                                      getColorAttr(
+                                                                        attributeValues
+                                                                      ),
+                                                                  }}
+                                                                >
+                                                                  {(attributeValues.attribute_value !=
+                                                                    null
+                                                                    ? attributeValues.attribute_value
+                                                                    : "") +
+                                                                    " " +
+                                                                    (attributeValues.unit !=
+                                                                      null
+                                                                      ? attributeValues.unit
+                                                                      : "")}
+                                                                </span>
                                                               }
-                                                            />
-                                                          </div>
-                                                        )}
+                                                              {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
+                                                              <ProsConsToolTip
+                                                                hover_phrase={
+                                                                  attributeValues &&
+                                                                  attributeValues.hover_phase
+                                                                }
+                                                              />
+                                                            </div>
+                                                          )}
                                                       </div>
                                                     </div>
                                                   </div>
@@ -1484,12 +1489,12 @@ export default function Product({
                                             displayedAttributesCount[
                                               product.name
                                             ] &&
-                                            displayedAttributesCount[
+                                              displayedAttributesCount[
                                               product.name
-                                            ][attribute]
+                                              ][attribute]
                                               ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
+                                              product.name
+                                              ][attribute]
                                               : initialDisplay
                                           }
                                         />
@@ -1497,43 +1502,42 @@ export default function Product({
 
                                       {loading == false
                                         ? product.attributes_new[attribute]
-                                            .length >
-                                            (displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                            displayedAttributesCount[
-                                              product.name
-                                            ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay) && (
-                                            <span
-                                              className="show_more"
-                                              onClick={() => {
-                                                setloading(true),
-                                                  handleDisplayedAttributesCount(
-                                                    product.name,
-                                                    attribute
-                                                  );
-                                                setTimeout(() => {
-                                                  setloading(false);
-                                                }, 600);
-                                              }}
-                                            >
-                                              {"SHOW MORE "}
-                                              <i
-                                                className={`ri-${
-                                                  initialDisplay <
+                                          .length >
+                                        (displayedAttributesCount[
+                                          product.name
+                                        ] &&
+                                          displayedAttributesCount[
+                                          product.name
+                                          ][attribute]
+                                          ? displayedAttributesCount[
+                                          product.name
+                                          ][attribute]
+                                          : initialDisplay) && (
+                                          <span
+                                            className="show_more"
+                                            onClick={() => {
+                                              setloading(true),
+                                                handleDisplayedAttributesCount(
+                                                  product.name,
+                                                  attribute
+                                                );
+                                              setTimeout(() => {
+                                                setloading(false);
+                                              }, 600);
+                                            }}
+                                          >
+                                            {"SHOW MORE "}
+                                            <i
+                                              className={`ri-${initialDisplay <
                                                   product.attributes_new[
                                                     attribute
                                                   ].length
-                                                    ? "add"
-                                                    : "subtract"
+                                                  ? "add"
+                                                  : "subtract"
                                                 }-line`}
-                                              ></i>
-                                            </span>
-                                          )
+                                            ></i>
+                                          </span>
+                                        )
                                         : ""}
                                     </Accordion.Body>
                                   </Accordion.Item>
@@ -1568,23 +1572,23 @@ export default function Product({
                                               .attribute_evaluation >= 7.5
                                               ? "#093673"
                                               : product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation >=
-                                                  5 &&
+                                                attribute
+                                              ][0].attribute_evaluation >=
+                                                5 &&
                                                 product.attributes_new[
                                                   attribute
                                                 ][0].attribute_evaluation < 7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                                ? "#437ECE"
+                                                : "#85B2F1",
                                         }}
                                       >
                                         {product.attributes_new[attribute][0]
                                           .attribute_evaluation != null
                                           ? parseInt(
-                                              product.attributes_new[
-                                                attribute
-                                              ][0].attribute_evaluation
-                                            ).toFixed(1)
+                                            product.attributes_new[
+                                              attribute
+                                            ][0].attribute_evaluation
+                                          ).toFixed(1)
                                           : "0.0"}
                                       </span>
                                       <div className="show-btn">
@@ -1605,11 +1609,11 @@ export default function Product({
                                               product.name
                                             ] &&
                                               displayedAttributesCount[
-                                                product.name
+                                              product.name
                                               ][attribute]
                                               ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
+                                              product.name
+                                              ][attribute]
                                               : initialDisplay
                                           )
                                           .map(
@@ -1638,20 +1642,20 @@ export default function Product({
                                                         {attributeValues.attribute_value !=
                                                           "yes" &&
                                                           attributeValues.attribute_value !=
-                                                            "no" && (
+                                                          "no" && (
                                                             <div
                                                               className="tooltip-title"
                                                               style={{
                                                                 color:
                                                                   attributeValues.is_better_than *
                                                                     100 >=
-                                                                  70
+                                                                    70
                                                                     ? "#437ece"
                                                                     : attributeValues.is_worse_than *
-                                                                        100 >
+                                                                      100 >
                                                                       70
-                                                                    ? "#ce434b"
-                                                                    : "#27304e",
+                                                                      ? "#ce434b"
+                                                                      : "#27304e",
                                                                 fontSize:
                                                                   "15px",
                                                                 textDecoration:
@@ -1663,13 +1667,13 @@ export default function Product({
                                                                 textDecorationColor:
                                                                   attributeValues.is_better_than *
                                                                     100 >=
-                                                                  70
+                                                                    70
                                                                     ? "#437ece"
                                                                     : attributeValues.is_worse_than *
-                                                                        100 >
+                                                                      100 >
                                                                       70
-                                                                    ? "#ce434b"
-                                                                    : "#27304e",
+                                                                      ? "#ce434b"
+                                                                      : "#27304e",
                                                                 textUnderlineOffset:
                                                                   "5px",
                                                               }}
@@ -1680,24 +1684,24 @@ export default function Product({
                                                                     color:
                                                                       attributeValues.is_better_than *
                                                                         100 >=
-                                                                      70
+                                                                        70
                                                                         ? "#437ece"
                                                                         : attributeValues.is_worse_than *
-                                                                            100 >
+                                                                          100 >
                                                                           70
-                                                                        ? "#ce434b"
-                                                                        : "#27304e",
+                                                                          ? "#ce434b"
+                                                                          : "#27304e",
                                                                     fontSize:
                                                                       "15px",
                                                                   }}
                                                                 >
                                                                   {(attributeValues.attribute_value !=
-                                                                  null
+                                                                    null
                                                                     ? attributeValues.attribute_value
                                                                     : "") +
                                                                     " " +
                                                                     (attributeValues.unit !=
-                                                                    null
+                                                                      null
                                                                       ? attributeValues.unit
                                                                       : "")}
                                                                 </span>
@@ -1716,90 +1720,90 @@ export default function Product({
                                                         {(attributeValues.attribute_value ==
                                                           "yes" ||
                                                           attributeValues.attribute_value ==
-                                                            "no") && (
-                                                          <div
-                                                            className="tooltip-title"
-                                                            style={{
-                                                              color:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_same_as *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
-                                                                      100 >
-                                                                      60
-                                                                  ? "red"
-                                                                  : "#27304e",
-                                                              fontSize: "15px",
-                                                              textDecoration:
-                                                                "underline",
-                                                              textDecorationStyle:
-                                                                "dotted",
-                                                              textDecorationThickness:
-                                                                "1.5px",
-                                                              textDecorationColor:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                // here I change attribute_is_better_than to attribute_is_same_as
-                                                                attributeValues.attribute_is_same_as *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
-                                                                      100 >
-                                                                      60
-                                                                  ? "red"
-                                                                  : "#27304e",
-                                                              textUnderlineOffset:
-                                                                "5px",
-                                                            }}
-                                                          >
-                                                            {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
-                                                            {
-                                                              <span
-                                                                style={{
-                                                                  color:
-                                                                    attributeValues.attribute_value ==
-                                                                      "yes" &&
+                                                          "no") && (
+                                                            <div
+                                                              className="tooltip-title"
+                                                              style={{
+                                                                color:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
                                                                     attributeValues.attribute_is_same_as *
-                                                                      100 <
-                                                                      40
-                                                                      ? "#0066b2"
-                                                                      : attributeValues.attribute_value ==
-                                                                          "no" &&
-                                                                        attributeValues.attribute_is_worse_than *
-                                                                          100 >
-                                                                          60
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
+                                                                      "no" &&
+                                                                      attributeValues.attribute_is_worse_than *
+                                                                      100 >
+                                                                      60
                                                                       ? "red"
                                                                       : "#27304e",
-                                                                }}
-                                                              >
-                                                                {(attributeValues.attribute_value !=
-                                                                null
-                                                                  ? attributeValues.attribute_value
-                                                                  : "") +
-                                                                  " " +
-                                                                  (attributeValues.unit !=
-                                                                  null
-                                                                    ? attributeValues.unit
-                                                                    : "")}
-                                                              </span>
-                                                            }
-                                                            {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
-                                                            <ProsConsToolTip
-                                                              hover_phrase={
-                                                                attributeValues &&
-                                                                attributeValues.hover_phase
+                                                                fontSize: "15px",
+                                                                textDecoration:
+                                                                  "underline",
+                                                                textDecorationStyle:
+                                                                  "dotted",
+                                                                textDecorationThickness:
+                                                                  "1.5px",
+                                                                textDecorationColor:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
+                                                                    // here I change attribute_is_better_than to attribute_is_same_as
+                                                                    attributeValues.attribute_is_same_as *
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
+                                                                      "no" &&
+                                                                      attributeValues.attribute_is_worse_than *
+                                                                      100 >
+                                                                      60
+                                                                      ? "red"
+                                                                      : "#27304e",
+                                                                textUnderlineOffset:
+                                                                  "5px",
+                                                              }}
+                                                            >
+                                                              {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                                              {
+                                                                <span
+                                                                  style={{
+                                                                    color:
+                                                                      attributeValues.attribute_value ==
+                                                                        "yes" &&
+                                                                        attributeValues.attribute_is_same_as *
+                                                                        100 <
+                                                                        40
+                                                                        ? "#0066b2"
+                                                                        : attributeValues.attribute_value ==
+                                                                          "no" &&
+                                                                          attributeValues.attribute_is_worse_than *
+                                                                          100 >
+                                                                          60
+                                                                          ? "red"
+                                                                          : "#27304e",
+                                                                  }}
+                                                                >
+                                                                  {(attributeValues.attribute_value !=
+                                                                    null
+                                                                    ? attributeValues.attribute_value
+                                                                    : "") +
+                                                                    " " +
+                                                                    (attributeValues.unit !=
+                                                                      null
+                                                                      ? attributeValues.unit
+                                                                      : "")}
+                                                                </span>
                                                               }
-                                                            />
-                                                          </div>
-                                                        )}
+                                                              {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
+                                                              <ProsConsToolTip
+                                                                hover_phrase={
+                                                                  attributeValues &&
+                                                                  attributeValues.hover_phase
+                                                                }
+                                                              />
+                                                            </div>
+                                                          )}
                                                       </div>
                                                     </div>
                                                   </div>
@@ -1814,55 +1818,54 @@ export default function Product({
                                             displayedAttributesCount[
                                               product.name
                                             ] &&
-                                            displayedAttributesCount[
+                                              displayedAttributesCount[
                                               product.name
-                                            ][attribute]
+                                              ][attribute]
                                               ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
+                                              product.name
+                                              ][attribute]
                                               : initialDisplay
                                           }
                                         />
                                       )}
                                       {loading == false
                                         ? product.attributes_new[attribute]
-                                            .length >
-                                            (displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                            displayedAttributesCount[
-                                              product.name
-                                            ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay) && (
-                                            <span
-                                              className="show_more"
-                                              onClick={() => {
-                                                setloading(true),
-                                                  handleDisplayedAttributesCount(
-                                                    product.name,
-                                                    attribute
-                                                  );
-                                                setTimeout(() => {
-                                                  setloading(false);
-                                                }, 600);
-                                              }}
-                                            >
-                                              {"SHOW MORE "}
-                                              <i
-                                                className={`ri-${
-                                                  initialDisplay <
+                                          .length >
+                                        (displayedAttributesCount[
+                                          product.name
+                                        ] &&
+                                          displayedAttributesCount[
+                                          product.name
+                                          ][attribute]
+                                          ? displayedAttributesCount[
+                                          product.name
+                                          ][attribute]
+                                          : initialDisplay) && (
+                                          <span
+                                            className="show_more"
+                                            onClick={() => {
+                                              setloading(true),
+                                                handleDisplayedAttributesCount(
+                                                  product.name,
+                                                  attribute
+                                                );
+                                              setTimeout(() => {
+                                                setloading(false);
+                                              }, 600);
+                                            }}
+                                          >
+                                            {"SHOW MORE "}
+                                            <i
+                                              className={`ri-${initialDisplay <
                                                   product.attributes_new[
                                                     attribute
                                                   ].length
-                                                    ? "add"
-                                                    : "subtract"
+                                                  ? "add"
+                                                  : "subtract"
                                                 }-line`}
-                                              ></i>
-                                            </span>
-                                          )
+                                            ></i>
+                                          </span>
+                                        )
                                         : ""}
                                     </Accordion.Body>
                                   </Accordion.Item>

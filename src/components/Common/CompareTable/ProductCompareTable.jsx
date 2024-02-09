@@ -155,14 +155,14 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
             ) : (
               <>
                 {item?.attribute_value === "-" ||
-                item?.attribute_value === null ||
-                item?.attribute_value === "?" ? (
+                  item?.attribute_value === null ||
+                  item?.attribute_value === "?" ? (
                   "-"
                 ) : (
                   <>
                     {item?.attribute_value === "-" ||
-                    item?.attribute_value === null ||
-                    item?.attribute_value === "?" ? (
+                      item?.attribute_value === null ||
+                      item?.attribute_value === "?" ? (
                       item?.attribute_value
                     ) : (
                       <>
@@ -291,16 +291,21 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                                     {data.price !== null && (
                                       <li>
                                         <>
-                                        <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
-                                          <img
-                                            src={data?.logo}
-                                            width={0}
-                                            height={0}
-                                            sizes="100vw"
-                                            alt="price"
-                                          />
+                                          <Link rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
+                                            <img
+                                              src={data?.logo}
+                                              width={0}
+                                              height={0}
+                                              sizes="100vw"
+                                              alt="price"
+                                            />
                                           </Link>
-                                          <span>{data?.price} €</span>
+                                          <span>
+                                            <a rel="noopener noreferrer" target="_blank" href={`/link?p=${btoa(data.url)}`}>
+                                              {data?.price} €
+                                            </a>
+                                          </span>
+
                                         </>
                                       </li>
                                     )}
@@ -348,8 +353,8 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                           ? "#093673"
                           : product.overall_score >= 5 &&
                             product.overall_score < 7.5
-                          ? "#437ECE"
-                          : " #85B2F1",
+                            ? "#437ECE"
+                            : " #85B2F1",
                     }}
                   >
                     {product.overall_score}
@@ -372,14 +377,14 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                     )}
                     {products[0]?.technical_score_descriptions
                       ?.when_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_matters
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_matters
+                          }
+                        </p>
+                      )}
                   </div>
                 )}
               </div>
@@ -404,14 +409,14 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                     )}
                     {products[0]?.technical_score_descriptions
                       ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_it_matters
+                          }
+                        </p>
+                      )}
                   </div>
                 )}
               </div>
@@ -428,24 +433,24 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                   <div className="tooltip-display-content">
                     {products[0]?.ratio_qulitiy_points_descriptions
                       ?.description && (
-                      <p className="mb-2">
-                        <b>What it is: </b>{" "}
-                        {
-                          products[0]?.ratio_qulitiy_points_descriptions
-                            ?.description
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>What it is: </b>{" "}
+                          {
+                            products[0]?.ratio_qulitiy_points_descriptions
+                              ?.description
+                          }
+                        </p>
+                      )}
                     {products[0]?.technical_score_descriptions
                       ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_it_matters
+                          }
+                        </p>
+                      )}
                   </div>
                 )}
               </div>
@@ -498,13 +503,13 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                                   ][0]?.final_points?.toFixed(1) >= 7.5
                                     ? "#093673"
                                     : product.attributes[
-                                        category.name
-                                      ][0]?.final_points?.toFixed(1) >= 5 &&
+                                      category.name
+                                    ][0]?.final_points?.toFixed(1) >= 5 &&
                                       product.attributes[
                                         category.name
                                       ][0]?.final_points?.toFixed(1) < 7.5
-                                    ? "#437ECE"
-                                    : " #85B2F1",
+                                      ? "#437ECE"
+                                      : " #85B2F1",
                               }}
                             >
                               {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
@@ -529,22 +534,22 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                               {catAttribute.name}
                               {(catAttribute.description ||
                                 catAttribute.when_matters) && (
-                                <div className="tooltip-display-content">
-                                  {catAttribute?.description && (
-                                    <p className="mb-2">
-                                      <b>What it is: </b>
-                                      {catAttribute?.description}
-                                    </p>
-                                  )}
+                                  <div className="tooltip-display-content">
+                                    {catAttribute?.description && (
+                                      <p className="mb-2">
+                                        <b>What it is: </b>
+                                        {catAttribute?.description}
+                                      </p>
+                                    )}
 
-                                  {catAttribute?.when_matters && (
-                                    <p className="mb-2">
-                                      <b>When it matters: </b>{" "}
-                                      {catAttribute?.when_matters}
-                                    </p>
-                                  )}
-                                </div>
-                              )}
+                                    {catAttribute?.when_matters && (
+                                      <p className="mb-2">
+                                        <b>When it matters: </b>{" "}
+                                        {catAttribute?.when_matters}
+                                      </p>
+                                    )}
+                                  </div>
+                                )}
                             </div>
                           </th>
                           {addAsterisksToTopValue(
@@ -557,17 +562,17 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
                     })}
                   {category.attributes.length >
                     (pagination[category.name] || initialNoOfCategories) && (
-                    <tr className="text-center show_more_row">
-                      <td colSpan="6">
-                        <span
-                          className="show_more"
-                          onClick={() => handlePagination(category.name)}
-                        >
-                          SHOW MORE <i className="ri-add-line"></i>
-                        </span>
-                      </td>
-                    </tr>
-                  )}
+                      <tr className="text-center show_more_row">
+                        <td colSpan="6">
+                          <span
+                            className="show_more"
+                            onClick={() => handlePagination(category.name)}
+                          >
+                            SHOW MORE <i className="ri-add-line"></i>
+                          </span>
+                        </td>
+                      </tr>
+                    )}
                 </Fragment>
               );
             })}
