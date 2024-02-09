@@ -15,6 +15,8 @@ function CorrelationChart(props) {
     yTick,
     xUnit,
     yUnit,
+    xTitle,
+    yTitle,
     isGeneralAttribute_x,
     isGeneralAttribute_y,
     rangeMinX,
@@ -99,11 +101,35 @@ function CorrelationChart(props) {
     return { ticks };
   }
 
+// here Update x and y axios label based on xLabel and yLabel value 
+
+  let yLabelValue = {  }
+  if (yLabel) {
+    yLabelValue = {
+      ticks
+        : yLabel
+    }
+  } else { 
+    let yLabelValue =  tickValuesAdujst(minY, maxY, y_tick, yStep)
+  }
+
+  let xLabelValue = {}
+  if (xLabel) {
+    xLabelValue = {
+      ticks
+        : xLabel
+    }
+  } else {
+    let xLabelValue = tickValuesAdujst(minX, maxX, x_tick, xStep)
+  }
+  // end Update x and y axios label 
+
+  
   const margin = { top: 40, right: 35, bottom: 40, left: 35 };
   const { nextStepVal: yStep } = calculateNextStep(maxY, minY, y_tick);
-  const { ticks: yTickValues } = tickValuesAdujst(minY, maxY, y_tick, yStep);
+  const { ticks: yTickValues } = yLabelValue;
   const { nextStepVal: xStep } = calculateNextStep(maxX, minX, x_tick);
-  const { ticks: xTickValues } = tickValuesAdujst(minX, maxX, x_tick, xStep);
+  const { ticks: xTickValues } = xLabelValue;
 
   useEffect(() => {
     drawChart();
@@ -193,7 +219,7 @@ function CorrelationChart(props) {
     svg.selectAll(".tick line").attr("stroke", "rgba(39, 48, 78, 0.1)");
     svg.selectAll("path").attr("display", "none");
 
-    //x axis label
+//x axis label
     svg
       .append("text")
       .attr("class", "axis-label")
@@ -201,17 +227,17 @@ function CorrelationChart(props) {
       .attr("x", (width - margin.left) / 2)
       .attr("y", height - margin.top + 20)
       //.attr("transform", "rotate(-90)")
-      .text(xLabel);
+      .text(xTitle);
 
     //y axis label
     svg
       .append("text")
       .attr("class", "axis-label")
       .attr("text-anchor", "middle")
-      .attr("x", -margin.left - 55)
-      .attr("y", (height - margin.top) / 2)
-      //.attr("transform", "rotate(-90)")
-      .text(yLabel);
+      .attr("x", -height/2)
+      .attr("y", -100)
+      .attr("transform", "rotate(-90)")
+      .text(yTitle);
 
     //plot graph
     // Add dots

@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import useChart from "@/hooks/useChart";
+import useChart, {
+  searchForPatternAndReplace
+}
+ from "@/hooks/useChart";
 import Image from "next/image";
 import { Button, Col, Container, Row, Table, Form } from "react-bootstrap";
 import Link from "next/link";
@@ -225,7 +228,7 @@ export default function GuidePage({
                 <Col md={12}>
                   <div
                     className="product-inner-content"
-                    dangerouslySetInnerHTML={{ __html: guide?.text_first_part }}
+                    dangerouslySetInnerHTML={{ __html: searchForPatternAndReplace(guide?.text_first_part)}}
                   />
                 </Col>
               </Row>
@@ -287,7 +290,7 @@ export default function GuidePage({
                   <div
                     className="para_content_text"
                     dangerouslySetInnerHTML={{
-                      __html: guide?.text_second_part,
+                      __html: searchForPatternAndReplace(guide?.text_second_part),
                     }}
                   />
                 </Col>
@@ -583,7 +586,7 @@ export default function GuidePage({
                   <div
                     className="review-content"
                     dangerouslySetInnerHTML={{
-                      __html: guide?.text_third_part_main,
+                      __html: searchForPatternAndReplace(guide?.text_third_part_main),
                     }}
                   />
                   <br />

@@ -4,7 +4,10 @@ import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
-import useChart from "@/hooks/useChart";
+import useChart, {
+  searchForPatternAndReplace
+}
+from "@/hooks/useChart";
 import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSliderBlog";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
@@ -24,11 +27,11 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
   //     }
   //   }
   // }, [filteredData.length]);
-
+  
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
-      <div>{useChart()}</div>
+      <div>{useChart()}</div> 
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -104,7 +107,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 id="shortCodeText"
                 className="content-para mt-1"
                 dangerouslySetInnerHTML={{
-                  __html: blogData[0]?.data?.text_part,
+                  __html: searchForPatternAndReplace(blogData[0]?.data?.text_part)
                 }}
               />
               <div className="social-icon items-icon">

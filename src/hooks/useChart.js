@@ -8,6 +8,20 @@ import HorizontalChart from "../_chart/HorizontalChart";
 import CorrelationChart from "../_chart/CorrelationChart";
 import { ChartName } from "../_chart/data/enums/ChartName.ts";
 
+
+export const searchForPatternAndReplace = (data) => {
+  const shortCodePatternsRE =
+    /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)[^\]]*\]/g;
+
+  const updatedData = data.replace(shortCodePatternsRE, (match) => {
+    return `<h6 class="addClassData">${match}</h6>`;
+  });
+
+  return updatedData + '<h6 class="addClassData"> [correlation-chart;Title sample;Robot Vacuum Cleaners;Runtime:80-130,Noisiness:55-70;Overall Score;Noisiness]</h6>';
+};
+
+
+
 const useChart = () => {
   const shortCodepatternsRE =
     /^\[pie-chart|vertical-chart|horizontal-chart|correlation-chart|.*\]$/;
@@ -15,7 +29,7 @@ const useChart = () => {
   useEffect(() => {
     // Function to search for the pattern
     const searchForPattern = async () => {
-      const elementsWithNodeType1 = document.body.querySelectorAll("p");
+      const elementsWithNodeType1 = document.body.querySelectorAll(".addClassData");
       elementsWithNodeType1.forEach(async (element, index) => {
         const shortCode = element.textContent;
         // console.log(shortCode);
@@ -56,9 +70,11 @@ const useChart = () => {
         });
         const chartData = await res.data.data;
 
-        if (chartData && chartData.data.length > 0) {
+        if (chartData && chartData.data && chartData.data.length > 0) {
           const xAixsLabel = chartData.x_axis_label ?? "";
           const yAixsLabel = chartData.y_axis_label ?? "";
+          const xAxisTitle = chartData.x_title ?? "";
+          const yAxisTitle = chartData.y_title ?? "";
           const yAxisUnit = chartData.unitY ?? "";
           const xAxisUnit = chartData.unit ?? "";
           const chartTitle = chartData.title ?? "";
@@ -78,18 +94,18 @@ const useChart = () => {
             container.setAttribute("class", "chart_Append" + index);
             parentDiv.insertAdjacentElement("beforeend", container);
             const root = createRoot(container);
-
+            
             const chartAppendElements = document.querySelectorAll(
               ".chart_Append" + index
-            );
-            const numberOfChartAppends = chartAppendElements.length;
-            // console.log(
-            //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
-            // );
-            if (numberOfChartAppends == 1) {
-              if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
-                root.render(
-                  <PiChart
+              );
+              const numberOfChartAppends = chartAppendElements.length;
+              // console.log(
+                //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
+                // );
+                if (numberOfChartAppends == 1) {
+                               if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
+                    root.render(
+                      <PiChart
                     data={plotData}
                     pieSize={150}
                     svgSize={180}
@@ -151,7 +167,7 @@ const useChart = () => {
               if (
                 shortCodesMatched[indx].pattern == ChartName.CorrelationChart
               ) {
-                root.render(
+                                root.render(
                   <CorrelationChart
                     data={plotData}
                     height={300}
@@ -163,16 +179,18 @@ const useChart = () => {
                     yTick={7}
                     xUnit={xAxisUnit}
                     yUnit={yAxisUnit}
+                    xTitle={xAxisTitle}
+                    yTitle={yAxisTitle}
                     isGeneralAttribute_x={
                       isGeneralAttributesOfCorrelationChart_x
                     }
                     isGeneralAttribute_y={
                       isGeneralAttributesOfCorrelationChart_y
                     }
-                    rangeMinX={correlation_minX}
-                    rangeMaxX={correlation_maxX}
-                    rangeMinY={correlation_minY}
-                    rangeMaxY={correlation_maxY}
+                      rangeMinX={correlation_minX}
+                      rangeMaxX={correlation_maxX}
+                      rangeMinY={correlation_minY}
+                      rangeMaxY={correlation_maxY}
                   />
                 );
               }
@@ -213,6 +231,19 @@ const useChart = () => {
       chartData.data.forEach((val, index) => {
         dataForChart.push({
           label: chartData.lable[index],
+          value: Number(val),
+        });
+      });
+    }
+    else if (
+      chartData &&
+      chartData.data &&
+      chartData.data.length > 0 &&
+      chartData.label
+    ) {
+      chartData.data.forEach((val, index) => {
+        dataForChart.push({
+          label: chartData.label[index] ,
           value: Number(val),
         });
       });
