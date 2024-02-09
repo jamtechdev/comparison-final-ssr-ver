@@ -277,7 +277,7 @@ function CorrelationChart(props) {
 
     function customTickFormaYaxis(d) {
       if (!Number.isInteger(d)) {
-        const formateFunction = d3.format(".2f");
+        const formateFunction = d3.format(".0f");
         return `${formateFunction(d)} ${yUnit}`;
       } else {
         const formateFunction = d3.format(".0f");
