@@ -35,34 +35,27 @@ function CompareDropDown({ attributeDropDown, product }) {
   };
 
   // Call Chart API
-
   useEffect(() => {
-    const selectedObject =
-      attributeDropDown[selectedCategory]?.find(
-        (obj) => obj.attribute === selectedAttribute
-      ) || {};
-    // console.log(selectedObject, "selected object");
+    const selectedObject = selectedAttribute ? attributeDropDown[selectedCategory].find((obj) => selectedAttribute === obj.attribute) : attributeDropDown[selectedCategory][0];
     const { description, when_matters } = selectedObject;
     setwhenMatters(when_matters ? when_matters : "");
     setSelectedObjectDescription(description || "");
-  }, [selectedCategory, selectedAttribute, attributeDropDown]);
 
-  useEffect(() => {
     const config = {
       headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
     };
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedAttribute}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedObject?.attribute}`,
         config
       )
       .then((res) => {
         setChart(res.data.data);
       });
-  }, [selectedAttribute]);
-  console.log(chart,chart?.type);
 
-  comparisonChart(chart);
+  }, [attributeDropDown, selectedAttribute]);
+
+    comparisonChart(chart)
   return (
     <>
       <section className="ptb-80">

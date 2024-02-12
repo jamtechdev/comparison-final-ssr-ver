@@ -3,14 +3,13 @@ import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { v4 as uuidv4 } from "uuid";
 import { graphService } from "../_services/graph.service.js";
-import PiChart from "../_chart/PieChart";
+import ComparisonPieChart from "../_chart/ComparisonPieChart";
 import VerticalChart from "../_chart/VerticalChart";
 import HorizontalChart from "../_chart/HorizontalChart";
 import CorrelationChart from "../_chart/CorrelationChart";
 import { ChartName } from "../_chart/data/enums/ChartName.ts";
 
 const comparisonChart = (chartData, type) => {
-  console.log(chartData);
   const shortCodepatternsRE = type;
 
   useEffect(() => {
@@ -40,10 +39,16 @@ const comparisonChart = (chartData, type) => {
     index,
     chartData
   ) {
+    if (!chartData) {
+      const containerDivs = document.getElementsByClassName("container-div");
+      for (let i = 0; i < containerDivs.length; i++) {
+          containerDivs[i].remove();
+      }
+      return;
+  }else{
     const parentDiv = document.createElement("div");
     parentDiv.classList.add("container-div");
     element.insertAdjacentElement("afterend", parentDiv);
-    console.log(chartData);
 
     if (chartData) {
       const xAixsLabel = chartData.x_axis_label ?? "";
@@ -53,6 +58,7 @@ const comparisonChart = (chartData, type) => {
       const yAxisUnit = chartData.unitY ?? "";
       const xAxisUnit = chartData.unit ?? "";
       const chartTitle = chartData.title ?? "";
+      const pieProductBatch = chartData.products ?? ""
       const isGeneralAttributesOfCorrelationChart_x =
         chartData.is_general_attribute_x ?? false;
       const isGeneralAttributesOfCorrelationChart_y =
@@ -75,7 +81,7 @@ const comparisonChart = (chartData, type) => {
         if (numberOfChartAppends == 1) {
           if (chartData?.type === "pie-chart") {
             root.render(
-              <PiChart
+              <ComparisonPieChart
                 data={plotData}
                 pieSize={150}
                 svgSize={180}
@@ -83,11 +89,12 @@ const comparisonChart = (chartData, type) => {
                 containerId={`pie${uuidv4()}`}
                 chartTitle={chartTitle}
                 xUnit={xAxisUnit}
+                pieProductBatch={pieProductBatch}
               />
             );
           }
         }
-      }
+      } 
     }
     // for (let indx = 0; indx < shortCodesMatched.length; indx++) {
     //   if (
@@ -231,9 +238,11 @@ const comparisonChart = (chartData, type) => {
     //   }
     // }
   }
+  
+   
+  }
 
   async function regenerateData(chartData) {
-    console.log(chartData);
     const dataForChart = [];
 
     if (
