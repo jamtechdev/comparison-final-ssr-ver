@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Image from "next/image";
+import useChart from "@/hooks/useChart";
 
 function CompareDropDown({ attributeDropDown, product }) {
   const [selectedCategory, setSelectedCategory] = useState(
@@ -39,7 +40,7 @@ function CompareDropDown({ attributeDropDown, product }) {
     setwhenMatters(when_matters ? when_matters : "");
     setSelectedObjectDescription(description || "");
   }, [selectedCategory, selectedAttribute, attributeDropDown]);
-
+  useChart();
   return (
     <>
       <section className="ptb-80">
@@ -102,14 +103,21 @@ function CompareDropDown({ attributeDropDown, product }) {
               </p>
             </Col>
             <Col md={8} lg={8}>
-              <Image
+              <h6 className="addClassData">
+                [pie-chart;Overall1;Robot Vacuum
+                Cleaners;Runtime:0-300;Noisiness]
+              </h6>
+              {/* <h6 className="addClassData">
+                [pie-chart;Overall1;Robot Vacuum Cleaners;Runtime:0-300;Can mop]
+              </h6> */}
+              {/* <Image
                 className="graph-bar"
                 src="/images/graph-bar.png"
                 width={0}
                 height={0}
                 alt=""
                 sizes="100%"
-              />
+              /> */}
             </Col>
           </Row>
         </Container>

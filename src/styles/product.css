@@ -266,6 +266,12 @@
   line-height: 30px;
   cursor: pointer;
 }
+.best-list-item li span > a {
+  color: var(--white-color);
+  min-width: 80px !important;
+  font-size: 15px !important;
+  line-height: 30px !important;
+}
 
 .best-list-item li span:hover {
   background: #ff7d00;
@@ -802,7 +808,7 @@
   font-family: "Lato", sans-serif !important;
 }
 
-.pros-corns-section ul li span.pros-crons-text{
+.pros-corns-section ul li span.pros-crons-text {
   opacity: 70%;
 }
 
@@ -1002,7 +1008,7 @@
   color: var(--primary-color);
 }
 
-.table-accordion .accordion-button  div {
+.table-accordion .accordion-button div {
   text-transform: uppercase;
   font-weight: 400 !important;
   font-size: 18px;

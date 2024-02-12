@@ -1,9 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import useChart, {
-  searchForPatternAndReplace
-}
- from "@/hooks/useChart";
+import useChart, { searchForPatternAndReplace } from "@/hooks/useChart";
 import Image from "next/image";
 import { Button, Col, Container, Row, Table, Form } from "react-bootstrap";
 import Link from "next/link";
@@ -32,8 +29,7 @@ export default function GuidePage({
   const [isShown, setIsShown] = useState(false);
 
   const guide = guideData[0]?.data;
-  console.log(guideData,"guideData")
-
+  // console.log(guideData, "guideData");
 
   const products = guideData[1]?.data?.products || [];
 
@@ -163,18 +159,28 @@ export default function GuidePage({
     // console.log(JSON.parse(sortAttribute))
   };
 
-  // if (products.length <= 0 && (!currentParams.variant)) {
+  if (products.length <= 0 && !currentParams.variant) {
+    const queryString = Object.keys(searchParams)
+      .map((key) => key + "=" + encodeURI(searchParams[key]))
+      .join("&");
+    window.history.pushState(
+      {},
+      "",
+      `?${queryString}&variant=true&direct=true&available=true`
+    );
+    router.push(`?${queryString}&variant=true&direct=true&available=true`, {
+      scroll: false,
+    });
+  }
 
-  //   const queryString = Object.keys(searchParams)
-  //     .map(key => key + '=' +encodeURI(searchParams[key]))
-  //     .join('&');
-  //    window.history.pushState({}, "", `?${queryString}&variant=true&direct=true`);
-  //  router.push(`?${queryString}&variant=true&direct=true`, { scroll: false });
-  // }
-  // console.log(products);
-
-
-  console.log(products ,"allproduct")
+  // When initial product load than store in local storage
+  // this code is  only for testing when will  API create than remove  this code
+  useEffect(() => {
+    if (!localStorage.getItem("products")) {
+      localStorage.setItem("products", JSON.stringify(products));
+    }
+  }, []);
+  // console.log(products, "allproduct");
   return (
     <>
       {products.length > 0 ? (
@@ -228,7 +234,11 @@ export default function GuidePage({
                 <Col md={12}>
                   <div
                     className="product-inner-content"
-                    dangerouslySetInnerHTML={{ __html: searchForPatternAndReplace(guide?.text_first_part)}}
+                    dangerouslySetInnerHTML={{
+                      __html: searchForPatternAndReplace(
+                        guide?.text_first_part
+                      ),
+                    }}
                   />
                 </Col>
               </Row>
@@ -290,7 +300,9 @@ export default function GuidePage({
                   <div
                     className="para_content_text"
                     dangerouslySetInnerHTML={{
-                      __html: searchForPatternAndReplace(guide?.text_second_part),
+                      __html: searchForPatternAndReplace(
+                        guide?.text_second_part
+                      ),
                     }}
                   />
                 </Col>
@@ -586,7 +598,9 @@ export default function GuidePage({
                   <div
                     className="review-content"
                     dangerouslySetInnerHTML={{
-                      __html: searchForPatternAndReplace(guide?.text_third_part_main),
+                      __html: searchForPatternAndReplace(
+                        guide?.text_third_part_main
+                      ),
                     }}
                   />
                   <br />

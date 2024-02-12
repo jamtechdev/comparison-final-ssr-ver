@@ -8,7 +8,6 @@ import HorizontalChart from "../_chart/HorizontalChart";
 import CorrelationChart from "../_chart/CorrelationChart";
 import { ChartName } from "../_chart/data/enums/ChartName.ts";
 
-
 export const searchForPatternAndReplace = (data) => {
   const shortCodePatternsRE =
     /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)[^\]]*\]/g;
@@ -17,10 +16,8 @@ export const searchForPatternAndReplace = (data) => {
     return `<h6 class="addClassData">${match}</h6>`;
   });
 
-  return updatedData
+  return updatedData;
 };
-
-
 
 const useChart = () => {
   const shortCodepatternsRE =
@@ -29,7 +26,8 @@ const useChart = () => {
   useEffect(() => {
     // Function to search for the pattern
     const searchForPattern = async () => {
-      const elementsWithNodeType1 = document.body.querySelectorAll(".addClassData");
+      const elementsWithNodeType1 =
+        document.body.querySelectorAll(".addClassData");
       elementsWithNodeType1.forEach(async (element, index) => {
         const shortCode = element.textContent;
         // console.log(shortCode);
@@ -94,18 +92,18 @@ const useChart = () => {
             container.setAttribute("class", "chart_Append" + index);
             parentDiv.insertAdjacentElement("beforeend", container);
             const root = createRoot(container);
-            
+
             const chartAppendElements = document.querySelectorAll(
               ".chart_Append" + index
-              );
-              const numberOfChartAppends = chartAppendElements.length;
-              // console.log(
-                //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
-                // );
-                if (numberOfChartAppends == 1) {
-                               if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
-                    root.render(
-                      <PiChart
+            );
+            const numberOfChartAppends = chartAppendElements.length;
+            // console.log(
+            //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
+            // );
+            if (numberOfChartAppends == 1) {
+              if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
+                root.render(
+                  <PiChart
                     data={plotData}
                     pieSize={150}
                     svgSize={180}
@@ -167,7 +165,7 @@ const useChart = () => {
               if (
                 shortCodesMatched[indx].pattern == ChartName.CorrelationChart
               ) {
-                                root.render(
+                root.render(
                   <CorrelationChart
                     data={plotData}
                     height={300}
@@ -187,10 +185,10 @@ const useChart = () => {
                     isGeneralAttribute_y={
                       isGeneralAttributesOfCorrelationChart_y
                     }
-                      rangeMinX={correlation_minX}
-                      rangeMaxX={correlation_maxX}
-                      rangeMinY={correlation_minY}
-                      rangeMaxY={correlation_maxY}
+                    rangeMinX={correlation_minX}
+                    rangeMaxX={correlation_maxX}
+                    rangeMinY={correlation_minY}
+                    rangeMaxY={correlation_maxY}
                   />
                 );
               }
@@ -234,8 +232,7 @@ const useChart = () => {
           value: Number(val),
         });
       });
-    }
-    else if (
+    } else if (
       chartData &&
       chartData.data &&
       chartData.data.length > 0 &&
@@ -243,7 +240,7 @@ const useChart = () => {
     ) {
       chartData.data.forEach((val, index) => {
         dataForChart.push({
-          label: chartData.label[index] ,
+          label: chartData.label[index],
           value: Number(val),
         });
       });

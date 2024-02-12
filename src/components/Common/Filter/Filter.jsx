@@ -12,7 +12,7 @@ export default function Filter({
   searchParam,
   orderBy,
 }) {
-  console.log(categoryAttributes);
+  // console.log(categoryAttributes);
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({
@@ -35,9 +35,7 @@ export default function Filter({
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
     const currentParams = new URLSearchParams(searchParams.toString());
-
     const url = new URL(window.location.href);
-
     switch (filterName) {
       case "price":
         if (!isChecked) {
@@ -192,7 +190,7 @@ export default function Filter({
       //search param remove
       if (removedParam == "available") {
         handelFilterActions("available", "available", false);
-        document.getElementById("Available").checked = false;
+        document.getElementById("available").checked = false;
       }
       if (removedParam == "brand") {
         Object.values(searchParam)[0]
@@ -354,7 +352,7 @@ export default function Filter({
               required
               className="custom-switch"
               type="switch"
-              id={`Available`}
+              id={`available`}
               onChange={(e) =>
                 handelFilterActions("available", "available", e.target.checked)
               }
