@@ -1,4 +1,5 @@
 "use client";
+import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from "react";
 import {
   Accordion,
@@ -19,8 +20,7 @@ import QuestionIcon from "@/components/Svg/QuestionIcon";
 import { LoaderIcon } from "react-hot-toast";
 import Loader from "@/app/_components/Loader";
 // import SpiderChart from "@/_chart/SpiderChart";
-import Radar from "react-d3-radar";
-
+const Radar = dynamic(() => import('react-d3-radar'), { ssr: false });
 const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   const [activatab, setActiveTab] = useState("tab-1");
   const [apiData, setApiData] = useState(null);
@@ -225,7 +225,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 key={index}
               >
                 <div className="graph-tab-content">
-                  <Radar
+                 <Radar
                     width={500}
                     height={500}
                     padding={70}
