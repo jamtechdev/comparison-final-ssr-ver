@@ -1,4 +1,5 @@
 "use client";
+import dynamic from "next/dynamic";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Accordion,
@@ -19,12 +20,12 @@ import QuestionIcon from "@/components/Svg/QuestionIcon";
 import { LoaderIcon } from "react-hot-toast";
 import Loader from "@/app/_components/Loader";
 // import SpiderChart from "@/_chart/SpiderChart";
-import Radar from "react-d3-radar";
-
+const Radar = dynamic(() => import("react-d3-radar"), { ssr: false });
 const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   const [activatab, setActiveTab] = useState("tab-1");
   const [apiData, setApiData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [graphData, setGraphData] = useState(null);
 
   // extract the permalink from the sendProductProps
   const extractedUrls = sendProductProps.map((entry) => entry?.permalink);
@@ -59,12 +60,14 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     const index = parseInt(activatab.split("-")[1], 10);
     // Swap the order of extractedUrls when the active tab changes
     const updatedUrls = [...extractedUrls];
+    console.log(updatedUrls);
     const temp = updatedUrls[index - 1];
     updatedUrls[index - 1] = updatedUrls[0];
     updatedUrls[0] = temp;
     const apiUrlParams = updatedUrls.map((url, idx) => {
       return `permalink${idx + 1}=${url}`;
     });
+
     const apiUrl = `${
       process.env.NEXT_PUBLIC_API_URL
     }/product/average?${apiUrlParams.join("&")}`;
@@ -85,10 +88,26 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
         console.error("Error fetching data:", error);
       });
 
+    const secondApiUrl = `${
+      process.env.NEXT_PUBLIC_API_URL
+    }/generate-chart?${apiUrlParams.join("&")}`;
+    fetch(secondApiUrl, {
+      method: "GET",
+      headers: headers,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setGraphData(data); // Assuming data from the second API call is directly usable
+      })
+      .catch((error) => {
+        console.error("Error fetching data from second API:", error);
+      });
+
     setTimeout(() => {
       setIsLoading(true);
     }, 1000);
   }, [activatab]);
+  console.log(graphData?.data);
 
   // this funcation spilt the vs value from ApiData
   const splitVsValue = (value) => {
@@ -164,13 +183,69 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   };
 
   // chart Dummy Data
+
+  const chartCheck = {
+    variables: [
+      {
+        key: "Battery",
+        label: "Battery",
+      },
+      {
+        key: "Cleaning",
+        label: "Cleaning",
+      },
+      {
+        key: "Mopping",
+        label: "Mopping",
+      },
+      {
+        key: "Navigation",
+        label: "Navigation",
+      },
+      {
+        key: "Control & Mapping",
+        label: "Control & Mapping",
+      },
+      {
+        key: "Design",
+        label: "Design",
+      },
+    ],
+    sets: [
+      {
+        key: "360 Botslab S8 Plus",
+        label: "360 Botslab S8 Plus",
+        values: {
+          Battery: 3.805,
+          Cleaning: 5.0252,
+          Mopping: 1.2058,
+          Navigation: 1.25,
+          "Control & Mapping": 1.27,
+          Design: 4.0481,
+        },
+      },
+      {
+        key: "amarey A90+",
+        label: "amarey A90+",
+        values: {
+          Battery: 2.98,
+          Cleaning: 4.1943,
+          Mopping: 1.195,
+          Navigation: 1.25,
+          "Control & Mapping": 1.27,
+          Design: 4.1809,
+        },
+      },
+    ],
+  };
+
   const chartData = {
     variables: [
-      { key: "anxiety", label: "a" },
-      { key: "illness", label: "b" },
-      { key: "sucidal", label: "c" },
-      { key: "distress", label: "d" },
-      { key: "depression", label: "e" },
+      { key: "a", label: "a" },
+      { key: "b", label: "b" },
+      { key: "c", label: "c" },
+      { key: "d", label: "d" },
+      { key: "e", label: "e" },
     ],
     sets: [
       {
@@ -224,16 +299,17 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 title={items?.name}
                 key={index}
               >
-                <Radar
-                  width={500}
-                  height={500}
-                  padding={70}
-                  domainMax={20}
-                  highlighted={highlighted}
-                  onHover={onHover}
-                  data={chartData}
-                />
-
+                <div className="graph-tab-content">
+                  <Radar
+                    width={500}
+                    height={500}
+                    padding={70}
+                    domainMax={20}
+                    highlighted={highlighted}
+                    onHover={onHover}
+                    data={chartCheck}
+                  />
+                </div>
                 {/* <Image
                     className="site_image"
                     src="/images/chart.png"
