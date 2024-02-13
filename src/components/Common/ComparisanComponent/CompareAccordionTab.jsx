@@ -18,6 +18,8 @@ import Image from "next/image";
 import QuestionIcon from "@/components/Svg/QuestionIcon";
 import { LoaderIcon } from "react-hot-toast";
 import Loader from "@/app/_components/Loader";
+// import SpiderChart from "@/_chart/SpiderChart";
+import Radar from "react-d3-radar";
 
 const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   const [activatab, setActiveTab] = useState("tab-1");
@@ -160,6 +162,50 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
       </h3>
     );
   };
+
+  // chart Dummy Data
+  const chartData = {
+    variables: [
+      { key: "anxiety", label: "Anxiety" },
+      { key: "illness", label: "Any Mental Illness" },
+      { key: "sucidal", label: "Suicidal Thoughts" },
+      { key: "distress", label: "Frequent Mental Distress" },
+      { key: "depression", label: "Depression" },
+    ],
+    sets: [
+      {
+        key: "served",
+        label: "Those Who Have Served",
+        values: {
+          anxiety: 19.7,
+          illness: 6,
+          sucidal: 10,
+          distress: 2,
+          openness: 8,
+          depression: 10,
+        },
+      },
+      {
+        key: "civilians",
+        label: "Civilians",
+        values: {
+          anxiety: 10,
+          illness: 8,
+          sucidal: 10,
+          distress: 4,
+          openness: 2,
+          depression: 10,
+        },
+      },
+    ],
+  };
+  const [highlighted, setHighlighted] = useState(null);
+
+  const onHover = (hovered) => {
+    if (!highlighted && !hovered) return;
+    if (highlighted && hovered && hovered.key === highlighted.key) return;
+    setHighlighted(hovered);
+  };
   return (
     <>
       <Row>
@@ -179,14 +225,23 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 key={index}
               >
                 <div className="graph-tab-content">
-                  <Image
+                  <Radar
+                    width={500}
+                    height={500}
+                    padding={70}
+                    domainMax={20}
+                    highlighted={highlighted}
+                    onHover={onHover}
+                    data={chartData}
+                  />
+                  {/* <Image
                     className="site_image"
                     src="/images/chart.png"
                     width={0}
                     height={0}
                     alt=""
                     sizes="100%"
-                  />
+                  /> */}
                 </div>
               </Tab>
             ))}

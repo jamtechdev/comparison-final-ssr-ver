@@ -14,6 +14,7 @@ function ComparisonBarChart(props) {
     ...rest,
     label: label.split("-").map(Number).join("-"),
   }));
+  console.log(data);
 
   svg
     .selectAll("bar")
@@ -25,6 +26,7 @@ function ComparisonBarChart(props) {
     .attr("width", xScale.bandwidth())
     .attr("y", (d) => yScale(d.value))
     .attr("height", (d) => height - yScale(d.value))
+    .style("fill", (d) => (d.selected === 1 ? "#3c445f" : "#99D1FF"))
     .on("mouseover", (e, data) => {
       toolTip.transition().duration(300).style("opacity", 1);
       toolTip

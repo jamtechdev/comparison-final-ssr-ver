@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { v4 as uuidv4 } from "uuid";
 import { graphService } from "../_services/graph.service.js";
-import ComparisonPieChart from "../_chart/ComparisonPieChart";
-import ComparisonBarChart from "../_chart/ComparisonVerticalChart";
-import HorizontalChart from "../_chart/HorizontalChart";
-import CorrelationChart from "../_chart/CorrelationChart";
-import { ChartName } from "../_chart/data/enums/ChartName.ts";
+import ComparisonPieChart from "../_chart/ComparisonPieChart/index.js";
+import ComparisonBarChart from "../_chart/ComparisonVerticalChart/index.js";
+import HorizontalChart from "../_chart/HorizontalChart/index.js";
+import CorrelationChart from "../_chart/CorrelationChart/index.js";
+// import { ChartName } from "../_chart/data/enums/ChartName.js";
 
-const comparisonChart = (chartData) => {
+const useComparisonChart = (chartData) => {
+  console.log(chartData);
   const shortCodepatternsRE = chartData;
   console.log(shortCodepatternsRE?.type);
 
@@ -69,7 +70,7 @@ const comparisonChart = (chartData) => {
         const correlation_minY = Number(chartData.rang_min_y) ?? null;
         const correlation_maxY = Number(chartData.rang_max_y) ?? null;
         const plotData = await regenerateData(chartData);
-        // console.log(plotData, "hello");
+
         if (plotData && plotData.length > 0) {
           const container = document.createElement("div");
           container.style.padding = "20px";
@@ -282,6 +283,7 @@ const comparisonChart = (chartData) => {
       chartData.data &&
       chartData.data.length > 0 &&
       chartData.lable &&
+      chartData.selected &&
       (chartData.product_count || chartData.produt_name)
     ) {
       chartData.data.forEach((val, index) => {
@@ -291,6 +293,9 @@ const comparisonChart = (chartData) => {
         });
         if (chartData.product_count) {
           dataForChart[index]["productCount"] = chartData.product_count[index];
+        }
+        if (chartData.selected) {
+          dataForChart[index]["selected"] = chartData.selected[index];
         }
         if (chartData.produt_name)
           dataForChart[index]["productName"] = chartData.produt_name[index];
@@ -370,4 +375,4 @@ const comparisonChart = (chartData) => {
     return chartTitle;
   }
 };
-export default comparisonChart;
+export default useComparisonChart;

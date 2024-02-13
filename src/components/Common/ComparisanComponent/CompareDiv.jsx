@@ -245,6 +245,7 @@ function CompareDiv({
             </Col>
           </Row>
           <CompareAccordionTab
+           
             sendProductProps={comparisonProductData}
             product={graphComparisonProsCons}
             pageType={"comparison"}
@@ -283,7 +284,7 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
-      <CompareDropDown attributeDropDown={productAttributes} />
+      <CompareDropDown slug={slug} attributeDropDown={productAttributes} />
       {isOpen && (
         <CompareModal
           location={"comparison"}

@@ -22,6 +22,7 @@ function ComparisonPieChart(props) {
   }, [data]);
 
   function drawChart() {
+    console.log(pieProductBatch);
     // Remove the old chart
     d3.select(`#${containerId}`).select("svg").remove();
     // Remove the old tooltip
@@ -104,10 +105,10 @@ function ComparisonPieChart(props) {
             `<div style="height:20px; width:20px;margin-right:6px; border-radius:100%;background-color:${customColorScale(
               data.data.label
             )}"></div><div style="font-size: 14px;
-          font-weight: 400;
-          color: rgba(39, 48, 78, 0.8);"><span style="margin-right:8px">${
-            data.data.value
-          }%</span><span>${data.data.label} ${xUnit}</span></div>`
+            font-weight: 400;
+            color: rgba(39, 48, 78, 0.8);"><span style="margin-right:8px">${
+              data.data.value
+            }%</span><span>${data.data.label} ${xUnit}</span></div>`
           )
           .style("left", e.clientX - 20 + "px")
           .style("top", e.clientY - 50 + "px");
@@ -129,12 +130,18 @@ function ComparisonPieChart(props) {
     const rows = tbody.selectAll("tr").data(data).enter().append("tr");
     const cells = rows
       .selectAll("td")
-      .data(function (d) {
-        return [customColorScale(d.label), d.value, d.label];
+      .data(function (d, i) {
+        return [
+          customColorScale(d.label),
+          d.value,
+          d.label,
+          pieProductBatch[i],
+        ];
       })
       .enter()
       .append("td")
       .each(function (d, i) {
+        // console.log(d);
         if (i == 0) {
           d3.select(this)
             .append("div")
@@ -148,18 +155,64 @@ function ComparisonPieChart(props) {
             .append("span")
             .attr("class", "legend-text")
             .text((d) => `${d}%`);
-            console.log(d,"nav")
 
-
-       
+          // pieProductBatch.slice(0, 3).forEach((array, index) => {
+          //   array.forEach((item) => {
+          //     // console.log(item);
+          //     let color;
+          //     if (index === 0) {
+          //       color = "#437ECE"; // blue
+          //     } else if (index === 1) {
+          //       color = "#FF8F0B"; // red
+          //     } else if (index === 2) {
+          //       color = "#28A28C";
+          //     } else {
+          //       color = "#000000"; // default color
+          //     }
+          //     d3.select(this)
+          //       .append("span")
+          //       .attr("class", "graph-batch")
+          //       .style("display", "inline-block")
+          //       .style("padding", "5px 10px")
+          //       .style("margin", "2px")
+          //       .style("font-size", "12px")
+          //       .style("border", `1px solid ${color}`)
+          //       .style("border-radius", "3px")
+          //       .style("background-color", "#fff")
+          //       .style("color", color)
+          //       .text(`${item}`);
+          //   });
+          // });
         }
 
-        // if (i == 2) {
-        //   d3.select(this)
-        //     .append("span")
-        //     .attr("class", "legend-text")
-        //     .text((d) => `${d} ${xUnit}`);
-        // }
+        if (i === 3) {
+          d.forEach((item, index) => {
+            let color;
+            if (d.length === 1) {
+              color = "#437ECE";
+            } else if (d.length === 2) {
+              color = index === 0 ? "#437ECE" : "#FF8F0B";
+            } else if (d.length === 3) {
+              color =
+                index === 0 ? "#437ECE" : index === 1 ? "#FF8F0B" : "#28A28C";
+            } else {
+              color = "#000000"; // Default color
+            }
+
+            d3.select(this)
+              .append("span")
+              .attr("class", "graph-batch")
+              .style("display", "inline-block")
+              .style("padding", "5px 5px")
+              .style("margin", "2px")
+              .style("font-size", "10px")
+              .style("border", `1px solid ${color}`)
+              .style("border-radius", "3px")
+              .style("background-color", "#fff")
+              .style("color", color)
+              .text(`${item}`);
+          });
+        }
       });
   }
 

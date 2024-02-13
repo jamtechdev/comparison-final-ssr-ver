@@ -4,9 +4,9 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import Image from "next/image";
 import useChart from "@/hooks/useChart";
 import axios from "axios";
-import comparisonChart from "@/hooks/comparisonChart";
+import useComparisonChart from "@/hooks/useComparisonChart";
 
-function CompareDropDown({ attributeDropDown, product }) {
+function CompareDropDown({ attributeDropDown, product, slug }) {
   const [selectedCategory, setSelectedCategory] = useState(
     Object.keys(attributeDropDown)[0] || ""
   );
@@ -50,7 +50,7 @@ function CompareDropDown({ attributeDropDown, product }) {
     };
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedObject?.attribute}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedObject?.attribute}&slug=${slug}`,
         config
       )
       .then((res) => {
@@ -62,8 +62,8 @@ function CompareDropDown({ attributeDropDown, product }) {
       containerDivs[i].remove();
     }
   }, [attributeDropDown, selectedAttribute]);
-
-  comparisonChart(chart);
+  // console.log(slug);
+  useComparisonChart(chart);
   return (
     <>
       <section className="ptb-80">
