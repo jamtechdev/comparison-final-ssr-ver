@@ -9,7 +9,8 @@ import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 
 const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
-  console.log(products?.length)
+  // console.log(products?.length);
+  // console.log(categoryAttributes)
   const router = useRouter();
   const [winPos, setWinPos] = useState(false);
   let initialNoOfCategories = 5;

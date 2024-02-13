@@ -234,8 +234,8 @@ function CorrelationChart(props) {
       .append("text")
       .attr("class", "axis-label")
       .attr("text-anchor", "middle")
-      .attr("x", -height/2)
-      .attr("y", -100)
+      .attr("x", -height/2 +30)
+      .attr("y", -50)
       .attr("transform", "rotate(-90)")
       .text(yTitle);
 
@@ -286,7 +286,7 @@ function CorrelationChart(props) {
     }
     function customTickFormatXaxis(d) {
       if (!Number.isInteger(d)) {
-        const formateFunction = d3.format(".2f");
+        const formateFunction = d3.format(".0f");
         return `${formateFunction(d)} ${xUnit}`;
       } else {
         const formateFunction = d3.format(".0f");

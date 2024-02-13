@@ -19,11 +19,12 @@ export default function GuidePage({
   categorySlug,
   guideData,
   attributesForTable,
+  productForTable,
   filters,
   searchParams,
 }) {
   useChart("guide");
-  // console.log(attributesForTable, "Abhay");
+  // console.log(productForTable?.products, "Abhay");
   const router = useRouter();
   const currentParams = new URLSearchParams(searchParams.toString());
   const [isShown, setIsShown] = useState(false);
@@ -544,7 +545,7 @@ export default function GuidePage({
                   </h2>
                   {guide && products && (
                     <CompareTable
-                      products={products}
+                      products={productForTable?.products}
                       categoryAttributes={
                         attributesForTable && attributesForTable
                       }
