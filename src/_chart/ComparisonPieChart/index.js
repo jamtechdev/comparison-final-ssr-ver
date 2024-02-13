@@ -148,35 +148,10 @@ function ComparisonPieChart(props) {
             .append("span")
             .attr("class", "legend-text")
             .text((d) => `${d}%`);
+            console.log(d,"nav")
 
-          pieProductBatch.slice(0, 3).forEach((array, index) => {
-            console.log(d?.length);
-            array.forEach((item) => {
-              // console.log(item);
-              let color;
-              if (index === 0) {
-                color = "#437ECE"; // blue
-              } else if (index === 1) {
-                color = "#FF8F0B"; // red
-              } else if (index === 2) {
-                color = "#28A28C";
-              } else {
-                color = "#000000"; // default color
-              }
-              d3.select(this)
-                .append("span")
-                .attr("class", "graph-batch")
-                .style("display", "inline-block")
-                .style("padding", "5px 10px")
-                .style("margin", "2px")
-                .style("font-size", "12px")
-                .style("border", `1px solid ${color}`)
-                .style("border-radius", "3px")
-                .style("background-color", "#fff")
-                .style("color", color)
-                .text(`${item}`);
-            });
-          });
+
+       
         }
 
         // if (i == 2) {
