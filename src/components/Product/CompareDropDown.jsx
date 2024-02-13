@@ -36,7 +36,11 @@ function CompareDropDown({ attributeDropDown, product }) {
 
   // Call Chart API
   useEffect(() => {
-    const selectedObject = selectedAttribute ? attributeDropDown[selectedCategory].find((obj) => selectedAttribute === obj.attribute) : attributeDropDown[selectedCategory][0];
+    const selectedObject = selectedAttribute
+      ? attributeDropDown[selectedCategory].find(
+          (obj) => selectedAttribute === obj.attribute
+        )
+      : attributeDropDown[selectedCategory][0];
     const { description, when_matters } = selectedObject;
     setwhenMatters(when_matters ? when_matters : "");
     setSelectedObjectDescription(description || "");
@@ -53,9 +57,13 @@ function CompareDropDown({ attributeDropDown, product }) {
         setChart(res.data.data);
       });
 
+    const containerDivs = document.getElementsByClassName("container-div");
+    for (let i = 0; i < containerDivs.length; i++) {
+      containerDivs[i].remove();
+    }
   }, [attributeDropDown, selectedAttribute]);
 
-    comparisonChart(chart)
+  comparisonChart(chart);
   return (
     <>
       <section className="ptb-80">
@@ -118,9 +126,7 @@ function CompareDropDown({ attributeDropDown, product }) {
               </p>
             </Col>
             <Col md={8} lg={8}>
-              <h6 className="addClassData">
-
-              </h6>
+              <h6 className="addClassData"></h6>
               {/* <h6 className="addClassData">
                 [pie-chart;Overall1;Robot Vacuum Cleaners;Runtime:0-300;Can mop]
               </h6> */}

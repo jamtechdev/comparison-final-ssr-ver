@@ -4,13 +4,14 @@ import { createRoot } from "react-dom/client";
 import { v4 as uuidv4 } from "uuid";
 import { graphService } from "../_services/graph.service.js";
 import ComparisonPieChart from "../_chart/ComparisonPieChart";
-import VerticalChart from "../_chart/VerticalChart";
+import ComparisonBarChart from "../_chart/ComparisonVerticalChart";
 import HorizontalChart from "../_chart/HorizontalChart";
 import CorrelationChart from "../_chart/CorrelationChart";
 import { ChartName } from "../_chart/data/enums/ChartName.ts";
 
-const comparisonChart = (chartData, type) => {
-  const shortCodepatternsRE = type;
+const comparisonChart = (chartData) => {
+  const shortCodepatternsRE = chartData;
+  console.log(shortCodepatternsRE?.type);
 
   useEffect(() => {
     // Function to search for the pattern
@@ -20,7 +21,7 @@ const comparisonChart = (chartData, type) => {
       elementsWithNodeType1.forEach(async (element, index) => {
         const shortCode = element.textContent;
         // console.log(shortCode);
-        const shortCodesMatched = type;
+        const shortCodesMatched = chartData?.type;
 
         // console.log(shortCodesMatched, "checking");
         await renderGraphForMatchedShortCodePattern(
@@ -32,7 +33,7 @@ const comparisonChart = (chartData, type) => {
       });
     };
     searchForPattern();
-  });
+  }, [chartData]);
   async function renderGraphForMatchedShortCodePattern(
     element,
     shortCodesMatched,
@@ -42,204 +43,235 @@ const comparisonChart = (chartData, type) => {
     if (!chartData) {
       const containerDivs = document.getElementsByClassName("container-div");
       for (let i = 0; i < containerDivs.length; i++) {
-          containerDivs[i].remove();
+        containerDivs[i].remove();
       }
       return;
-  }else{
-    const parentDiv = document.createElement("div");
-    parentDiv.classList.add("container-div");
-    element.insertAdjacentElement("afterend", parentDiv);
+    } else {
+      const parentDiv = document.createElement("div");
+      parentDiv.classList.add("container-div");
+      element.insertAdjacentElement("afterend", parentDiv);
 
-    if (chartData) {
-      const xAixsLabel = chartData.x_axis_label ?? "";
-      const yAixsLabel = chartData.y_axis_label ?? "";
-      const xAxisTitle = chartData.x_title ?? "";
-      const yAxisTitle = chartData.y_title ?? "";
-      const yAxisUnit = chartData.unitY ?? "";
-      const xAxisUnit = chartData.unit ?? "";
-      const chartTitle = chartData.title ?? "";
-      const pieProductBatch = chartData.products ?? ""
-      const isGeneralAttributesOfCorrelationChart_x =
-        chartData.is_general_attribute_x ?? false;
-      const isGeneralAttributesOfCorrelationChart_y =
-        chartData.is_general_attribute_y ?? false;
-      const correlation_minX = Number(chartData.rang_min_x) ?? null;
-      const correlation_maxX = Number(chartData.rang_max_x) ?? null;
-      const correlation_minY = Number(chartData.rang_min_y) ?? null;
-      const correlation_maxY = Number(chartData.rang_max_y) ?? null;
-      const plotData = await regenerateData(chartData);
-      if (plotData && plotData.length > 0) {
-        const container = document.createElement("div");
-        container.style.padding = "20px";
-        container.setAttribute("class", "chart_Append" + index);
-        parentDiv.insertAdjacentElement("beforeend", container);
-        const root = createRoot(container);
-        const chartAppendElements = document.querySelectorAll(
-          ".chart_Append" + index
-        );
-        const numberOfChartAppends = chartAppendElements.length;
-        if (numberOfChartAppends == 1) {
-          if (chartData?.type === "pie-chart") {
-            root.render(
-              <ComparisonPieChart
-                data={plotData}
-                pieSize={150}
-                svgSize={180}
-                innerRadius={0}
-                containerId={`pie${uuidv4()}`}
-                chartTitle={chartTitle}
-                xUnit={xAxisUnit}
-                pieProductBatch={pieProductBatch}
-              />
-            );
+      if (chartData) {
+        const xAixsLabel = chartData.x_axis_label ?? "";
+        const yAixsLabel = chartData.y_axis_label ?? "";
+        const xAxisTitle = chartData.x_title ?? "";
+        const yAxisTitle = chartData.y_title ?? "";
+        const yAxisUnit = chartData.unitY ?? "";
+        const xAxisUnit = chartData.unit ?? "";
+        const chartTitle = chartData.title ?? "";
+        const pieProductBatch = chartData.products ?? "";
+        const isGeneralAttributesOfCorrelationChart_x =
+          chartData.is_general_attribute_x ?? false;
+        const isGeneralAttributesOfCorrelationChart_y =
+          chartData.is_general_attribute_y ?? false;
+        const correlation_minX = Number(chartData.rang_min_x) ?? null;
+        const correlation_maxX = Number(chartData.rang_max_x) ?? null;
+        const correlation_minY = Number(chartData.rang_min_y) ?? null;
+        const correlation_maxY = Number(chartData.rang_max_y) ?? null;
+        const plotData = await regenerateData(chartData);
+        // console.log(plotData, "hello");
+        if (plotData && plotData.length > 0) {
+          const container = document.createElement("div");
+          container.style.padding = "20px";
+          container.setAttribute("class", "chart_Append" + index);
+          parentDiv.insertAdjacentElement("beforeend", container);
+          const root = createRoot(container);
+          const chartAppendElements = document.querySelectorAll(
+            ".chart_Append" + index
+          );
+          const numberOfChartAppends = chartAppendElements.length;
+          // console.log(chartData?.type);
+          if (numberOfChartAppends == 1) {
+            // console.log(chartData?.type);
+            if (chartData?.type === "pie-chart") {
+              root.render(
+                <ComparisonPieChart
+                  data={plotData}
+                  pieSize={150}
+                  svgSize={180}
+                  innerRadius={0}
+                  containerId={`pie${uuidv4()}`}
+                  chartTitle={chartTitle}
+                  xUnit={xAxisUnit}
+                  pieProductBatch={pieProductBatch}
+                />
+              );
+            }
+            if (chartData?.type === "vertical-chart") {
+              root.render(
+                <ComparisonBarChart
+                  svgProps={{
+                    margin: {
+                      top: 80,
+                      bottom: 80,
+                      left: 80,
+                      right: 80,
+                    },
+                    width: 478,
+                    height: 180,
+                  }}
+                  axisProps={{
+                    xLabel: { xAixsLabel },
+                    yLabel: { yAixsLabel },
+                    xUnit: { xAxisUnit },
+                    yUnit: { yAxisUnit },
+                    drawXGridlines: true,
+                    tick: 6,
+                    isTextOrientationOblique:
+                      plotData[0].label.length > 3 ? true : false,
+                  }}
+                  chartTitle={chartTitle}
+                  data={plotData}
+                  strokeWidth={4}
+                />
+              );
+            }
+          } else {
           }
         }
-      } 
+      }
+      // for (let indx = 0; indx < shortCodesMatched.length; indx++) {
+      //   if (
+      //     shortCodesMatched[indx]?.isMatch &&
+      //     element.nodeType === Node.ELEMENT_NODE
+      //   ) {
+      //     const res = await graphService.getGraphData({
+      //       graph_shortcode: shortCodesMatched[indx].matchedString,
+      //     });
+      //     // const chartData = await res.data.data;
+      //     console.log(first);
+
+      //     if (chartData) {
+      //       const xAixsLabel = chartData.x_axis_label ?? "";
+      //       const yAixsLabel = chartData.y_axis_label ?? "";
+      //       const xAxisTitle = chartData.x_title ?? "";
+      //       const yAxisTitle = chartData.y_title ?? "";
+      //       const yAxisUnit = chartData.unitY ?? "";
+      //       const xAxisUnit = chartData.unit ?? "";
+      //       const chartTitle = chartData.title ?? "";
+      //       const isGeneralAttributesOfCorrelationChart_x =
+      //         chartData.is_general_attribute_x ?? false;
+      //       const isGeneralAttributesOfCorrelationChart_y =
+      //         chartData.is_general_attribute_y ?? false;
+      //       const correlation_minX = Number(chartData.rang_min_x) ?? null;
+      //       const correlation_maxX = Number(chartData.rang_max_x) ?? null;
+      //       const correlation_minY = Number(chartData.rang_min_y) ?? null;
+      //       const correlation_maxY = Number(chartData.rang_max_y) ?? null;
+      //       const plotData = await regenerateData(chartData);
+      //       console.log(plotData, "dataHai");
+
+      //       if (plotData && plotData.length > 0) {
+      //         const container = document.createElement("div");
+      //         container.style.padding = "20px";
+      //         container.setAttribute("class", "chart_Append" + index);
+      //         parentDiv.insertAdjacentElement("beforeend", container);
+      //         const root = createRoot(container);
+
+      //         const chartAppendElements = document.querySelectorAll(
+      //           ".chart_Append" + index
+      //         );
+      //         const numberOfChartAppends = chartAppendElements.length;
+      //         // console.log(
+      //         //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
+      //         // );
+      //         if (numberOfChartAppends == 1) {
+      //           if (chartData?.type === "pie-chart") {
+      //             root.render(
+      //               <PiChart
+      //                 data={plotData}
+      //                 pieSize={150}
+      //                 svgSize={180}
+      //                 innerRadius={0}
+      //                 containerId={`pie${uuidv4()}`}
+      //                 chartTitle={chartTitle}
+      //                 xUnit={xAxisUnit}
+      //               />
+      //             );
+      //           }
+
+      //           if (shortCodesMatched[indx].pattern == ChartName.VerticalChart) {
+      //             root.render(
+      //               <VerticalChart
+      //                 svgProps={{
+      //                   margin: {
+      //                     top: 80,
+      //                     bottom: 80,
+      //                     left: 80,
+      //                     right: 80,
+      //                   },
+      //                   width: 478,
+      //                   height: 180,
+      //                 }}
+      //                 axisProps={{
+      //                   xLabel: { xAixsLabel },
+      //                   yLabel: { yAixsLabel },
+      //                   xUnit: { xAxisUnit },
+      //                   yUnit: { yAxisUnit },
+      //                   drawXGridlines: true,
+      //                   tick: 6,
+      //                   isTextOrientationOblique:
+      //                     plotData[0].label.length > 3 ? true : false,
+      //                 }}
+      //                 chartTitle={chartTitle}
+      //                 data={plotData}
+      //                 strokeWidth={4}
+      //               />
+      //             );
+      //           }
+
+      //           if (
+      //             shortCodesMatched[indx].pattern == ChartName.HorizontalChart
+      //           ) {
+      //             root.render(
+      //               <HorizontalChart
+      //                 data={plotData}
+      //                 height={220}
+      //                 width={650}
+      //                 chartTitle={shortCodesMatched[indx].chartTitle}
+      //                 xUnit={xAxisUnit}
+      //                 yUnit={yAxisUnit}
+      //                 rectBarWidth={27}
+      //                 rectBarPadding={10}
+      //               />
+      //             );
+      //           }
+
+      //           if (
+      //             shortCodesMatched[indx].pattern == ChartName.CorrelationChart
+      //           ) {
+      //             root.render(
+      //               <CorrelationChart
+      //                 data={plotData}
+      //                 height={300}
+      //                 width={478}
+      //                 chartTitle={shortCodesMatched[indx].chartTitle}
+      //                 xLabel={xAixsLabel}
+      //                 yLabel={yAixsLabel}
+      //                 xTick={9}
+      //                 yTick={7}
+      //                 xUnit={xAxisUnit}
+      //                 yUnit={yAxisUnit}
+      //                 xTitle={xAxisTitle}
+      //                 yTitle={yAxisTitle}
+      //                 isGeneralAttribute_x={
+      //                   isGeneralAttributesOfCorrelationChart_x
+      //                 }
+      //                 isGeneralAttribute_y={
+      //                   isGeneralAttributesOfCorrelationChart_y
+      //                 }
+      //                 rangeMinX={correlation_minX}
+      //                 rangeMaxX={correlation_maxX}
+      //                 rangeMinY={correlation_minY}
+      //                 rangeMaxY={correlation_maxY}
+      //               />
+      //             );
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
     }
-    // for (let indx = 0; indx < shortCodesMatched.length; indx++) {
-    //   if (
-    //     shortCodesMatched[indx]?.isMatch &&
-    //     element.nodeType === Node.ELEMENT_NODE
-    //   ) {
-    //     const res = await graphService.getGraphData({
-    //       graph_shortcode: shortCodesMatched[indx].matchedString,
-    //     });
-    //     // const chartData = await res.data.data;
-    //     console.log(first);
-
-    //     if (chartData) {
-    //       const xAixsLabel = chartData.x_axis_label ?? "";
-    //       const yAixsLabel = chartData.y_axis_label ?? "";
-    //       const xAxisTitle = chartData.x_title ?? "";
-    //       const yAxisTitle = chartData.y_title ?? "";
-    //       const yAxisUnit = chartData.unitY ?? "";
-    //       const xAxisUnit = chartData.unit ?? "";
-    //       const chartTitle = chartData.title ?? "";
-    //       const isGeneralAttributesOfCorrelationChart_x =
-    //         chartData.is_general_attribute_x ?? false;
-    //       const isGeneralAttributesOfCorrelationChart_y =
-    //         chartData.is_general_attribute_y ?? false;
-    //       const correlation_minX = Number(chartData.rang_min_x) ?? null;
-    //       const correlation_maxX = Number(chartData.rang_max_x) ?? null;
-    //       const correlation_minY = Number(chartData.rang_min_y) ?? null;
-    //       const correlation_maxY = Number(chartData.rang_max_y) ?? null;
-    //       const plotData = await regenerateData(chartData);
-    //       console.log(plotData, "dataHai");
-
-    //       if (plotData && plotData.length > 0) {
-    //         const container = document.createElement("div");
-    //         container.style.padding = "20px";
-    //         container.setAttribute("class", "chart_Append" + index);
-    //         parentDiv.insertAdjacentElement("beforeend", container);
-    //         const root = createRoot(container);
-
-    //         const chartAppendElements = document.querySelectorAll(
-    //           ".chart_Append" + index
-    //         );
-    //         const numberOfChartAppends = chartAppendElements.length;
-    //         // console.log(
-    //         //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
-    //         // );
-    //         if (numberOfChartAppends == 1) {
-    //           if (chartData?.type === "pie-chart") {
-    //             root.render(
-    //               <PiChart
-    //                 data={plotData}
-    //                 pieSize={150}
-    //                 svgSize={180}
-    //                 innerRadius={0}
-    //                 containerId={`pie${uuidv4()}`}
-    //                 chartTitle={chartTitle}
-    //                 xUnit={xAxisUnit}
-    //               />
-    //             );
-    //           }
-
-    //           if (shortCodesMatched[indx].pattern == ChartName.VerticalChart) {
-    //             root.render(
-    //               <VerticalChart
-    //                 svgProps={{
-    //                   margin: {
-    //                     top: 80,
-    //                     bottom: 80,
-    //                     left: 80,
-    //                     right: 80,
-    //                   },
-    //                   width: 478,
-    //                   height: 180,
-    //                 }}
-    //                 axisProps={{
-    //                   xLabel: { xAixsLabel },
-    //                   yLabel: { yAixsLabel },
-    //                   xUnit: { xAxisUnit },
-    //                   yUnit: { yAxisUnit },
-    //                   drawXGridlines: true,
-    //                   tick: 6,
-    //                   isTextOrientationOblique:
-    //                     plotData[0].label.length > 3 ? true : false,
-    //                 }}
-    //                 chartTitle={chartTitle}
-    //                 data={plotData}
-    //                 strokeWidth={4}
-    //               />
-    //             );
-    //           }
-
-    //           if (
-    //             shortCodesMatched[indx].pattern == ChartName.HorizontalChart
-    //           ) {
-    //             root.render(
-    //               <HorizontalChart
-    //                 data={plotData}
-    //                 height={220}
-    //                 width={650}
-    //                 chartTitle={shortCodesMatched[indx].chartTitle}
-    //                 xUnit={xAxisUnit}
-    //                 yUnit={yAxisUnit}
-    //                 rectBarWidth={27}
-    //                 rectBarPadding={10}
-    //               />
-    //             );
-    //           }
-
-    //           if (
-    //             shortCodesMatched[indx].pattern == ChartName.CorrelationChart
-    //           ) {
-    //             root.render(
-    //               <CorrelationChart
-    //                 data={plotData}
-    //                 height={300}
-    //                 width={478}
-    //                 chartTitle={shortCodesMatched[indx].chartTitle}
-    //                 xLabel={xAixsLabel}
-    //                 yLabel={yAixsLabel}
-    //                 xTick={9}
-    //                 yTick={7}
-    //                 xUnit={xAxisUnit}
-    //                 yUnit={yAxisUnit}
-    //                 xTitle={xAxisTitle}
-    //                 yTitle={yAxisTitle}
-    //                 isGeneralAttribute_x={
-    //                   isGeneralAttributesOfCorrelationChart_x
-    //                 }
-    //                 isGeneralAttribute_y={
-    //                   isGeneralAttributesOfCorrelationChart_y
-    //                 }
-    //                 rangeMinX={correlation_minX}
-    //                 rangeMaxX={correlation_maxX}
-    //                 rangeMinY={correlation_minY}
-    //                 rangeMaxY={correlation_maxY}
-    //               />
-    //             );
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-  }
-  
-   
   }
 
   async function regenerateData(chartData) {
@@ -305,7 +337,7 @@ const comparisonChart = (chartData, type) => {
 
     if (patterns && patterns.length > 0) {
       patterns.forEach((matchedPattern) => {
-        const regex = new RegExp(shortCodepatternsRE);
+        const regex = new RegExp(shortCodepatternsRE?.type);
         if (regex.test(matchedPattern)) {
           results.push({
             isMatch: true,
