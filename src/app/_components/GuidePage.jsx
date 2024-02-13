@@ -299,7 +299,7 @@ export default function GuidePage({
               <Row>
                 <Col md={12}>
                   <div
-                    className="para_content_text"
+                    // className="para_content_text"
                     dangerouslySetInnerHTML={{
                       __html: searchForPatternAndReplace(
                         guide?.text_second_part
@@ -597,7 +597,7 @@ export default function GuidePage({
                 </Col>
                 <Col md={8} lg={8}>
                   <div
-                    className="review-content"
+
                     dangerouslySetInnerHTML={{
                       __html: searchForPatternAndReplace(
                         guide?.text_third_part_main

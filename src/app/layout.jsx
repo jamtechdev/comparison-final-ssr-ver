@@ -13,6 +13,7 @@ export default async function RootLayout({ children }) {
         href={`https://panel.mondopedia.it/logos/app_favicon.ico`}
         sizes="any"
       />
+
       <body>
         <Layout footerData={footerData} headerData={headerData}>
           {children}

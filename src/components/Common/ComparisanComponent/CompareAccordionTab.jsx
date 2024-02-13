@@ -166,11 +166,11 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   // chart Dummy Data
   const chartData = {
     variables: [
-      { key: "anxiety", label: "Anxiety" },
-      { key: "illness", label: "Any Mental Illness" },
-      { key: "sucidal", label: "Suicidal Thoughts" },
-      { key: "distress", label: "Frequent Mental Distress" },
-      { key: "depression", label: "Depression" },
+      { key: "anxiety", label: "a" },
+      { key: "illness", label: "b" },
+      { key: "sucidal", label: "c" },
+      { key: "distress", label: "d" },
+      { key: "depression", label: "e" },
     ],
     sets: [
       {
@@ -224,17 +224,17 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 title={items?.name}
                 key={index}
               >
-                <div className="graph-tab-content">
-                  <Radar
-                    width={500}
-                    height={500}
-                    padding={70}
-                    domainMax={20}
-                    highlighted={highlighted}
-                    onHover={onHover}
-                    data={chartData}
-                  />
-                  {/* <Image
+                <Radar
+                  width={500}
+                  height={500}
+                  padding={70}
+                  domainMax={20}
+                  highlighted={highlighted}
+                  onHover={onHover}
+                  data={chartData}
+                />
+
+                {/* <Image
                     className="site_image"
                     src="/images/chart.png"
                     width={0}
@@ -242,7 +242,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                     alt=""
                     sizes="100%"
                   /> */}
-                </div>
               </Tab>
             ))}
           </Tabs>
