@@ -1,29 +1,50 @@
 import React, { useRef, useEffect } from "react";
 import { select, scaleLinear, line } from "d3";
+import * as d3 from "d3";
 import "./index.css";
 
-function Radar(props) {
+function Radar({ data }) {
+  console.log(data)
+  
   const containerRef = useRef(null);
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
-  const width = 550 - margin.left - margin.right;
+  const width = 500 - margin.left - margin.right;
   const height = 450 - margin.top - margin.bottom;
 
-  const data = [
-    {
-      pace: 0.85,
-      shooting: 0.92,
-      passing: 0.91,
-      dribbling: 0.95,
-      physical: 0.65,
-    },
-    {
-      pace: 0.89,
-      shooting: 0.93,
-      passing: 0.81,
-      dribbling: 0.89,
-      physical: 0.77,
-    },
-  ];
+  // const data = [
+  //   {
+  //     pace: 0.85,
+  //     shooting: 0.92,
+  //     passing: 0.91,
+  //     dribbling: 0.95,
+  //     physical: 0.65,
+  //   },
+  //   {
+  //     pace: 0.89,
+  //     shooting: 0.93,
+  //     passing: 0.81,
+  //     dribbling: 0.89,
+  //     physical: 0.77,
+  //   },
+  // ];
+  // const data = [
+  //   {
+  //     Battery: 0.805,
+  //     Cleaning: 1.0252,
+  //     Mopping: 0.2058,
+  //     Navigation: 1.25,
+  //     Control: 1.27,
+  //     Design: 0.0481,
+  //   },
+  //   {
+  //     Battery: 2.98,
+  //     Cleaning: 4.1943,
+  //     Mopping: 8.195,
+  //     Navigation: 1.25,
+  //     Control: 2.27,
+  //     Design: 4.1809,
+  //   },
+  // ];
 
   const capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -41,7 +62,22 @@ function Radar(props) {
 
     const radius = 200;
 
-    const radAxis = scaleLinear().domain([0.1, 1.0]).range([0, radius]);
+    // const { min, max } = data.reduce(
+    //   (acc, curr) => {
+    //     const currValues = Object.values(curr);
+    //     const currMin = Math.min(...currValues);
+    //     const currMax = Math.max(...currValues);
+    //     return {
+    //       min: Math.min(currMin, acc.min),
+    //       max: Math.max(currMax, acc.max),
+    //     };
+    //   },
+    //   { min: Infinity, max: -Infinity }
+    // );
+    const min = 0;
+    const max = 10;
+
+    const radAxis = scaleLinear().domain([min, max]).range([0, radius]);
 
     const cordForAngle = (angle, len) => {
       const x = Math.cos(angle) * len;
@@ -49,7 +85,8 @@ function Radar(props) {
       return { x, y };
     };
 
-    const tooltip = select("body")
+    const tooltip = d3
+    .select(`.graph-tab-content`)
       .append("div")
       .attr("class", "tooltip")
       .style("display", "none");
@@ -109,15 +146,19 @@ function Radar(props) {
         )
         .attr("fill", "black");
     }
-
-    const ticks = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+    const numTicks = 10; // Number of ticks
+    const tickIncrement = (max - min) / (numTicks - 1); // Calculate the tick increment
+    const ticks = Array.from(
+      { length: numTicks },
+      (_, index) => min + tickIncrement * index
+    ); // Generate an array of ticks
 
     ticks.forEach((el) => {
       svg
         .append("text")
         .attr("x", width / 2)
         .attr("y", height / 2 - radAxis(el) - 0.85)
-        .text(el)
+        .text(Math.round(el))
         .attr("fill", "black")
         .attr("stroke", "none")
         .attr("opacity", "0.5")
@@ -172,13 +213,13 @@ function Radar(props) {
           .attr("cy", point.y + height / 2)
           .attr("r", 4)
           .attr("fill", "white")
-          .attr("stroke", "black")
+          .attr("stroke", "#437ece")
           .attr("stroke-width", 1.5)
-          .style("z-Index", 9999)
           .on("mouseover", function (d) {
+            console.log(d,"mouse hoverfc " )
             tooltip
               .style("display", "block")
-              .html(`${attributes[index]}: ${data[i][attributes[index]]}`)
+              .html(`<div style="font-size: 14px;><h1>${attributes[index]}: ${data[i][attributes[index]]} </h1> </div>`)
               .style("left", d.clientX - 20 + "px")
               .style("top", d.clientY - 50 + "px")
               .style("color", "#ff0000");
@@ -188,38 +229,6 @@ function Radar(props) {
           });
       });
     }
-
-    svg
-      .append("circle")
-      .attr("cx", width / 2 + 250)
-      .attr("cy", height / 2 + 150)
-      .attr("r", 10)
-      .style("fill", "#FFC4DD")
-      .style("opacity", "0.5");
-
-    svg
-      .append("circle")
-      .attr("cx", width / 2 + 250)
-      .attr("cy", height / 2 + 180)
-      .attr("r", 10)
-      .style("fill", "#B4FF9F")
-      .style("opacity", "0.7");
-
-    svg
-      .append("text")
-      .attr("y", height / 2 + 150)
-      .attr("x", width / 2 + 280)
-      .html("Messi")
-      .style("stroke", "none")
-      .style("fill", "black");
-
-    svg
-      .append("text")
-      .attr("y", height / 2 + 185)
-      .attr("x", width / 2 + 280)
-      .html("Cristiano")
-      .style("stroke", "none")
-      .style("fill", "black");
   }, []);
 
   return <svg viewBox={`0 0 ${width} ${height}`} ref={containerRef}></svg>;

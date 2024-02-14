@@ -43,7 +43,7 @@ export const getFilteredAttributeValues = (obj) => {
     });
     // exract productCount
     let countProduct = [];
-    console.log(uniq);
+    // console.log(uniq);
     for (let i = 0; i < obj.values.length; i++) {
       // Check if the name is not blank or "-"
       const name = obj.values[i].name;

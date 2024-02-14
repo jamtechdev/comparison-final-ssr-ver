@@ -10,10 +10,11 @@ import CorrelationChart from "../_chart/CorrelationChart/index.js";
 import ComparisonVerticalChart from "../_chart/ComparisonVerticalChart/index.js";
 // import { ChartName } from "../_chart/data/enums/ChartName.js";
 
-const useComparisonChart = (chartData) => {
-  console.log(chartData);
+const useComparisonChart = (chartData, slug) => {
+  // console.log(slug);
+
   const shortCodepatternsRE = chartData;
-  console.log(shortCodepatternsRE?.type);
+  // console.log(shortCodepatternsRE?.type);
 
   useEffect(() => {
     // Function to search for the pattern
@@ -285,6 +286,7 @@ const useComparisonChart = (chartData) => {
       chartData.data.length > 0 &&
       chartData.lable &&
       chartData.selected &&
+      chartData.products &&
       (chartData.product_count || chartData.produt_name)
     ) {
       chartData.data.forEach((val, index) => {
@@ -294,6 +296,9 @@ const useComparisonChart = (chartData) => {
         });
         if (chartData.product_count) {
           dataForChart[index]["productCount"] = chartData.product_count[index];
+        }
+        if (chartData.products) {
+          dataForChart[index]["products"] = chartData.products[index];
         }
         if (chartData.selected) {
           dataForChart[index]["selected"] = chartData.selected[index];

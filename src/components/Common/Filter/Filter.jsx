@@ -161,9 +161,9 @@ export default function Filter({
       if (filteredKeys.includes("variant")) {
         document.getElementById("variant").checked = true;
       }
-      if (filteredKeys.includes("available")) {
-        document.getElementById("available").checked = true;
-      }
+      // if (filteredKeys.includes("available")) {
+      //   document.getElementById("available").checked = true;
+      // }
       if (filteredKeys.includes("brand")) {
         Object.values(searchParam)[0]
           .split(",")
@@ -399,7 +399,7 @@ export default function Filter({
                 ) {
                   let filteredArrayOfAttributeValues =
                     getFilteredAttributeValues(attribute);
-                  console.log(filteredArrayOfAttributeValues, "filter");
+                  // console.log(filteredArrayOfAttributeValues, "filter");
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
                     // check if values contain only yes then Toggle Switch

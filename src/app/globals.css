@@ -1186,3 +1186,6 @@ table.compare-container.table.comparison-table .best-list-item li img {
   display: flex;
   align-items: center;
 }
+.short_code_product_table_price_name.text-center {
+  justify-content: center;
+}

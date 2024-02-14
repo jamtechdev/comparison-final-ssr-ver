@@ -167,9 +167,9 @@ export default function GuidePage({
     window.history.pushState(
       {},
       "",
-      `?${queryString}&variant=true&direct=true&available=true`
+      `?${queryString}&variant=true&direct=true`
     );
-    router.push(`?${queryString}&variant=true&direct=true&available=true`, {
+    router.push(`?${queryString}&variant=true&direct=true`, {
       scroll: false,
     });
   }
@@ -597,7 +597,6 @@ export default function GuidePage({
                 </Col>
                 <Col md={8} lg={8}>
                   <div
-
                     dangerouslySetInnerHTML={{
                       __html: searchForPatternAndReplace(
                         guide?.text_third_part_main

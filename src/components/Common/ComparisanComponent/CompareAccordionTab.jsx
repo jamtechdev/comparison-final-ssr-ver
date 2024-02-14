@@ -97,7 +97,8 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setGraphData(data); // Assuming data from the second API call is directly usable
+        console.log(data.data?.sets);
+        setGraphData(data.data?.sets); // Assuming data from the second API call is directly usable
       })
       .catch((error) => {
         console.error("Error fetching data from second API:", error);
@@ -184,60 +185,26 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
 
   // chart Dummy Data
 
-  const chartCheck = {
-    variables: [
-      {
-        key: "Battery",
-        label: "Battery",
-      },
-      {
-        key: "Cleaning",
-        label: "Cleaning",
-      },
-      {
-        key: "Mopping",
-        label: "Mopping",
-      },
-      {
-        key: "Navigation",
-        label: "Navigation",
-      },
-      {
-        key: "Control & Mapping",
-        label: "Control & Mapping",
-      },
-      {
-        key: "Design",
-        label: "Design",
-      },
-    ],
-    sets: [
-      {
-        key: "360 Botslab S8 Plus",
-        label: "360 Botslab S8 Plus",
-        values: {
-          Battery: 3.805,
-          Cleaning: 5.0252,
-          Mopping: 1.2058,
-          Navigation: 1.25,
-          "Control & Mapping": 1.27,
-          Design: 4.0481,
-        },
-      },
-      {
-        key: "amarey A90+",
-        label: "amarey A90+",
-        values: {
-          Battery: 2.98,
-          Cleaning: 4.1943,
-          Mopping: 1.195,
-          Navigation: 1.25,
-          "Control & Mapping": 1.27,
-          Design: 4.1809,
-        },
-      },
-    ],
-  };
+  const chartCheck = [
+    {
+      Battery: 3.805,
+      Cleaning: 5.0252,
+      Mopping: 1.2058,
+      Navigation: 1.25,
+      Control: 1.27,
+      Design: 4.0481,
+    },
+    {
+      Battery: 2.98,
+      Cleaning: 4.1943,
+      Mopping: 1.195,
+      Navigation: 1.25,
+      Control: 1.27,
+      Design: 4.1809,
+    },
+  ];
+
+  console.log(graphData)
 
   const chartData = {
     variables: [
@@ -300,7 +267,9 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 key={index}
               >
                 <div className="graph-tab-content">
-                  <Radar />
+                {graphData && (
+                  <Radar data={graphData} />
+                )}
                 </div>
                 {/* <Image
                     className="site_image"
