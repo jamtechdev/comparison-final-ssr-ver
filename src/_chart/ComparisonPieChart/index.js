@@ -22,7 +22,6 @@ function ComparisonPieChart(props) {
   }, [data]);
 
   function drawChart() {
-    console.log(pieProductBatch);
     // Remove the old chart
     d3.select(`#${containerId}`).select("svg").remove();
     // Remove the old tooltip
@@ -127,7 +126,9 @@ function ComparisonPieChart(props) {
     const tbody = table.append("tbody");
 
     // Append the data rows
+    const colors = ["#437ECE", "#FF8F0B", "#28A28C"];
     const rows = tbody.selectAll("tr").data(data).enter().append("tr");
+    let indexId = 0;
     const cells = rows
       .selectAll("td")
       .data(function (d, i) {
@@ -155,49 +156,27 @@ function ComparisonPieChart(props) {
             .append("span")
             .attr("class", "legend-text")
             .text((d) => `${d}%`);
-
-          // pieProductBatch.slice(0, 3).forEach((array, index) => {
-          //   array.forEach((item) => {
-          //     // console.log(item);
-          //     let color;
-          //     if (index === 0) {
-          //       color = "#437ECE"; // blue
-          //     } else if (index === 1) {
-          //       color = "#FF8F0B"; // red
-          //     } else if (index === 2) {
-          //       color = "#28A28C";
-          //     } else {
-          //       color = "#000000"; // default color
-          //     }
-          //     d3.select(this)
-          //       .append("span")
-          //       .attr("class", "graph-batch")
-          //       .style("display", "inline-block")
-          //       .style("padding", "5px 10px")
-          //       .style("margin", "2px")
-          //       .style("font-size", "12px")
-          //       .style("border", `1px solid ${color}`)
-          //       .style("border-radius", "3px")
-          //       .style("background-color", "#fff")
-          //       .style("color", color)
-          //       .text(`${item}`);
-          //   });
-          // });
+        }
+        if (i == 2) {
+          d3.select(this)
+            .append("span")
+            .attr("class", "legend-text")
+            .text((d) => `${d} ${xUnit}`);
         }
 
         if (i === 3) {
+          console.log(indexId);
+
           d.forEach((item, index) => {
             let color;
-            if (d.length === 1) {
+            if (indexId === 0) {
               color = "#437ECE";
-            } else if (d.length === 2) {
-              color = index === 0 ? "#437ECE" : "#FF8F0B";
-            } else if (d.length === 3) {
-              color =
-                index === 0 ? "#437ECE" : index === 1 ? "#FF8F0B" : "#28A28C";
+            } else if (indexId === 1) {
+              color = "#FF8F0B";
             } else {
-              color = "#000000"; // Default color
+              color = "red";
             }
+            indexId = indexId + 1;
 
             d3.select(this)
               .append("span")
@@ -205,12 +184,12 @@ function ComparisonPieChart(props) {
               .style("display", "inline-block")
               .style("padding", "5px 5px")
               .style("margin", "2px")
-              .style("font-size", "10px")
+              .style("font-size", "12px")
               .style("border", `1px solid ${color}`)
               .style("border-radius", "3px")
               .style("background-color", "#fff")
               .style("color", color)
-              .text(`${item}`);
+              .text(`${item}` + indexId);
           });
         }
       });

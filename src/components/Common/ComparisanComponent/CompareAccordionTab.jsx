@@ -19,8 +19,8 @@ import Image from "next/image";
 import QuestionIcon from "@/components/Svg/QuestionIcon";
 import { LoaderIcon } from "react-hot-toast";
 import Loader from "@/app/_components/Loader";
+import Radar from "@/_chart/Radar";
 // import SpiderChart from "@/_chart/SpiderChart";
-const Radar = dynamic(() => import("react-d3-radar"), { ssr: false });
 const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   const [activatab, setActiveTab] = useState("tab-1");
   const [apiData, setApiData] = useState(null);
@@ -60,7 +60,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     const index = parseInt(activatab.split("-")[1], 10);
     // Swap the order of extractedUrls when the active tab changes
     const updatedUrls = [...extractedUrls];
-    console.log(updatedUrls);
+    // console.log(updatedUrls);
     const temp = updatedUrls[index - 1];
     updatedUrls[index - 1] = updatedUrls[0];
     updatedUrls[0] = temp;
@@ -107,7 +107,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
       setIsLoading(true);
     }, 1000);
   }, [activatab]);
-  console.log(graphData?.data);
+  // console.log(graphData?.data);
 
   // this funcation spilt the vs value from ApiData
   const splitVsValue = (value) => {
@@ -300,15 +300,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 key={index}
               >
                 <div className="graph-tab-content">
-                  <Radar
-                    width={500}
-                    height={500}
-                    padding={70}
-                    domainMax={20}
-                    highlighted={highlighted}
-                    onHover={onHover}
-                    data={chartCheck}
-                  />
+                  <Radar />
                 </div>
                 {/* <Image
                     className="site_image"

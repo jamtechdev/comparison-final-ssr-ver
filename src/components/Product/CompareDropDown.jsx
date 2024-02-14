@@ -74,6 +74,8 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
                 Comparison With All Other Vaccuum Cleaners
               </h2>
             </Col>
+          </Row>
+          <Row className="mt-3">
             <Col md={4} lg={4}>
               <div className="filtered-data-select justify-content-start">
                 <span>Attribute category:</span>
@@ -105,11 +107,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
                   </Form.Select>
                 )}
               </div>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col md={4} lg={4}>
-              <p className="text-end para_content_text">
+              <p className="text-end para_content_text mt-3">
                 {selectedObjectDescription && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>
                     What it is:

@@ -7,6 +7,7 @@ import ComparisonPieChart from "../_chart/ComparisonPieChart/index.js";
 import ComparisonBarChart from "../_chart/ComparisonVerticalChart/index.js";
 import HorizontalChart from "../_chart/HorizontalChart/index.js";
 import CorrelationChart from "../_chart/CorrelationChart/index.js";
+import ComparisonVerticalChart from "../_chart/ComparisonVerticalChart/index.js";
 // import { ChartName } from "../_chart/data/enums/ChartName.js";
 
 const useComparisonChart = (chartData) => {
@@ -100,7 +101,7 @@ const useComparisonChart = (chartData) => {
             }
             if (chartData?.type === "vertical-chart") {
               root.render(
-                <ComparisonBarChart
+                <ComparisonVerticalChart
                   svgProps={{
                     margin: {
                       top: 80,

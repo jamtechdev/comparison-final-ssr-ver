@@ -4,7 +4,7 @@ import classnames from "classnames";
 import drawAxis from "./axis";
 import "./index.scss";
 
-const BaseChart = (drawChart, extraProps) => {
+const ComparisonBaseChart = (drawChart, extraProps) => {
   function Chart(props) {
     const svgRef = React.createRef();
     const tooltipRef = React.createRef();
@@ -121,4 +121,4 @@ const BaseChart = (drawChart, extraProps) => {
 
   return Chart;
 };
-export default BaseChart;
+export default ComparisonBaseChart;
