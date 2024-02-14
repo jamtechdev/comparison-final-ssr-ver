@@ -43,7 +43,7 @@
   font-weight: 400;
   font-size: 18px;
   color: var(--heading-color);
-  opacity: 80%;
+  /* opacity: 80%; */
   margin: 20px 0 0 !important;
 }
 
