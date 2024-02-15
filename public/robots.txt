@@ -1,3 +1,2 @@
 User-agent: *
 Disallow: /
-allow: ./sitemaps/pages.xml

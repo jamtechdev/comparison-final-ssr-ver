@@ -4,6 +4,6 @@ export default function robots() {
         userAgent: '*',
         disallow: '/',
       },
-      sitemap: 'https://mondopedia.it/sitemap.xml',
+      sitemap: 'https://mondopedia.it/sitemaps/pages.xml',
     }
   }
