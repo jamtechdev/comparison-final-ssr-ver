@@ -5,8 +5,9 @@ export default async function handler(req, res) {
   const baseUrl = 'https://mondopedia.it'; // Your base URL
   const pages = [
     { url: '/', changefreq: 'daily', priority: 1.0 },
-    { url: '/about-us', changefreq: 'monthly', priority: 0.8 },
-    // Add more pages as needed
+    { url: '/about-us', changefreq: 'daily', priority: 0.8 },
+    { url: '/contact-us', changefreq: 'daily', priority: 0.8 }, 
+    { url: '/Electronic', changefreq: 'daily', priority: 0.8 }
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
