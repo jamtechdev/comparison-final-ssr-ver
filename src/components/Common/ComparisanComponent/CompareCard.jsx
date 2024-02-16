@@ -15,7 +15,7 @@ const CompareCard = ({
     if (products.length === 0) {
       return "";
     }
-    const maxScore = Math.max(...products.map((obj) => obj.overall_score));
+    const maxScore = Math.max(...products.map((obj) => obj?.overall_score));
     const winningProductIndex = products
       .map((obj, index) => (obj.overall_score === maxScore ? index : undefined))
       .filter((index) => index !== undefined);

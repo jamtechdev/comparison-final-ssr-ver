@@ -3,31 +3,31 @@ import { select, scaleLinear, line } from "d3";
 import * as d3 from "d3";
 import "./index.css";
 
-function Radar({ meet, activeTab }) {
+function Radar({ data, activeTab }) {
   // console.log(data, "neet");
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 500 - margin.left - margin.right;
   const height = 450 - margin.top - margin.bottom;
 
-  const data = [
-    {
-      Battery: 8.805,
-      Cleaning: 3.0252,
-      Mopping: 5.2058,
-      Navigation: 1.25,
-      Control: 10.27,
-      Design: 8.0481,
-    },
-    {
-      Battery: 7.98,
-      Cleaning: 4.1943,
-      Mopping: 8.195,
-      Navigation: 1.25,
-      Control: 2.27,
-      Design: 4.1809,
-    },
-  ];
+  // const data = [
+  //   {
+  //     Battery: 8.805,
+  //     Cleaning: 3.0252,
+  //     Mopping: 5.2058,
+  //     Navigation: 1.25,
+  //     Control: 10.27,
+  //     Design: 8.0481,
+  //   },
+  //   {
+  //     Battery: 7.98,
+  //     Cleaning: 4.1943,
+  //     Mopping: 8.195,
+  //     Navigation: 1.25,
+  //     Control: 2.27,
+  //     Design: 4.1809,
+  //   },
+  // ];
 
   const capitalize = (str) => {
     if (str && str.length > 0) {
@@ -198,7 +198,7 @@ function Radar({ meet, activeTab }) {
             ? "#437ECE"
             : "#FF8F0B"
         )
-        .attr("opacity", activeTab == i ? 0.4 : 0.1)
+        .attr("opacity", activeTab == i ? 0.5 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
       cord.forEach((point, index) => {
         svg
