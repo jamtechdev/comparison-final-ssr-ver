@@ -97,7 +97,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data?.sets);
+        // console.log(data.data?.sets);
         setGraphData(data.data?.sets); // Assuming data from the second API call is directly usable
       })
       .catch((error) => {
@@ -183,26 +183,8 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     );
   };
 
-  // chart Dummy Data
 
-  const chartCheck = [
-    {
-      Battery: 3.805,
-      Cleaning: 5.0252,
-      Mopping: 1.2058,
-      Navigation: 1.25,
-      Control: 1.27,
-      Design: 4.0481,
-    },
-    {
-      Battery: 2.98,
-      Cleaning: 4.1943,
-      Mopping: 1.195,
-      Navigation: 1.25,
-      Control: 1.27,
-      Design: 4.1809,
-    },
-  ];
+
 
   // console.log(graphData);
 

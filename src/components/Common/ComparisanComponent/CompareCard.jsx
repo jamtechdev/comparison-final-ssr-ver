@@ -17,7 +17,9 @@ const CompareCard = ({
     }
     const maxScore = Math.max(...products.map((obj) => obj?.overall_score));
     const winningProductIndex = products
-      .map((obj, index) => (obj.overall_score === maxScore ? index : undefined))
+      .map((obj, index) =>
+        obj?.overall_score === maxScore ? index : undefined
+      )
       .filter((index) => index !== undefined);
     return winningProductIndex.length === 1 ? winningProductIndex[0] : -1000;
   };
@@ -40,7 +42,7 @@ const CompareCard = ({
         window.location.pathname.split("/")[1]
       }/${newUrl}`;
       window.location.href = path;
-    } 
+    }
 
     newArray.length <= 1 && handelRemoveProduct(i);
   };
@@ -105,7 +107,6 @@ const CompareCard = ({
             {compareProduct?.price_websites?.length > 0 ? (
               <>
                 <div className="comparison-product-item">
-                  
                   <Image
                     src={
                       compareProduct?.price_websites[0]?.price != null &&

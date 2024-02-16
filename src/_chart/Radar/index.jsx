@@ -69,6 +69,7 @@ function Radar({ data, activeTab }) {
     for (let i = 0; i < attributes.length; i++) {
       const slice = Math.PI / 2 + (2 * Math.PI * i) / attributes.length;
       const key = attributes[i];
+      // console.log(key)
       const { x, y } = cordForAngle(slice, radius);
 
       svg
@@ -200,6 +201,7 @@ function Radar({ data, activeTab }) {
         )
         .attr("opacity", activeTab == i ? 0.5 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
       cord.forEach((point, index) => {
         svg
           .append("circle")
@@ -222,24 +224,27 @@ function Radar({ data, activeTab }) {
           .attr("class", "data-point")
           .attr("data-value", point.value)
           .attr("data-attribute", point.attribute)
-          .on("mouseenter", function (event, d) {
+          .on("mouseover", function (event, d) {
             const value = select(this).attr("data-value");
             const attribute = select(this).attr("data-attribute");
             tooltip
               .style("display", "block")
-              .html(`${attribute}: ${value}`)
+              .style("opacity", 2)
+              .html(`${attribute}: ${Math.round(value)}`)
+              .style("background-color", "#437ECE")
               .style("left", event.clientX + "px")
               .style("top", event.clientY + "px")
-              .style("color", "#ff0000");
+              .style("color", "#fff");
           })
-          .on("mouseleave", function () {
+          .on("mouseout", function () {
             // Remove the tooltip and the value label on mouse leave
             // svg.selectAll(".data-point-label").remove();
-            tooltip.style("display", "none");
+            // tooltip.style("display", "none");
+            tooltip.style("opacity", 0);
           });
       });
     }
-  }, []);
+  }, [activeTab]);
 
   return <svg viewBox={`0 0 ${width} ${height}`}></svg>;
 }

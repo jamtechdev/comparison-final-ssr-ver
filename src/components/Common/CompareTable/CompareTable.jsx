@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
   // console.log(products);
   // console.log(products?.length);
-  // console.log(categoryAttributes)
+  // console.log(categoryAttributes);
   const router = useRouter();
   const [winPos, setWinPos] = useState(false);
   let initialNoOfCategories = 5;
@@ -55,6 +55,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     productsWithAttributeGroup[product.name] = productCopy;
   });
   const finalProducts = Object.values(productsWithAttributeGroup);
+  // console.log(finalProducts)
 
   const getValue = (arr, attribute) => {
     const foundElement = arr.find((obj) => obj.attribute === attribute);
@@ -86,7 +87,6 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
           (obj) => obj.attribute === catAttribute.name
         )
       );
-
     const arrayOfObjects = [...filterData];
     let numericValues = [];
 
@@ -128,7 +128,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             ? obj.attribute_value
             : parseFloat(obj.attribute_value);
         if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
-          console.log(obj.attribute_value + "⭐");
+          // console.log(obj.attribute_value + "⭐");
           obj.attribute_value += "⭐";
         }
       });
