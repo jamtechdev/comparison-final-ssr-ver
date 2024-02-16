@@ -3,8 +3,8 @@ import { select, scaleLinear, line } from "d3";
 import * as d3 from "d3";
 import "./index.css";
 
-function Radar({ data, activetab }) {
-  console.log(data, "neet");
+function Radar({ data, activeTab }) {
+  // console.log(data, "neet");
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 500 - margin.left - margin.right;
@@ -12,7 +12,7 @@ function Radar({ data, activetab }) {
 
   // const data = [
   //   {
-  //     Battery: 1.805,
+  //     Battery: 8.805,
   //     Cleaning: 3.0252,
   //     Mopping: 5.2058,
   //     Navigation: 1.25,
@@ -26,6 +26,14 @@ function Radar({ data, activetab }) {
   //     Navigation: 1.25,
   //     Control: 2.27,
   //     Design: 4.1809,
+  //   },
+  //   {
+  //     Battery: 7.805,
+  //     Cleaning: 6.0252,
+  //     Mopping: 9.2058,
+  //     Navigation: 1.25,
+  //     Control: 6.27,
+  //     Design: 7.0481,
   //   },
   // ];
 
@@ -77,9 +85,9 @@ function Radar({ data, activetab }) {
         .attr("y2", y + height / 2)
         .attr("x1", width / 2)
         .attr("y1", height / 2)
-        .attr("stroke", "#00dd")
+        .attr("stroke", "#D3D3D3")
         .attr("stroke-width", 1.5)
-        .style("opacity", "0.1");
+        .style("opacity", "0.3");
 
       svg
         .append("text")
@@ -119,7 +127,7 @@ function Radar({ data, activetab }) {
             ? "-0.5em"
             : "0.4em"
         )
-        .attr("fill", "black");
+        .attr("fill", "gray");
     }
     const numTicks = 10; // Number of ticks
     const tickIncrement = (max - min) / (numTicks - 1); // Calculate the tick increment
@@ -146,7 +154,7 @@ function Radar({ data, activetab }) {
         .attr("cx", width / 2)
         .attr("cy", height / 2)
         .attr("fill", "none")
-        .attr("stroke", "gray")
+        .attr("stroke", "#D3D3D3")
         .attr("stroke-width", 1.0)
         .attr("r", radAxis(el));
     });
@@ -167,7 +175,7 @@ function Radar({ data, activetab }) {
 
     for (let i = 0; i < data.length; i++) {
       const d = data[i];
-      console.log(i);
+      // console.log(i);
       const cord = getCoordPath(d);
 
       svg
@@ -176,19 +184,29 @@ function Radar({ data, activetab }) {
         .attr("class", `areapath`)
         .attr("d", lineGen)
         .attr("stroke-width", 1.5)
-        .attr("stroke", "none")
-        .attr("fill", () =>
+        .attr("stroke", () =>
           data?.length > 2
             ? i === 0
               ? "#437ECE"
-              : i === 2
+              : i === 1
               ? "#FF8F0B"
               : "#28A28C"
             : i === 0
             ? "#437ECE"
             : "#FF8F0B"
         )
-        .attr("opacity", 0.1)
+        .attr("fill", () =>
+          data?.length > 2
+            ? i === 0
+              ? "#437ECE"
+              : i === 1
+              ? "#FF8F0B"
+              : "#28A28C"
+            : i === 0
+            ? "#437ECE"
+            : "#FF8F0B"
+        )
+        .attr("opacity", activeTab == i ? 0.6 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
       cord.forEach((point) => {
         svg

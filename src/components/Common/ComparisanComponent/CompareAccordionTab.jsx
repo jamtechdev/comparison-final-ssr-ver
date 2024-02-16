@@ -268,7 +268,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
               >
                 <div className="graph-tab-content">
                   {activatab === `tab-${index + 1}` && graphData && (
-                    <Radar data={graphData} activetab={activatab} />
+                    <Radar data={graphData} activeTab={index} />
                   )}
                 </div>
               </Tab>

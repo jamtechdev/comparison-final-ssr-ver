@@ -5,7 +5,7 @@ export default async function Page({
   searchParams,
 }) {
 
-  console.log(slug , 'slugggss' , category);
+  // console.log(slug , 'slugggss' , category);
   try {
 
     const categoryslugType = await getSlugType(category);

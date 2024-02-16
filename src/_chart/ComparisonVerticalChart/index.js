@@ -115,6 +115,7 @@ function ComparisonVerticalChart(props) {
 
   // loop data and add product name with color
   // Define margin
+  let circleMargin = 10;
   data.forEach((d, i) => {
     let color = ["#FF8F0B", "#437ECE", "black"];
     let fillColor = d.products ? color[i] : "";
@@ -123,19 +124,20 @@ function ComparisonVerticalChart(props) {
       svg
         .append("circle")
         .attr("cx", 20 + 600 / 50 + 479) // Adjusted for margin
-        .attr("cy", i * 20 + 5) // Adjust the y position based on index
+        .attr("cy", i * 20 + circleMargin) // Adjust the y position based on index
         .attr("r", 10)
         .style("fill", fillColor)
         .style("opacity", "1");
     }
     svg
       .append("text")
-      .attr("y", i * 20 + 5) // Adjust the y position based on index
-      .attr("x", 20 + 600 / 2 + 280) // Adjusted for margin
+      .attr("y", i * 20 + circleMargin + 4) // Adjust the y position based on index
+      .attr("x", 20 + 610 / 2 + 280) // Adjusted for margin
       .attr("text-anchor", "middle") // Center the text horizontally
       .html(`${d.products || ""}`) // Display the products or an empty string if undefined
       .style("stroke", "none")
       .style("fill", "black");
+    circleMargin = circleMargin + 10;
   });
 }
 
