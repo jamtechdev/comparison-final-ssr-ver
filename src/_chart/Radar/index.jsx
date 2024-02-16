@@ -199,7 +199,7 @@ function Radar({ data, activeTab }) {
             ? "#437ECE"
             : "#FF8F0B"
         )
-        .attr("opacity", activeTab == i ? 0.5 : 0.1)
+        .attr("opacity", activeTab == i ? 0.5 : 0.2)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
       cord.forEach((point, index) => {
