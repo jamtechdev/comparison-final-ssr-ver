@@ -483,7 +483,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                   );
                                 })
                             ) : (
-                              <p>No Data Found</p>
+                              <p></p>
                             )}
                           </ul>
                         </Tab.Pane>

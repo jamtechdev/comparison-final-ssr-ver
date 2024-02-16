@@ -3,39 +3,31 @@ import { select, scaleLinear, line } from "d3";
 import * as d3 from "d3";
 import "./index.css";
 
-function Radar({ data, activeTab }) {
+function Radar({ meet, activeTab }) {
   // console.log(data, "neet");
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 500 - margin.left - margin.right;
   const height = 450 - margin.top - margin.bottom;
 
-  // const data = [
-  //   {
-  //     Battery: 8.805,
-  //     Cleaning: 3.0252,
-  //     Mopping: 5.2058,
-  //     Navigation: 1.25,
-  //     Control: 10.27,
-  //     Design: 8.0481,
-  //   },
-  //   {
-  //     Battery: 2.98,
-  //     Cleaning: 4.1943,
-  //     Mopping: 8.195,
-  //     Navigation: 1.25,
-  //     Control: 2.27,
-  //     Design: 4.1809,
-  //   },
-  //   {
-  //     Battery: 7.805,
-  //     Cleaning: 6.0252,
-  //     Mopping: 9.2058,
-  //     Navigation: 1.25,
-  //     Control: 6.27,
-  //     Design: 7.0481,
-  //   },
-  // ];
+  const data = [
+    {
+      Battery: 8.805,
+      Cleaning: 3.0252,
+      Mopping: 5.2058,
+      Navigation: 1.25,
+      Control: 10.27,
+      Design: 8.0481,
+    },
+    {
+      Battery: 7.98,
+      Cleaning: 4.1943,
+      Mopping: 8.195,
+      Navigation: 1.25,
+      Control: 2.27,
+      Design: 4.1809,
+    },
+  ];
 
   const capitalize = (str) => {
     if (str && str.length > 0) {
@@ -183,7 +175,7 @@ function Radar({ data, activeTab }) {
         .datum(cord)
         .attr("class", `areapath`)
         .attr("d", lineGen)
-        .attr("stroke-width", 1.5)
+        .attr("stroke-width", "1.5px")
         .attr("stroke", () =>
           data?.length > 2
             ? i === 0
@@ -206,9 +198,9 @@ function Radar({ data, activeTab }) {
             ? "#437ECE"
             : "#FF8F0B"
         )
-        .attr("opacity", activeTab == i ? 0.6 : 0.1)
+        .attr("opacity", activeTab == i ? 0.4 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
-      cord.forEach((point) => {
+      cord.forEach((point, index) => {
         svg
           .append("circle")
           .attr("cx", point.x + width / 2)
@@ -226,54 +218,26 @@ function Radar({ data, activeTab }) {
               ? "#437ECE"
               : "#FF8F0B"
           )
-          .style("opacity", "0.5")
+          .attr("opacity", activeTab == i ? 0.9 : 0.1)
           .attr("class", "data-point")
           .attr("data-value", point.value)
           .attr("data-attribute", point.attribute)
-          .on("mouseenter", function () {
+          .on("mouseenter", function (event, d) {
             const value = select(this).attr("data-value");
             const attribute = select(this).attr("data-attribute");
-
-            svg
-              .append("text")
-              .attr("class", "data-point-label")
-              .attr("x", point.x + width / 2 + 10)
-              .attr("y", point.y + height / 2)
-              .text(`${Math.round(value)}`)
-              .attr("fill", "black");
+            tooltip
+              .style("display", "block")
+              .html(`${attribute}: ${value}`)
+              .style("left", event.clientX + "px")
+              .style("top", event.clientY + "px")
+              .style("color", "#ff0000");
           })
           .on("mouseleave", function () {
             // Remove the tooltip and the value label on mouse leave
-            svg.selectAll(".data-point-label").remove();
-            tooltip.transition().duration(300).style("opacity", 0);
+            // svg.selectAll(".data-point-label").remove();
+            tooltip.style("display", "none");
           });
       });
-
-      // cord.forEach((point, index) => {
-      //   svg
-      //     .append("circle")
-      //     .attr("cx", point.x + width / 2)
-      //     .attr("cy", point.y + height / 2)
-      //     .attr("r", 4)
-      //     .attr("fill", "white")
-      //     .attr("stroke", "#437ece")
-      //     .attr("stroke-width", 1.5)
-      //     .on("mouseover", function (d) {
-      //       tooltip
-      //         .style("display", "block")
-      //         .html(
-      //           `<div style="font-size: 14px;"><h1>${attributes[index]}: ${
-      //             data[i][attributes[index]]
-      //           }</h1></div>`
-      //         )
-      //         .style("left", d.clientX - 20 + "px")
-      //         .style("top", d.clientY - 50 + "px")
-      //         .style("color", "#ff0000");
-      //     })
-      //     .on("mouseout", function () {
-      //       tooltip.style("display", "none");
-      //     });
-      // });
     }
   }, []);
 

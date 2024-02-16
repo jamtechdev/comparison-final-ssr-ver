@@ -5,7 +5,16 @@ import * as d3 from "d3";
 import "./index.scss";
 
 function ComparisonVerticalChart(props) {
-  const { svgRef, data, xScale, yScale, height, barClass, tooltipRef } = props;
+  const {
+    svgRef,
+    data,
+    xScale,
+    yScale,
+    height,
+    barClass,
+    tooltipRef,
+    containerId,
+  } = props;
   const toolTip = d3.select(tooltipRef.current);
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 760 - margin.left - margin.right;
@@ -85,7 +94,7 @@ function ComparisonVerticalChart(props) {
     .attr("height", (d) => height - yScale(d.value))
     .style("fill", (d, i) => {
       if (d.selected === 1 && d.productCount == 1) {
-        return "#000";
+        return "rgb(67, 126, 206)";
       } else if (d.selected === 1 && i === fristIndex && d.productCount > 1) {
         return "#FF8F0B";
       } else if (d.selected === 1 && i === secondIndex && d.productCount > 1) {
@@ -117,7 +126,7 @@ function ComparisonVerticalChart(props) {
   // Define margin
   let circleMargin = 10;
   data.forEach((d, i) => {
-    let color = ["#FF8F0B", "#437ECE", "black"];
+    let color = ["#437ECE", "#FF8F0B", "black"];
     let fillColor = d.products ? color[i] : "";
 
     if (fillColor) {

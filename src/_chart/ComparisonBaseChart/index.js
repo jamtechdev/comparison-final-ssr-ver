@@ -12,6 +12,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
       chartTitle,
       axisProps,
       data,
+      containerId,
       svgProps,
       tooltipClass,
       scaleBandPadding,
@@ -111,6 +112,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
             ref={tooltipRef}
           />
         </div>
+        <div id={containerId} className="barChart"></div>
       </div>
     );
   }
