@@ -133,7 +133,7 @@ function ComparisonVerticalChart(props) {
       .attr("y", i * 20 + 5) // Adjust the y position based on index
       .attr("x", 20 + 600 / 2 + 280) // Adjusted for margin
       .attr("text-anchor", "middle") // Center the text horizontally
-      .text(d.products || "") // Display the products or an empty string if undefined
+      .html(`${d.products || ""}`) // Display the products or an empty string if undefined
       .style("stroke", "none")
       .style("fill", "black");
   });

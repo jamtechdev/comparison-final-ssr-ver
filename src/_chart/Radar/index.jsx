@@ -1,40 +1,23 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { select, scaleLinear, line } from "d3";
 import * as d3 from "d3";
 import "./index.css";
 
-function Radar({ data }) {
-  console.log(data)
-  
-  const containerRef = useRef(null);
+function Radar({ data, activetab }) {
+  console.log(data, "neet");
+
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 500 - margin.left - margin.right;
   const height = 450 - margin.top - margin.bottom;
 
   // const data = [
   //   {
-  //     pace: 0.85,
-  //     shooting: 0.92,
-  //     passing: 0.91,
-  //     dribbling: 0.95,
-  //     physical: 0.65,
-  //   },
-  //   {
-  //     pace: 0.89,
-  //     shooting: 0.93,
-  //     passing: 0.81,
-  //     dribbling: 0.89,
-  //     physical: 0.77,
-  //   },
-  // ];
-  // const data = [
-  //   {
-  //     Battery: 0.805,
-  //     Cleaning: 1.0252,
-  //     Mopping: 0.2058,
+  //     Battery: 1.805,
+  //     Cleaning: 3.0252,
+  //     Mopping: 5.2058,
   //     Navigation: 1.25,
-  //     Control: 1.27,
-  //     Design: 0.0481,
+  //     Control: 10.27,
+  //     Design: 8.0481,
   //   },
   //   {
   //     Battery: 2.98,
@@ -47,11 +30,15 @@ function Radar({ data }) {
   // ];
 
   const capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    if (str && str.length > 0) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    } else {
+      return "";
+    }
   };
 
   useEffect(() => {
-    const svg = select(containerRef.current)
+    const svg = select("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -60,20 +47,8 @@ function Radar({ data }) {
 
     const attributes = Object.keys(data[0]);
 
-    const radius = 200;
+    const radius = 150;
 
-    // const { min, max } = data.reduce(
-    //   (acc, curr) => {
-    //     const currValues = Object.values(curr);
-    //     const currMin = Math.min(...currValues);
-    //     const currMax = Math.max(...currValues);
-    //     return {
-    //       min: Math.min(currMin, acc.min),
-    //       max: Math.max(currMax, acc.max),
-    //     };
-    //   },
-    //   { min: Infinity, max: -Infinity }
-    // );
     const min = 0;
     const max = 10;
 
@@ -86,7 +61,7 @@ function Radar({ data }) {
     };
 
     const tooltip = d3
-    .select(`.graph-tab-content`)
+      .select(`.graph-tab-content`)
       .append("div")
       .attr("class", "tooltip")
       .style("display", "none");
@@ -158,7 +133,6 @@ function Radar({ data }) {
         .append("text")
         .attr("x", width / 2)
         .attr("y", height / 2 - radAxis(el) - 0.85)
-        .text(Math.round(el))
         .attr("fill", "black")
         .attr("stroke", "none")
         .attr("opacity", "0.5")
@@ -180,58 +154,112 @@ function Radar({ data }) {
     const lineGen = line()
       .x((d) => d.x)
       .y((d) => d.y);
-
     const getCoordPath = (dataPoint) => {
-      const coord = [];
+      let coord = [];
       for (let i = 0; i < attributes.length; i++) {
-        const attr = attributes[i];
-        const angle = Math.PI / 2 + (2 * Math.PI * i) / attributes.length;
-        coord.push(cordForAngle(angle, radAxis(dataPoint[attr])));
+        let attr = attributes[i];
+        let angle = Math.PI / 2 + (2 * Math.PI * i) / attributes.length;
+        let { x, y } = cordForAngle(angle, radAxis(dataPoint[attr]));
+        coord.push({ x, y, value: dataPoint[attr], attribute: attr });
       }
       return coord;
     };
 
     for (let i = 0; i < data.length; i++) {
       const d = data[i];
+      console.log(i);
       const cord = getCoordPath(d);
 
       svg
         .append("path")
         .datum(cord)
-        .attr("class", "areapath")
+        .attr("class", `areapath`)
         .attr("d", lineGen)
         .attr("stroke-width", 1.5)
         .attr("stroke", "none")
-        .attr("fill", () => (i === 0 ? "#FF0" : "#ff0000"))
+        .attr("fill", () =>
+          data?.length > 2
+            ? i === 0
+              ? "#437ECE"
+              : i === 2
+              ? "#FF8F0B"
+              : "#28A28C"
+            : i === 0
+            ? "#437ECE"
+            : "#FF8F0B"
+        )
         .attr("opacity", 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
-
-      cord.forEach((point, index) => {
+      cord.forEach((point) => {
         svg
           .append("circle")
           .attr("cx", point.x + width / 2)
           .attr("cy", point.y + height / 2)
-          .attr("r", 4)
-          .attr("fill", "white")
-          .attr("stroke", "#437ece")
-          .attr("stroke-width", 1.5)
-          .on("mouseover", function (d) {
-            console.log(d,"mouse hoverfc " )
-            tooltip
-              .style("display", "block")
-              .html(`<div style="font-size: 14px;><h1>${attributes[index]}: ${data[i][attributes[index]]} </h1> </div>`)
-              .style("left", d.clientX - 20 + "px")
-              .style("top", d.clientY - 50 + "px")
-              .style("color", "#ff0000");
+          .attr("r", 5)
+          .style(
+            "fill",
+            data?.length > 2
+              ? i === 0
+                ? "#437ECE"
+                : i === 2
+                ? "#FF8F0B"
+                : "#28A28C"
+              : i === 0
+              ? "#437ECE"
+              : "#FF8F0B"
+          )
+          .style("opacity", "0.5")
+          .attr("class", "data-point")
+          .attr("data-value", point.value)
+          .attr("data-attribute", point.attribute)
+          .on("mouseenter", function () {
+            const value = select(this).attr("data-value");
+            const attribute = select(this).attr("data-attribute");
+
+            svg
+              .append("text")
+              .attr("class", "data-point-label")
+              .attr("x", point.x + width / 2 + 10)
+              .attr("y", point.y + height / 2)
+              .text(`${Math.round(value)}`)
+              .attr("fill", "black");
           })
-          .on("mouseout", function () {
-            tooltip.style("display", "none");
+          .on("mouseleave", function () {
+            // Remove the tooltip and the value label on mouse leave
+            svg.selectAll(".data-point-label").remove();
+            tooltip.transition().duration(300).style("opacity", 0);
           });
       });
+
+      // cord.forEach((point, index) => {
+      //   svg
+      //     .append("circle")
+      //     .attr("cx", point.x + width / 2)
+      //     .attr("cy", point.y + height / 2)
+      //     .attr("r", 4)
+      //     .attr("fill", "white")
+      //     .attr("stroke", "#437ece")
+      //     .attr("stroke-width", 1.5)
+      //     .on("mouseover", function (d) {
+      //       tooltip
+      //         .style("display", "block")
+      //         .html(
+      //           `<div style="font-size: 14px;"><h1>${attributes[index]}: ${
+      //             data[i][attributes[index]]
+      //           }</h1></div>`
+      //         )
+      //         .style("left", d.clientX - 20 + "px")
+      //         .style("top", d.clientY - 50 + "px")
+      //         .style("color", "#ff0000");
+      //     })
+      //     .on("mouseout", function () {
+      //       tooltip.style("display", "none");
+      //     });
+      // });
     }
   }, []);
 
-  return <svg viewBox={`0 0 ${width} ${height}`} ref={containerRef}></svg>;
+  return <svg viewBox={`0 0 ${width} ${height}`}></svg>;
 }
 
 export default Radar;

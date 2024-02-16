@@ -204,7 +204,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     },
   ];
 
-  console.log(graphData)
+  // console.log(graphData);
 
   const chartData = {
     variables: [
@@ -267,18 +267,10 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 key={index}
               >
                 <div className="graph-tab-content">
-                {graphData && (
-                  <Radar data={graphData} />
-                )}
+                  {activatab === `tab-${index + 1}` && graphData && (
+                    <Radar data={graphData} activetab={activatab} />
+                  )}
                 </div>
-                {/* <Image
-                    className="site_image"
-                    src="/images/chart.png"
-                    width={0}
-                    height={0}
-                    alt=""
-                    sizes="100%"
-                  /> */}
               </Tab>
             ))}
           </Tabs>

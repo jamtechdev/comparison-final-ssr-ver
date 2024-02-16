@@ -4,14 +4,16 @@ export default async function Page({
   params: { category, slug },
   searchParams,
 }) {
-  try {
-    
-    const categoryslugType = await getSlugType(category);
 
+  console.log(slug , 'slugggss' , category);
+  try {
+
+    const categoryslugType = await getSlugType(category);
+console.log(categoryslugType.error);
     if (categoryslugType.error) {
       return <NotFound />;
     }
-    const slugType = await getSlugType(slug);
+   const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
       const pageData = await fetchDataBasedOnPageType(
@@ -19,6 +21,7 @@ export default async function Page({
         "Comparison",
         searchParams
       );
+
       return (
         <PageSwitch
           PageType="Comparison"

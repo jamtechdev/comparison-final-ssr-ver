@@ -4,6 +4,7 @@ export default async function Page({ params: { category } }) {
   // console.log(category);
   return;
   const slugType = await getSlugType(category);
+
   if (slugType.type) {
     const pageData = await fetchDataBasedOnPageType(category, slugType.type);
     if (pageData != null) {
