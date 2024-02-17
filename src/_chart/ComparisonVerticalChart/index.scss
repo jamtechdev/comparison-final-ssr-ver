@@ -33,3 +33,21 @@
 .base__svg-container {
   cursor: inherit !important;
 }
+.container-div .chart_Append0 {
+  display: flex;
+  align-items: flex-start !important;
+  // gap: 10px;
+
+  .legendBoxBarChart {
+    margin-left: -40px;
+    z-index: 9;
+    margin-top: 20px;
+    table {
+      width: 200px;
+    }
+  }
+}
+
+// .base__svg-container g:first-child{
+//   transform: translate(50px, 20px);
+// }

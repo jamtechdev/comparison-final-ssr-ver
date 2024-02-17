@@ -63,6 +63,7 @@ header.sticky{
 .nav-dropdown-item .container .row .col-md-3 .nav-list-section{
     border-right: 1px solid #D5D5D5;
     padding: 0 10px;
+    min-height: 194px;
 }
 
 .nav-dropdown-item .container .row .col-md-3:last-child .nav-list-section{

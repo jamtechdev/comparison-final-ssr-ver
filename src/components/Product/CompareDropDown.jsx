@@ -71,7 +71,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
   return (
     <>
       <section className="ptb-80">
-        <Container fluid>
+        <Container>
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">
@@ -127,8 +127,9 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
                 {whenMatters}
               </p>
             </Col>
-            <Col md={6} lg={6}>
+            <Col md={8} lg={8}>
               <h6 className="addClassData"></h6>
+              <div className="barData"></div>
               {/* <h6 className="addClassData">
                 [pie-chart;Overall1;Robot Vacuum Cleaners;Runtime:0-300;Can mop]
               </h6> */}
@@ -141,9 +142,9 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
                 sizes="100%"
               /> */}
             </Col>
-            <Col md={2} lg={2}>
+            {/* <Col md={2} lg={2}>
               <div className="barData"></div>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </section>

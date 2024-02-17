@@ -17,7 +17,7 @@ function ComparisonVerticalChart(props) {
   } = props;
   const toolTip = d3.select(tooltipRef.current);
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
-  const width = 760 - margin.left - margin.right;
+  const width = 500 - margin.left - margin.right;
   const heights = 450 - margin.top - margin.bottom;
   const svg = d3.select(svgRef.current).select("g");
   // console.log(data, "data");
@@ -123,10 +123,10 @@ function ComparisonVerticalChart(props) {
     });
 
   // loop data and add product name with color
-  const legendMainContainer = d3.select(`.barData`);
+  const legendMainContainer = d3.select(`.chart_Append0`);
   const legendContainer = legendMainContainer
     .append("div")
-    .attr("class", "legendBox");
+    .attr("class", "legendBoxBarChart");
 
   // remove object were products is undefined
   let filteredData = data.filter((item) => item.products !== undefined);
