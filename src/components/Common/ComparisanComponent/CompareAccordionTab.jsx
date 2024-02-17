@@ -20,7 +20,6 @@ import QuestionIcon from "@/components/Svg/QuestionIcon";
 import { LoaderIcon } from "react-hot-toast";
 import Loader from "@/app/_components/Loader";
 import Radar from "@/_chart/Radar";
-// import SpiderChart from "@/_chart/SpiderChart";
 const CompareAccordionTab = React.memo(({ sendProductProps }) => {
   const [activatab, setActiveTab] = useState("tab-1");
   const [apiData, setApiData] = useState(null);
@@ -183,9 +182,6 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
     );
   };
 
-
-
-
   // console.log(graphData);
 
   const chartData = {
@@ -247,10 +243,13 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                 eventKey={`tab-${index + 1}`}
                 title={items?.name}
                 key={index}
+                onSelect={() => {
+                  d3.select(".tooltip").remove(); // Remove existing tooltip
+                }}
               >
                 <div className="graph-tab-content">
                   {activatab === `tab-${index + 1}` && graphData && (
-                    <Radar data={graphData} activeTab={index} />
+                    <Radar data={graphData} itemsData={items} activeTab={index} />
                   )}
                 </div>
               </Tab>
@@ -433,7 +432,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         attributes={item?.when_matters}
                                       />
 
-                                      <small className="d-block tooltip-title">
+                                      <small className="d-block tooltip-title invisible" >
                                         {item?.hover_phase && (
                                           <>
                                             <span
@@ -441,7 +440,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                             ip-display-content"
                                             >
                                               <span className="mb-2 prosconsColor">
-                                                {item?.hover_phase}
+                                                {/* {item?.hover_phase} */}
                                               </span>
                                             </span>
                                           </>

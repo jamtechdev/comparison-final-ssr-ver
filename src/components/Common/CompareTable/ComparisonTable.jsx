@@ -302,30 +302,36 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                                 <React.Fragment key={dIndex}>
                                   {data.price !== null && (
                                     <li>
-                                      <>
+                                      <Link
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                        href={`/link?p=${btoa(data.url)}`}
+                                        style={{
+                                          display: "block",
+                                          width: "100%",
+                                        }}
+                                      >
+                                        <img
+                                          src={data?.logo}
+                                          width={0}
+                                          height={0}
+                                          style={{
+                                            width: "100%",
+                                            height: "auto",
+                                            maxWidth: "40%",
+                                          }}
+                                          alt=""
+                                        />
+                                      </Link>
+                                      <span className="price-wider">
                                         <Link
                                           rel="noopener noreferrer"
                                           target="_blank"
                                           href={`/link?p=${btoa(data.url)}`}
                                         >
-                                          <img
-                                            src={data?.logo}
-                                            width={0}
-                                            height={0}
-                                            sizes="100vw"
-                                            alt=""
-                                          />
+                                          {data?.price} €
                                         </Link>
-                                        <span className="price-wider">
-                                          <a
-                                            rel="noopener noreferrer"
-                                            target="_blank"
-                                            href={`/link?p=${btoa(data.url)}`}
-                                          >
-                                            {data?.price} €
-                                          </a>
-                                        </span>
-                                      </>
+                                      </span>
                                     </li>
                                   )}
                                 </React.Fragment>

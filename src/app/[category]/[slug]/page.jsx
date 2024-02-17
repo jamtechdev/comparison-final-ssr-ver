@@ -4,16 +4,14 @@ export default async function Page({
   params: { category, slug },
   searchParams,
 }) {
-
   // console.log(slug , 'slugggss' , category);
   try {
-
     const categoryslugType = await getSlugType(category);
-console.log(categoryslugType.error);
+    console.log(categoryslugType);
     if (categoryslugType.error) {
       return <NotFound />;
     }
-   const slugType = await getSlugType(slug);
+    const slugType = await getSlugType(slug);
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
       const pageData = await fetchDataBasedOnPageType(
@@ -91,9 +89,9 @@ export async function generateMetadata({ params: { slug, category } }) {
       extractedUrls.length > 2
         ? `${firstTitle} vs ${secondTitle} vs ${thirdTitle}`
         : `${firstTitle} vs ${secondTitle}`;
-              // `(${capitalizeFirstLetter(
-              //       category
-              //     )})`;
+    // `(${capitalizeFirstLetter(
+    //       category
+    //     )})`;
 
     return {
       title: title || "Comparison web",
@@ -143,7 +141,6 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
-
       let productApiUrl = `${
         process.env.NEXT_PUBLIC_API_URL
       }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
@@ -156,7 +153,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${slug}`,
         productApiUrl,
       ];
-      
+
       break;
     case "Blog":
       apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug}`];

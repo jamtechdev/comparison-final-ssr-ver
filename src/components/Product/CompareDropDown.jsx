@@ -61,13 +61,17 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
     for (let i = 0; i < containerDivs.length; i++) {
       containerDivs[i].remove();
     }
+    const legendBoxDivs = document.getElementsByClassName("legendBox");
+    for (let i = 0; i < legendBoxDivs.length; i++) {
+      legendBoxDivs[i].remove();
+    }
   }, [attributeDropDown, selectedAttribute]);
   // console.log(slug);
   useComparisonChart(chart);
   return (
     <>
       <section className="ptb-80">
-        <Container>
+        <Container fluid>
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">
@@ -123,7 +127,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
                 {whenMatters}
               </p>
             </Col>
-            <Col md={8} lg={8}>
+            <Col md={6} lg={6}>
               <h6 className="addClassData"></h6>
               {/* <h6 className="addClassData">
                 [pie-chart;Overall1;Robot Vacuum Cleaners;Runtime:0-300;Can mop]
@@ -136,6 +140,9 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
                 alt=""
                 sizes="100%"
               /> */}
+            </Col>
+            <Col md={2} lg={2}>
+              <div className="barData"></div>
             </Col>
           </Row>
         </Container>

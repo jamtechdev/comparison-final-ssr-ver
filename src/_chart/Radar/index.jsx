@@ -4,28 +4,28 @@ import * as d3 from "d3";
 import "./index.css";
 
 function Radar({ data, activeTab }) {
-  // console.log(data, "neet");
+  // console.log(props, "neet");
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
-  const width = 500 - margin.left - margin.right;
+  const width = 490 - margin.left - margin.right;
   const height = 450 - margin.top - margin.bottom;
 
   // const data = [
   //   {
-  //     Battery: 8.805,
-  //     Cleaning: 3.0252,
-  //     Mopping: 5.2058,
+  //     Total: 5.758,
+  //     Battery: 3.805,
+  //     Cleaning: 5.0252,
+  //     Mopping: 8.2058,
   //     Navigation: 1.25,
-  //     Control: 10.27,
-  //     Design: 8.0481,
+  //     Design: 4.0481,
   //   },
   //   {
-  //     Battery: 7.98,
-  //     Cleaning: 4.1943,
-  //     Mopping: 8.195,
-  //     Navigation: 1.25,
-  //     Control: 2.27,
-  //     Design: 4.1809,
+  //     Total: 4.479,
+  //     Battery: 3.052,
+  //     Cleaning: 5.0252,
+  //     Mopping: 7,
+  //     Navigation: 6,
+  //     Design: 6.1378,
   //   },
   // ];
 
@@ -53,15 +53,13 @@ function Radar({ data, activeTab }) {
     const max = 10;
 
     const radAxis = scaleLinear().domain([min, max]).range([0, radius]);
-
     const cordForAngle = (angle, len) => {
-      const x = Math.cos(angle) * len;
-      const y = Math.sin(angle) * len;
+      const x = Math.cos(angle - Math.PI / 1) * len;
+      const y = Math.sin(angle - Math.PI / 1) * len;
       return { x, y };
     };
-
     const tooltip = d3
-      .select(`.graph-tab-content`)
+      .selectAll(`.graph-tab-content`)
       .append("div")
       .attr("class", "tooltip")
       .style("display", "none");
@@ -71,55 +69,43 @@ function Radar({ data, activeTab }) {
       const key = attributes[i];
       // console.log(key)
       const { x, y } = cordForAngle(slice, radius);
-
+      // Calculate the center position of the line
+      const lineCenterX = x + width / 2;
+      const lineCenterY = y + height / 2;
+      // Append the line
       svg
         .append("line")
-        .attr("x2", x + width / 2)
-        .attr("y2", y + height / 2)
+        .attr("x2", lineCenterX)
+        .attr("y2", lineCenterY)
         .attr("x1", width / 2)
         .attr("y1", height / 2)
-        .attr("stroke", "#D3D3D3")
+        .attr("stroke", "#dedede")
         .attr("stroke-width", 1.5)
-        .style("opacity", "0.3");
+        .style("opacity", "0.5");
 
+      // Append the text
+
+      // Append the text
+      const textDistance = -30;
+      const textX = lineCenterX + textDistance * Math.cos(slice) + 20.5;
+      const textY = lineCenterY + textDistance * Math.sin(slice) + 5;
       svg
         .append("text")
-        .attr("x", x + width / 2)
-        .attr("y", y + height / 2)
+
+        .attr("x", textX)
+        .attr("y", textY)
         .text(capitalize(key))
-        .style("text-anchor", (d) =>
-          i === 0
-            ? "end"
-            : i === 1
-            ? "end"
-            : i === 2
-            ? "end"
-            : i === 2
-            ? "end"
-            : null
-        )
-        .attr("dx", (d) =>
-          i === 0
-            ? "0.7em"
-            : i === 1
-            ? "-0.7em"
-            : i === 2
-            ? "-0.5em"
-            : i === 3
-            ? "0.3em"
-            : "0.6em"
-        )
-        .attr("dy", (d) =>
-          i === 0
-            ? "1.3em"
-            : i === 1
-            ? "0.4em"
-            : i === 2
-            ? "-0.5em"
-            : i === 3
-            ? "-0.5em"
-            : "0.4em"
-        )
+        .style(
+          "text-anchor",
+          slice < (Math.PI * 3.9) / 3.2 && slice > Math.PI / 2
+            ? "middle"
+            : "end"
+        ) // Center the text horizontally
+        .attr("dy", "0.5em")
+        .attr("dy", (d) => {
+          const textHeight = 5; // Approximate text height for vertical centering
+          return i % 2 === 0 ? "0.5em" : `${-textHeight / 10}px`; // Adjust vertical position
+        })
         .attr("fill", "gray");
     }
     const numTicks = 10; // Number of ticks
@@ -174,7 +160,7 @@ function Radar({ data, activeTab }) {
       svg
         .append("path")
         .datum(cord)
-        .attr("class", `areapath`)
+        .attr("class", `areapath${i}`)
         .attr("d", lineGen)
         .attr("stroke-width", "1.5px")
         .attr("stroke", () =>
@@ -199,9 +185,8 @@ function Radar({ data, activeTab }) {
             ? "#437ECE"
             : "#FF8F0B"
         )
-        .attr("opacity", activeTab == i ? 0.5 : 0.2)
+        .attr("opacity", activeTab == i ? 0.9 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
-
       cord.forEach((point, index) => {
         svg
           .append("circle")
@@ -209,29 +194,40 @@ function Radar({ data, activeTab }) {
           .attr("cy", point.y + height / 2)
           .attr("r", 5)
           .style(
-            "fill",
+            "stroke",
             data?.length > 2
               ? i === 0
                 ? "#437ECE"
-                : i === 2
+                : i === 1
                 ? "#FF8F0B"
                 : "#28A28C"
               : i === 0
               ? "#437ECE"
               : "#FF8F0B"
           )
+          .style("fill", "white")
           .attr("opacity", activeTab == i ? 0.9 : 0.1)
-          .attr("class", "data-point")
+          .attr("class", `data-point${i}`)
           .attr("data-value", point.value)
           .attr("data-attribute", point.attribute)
           .on("mouseover", function (event, d) {
             const value = select(this).attr("data-value");
+            const hoverClass = d3.select(this).attr("class");
+            let backgroundColor = "";
+
+            if (hoverClass === "data-point0") {
+              backgroundColor = "#437ECE";
+            } else if (hoverClass === "data-point1") {
+              backgroundColor = "#ff8f0b";
+            } else {
+              backgroundColor = "#28A28C";
+            }
             const attribute = select(this).attr("data-attribute");
             tooltip
               .style("display", "block")
-              .style("opacity", 2)
+              .style("opacity", 0.9)
               .html(`${attribute}: ${Math.round(value)}`)
-              .style("background-color", "#437ECE")
+              .style("background-color", backgroundColor)
               .style("left", event.clientX + "px")
               .style("top", event.clientY + "px")
               .style("color", "#fff");

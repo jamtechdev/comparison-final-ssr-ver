@@ -604,7 +604,7 @@ export default function GuidePage({
                     }}
                   />
                   <br />
-                  <h3 className="site-main-heading">Connectivity</h3>
+                  {/* <h3 className="site-main-heading">Connectivity</h3>
                   <p className="review-content">
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum has been the industry
@@ -834,7 +834,7 @@ export default function GuidePage({
                     simply dummy text of the printing and typesetting industry.
                     Lorem Ipsum has been the industry standard dummy text Ipsum
                     has been the industry standard dummy text
-                  </p>
+                  </p> */}
                 </Col>
                 <Col className="mobile-hide" md={12} lg={2}>
                   <div className="ranking-section">

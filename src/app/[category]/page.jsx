@@ -2,7 +2,7 @@ import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "../not-found";
 export default async function Page({ params: { category } }) {
   // console.log(category);
-  return;
+
   const slugType = await getSlugType(category);
 
   if (slugType.type) {
@@ -59,15 +59,15 @@ async function getSlugMetaData(category) {
   return response.json();
 }
 export async function generateMetadata({ params: { category } }) {
-
-  const meta_data = await getSlugMetaData(category)
+  const meta_data = await getSlugMetaData(category);
   return {
     title: meta_data?.data?.title || "Comparison web",
     generator: "Comparison web",
     applicationName: "Comparison web",
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
-    description: meta_data?.data?.meta_description || "Comparison web description",
+    description:
+      meta_data?.data?.meta_description || "Comparison web description",
   };
 }
 async function fetchDataBasedOnPageType(slug, pageType) {

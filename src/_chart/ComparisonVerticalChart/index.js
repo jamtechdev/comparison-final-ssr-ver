@@ -69,7 +69,7 @@ function ComparisonVerticalChart(props) {
         .html(
           `<div style="font-size: 14px;
       font-weight: 400;
-      color: rgba(39, 48, 78, 0.8);"><span style="margin-right:8px">${
+      color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
         data.value
       }% (${data.productCount ? data.productCount : "0"})</span></div>`
         )
@@ -123,31 +123,66 @@ function ComparisonVerticalChart(props) {
     });
 
   // loop data and add product name with color
-  // Define margin
-  let circleMargin = 10;
-  data.forEach((d, i) => {
-    let color = ["#437ECE", "#FF8F0B", "black"];
-    let fillColor = d.products ? color[i] : "";
+  const legendMainContainer = d3.select(`.barData`);
+  const legendContainer = legendMainContainer
+    .append("div")
+    .attr("class", "legendBox");
 
-    if (fillColor) {
-      svg
-        .append("circle")
-        .attr("cx", 20 + 600 / 50 + 479) // Adjusted for margin
-        .attr("cy", i * 20 + circleMargin) // Adjust the y position based on index
-        .attr("r", 10)
-        .style("fill", fillColor)
-        .style("opacity", "1");
-    }
-    svg
-      .append("text")
-      .attr("y", i * 20 + circleMargin + 4) // Adjust the y position based on index
-      .attr("x", 20 + 610 / 2 + 280) // Adjusted for margin
-      .attr("text-anchor", "middle") // Center the text horizontally
-      .html(`${d.products || ""}`) // Display the products or an empty string if undefined
-      .style("stroke", "none")
-      .style("fill", "black");
-    circleMargin = circleMargin + 10;
-  });
+  // remove object were products is undefined
+  let filteredData = data.filter((item) => item.products !== undefined);
+  const table = legendContainer.append("table");
+  const tbody = table.append("tbody");
+  const rows = tbody.selectAll("tr").data(filteredData).enter().append("tr");
+  let color = ["#437ECE", "#FF8F0B", "black"];
+  const cells = rows
+    .selectAll("td")
+    .data(function (d, i) {
+      return [color[i], d.products];
+    })
+    .enter()
+    .append("td")
+    .each(function (d, i) {
+      if (i == 0) {
+        d3.select(this)
+          .append("div")
+          .attr("class", "legend-avatar barChartProduct")
+          .style("width", "12px")
+          .style("height", "12px")
+          .style("background-color", d);
+      }
+      if (i == 1) {
+        d3.select(this)
+          .append("span")
+          .attr("class", "legend-text barChartProduct")
+          .text((d) => `${d}`);
+      }
+    });
+
+  // Define margin
+  // let circleMargin = 10;
+  // data.forEach((d, i) => {
+  //   let color = ["#437ECE", "#FF8F0B", "black"];
+  //   let fillColor = d.products ? color[i] : "";
+
+  //   if (fillColor) {
+  //     svg
+  //       .append("circle")
+  //       .attr("cx", 20 + 600 / 50 + 479) // Adjusted for margin
+  //       .attr("cy", i * 20 + circleMargin) // Adjust the y position based on index
+  //       .attr("r", 10)
+  //       .style("fill", fillColor)
+  //       .style("opacity", "1");
+  //   }
+  //   svg
+  //     .append("text")
+  //     .attr("y", i * 20 + circleMargin + 4) // Adjust the y position based on index
+  //     .attr("x", 20 + 610 / 2 + 280) // Adjusted for margin
+  //     .attr("text-anchor", "end") // Center the text horizontally
+  //     .append("tspan")
+  //     .html(`<span>${d.products || ""}</span>`) // Display the products or an empty string if undefined
+  //     .style("fill", fillColor);
+  //   circleMargin = circleMargin + 10;
+  // });
 }
 
 const extraProps = {

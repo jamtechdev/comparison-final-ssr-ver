@@ -7,6 +7,7 @@
 .rect-hover {
   &:hover {
     fill: rgb(67, 126, 206);
+    cursor: pointer;
   }
 }
 
@@ -28,4 +29,7 @@
 }
 .marginPath {
   margin: 5px 5px 4px 4px;
+}
+.base__svg-container {
+  cursor: inherit !important;
 }
