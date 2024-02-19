@@ -46,6 +46,10 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
     for (let i = 0; i < legendBoxDivs.length; i++) {
       legendBoxDivs[i].remove();
     }
+    const parentDivs = document.getElementsByClassName("parentBarDiv");
+    for (let i = 0; i < parentDivs.length; i++) {
+      parentDivs[i].remove();
+    }
   }, [selectedAttribute]);
 
   const handleItemChange = (e) => {

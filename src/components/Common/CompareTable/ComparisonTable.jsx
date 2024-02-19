@@ -92,13 +92,15 @@ export default function ComparisonTable({ products, categoryAttributes }) {
 
     numericValues = arrayOfObjects
       .map((obj) => {
-        if (!isNaN(parseFloat(obj.attribute_value))) {
-          return parseFloat(obj.attribute_value);
+        if (!isNaN(parseFloat(obj?.attribute_value))) {
+          return parseFloat(obj?.attribute_value);
         } else {
-          return obj.attribute_value;
+          return obj?.attribute_value;
         }
       })
       .filter((value) => !isNaN(value));
+
+      console.log(arrayOfObjects,"neet")
 
     if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
       numericValues.sort((a, b) => b - a);
@@ -108,7 +110,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
 
     // Adding logic for String case
     if (numericValues.length === 0) {
-      const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
+      const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
 
       if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
         const targetString = stringArray[0] === "yes" ? "yes" : "no";
@@ -121,7 +123,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       (value) => value === topValue
     ).length;
 
-    if (occurrences === 1 || occurrences === 2) {
+    if (occurrences === 1) {
       arrayOfObjects.forEach((obj) => {
         const numericValue =
           typeof topValue === "string"
@@ -140,7 +142,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       <>
         {arrayOfObjects.map((item, attrIndex) => (
           <td key={attrIndex}>
-            {item.attribute_value.includes("⭐") ? (
+            {item?.attribute_value.includes("⭐") ? (
               <>
                 <div>
                   {item?.attribute_value.split("⭐")[0]}{" "}
@@ -163,7 +165,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                 ) : (
                   <>
                     {" "}
-                    {item?.attribute_value} {item.unit ? item.unit : ""}
+                    {item?.attribute_value} {item?.unit ? item.unit : ""}
                   </>
                 )}
               </>

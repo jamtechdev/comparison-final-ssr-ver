@@ -105,6 +105,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     } else {
       numericValues.sort((a, b) => a - b);
     }
+    // console.log(arrayOfObjects, "numericValues");
 
     // Adding logic for String case
     if (numericValues.length === 0) {
@@ -117,23 +118,25 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     }
 
     const topValue = numericValues[0];
+    // console.log(topValue, "neet ")
 
     const occurrences = numericValues?.filter(
       (value) => value === topValue
     ).length;
-
-    if (occurrences === 1 || occurrences === 2) {
+    // console.log(occurrences, "neet");
+    //  if (occurrences === 1 || occurrences === 2)
+    if (occurrences === 1) {
       arrayOfObjects.forEach((obj) => {
         const numericValue =
           typeof topValue === "string"
             ? obj.attribute_value
             : parseFloat(obj.attribute_value);
         if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
-          // console.log(obj.attribute_value + "⭐");
           obj.attribute_value += "⭐";
         }
       });
     }
+    // console.log(arrayOfObjects,"neet")
 
     // Adjust this function according to your context as I don't have the complete code
     // It would be good to ensure that you have the required variables (finalProducts) in scope.
