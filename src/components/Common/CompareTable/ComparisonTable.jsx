@@ -55,6 +55,8 @@ export default function ComparisonTable({ products, categoryAttributes }) {
     productsWithAttributeGroup[product.name] = productCopy;
   });
   const finalProducts = Object.values(productsWithAttributeGroup);
+  const removeLastObjectFromCategory = [...categoryAttributes]; // Clone the finalProducts array
+  removeLastObjectFromCategory.pop();
 
   const getValue = (arr, attribute) => {
     const foundElement = arr.find((obj) => obj.attribute === attribute);
@@ -72,7 +74,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
   };
 
   const handleTableShow = () => {
-    setFullTable(categoryAttributes?.length);
+    setFullTable(removeLastObjectFromCategory?.length);
   };
 
   const [isSticky, ref] = useDetectSticky();
@@ -100,7 +102,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       })
       .filter((value) => !isNaN(value));
 
-      console.log(arrayOfObjects,"neet")
+    console.log(arrayOfObjects, "neet");
 
     if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
       numericValues.sort((a, b) => b - a);
@@ -180,7 +182,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
     if (products.length === 0) {
       return "";
     }
-    const maxScore = Math.max(...products.map((obj) => obj.overall_score));
+    const maxScore = Math.max(...products?.map((obj) => obj.overall_score));
     const winningProductIndex = products
       .map((obj, index) => (obj.overall_score === maxScore ? index : undefined))
       .filter((index) => index !== undefined);
@@ -487,7 +489,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
               );
             })}
           </tr>
-          {categoryAttributes
+          {removeLastObjectFromCategory
             ?.slice(0, fullTable || 2)
             .map((category, categoryIndex) => {
               return (

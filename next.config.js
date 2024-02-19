@@ -17,7 +17,7 @@ const nextConfig = {
       "via.placeholder.com",
       "frontum.online",
       "localhost:3000",
-    "source.unsplash.com"
+      "source.unsplash.com",
     ], // Add any other domains as needed
   },
 };
