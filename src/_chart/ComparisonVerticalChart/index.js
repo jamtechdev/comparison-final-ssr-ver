@@ -160,32 +160,6 @@ function ComparisonVerticalChart(props) {
           .text((d) => `${d}`);
       }
     });
-
-  // Define margin
-  // let circleMargin = 10;
-  // data.forEach((d, i) => {
-  //   let color = ["#437ECE", "#FF8F0B", "black"];
-  //   let fillColor = d.products ? color[i] : "";
-
-  //   if (fillColor) {
-  //     svg
-  //       .append("circle")
-  //       .attr("cx", 20 + 600 / 50 + 479) // Adjusted for margin
-  //       .attr("cy", i * 20 + circleMargin) // Adjust the y position based on index
-  //       .attr("r", 10)
-  //       .style("fill", fillColor)
-  //       .style("opacity", "1");
-  //   }
-  //   svg
-  //     .append("text")
-  //     .attr("y", i * 20 + circleMargin + 4) // Adjust the y position based on index
-  //     .attr("x", 20 + 610 / 2 + 280) // Adjusted for margin
-  //     .attr("text-anchor", "end") // Center the text horizontally
-  //     .append("tspan")
-  //     .html(`<span>${d.products || ""}</span>`) // Display the products or an empty string if undefined
-  //     .style("fill", fillColor);
-  //   circleMargin = circleMargin + 10;
-  // });
 }
 
 const extraProps = {
