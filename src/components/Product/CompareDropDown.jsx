@@ -7,55 +7,36 @@ import axios from "axios";
 import useComparisonChart from "@/hooks/useComparisonChart";
 
 function CompareDropDown({ attributeDropDown, product, slug }) {
-  const [selectedCategory, setSelectedCategory] = useState(
-    Object.keys(attributeDropDown)[0] || ""
+  // console.log(attributeDropDown)
+  const [selectedItem, setSelectedItem] = useState(
+    attributeDropDown[0] || null
   );
-  const [selectedAttribute, setSelectedAttribute] = useState("");
-  const [selectedObjectDescription, setSelectedObjectDescription] =
-    useState("");
-  const [whenMatters, setwhenMatters] = useState("");
   const [chart, setChart] = useState("");
-  // console.log(attributeDropDown);
-  const handleCategoryChange = (event) => {
-    const category = event.target.value;
-    setSelectedCategory(category);
-    setSelectedAttribute(""); // Reset selected attribute when category changes
+  const [selectedAttribute, setSelectedAttribute] = useState(
+    (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
+  );
+  // console.log(selectedAttribute)
 
-    // Update the description based on the selected category and attribute
-    const firstObject = attributeDropDown[category]?.[0] || {};
-    const { description } = firstObject;
-    setSelectedObjectDescription(description || "");
-  };
-
-  const handleAttributeChange = (event) => {
-    const attribute = event.target.value;
-    setSelectedAttribute(attribute);
-
-    // Update the description based on the selected category and attribute
-  };
-
-  // Call Chart API
   useEffect(() => {
-    const selectedObject = selectedAttribute
-      ? attributeDropDown[selectedCategory].find(
-          (obj) => selectedAttribute === obj.attribute
+    setSelectedItem(attributeDropDown[0] || null);
+    setSelectedAttribute(
+      (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
+    );
+  }, [attributeDropDown]);
+  useEffect(() => {
+    if (selectedAttribute) {
+      const config = {
+        headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
+      };
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedAttribute?.name}&slug=${slug}`,
+          config
         )
-      : attributeDropDown[selectedCategory][0];
-    const { description, when_matters } = selectedObject;
-    setwhenMatters(when_matters ? when_matters : "");
-    setSelectedObjectDescription(description || "");
-
-    const config = {
-      headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
-    };
-    axios
-      .get(
-        `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedObject?.attribute}&slug=${slug}`,
-        config
-      )
-      .then((res) => {
-        setChart(res.data.data);
-      });
+        .then((res) => {
+          setChart(res.data.data);
+        });
+    }
 
     const containerDivs = document.getElementsByClassName("container-div");
     for (let i = 0; i < containerDivs.length; i++) {
@@ -65,8 +46,21 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
     for (let i = 0; i < legendBoxDivs.length; i++) {
       legendBoxDivs[i].remove();
     }
-  }, [attributeDropDown, selectedAttribute]);
-  // console.log(slug);
+  }, [selectedAttribute]);
+
+  const handleItemChange = (e) => {
+    const selectedItemIndex = e.target.value;
+    const selectedItem = attributeDropDown[selectedItemIndex];
+    setSelectedItem(selectedItem);
+    setSelectedAttribute(selectedItem.attributes[0]);
+  };
+
+  const handleAttributeChange = (e) => {
+    const selectedAttributeIndex = e.target.value;
+    const selectedAttribute = selectedItem.attributes[selectedAttributeIndex];
+    setSelectedAttribute(selectedAttribute);
+  };
+
   useComparisonChart(chart);
   return (
     <>
@@ -85,46 +79,46 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
                 <span>Attribute category:</span>
                 <Form.Select
                   aria-label="Category select"
-                  value={selectedCategory}
-                  onChange={handleCategoryChange}
+                  onChange={handleItemChange}
+                  value={attributeDropDown.indexOf(selectedItem)}
                 >
-                  {Object.keys(attributeDropDown).map((category) => (
-                    <option key={category} value={category}>
-                      {category}
+                  {attributeDropDown.map((item, index) => (
+                    <option key={index} value={index}>
+                      {item.name}
                     </option>
                   ))}
                 </Form.Select>
               </div>
               <div className="filtered-data-select justify-content-start mt-3">
                 <span>Attribute:</span>
-                {selectedCategory && (
+                {selectedItem && (
                   <Form.Select
                     aria-label="Attribute select"
-                    value={selectedAttribute}
                     onChange={handleAttributeChange}
+                    value={selectedItem.attributes.indexOf(selectedAttribute)}
                   >
-                    {attributeDropDown[selectedCategory].map((obj) => (
-                      <option key={obj.attribute} value={obj.attribute}>
-                        {obj.attribute}
+                    {selectedItem.attributes.map((attribute, index) => (
+                      <option key={index} value={index}>
+                        {attribute.name}
                       </option>
                     ))}
                   </Form.Select>
                 )}
               </div>
               <p className="text-end para_content_text mt-3">
-                {selectedObjectDescription && (
+                {selectedAttribute && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>
                     What it is:
                   </span>
                 )}
-                {selectedObjectDescription}
+                {selectedAttribute.description}
                 <br />
-                {whenMatters && (
+                {selectedAttribute && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>
                     When matters:
                   </span>
                 )}
-                {whenMatters}
+                {selectedAttribute.when_matters}
               </p>
             </Col>
             <Col md={8} lg={8}>

@@ -408,7 +408,7 @@ function ProductPage({
         </Container>
       </section>
       <CompareDropDown
-        attributeDropDown={productCopy?.attributes}
+        attributeDropDown={productCatAttributes?.data}
         product={product}
       />
 
@@ -530,9 +530,9 @@ function ProductPage({
                                   <a
                                     rel="noopener noreferrer"
                                     target="_blank"
-                                    href={`/link?p=${btoa(data.url)}`}
+                                    href={`/link?p=${btoa(item.url)}`}
                                   >
-                                    {data?.price} €
+                                    {item?.price} €
                                   </a>
                                 </span>
                               </li>

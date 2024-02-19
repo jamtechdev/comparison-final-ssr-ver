@@ -8,6 +8,7 @@ import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
 import Link from "next/link";
+
 export default function ComparisonTable({ products, categoryAttributes }) {
   const router = useRouter();
 
@@ -81,7 +82,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
     const filterData = copiedFinalProducts
       .slice(0, defaultNo)
       .flatMap((product) =>
-        product.attributes[category.name].filter(
+        product.attributes[category.name]?.filter(
           (obj) => obj.attribute === catAttribute.name
         )
       );
@@ -301,14 +302,13 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                               return (
                                 <React.Fragment key={dIndex}>
                                   {data.price !== null && (
-                                    <li>
+                                    <li className="compare-product-table">
                                       <Link
                                         rel="noopener noreferrer"
                                         target="_blank"
                                         href={`/link?p=${btoa(data.url)}`}
                                         style={{
-                                          display: "block",
-                                          width: "100%",
+                                          width: "auto",
                                         }}
                                       >
                                         <img
@@ -318,7 +318,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                                           style={{
                                             width: "100%",
                                             height: "auto",
-                                            maxWidth: "40%",
+                                            maxWidth: "100%",
                                           }}
                                           alt=""
                                         />

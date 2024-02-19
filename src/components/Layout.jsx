@@ -2,13 +2,21 @@
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import store from "../redux/store";
+import { usePathname } from "next/navigation";
 import { Provider } from "react-redux";
+
 export default async function Layout({ children, footerData, headerData }) {
-    return (<>
-        <Provider store={store}>
-            <Header headerData={headerData} />
-            {children}
-            <Footer footerData={footerData} />
-        </Provider>
-    </>)
+  const pathname = usePathname();
+  if (pathname == "/link") {
+    return <Provider store={store}>{children}</Provider>;
+  }
+  return (
+    <>
+      <Provider store={store}>
+        <Header headerData={headerData} />
+        {children}
+        <Footer footerData={footerData} />
+      </Provider>
+    </>
+  );
 }

@@ -9,6 +9,7 @@ import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 
 const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
+  // console.table(categoryAttributes[0]?.attributes);
   // console.log(products);
   // console.log(products?.length);
   // console.log(categoryAttributes);
@@ -55,7 +56,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     productsWithAttributeGroup[product.name] = productCopy;
   });
   const finalProducts = Object.values(productsWithAttributeGroup);
-  // console.log(finalProducts)
+  // console.log(finalProducts);
 
   const getValue = (arr, attribute) => {
     const foundElement = arr.find((obj) => obj.attribute === attribute);
@@ -77,7 +78,6 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
   };
 
   const [isSticky, ref] = useDetectSticky();
-
   const addAsterisksToTopValue = (defaultNo, category, catAttribute) => {
     const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
     const filterData = copiedFinalProducts
@@ -100,7 +100,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
       })
       .filter((value) => !isNaN(value));
 
-    if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
+    if (arrayOfObjects?.[0]?.algorithm == "highest_to_lowest") {
       numericValues.sort((a, b) => b - a);
     } else {
       numericValues.sort((a, b) => a - b);
@@ -117,6 +117,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     }
 
     const topValue = numericValues[0];
+
     const occurrences = numericValues?.filter(
       (value) => value === topValue
     ).length;
@@ -303,8 +304,13 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                                       <>
                                         <Link
                                           rel="noopener noreferrer"
-                                          target="_blank"
-                                          href={`/link?p=${btoa(data.url)}`}
+                                          onClick={() =>
+                                            window.open(
+                                              `/link?p=${btoa(data.url)}`,
+                                              "_blank"
+                                            )
+                                          }
+                                          href="#"
                                         >
                                           <img
                                             src={data?.logo}
@@ -315,13 +321,13 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                                           />
                                         </Link>
                                         <span>
-                                          <a
+                                          <Link
                                             rel="noopener noreferrer"
                                             target="_blank"
                                             href={`/link?p=${btoa(data.url)}`}
                                           >
                                             {data?.price} €
-                                          </a>
+                                          </Link>
                                         </span>
                                       </>
                                     </li>

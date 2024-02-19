@@ -167,7 +167,7 @@ function ComparisonPieChart(props) {
         if (i === 3) {
           // console.log(indexId);
 
-          d.forEach((item, index) => {
+          d?.forEach((item, index) => {
             let color;
             if (indexId === 0) {
               color = "#437ECE";

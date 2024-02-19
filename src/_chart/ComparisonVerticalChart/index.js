@@ -123,7 +123,10 @@ function ComparisonVerticalChart(props) {
     });
 
   // loop data and add product name with color
-  const legendMainContainer = d3.select(`.chart_Append0`);
+  const legendMainContainer = d3
+    .select(`.chart_Append0`)
+    .attr("class", "parentBarDiv");
+
   const legendContainer = legendMainContainer
     .append("div")
     .attr("class", "legendBoxBarChart");
@@ -133,7 +136,7 @@ function ComparisonVerticalChart(props) {
   const table = legendContainer.append("table");
   const tbody = table.append("tbody");
   const rows = tbody.selectAll("tr").data(filteredData).enter().append("tr");
-  let color = ["#437ECE", "#FF8F0B", "black"];
+  let color = ["#437ECE", "#FF8F0B", "rgb(40, 162, 140)"];
   const cells = rows
     .selectAll("td")
     .data(function (d, i) {

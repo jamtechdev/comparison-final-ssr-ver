@@ -14,6 +14,7 @@ import BottomBar from "@/components/Common/BottomBar/BottomBar";
 import { isAreObjectsEqual } from "@/_helpers";
 import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import ConfirmationModal from "@/components/Common/Modal/ConfirmationModal";
 export default function GuidePage({
   slug,
   categorySlug,
@@ -159,20 +160,21 @@ export default function GuidePage({
     // ]);
     // console.log(JSON.parse(sortAttribute))
   };
-
-  if (products.length <= 0 && !currentParams.variant) {
-    const queryString = Object.keys(searchParams)
-      .map((key) => key + "=" + encodeURI(searchParams[key]))
-      .join("&");
-    window.history.pushState(
-      {},
-      "",
-      `?${queryString}&variant=true&direct=true`
-    );
-    router.push(`?${queryString}&variant=true&direct=true`, {
-      scroll: false,
-    });
-  }
+  // if (products.length === 0) {
+  //   if (products.length <= 0 && !currentParams.variant) {
+  //     const queryString = Object.keys(searchParams)
+  //       .map((key) => key + "=" + encodeURI(searchParams[key]))
+  //       .join("&");
+  //     window.history.pushState(
+  //       {},
+  //       "",
+  //       `?${queryString}&variant=true&direct=true`
+  //     );
+  //     router.push(`?${queryString}&variant=true&direct=true`, {
+  //       scroll: false,
+  //     });
+  //   }
+  // }
 
   // When initial product load than store in local storage
   // this code is  only for testing when will  API create than remove  this code
@@ -182,6 +184,31 @@ export default function GuidePage({
     }
   }, []);
   // console.log(products, "allproduct");
+  const [showModal, setShowModal] = useState(true);
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+  const handleConfirm = () => {
+    // Handle confirmation logic here
+    if (products.length <= 0 && !currentParams.variant) {
+      const queryString = Object.keys(searchParams)
+        .map((key) => key + "=" + encodeURI(searchParams[key]))
+        .join("&");
+      window.history.pushState(
+        {},
+        "",
+        `?${queryString}&variant=true&direct=true`
+      );
+      router.push(`?${queryString}&variant=true&direct=true`, {
+        scroll: true,
+      });
+    }
+    setShowModal(false);
+  };
+  if (products?.length === 0) {
+  }
+
   return (
     <>
       {products.length > 0 ? (
@@ -604,237 +631,6 @@ export default function GuidePage({
                     }}
                   />
                   <br />
-                  {/* <h3 className="site-main-heading">Connectivity</h3>
-                  <p className="review-content">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry
-                    standard dummy text Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry standard dummy text Ipsum
-                    has been the industry standard dummy text
-                  </p>
-                  <br />
-                  <h3 className="site-main-heading">Power</h3>
-                  <p className="review-content">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry
-                    standard dummy text Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry standard dummy text Ipsum
-                    has been the industry standard dummy text
-                  </p>
-                  <Row className="mt-3">
-                    <Col md={12}>
-                      <h4 className="site-main-heading">
-                        Smartwatches with best power
-                      </h4>
-                    </Col>
-                    <div className="best-product-listing-item">
-                      <span className="number">1</span>
-                      <Table>
-                        <tbody>
-                          <tr>
-                            <td rowSpan="2">
-                              <div className="best-product-listing-item-name">
-                                <p className="device-name">
-                                  Samsung Galaxy S23 Ultra
-                                </p>
-                                <Image
-                                  className="compare_image"
-                                  src="/images/compare.png"
-                                  width={0}
-                                  height={0}
-                                  alt=""
-                                  sizes="100%"
-                                />
-                              </div>
-                            </td>
-                            <td className="light-bg-color">
-                              <div className="best-product-listing-item-rating-item">
-                                <span>Overall Score</span>
-                                <span className="count dark-color">8.5</span>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="best-product-listing-item-price-item">
-                                <Image
-                                  src="/images/amazon.png"
-                                  width={0}
-                                  height={0}
-                                  sizes="100%"
-                                  alt=""
-                                />
-                                <span>155.87 €</span>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="light-bg-color">
-                              <div className="best-product-listing-item-rating-item">
-                                <span>Power</span>
-                                <span className="count power-of-count">
-                                  500 W
-                                </span>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="best-product-listing-item-price-item">
-                                <Image
-                                  src="/images/amazon.png"
-                                  width={0}
-                                  height={0}
-                                  sizes="100%"
-                                  alt=""
-                                />
-                                <span>155.87 €</span>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </div>
-                    <div className="best-product-listing-item">
-                      <span className="number">2</span>
-                      <Table>
-                        <tbody>
-                          <tr>
-                            <td rowSpan="2">
-                              <div className="best-product-listing-item-name">
-                                <p className="device-name">
-                                  Samsung Galaxy S23 Ultra
-                                </p>
-                                <Image
-                                  className="compare_image"
-                                  src="/images/compare.png"
-                                  width={0}
-                                  height={0}
-                                  alt=""
-                                  sizes="100%"
-                                />
-                              </div>
-                            </td>
-                            <td className="light-bg-color">
-                              <div className="best-product-listing-item-rating-item">
-                                <span>Overall Score</span>
-                                <span className="count dark-color">8.5</span>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="best-product-listing-item-price-item">
-                                <Image
-                                  src="/images/amazon.png"
-                                  width={0}
-                                  height={0}
-                                  sizes="100%"
-                                  alt=""
-                                />
-                                <span>155.87 €</span>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="light-bg-color">
-                              <div className="best-product-listing-item-rating-item">
-                                <span>Power</span>
-                                <span className="count power-of-count">
-                                  500 W
-                                </span>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="best-product-listing-item-price-item">
-                                <Image
-                                  src="/images/amazon.png"
-                                  width={0}
-                                  height={0}
-                                  sizes="100%"
-                                  alt=""
-                                />
-                                <span>155.87 €</span>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </div>
-                    <div className="best-product-listing-item">
-                      <span className="number">3</span>
-                      <Table>
-                        <tbody>
-                          <tr>
-                            <td rowSpan="2">
-                              <div className="best-product-listing-item-name">
-                                <p className="device-name">
-                                  Samsung Galaxy S23 Ultra
-                                </p>
-                                <Image
-                                  className="compare_image"
-                                  src="/images/compare.png"
-                                  width={0}
-                                  height={0}
-                                  alt=""
-                                  sizes="100%"
-                                />
-                              </div>
-                            </td>
-                            <td className="light-bg-color">
-                              <div className="best-product-listing-item-rating-item">
-                                <span>Overall Score</span>
-                                <span className="count dark-color">8.5</span>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="best-product-listing-item-price-item">
-                                <Image
-                                  src="/images/amazon.png"
-                                  width={0}
-                                  height={0}
-                                  sizes="100%"
-                                  alt=""
-                                />
-                                <span>155.87 €</span>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td className="light-bg-color">
-                              <div className="best-product-listing-item-rating-item">
-                                <span>Power</span>
-                                <span className="count power-of-count">
-                                  500 W
-                                </span>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="best-product-listing-item-price-item">
-                                <Image
-                                  src="/images/amazon.png"
-                                  width={0}
-                                  height={0}
-                                  sizes="100%"
-                                  alt=""
-                                />
-                                x <span>155.87 €</span>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </div>
-                  </Row>
-                  <br />
-                  <h3 className="site-main-heading">Speed</h3>
-                  <p className="review-content">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry
-                    standard dummy text Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry standard dummy text Ipsum
-                    has been the industry standard dummy text
-                  </p> */}
                 </Col>
                 <Col className="mobile-hide" md={12} lg={2}>
                   <div className="ranking-section">
@@ -892,16 +688,28 @@ export default function GuidePage({
         </>
       ) : (
         <>
-          {" "}
-          <div className="text-center p-5">
-            We regret to inform you that, at the moment, we do not currently
-            have a product available that aligns with the content of this guide.
-            Our team is actively working on expanding our product offerings, and
-            we appreciate your understanding. If you have any specific
-            product-related inquiries or if there's anything else we can assist
-            you with, please feel free to reach out to our support team. Thank
-            you for your patience and interest in our services.
-          </div>
+          <ConfirmationModal
+            showModal={showModal}
+            handleClose={handleClose}
+            handleConfirm={handleConfirm}
+          />
+          {showModal === false ? (
+            <div className="text-center p-5">
+              None of the products meet your filtering criteria.
+            </div>
+          ) : (
+            <div className="text-center p-5">
+              We regret to inform you that, at the moment, we do not currently
+              have a product available that aligns with the content of this
+              guide. Our team is actively working on expanding our product
+              offerings, and we appreciate your understanding. If you have any
+              specific product-related inquiries or if there's anything else we
+              can assist you with, please feel free to reach out to our support
+              team. Thank you for your patience and interest in our services.
+            </div>
+          )}
+
+          {/* {confirm("tum chai pina h ?")} */}
         </>
       )}
     </>

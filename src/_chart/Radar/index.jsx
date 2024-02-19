@@ -226,7 +226,7 @@ function Radar({ data, activeTab }) {
             tooltip
               .style("display", "block")
               .style("opacity", 0.9)
-              .html(`${attribute}: ${Math.round(value)}`)
+              .html(`${attribute}: ${parseFloat(value).toFixed(1)}`)
               .style("background-color", backgroundColor)
               .style("left", event.clientX + "px")
               .style("top", event.clientY + "px")

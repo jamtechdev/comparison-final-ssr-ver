@@ -11,6 +11,7 @@ function Comparison({
 }) {
   return (
     <>
+ 
 
 
       <CompareDiv

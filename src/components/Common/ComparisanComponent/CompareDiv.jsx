@@ -116,6 +116,7 @@ function CompareDiv({
     productAttributes[categoryName]?.push(attribute);
   });
   productCopy["attributes"] = productAttributes;
+  // console.log(productAttributes)
 
   // this useEffect work when anyone  direct vist comparsion product link than fetch data using paramURL & store in redux
   useEffect(() => {
@@ -284,7 +285,7 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
-      <CompareDropDown slug={slug} attributeDropDown={productAttributes} />
+      <CompareDropDown slug={slug} attributeDropDown={categroyAttributes} />
       {isOpen && (
         <CompareModal
           location={"comparison"}

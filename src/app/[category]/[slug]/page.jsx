@@ -1,5 +1,6 @@
 import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "@/app/not-found";
+
 export default async function Page({
   params: { category, slug },
   searchParams,
@@ -7,7 +8,10 @@ export default async function Page({
   // console.log(slug , 'slugggss' , category);
   try {
     const categoryslugType = await getSlugType(category);
-    console.log(categoryslugType);
+    // console.log(categoryslugType)  
+
+
+    // console.log(categoryslugType);
     if (categoryslugType.error) {
       return <NotFound />;
     }
