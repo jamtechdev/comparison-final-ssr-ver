@@ -18,10 +18,19 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
   // console.log(selectedAttribute)
 
   useEffect(() => {
-    setSelectedItem(attributeDropDown[0] || null);
-    setSelectedAttribute(
-      (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
+    const generalIndex = attributeDropDown.findIndex(
+      (attribute) => attribute.name === "General"
     );
+    if (generalIndex !== -1) {
+      const [general] = attributeDropDown.splice(generalIndex, 1);
+      attributeDropDown.unshift(general);
+    }
+    setTimeout(() => {
+      setSelectedItem(attributeDropDown[0] || null);
+      setSelectedAttribute(
+        (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
+      );
+    }, [300]);
   }, [attributeDropDown]);
   useEffect(() => {
     if (selectedAttribute) {
@@ -50,7 +59,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
     for (let i = 0; i < parentDivs.length; i++) {
       parentDivs[i].remove();
     }
-  }, [selectedAttribute]);
+  }, [attributeDropDown, selectedAttribute]);
 
   const handleItemChange = (e) => {
     const selectedItemIndex = e.target.value;

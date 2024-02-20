@@ -194,7 +194,7 @@ export default function Filter({
       }
       if (removedParam == "brand") {
         Object.values(searchParam)[0]
-          .split(",")
+          ?.split(",")
           .map((item) => {
             handelFilterActions("brand", "brand", { brand: item }, false);
             document.getElementById(`${item}`).checked = false;

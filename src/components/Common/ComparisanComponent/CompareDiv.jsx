@@ -26,6 +26,7 @@ import CompareAccordionTab from "./CompareAccordionTab";
 import { useDispatch, useSelector } from "react-redux";
 import CompareDropDown from "@/components/Product/CompareDropDown";
 import { useRouter } from "next/navigation";
+import { getAttributeHalf } from "@/_helpers";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -162,6 +163,10 @@ function CompareDiv({
       image: product?.main_image ? product?.main_image : "/images/nofound.png",
     };
   };
+
+
+  
+  
   return (
     <>
       <section className="product-header">
@@ -285,7 +290,7 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
-      <CompareDropDown slug={slug} attributeDropDown={categroyAttributes} />
+      <CompareDropDown slug={slug} attributeDropDown={[...categroyAttributes]} />
       {isOpen && (
         <CompareModal
           location={"comparison"}
