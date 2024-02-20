@@ -58,7 +58,7 @@ function ComparisonVerticalChart(props) {
       } else if (d.selected === 1 && i === secondIndex) {
         return "#FF8F0B";
       } else if (d.selected === 1 && i === thirdIndex) {
-        return "#28A28C";
+        return "";
       } else {
         return ""; // or any other default color
       }
@@ -99,7 +99,7 @@ function ComparisonVerticalChart(props) {
       } else if (d.selected === 1 && i === secondIndex) {
         return "#FF8F0B";
       } else if (d.selected === 1 && i === thirdIndex) {
-        return "#28A28C";
+        return "";
       } else {
         return "";
       }
