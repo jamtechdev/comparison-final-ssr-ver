@@ -208,6 +208,8 @@ export default function GuidePage({
     }
     setShowModal(false);
   };
+  // console.log(products, "hello");
+
   return (
     <>
       <section className="product-header">
