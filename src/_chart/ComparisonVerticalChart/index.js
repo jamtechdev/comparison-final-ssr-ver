@@ -28,7 +28,7 @@ function ComparisonVerticalChart(props) {
     label: label.split("-").map(Number).join("-"),
   }));
 
-  // Bar chart Based on selected product
+  // Bar chart Valur Based on selected product
   let fristIndex = -1;
   let secondIndex = -1;
   let thirdIndex = -1;
