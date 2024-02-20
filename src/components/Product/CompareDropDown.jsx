@@ -59,7 +59,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
     for (let i = 0; i < parentDivs.length; i++) {
       parentDivs[i].remove();
     }
-  }, [attributeDropDown, selectedAttribute]);
+  }, [selectedAttribute]);
 
   const handleItemChange = (e) => {
     const selectedItemIndex = e.target.value;
