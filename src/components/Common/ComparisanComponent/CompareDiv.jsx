@@ -290,7 +290,7 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
-      <CompareDropDown slug={slug} attributeDropDown={[...categroyAttributes]} />
+      <CompareDropDown slug={slug} attributeDropDown={[...categroyAttributes].reverse()} />
       {isOpen && (
         <CompareModal
           location={"comparison"}

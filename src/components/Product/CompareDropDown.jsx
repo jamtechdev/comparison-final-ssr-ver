@@ -18,20 +18,16 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
   // console.log(selectedAttribute)
 
   useEffect(() => {
-    const generalIndex = attributeDropDown.findIndex(
-      (attribute) => attribute.name === "General"
-    );
-    if (generalIndex !== -1) {
-      const [general] = attributeDropDown.splice(generalIndex, 1);
-      attributeDropDown.unshift(general);
+    const containerDivs = document.getElementsByClassName("container-div");
+    // setSelectedItem(attributeDropDown[0] || null);
+    // setSelectedAttribute(
+    //   (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
+    // );
+    // console.log(containerDivs.length)
+    if (containerDivs.length) {
+      containerDivs[0].remove();
     }
-    setTimeout(() => {
-      setSelectedItem(attributeDropDown[0] || null);
-      setSelectedAttribute(
-        (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
-      );
-    }, [300]);
-  }, [attributeDropDown]);
+  });
   useEffect(() => {
     if (selectedAttribute) {
       const config = {
