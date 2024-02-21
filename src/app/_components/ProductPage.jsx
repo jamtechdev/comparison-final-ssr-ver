@@ -21,6 +21,7 @@ import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import ProductTabs from "@/components/Product/ProductTabs";
 import ProductCompareTable from "@/components/Common/CompareTable/ProductCompareTable";
 import ComparisonsSlider from "@/components/Common/ComparisonsSlider/comparisonsSlider";
+import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 
 // import Link from "next/link";
 
@@ -408,8 +409,9 @@ function ProductPage({
         </Container>
       </section>
       <CompareDropDown
-        attributeDropDown={productCatAttributes?.data}
+        attributeDropDown={[...productCatAttributes?.data].reverse()}
         product={product}
+        slug={slug}
       />
 
       <section className="ptb-80 bg-color">
@@ -482,7 +484,8 @@ function ProductPage({
             <Col md={4} lg={2}>
               <div className="outline-section">
                 <p>Outline</p>
-                <ol>
+                <OutlineGenerator blogData={product?.text_part} />
+                {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
                   <li>VS Average</li>
@@ -494,7 +497,7 @@ function ProductPage({
                     </ol>
                   </li>
                   <li>Pros/Cons</li>
-                </ol>
+                </ol> */}
               </div>
             </Col>
             <Col md={8} lg={8}>

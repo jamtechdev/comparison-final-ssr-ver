@@ -12,6 +12,7 @@ export default async function PageSwitch({
   searchParams,
 }) {
   let PageToRender;
+  console.log(PageType)
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;

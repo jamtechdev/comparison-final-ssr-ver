@@ -7,7 +7,7 @@ import axios from "axios";
 import useComparisonChart from "@/hooks/useComparisonChart";
 
 function CompareDropDown({ attributeDropDown, product, slug }) {
-  // console.log(attributeDropDown)
+  // console.log(slug)
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null
   );
@@ -23,7 +23,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
     // setSelectedAttribute(
     //   (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
     // );
-    // console.log(containerDivs.length)
+    console.log(containerDivs.length>1)
     if (containerDivs.length) {
       containerDivs[0].remove();
     }

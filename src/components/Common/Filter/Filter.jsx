@@ -235,9 +235,17 @@ export default function Filter({
             return filteredArray;
           }
         });
-        let filteredArrayOfAttributeValues = getFilteredAttributeValues(
-          arrayToGetFilteredObject[0][0]
-        );
+        let filteredArrayOfAttributeValues;
+
+        if (arrayToGetFilteredObject[0] && arrayToGetFilteredObject[0][0]) {
+          filteredArrayOfAttributeValues = getFilteredAttributeValues(
+            arrayToGetFilteredObject[0][0]
+          );
+        } else {
+          filteredArrayOfAttributeValues = [];
+        }
+        // console.log(arrayToGetFilteredObject, "checkNeet");
+
         let countAttribute = 1;
         if (filteredArrayOfAttributeValues?.type == "dropdown") {
           countAttribute++;
@@ -291,10 +299,20 @@ export default function Filter({
           // thumb thumb--left ${classForSlider}
 
           handelFilterActions("range", removedParam, `${min},${max}`, false);
-          document.getElementById(`thumb thumb--left ${removedParam}`).value =
-            min;
-          document.getElementById(`thumb thumb--right ${removedParam}`).value =
-            max;
+          const leftThumb = document.getElementById(
+            `thumb thumb--left ${removedParam}`
+          );
+          const rightThumb = document.getElementById(
+            `thumb thumb--right ${removedParam}`
+          );
+
+          if (leftThumb) {
+            leftThumb.value = min;
+          }
+
+          if (rightThumb) {
+            rightThumb.value = max;
+          }
         }
       }
 

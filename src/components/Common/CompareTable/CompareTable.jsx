@@ -349,7 +349,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 Overall Score
-                {products[0]?.overall_score_descriptions && (
+                {products && products[0]?.overall_score_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.overall_score_descriptions?.description && (
                       <p className="mb-2">
@@ -392,7 +392,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 Technical Score
-                {products[0]?.technical_score_descriptions && (
+                {products && products[0]?.technical_score_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.technical_score_descriptions?.description && (
                       <p className="mb-2">
@@ -424,7 +424,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 User’s Ratings
-                {products[0]?.users_rating_descriptions && (
+                {products && products[0]?.users_rating_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.users_rating_descriptions?.description && (
                       <p className="mb-2">
@@ -454,7 +454,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 Ratio Qlt/Price
-                {products[0]?.ratio_qulitiy_points_descriptions && (
+                {products && products[0]?.ratio_qulitiy_points_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.ratio_qulitiy_points_descriptions
                       ?.description && (

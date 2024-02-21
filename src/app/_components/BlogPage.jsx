@@ -4,13 +4,11 @@ import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
-import useChart, {
-  searchForPatternAndReplace
-}
-from "@/hooks/useChart";
+import useChart, { searchForPatternAndReplace } from "@/hooks/useChart";
 import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSliderBlog";
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
+import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 export default function BlogPage({ slug, blogData, categorySlug }) {
   var textPart = `${blogData[0]?.data?.text_part}`;
   var matches = textPart.match(/\[(.*?)\]/g);
@@ -27,11 +25,23 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
   //     }
   //   }
   // }, [filteredData.length]);
-  
+
+  //  *******This part of code extract h1,h2,h3 from text_part and add ids to them*************
+  const content = blogData[0]?.data?.text_part;
+  // Regular expression to match h1, h2, and h3 tags
+  const headingRegex = /<h([1-3])>(.*?)<\/h[1-3]>/g;
+  // Function to add IDs to matched tags
+  const addIds = (match, tag, content) => {
+    const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
+    return `<h${tag} id="${id}">${content}</h${tag}>`;
+  };
+  // Replace the matched tags with IDs
+  const modifiedContent = content.replace(headingRegex, addIds);
+
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
-      <div>{useChart()}</div> 
+      <div>{useChart()}</div>
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -87,7 +97,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
             <Col lg={2} md={2} xs={12}>
               <div className="outline-section">
                 <p>Outline</p>
-                <ol>
+                <OutlineGenerator blogData={blogData[0]?.data?.text_part} />
+                {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
                   <li>VS Average</li>
@@ -99,7 +110,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                     </ol>
                   </li>
                   <li>Pros/Cons</li>
-                </ol>
+                </ol> */}
               </div>
             </Col>
             <Col lg={8} md={8} xs={12}>
@@ -107,7 +118,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 id="shortCodeText"
                 className="content-para mt-1"
                 dangerouslySetInnerHTML={{
-                  __html: searchForPatternAndReplace(blogData[0]?.data?.text_part)
+                  __html: searchForPatternAndReplace(modifiedContent),
                 }}
               />
               <div className="social-icon items-icon">

@@ -1,7 +1,7 @@
 //Updated
 export const getFilteredAttributeValues = (obj) => {
   let uniq = [];
-  if (obj.algorithm == "absolute_value") {
+  if (obj?.algorithm == "absolute_value") {
     for (let i = 0; i < obj.values.length; i++) {
       if (
         !uniq.includes(obj.values[i].name) &&

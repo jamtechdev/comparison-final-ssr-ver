@@ -8,14 +8,17 @@ export default async function Page({
   // console.log(slug , 'slugggss' , category);
   try {
     const categoryslugType = await getSlugType(category);
-    // console.log(categoryslugType)  
-
+    // console.log(categoryslugType)
 
     // console.log(categoryslugType);
     if (categoryslugType.error) {
       return <NotFound />;
     }
     const slugType = await getSlugType(slug);
+    // console.log(slugType);
+    // if (slugType.error === "Permalink not found") {
+    //   return <NotFound />;
+    // }
     // Bypass for comparison page
     if (slugType.error && slug.includes("-vs-")) {
       const pageData = await fetchDataBasedOnPageType(
@@ -93,10 +96,6 @@ export async function generateMetadata({ params: { slug, category } }) {
       extractedUrls.length > 2
         ? `${firstTitle} vs ${secondTitle} vs ${thirdTitle}`
         : `${firstTitle} vs ${secondTitle}`;
-    // `(${capitalizeFirstLetter(
-    //       category
-    //     )})`;
-
     return {
       title: title || "Comparison web",
       generator: "Comparison web",
@@ -108,18 +107,24 @@ export async function generateMetadata({ params: { slug, category } }) {
   };
 
   if (slug.includes("-vs-")) {
-    const extractedUrls = slug.split("-vs-");
+    const extractedUrls = slug?.split("-vs-");
     return generateComparisonMetaData(extractedUrls, category);
   } else {
-    const meta_data = await getSlugMetaData(slug);
-    return {
-      title: meta_data?.data?.heading_title || "Comparison web",
-      generator: "Comparison web",
-      applicationName: "Comparison web",
-      referrer: "origin-when-cross-origin",
-      keywords: ["compare", "product"],
-      description: meta_data?.data?.meta_description || "Comparison web",
-    };
+    const slugType = await getSlugType(slug);
+    if (slugType.error === "Permalink not found") {
+      return "";
+    } else {
+      const meta_data = await getSlugMetaData(slug);
+      // console.log(meta_data?.data);
+      return {
+        title: meta_data?.data?.heading_title || "Comparison web",
+        generator: "Comparison web",
+        applicationName: "Comparison web",
+        referrer: "origin-when-cross-origin",
+        keywords: ["compare", "product"],
+        description: meta_data?.data?.meta_description || "Comparison web",
+      };
+    }
   }
 }
 

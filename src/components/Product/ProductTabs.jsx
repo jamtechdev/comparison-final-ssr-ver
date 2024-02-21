@@ -6,6 +6,7 @@ import Image from "next/image";
 function ProductTabs() {
   return (
     <>
+    
       <section className="ptb-80 bg-color">
         <Container>
           <Row>

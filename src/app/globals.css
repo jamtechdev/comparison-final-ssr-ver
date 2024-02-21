@@ -1189,3 +1189,10 @@ table.compare-container.table.comparison-table .best-list-item li img {
 .short_code_product_table_price_name.text-center {
   justify-content: center;
 }
+.outlineList a {
+  color: #26272a;
+}
+
+a.outlineList.outline-active {
+  color: var(--secondary-color);
+}

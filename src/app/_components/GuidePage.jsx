@@ -15,6 +15,7 @@ import { isAreObjectsEqual } from "@/_helpers";
 import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ConfirmationModal from "@/components/Common/Modal/ConfirmationModal";
+import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 export default function GuidePage({
   slug,
   categorySlug,
@@ -85,32 +86,38 @@ export default function GuidePage({
   function removeQueryParamAndNavigate(url, paramToRemove) {
     // delete searchParams[`${paramToRemove}`];
 
-    if (paramToRemove != "sort") {
-      setparams(() => {
-        return {
-          ...searchParams,
-        };
-      });
+    if (paramToRemove === "variant") {
+      window.history.replaceState(null, "", window.location.pathname);
+      location.reload();
     } else {
-      delete params.sort;
-      let removeSortParam = params;
+      if (paramToRemove != "sort") {
+        setparams(() => {
+          return {
+            ...searchParams,
+          };
+        });
+      } else {
+        delete params.sort;
+        let removeSortParam = params;
 
-      setparams(() => {
-        return {
-          ...removeSortParam,
-        };
-      });
+        setparams(() => {
+          return {
+            ...removeSortParam,
+          };
+        });
+      }
+
+      const urlObject = new URL(url);
+      urlObject.searchParams.delete(paramToRemove);
+      const newUrl = urlObject.toString();
+      // Update the URL in the address bar without triggering a page reload
+      window.history.pushState({ path: newUrl }, "", newUrl);
+      location.reload();
+      // You can also use window.location.href = newUrl; if you want to trigger a page reload
+      // Optionally, you can perform additional actions, such as updating the UI, based on the new URL
+      // updateUI();
+      return newUrl;
     }
-
-    const urlObject = new URL(url);
-    urlObject.searchParams.delete(paramToRemove);
-    const newUrl = urlObject.toString();
-    // Update the URL in the address bar without triggering a page reload
-    window.history.pushState({ path: newUrl }, "", newUrl);
-    // You can also use window.location.href = newUrl; if you want to trigger a page reload
-    // Optionally, you can perform additional actions, such as updating the UI, based on the new URL
-    // updateUI();
-    return newUrl;
   }
 
   useEffect(() => {
@@ -200,10 +207,10 @@ export default function GuidePage({
       window.history.pushState(
         {},
         "",
-        `?${queryString}&variant=true&direct=true`
+        `?${queryString}&variant=yes&direct=true`
       );
-      router.push(`?${queryString}&variant=true&direct=true`, {
-        scroll: true,
+      router.push(`?${queryString}&variant=yes&direct=true`, {
+        scroll: false,
       });
     }
     setShowModal(false);
@@ -372,19 +379,28 @@ export default function GuidePage({
                         {Object.keys(params)
                           .filter((key) => key !== "direct")
                           .map((categoryName, index) => (
-                            <li
-                              key={index}
-                              onClick={() => {
-                                setremovedParam(categoryName);
-                                removeQueryParamAndNavigate(
-                                  window.location.href,
-                                  categoryName
-                                );
-                              }}
-                            >
+                            <li key={index}>
                               {" "}
-                              {categoryName} : {Object.values(params)[index]}
-                              <span className="text0danger">
+                              {categoryName === "variant"
+                                ? `Show all variants: ${
+                                    Object.values(params)[index] === "true"
+                                      ? `yes`
+                                      : "yes"
+                                  }`
+                                : `${
+                                    categoryName.charAt(0).toUpperCase() +
+                                    categoryName.slice(1)
+                                  }: ${Object.values(params)[index]}`}
+                              <span
+                                className="text0danger"
+                                onClick={() => {
+                                  setremovedParam(categoryName);
+                                  removeQueryParamAndNavigate(
+                                    window.location.href,
+                                    categoryName
+                                  );
+                                }}
+                              >
                                 {" "}
                                 <i className="ri-close-fill"></i>{" "}
                               </span>
@@ -600,19 +616,7 @@ export default function GuidePage({
             <Col md={4} lg={2}>
               <div className="outline-section">
                 <p>Outline</p>
-                <ol>
-                  <li>Overall</li>
-                  <li>Technical</li>
-                  <li>VS Average</li>
-                  <li className="outline-active">
-                    Review
-                    <ol>
-                      <li>Subtile</li>
-                      <li>Subtile</li>
-                    </ol>
-                  </li>
-                  <li>Pros/Cons</li>
-                </ol>
+                <OutlineGenerator blogData={guide?.text_third_part_main} />
               </div>
             </Col>
             <Col md={8} lg={8}>

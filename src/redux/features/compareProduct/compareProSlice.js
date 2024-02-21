@@ -27,7 +27,7 @@ export const compareProSlice = createSlice({
     deleteCompareProduct: (state, action) => {
       if (
         state.compareProduct[0]?.productFirst &&
-        action.payload.key === "productFirst" 
+        action.payload.key === "productFirst"
       ) {
         state.compareProduct[0].productFirst = null;
       }
