@@ -44,9 +44,7 @@ function CompareDiv({
   const [compareProDataThird, setCompareProDataThird] = useState(
     products[2] || []
   );
-  const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const [otherPermalinks, setOtherPermalinks] = useState([]);
-
   const router = useRouter();
   const handelRemoveProductFormComparison = (index) => {
     // Remove the product from the comparison store last product url
@@ -101,7 +99,6 @@ function CompareDiv({
       typeof item !== "undefined" &&
       Object.keys(item).length !== 0
   );
-  // console.log(comparisonProductData, "comparison darta");
 
   const productCopy = comparisonProductData;
   const productAttributes = {};
@@ -109,6 +106,7 @@ function CompareDiv({
     // Extract the category name for the attribute
     const categoryName = attribute?.attribute_category?.name;
     // Check if the category name exists in the productAttributes object
+
     if (!productAttributes[categoryName]) {
       // If not, create an empty array for the category
       productAttributes[categoryName] = [];
@@ -117,56 +115,8 @@ function CompareDiv({
     productAttributes[categoryName]?.push(attribute);
   });
   productCopy["attributes"] = productAttributes;
-  // console.log(productAttributes)
+  // console.log(comparisonTableProductData)
 
-  // this useEffect work when anyone  direct vist comparsion product link than fetch data using paramURL & store in redux
-  useEffect(() => {
-    if (!reduxData || reduxData.productFirst === null) {
-      const productData = createProductData(comparisonProductData[0]);
-      dispatch(
-        addCompareProduct({
-          productFirst: productData,
-          productSecond: null,
-          productThird: null,
-          category: comparisonProductData[0].category_id,
-          location: "ON_GUIDE",
-        })
-      );
-      return;
-    }
-    if (reduxData.productFirst !== null && reduxData.productSecond === null) {
-      const productData = createProductData(comparisonProductData[1]);
-      dispatch(
-        updateCompareProduct({ key: "productSecond", data: productData })
-      );
-      return;
-    }
-    if (
-      reduxData.productFirst !== null &&
-      reduxData.productSecond !== null &&
-      reduxData.productThird === null &&
-      comparisonProductData.length > 2
-    ) {
-      const productData = createProductData(comparisonProductData[2]);
-      dispatch(
-        updateCompareProduct({ key: "productThird", data: productData })
-      );
-    }
-  }, [reduxData]);
-
-  const createProductData = (product) => {
-    return {
-      name: product?.name,
-      category: product?.category_id,
-      category_url: product?.category_url,
-      permalink: product?.permalink,
-      image: product?.main_image ? product?.main_image : "/images/nofound.png",
-    };
-  };
-
-
-  
-  
   return (
     <>
       <section className="product-header">
@@ -251,7 +201,6 @@ function CompareDiv({
             </Col>
           </Row>
           <CompareAccordionTab
-           
             sendProductProps={comparisonProductData}
             product={graphComparisonProsCons}
             pageType={"comparison"}
@@ -290,7 +239,10 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
-      <CompareDropDown slug={slug} attributeDropDown={[...categroyAttributes].reverse()} />
+      <CompareDropDown
+        slug={slug}
+        attributeDropDown={[...categroyAttributes].reverse()}
+      />
       {isOpen && (
         <CompareModal
           location={"comparison"}

@@ -11,9 +11,6 @@ function Comparison({
 }) {
   return (
     <>
- 
-
-
       <CompareDiv
         slug={slug}
         categorySlug={categorySlug}
