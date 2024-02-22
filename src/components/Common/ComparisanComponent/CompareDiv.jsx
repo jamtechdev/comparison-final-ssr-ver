@@ -36,10 +36,12 @@ function CompareDiv({
 }) {
   const dispatch = useDispatch();
   const products = comparisonData.map((item) => item.data);
+  // console.log(products[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [compareProDataFirst, setCompareProDataFirst] = useState(
-    products[0] || []
+    (products[0] && products[0]) || []
   );
+
   const [compareProDataSec, setCompareProDataSec] = useState(products[1] || []);
   const [compareProDataThird, setCompareProDataThird] = useState(
     products[2] || []
@@ -99,6 +101,7 @@ function CompareDiv({
       typeof item !== "undefined" &&
       Object.keys(item).length !== 0
   );
+  console.log(comparisonProductData?.length);
 
   const productCopy = comparisonProductData;
   const productAttributes = {};

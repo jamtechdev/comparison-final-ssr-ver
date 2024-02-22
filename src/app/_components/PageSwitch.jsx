@@ -12,7 +12,7 @@ export default async function PageSwitch({
   searchParams,
 }) {
   let PageToRender;
-  console.log(PageType)
+  // console.log(PageType)
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
@@ -164,6 +164,7 @@ async function getCompareProductByCatID(category_id) {
 
 async function getGraphComparisonProsCons(data) {
   if (data.length === 2) {
+    console.log(data[0])
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}`,
       {
