@@ -42,14 +42,16 @@ function CompareDiv({
     (products[0] && products[0]) || []
   );
 
-  const [compareProDataSec, setCompareProDataSec] = useState(products[1] || []);
+  const [compareProDataSec, setCompareProDataSec] = useState(
+    (products[1] && products[1]) || []
+  );
   const [compareProDataThird, setCompareProDataThird] = useState(
-    products[2] || []
+    (products[2] && products[2]) || []
   );
   const [otherPermalinks, setOtherPermalinks] = useState([]);
   const router = useRouter();
   const handelRemoveProductFormComparison = (index) => {
-    // Remove the product from the comparison store last product url
+    // Remove the last product's URL from the comparison store.
     let remainingProductUrl = "";
     if (index === 0) {
       setCompareProDataFirst([]);
