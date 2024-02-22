@@ -1196,3 +1196,12 @@ table.compare-container.table.comparison-table .best-list-item li img {
 a.outlineList.outline-active {
   color: var(--secondary-color);
 }
+a.outlineLink.outline-active {
+  color: var(--secondary-color);
+}
+
+.outline-section ol li.outline-active,
+.outline-section ol li a:hover {
+  color: var(--secondary-color);
+  position: relative;
+}
