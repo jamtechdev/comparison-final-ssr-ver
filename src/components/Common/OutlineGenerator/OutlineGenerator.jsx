@@ -67,7 +67,7 @@ function OutlineGenerator({ blogData }) {
     setActiveChildSubChildIndex(childSubChildIndex);
     handleScrollTo(id);
   };
-  console.log(outline);
+  // console.log(outline);
 
   return (
     <>

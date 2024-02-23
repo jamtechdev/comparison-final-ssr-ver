@@ -118,7 +118,7 @@ function ProductPage({
     showFullPrice = !setShowFullPrice;
   };
 
-  console.log(product, "Neet");
+  // console.log(product, "Neet");
 
   return (
     <>
