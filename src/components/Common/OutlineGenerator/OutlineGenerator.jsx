@@ -8,7 +8,9 @@ function OutlineGenerator({ blogData }) {
   const [activeChildIndex, setActiveChildIndex] = useState(null);
 
   useEffect(() => {
-    const headings = document.querySelectorAll("h2,h3,h4");
+    const container = document.getElementById("shortCodeText");
+    const headings = container.querySelectorAll("h2, h3, h4");
+
     const newOutline = [];
     let mainIndex = -1;
     let subIndex = -1;
