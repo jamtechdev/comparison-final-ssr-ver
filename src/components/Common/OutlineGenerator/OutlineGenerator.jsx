@@ -68,6 +68,8 @@ function OutlineGenerator({ blogData }) {
             }`}
             onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation(); // Stop event propagation here
+              setActiveIndex(index); // Update activeIndex here
               handleItemClick(index, section.id);
             }}
           >
@@ -84,19 +86,23 @@ function OutlineGenerator({ blogData }) {
                 <li
                   key={childIndex}
                   className={`outlineList ${
-                    activeChildIndex === childIndex ? "outline-active" : ""
+                    activeChildIndex === childIndex && activeIndex === index
+                      ? "outline-active"
+                      : ""
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation(); // Stop event propagation here
                     setActiveChildIndex(childIndex); // Update activeChildIndex here
-                    handleItemClick(index,childIndex, child.id);
+                    handleItemClick(index, childIndex, child.id);
                   }}
                 >
                   <Link
                     href={`#${child?.id}`}
                     className={`outlineLink ${
-                      activeChildIndex === childIndex ? "outline-active" : ""
+                      activeChildIndex === childIndex && activeIndex === index
+                        ? "outline-active"
+                        : ""
                     }`}
                   >
                     {child.text}

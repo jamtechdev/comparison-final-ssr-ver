@@ -475,20 +475,20 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      
-      <section className="ptb-80">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">Review of {product?.name}</h2>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col md={4} lg={2}>
-              <div className="outline-section">
-                <p>Outline</p>
-                <OutlineGenerator blogData={product?.text_part} />
-                {/* <ol>
+      {product?.text_part && (
+        <section className="ptb-80">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <h2 className="site-main-heading">Review of {product?.name}</h2>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col md={4} lg={2}>
+                <div className="outline-section">
+                  <p>Outline</p>
+                  <OutlineGenerator blogData={product?.text_part} />
+                  {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
                   <li>VS Average</li>
@@ -501,159 +501,161 @@ function ProductPage({
                   </li>
                   <li>Pros/Cons</li>
                 </ol> */}
-              </div>
-            </Col>
-            <Col md={8} lg={8}>
-              <div
-                className="review-content"
-                dangerouslySetInnerHTML={{ __html: product?.text_part }}
-              />
-              <Row className="mt-3">
-                <Col md={12} lg={6}>
-                  <div className="best-price-section mobile-best-price-section">
-                    <h3 className="site-main-heading">Best Prices</h3>
-                    <ul className="best-list-item">
-                      {product &&
-                        product?.price_websites
-                          .slice(0, showFullPrice ? 8 : 4)
-                          .map((item, index) => {
-                            return (
-                              <li key={index}>
-                                <Link
-                                  rel="noopener noreferrer"
-                                  target="_blank"
-                                  href={`/link?p=${btoa(item.url)}`}
-                                >
-                                  <img
-                                    src={item?.logo}
-                                    width={0}
-                                    height={0}
-                                    sizes="100%"
-                                    alt=""
-                                  />
-                                </Link>
-                                <span>
-                                  <a
+                </div>
+              </Col>
+              <Col md={8} lg={8}>
+                <div
+                  className="review-content"
+                  dangerouslySetInnerHTML={{ __html: product?.text_part }}
+                />
+                <Row className="mt-3">
+                  <Col md={12} lg={6}>
+                    <div className="best-price-section mobile-best-price-section">
+                      <h3 className="site-main-heading">Best Prices</h3>
+                      <ul className="best-list-item">
+                        {product &&
+                          product?.price_websites
+                            .slice(0, showFullPrice ? 8 : 4)
+                            .map((item, index) => {
+                              return (
+                                <li key={index}>
+                                  <Link
                                     rel="noopener noreferrer"
                                     target="_blank"
                                     href={`/link?p=${btoa(item.url)}`}
                                   >
-                                    {item?.price} €
-                                  </a>
-                                </span>
-                              </li>
-                            );
-                          })}
-                    </ul>
-                    {product?.price_websites.length > 5 && (
-                      <Button className="see_all_btn">
-                        See All <i className="ri-arrow-down-s-line"></i>
-                      </Button>
-                    )}
-                  </div>
-                </Col>
-                <Col md={12} lg={6}>
-                  <div className="best-price-section mobile-best-price-section ranking">
-                    <h3 className="site-main-heading">Best Rankings</h3>
-                    <ul className="best-list-item">
-                      {product &&
-                        product?.guide_ratings
-                          .slice(0, showFullRanking ? 8 : 4)
-                          .map((item, index) => {
-                            return (
-                              <li key={index}>
-                                <p>
-                                  <img
-                                    src="/images/double-arrow.png"
-                                    width={0}
-                                    height={0}
-                                    sizes="100%"
-                                    alt=""
-                                  />
-                                  N.{item.position} in{" "}
-                                  <Link href={`/${item?.permalink}`}>
-                                    <small>{item.guide_name}</small>
+                                    <img
+                                      src={item?.logo}
+                                      width={0}
+                                      height={0}
+                                      sizes="100%"
+                                      alt=""
+                                    />
                                   </Link>
-                                </p>
-                              </li>
-                            );
-                          })}
-                    </ul>
-                    {product?.guide_ratings.length > 5 && (
-                      <Button
-                        className="see_all_btn"
-                        // onClick={() => {
-                        //   showFullRanking = !showFullRanking;
-                        // }}
-                      >
-                        See All <i className="ri-arrow-down-s-line"></i>
-                      </Button>
-                    )}
+                                  <span>
+                                    <a
+                                      rel="noopener noreferrer"
+                                      target="_blank"
+                                      href={`/link?p=${btoa(item.url)}`}
+                                    >
+                                      {item?.price} €
+                                    </a>
+                                  </span>
+                                </li>
+                              );
+                            })}
+                      </ul>
+                      {product?.price_websites.length > 5 && (
+                        <Button className="see_all_btn">
+                          See All <i className="ri-arrow-down-s-line"></i>
+                        </Button>
+                      )}
+                    </div>
+                  </Col>
+                  <Col md={12} lg={6}>
+                    <div className="best-price-section mobile-best-price-section ranking">
+                      <h3 className="site-main-heading">Best Rankings</h3>
+                      <ul className="best-list-item">
+                        {product &&
+                          product?.guide_ratings
+                            .slice(0, showFullRanking ? 8 : 4)
+                            .map((item, index) => {
+                              return (
+                                <li key={index}>
+                                  <p>
+                                    <img
+                                      src="/images/double-arrow.png"
+                                      width={0}
+                                      height={0}
+                                      sizes="100%"
+                                      alt=""
+                                    />
+                                    N.{item.position} in{" "}
+                                    <Link href={`/${item?.permalink}`}>
+                                      <small>{item.guide_name}</small>
+                                    </Link>
+                                  </p>
+                                </li>
+                              );
+                            })}
+                      </ul>
+                      {product?.guide_ratings.length > 5 && (
+                        <Button
+                          className="see_all_btn"
+                          // onClick={() => {
+                          //   showFullRanking = !showFullRanking;
+                          // }}
+                        >
+                          See All <i className="ri-arrow-down-s-line"></i>
+                        </Button>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
+              <Col md={12} lg={2}>
+                <div className="ranking-section">
+                  <div className="site-main-heading">In Rankings</div>
+                  <div className="product-card card-mobile">
+                    <Image
+                      src="/images/p1.png"
+                      width={0}
+                      height={0}
+                      sizes="100%"
+                      alt="F"
+                    />
+                    <span>Best Monitors</span>
                   </div>
-                </Col>
-              </Row>
-            </Col>
-            <Col md={12} lg={2}>
-              <div className="ranking-section">
-                <div className="site-main-heading">In Rankings</div>
-                <div className="product-card card-mobile">
-                  <Image
-                    src="/images/p1.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt="F"
-                  />
-                  <span>Best Monitors</span>
+                  <ProductSlider className="slider-show" />
                 </div>
-                <ProductSlider className="slider-show" />
-              </div>
-            </Col>
-          </Row>
-          <Row className="mt-5">
-            <Col md={6}>
-              <div className="pros-corns-section pros light-background">
-                <h3 className="pros-header">Pros</h3>
-                <ul>
-                  {product &&
-                    product?.top_pros?.map((data, key) => {
-                      return (
-                        <>
-                          <li
-                            key={key}
-                            style={{ color: "rgba(39, 48, 78, 0.80)" }}
-                          >
-                            {data?.name} {renderValue(data)}
-                          </li>
-                        </>
-                      );
-                    })}
-                </ul>
-              </div>
-            </Col>
-            <Col md={6}>
-              <div className="pros-corns-section corns light-background">
-                <h3 className="pros-header">Cons</h3>
-                <ul className="cross">
-                  {product &&
-                    product?.top_cons?.map((data, key) => {
-                      return (
-                        <>
-                          <li
-                            key={key}
-                            style={{ color: "rgba(39, 48, 78, 0.80)" }}
-                          >
-                            {data?.name} {renderValue(data)}
-                          </li>
-                        </>
-                      );
-                    })}
-                </ul>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+              </Col>
+            </Row>
+            <Row className="mt-5">
+              <Col md={6}>
+                <div className="pros-corns-section pros light-background">
+                  <h3 className="pros-header">Pros</h3>
+                  <ul>
+                    {product &&
+                      product?.top_pros?.map((data, key) => {
+                        return (
+                          <>
+                            <li
+                              key={key}
+                              style={{ color: "rgba(39, 48, 78, 0.80)" }}
+                            >
+                              {data?.name} {renderValue(data)}
+                            </li>
+                          </>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </Col>
+              <Col md={6}>
+                <div className="pros-corns-section corns light-background">
+                  <h3 className="pros-header">Cons</h3>
+                  <ul className="cross">
+                    {product &&
+                      product?.top_cons?.map((data, key) => {
+                        return (
+                          <>
+                            <li
+                              key={key}
+                              style={{ color: "rgba(39, 48, 78, 0.80)" }}
+                            >
+                              {data?.name} {renderValue(data)}
+                            </li>
+                          </>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
+
       <ProductTabs />
       {/* <section className="ptb-80">
         <Container>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import Image from "next/image";
@@ -6,7 +6,6 @@ import Image from "next/image";
 function ProductTabs() {
   return (
     <>
-    
       <section className="ptb-80 bg-color">
         <Container>
           <Row>

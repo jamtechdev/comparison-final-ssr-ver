@@ -28,6 +28,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
       containerDivs[0].remove();
     }
   });
+
   useEffect(() => {
     if (selectedAttribute) {
       const config = {
@@ -35,7 +36,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
       };
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedAttribute?.name}&slug=${slug}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=Overall score&slug=${slug}`,
           config
         )
         .then((res) => {

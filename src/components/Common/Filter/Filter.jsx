@@ -34,6 +34,7 @@ export default function Filter({
   };
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
+    console.log(filterName,"neet")
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
