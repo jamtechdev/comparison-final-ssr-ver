@@ -848,13 +848,13 @@
 }
 
 .outline-section ol li ol li:before {
-  content: counters(item, ".") " ";
-  counter-increment: item;
+  /* content: counters(item, ".") " "; */
+  /* counter-increment: item; */
   margin-left: -3px;
 }
 
 .outline-section > ol {
-  list-style: auto !important;
+  /* list-style: auto !important; */
   list-style-position: inside !important;
   padding-left: 20px !important;
   font-weight: 400;
@@ -899,9 +899,9 @@
 }
 
 .outline-section ol li ol {
-  padding-left: 18px !important;
+  padding-left: 10px !important;
   color: var(--heading-color);
-  list-style: auto !important;
+  list-style: none !important;
   list-style-position: inside !important;
 }
 

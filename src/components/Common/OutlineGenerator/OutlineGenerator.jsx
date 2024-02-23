@@ -14,6 +14,8 @@ function OutlineGenerator({ blogData }) {
     const shortCodeTextElement = document.getElementById("shortCodeText");
     const headings = shortCodeTextElement.querySelectorAll("h2,h3,h4,h5");
     const newOutline = [];
+    let mainCounter = 0;
+    let subMainCounter = 0;
 
     let currentMain = null;
     let currentSubMain = null;
@@ -24,12 +26,16 @@ function OutlineGenerator({ blogData }) {
       const dataId = heading.getAttribute("data-id");
 
       if (heading.tagName === "H2") {
+        mainCounter++;
+        subMainCounter = 0;
         currentMain = {
           type: "main",
           text: heading.textContent,
           id,
           children: [],
+          number: `${mainCounter}.${subMainCounter}`,
         };
+
         newOutline.push(currentMain);
         currentSubMain = null;
         currentSubSubMain = null;
@@ -39,6 +45,7 @@ function OutlineGenerator({ blogData }) {
           text: heading.textContent,
           id,
           children: [],
+          number: `${mainCounter}.${subMainCounter}`,
         };
         currentMain.children.push(currentSubMain);
         currentSubSubMain = null;
@@ -47,6 +54,7 @@ function OutlineGenerator({ blogData }) {
           type: "sub-sub-main",
           text: heading.textContent,
           id,
+          number: `${mainCounter}.${subMainCounter}`,
         };
         currentSubMain.children.push(currentSubSubMain);
       }
@@ -67,108 +75,122 @@ function OutlineGenerator({ blogData }) {
     setActiveChildSubChildIndex(childSubChildIndex);
     handleScrollTo(id);
   };
-  // console.log(outline);
+  console.log(outline);
 
   return (
     <>
       <ol>
-        {outline.map((section, index) => (
-          <li
-            key={index}
-            className={`outlineList ${
-              activeIndex === index ? "outline-active" : ""
-            }`}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation(); // Stop event propagation here
-              setActiveIndex(index); // Update activeIndex here
-              handleItemClick(index, section.id);
-            }}
-          >
-            <Link
-              href={`#${section?.id}`}
-              className={`outlineLink ${
+        {outline.map((section, index) => {
+          const mainNumber = index + 1;
+          return (
+            <li
+              key={index}
+              className={`outlineList ${
                 activeIndex === index ? "outline-active" : ""
               }`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation(); // Stop event propagation here
+                setActiveIndex(index); // Update activeIndex here
+                handleItemClick(index, section.id);
+              }}
             >
-              {section.text}
-            </Link>
-            {section.children && (
-              <ol>
-                {section.children.map((child, childIndex) => (
-                  <li
-                    key={childIndex}
-                    className={`outlineList ${
-                      activeChildIndex === childIndex && activeIndex === index
-                        ? "outline-active"
-                        : ""
-                    }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation(); // Stop event propagation here
-                      setActiveChildIndex(childIndex); // Update activeChildIndex here
-                      handleItemClick(index, childIndex, "", child.id);
-                    }}
-                  >
-                    <Link
-                      href={`#${child?.id}`}
-                      className={`outlineLink ${
-                        activeChildIndex === childIndex && activeIndex === index
-                          ? "outline-active"
-                          : ""
-                      }`}
-                    >
-                      {child.text}
-                    </Link>
-                    {child?.children && (
-                      <ol>
-                        {child?.children &&
-                          child?.children?.map((subSubMain, subChildIndex) => {
-                            return (
-                              <li
-                                key={subChildIndex}
-                                className={`outlineList ${
-                                  activeChildSubChildIndex === subChildIndex &&
-                                  activeChildIndex === childIndex
-                                    ? "outline-active"
-                                    : ""
-                                }`}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation(); // Stop event propagation here
-                                  setActiveChildSubChildIndex(subChildIndex); // Update activeChildIndex here
-                                  handleItemClick(
-                                    index,
-                                    childIndex,
-                                    subChildIndex,
-                                    child.id
-                                  );
-                                }}
-                              >
-                                <Link
-                                  href={`#${child?.id}`}
-                                  className={`outlineLink ${
-                                    activeChildSubChildIndex ===
-                                      subChildIndex &&
-                                    activeChildIndex === childIndex
-                                      ? "outline-active"
-                                      : ""
-                                  }`}
-                                >
-                                  {subSubMain.text}
-                                </Link>
-                              </li>
-                            );
-                            //  {console.log(subSubMain?.text)}
-                          })}
-                      </ol>
-                    )}
-                  </li>
-                ))}
-              </ol>
-            )}
-          </li>
-        ))}
+              <Link
+                href={`#${section?.id}`}
+                className={`outlineLink ${
+                  activeIndex === index ? "outline-active" : ""
+                }`}
+              >
+                {mainNumber}.{section.text}
+              </Link>
+              {section.children && (
+                <ol>
+                  {section.children.map((child, childIndex) => {
+                    const subMainNumber = `${mainNumber}.${childIndex + 1}`;
+                    return (
+                      <li
+                        key={childIndex}
+                        className={`outlineList ${
+                          activeChildIndex === childIndex &&
+                          activeIndex === index
+                            ? "outline-active"
+                            : ""
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation(); // Stop event propagation here
+                          setActiveChildIndex(childIndex); // Update activeChildIndex here
+                          handleItemClick(index, childIndex, "", child.id);
+                        }}
+                      >
+                        <Link
+                          href={`#${child?.id}`}
+                          className={`outlineLink ${
+                            activeChildIndex === childIndex &&
+                            activeIndex === index
+                              ? "outline-active"
+                              : ""
+                          }`}
+                        >
+                          {subMainNumber} {child.text}
+                        </Link>
+                        {child?.children && (
+                          <ol>
+                            {child?.children.map(
+                              (subSubMain, subChildIndex) => {
+                                const subSubMainNumber = `${subMainNumber}.${
+                                  subChildIndex + 1
+                                }`;
+                                return (
+                                  <li
+                                    key={subChildIndex}
+                                    className={`outlineList ${
+                                      activeChildSubChildIndex ===
+                                        subChildIndex &&
+                                      activeChildIndex === childIndex
+                                        ? "outline-active"
+                                        : ""
+                                    }`}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation(); // Stop event propagation here
+                                      setActiveChildSubChildIndex(
+                                        subChildIndex
+                                      ); // Update activeChildIndex here
+                                      handleItemClick(
+                                        index,
+                                        childIndex,
+                                        subChildIndex,
+                                        child.id
+                                      );
+                                    }}
+                                  >
+                                    <Link
+                                      href={`#${subSubMain?.id}`}
+                                      className={`outlineLink ${
+                                        activeChildSubChildIndex ===
+                                          subChildIndex &&
+                                        activeChildIndex === childIndex
+                                          ? "outline-active"
+                                          : ""
+                                      }`}
+                                    >
+                                      {subSubMainNumber} {subSubMain.text}
+                                    </Link>
+                                  </li>
+                                );
+                              }
+                            )}
+                          </ol>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              )}
+            </li>
+          );
+        })}
       </ol>
     </>
   );

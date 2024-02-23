@@ -1199,7 +1199,10 @@ a.outlineList.outline-active {
 a.outlineLink.outline-active {
   color: var(--secondary-color);
 }
-
+.outline-section ol li{
+  padding-left: 0px !important;
+  font-size: 15px;
+}
 .outline-section ol li.outline-active,
 .outline-section ol li a:hover {
   color: var(--secondary-color);
