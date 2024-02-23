@@ -101,6 +101,7 @@ export default function Filter({
       case "range":
         if (!isChecked) {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
+          console.log("testing")
         } else {
           updatedParams[key] = value;
         }

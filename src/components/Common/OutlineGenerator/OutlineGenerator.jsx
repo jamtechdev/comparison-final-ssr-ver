@@ -8,40 +8,44 @@ function OutlineGenerator({ blogData }) {
   const [activeChildIndex, setActiveChildIndex] = useState(null);
 
   useEffect(() => {
-    // get all h1,h2,h3,h4,span elements
-    const headings = document.querySelectorAll("h1, h2,h3,h4,h5,h6,span");
+    const headings = document.querySelectorAll("h2,h3,h4");
     const newOutline = [];
+    let mainIndex = -1;
+    let subIndex = -1;
 
     headings.forEach((heading) => {
-      // Get the id attribute of the heading
       const id = heading.getAttribute("id");
-      // Get the data-id attribute of the heading
       const dataId = heading.getAttribute("data-id");
-      // If the heading has both id and data-id attributes and they match
-      if (id && dataId && id === dataId) {
-        // Push a new main section to the outline with the heading text and id
+
+      if (heading.tagName === "H2") {
         newOutline.push({
           type: "main",
           text: heading.textContent,
           id,
-          children: [], // Initialize an empty array for children
+          children: [],
         });
-      } else if (dataId && newOutline.length > 0) {
-        // If the heading has a data-id attribute and the outline is not empty
-        const lastMain = newOutline[newOutline.length - 1];
-        if (lastMain.id === dataId) {
-          // Push a new sub-main section to the last main section's children
-          lastMain.children.push({
-            type: "sub-main",
-            text: heading.textContent,
-            id,
-          });
-        }
+        mainIndex++;
+        subIndex = -1;
+      } else if (heading.tagName === "H3" && mainIndex >= 0) {
+        newOutline[mainIndex].children.push({
+          type: "sub-main",
+          text: heading.textContent,
+          id,
+          children: [],
+        });
+        subIndex++;
+      } else if (heading.tagName === "H4" && mainIndex >= 0 && subIndex >= 0) {
+        newOutline[mainIndex].children[subIndex].children.push({
+          type: "sub-sub-main",
+          text: heading.textContent,
+          id,
+        });
       }
     });
 
     setOutline(newOutline);
   }, []);
+
   const handleScrollTo = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -49,10 +53,7 @@ function OutlineGenerator({ blogData }) {
     }
   };
 
-  // console.log(outline);
-
   const handleItemClick = (index, childIndex, id) => {
-    // console.log(childIndex);
     setActiveIndex(index);
     setActiveChildIndex(childIndex);
     handleScrollTo(id);
