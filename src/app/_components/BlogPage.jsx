@@ -2,7 +2,6 @@
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Image from "next/image";
 import Link from "next/link";
 import useChart, { searchForPatternAndReplace } from "@/hooks/useChart";
 import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSliderBlog";
@@ -10,33 +9,17 @@ import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 export default function BlogPage({ slug, blogData, categorySlug }) {
-  var textPart = `${blogData[0]?.data?.text_part}`;
-  var matches = textPart.match(/\[(.*?)\]/g);
-  // const filteredData = matches.filter((item) => item !== "[]");
-  // // remove empty Array from matches
-  // useEffect(() => {
-  //   // Find all elements with the class "container-div"
-  //   const chartElements = document.querySelectorAll(".container-div");
-  //   // If there are more elements than filteredData length
-  //   if (chartElements.length > filteredData.length) {
-  //     // Remove excess elements starting from the filteredData length
-  //     for (let i = filteredData.length; i < chartElements.length; i++) {
-  //       chartElements[i].parentNode.removeChild(chartElements[i]);
-  //     }
-  //   }
-  // }, [filteredData.length]);
-
-  //  *******This part of code extract h1,h2,h3 from text_part and add ids to them*************
-  const content = blogData[0]?.data?.text_part;
-  // Regular expression to match h1, h2, and h3 tags
-  const headingRegex = /<h([1-3])>(.*?)<\/h[1-3]>/g;
-  // Function to add IDs to matched tags
-  const addIds = (match, tag, content) => {
-    const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
-    return `<h${tag} id="${id}">${content}</h${tag}>`;
-  };
-  // Replace the matched tags with IDs
-  const modifiedContent = content.replace(headingRegex, addIds);
+  // //  *******This part of code extract h1,h2,h3 from text_part and add ids to them*************
+  // const content = blogData[0]?.data?.text_part;
+  // // Regular expression to match h1, h2, and h3 tags
+  // const headingRegex = /<h([1-3])>(.*?)<\/h[1-3]>/g;
+  // // Function to add IDs to matched tags
+  // const addIds = (match, tag, content) => {
+  //   const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
+  //   return `<h${tag} id="${id}">${content}</h${tag}>`;
+  // };
+  // // Replace the matched tags with IDs
+  // const modifiedContent = content.replace(headingRegex, addIds);
 
   return (
     <>
@@ -118,7 +101,9 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 id="shortCodeText"
                 className="content-para mt-1"
                 dangerouslySetInnerHTML={{
-                  __html: searchForPatternAndReplace(modifiedContent),
+                  __html: searchForPatternAndReplace(
+                    blogData[0]?.data?.text_part
+                  ),
                 }}
               />
               <div className="social-icon items-icon">

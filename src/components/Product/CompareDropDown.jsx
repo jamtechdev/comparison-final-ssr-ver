@@ -23,7 +23,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
     // setSelectedAttribute(
     //   (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
     // );
-    console.log(containerDivs.length>1)
+    // console.log(containerDivs.length>1)
     if (containerDivs.length) {
       containerDivs[0].remove();
     }

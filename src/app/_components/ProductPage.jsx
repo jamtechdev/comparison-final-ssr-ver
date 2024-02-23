@@ -118,6 +118,8 @@ function ProductPage({
     showFullPrice = !setShowFullPrice;
   };
 
+  console.log(product, "Neet");
+
   return (
     <>
       <section className="product-header">
@@ -473,6 +475,7 @@ function ProductPage({
           </Row>
         </Container>
       </section>
+      
       <section className="ptb-80">
         <Container>
           <Row>

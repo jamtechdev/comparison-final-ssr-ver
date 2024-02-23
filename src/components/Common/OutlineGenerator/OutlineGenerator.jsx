@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 function OutlineGenerator({ blogData }) {
   const [outline, setOutline] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeChildIndex, setActiveChildIndex] = useState(null);
 
   useEffect(() => {
     // get all h1,h2,h3,h4,span elements
@@ -50,11 +51,12 @@ function OutlineGenerator({ blogData }) {
 
   // console.log(outline);
 
-  const handleItemClick = (index, id) => {
+  const handleItemClick = (index, childIndex, id) => {
+    // console.log(childIndex);
     setActiveIndex(index);
+    setActiveChildIndex(childIndex);
     handleScrollTo(id);
   };
-
   return (
     <>
       <ol>
@@ -78,31 +80,29 @@ function OutlineGenerator({ blogData }) {
               {section.text}
             </Link>
             <ol>
-              {section.children.map((child, childIndex) => {
-                // const nestedIndex = index  + 1 + 1;
-                // console.log(nestedIndex) // Calculate the nested index
-                return (
-                  <li
-                    key={childIndex}
-                    className={`outlineList ${
-                      activeIndex === index ? "outline-active" : ""
+              {section.children.map((child, childIndex) => (
+                <li
+                  key={childIndex}
+                  className={`outlineList ${
+                    activeChildIndex === childIndex ? "outline-active" : ""
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation(); // Stop event propagation here
+                    setActiveChildIndex(childIndex); // Update activeChildIndex here
+                    handleItemClick(index,childIndex, child.id);
+                  }}
+                >
+                  <Link
+                    href={`#${child?.id}`}
+                    className={`outlineLink ${
+                      activeChildIndex === childIndex ? "outline-active" : ""
                     }`}
                   >
-                    <Link
-                      href={`#${child?.id}`}
-                      className={`outlineList ${
-                        activeIndex === index ? "outline-active" : ""
-                      }`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleItemClick(3, child.id);
-                      }}
-                    >
-                      {child.text}
-                    </Link>
-                  </li>
-                );
-              })}
+                    {child.text}
+                  </Link>
+                </li>
+              ))}
             </ol>
           </li>
         ))}
