@@ -11,29 +11,24 @@ function OutlineGenerator({ blogData }) {
 
   useEffect(() => {
     // get all h2,h3,h4,h5,h6 elements
-    const shortCodeTextElement = document.getElementById("shortCodeText");
-    const headings = shortCodeTextElement.querySelectorAll("h2,h3,h4,h5");
+    const shortCodeTextElement = document?.getElementById("shortCodeText");
+    const headings = shortCodeTextElement?.querySelectorAll("h2,h3,h4,h5");
     const newOutline = [];
-    let mainCounter = 0;
-    let subMainCounter = 0;
 
     let currentMain = null;
     let currentSubMain = null;
     let currentSubSubMain = null;
 
-    headings.forEach((heading) => {
+    headings?.forEach((heading) => {
       const id = heading.getAttribute("id");
       const dataId = heading.getAttribute("data-id");
 
       if (heading.tagName === "H2") {
-        mainCounter++;
-        subMainCounter = 0;
         currentMain = {
           type: "main",
           text: heading.textContent,
           id,
           children: [],
-          number: `${mainCounter}.${subMainCounter}`,
         };
 
         newOutline.push(currentMain);
@@ -45,7 +40,6 @@ function OutlineGenerator({ blogData }) {
           text: heading.textContent,
           id,
           children: [],
-          number: `${mainCounter}.${subMainCounter}`,
         };
         currentMain.children.push(currentSubMain);
         currentSubSubMain = null;
@@ -54,7 +48,6 @@ function OutlineGenerator({ blogData }) {
           type: "sub-sub-main",
           text: heading.textContent,
           id,
-          number: `${mainCounter}.${subMainCounter}`,
         };
         currentSubMain.children.push(currentSubSubMain);
       }
@@ -74,8 +67,9 @@ function OutlineGenerator({ blogData }) {
     setActiveChildIndex(childIndex);
     setActiveChildSubChildIndex(childSubChildIndex);
     handleScrollTo(id);
+    document.getElementById("shortCodeText").scrollTo(0, 0);
   };
-  console.log(outline);
+  // console.log(outline);
 
   return (
     <>
@@ -90,8 +84,10 @@ function OutlineGenerator({ blogData }) {
               }`}
               onClick={(e) => {
                 e.preventDefault();
-                e.stopPropagation(); // Stop event propagation here
-                setActiveIndex(index); // Update activeIndex here
+                e.stopPropagation();
+                setActiveIndex(index);
+                setActiveChildIndex(null); // Reset activeChildIndex
+                setActiveChildSubChildIndex(null); // Reset activeChildSubChildIndex
                 handleItemClick(index, section.id);
               }}
             >
@@ -101,10 +97,10 @@ function OutlineGenerator({ blogData }) {
                   activeIndex === index ? "outline-active" : ""
                 }`}
               >
-                {mainNumber}.{section.text}
+                {section.text}
               </Link>
               {section.children && (
-                <ol>
+                <ol className="ol-child">
                   {section.children.map((child, childIndex) => {
                     const subMainNumber = `${mainNumber}.${childIndex + 1}`;
                     return (
@@ -118,8 +114,9 @@ function OutlineGenerator({ blogData }) {
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
-                          e.stopPropagation(); // Stop event propagation here
-                          setActiveChildIndex(childIndex); // Update activeChildIndex here
+                          e.stopPropagation();
+                          setActiveChildIndex(childIndex);
+                          setActiveChildSubChildIndex(null); // Reset activeChildSubChildIndex
                           handleItemClick(index, childIndex, "", child.id);
                         }}
                       >
@@ -132,10 +129,10 @@ function OutlineGenerator({ blogData }) {
                               : ""
                           }`}
                         >
-                          {subMainNumber} {child.text}
+                          {child.text}
                         </Link>
                         {child?.children && (
-                          <ol>
+                          <ol className="ol-sub-child">
                             {child?.children.map(
                               (subSubMain, subChildIndex) => {
                                 const subSubMainNumber = `${subMainNumber}.${
@@ -153,10 +150,10 @@ function OutlineGenerator({ blogData }) {
                                     }`}
                                     onClick={(e) => {
                                       e.preventDefault();
-                                      e.stopPropagation(); // Stop event propagation here
+                                      e.stopPropagation();
                                       setActiveChildSubChildIndex(
                                         subChildIndex
-                                      ); // Update activeChildIndex here
+                                      );
                                       handleItemClick(
                                         index,
                                         childIndex,
@@ -175,7 +172,7 @@ function OutlineGenerator({ blogData }) {
                                           : ""
                                       }`}
                                     >
-                                      {subSubMainNumber} {subSubMain.text}
+                                      {subSubMain.text}
                                     </Link>
                                   </li>
                                 );
