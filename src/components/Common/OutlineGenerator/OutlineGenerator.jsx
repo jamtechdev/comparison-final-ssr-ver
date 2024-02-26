@@ -1,11 +1,11 @@
 "use client";
+import { index } from "d3";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 function OutlineGenerator({ blogData }) {
   const [outline, setOutline] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  // console.log(activeIndex);
   const [activeChildIndex, setActiveChildIndex] = useState(null);
   const [activeChildSubChildIndex, setActiveChildSubChildIndex] =
     useState(null);
@@ -56,7 +56,6 @@ function OutlineGenerator({ blogData }) {
 
     setOutline(newOutline);
   }, []);
-
   const handleScrollTo = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -72,7 +71,26 @@ function OutlineGenerator({ blogData }) {
     document.getElementById("shortCodeText").scrollTo(0, 0);
   };
   // console.log(outline);
-  // console.log(activeIndex)
+  const handleItemSubClick = (
+    index,
+    childIndex,
+    childSubIndex,
+    childSubChildIndex,
+    id
+  ) => {
+    setActiveIndex(null);
+    setActiveChildIndex(childIndex);
+    setActiveChildSubChildIndex(childSubChildIndex);
+    handleScrollTo(id);
+    document.getElementById("shortCodeText").scrollTo(0, 0);
+  };
+  const handleSubItemSubChild = (index, childIndex, childSubChildIndex, id) => {
+    setActiveIndex(null);
+    setActiveChildIndex(null);
+    setActiveChildSubChildIndex(childSubChildIndex);
+    handleScrollTo(id);
+    document.getElementById("shortCodeText").scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -100,7 +118,7 @@ function OutlineGenerator({ blogData }) {
                   activeIndex === index ? "outline-active" : ""
                 }`}
               >
-                {mainNumber} {section.text}
+                {`${mainNumber}. ${" "} ${section.text}`}
               </Link>
               {section.children && (
                 <ol className="ol-child">
@@ -111,37 +129,28 @@ function OutlineGenerator({ blogData }) {
                         key={childIndex}
                         className={`outlineList ${
                           activeChildIndex === childIndex &&
-                          activeIndex === index
-                            ? ""
+                          activeIndex == index
+                            ? "outline-active"
                             : ""
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-
                           setActiveChildIndex(childIndex);
                           setActiveChildSubChildIndex(null); // Reset activeChildSubChildIndex
-                          setActiveIndex(null); // Reset activeIndex
-                          handleItemClick(index, childIndex, "", child.id);
-
-                          // Remove outline-active class from parent li
-                          const parentLi = e.currentTarget.parentElement;
-                          if (parentLi) {
-                            parentLi.classList.remove("outline-active");
-                          }
+                          handleItemSubClick(index, childIndex, "", child.id);
                         }}
                       >
-                        {/* {console.log(child?.id)} */}
                         <Link
                           href={`#${child?.id}`}
                           className={`outlineLink ${
                             activeChildIndex === childIndex &&
                             activeIndex === index
-                              ? ""
+                              ? "outline-active"
                               : ""
                           }`}
                         >
-                          {subMainNumber} {child.text}
+                          {`${subMainNumber}. ${" "} ${child.text}`}
                         </Link>
                         {child?.children && (
                           <ol className="ol-sub-child">
@@ -154,10 +163,8 @@ function OutlineGenerator({ blogData }) {
                                   <li
                                     key={subChildIndex}
                                     className={`outlineList ${
-                                      activeChildSubChildIndex ===
-                                        subChildIndex &&
-                                      activeChildIndex === childIndex
-                                        ? ""
+                                      activeChildSubChildIndex === subChildIndex
+                                        ? "outline-active"
                                         : ""
                                     }`}
                                     onClick={(e) => {
@@ -166,7 +173,7 @@ function OutlineGenerator({ blogData }) {
                                       setActiveChildSubChildIndex(
                                         subChildIndex
                                       );
-                                      handleItemClick(
+                                      handleSubItemSubChild(
                                         index,
                                         childIndex,
                                         subChildIndex,
@@ -174,18 +181,19 @@ function OutlineGenerator({ blogData }) {
                                       );
                                     }}
                                   >
-                                    {/* {console.log(subSubMain?.id)} */}
                                     <Link
                                       href={`#${subSubMain?.id}`}
                                       className={`outlineLink ${
                                         activeChildSubChildIndex ===
                                           subChildIndex &&
                                         activeChildIndex === childIndex
-                                          ? ""
+                                          ? "outline-active"
                                           : ""
                                       }`}
                                     >
-                                      {subSubMainNumber} {subSubMain.text}
+                                      {`${subSubMainNumber}. ${" "} ${
+                                        subSubMain.text
+                                      }`}
                                     </Link>
                                   </li>
                                 );

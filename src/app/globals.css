@@ -1214,7 +1214,7 @@ a.outlineLink.outline-active {
 }
 .outlineList a {
  
-  line-height: 1.7rem;
+  line-height: 1.7;
 }
 /* .outline-section .ol-child li{
   line-height: 2.2;

@@ -20,6 +20,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
   };
   // Replace the matched tags with IDs
   const modifiedContent = content.replace(headingRegex, addIds);
+  // console.log(blogData[0])
 
   return (
     <>
@@ -76,7 +77,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
       </section>
       <section className="contentSec my-3">
         <Container>
-         <div className="custom-row">
+          <div className="custom-row">
             <div className="left-side-bar">
               <div className="outline-section">
                 <p>Outline</p>
@@ -142,9 +143,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 </div>
               </div>
             </div>
-            <div
-              className="mobile-hide right-side-bar productSlider-Container"
-            >
+            <div className="mobile-hide right-side-bar productSlider-Container">
               <Row className="mt-3">
                 <Col md={12}>
                   <div className="heading-primary secondary mb-2">
