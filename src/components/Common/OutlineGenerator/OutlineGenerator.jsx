@@ -123,6 +123,12 @@ function OutlineGenerator({ blogData }) {
                           setActiveChildSubChildIndex(null); // Reset activeChildSubChildIndex
                           setActiveIndex(null); // Reset activeIndex
                           handleItemClick(index, childIndex, "", child.id);
+
+                          // Remove outline-active class from parent li
+                          const parentLi = e.currentTarget.parentElement;
+                          if (parentLi) {
+                            parentLi.classList.remove("outline-active");
+                          }
                         }}
                       >
                         {/* {console.log(child?.id)} */}

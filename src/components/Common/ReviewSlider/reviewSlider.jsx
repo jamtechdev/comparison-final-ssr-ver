@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ReviewSlider({ favSlider }) {
-  // console.log(favSlider)
+  console.log(favSlider);
   // if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {
@@ -23,7 +23,7 @@ export default function ReviewSlider({ favSlider }) {
         spaceBetween={30}
         loop={true}
         // rewind={true}
-        onSwiper={(swiper) =>{}}
+        onSwiper={(swiper) => {}}
         navigation={{
           nextEl: ".review-slider .swiper-next",
           prevEl: ".review-slider .swiper-prev",
@@ -49,8 +49,8 @@ export default function ReviewSlider({ favSlider }) {
         }}
         className="product-slider"
       >
-        {favSlider?.map((item,index) => {
-          const url = item?.category.replace(/\s+/g, "-").toLowerCase();
+        {favSlider?.map((item, index) => {
+          const url = item?.category?.replace(/\s+/g, "-").toLowerCase();
           return (
             <SwiperSlide key={index}>
               <Link href={`/${url}/${item?.permalink}`}>
@@ -92,7 +92,8 @@ export default function ReviewSlider({ favSlider }) {
           <span
             className="swiper-prev"
             onClick={(e) => {
-             {}
+              {
+              }
             }}
           >
             <i className="ri-arrow-left-s-line"></i>
@@ -100,7 +101,8 @@ export default function ReviewSlider({ favSlider }) {
           <span
             className="swiper-next"
             onClick={(e) => {
-             {}
+              {
+              }
             }}
           >
             <i className="ri-arrow-right-s-line"></i>

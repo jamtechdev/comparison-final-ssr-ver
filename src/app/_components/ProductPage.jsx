@@ -23,6 +23,7 @@ import ProductCompareTable from "@/components/Common/CompareTable/ProductCompare
 import ComparisonsSlider from "@/components/Common/ComparisonsSlider/comparisonsSlider";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 import CompareForm from "@/components/Common/Comparison/CompareForm";
+import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 
 // import Link from "next/link";
 
@@ -431,7 +432,7 @@ function ProductPage({
                 {product?.should_buy.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
                 )}
-                {console.log(product?.should_buy)}
+                {console.log(product?.should_not_buy)}
                 <ul>
                   {product &&
                     product?.should_buy?.map((item, index) => {
@@ -464,7 +465,7 @@ function ProductPage({
                         <>
                           <li
                             key={index}
-                            tyle={{ color: "rgba(39, 48, 78, 0.7)" }}
+                            style={{ color: "rgba(39, 48, 78, 0.7)" }}
                           >
                             {item}
                           </li>
@@ -670,13 +671,22 @@ function ProductPage({
           </Row>
         </Container>
       </section> */}
+
       <section className="mt-3">
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Best Alternatives</h2>
-              <p>No Data Found</p>
-              {/* <ReviewSlider /> */}
+              {/* <h2 className="site-main-heading">Best Alternatives</h2> */}
+              {/* <p>No Data Found</p> */}
+              {product?.alternative_products?.map((data, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <h2 className="site-main-heading">{data?.heading}</h2>
+                    {data?.alternative_products.length != 0 ? (<ReviewSlider favSlider={data?.alternative_products} />): <span className="text-center m-2">No Alternative Products Found</span>}
+                    
+                  </React.Fragment>
+                );
+              })}
             </Col>
           </Row>
         </Container>
