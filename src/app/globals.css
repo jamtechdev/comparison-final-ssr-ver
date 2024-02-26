@@ -1216,6 +1216,9 @@ a.outlineLink.outline-active {
  
   line-height: 1.7;
 }
+#shortCodeText img{
+  width: 100%;
+}
 /* .outline-section .ol-child li{
   line-height: 2.2;
 }  */
