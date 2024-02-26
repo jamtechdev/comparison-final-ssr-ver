@@ -12,12 +12,13 @@ export default function CompareForm({
   location,
   handelCategoryForOffenProduct,
   handelCloseCompareModel,
+  slug,
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const [formFields, setFormFields] = useState({
-    productFirst: reduxData?.productFirst || null,
+    productFirst: reduxData?.productFirst || slug || null,
     productSecond: reduxData?.productSecond || null,
     productThird: reduxData?.productThird || null,
     category: reduxData?.category || null,

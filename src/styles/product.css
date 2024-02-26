@@ -259,9 +259,9 @@
   background: #ff8f0b;
   border-radius: 50px;
   color: var(--white-color);
-  min-width: 80px;
+  min-width: 100px !important;
   text-align: center;
-  padding: 0px 5px;
+  padding: 0px 18px;
   font-size: 17px;
   line-height: 30px;
   cursor: pointer;

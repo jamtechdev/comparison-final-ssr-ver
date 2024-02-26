@@ -34,7 +34,7 @@ export default function Filter({
   };
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    console.log(filterName,"neet")
+    // console.log(filterName,"neet")
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -101,7 +101,7 @@ export default function Filter({
       case "range":
         if (!isChecked) {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
-          console.log("testing")
+          // console.log("testing")
         } else {
           updatedParams[key] = value;
         }

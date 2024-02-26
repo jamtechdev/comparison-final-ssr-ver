@@ -336,8 +336,8 @@ function ProductPage({
                       .slice(0, showFullRanking ? 8 : 4)
                       .map((item, index) => {
                         return (
-                          <li key={index}>
-                            <p>
+                          <li key={index} className="d-flex align-items-start">
+                            <div className="d-flex align-items-start gap-1">
                               <img
                                 src="/images/double-arrow.png"
                                 width={0}
@@ -345,11 +345,13 @@ function ProductPage({
                                 sizes="100%"
                                 alt=""
                               />
-                              N.{item.position} in{" "}
-                              <Link href={`/${item?.permalink}`}>
-                                <small>{item.guide_name}</small>
-                              </Link>
-                            </p>
+                              <p>
+                                N.{item.position} in{" "}
+                                <Link href={`/${item?.permalink}`}>
+                                  <small>{item.guide_name}</small>
+                                </Link>
+                              </p>
+                            </div>
                           </li>
                         );
                       })}
@@ -402,6 +404,7 @@ function ProductPage({
           </Row>
         </Container>
       </section>
+
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -409,7 +412,7 @@ function ProductPage({
               <h2 className="site-main-heading">{product?.name}</h2>
             </Col>
           </Row>
-          <WhyAccordionTab product={product} />
+          <WhyAccordionTab product={product} slug={slug} />
         </Container>
       </section>
       <CompareDropDown
@@ -432,7 +435,7 @@ function ProductPage({
                 {product?.should_buy.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
                 )}
-                {console.log(product?.should_not_buy)}
+                {/* {console.log(product?.should_not_buy)} */}
                 <ul>
                   {product &&
                     product?.should_buy?.map((item, index) => {
@@ -566,7 +569,7 @@ function ProductPage({
                             .map((item, index) => {
                               return (
                                 <li key={index}>
-                                  <p>
+                                  <div className="d-flex align-items-start gap-1">
                                     <img
                                       src="/images/double-arrow.png"
                                       width={0}
@@ -574,11 +577,13 @@ function ProductPage({
                                       sizes="100%"
                                       alt=""
                                     />
-                                    N.{item.position} in{" "}
-                                    <Link href={`/${item?.permalink}`}>
-                                      <small>{item.guide_name}</small>
-                                    </Link>
-                                  </p>
+                                    <p>
+                                      N.{item.position} in{" "}
+                                      <Link href={`/${item?.permalink}`}>
+                                        <small>{item.guide_name}</small>
+                                      </Link>
+                                    </p>
+                                  </div>
                                 </li>
                               );
                             })}
@@ -719,7 +724,7 @@ function ProductPage({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare With Other Products</h2>
-              <CompareForm />
+              <CompareForm location="ON_PRODUCT_PAGE" slug={slug} />
             </Col>
           </Row>
         </Container>

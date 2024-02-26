@@ -65,7 +65,7 @@ function OutlineGenerator({ blogData }) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = itemRefs.current.findIndex(
-              (ref) => ref === entry.target
+              (ref) => ref.current === entry.target
             );
             setActiveIndex(index);
             setActiveParentIndex(index);
@@ -75,10 +75,18 @@ function OutlineGenerator({ blogData }) {
       { threshold: 0.5 }
     );
 
-    itemRefs.current.forEach((ref) => observer.observe(ref));
+    itemRefs.current.forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
 
     return () => {
-      itemRefs.current.forEach((ref) => observer.unobserve(ref));
+      itemRefs.current.forEach((ref) => {
+        if (ref?.current) {
+          observer.unobserve(ref.current);
+        }
+      });
     };
   }, []);
 

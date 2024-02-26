@@ -103,7 +103,7 @@ function CompareDiv({
       typeof item !== "undefined" &&
       Object.keys(item).length !== 0
   );
-  console.log(comparisonProductData?.length);
+  // console.log(comparisonProductData?.length);
 
   const productCopy = comparisonProductData;
   const productAttributes = {};
