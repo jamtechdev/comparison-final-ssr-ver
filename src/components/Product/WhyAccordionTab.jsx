@@ -38,8 +38,8 @@ const WhyAccordionTab = React.memo(
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          // setApiData(data?.data); // Assuming data from the second API call is directly usable
+          // console.log(data);
+          setApiData(data?.data); // Assuming data from the second API call is directly usable
         })
         .catch((error) => {
           console.error("Error fetching data from second API:", error);
