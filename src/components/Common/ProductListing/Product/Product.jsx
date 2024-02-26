@@ -591,7 +591,10 @@ export default function Product({
                                             target="_blank"
                                             href={`/link?p=${btoa(data.url)}`}
                                           >
-                                            {data?.price} €
+                                            {Math.round(data?.price)?.toFixed(
+                                              1
+                                            )}{" "}
+                                            €
                                           </a>
                                         </span>
                                       </>
