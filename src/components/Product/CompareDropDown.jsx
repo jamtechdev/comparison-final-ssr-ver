@@ -36,7 +36,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
       };
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=Overall score&slug=${slug}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedAttribute?.name}&slug=${slug}`,
           config
         )
         .then((res) => {

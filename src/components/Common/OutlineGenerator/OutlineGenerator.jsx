@@ -7,12 +7,15 @@ function OutlineGenerator({ blogData }) {
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeParentIndex, setActiveParentIndex] = useState(null);
   const [activeChildIndex, setActiveChildIndex] = useState(null);
-  const [activeChildSubChildIndex, setActiveChildSubChildIndex] = useState(null);
+  const [activeChildSubChildIndex, setActiveChildSubChildIndex] =
+    useState(null);
 
   const itemRefs = useRef([]);
 
   useEffect(() => {
-    const headings = document?.getElementById("shortCodeText")?.querySelectorAll("h2, h3, h4, h5");
+    const headings = document
+      ?.getElementById("shortCodeText")
+      ?.querySelectorAll("h2, h3, h4, h5");
     const newOutline = [];
 
     let currentMain = null;
@@ -61,7 +64,9 @@ function OutlineGenerator({ blogData }) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = itemRefs.current.findIndex((ref) => ref === entry.target);
+            const index = itemRefs.current.findIndex(
+              (ref) => ref === entry.target
+            );
             setActiveIndex(index);
             setActiveParentIndex(index);
           }
@@ -131,7 +136,9 @@ function OutlineGenerator({ blogData }) {
                         key={childIndex}
                         id={`${index}child${childIndex}`}
                         className={`outlineList ${
-                          activeParentIndex === `${index}child${childIndex}` ? "outline-active" : ""
+                          activeParentIndex === `${index}child${childIndex}`
+                            ? "outline-active"
+                            : ""
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -142,39 +149,53 @@ function OutlineGenerator({ blogData }) {
                         <Link
                           href={`#${child?.id}`}
                           className={`outlineLink ${
-                            activeParentIndex === `${index}child${childIndex}` ? "outline-active" : ""
+                            activeParentIndex === `${index}child${childIndex}`
+                              ? "outline-active"
+                              : ""
                           }`}
                         >
                           {`${subMainNumber}. ${child.text}`}
                         </Link>
                         {child?.children && (
                           <ol className="ol-sub-child">
-                            {child?.children.map((subSubMain, subChildIndex) => {
-                              const subSubMainNumber = `${subMainNumber}.${subChildIndex + 1}`;
-                              return (
-                                <li
-                                  key={subChildIndex}
-                                  id={`${index}child${childIndex}subChild${subChildIndex}`}
-                                  className={`outlineList ${
-                                    activeParentIndex === `${index}child${childIndex}subChild${subChildIndex}` ? "outline-active" : ""
-                                  }`}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    setActiveParentIndex(`${index}child${childIndex}subChild${subChildIndex}`);
-                                  }}
-                                >
-                                  <Link
-                                    href={`#${subSubMain?.id}`}
-                                    className={`outlineLink ${
-                                      activeParentIndex === `${index}child${childIndex}subChild${subChildIndex}` ? "outline-active" : ""
+                            {child?.children.map(
+                              (subSubMain, subChildIndex) => {
+                                const subSubMainNumber = `${subMainNumber}.${
+                                  subChildIndex + 1
+                                }`;
+                                return (
+                                  <li
+                                    key={subChildIndex}
+                                    id={`${index}child${childIndex}subChild${subChildIndex}`}
+                                    className={`outlineList ${
+                                      activeParentIndex ===
+                                      `${index}child${childIndex}subChild${subChildIndex}`
+                                        ? "outline-active"
+                                        : ""
                                     }`}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      setActiveParentIndex(
+                                        `${index}child${childIndex}subChild${subChildIndex}`
+                                      );
+                                    }}
                                   >
-                                    {`${subSubMainNumber}. ${subSubMain.text}`}
-                                  </Link>
-                                </li>
-                              );
-                            })}
+                                    <Link
+                                      href={`#${subSubMain?.id}`}
+                                      className={`outlineLink ${
+                                        activeParentIndex ===
+                                        `${index}child${childIndex}subChild${subChildIndex}`
+                                          ? "outline-active"
+                                          : ""
+                                      }`}
+                                    >
+                                      {`${subSubMainNumber}. ${subSubMain.text}`}
+                                    </Link>
+                                  </li>
+                                );
+                              }
+                            )}
                           </ol>
                         )}
                       </li>
