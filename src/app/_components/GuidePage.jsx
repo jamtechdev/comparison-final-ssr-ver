@@ -621,6 +621,7 @@ export default function GuidePage({
             </Col>
             <Col md={8} lg={8}>
               <div
+                id="shortCodeText"
                 dangerouslySetInnerHTML={{
                   __html: searchForPatternAndReplace(
                     guide?.text_third_part_main

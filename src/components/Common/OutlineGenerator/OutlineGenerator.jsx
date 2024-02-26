@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 function OutlineGenerator({ blogData }) {
   const [outline, setOutline] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  // console.log(activeIndex);
   const [activeChildIndex, setActiveChildIndex] = useState(null);
   const [activeChildSubChildIndex, setActiveChildSubChildIndex] =
     useState(null);
@@ -70,6 +71,7 @@ function OutlineGenerator({ blogData }) {
     document.getElementById("shortCodeText").scrollTo(0, 0);
   };
   // console.log(outline);
+  console.log(activeIndex)
 
   return (
     <>
@@ -115,11 +117,14 @@ function OutlineGenerator({ blogData }) {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
+
                           setActiveChildIndex(childIndex);
                           setActiveChildSubChildIndex(null); // Reset activeChildSubChildIndex
+                          setActiveIndex(null); // Reset activeIndex
                           handleItemClick(index, childIndex, "", child.id);
                         }}
                       >
+                        {/* {console.log(child?.id)} */}
                         <Link
                           href={`#${child?.id}`}
                           className={`outlineLink ${
@@ -162,6 +167,7 @@ function OutlineGenerator({ blogData }) {
                                       );
                                     }}
                                   >
+                                    {/* {console.log(subSubMain?.id)} */}
                                     <Link
                                       href={`#${subSubMain?.id}`}
                                       className={`outlineLink ${

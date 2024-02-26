@@ -10,16 +10,16 @@ import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 export default function BlogPage({ slug, blogData, categorySlug }) {
   // //  *******This part of code extract h1,h2,h3 from text_part and add ids to them*************
-  // const content = blogData[0]?.data?.text_part;
-  // // Regular expression to match h1, h2, and h3 tags
-  // const headingRegex = /<h([1-3])>(.*?)<\/h[1-3]>/g;
-  // // Function to add IDs to matched tags
-  // const addIds = (match, tag, content) => {
-  //   const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
-  //   return `<h${tag} id="${id}">${content}</h${tag}>`;
-  // };
-  // // Replace the matched tags with IDs
-  // const modifiedContent = content.replace(headingRegex, addIds);
+  const content = blogData[0]?.data?.text_part;
+  // Regular expression to match h1, h2, and h3 tags
+  const headingRegex = /<h([1-3])>(.*?)<\/h[1-3]>/g;
+  // Function to add IDs to matched tags
+  const addIds = (match, tag, content) => {
+    const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
+    return `<h${tag} id="${id}">${content}</h${tag}>`;
+  };
+  // Replace the matched tags with IDs
+  const modifiedContent = content.replace(headingRegex, addIds);
 
   return (
     <>
@@ -77,7 +77,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
       <section className="contentSec my-3">
         <Container>
           <Row>
-            <Col lg={2} md={2} xs={12}>
+            <Col lg={3} md={3} xs={12}>
               <div className="outline-section">
                 <p>Outline</p>
                 <OutlineGenerator blogData={blogData[0]?.data?.text_part} />
@@ -96,14 +96,12 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 </ol> */}
               </div>
             </Col>
-            <Col lg={8} md={8} xs={12}>
+            <Col lg={7} md={7} xs={12}>
               <div
                 id="shortCodeText"
                 className="content-para mt-1"
                 dangerouslySetInnerHTML={{
-                  __html: searchForPatternAndReplace(
-                    blogData[0]?.data?.text_part
-                  ),
+                  __html: searchForPatternAndReplace(modifiedContent),
                 }}
               />
               <div className="social-icon items-icon">
