@@ -100,7 +100,7 @@ function OutlineGenerator({ blogData }) {
                   activeIndex === index ? "outline-active" : ""
                 }`}
               >
-                {section.text}
+                {mainNumber} {section.text}
               </Link>
               {section.children && (
                 <ol className="ol-child">
@@ -141,7 +141,7 @@ function OutlineGenerator({ blogData }) {
                               : ""
                           }`}
                         >
-                          {child.text}
+                          {subMainNumber} {child.text}
                         </Link>
                         {child?.children && (
                           <ol className="ol-sub-child">
@@ -185,7 +185,7 @@ function OutlineGenerator({ blogData }) {
                                           : ""
                                       }`}
                                     >
-                                      {subSubMain.text}
+                                      {subSubMainNumber} {subSubMain.text}
                                     </Link>
                                   </li>
                                 );

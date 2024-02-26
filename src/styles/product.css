@@ -899,7 +899,7 @@
 }
 
 .outline-section ol li ol {
-  padding-left: 10px !important;
+  padding-left: 13px !important;
   color: var(--heading-color);
   list-style: none !important;
   list-style-position: inside !important;

@@ -12,7 +12,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
   // //  *******This part of code extract h1,h2,h3 from text_part and add ids to them*************
   const content = blogData[0]?.data?.text_part;
   // Regular expression to match h1, h2, and h3 tags
-  const headingRegex = /<h([1-3])>(.*?)<\/h[1-3]>/g;
+  const headingRegex = /<h([1-6])>(.*?)<\/h[1-6]>/g;
   // Function to add IDs to matched tags
   const addIds = (match, tag, content) => {
     const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
@@ -76,8 +76,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
       </section>
       <section className="contentSec my-3">
         <Container>
-          <Row>
-            <Col lg={3} md={3} xs={12}>
+         <div className="custom-row">
+            <div className="left-side-bar">
               <div className="outline-section">
                 <p>Outline</p>
                 <OutlineGenerator blogData={blogData[0]?.data?.text_part} />
@@ -95,8 +95,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   <li>Pros/Cons</li>
                 </ol> */}
               </div>
-            </Col>
-            <Col lg={7} md={7} xs={12}>
+            </div>
+            <div className="center-section ">
               <div
                 id="shortCodeText"
                 className="content-para mt-1"
@@ -141,12 +141,9 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   </div>
                 </div>
               </div>
-            </Col>
-            <Col
-              lg={2}
-              md={2}
-              xs={12}
-              className="mobile-hide productSlider-Container"
+            </div>
+            <div
+              className="mobile-hide right-side-bar productSlider-Container"
             >
               <Row className="mt-3">
                 <Col md={12}>
@@ -160,8 +157,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   />
                 </Col>
               </Row>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Container>
       </section>
       <section className="blog-slides">

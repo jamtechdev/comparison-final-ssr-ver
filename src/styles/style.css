@@ -1101,3 +1101,32 @@ footer .search-icon {
 .content-para .product-categories-item:hover {
   text-decoration: underline;
 }
+
+.custom-row{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1* var(--bs-gutter-y));
+  margin-right: calc(-.5* var(--bs-gutter-x));
+  margin-left: calc(-.5* var(--bs-gutter-x));
+}
+@media screen and (min-width:992px){
+  .left-side-bar, .right-side-bar{
+    flex: 0 0 auto;
+    width: 20% !important;
+    
+  }
+  .center-section{
+    flex: 0 0 auto;
+    width: 60% !important;
+   
+  }
+}
+.left-side-bar, .right-side-bar, .center-section {
+  max-width: 100%;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x)* .5);
+  padding-left: calc(var(--bs-gutter-x)* .5);
+  margin-top: var(--bs-gutter-y);
+}

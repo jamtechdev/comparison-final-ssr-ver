@@ -1202,7 +1202,7 @@ a.outlineLink.outline-active {
 .outline-section ol li{
   padding-left: 0px !important;
   font-size: 13px;
-  line-height: 1.8;
+  /* line-height: 1.8; */
 }
 .outline-section ol li.outline-active,
 .outline-section ol li a:hover {
@@ -1212,10 +1212,13 @@ a.outlineLink.outline-active {
 .outline-section ol li.outline-active:before{
   padding: 13px 0 10px 0 !important;
 }
-
-.outline-section .ol-child li{
+.outlineList a {
+ 
+  line-height: 1.7rem;
+}
+/* .outline-section .ol-child li{
   line-height: 2.2;
-} 
+}  */
 /* .ol-child li.outlineList.outline-active::before{
   content: "";
 } */
