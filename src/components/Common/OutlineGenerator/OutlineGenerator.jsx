@@ -56,6 +56,7 @@ function OutlineGenerator({ blogData }) {
 
     setOutline(newOutline);
   }, []);
+
   const handleScrollTo = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -71,7 +72,7 @@ function OutlineGenerator({ blogData }) {
     document.getElementById("shortCodeText").scrollTo(0, 0);
   };
   // console.log(outline);
-  console.log(activeIndex)
+  // console.log(activeIndex)
 
   return (
     <>

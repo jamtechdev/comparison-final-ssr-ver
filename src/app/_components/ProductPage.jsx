@@ -22,6 +22,7 @@ import ProductTabs from "@/components/Product/ProductTabs";
 import ProductCompareTable from "@/components/Common/CompareTable/ProductCompareTable";
 import ComparisonsSlider from "@/components/Common/ComparisonsSlider/comparisonsSlider";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
+import CompareForm from "@/components/Common/Comparison/CompareForm";
 
 // import Link from "next/link";
 
@@ -430,6 +431,7 @@ function ProductPage({
                 {product?.should_buy.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
                 )}
+                {console.log(product?.should_buy)}
                 <ul>
                   {product &&
                     product?.should_buy?.map((item, index) => {
@@ -505,6 +507,7 @@ function ProductPage({
               </Col>
               <Col md={8} lg={8}>
                 <div
+                  id="shortCodeText"
                   className="review-content"
                   dangerouslySetInnerHTML={{ __html: product?.text_part }}
                 />
@@ -701,7 +704,7 @@ function ProductPage({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare With Other Products</h2>
-              {/* <Compare /> */}
+              <CompareForm />
             </Col>
           </Row>
         </Container>
