@@ -112,7 +112,7 @@ function OutlineGenerator({ blogData }) {
                         className={`outlineList ${
                           activeChildIndex === childIndex &&
                           activeIndex === index
-                            ? "outline-active"
+                            ? ""
                             : ""
                         }`}
                         onClick={(e) => {
@@ -137,7 +137,7 @@ function OutlineGenerator({ blogData }) {
                           className={`outlineLink ${
                             activeChildIndex === childIndex &&
                             activeIndex === index
-                              ? "outline-active"
+                              ? ""
                               : ""
                           }`}
                         >
@@ -157,7 +157,7 @@ function OutlineGenerator({ blogData }) {
                                       activeChildSubChildIndex ===
                                         subChildIndex &&
                                       activeChildIndex === childIndex
-                                        ? "outline-active"
+                                        ? ""
                                         : ""
                                     }`}
                                     onClick={(e) => {
@@ -181,7 +181,7 @@ function OutlineGenerator({ blogData }) {
                                         activeChildSubChildIndex ===
                                           subChildIndex &&
                                         activeChildIndex === childIndex
-                                          ? "outline-active"
+                                          ? ""
                                           : ""
                                       }`}
                                     >

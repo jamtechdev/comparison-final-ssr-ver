@@ -210,8 +210,8 @@ function ProductPage({
                 </div>
                 {resultOverallScore && (
                   <small>
-                    {resultOverallScore} (better than{" "}
-                    <i>{`${product?.overall_score_better_then * 100}%`}</i>)
+                    {resultOverallScore} better than{" "}
+                    <i>{`${product?.overall_score_better_then * 100}%`}</i>
                   </small>
                 )}
               </div>
@@ -242,8 +242,8 @@ function ProductPage({
                   ></span>
                 </div>
                 <small>
-                  {resultTechnicalScoreColor} (better than{" "}
-                  <i>{`${product?.technical_score_is_better_than * 100}%`}</i>)
+                  {resultTechnicalScoreColor} better than{" "}
+                  <i>{`${product?.technical_score_is_better_than * 100}%`}</i>
                 </small>
               </div>
             </div>
@@ -270,8 +270,8 @@ function ProductPage({
                   ></span>
                 </div>
                 <small>
-                  {resultUsersRatingColor} (better than{" "}
-                  <i>{`${product?.reviews_is_better_than * 100}%`}</i>)
+                  {resultUsersRatingColor} better than{" "}
+                  <i>{`${product?.reviews_is_better_than * 100}%`}</i>
                 </small>
               </div>
             </div>
@@ -682,8 +682,13 @@ function ProductPage({
                 return (
                   <React.Fragment key={index}>
                     <h2 className="site-main-heading">{data?.heading}</h2>
-                    {data?.alternative_products.length != 0 ? (<ReviewSlider favSlider={data?.alternative_products} />): <span className="text-center m-2">No Alternative Products Found</span>}
-                    
+                    {data?.alternative_products.length != 0 ? (
+                      <ReviewSlider favSlider={data?.alternative_products} />
+                    ) : (
+                      <span className="text-center m-2">
+                        No Alternative Products Found
+                      </span>
+                    )}
                   </React.Fragment>
                 );
               })}

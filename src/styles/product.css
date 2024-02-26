@@ -814,7 +814,7 @@
 
 .review-content {
   color: var(--heading-color);
-  opacity: 70%;
+  /* opacity: 70%; */
   font-weight: 400;
   font-size: 18px;
   line-height: 30px;

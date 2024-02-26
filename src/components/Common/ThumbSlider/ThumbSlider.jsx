@@ -2,7 +2,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 
@@ -49,7 +49,7 @@ export default function ThumbSlider({ productData }) {
       {productData?.main_image === null ? (
         <>
           <ul className="thumb-images">
-            {product.map((item, index) => (
+            {product.slice(0, 1).map((item, index) => (
               <li
                 key={index}
                 onClick={() => handleThumbClick(index)}
