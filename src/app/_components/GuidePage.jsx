@@ -388,7 +388,7 @@ export default function GuidePage({
                                 : `${
                                     categoryName.charAt(0).toUpperCase() +
                                     categoryName.slice(1)
-                                  }: ${Object.values(params)[index]}`}
+                                  }: ${Object.values(params)[index].replace(/,/g, "-")}`}
                               <span
                                 className="text0danger"
                                 onClick={() => {

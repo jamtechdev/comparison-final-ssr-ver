@@ -3,7 +3,7 @@ import { select, scaleLinear, line } from "d3";
 import * as d3 from "d3";
 import "./index.css";
 
-function Radar({ data, activeTab }) {
+function ProductPageGraph({ data, activeTab }) {
   // console.log(props, "neet");
   // console.log(data)
 
@@ -37,9 +37,21 @@ function Radar({ data, activeTab }) {
       return "";
     }
   };
+  useEffect(() => {
+    const svgContainer = select("#productGraph");
+    // Select all SVG elements inside the container
+    const svgElements = svgContainer.selectAll("svg");
+    // Filter out the SVG elements you want to remove
+    const svgToRemove = svgElements.filter((d, i) => i === 0); // Keep only the first SVG element, remove the rest
+    // Remove the SVG elements
+    svgToRemove.remove();
+
+    // Continue with your D3.js code for the remaining SVG element...
+  }, []);
 
   useEffect(() => {
-    const svg = select("svg")
+    const svg = select("#productGraph")
+      .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -246,4 +258,4 @@ function Radar({ data, activeTab }) {
   return <svg viewBox={`0 0 ${width} ${height}`}></svg>;
 }
 
-export default Radar;
+export default ProductPageGraph;

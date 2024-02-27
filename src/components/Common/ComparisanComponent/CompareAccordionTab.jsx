@@ -249,7 +249,11 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
               >
                 <div className="graph-tab-content">
                   {activatab === `tab-${index + 1}` && graphData && (
-                    <Radar data={graphData} itemsData={items} activeTab={index} />
+                    <Radar
+                      data={graphData}
+                      itemsData={items}
+                      activeTab={index}
+                    />
                   )}
                 </div>
               </Tab>
@@ -432,7 +436,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
                                         attributes={item?.when_matters}
                                       />
 
-                                      <small className="d-block tooltip-title invisible" >
+                                      <small className="d-block tooltip-title invisible">
                                         {item?.hover_phase && (
                                           <>
                                             <span

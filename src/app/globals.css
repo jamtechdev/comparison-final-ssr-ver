@@ -838,7 +838,7 @@ body
 }
 
 .best-list-item li img {
-  padding: 7px;
+  padding: 0px;
 }
 
 .user-info-section {
@@ -1202,7 +1202,7 @@ a.outlineLink.outline-active {
 .outline-section ol li{
   padding-left: 0px !important;
   font-size: 13px;
-  line-height: 1.8;
+  /* line-height: 1.8; */
 }
 .outline-section ol li.outline-active,
 .outline-section ol li a:hover {
@@ -1212,10 +1212,23 @@ a.outlineLink.outline-active {
 .outline-section ol li.outline-active:before{
   padding: 13px 0 10px 0 !important;
 }
-
-.outline-section .ol-child li{
+.outlineList a {
+ 
+  line-height: 1.7;
+}
+#shortCodeText img{
+  width: 100%;
+}
+/* .outline-section .ol-child li{
   line-height: 2.2;
-} 
+}  */
 /* .ol-child li.outlineList.outline-active::before{
   content: "";
 } */
+
+.curser-pointer {
+  cursor: pointer;
+}
+.curser-pointer .form-check-input{
+  cursor: pointer;
+}

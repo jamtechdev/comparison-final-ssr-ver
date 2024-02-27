@@ -1,6 +1,6 @@
 "use client";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Link from "next/link";
 import useChart, { searchForPatternAndReplace } from "@/hooks/useChart";
@@ -9,18 +9,50 @@ import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 export default function BlogPage({ slug, blogData, categorySlug }) {
+  const [currentHeading, setCurrentHeading] = useState("");
   // //  *******This part of code extract h1,h2,h3 from text_part and add ids to them*************
   const content = blogData[0]?.data?.text_part;
   // Regular expression to match h1, h2, and h3 tags
-  const headingRegex = /<h([1-3])>(.*?)<\/h[1-3]>/g;
+  const headingRegex = /<h([1-6])>(.*?)<\/h[1-6]>/g;
   // Function to add IDs to matched tags
   const addIds = (match, tag, content) => {
     const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
-    return `<h${tag} id="${id}">${content}</h${tag}>`;
+    return `<h${tag} id="${id}" >${content}</h${tag}>`;
   };
   // Replace the matched tags with IDs
   const modifiedContent = content.replace(headingRegex, addIds);
+  // console.log(blogData[0])
 
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // var rect = entry.getBoundingClientRect();
+          if (entry.isIntersecting ) {
+            const heading = entry.target;
+            if ( heading.id !== currentHeading) {
+              setCurrentHeading(heading.id);
+            }
+          }
+        });
+      },
+      { threshold: 1.0 }
+    );
+  
+    const headings = contentRef.current.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    headings.forEach((heading) => {
+      observer.observe(heading);
+    });
+  
+    return () => {
+      headings.forEach((heading) => {
+        observer.unobserve(heading);
+      });
+    };
+  }, [currentHeading]); // Include currentHeading in the dependency array
+  
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
@@ -76,11 +108,11 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
       </section>
       <section className="contentSec my-3">
         <Container>
-          <Row>
-            <Col lg={3} md={3} xs={12}>
+          <div className="custom-row">
+            <div className="left-side-bar">
               <div className="outline-section">
                 <p>Outline</p>
-                <OutlineGenerator blogData={blogData[0]?.data?.text_part} />
+                <OutlineGenerator currentIndexId={currentHeading} blogData={blogData[0]?.data?.text_part} />
                 {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
@@ -95,10 +127,11 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   <li>Pros/Cons</li>
                 </ol> */}
               </div>
-            </Col>
-            <Col lg={7} md={7} xs={12}>
+            </div>
+            <div className="center-section ">
               <div
                 id="shortCodeText"
+                ref={contentRef}
                 className="content-para mt-1"
                 dangerouslySetInnerHTML={{
                   __html: searchForPatternAndReplace(modifiedContent),
@@ -141,13 +174,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   </div>
                 </div>
               </div>
-            </Col>
-            <Col
-              lg={2}
-              md={2}
-              xs={12}
-              className="mobile-hide productSlider-Container"
-            >
+            </div>
+            <div className="mobile-hide right-side-bar productSlider-Container">
               <Row className="mt-3">
                 <Col md={12}>
                   <div className="heading-primary secondary mb-2">
@@ -160,8 +188,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   />
                 </Col>
               </Row>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Container>
       </section>
       <section className="blog-slides">

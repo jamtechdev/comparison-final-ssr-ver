@@ -102,7 +102,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       })
       .filter((value) => !isNaN(value));
 
-    console.log(arrayOfObjects, "neet");
+    // console.log(arrayOfObjects, "neet");
 
     if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
       numericValues.sort((a, b) => b - a);
