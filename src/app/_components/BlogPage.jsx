@@ -1,6 +1,6 @@
 "use client";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Link from "next/link";
 import useChart, { searchForPatternAndReplace } from "@/hooks/useChart";
@@ -21,6 +21,42 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
   // Replace the matched tags with IDs
   const modifiedContent = content.replace(headingRegex, addIds);
   // console.log(blogData[0])
+const containerRef = useRef(null)
+
+  useEffect(() => {
+  // Function to handle scroll event
+  function handleScroll () {
+    const scrollTop =
+      containerRef.current.scrollTop + containerRef.current.clientHeight / 2
+    let height = 0
+
+    // Loop through children to find the one in view
+    for (let child of containerRef.current.children) {
+      const top = height
+      const bottom = height + child.clientHeight
+      if (top < scrollTop && bottom > scrollTop) {
+        // Found the element that's currently viewed!
+        console.log(child)
+        console.log(child.id)
+        break
+      }
+      height = bottom
+    }
+  }
+
+  // Attach scroll event listener
+  containerRef.current.addEventListener('scroll', handleScroll)
+
+  // Initial call to handle initial position
+  handleScroll()
+
+  // Clean up function
+  return () => {
+    containerRef.current.removeEventListener('scroll', handleScroll)
+  }
+}, [])
+
+
 
   return (
     <>
@@ -100,6 +136,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
             <div className="center-section ">
               <div
                 id="shortCodeText"
+                ref={containerRef}
                 className="content-para mt-1"
                 dangerouslySetInnerHTML={{
                   __html: searchForPatternAndReplace(modifiedContent),

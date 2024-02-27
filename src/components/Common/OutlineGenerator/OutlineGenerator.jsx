@@ -10,8 +10,6 @@ function OutlineGenerator({ blogData }) {
   const [activeChildSubChildIndex, setActiveChildSubChildIndex] =
     useState(null);
 
-  const itemRefs = useRef([]);
-
   useEffect(() => {
     const headings = document
       ?.getElementById("shortCodeText")
@@ -59,37 +57,6 @@ function OutlineGenerator({ blogData }) {
     setOutline(newOutline);
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = itemRefs.current.findIndex(
-              (ref) => ref.current === entry.target
-            );
-            setActiveIndex(index);
-            setActiveParentIndex(index);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    itemRefs.current.forEach((ref) => {
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-    });
-
-    return () => {
-      itemRefs.current.forEach((ref) => {
-        if (ref?.current) {
-          observer.unobserve(ref.current);
-        }
-      });
-    };
-  }, []);
-
   const handleScrollTo = (id, index) => {
     const element = document.getElementById(id);
     if (element) {
@@ -114,7 +81,6 @@ function OutlineGenerator({ blogData }) {
           return (
             <li
               key={index}
-              ref={(ref) => (itemRefs.current[index] = ref)}
               id={`parent${index}`}
               className={`outlineList ${
                 activeParentIndex === section?.id ? "outline-active" : ""
