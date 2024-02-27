@@ -40,7 +40,7 @@ export default function BreadCrum({ firstPageName, secondPageName, pageType }) {
         ) : (
           <>
             <BreadcrumbItem className="breadcrumb-items breadcrumb-active">
-              {secondPageName?.heading_title ?? secondPageName?.permalink}
+              {secondPageName?.heading_title ?? secondPageName?.name}
             </BreadcrumbItem>
           </>
         )}
