@@ -168,6 +168,7 @@ function ProductPage({
             </Col>
 
             <Col md={12}>
+              <h1>{product?.name}</h1>
               <p className="product-inner-content">
                 We’ve analyzed 24 784 user’s reviews and 45 technical data to
                 find out if the Samsung New VR Headset Oculus 2.0 is worth
