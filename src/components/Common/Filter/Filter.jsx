@@ -418,10 +418,8 @@ export default function Filter({
                   countAttribute <=
                   (pagination[category.name] || initialNoOfCategories)
                 ) {
-                  console.log(attribute)
                   let filteredArrayOfAttributeValues =
-                    getFilteredAttributeValues(attribute);
-                    console.log(filteredArrayOfAttributeValues, "here attribute value ")
+                  getFilteredAttributeValues(attribute);
                   // console.log(filteredArrayOfAttributeValues, "filter");
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
