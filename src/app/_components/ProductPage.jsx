@@ -131,7 +131,7 @@ function ProductPage({
               />
             </Col>
             <Col md={12} lg={12} xl={9}>
-              <h1 className="site-main-heading">{product?.heading_title}</h1>
+              <h1 className="site-main-heading">{product?.heading_title ?? product?.name}</h1>
             </Col>
 
             <Col md={12} lg={12} xl={3}>
@@ -168,7 +168,7 @@ function ProductPage({
             </Col>
 
             <Col md={12}>
-              <h1>{product?.name}</h1>
+
               <p className="product-inner-content">
                 We’ve analyzed 24 784 user’s reviews and 45 technical data to
                 find out if the Samsung New VR Headset Oculus 2.0 is worth
@@ -357,9 +357,9 @@ function ProductPage({
                 {product?.guide_ratings.length > 5 && (
                   <Button
                     className="see_all_btn"
-                    // onClick={() => {
-                    //   showFullRanking = !showFullRanking;
-                    // }}
+                  // onClick={() => {
+                  //   showFullRanking = !showFullRanking;
+                  // }}
                   >
                     See All <i className="ri-arrow-down-s-line"></i>
                   </Button>
@@ -589,9 +589,9 @@ function ProductPage({
                       {product?.guide_ratings.length > 5 && (
                         <Button
                           className="see_all_btn"
-                          // onClick={() => {
-                          //   showFullRanking = !showFullRanking;
-                          // }}
+                        // onClick={() => {
+                        //   showFullRanking = !showFullRanking;
+                        // }}
                         >
                           See All <i className="ri-arrow-down-s-line"></i>
                         </Button>
