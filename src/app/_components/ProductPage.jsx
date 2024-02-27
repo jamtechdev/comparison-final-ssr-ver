@@ -208,7 +208,7 @@ function ProductPage({
                 {resultOverallScore && (
                   <small>
                     {resultOverallScore}{" "}
-                    <i>{`${product?.overall_score_better_then * 100}`}</i>
+                    {/* <i>{`${product?.overall_score_better_then * 100}`}</i> */}
                   </small>
                 )}
               </div>
@@ -240,7 +240,7 @@ function ProductPage({
                 </div>
                 <small>
                   {resultTechnicalScoreColor}{" "}
-                  <i>{`${product?.technical_score_is_better_than * 100}`}</i>
+                  {/* <i>{`${product?.technical_score_is_better_than * 100}`}</i> */}
                 </small>
               </div>
             </div>
@@ -268,7 +268,7 @@ function ProductPage({
                 </div>
                 <small>
                   {resultUsersRatingColor}{" "}
-                  <i>{`${product?.reviews_is_better_than * 100}`}</i>
+                  {/* <i>{`${product?.reviews_is_better_than * 100}`}</i> */}
                 </small>
               </div>
             </div>
