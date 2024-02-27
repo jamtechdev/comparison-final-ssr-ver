@@ -2,13 +2,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
-function OutlineGenerator({ blogData }) {
+function OutlineGenerator({ blogData , currentIndexId}) {
   const [outline, setOutline] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeParentIndex, setActiveParentIndex] = useState(null);
   const [activeChildIndex, setActiveChildIndex] = useState(null);
   const [activeChildSubChildIndex, setActiveChildSubChildIndex] =
     useState(null);
+
+    useEffect(()=>{
+      console.log(currentIndexId, " id on outerlie", activeParentIndex)
+      if(currentIndexId){
+        setActiveParentIndex(currentIndexId)
+      }
+    },[currentIndexId])
 
   useEffect(() => {
     const headings = document

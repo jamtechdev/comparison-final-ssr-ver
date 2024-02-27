@@ -1,25 +1,46 @@
 //Updated
 export const getFilteredAttributeValues = (obj) => {
   let uniq = [];
+  let product = [];
+  const uniqueValues = obj.values.reduce((acc, currentValue) => {
+    if (!acc.includes(currentValue.name)) {
+      acc.push(currentValue.name);
+    }
+    return acc;
+  }, []);
   if (obj?.algorithm == "absolute_value") {
-    for (let i = 0; i < obj.values.length; i++) {
+    for (let i = 0; i < uniqueValues.length; i++) {
       if (
         !uniq.includes(obj.values[i].name) &&
         obj.values[i].name != "" &&
         obj.values[i].name != "-" &&
-        obj.values[i].name != "?"
+        obj.values[i].name != "?" && 
+        !obj.values[i].product_count
       ) {
         uniq.push(obj.values[i].name);
+      }
+      if (
+        !uniq.includes(obj.values[i].name) &&
+        obj.values[i].name != "" &&
+        obj.values[i].name != "-" &&
+        obj.values[i].name != "?" &&
+        obj.values[i].product_count
+      ) {
+        uniq.push([obj.values[i].name]);
+        product.push([obj.values[i].product_count]);
+
       }
     }
     // if uniq contain yes or no one of them only then add second one automatically
     if (uniq.includes("no") || uniq.includes("yes")) {
       uniq = ["yes"];
     }
+    
     if (uniq.length > 0)
       return {
         type: "dropdown",
         values: uniq,
+        product_count: product,
         unit: obj.unit,
       };
   } else if (

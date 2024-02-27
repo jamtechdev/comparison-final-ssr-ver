@@ -836,6 +836,8 @@
   border-radius: 5px;
   position: sticky;
   top: 15px;
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
 }
 
 .outline-section ol li {

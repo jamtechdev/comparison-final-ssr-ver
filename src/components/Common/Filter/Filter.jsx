@@ -330,6 +330,7 @@ export default function Filter({
       ? handelFilterActions("sort", "sort", `${orderBy.value}`, true)
       : handelFilterActions("sort", "sort", `${orderBy.value}`, false);
   }, [orderBy]);
+
   return (
     <div className="filter-container">
       <div className="filter-section">
@@ -417,8 +418,10 @@ export default function Filter({
                   countAttribute <=
                   (pagination[category.name] || initialNoOfCategories)
                 ) {
+                  console.log(attribute)
                   let filteredArrayOfAttributeValues =
                     getFilteredAttributeValues(attribute);
+                    console.log(filteredArrayOfAttributeValues, "here attribute value ")
                   // console.log(filteredArrayOfAttributeValues, "filter");
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
@@ -472,39 +475,47 @@ export default function Filter({
                               (value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
                                 return (
-                                  <Form.Check
-                                    required
-                                    label={
+                                  <div className="d-flex flex-row justify-content-between">
+                                    <div className="d-flex flex-row curser-pointer">
+                                      <Form.Check
+                                        required
+                                        label={""}
+                                        key={valIndex}
+                                        id={`${attribute.name}${value}`}
+                                        onChange={(e) =>
+                                          handelFilterActions(
+                                            "dropdown",
+                                            attribute.name,
+                                            { key: value },
+                                            e.target.checked
+                                          )
+                                        }
+                                      />
                                       <span>
                                         {value.toString()}{" "}
-                                        {filteredArrayOfAttributeValues?.unit}
-                                        <span
-                                          dangerouslySetInnerHTML={{
-                                            __html: `<p>(${
-                                              filteredArrayOfAttributeValues.values &&
-                                              filteredArrayOfAttributeValues.product_count &&
-                                              filteredArrayOfAttributeValues
-                                                .product_count[valIndex] !==
-                                                undefined
-                                                ? filteredArrayOfAttributeValues
-                                                    .product_count[valIndex]
-                                                : "0"
-                                            })</p>`,
-                                          }}
-                                        />
+                                        {filteredArrayOfAttributeValues?.unit ==
+                                          "-" ||
+                                        filteredArrayOfAttributeValues?.unit ==
+                                          "?"
+                                          ? ""
+                                          : filteredArrayOfAttributeValues?.unit}
                                       </span>
-                                    }
-                                    key={valIndex}
-                                    id={`${attribute.name}${value}`}
-                                    onChange={(e) =>
-                                      handelFilterActions(
-                                        "dropdown",
-                                        attribute.name,
-                                        { key: value },
-                                        e.target.checked
-                                      )
-                                    }
-                                  />
+                                    </div>
+                                    <span
+                                      dangerouslySetInnerHTML={{
+                                        __html: `<p>(${
+                                          filteredArrayOfAttributeValues.values &&
+                                          filteredArrayOfAttributeValues.product_count &&
+                                          filteredArrayOfAttributeValues
+                                            .product_count[valIndex] !==
+                                            undefined
+                                            ? filteredArrayOfAttributeValues
+                                                .product_count[valIndex]
+                                            : "0"
+                                        })</p>`,
+                                      }}
+                                    />
+                                  </div>
                                 );
                               }
                             )}

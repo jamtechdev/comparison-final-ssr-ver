@@ -1,6 +1,6 @@
 "use client";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Link from "next/link";
 import useChart, { searchForPatternAndReplace } from "@/hooks/useChart";
@@ -9,6 +9,7 @@ import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 export default function BlogPage({ slug, blogData, categorySlug }) {
+  const [currentHeading, setCurrentHeading] = useState("");
   // //  *******This part of code extract h1,h2,h3 from text_part and add ids to them*************
   const content = blogData[0]?.data?.text_part;
   // Regular expression to match h1, h2, and h3 tags
@@ -16,48 +17,42 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
   // Function to add IDs to matched tags
   const addIds = (match, tag, content) => {
     const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
-    return `<h${tag} id="${id}">${content}</h${tag}>`;
+    return `<h${tag} id="${id}" >${content}</h${tag}>`;
   };
   // Replace the matched tags with IDs
   const modifiedContent = content.replace(headingRegex, addIds);
   // console.log(blogData[0])
-const containerRef = useRef(null)
+
+  const contentRef = useRef(null);
 
   useEffect(() => {
-  // Function to handle scroll event
-  function handleScroll () {
-    const scrollTop =
-      containerRef.current.scrollTop + containerRef.current.clientHeight / 2
-    let height = 0
-
-    // Loop through children to find the one in view
-    for (let child of containerRef.current.children) {
-      const top = height
-      const bottom = height + child.clientHeight
-      if (top < scrollTop && bottom > scrollTop) {
-        // Found the element that's currently viewed!
-        console.log(child)
-        console.log(child.id)
-        break
-      }
-      height = bottom
-    }
-  }
-
-  // Attach scroll event listener
-  containerRef.current.addEventListener('scroll', handleScroll)
-
-  // Initial call to handle initial position
-  handleScroll()
-
-  // Clean up function
-  return () => {
-    containerRef.current.removeEventListener('scroll', handleScroll)
-  }
-}, [])
-
-
-
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // var rect = entry.getBoundingClientRect();
+          if (entry.isIntersecting ) {
+            const heading = entry.target;
+            if ( heading.id !== currentHeading) {
+              setCurrentHeading(heading.id);
+            }
+          }
+        });
+      },
+      { threshold: 1.0 }
+    );
+  
+    const headings = contentRef.current.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    headings.forEach((heading) => {
+      observer.observe(heading);
+    });
+  
+    return () => {
+      headings.forEach((heading) => {
+        observer.unobserve(heading);
+      });
+    };
+  }, [currentHeading]); // Include currentHeading in the dependency array
+  
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
@@ -117,7 +112,7 @@ const containerRef = useRef(null)
             <div className="left-side-bar">
               <div className="outline-section">
                 <p>Outline</p>
-                <OutlineGenerator blogData={blogData[0]?.data?.text_part} />
+                <OutlineGenerator currentIndexId={currentHeading} blogData={blogData[0]?.data?.text_part} />
                 {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
@@ -136,7 +131,7 @@ const containerRef = useRef(null)
             <div className="center-section ">
               <div
                 id="shortCodeText"
-                ref={containerRef}
+                ref={contentRef}
                 className="content-para mt-1"
                 dangerouslySetInnerHTML={{
                   __html: searchForPatternAndReplace(modifiedContent),

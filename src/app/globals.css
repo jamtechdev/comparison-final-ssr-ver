@@ -1225,3 +1225,10 @@ a.outlineLink.outline-active {
 /* .ol-child li.outlineList.outline-active::before{
   content: "";
 } */
+
+.curser-pointer {
+  cursor: pointer;
+}
+.curser-pointer .form-check-input{
+  cursor: pointer;
+}

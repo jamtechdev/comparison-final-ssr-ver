@@ -68,7 +68,7 @@ export default function ThumbSlider({ productData }) {
         </>
       ) : (
         <ul className="thumb-images">
-          {productData?.main_image.map((item, index) => (
+          {productData && productData?.all_images?.map((item, index) => (
             <li
               key={index}
               onClick={() => handleThumbClick(index)}
@@ -143,7 +143,7 @@ export default function ThumbSlider({ productData }) {
               },
             }}
           >
-            {productData?.main_image((item, index) => (
+            {productData?.all_images.map((item, index) => (
               <SwiperSlide key={index}>
                 <Image
                   src={item.image}
