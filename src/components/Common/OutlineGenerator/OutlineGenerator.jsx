@@ -117,20 +117,18 @@ function OutlineGenerator({ blogData }) {
               ref={(ref) => (itemRefs.current[index] = ref)}
               id={`parent${index}`}
               className={`outlineList ${
-                activeParentIndex === `parent${index}` ? "outline-active" : ""
+                activeParentIndex === section?.id ? "outline-active" : ""
               }`}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setActiveIndex(index);
-                setActiveParentIndex(`parent${index}`);
-                handleItemClick(index, section.id);
+                setActiveParentIndex(section?.id);
               }}
             >
               <Link
                 href={`#${section?.id}`}
                 className={`outlineLink ${
-                  activeParentIndex === `parent${index}` ? "outline-active" : ""
+                  activeParentIndex === section?.id ? "outline-active" : ""
                 }`}
               >
                 {`${mainNumber}. ${section.text}`}
@@ -144,20 +142,20 @@ function OutlineGenerator({ blogData }) {
                         key={childIndex}
                         id={`${index}child${childIndex}`}
                         className={`outlineList ${
-                          activeParentIndex === `${index}child${childIndex}`
+                          activeParentIndex === child?.id
                             ? "outline-active"
                             : ""
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          setActiveParentIndex(`${index}child${childIndex}`);
+                          setActiveParentIndex(child?.id);
                         }}
                       >
                         <Link
                           href={`#${child?.id}`}
                           className={`outlineLink ${
-                            activeParentIndex === `${index}child${childIndex}`
+                            activeParentIndex === child?.id
                               ? "outline-active"
                               : ""
                           }`}
@@ -174,10 +172,9 @@ function OutlineGenerator({ blogData }) {
                                 return (
                                   <li
                                     key={subChildIndex}
-                                    id={`${index}child${childIndex}subChild${subChildIndex}`}
+                                    id={`${index}subChild${subChildIndex}`}
                                     className={`outlineList ${
-                                      activeParentIndex ===
-                                      `${index}child${childIndex}subChild${subChildIndex}`
+                                      activeParentIndex ===subSubMain?.id
                                         ? "outline-active"
                                         : ""
                                     }`}
@@ -185,15 +182,14 @@ function OutlineGenerator({ blogData }) {
                                       e.preventDefault();
                                       e.stopPropagation();
                                       setActiveParentIndex(
-                                        `${index}child${childIndex}subChild${subChildIndex}`
+                                        subSubMain?.id
                                       );
                                     }}
                                   >
                                     <Link
                                       href={`#${subSubMain?.id}`}
                                       className={`outlineLink ${
-                                        activeParentIndex ===
-                                        `${index}child${childIndex}subChild${subChildIndex}`
+                                        activeParentIndex === subSubMain?.id
                                           ? "outline-active"
                                           : ""
                                       }`}
