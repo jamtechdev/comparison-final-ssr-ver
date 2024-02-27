@@ -8,7 +8,6 @@ import {
   BreadcrumbItem,
 } from "react-bootstrap";
 export default function BreadCrum({ firstPageName, secondPageName, pageType }) {
-  // console.log(secondPageName);
   const router = useRouter();
   return (
     <>
@@ -41,7 +40,7 @@ export default function BreadCrum({ firstPageName, secondPageName, pageType }) {
         ) : (
           <>
             <BreadcrumbItem className="breadcrumb-items breadcrumb-active">
-              {secondPageName?.heading_title}
+              {secondPageName?.heading_title ?? secondPageName?.permalink}
             </BreadcrumbItem>
           </>
         )}
