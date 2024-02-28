@@ -164,7 +164,6 @@ async function getCompareProductByCatID(category_id) {
 
 async function getGraphComparisonProsCons(data) {
   if (data.length === 2) {
-   
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}`,
       {

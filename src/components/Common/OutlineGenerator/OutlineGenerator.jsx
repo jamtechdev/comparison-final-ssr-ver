@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
-function OutlineGenerator({ blogData , currentIndexId}) {
+function OutlineGenerator({ blogData, currentIndexId }) {
+  console.log(currentIndexId);
   const [outline, setOutline] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeParentIndex, setActiveParentIndex] = useState(null);
@@ -10,12 +11,12 @@ function OutlineGenerator({ blogData , currentIndexId}) {
   const [activeChildSubChildIndex, setActiveChildSubChildIndex] =
     useState(null);
 
-    useEffect(()=>{
-      console.log(currentIndexId, " id on outerlie", activeParentIndex)
-      if(currentIndexId){
-        setActiveParentIndex(currentIndexId)
-      }
-    },[currentIndexId])
+  useEffect(() => {
+    // console.log(currentIndexId, " id on outerlie", activeParentIndex)
+    if (currentIndexId) {
+      setActiveParentIndex(currentIndexId);
+    }
+  }, [currentIndexId]);
 
   useEffect(() => {
     const headings = document
@@ -147,16 +148,14 @@ function OutlineGenerator({ blogData , currentIndexId}) {
                                     key={subChildIndex}
                                     id={`${index}subChild${subChildIndex}`}
                                     className={`outlineList ${
-                                      activeParentIndex ===subSubMain?.id
+                                      activeParentIndex === subSubMain?.id
                                         ? "outline-active"
                                         : ""
                                     }`}
                                     onClick={(e) => {
                                       e.preventDefault();
                                       e.stopPropagation();
-                                      setActiveParentIndex(
-                                        subSubMain?.id
-                                      );
+                                      setActiveParentIndex(subSubMain?.id);
                                     }}
                                   >
                                     <Link

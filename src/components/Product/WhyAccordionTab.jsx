@@ -46,25 +46,41 @@ const WhyAccordionTab = React.memo(
         });
     }, []);
 
+    useEffect(() => {
+      const getColor = ["#437ECE", "#FF8F0B", "#28A28C"];
+      // Find all buttons that are children of an element with role="presentation" add attribute
+      const attributeAdd = document.querySelectorAll(
+        '[role="presentation"] button'
+      );
+      attributeAdd.forEach((button, index) => {
+        button.setAttribute(
+          "data-count",
+          formatValue(sendProductProps[index]?.overall_score)
+        );
+        button.style.setProperty("--color-bg", getColor[index]);
+      });
+    }, []);
+
     // console.log(apiData && apiData?.sets);
     const handleTabChange = (key) => {
       setActiveTab(key);
     };
-    // const handleTabChanage = (value, key) => {
-    //   if (key == "pros") {
-    //     if (value == "total") {
-    //       setTabValue({ ...tabvalue, pros: "total" });
-    //     } else {
-    //       setTabValue({ ...tabvalue, pros: value });
-    //     }
-    //   } else {
-    //     if (value == "total") {
-    //       setTabValue({ ...tabvalue, cons: "total" });
-    //     } else {
-    //       setTabValue({ ...tabvalue, cons: value });
-    //     }
-    //   }
-    // };
+    const handleTabChanage = (value, key) => {
+      if (key == "pros") {
+        if (value == "total") {
+          setTabValue({ ...tabvalue, pros: "total" });
+        } else {
+          setTabValue({ ...tabvalue, pros: value });
+        }
+      } else {
+        if (value == "total") {
+          setTabValue({ ...tabvalue, cons: "total" });
+        } else {
+          setTabValue({ ...tabvalue, cons: value });
+        }
+      }
+    };
+    console.log(activetab);
     return (
       <Row>
         <Col md={12} lg={6}>
@@ -76,12 +92,23 @@ const WhyAccordionTab = React.memo(
             onSelect={handleTabChange}
           >
             <Tab eventKey="tab-1" title={product && product?.name}>
-              <div className="graph-tab-content" id="productGraph">
-                {apiData && <ProductPageGraph data={apiData?.sets} />}
-                {/* Your content for tab-1 */}
-              </div>
+              {activetab === "tab-1" && (
+                <div className="graph-tab-content" id="productGraph">
+                  {apiData && (
+                    <ProductPageGraph data={apiData?.sets} activeTab={0} />
+                  )}
+                </div>
+              )}
+              {/* Your content for tab-1 */}
             </Tab>
             <Tab eventKey="tab-2" title="Average">
+              {activetab === "tab-2" && (
+                <div className="graph-tab-content" id="productGraph">
+                  {apiData && (
+                    <ProductPageGraph data={apiData?.sets} activeTab={1} />
+                  )}
+                </div>
+              )}
               {/* Your content for tab-2 */}
             </Tab>
           </Tabs>

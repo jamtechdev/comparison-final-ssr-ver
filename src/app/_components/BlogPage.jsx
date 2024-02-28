@@ -26,33 +26,46 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
   const contentRef = useRef(null);
 
   useEffect(() => {
+    let lastHeadingId = null; // Variable to store the ID of the last heading that entered the viewport
+
     const observer = new IntersectionObserver(
       (entries) => {
+        console.log(entries);
         entries.forEach((entry) => {
-          // var rect = entry.getBoundingClientRect();
-          if (entry.isIntersecting ) {
+          console.log(entry.isIntersecting);
+          if (entry.isIntersecting) {
             const heading = entry.target;
-            if ( heading.id !== currentHeading) {
-              setCurrentHeading(heading.id);
-            }
+            lastHeadingId = heading.id; // Update the lastHeadingId variable
           }
         });
+
+        // Update the currentHeading state with the last heading ID
+        if (lastHeadingId !== null && lastHeadingId !== currentHeading) {
+          setCurrentHeading(lastHeadingId);
+        }
       },
-      { threshold: 1.0 }
+      { threshold: 1 }
     );
-  
-    const headings = contentRef.current.querySelectorAll("h1, h2, h3, h4, h5, h6");
-    headings.forEach((heading) => {
-      observer.observe(heading);
-    });
-  
-    return () => {
+    const shortTextElement = contentRef.current.querySelector("#shortText");
+    if (shortTextElement) {
+      const headings = contentRef.current.querySelectorAll(
+        "h1, h2, h3, h4, h5, h6"
+      );
       headings.forEach((heading) => {
-        observer.unobserve(heading);
+        observer.observe(heading);
       });
-    };
-  }, [currentHeading]); // Include currentHeading in the dependency array
-  
+
+      return () => {
+        headings.forEach((heading) => {
+          observer.unobserve(heading);
+        });
+      };
+    }
+  }, [currentHeading]);
+  console.log(currentHeading);
+
+  // Include currentHeading in the dependency array
+
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
@@ -112,7 +125,10 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
             <div className="left-side-bar">
               <div className="outline-section">
                 <p>Outline</p>
-                <OutlineGenerator currentIndexId={currentHeading} blogData={blogData[0]?.data?.text_part} />
+                <OutlineGenerator
+                  currentIndexId={currentHeading}
+                  blogData={blogData[0]?.data?.text_part}
+                />
                 {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
