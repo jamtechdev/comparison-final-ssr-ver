@@ -121,7 +121,7 @@ function ProductPage({
   };
   return (
     <>
-    {console.log(product)}
+    {/* {console.log(product)} */}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
