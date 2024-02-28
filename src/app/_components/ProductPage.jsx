@@ -364,19 +364,31 @@ function ProductPage({
                 )}
               </div>
             </Col>
-            <Col lg={12} md={12} xl={12}>
-              <div className="alternatives mt-4">
-                <h6>Similar Alternatives:</h6>
-                <ul>
-                  <li className="active">
-                    <span>9 kg</span>
-                  </li>
-                  <li>
-                    <span>10 kg</span>
-                  </li>
-                </ul>
-              </div>
-            </Col>
+            {product?.available_colors && (
+              <Col lg={12} md={12} xl={12}>
+                <div className="alternatives mt-4">
+                  <h6>Colors available:</h6>
+                  <Form className="color-section">
+                    {product?.available_colors?.map((data, key) => {
+                      return (
+                        <>
+                          <div className="color-item">
+                            <Form.Check
+                              inline
+                              label={data?.color}
+                              name="color"
+                              type="radio"
+                              defaultChecked={key === 0}
+                              id={`inline-${data?.color}-${key}`}
+                            />
+                          </div>
+                        </>
+                      );
+                    })}
+                  </Form>
+                </div>
+              </Col>
+            )}
           </Row>
         </Container>
       </section>
@@ -413,6 +425,7 @@ function ProductPage({
       </section>
       <CompareDropDown
         attributeDropDown={[...productCatAttributes?.data].reverse()}
+        pageType="product"
         product={product}
         slug={slug}
       />
@@ -477,7 +490,8 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {product?.text_part && (
+      {/* {console.log(product?.text_part !== "")} */}
+      {product?.text_part !== "" && (
         <section className="ptb-80">
           <Container>
             <Row>
@@ -720,7 +734,7 @@ function ProductPage({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare With Other Products</h2>
-              <CompareForm location="ON_PRODUCT_PAGE" slug={product?.name} />
+              <CompareForm location="ON_PRODUCT_PAGE" product_name={product} />
             </Col>
           </Row>
         </Container>

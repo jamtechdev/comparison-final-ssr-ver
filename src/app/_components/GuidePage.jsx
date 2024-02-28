@@ -36,7 +36,7 @@ export default function GuidePage({
   const guide = guideData[0]?.data;
 
 
-  const products = guideData[1]?.data?.products || [];
+  const  products = guideData[1]?.data?.products || [];
   // console.log(products, "guideData");
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data.product_names || [];
@@ -170,7 +170,6 @@ export default function GuidePage({
       // }?${searchParam.toString()}`;
       // searchParams.sort = `${param.algo},${param.rangeAttributes}`;
       // window.history.pushState({ path: newUrl }, "", newUrl);
-
     } else {
       removeQueryParamAndNavigate(window.location.href, "sort");
       delete searchParams.sort;
@@ -185,7 +184,6 @@ export default function GuidePage({
     //   ),
     // ]);
     // console.log(JSON.parse(sortAttribute))
-
   };
 
   // if (products.length === 0) {
@@ -538,9 +536,20 @@ export default function GuidePage({
                     )
                   ) : (
                     <>
-                      <div className="text-center p-5">
-                        None of the products meet your filtering criteria.
-                      </div>
+                      <ConfirmationModal
+                        showModal={showModal}
+                        handleClose={handleModalClose}
+                        handleConfirm={handleConfirm}
+                      />
+                      {showModal === false ? (
+                        <div className="text-center p-5">
+                          None of the products meet your filtering criteria.
+                        </div>
+                      ) : (
+                        ""
+                      )}
+
+                      {/* {confirm("tum chai pina h ?")} */}
                     </>
                   )}
                 </>

@@ -10,15 +10,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
 export default function CompareForm({
   location,
+  product_name,
   handelCategoryForOffenProduct,
   handelCloseCompareModel,
-  slug,
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const [formFields, setFormFields] = useState({
-    productFirst: reduxData?.productFirst || slug || null,
+    productFirst: reduxData?.productFirst || product_name || null,
     productSecond: reduxData?.productSecond || null,
     productThird: reduxData?.productThird || null,
     category: reduxData?.category || null,
@@ -95,6 +95,7 @@ export default function CompareForm({
       setFocusedProductThird(false);
     }, 200);
   };
+  // console.log(formFields);
   useEffect(() => {
     if (isHandelChildValue) {
       dispatch(addCompareProduct(formFields));
@@ -106,6 +107,7 @@ export default function CompareForm({
       ...reduxData,
     }));
   }, [reduxData]);
+  // console.log(formFields.productFirst)
   return (
     <>
       <div className="compare-section">
@@ -132,13 +134,15 @@ export default function CompareForm({
                 handleFieldChange("productFirst", e.target.value.trim())
               }
             />
-            {formFields.productFirst && isFocusedProductFirst && (
+            {/* {console.log(formFields.productFirst && formFields.productFirst)} */}
+            {formFields.productFirst && (
               <CompareSearchList
                 isFocused={isFocusedProductFirst}
                 setIsFocused={isFocusedProductFirst}
                 onSendValue={handleChildValue}
                 searchedKeyWord={formFields.productFirst}
                 inputPostion={"productFirst"}
+                // category_id={product_name?.category_id}
                 handelCategoryUpdate={handelCategoryUpdate}
               />
             )}
@@ -166,7 +170,7 @@ export default function CompareForm({
                 onSendValue={handleChildValue}
                 searchedKeyWord={formFields.productSecond}
                 inputPostion={"productSecond"}
-                category_id={formFields.category}
+                category_id={formFields.category || product_name?.category_id}
               />
             )}
           </div>

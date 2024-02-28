@@ -1186,11 +1186,12 @@ table.compare-container.table.comparison-table .best-list-item li img {
   display: flex;
   align-items: center;
 }
-.short_code_product_table_price_td img.short_code_product_table_price_td_img{
+.short_code_product_table_price_td img.short_code_product_table_price_td_img {
   width: 80px !important;
 }
-.short_code_product_table_price_td span.short_code_product_table_price_td_value{
-    min-width: 100px !important;
+.short_code_product_table_price_td
+  span.short_code_product_table_price_td_value {
+  min-width: 100px !important;
 }
 .short_code_product_table_price_name.text-center {
   justify-content: center;
@@ -1205,7 +1206,7 @@ a.outlineList.outline-active {
 a.outlineLink.outline-active {
   color: var(--secondary-color);
 }
-.outline-section ol li{
+.outline-section ol li {
   padding-left: 0px !important;
   font-size: 13px;
   /* line-height: 1.8; */
@@ -1215,14 +1216,13 @@ a.outlineLink.outline-active {
   color: var(--secondary-color);
   position: relative;
 }
-.outline-section ol li.outline-active:before{
+.outline-section ol li.outline-active:before {
   padding: 13px 0 10px 0 !important;
 }
 .outlineList a {
- 
   line-height: 1.7;
 }
-#shortCodeText img{
+#shortCodeText img {
   width: 100%;
 }
 /* .outline-section .ol-child li{
@@ -1235,6 +1235,10 @@ a.outlineLink.outline-active {
 .curser-pointer {
   cursor: pointer;
 }
-.curser-pointer .form-check-input{
+.curser-pointer .form-check-input {
   cursor: pointer;
+}
+/* css for graph radio chart  */
+div#productGraph {
+  margin-top: 50px;
 }

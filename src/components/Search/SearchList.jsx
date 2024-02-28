@@ -47,6 +47,17 @@ const SearchList = ({ search, isFocused }) => {
                             alt={`Image ${itemIndex}`}
                           />
                         )}
+                        {category === "products" && (
+                          <span className="d-flex justify-content-end">
+                            <i>
+                              (
+                              {item?.category_url
+                                ? item?.category_url.split("-").join(" ")
+                                : ""}
+                              )
+                            </i>
+                          </span>
+                        )}
                       </li>
                     </Link>
                   ))}

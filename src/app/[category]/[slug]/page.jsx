@@ -119,7 +119,7 @@ export async function generateMetadata({ params: { slug, category } }) {
       return {
         title: meta_data?.data?.title,
         description: meta_data?.data && meta_data?.data?.meta_description,
-        // generator: "Comparison web",
+        generator: "Comparison web",
         applicationName: "Comparison web",
         referrer: "origin-when-cross-origin",
         keywords: ["compare", "product"],
