@@ -50,21 +50,21 @@ const WhyAccordionTab = React.memo(
     const handleTabChange = (key) => {
       setActiveTab(key);
     };
-    // const handleTabChanage = (value, key) => {
-    //   if (key == "pros") {
-    //     if (value == "total") {
-    //       setTabValue({ ...tabvalue, pros: "total" });
-    //     } else {
-    //       setTabValue({ ...tabvalue, pros: value });
-    //     }
-    //   } else {
-    //     if (value == "total") {
-    //       setTabValue({ ...tabvalue, cons: "total" });
-    //     } else {
-    //       setTabValue({ ...tabvalue, cons: value });
-    //     }
-    //   }
-    // };
+    const handleTabChanage = (value, key) => {
+      if (key == "pros") {
+        if (value == "total") {
+          setTabValue({ ...tabvalue, pros: "total" });
+        } else {
+          setTabValue({ ...tabvalue, pros: value });
+        }
+      } else {
+        if (value == "total") {
+          setTabValue({ ...tabvalue, cons: "total" });
+        } else {
+          setTabValue({ ...tabvalue, cons: value });
+        }
+      }
+    };
     console.log(activetab);
     return (
       <Row>
@@ -79,7 +79,9 @@ const WhyAccordionTab = React.memo(
             <Tab eventKey="tab-1" title={product && product?.name}>
               {activetab === "tab-1" && (
                 <div className="graph-tab-content" id="productGraph">
-                  {apiData && <ProductPageGraph data={apiData?.sets} activeTab={0} />}
+                  {apiData && (
+                    <ProductPageGraph data={apiData?.sets} activeTab={0} />
+                  )}
                 </div>
               )}
               {/* Your content for tab-1 */}
@@ -87,7 +89,9 @@ const WhyAccordionTab = React.memo(
             <Tab eventKey="tab-2" title="Average">
               {activetab === "tab-2" && (
                 <div className="graph-tab-content" id="productGraph">
-                  {apiData && <ProductPageGraph data={apiData?.sets} activeTab={1} />}
+                  {apiData && (
+                    <ProductPageGraph data={apiData?.sets} activeTab={1} />
+                  )}
                 </div>
               )}
               {/* Your content for tab-2 */}
