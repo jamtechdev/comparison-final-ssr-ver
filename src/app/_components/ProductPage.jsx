@@ -121,6 +121,7 @@ function ProductPage({
   };
   return (
     <>
+      {/* {console.log(product)} */}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -169,9 +170,7 @@ function ProductPage({
 
             <Col md={12}>
               <p className="product-inner-content">
-                We’ve analyzed 24 784 user’s reviews and 45 technical data to
-                find out if the Samsung New VR Headset Oculus 2.0 is worth
-                buying. Let’s check the results!
+                {product?.meta_description}
               </p>
             </Col>
           </Row>
@@ -721,7 +720,7 @@ function ProductPage({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare With Other Products</h2>
-              <CompareForm location="ON_PRODUCT_PAGE" slug={slug} />
+              <CompareForm location="ON_PRODUCT_PAGE" slug={product?.name} />
             </Col>
           </Row>
         </Container>

@@ -17,6 +17,7 @@ import QuestionIcon from "../Svg/QuestionIcon";
 import ProsConsToolTip from "../Svg/ProsConsToolTip";
 import Radar from "@/_chart/Radar";
 import ProductPageGraph from "@/_chart/Radar/ProductPageGraph";
+import formatValue from "@/_helpers/formatValue";
 
 const WhyAccordionTab = React.memo(
   ({ categorySlug, product, pageType, slug }) => {
@@ -50,21 +51,34 @@ const WhyAccordionTab = React.memo(
     const handleTabChange = (key) => {
       setActiveTab(key);
     };
-    // const handleTabChanage = (value, key) => {
-    //   if (key == "pros") {
-    //     if (value == "total") {
-    //       setTabValue({ ...tabvalue, pros: "total" });
-    //     } else {
-    //       setTabValue({ ...tabvalue, pros: value });
-    //     }
-    //   } else {
-    //     if (value == "total") {
-    //       setTabValue({ ...tabvalue, cons: "total" });
-    //     } else {
-    //       setTabValue({ ...tabvalue, cons: value });
-    //     }
-    //   }
-    // };
+    const handleTabChanage = (value, key) => {
+      if (key == "pros") {
+        if (value == "total") {
+          setTabValue({ ...tabvalue, pros: "total" });
+        } else {
+          setTabValue({ ...tabvalue, pros: value });
+        }
+      } else {
+        if (value == "total") {
+          setTabValue({ ...tabvalue, cons: "total" });
+        } else {
+          setTabValue({ ...tabvalue, cons: value });
+        }
+      }
+    };
+
+    useEffect(() => {
+      const getColor = ["#437ECE", "#FF8F0B", "#28A28C"];
+      // Find all buttons that are children of an element with role="presentation" add attribute
+      const attributeAdd = document.querySelectorAll(
+        '[role="presentation"] button'
+      );
+      attributeAdd.forEach((button, index) => {
+        button.setAttribute("data-count", formatValue(product?.overall_score));
+        button.style.setProperty("--color-bg", getColor[index]);
+      });
+    }, []);
+    // console.log(activetab);
     return (
       <Row>
         <Col md={12} lg={6}>
@@ -76,12 +90,23 @@ const WhyAccordionTab = React.memo(
             onSelect={handleTabChange}
           >
             <Tab eventKey="tab-1" title={product && product?.name}>
-              <div className="graph-tab-content" id="productGraph">
-                {apiData && <ProductPageGraph data={apiData?.sets} />}
-                {/* Your content for tab-1 */}
-              </div>
+              {activetab === "tab-1" && (
+                <div className="graph-tab-content" id="productGraph">
+                  {apiData && (
+                    <ProductPageGraph data={apiData?.sets} activeTab={0} />
+                  )}
+                </div>
+              )}
+              {/* Your content for tab-1 */}
             </Tab>
             <Tab eventKey="tab-2" title="Average">
+              {activetab === "tab-2" && (
+                <div className="graph-tab-content" id="productGraph">
+                  {apiData && (
+                    <ProductPageGraph data={apiData?.sets} activeTab={1} />
+                  )}
+                </div>
+              )}
               {/* Your content for tab-2 */}
             </Tab>
           </Tabs>
@@ -90,15 +115,31 @@ const WhyAccordionTab = React.memo(
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
-                <h3 className="font-20">
-                  Why is {product && product?.name} BETTER than average?
-                </h3>
-                <div className="show-btn">
-                  Show All <i className="ri-arrow-down-s-line"></i>
-                </div>
-                <div className="hide-btn">
-                  Hide All <i className="ri-arrow-up-s-line"></i>
-                </div>
+                {activetab === "tab-1" ? (
+                  <>
+                    <h3 className="font-20">
+                      Why is {product && product?.name} BETTER than average?
+                    </h3>
+                    <div className="show-btn">
+                      Show All <i className="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div className="hide-btn">
+                      Hide All <i className="ri-arrow-up-s-line"></i>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="font-20">
+                      Why is average BETTER than {product && product?.name} ?
+                    </h3>
+                    <div className="show-btn">
+                      Show All <i className="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div className="hide-btn">
+                      Hide All <i className="ri-arrow-up-s-line"></i>
+                    </div>
+                  </>
+                )}
               </Accordion.Header>
               <Accordion.Body>
                 <Tab.Container

@@ -16,6 +16,7 @@ import GuidePagination from "@/components/Common/Pagination/GuidePagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ConfirmationModal from "@/components/Common/Modal/ConfirmationModal";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
+import GuidePageTextArea from "@/components/Common/GuidePageOutline/GuidePageTextArea";
 export default function GuidePage({
   slug,
   categorySlug,
@@ -30,6 +31,7 @@ export default function GuidePage({
   const router = useRouter();
   const currentParams = new URLSearchParams(searchParams.toString());
   const [isShown, setIsShown] = useState(false);
+  const [currentHeading, setCurrentHeading] = useState("");
 
   const guide = guideData[0]?.data;
 
@@ -220,6 +222,8 @@ export default function GuidePage({
     }
     setShowModal(false);
   };
+  // console.log(products, "hello");
+
   return (
     <>
       <section className="product-header">
@@ -611,54 +615,7 @@ export default function GuidePage({
               </h2>
             </Col>
           </Row>
-          <Row className="mt-3">
-            <Col md={4} lg={2}>
-              <div className="outline-section">
-                <p>Outline</p>
-                <OutlineGenerator blogData={guide?.text_third_part_main} />
-              </div>
-            </Col>
-            <Col md={8} lg={8}>
-              <div
-                id="shortCodeText"
-                dangerouslySetInnerHTML={{
-                  __html: searchForPatternAndReplace(
-                    guide?.text_third_part_main
-                  ),
-                }}
-              />
-              <br />
-            </Col>
-            <Col className="mobile-hide" md={12} lg={2}>
-              <div className="ranking-section">
-                <div className="site-main-heading">In Rankings</div>
-                {guide?.recommended_guides &&
-                  guide?.recommended_guides.slice(0, 3)?.map((data, index) => {
-                    return (
-                      <div className="product-card" key={index}>
-                        <Link
-                          className="product-link-cover"
-                          href={`/${data?.category_url}/${data?.permalink}`}
-                          style={{ color: "#326ebf" }}
-                        ></Link>
-                        <img
-                          src={
-                            data?.bannerImage === null
-                              ? "/images/nofound.png"
-                              : data?.bannerImage
-                          }
-                          width={0}
-                          height={0}
-                          sizes="100%"
-                          alt=""
-                        />
-                        <span>{data?.short_name}</span>
-                      </div>
-                    );
-                  })}
-              </div>
-            </Col>
-          </Row>
+          <GuidePageTextArea guide={guide} />
         </Container>
       </section>
       <section className="ptb-25 mobite-mb-20">
