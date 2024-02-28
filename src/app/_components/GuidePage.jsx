@@ -420,7 +420,7 @@ export default function GuidePage({
                             </li>
                           ))}
                       </ul>
-                      {Object.keys(params).filter((key) => key !== "direct" && key !== "sort" ).length > 0 && (
+                      {/* {Object.keys(params).filter((key) => key !== "direct" && key !== "sort" ).length > 0 && (
                         <span
                           onClick={() => {
                             removeFilters();
@@ -428,7 +428,7 @@ export default function GuidePage({
                         >
                           Remove all filters
                         </span>
-                      )}
+                      )} */}
                     </div>
                   </Col>
                   <Col md={4}>
