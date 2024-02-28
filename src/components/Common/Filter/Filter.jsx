@@ -167,9 +167,8 @@ export default function Filter({
       //   document.getElementById("available").checked = true;
       // }
       if (filteredKeys.includes("brand")) {
-        Object.values(searchParam)[0]
-          .split(",")
-          .map((item) => {
+        const brandValues = searchParam["brand"].split(",");
+          brandValues.map((item) => {
             document.getElementById(`${item}`).checked = true;
           });
       }
@@ -195,12 +194,11 @@ export default function Filter({
         document.getElementById("available").checked = false;
       }
       if (removedParam == "brand") {
-        Object.values(searchParam)[0]
-          ?.split(",")
-          .map((item) => {
-            handelFilterActions("brand", "brand", { brand: item }, false);
-            document.getElementById(`${item}`).checked = false;
-          });
+          const brandValues = searchParam["brand"].split(",");
+            brandValues.map((item) => {
+              handelFilterActions("brand", "brand", { brand: item }, false); 
+              document.getElementById(`${item}`).checked = false;
+            });
       }
 
       if (removedParam?.toLowerCase() == "price") {

@@ -34,10 +34,9 @@ export default function GuidePage({
   const [currentHeading, setCurrentHeading] = useState("");
 
   const guide = guideData[0]?.data;
-  // console.log(guideData, "guideData");
 
   const products = guideData[1]?.data?.products || [];
-
+  console.log(products, "guideData");
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data.product_names || [];
 
@@ -218,8 +217,6 @@ export default function GuidePage({
     setShowModal(false);
   };
   // console.log(products, "hello");
-
-
 
   return (
     <>

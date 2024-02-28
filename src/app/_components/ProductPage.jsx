@@ -119,11 +119,9 @@ function ProductPage({
   const setShowFullPrice = () => {
     showFullPrice = !setShowFullPrice;
   };
-
-  // console.log(product, "Neet");
-
   return (
     <>
+    {console.log(product)}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -172,9 +170,7 @@ function ProductPage({
 
             <Col md={12}>
               <p className="product-inner-content">
-                We’ve analyzed 24 784 user’s reviews and 45 technical data to
-                find out if the Samsung New VR Headset Oculus 2.0 is worth
-                buying. Let’s check the results!
+                {product?.meta_description}
               </p>
             </Col>
           </Row>
@@ -210,8 +206,8 @@ function ProductPage({
                 </div>
                 {resultOverallScore && (
                   <small>
-                    {resultOverallScore} better than{" "}
-                    <i>{`${product?.overall_score_better_then * 100}%`}</i>
+                    {resultOverallScore}{" "}
+                    {/* <i>{`${product?.overall_score_better_then * 100}`}</i> */}
                   </small>
                 )}
               </div>
@@ -242,8 +238,8 @@ function ProductPage({
                   ></span>
                 </div>
                 <small>
-                  {resultTechnicalScoreColor} better than{" "}
-                  <i>{`${product?.technical_score_is_better_than * 100}%`}</i>
+                  {resultTechnicalScoreColor}{" "}
+                  {/* <i>{`${product?.technical_score_is_better_than * 100}`}</i> */}
                 </small>
               </div>
             </div>
@@ -270,8 +266,8 @@ function ProductPage({
                   ></span>
                 </div>
                 <small>
-                  {resultUsersRatingColor} better than{" "}
-                  <i>{`${product?.reviews_is_better_than * 100}%`}</i>
+                  {resultUsersRatingColor}{" "}
+                  {/* <i>{`${product?.reviews_is_better_than * 100}`}</i> */}
                 </small>
               </div>
             </div>

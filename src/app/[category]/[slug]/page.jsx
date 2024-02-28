@@ -127,7 +127,6 @@ export async function generateMetadata({ params: { slug, category } }) {
     }
   }
 }
-
 async function getSlugType(slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
@@ -147,6 +146,7 @@ async function getSlugType(slug) {
 }
 
 async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
+  console.log("Abhay",JSON.stringify(searchParams))
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
