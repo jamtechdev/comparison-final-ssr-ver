@@ -169,9 +169,9 @@ export default function Filter({
       // }
       if (filteredKeys.includes("brand")) {
         const brandValues = searchParam["brand"].split(",");
-          brandValues.map((item) => {
-            document.getElementById(`${item}`).checked = true;
-          });
+        brandValues.map((item) => {
+          document.getElementById(`${item}`).checked = true;
+        });
       }
       if (filteredKeys.includes("price")) {
         setSliderValues((pre) => {
@@ -195,14 +195,14 @@ export default function Filter({
         document.getElementById("available").checked = false;
       }
       if (removedParam == "brand") {
-          const brandValues = searchParam["brand"]?.split(",");
-          if(brandValues){
-              brandValues.map((item) => {
-              handelFilterActions("brand", "brand", { brand: item }, false); 
-              document.getElementById(`${item}`).checked = false;
-            });
-          }
-           
+        const brandValues = searchParam["brand"]?.split(",");
+        if (brandValues) {
+          brandValues.map((item) => {
+            handelFilterActions("brand", "brand", { brand: item }, false);
+            document.getElementById(`${item}`).checked = false;
+          });
+        }
+
       }
 
       if (removedParam?.toLowerCase() == "price") {
@@ -261,7 +261,7 @@ export default function Filter({
             const value = filteredArrayOfAttributeValues?.values[0];
             handelFilterActions("radioSwitch", removedParam, "no", false);
             document.getElementById(`${removedParam}`).checked = false;
-            console.log("Radio switch",removedParam)
+            console.log("Radio switch", removedParam)
           } else {
             {
               filteredArrayOfAttributeValues?.values?.map((value, valIndex) => {
@@ -282,14 +282,14 @@ export default function Filter({
           let min =
             filteredArrayOfAttributeValues.maxValue -
               filteredArrayOfAttributeValues.minValue >=
-            1
+              1
               ? filteredArrayOfAttributeValues.minValue
               : 0;
 
           let max =
             filteredArrayOfAttributeValues.maxValue -
               filteredArrayOfAttributeValues.minValue >=
-            1
+              1
               ? filteredArrayOfAttributeValues.maxValue
               : 100;
           // alert(min)
@@ -422,8 +422,8 @@ export default function Filter({
                   (pagination[category.name] || initialNoOfCategories)
                 ) {
                   let filteredArrayOfAttributeValues =
-                  getFilteredAttributeValues(attribute);
-                  
+                    getFilteredAttributeValues(attribute);
+
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
                     // check if values contain only yes then Toggle Switch
@@ -480,7 +480,15 @@ export default function Filter({
                                     <div className="d-flex flex-row curser-pointer">
                                       <Form.Check
                                         required
-                                        label={""}
+                                        label={
+                                          <span style={{ cursor: "pointer" }}>
+                                            {value.toString()}{" "}
+                                            {filteredArrayOfAttributeValues?.unit == "-" ||
+                                            filteredArrayOfAttributeValues?.unit == "?"
+                                              ? ""
+                                              : filteredArrayOfAttributeValues?.unit}
+                                          </span>
+                                        }
                                         key={valIndex}
                                         id={`${attribute.name}${value}`}
                                         onChange={(e) =>
@@ -492,7 +500,22 @@ export default function Filter({
                                           )
                                         }
                                       />
-                                      <span>
+
+                                      {/* <Form.Check
+                                        required
+                                        label={`${value.toString()} ${}` }
+                                        key={valIndex}
+                                        id={`${attribute.name}${value}`}
+                                        onChange={(e) =>
+                                          handelFilterActions(
+                                            "dropdown",
+                                            attribute.name,
+                                            { key: value },
+                                            e.target.checked
+                                          )
+                                        }
+                                      /> */}
+                                      {/* <span>
                                         {value.toString()}{" "}
                                         {filteredArrayOfAttributeValues?.unit ==
                                           "-" ||
@@ -500,20 +523,19 @@ export default function Filter({
                                           "?"
                                           ? ""
                                           : filteredArrayOfAttributeValues?.unit}
-                                      </span>
+                                      </span> */}
                                     </div>
                                     <span
                                       dangerouslySetInnerHTML={{
-                                        __html: `<p>(${
-                                          filteredArrayOfAttributeValues.values &&
-                                          filteredArrayOfAttributeValues.product_count &&
-                                          filteredArrayOfAttributeValues
-                                            .product_count[valIndex] !==
+                                        __html: `<p>(${filteredArrayOfAttributeValues.values &&
+                                            filteredArrayOfAttributeValues.product_count &&
+                                            filteredArrayOfAttributeValues
+                                              .product_count[valIndex] !==
                                             undefined
                                             ? filteredArrayOfAttributeValues
-                                                .product_count[valIndex]
+                                              .product_count[valIndex]
                                             : "0"
-                                        })</p>`,
+                                          })</p>`,
                                       }}
                                     />
                                   </div>
@@ -539,14 +561,14 @@ export default function Filter({
                             min={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                              1
+                                1
                                 ? filteredArrayOfAttributeValues.minValue
                                 : 0
                             }
                             max={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                              1
+                                1
                                 ? filteredArrayOfAttributeValues.maxValue
                                 : 100
                             }
@@ -569,13 +591,13 @@ export default function Filter({
             </Accordion>
             {countAttribute >
               (pagination[category.name] || initialNoOfCategories) && (
-              <span
-                className="show_more"
-                onClick={() => handlePagination(category.name)}
-              >
-                SHOW MORE <i className="ri-add-line"></i>
-              </span>
-            )}
+                <span
+                  className="show_more"
+                  onClick={() => handlePagination(category.name)}
+                >
+                  SHOW MORE <i className="ri-add-line"></i>
+                </span>
+              )}
           </div>
         );
       })}
