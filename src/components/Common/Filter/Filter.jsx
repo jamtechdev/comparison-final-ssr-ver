@@ -50,6 +50,7 @@ export default function Filter({
           updatedParams.variant = value;
         } else {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
+          deleteQueryFormURL("direct", updatedParams, currentParams, url);
         }
         break;
       case "available":
@@ -60,14 +61,14 @@ export default function Filter({
         }
 
         break;
-      case "variants":
-        if (value) {
-          updatedParams.variants = value;
-        } else {
-          deleteQueryFormURL(key, updatedParams, currentParams, url);
-        }
+      // case "variants":
+      //   if (value) {
+      //     updatedParams.variants = value;
+      //   } else {
+      //     deleteQueryFormURL(key, updatedParams, currentParams, url);
+      //   }
 
-        break;
+      //   break;
       case "brand":
         if (isChecked) {
           if (Object.values(value).length > 0) {
@@ -194,11 +195,14 @@ export default function Filter({
         document.getElementById("available").checked = false;
       }
       if (removedParam == "brand") {
-          const brandValues = searchParam["brand"].split(",");
-            brandValues.map((item) => {
+          const brandValues = searchParam["brand"]?.split(",");
+          if(brandValues){
+ brandValues.map((item) => {
               handelFilterActions("brand", "brand", { brand: item }, false); 
               document.getElementById(`${item}`).checked = false;
             });
+          }
+           
       }
 
       if (removedParam?.toLowerCase() == "price") {
@@ -257,6 +261,7 @@ export default function Filter({
             const value = filteredArrayOfAttributeValues?.values[0];
             handelFilterActions("radioSwitch", removedParam, "no", false);
             document.getElementById(`${removedParam}`).checked = false;
+            console.log("Radio switch",removedParam)
           } else {
             {
               filteredArrayOfAttributeValues?.values?.map((value, valIndex) => {
@@ -418,7 +423,7 @@ export default function Filter({
                 ) {
                   let filteredArrayOfAttributeValues =
                   getFilteredAttributeValues(attribute);
-                  // console.log(filteredArrayOfAttributeValues, "filter");
+                  
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
                     // check if values contain only yes then Toggle Switch
