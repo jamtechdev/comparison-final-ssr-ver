@@ -36,7 +36,7 @@ export default function GuidePage({
   const guide = guideData[0]?.data;
 
 
-  const  products = guideData[1]?.data?.products || [];
+  const products = guideData[1]?.data?.products || [];
   // console.log(products, "guideData");
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data.product_names || [];
@@ -95,11 +95,11 @@ export default function GuidePage({
     });
     window.history.replaceState(null, '', `${url.pathname}?${params.toString()}`);
     // Reload the page without removing 'sort'
-    router.replace(`${url.pathname}?${params.toString()}`,{scroll:false});
+    router.replace(`${url.pathname}?${params.toString()}`, { scroll: false });
     // window.location.reload();
   };
-  
-  
+
+
   function removeQueryParamAndNavigate(url, paramToRemove) {
     // delete searchParams[`${paramToRemove}`];
     if (paramToRemove != "sort") {
@@ -124,7 +124,7 @@ export default function GuidePage({
     const newUrl = urlObject.toString();
     // Update the URL in the address bar without triggering a page reload
     window.history.pushState({ path: newUrl }, "", newUrl);
-    router.replace(newUrl,{scroll:false});
+    router.replace(newUrl, { scroll: false });
     // You can also use window.location.href = newUrl; if you want to trigger a page reload
     // Optionally, you can perform additional actions
     return newUrl;
@@ -401,9 +401,10 @@ export default function GuidePage({
                               {" "}
                               {categoryName === "variant"
                                 ? `Show all variants: Yes`
-                                : `${categoryName.charAt(0).toUpperCase() +
-                                categoryName.slice(1)
-                                }: ${params[categoryName]}`}
+                                : `${categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}: ${params[categoryName].includes(",")
+                                  ? params[categoryName].replace(/,/g, " - ")
+                                  : params[categoryName]
+                                }`}
                               <span
                                 className="text0danger"
                                 onClick={() => {
