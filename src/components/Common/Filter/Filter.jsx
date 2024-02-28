@@ -197,7 +197,7 @@ export default function Filter({
       if (removedParam == "brand") {
           const brandValues = searchParam["brand"]?.split(",");
           if(brandValues){
- brandValues.map((item) => {
+              brandValues.map((item) => {
               handelFilterActions("brand", "brand", { brand: item }, false); 
               document.getElementById(`${item}`).checked = false;
             });
@@ -422,8 +422,8 @@ export default function Filter({
                   (pagination[category.name] || initialNoOfCategories)
                 ) {
                   let filteredArrayOfAttributeValues =
-                    getFilteredAttributeValues(attribute);
-                  // console.log(filteredArrayOfAttributeValues, "filter");
+                  getFilteredAttributeValues(attribute);
+                  
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
                     // check if values contain only yes then Toggle Switch
@@ -476,7 +476,7 @@ export default function Filter({
                               (value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
                                 return (
-                                  <div className="d-flex flex-row justify-content-between">
+                                  <div key={valIndex} className="d-flex flex-row justify-content-between">
                                     <div className="d-flex flex-row curser-pointer">
                                       <Form.Check
                                         required
