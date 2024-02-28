@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
 function OutlineGenerator({ blogData, currentIndexId }) {
-  console.log(currentIndexId);
+  // console.log(currentIndexId);
   const [outline, setOutline] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeParentIndex, setActiveParentIndex] = useState(null);

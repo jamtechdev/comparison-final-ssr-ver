@@ -17,6 +17,8 @@ export default function CompareForm({
   const router = useRouter();
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
+  // const ProductPage = product_name;
+  // console.log(ProductPage)
   const [formFields, setFormFields] = useState({
     productFirst: reduxData?.productFirst || product_name || null,
     productSecond: reduxData?.productSecond || null,

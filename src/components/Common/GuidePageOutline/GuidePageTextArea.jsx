@@ -27,9 +27,9 @@ function GuidePageTextArea({ guide }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log(entries?.length);
+        // console.log(entries?.length);
         entries.forEach((entry) => {
-          console.log(entry?.isIntersecting);
+        //   console.log(entry?.isIntersecting);
           //   if (entry.isIntersecting) {
           //     const heading = entry.target;
           //     const headingId = heading.id;
