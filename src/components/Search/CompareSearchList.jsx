@@ -31,6 +31,7 @@ function CompareSearchList({
 
     if (searchedKeyWord.trim() != "" && searchedKeyWord != undefined) {
       if (inputPostion === "productFirst") {
+        console.log("XX",searchedKeyWord)
         homePage
           .getAllSearchedProducts(searchedKeyWord)
           .then((res) => {
@@ -43,7 +44,6 @@ function CompareSearchList({
             const containsResults = res.data.data.filter(
               (item) => !startsWithResults.includes(item)
             );
-
             setFilteredProData([...startsWithResults, ...containsResults]);
           })
           .catch((error) => {

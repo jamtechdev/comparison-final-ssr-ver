@@ -35,8 +35,9 @@ export default function GuidePage({
 
   const guide = guideData[0]?.data;
 
-  const products = guideData[1]?.data?.products || [];
-  console.log(products, "guideData");
+
+  const  products = guideData[1]?.data?.products || [];
+  // console.log(products, "guideData");
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data.product_names || [];
 
@@ -86,39 +87,38 @@ export default function GuidePage({
 
   function removeQueryParamAndNavigate(url, paramToRemove) {
     // delete searchParams[`${paramToRemove}`];
-
-    if (paramToRemove === "variant") {
-      window.history.replaceState(null, "", window.location.pathname);
-      location.reload();
+    if (paramToRemove != "sort") {
+      setparams(() => {
+        return {
+          ...searchParams,
+        };
+      });
     } else {
-      if (paramToRemove != "sort") {
-        setparams(() => {
-          return {
-            ...searchParams,
-          };
-        });
-      } else {
-        delete params.sort;
-        let removeSortParam = params;
+      delete params.sort;
+      let removeSortParam = params;
 
-        setparams(() => {
-          return {
-            ...removeSortParam,
-          };
-        });
-      }
-
-      const urlObject = new URL(url);
-      urlObject.searchParams.delete(paramToRemove);
-      const newUrl = urlObject.toString();
-      // Update the URL in the address bar without triggering a page reload
-      window.history.pushState({ path: newUrl }, "", newUrl);
-      location.reload();
-      // You can also use window.location.href = newUrl; if you want to trigger a page reload
-      // Optionally, you can perform additional actions, such as updating the UI, based on the new URL
-      // updateUI();
-      return newUrl;
+      setparams(() => {
+        return {
+          ...removeSortParam,
+        };
+      });
     }
+
+    const urlObject = new URL(url);
+    urlObject.searchParams.delete(paramToRemove);
+    const newUrl = urlObject.toString();
+    // Update the URL in the address bar without triggering a page reload
+    window.history.pushState({ path: newUrl }, "", newUrl);
+    location.reload();
+    // You can also use window.location.href = newUrl; if you want to trigger a page reload
+    // Optionally, you can perform additional actions
+    return newUrl;
+    // if (paramToRemove === "variant") {
+    //   window.history.replaceState(null, "", window.location.pathname);
+    //   location.reload();
+    // } else {
+      
+    // }
   }
 
   useEffect(() => {
@@ -140,6 +140,7 @@ export default function GuidePage({
           ischecked: true,
         };
       });
+
       // setorder(sortValue);
       // searchParam.set("sort", sortValue);
       // searchParams.sort = sortValue;
@@ -154,10 +155,12 @@ export default function GuidePage({
       // }?${searchParam.toString()}`;
       // searchParams.sort = `${param.algo},${param.rangeAttributes}`;
       // window.history.pushState({ path: newUrl }, "", newUrl);
+
     } else {
       removeQueryParamAndNavigate(window.location.href, "sort");
       delete searchParams.sort;
     }
+    
     // sortRangeAttribute.current = JSON.parse(sortAttribute);
     // setFilteredProducts([
     //   ...filterProducts(
@@ -167,7 +170,9 @@ export default function GuidePage({
     //   ),
     // ]);
     // console.log(JSON.parse(sortAttribute))
+
   };
+ 
   // if (products.length === 0) {
   //   if (products.length <= 0 && !currentParams.variant) {
   //     const queryString = Object.keys(searchParams)
@@ -186,12 +191,13 @@ export default function GuidePage({
 
   // When initial product load than store in local storage
   // this code is  only for testing when will  API create than remove  this code
-  useEffect(() => {
-    if (!localStorage.getItem("products")) {
-      localStorage.setItem("products", JSON.stringify(products));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!localStorage.getItem("products")) {
+  //     localStorage.setItem("products", JSON.stringify(products));
+  //   }
+  // }, []);
   // console.log(products, "allproduct");
+
   const [showModal, setShowModal] = useState(true);
   const handleModalClose = () => {
     setTimeout(() => {
@@ -378,23 +384,16 @@ export default function GuidePage({
                     <div className="filtered-data">
                       <ul>
                         {Object.keys(params)
-                          .filter((key) => key !== "direct")
+                         .filter((key) => key !== "direct" && key !== "sort")
                           .map((categoryName, index) => (
                             <li key={index}>
                               {" "}
                               {categoryName === "variant"
-                                ? `Show all variants: ${
-                                    Object.values(params)[index] === "true"
-                                      ? `yes`
-                                      : "yes"
-                                  }`
+                                ? `Show all variants: Yes`
                                 : `${
                                     categoryName.charAt(0).toUpperCase() +
                                     categoryName.slice(1)
-                                  }: ${Object.values(params)[index].replace(
-                                    /,/g,
-                                    "-"
-                                  )}`}
+                                  }: ${params[categoryName]}`}
                               <span
                                 className="text0danger"
                                 onClick={() => {
