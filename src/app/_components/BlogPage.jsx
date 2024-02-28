@@ -59,7 +59,6 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
     };
   }, [currentHeading]);
 
-
   // Include currentHeading in the dependency array
 
   return (

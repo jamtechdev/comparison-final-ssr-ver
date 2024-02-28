@@ -17,6 +17,7 @@ import QuestionIcon from "../Svg/QuestionIcon";
 import ProsConsToolTip from "../Svg/ProsConsToolTip";
 import Radar from "@/_chart/Radar";
 import ProductPageGraph from "@/_chart/Radar/ProductPageGraph";
+import formatValue from "@/_helpers/formatValue";
 
 const WhyAccordionTab = React.memo(
   ({ categorySlug, product, pageType, slug }) => {
@@ -65,7 +66,21 @@ const WhyAccordionTab = React.memo(
         }
       }
     };
-    console.log(activetab);
+
+    useEffect(() => {
+      const getColor = ["#437ECE", "#FF8F0B", "#28A28C"];
+      // Find all buttons that are children of an element with role="presentation" add attribute
+      const attributeAdd = document.querySelectorAll(
+        '[role="presentation"] button'
+      );
+      attributeAdd.forEach((button, index) => {
+        button.setAttribute("data-count", formatValue(product?.overall_score));
+        button.style.setProperty("--color-bg", getColor[index]);
+      });
+    }, []);
+    const createDynamicTabs = [slug, "average"];
+    console.log(createDynamicTabs);
+    // console.log(activetab);
     return (
       <Row>
         <Col md={12} lg={6}>
