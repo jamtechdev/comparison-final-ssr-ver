@@ -121,7 +121,7 @@ function ProductPage({
   };
   return (
     <>
-    {/* {console.log(product)} */}
+      {/* {console.log(product)} */}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -720,7 +720,7 @@ function ProductPage({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare With Other Products</h2>
-              <CompareForm location="ON_PRODUCT_PAGE" slug={slug} />
+              <CompareForm location="ON_PRODUCT_PAGE" slug={product?.name} />
             </Col>
           </Row>
         </Container>

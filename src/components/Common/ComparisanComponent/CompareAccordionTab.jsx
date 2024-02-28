@@ -262,7 +262,7 @@ const CompareAccordionTab = React.memo(({ sendProductProps }) => {
         </Col>
         <Col md={12} lg={6}>
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
-            <Accordion.Item eventKey="1">
+           <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
                 {accordionHeader("pros")}
                 <div className="show-btn">

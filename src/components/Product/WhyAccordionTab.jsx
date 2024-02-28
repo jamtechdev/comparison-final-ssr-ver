@@ -78,8 +78,6 @@ const WhyAccordionTab = React.memo(
         button.style.setProperty("--color-bg", getColor[index]);
       });
     }, []);
-    const createDynamicTabs = [slug, "average"];
-    console.log(createDynamicTabs);
     // console.log(activetab);
     return (
       <Row>
@@ -117,15 +115,31 @@ const WhyAccordionTab = React.memo(
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
-                <h3 className="font-20">
-                  Why is {product && product?.name} BETTER than average?
-                </h3>
-                <div className="show-btn">
-                  Show All <i className="ri-arrow-down-s-line"></i>
-                </div>
-                <div className="hide-btn">
-                  Hide All <i className="ri-arrow-up-s-line"></i>
-                </div>
+                {activetab === "tab-1" ? (
+                  <>
+                    <h3 className="font-20">
+                      Why is {product && product?.name} BETTER than average?
+                    </h3>
+                    <div className="show-btn">
+                      Show All <i className="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div className="hide-btn">
+                      Hide All <i className="ri-arrow-up-s-line"></i>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="font-20">
+                      Why is average BETTER than {product && product?.name} ?
+                    </h3>
+                    <div className="show-btn">
+                      Show All <i className="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div className="hide-btn">
+                      Hide All <i className="ri-arrow-up-s-line"></i>
+                    </div>
+                  </>
+                )}
               </Accordion.Header>
               <Accordion.Body>
                 <Tab.Container

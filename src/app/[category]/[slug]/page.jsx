@@ -115,14 +115,14 @@ export async function generateMetadata({ params: { slug, category } }) {
       return "";
     } else {
       const meta_data = await getSlugMetaData(slug);
-      // console.log(meta_data?.data);
+      // console.log("test", meta_data?.data?.meta_description);
       return {
-        title: meta_data?.data?.heading_title || "Comparison web",
+        title: meta_data?.data?.title,
+        description: meta_data?.data && meta_data?.data?.meta_description,
         generator: "Comparison web",
         applicationName: "Comparison web",
         referrer: "origin-when-cross-origin",
         keywords: ["compare", "product"],
-        description: meta_data?.data?.meta_description || "Comparison web",
       };
     }
   }
@@ -146,7 +146,7 @@ async function getSlugType(slug) {
 }
 
 async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
-  console.log("Abhay",JSON.stringify(searchParams))
+  console.log("Abhay", JSON.stringify(searchParams));
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
