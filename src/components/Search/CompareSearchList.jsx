@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 function CompareSearchList({
   isFocused,
   onSendValue,
+  product_cat_id,
   searchedKeyWord,
   inputPostion,
   handelCategoryUpdate,
@@ -17,10 +18,12 @@ function CompareSearchList({
   const [filteredProData, setFilteredProData] = useState([]);
   const handleChange = (data, inputPostion) => {
     if (inputPostion === "productFirst") {
-      handelCategoryUpdate(data.category_id);
+      handelCategoryUpdate(data.category_id || category_id);
     }
     onSendValue(inputPostion, data);
   };
+  // console.log(category_id);
+
   useEffect(() => {
     if (typeof searchedKeyWord === "object") {
       return;
@@ -48,16 +51,16 @@ function CompareSearchList({
           });
       } else {
         homePage
-          .getAllSearchedProductsByCategory(category_id, searchedKeyWord)
+          .getAllSearchedProductsByCategory(1, searchedKeyWord)
           .then((res) => {
             if (inputPostion === "productSecond") {
               if (res.data.data.length > 0) {
                 const filteredProducts = res.data.data.filter(
                   (item) =>
-                    (item.name !== reduxData?.productSecond?.name &&
-                      item.name !== reduxData?.productThird?.name) &&
-                    (item?.name !== getGuideCompareReduxData[1]?.name &&
-                      item?.name !== getGuideCompareReduxData[2]?.name)
+                    item.name !== reduxData?.productSecond?.name &&
+                    item.name !== reduxData?.productThird?.name &&
+                    item?.name !== getGuideCompareReduxData[1]?.name &&
+                    item?.name !== getGuideCompareReduxData[2]?.name
                 );
 
                 setFilteredProData(filteredProducts);
@@ -68,10 +71,10 @@ function CompareSearchList({
               if (res.data.data.length > 0) {
                 const filteredProducts = res.data.data.filter(
                   (item) =>
-                    (item.name !== reduxData?.productFirst?.name &&
-                      item.name !== reduxData?.productThird?.name) &&
-                    (item?.name !== getGuideCompareReduxData[0]?.name &&
-                      item?.name !== getGuideCompareReduxData[2]?.name)
+                    item.name !== reduxData?.productFirst?.name &&
+                    item.name !== reduxData?.productThird?.name &&
+                    item?.name !== getGuideCompareReduxData[0]?.name &&
+                    item?.name !== getGuideCompareReduxData[2]?.name
                 );
 
                 setFilteredProData(filteredProducts);
@@ -81,10 +84,10 @@ function CompareSearchList({
               if (res.data.data.length > 0) {
                 const filteredProducts = res.data.data.filter(
                   (item) =>
-                    (item.name !== reduxData?.productFirst?.name &&
-                      item.name !== reduxData?.productSecond?.name) &&
-                    (item?.name !== getGuideCompareReduxData[0]?.name &&
-                      item?.name !== getGuideCompareReduxData[1]?.name)
+                    item.name !== reduxData?.productFirst?.name &&
+                    item.name !== reduxData?.productSecond?.name &&
+                    item?.name !== getGuideCompareReduxData[0]?.name &&
+                    item?.name !== getGuideCompareReduxData[1]?.name
                 );
 
                 setFilteredProData(filteredProducts);

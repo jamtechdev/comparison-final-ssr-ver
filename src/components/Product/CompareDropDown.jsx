@@ -6,7 +6,7 @@ import useChart from "@/hooks/useChart";
 import axios from "axios";
 import useComparisonChart from "@/hooks/useComparisonChart";
 
-function CompareDropDown({ attributeDropDown, product, slug }) {
+function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
   // console.log(slug)
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null
@@ -71,7 +71,7 @@ function CompareDropDown({ attributeDropDown, product, slug }) {
     setSelectedAttribute(selectedAttribute);
   };
 
-  useComparisonChart(chart);
+  useComparisonChart(chart , pageType);
   return (
     <>
       <section className="ptb-80">

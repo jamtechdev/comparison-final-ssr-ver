@@ -413,6 +413,7 @@ function ProductPage({
       </section>
       <CompareDropDown
         attributeDropDown={[...productCatAttributes?.data].reverse()}
+        pageType="product"
         product={product}
         slug={slug}
       />
@@ -720,7 +721,7 @@ function ProductPage({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare With Other Products</h2>
-              <CompareForm location="ON_PRODUCT_PAGE" slug={product?.name} />
+              <CompareForm location="ON_PRODUCT_PAGE" product_name={product} />
             </Col>
           </Row>
         </Container>
