@@ -18,11 +18,11 @@ function CompareSearchList({
   const [filteredProData, setFilteredProData] = useState([]);
   const handleChange = (data, inputPostion) => {
     if (inputPostion === "productFirst") {
-      handelCategoryUpdate(data.category_id || category_id);
+      handelCategoryUpdate(data.category_id);
     }
     onSendValue(inputPostion, data);
   };
-  // console.log(category_id);
+  // console.log(searchedKeyWord);
 
   useEffect(() => {
     if (typeof searchedKeyWord === "object") {
@@ -31,7 +31,7 @@ function CompareSearchList({
 
     if (searchedKeyWord.trim() != "" && searchedKeyWord != undefined) {
       if (inputPostion === "productFirst") {
-        console.log("XX",searchedKeyWord)
+        // console.log("XX",searchedKeyWord)
         homePage
           .getAllSearchedProducts(searchedKeyWord)
           .then((res) => {
@@ -51,7 +51,7 @@ function CompareSearchList({
           });
       } else {
         homePage
-          .getAllSearchedProductsByCategory(1, searchedKeyWord)
+          .getAllSearchedProductsByCategory(category_id, searchedKeyWord)
           .then((res) => {
             if (inputPostion === "productSecond") {
               if (res.data.data.length > 0) {

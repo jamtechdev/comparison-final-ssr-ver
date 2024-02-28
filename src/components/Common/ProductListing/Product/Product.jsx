@@ -1120,59 +1120,6 @@ export default function Product({
                               <div className="spec-section">
                                 <div className="spec-item">
                                   <div className="spec-col">
-                                    <div className="query">
-                                      Ratio Quality-Price
-                                      <QuestionIcon
-                                        attributes={
-                                          product?.ratio_qulitiy_points_descriptions
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="spec-col ">
-                                    <div
-                                      className="tooltip-title"
-                                      style={{
-                                        color:
-                                          product.ratio_quality_price_points_better_then *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.ratio_quality_price_points_worse_then *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        fontSize: "15px",
-                                        textDecoration: "underline",
-                                        textDecorationStyle: "dotted",
-                                        textDecorationThickness: "1.5px",
-                                        textDecorationColor:
-                                          product.ratio_quality_price_points_better_then *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.ratio_quality_price_points_worse_then *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        textUnderlineOffset: "5px",
-                                      }}
-                                    >
-                                      {product.ratio_quality_price_points}
-                                      <ProsConsToolTip
-                                        hover_phrase={
-                                          product.ratio_quality_price_points_phase
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="spec-section">
-                                <div className="spec-item">
-                                  <div className="spec-col">
                                     <div className="query text-ellipse">
                                       Popularity
                                       <QuestionIcon
@@ -1217,6 +1164,59 @@ export default function Product({
                                       <ProsConsToolTip
                                         hover_phrase={
                                           product.popularity_points_phase
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="spec-section">
+                                <div className="spec-item">
+                                  <div className="spec-col">
+                                    <div className="query">
+                                      Ratio Quality-Price
+                                      <QuestionIcon
+                                        attributes={
+                                          product?.ratio_qulitiy_points_descriptions
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="spec-col ">
+                                    <div
+                                      className="tooltip-title"
+                                      style={{
+                                        color:
+                                          product.ratio_quality_price_points_better_then *
+                                            100 >=
+                                          70
+                                            ? "#437ece"
+                                            : product.ratio_quality_price_points_worse_then *
+                                                100 >
+                                              70
+                                            ? "#ce434b"
+                                            : "#27304e",
+                                        fontSize: "15px",
+                                        textDecoration: "underline",
+                                        textDecorationStyle: "dotted",
+                                        textDecorationThickness: "1.5px",
+                                        textDecorationColor:
+                                          product.ratio_quality_price_points_better_then *
+                                            100 >=
+                                          70
+                                            ? "#437ece"
+                                            : product.ratio_quality_price_points_worse_then *
+                                                100 >
+                                              70
+                                            ? "#ce434b"
+                                            : "#27304e",
+                                        textUnderlineOffset: "5px",
+                                      }}
+                                    >
+                                      {product.ratio_quality_price_points}
+                                      <ProsConsToolTip
+                                        hover_phrase={
+                                          product.ratio_quality_price_points_phase
                                         }
                                       />
                                     </div>

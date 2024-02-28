@@ -95,6 +95,7 @@ export default function CompareForm({
       setFocusedProductThird(false);
     }, 200);
   };
+  // console.log(formFields);
   useEffect(() => {
     if (isHandelChildValue) {
       dispatch(addCompareProduct(formFields));
@@ -133,7 +134,7 @@ export default function CompareForm({
                 handleFieldChange("productFirst", e.target.value.trim())
               }
             />
-            {console.log(formFields.productFirst && formFields.productFirst)}
+            {/* {console.log(formFields.productFirst && formFields.productFirst)} */}
             {formFields.productFirst && (
               <CompareSearchList
                 isFocused={isFocusedProductFirst}
@@ -141,7 +142,7 @@ export default function CompareForm({
                 onSendValue={handleChildValue}
                 searchedKeyWord={formFields.productFirst}
                 inputPostion={"productFirst"}
-                category_id={product_name?.category_id}
+                // category_id={product_name?.category_id}
                 handelCategoryUpdate={handelCategoryUpdate}
               />
             )}
@@ -169,7 +170,7 @@ export default function CompareForm({
                 onSendValue={handleChildValue}
                 searchedKeyWord={formFields.productSecond}
                 inputPostion={"productSecond"}
-                category_id={formFields.category}
+                category_id={formFields.category || product_name?.category_id}
               />
             )}
           </div>

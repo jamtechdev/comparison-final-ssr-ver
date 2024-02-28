@@ -5,7 +5,7 @@ import "./confimation.css";
 
 function ConfirmationModal({ showModal, handleClose, handleConfirm }) {
   return (
-    <>
+    <div>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Body className="confirm-modal-body">
           <p>
@@ -22,7 +22,7 @@ function ConfirmationModal({ showModal, handleClose, handleConfirm }) {
           </div>
         </Modal.Body>
       </Modal>
-    </>
+    </div>
   );
 }
 

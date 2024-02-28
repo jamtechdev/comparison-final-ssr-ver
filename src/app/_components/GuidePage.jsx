@@ -35,8 +35,7 @@ export default function GuidePage({
 
   const guide = guideData[0]?.data;
 
-
-  const  products = guideData[1]?.data?.products || [];
+  const products = guideData[1]?.data?.products || [];
   // console.log(products, "guideData");
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data.product_names || [];
@@ -117,7 +116,7 @@ export default function GuidePage({
     //   window.history.replaceState(null, "", window.location.pathname);
     //   location.reload();
     // } else {
-      
+
     // }
   }
 
@@ -155,12 +154,11 @@ export default function GuidePage({
       // }?${searchParam.toString()}`;
       // searchParams.sort = `${param.algo},${param.rangeAttributes}`;
       // window.history.pushState({ path: newUrl }, "", newUrl);
-
     } else {
       removeQueryParamAndNavigate(window.location.href, "sort");
       delete searchParams.sort;
     }
-    
+
     // sortRangeAttribute.current = JSON.parse(sortAttribute);
     // setFilteredProducts([
     //   ...filterProducts(
@@ -170,9 +168,8 @@ export default function GuidePage({
     //   ),
     // ]);
     // console.log(JSON.parse(sortAttribute))
-
   };
- 
+
   // if (products.length === 0) {
   //   if (products.length <= 0 && !currentParams.variant) {
   //     const queryString = Object.keys(searchParams)
@@ -384,7 +381,7 @@ export default function GuidePage({
                     <div className="filtered-data">
                       <ul>
                         {Object.keys(params)
-                         .filter((key) => key !== "direct" && key !== "sort")
+                          .filter((key) => key !== "direct" && key !== "sort")
                           .map((categoryName, index) => (
                             <li key={index}>
                               {" "}
@@ -531,15 +528,11 @@ export default function GuidePage({
                         handleClose={handleModalClose}
                         handleConfirm={handleConfirm}
                       />
-                      {showModal === false ? (
-                        <div className="text-center p-5">
+                      {showModal === false && (
+                        <p className="text-center p-5">
                           None of the products meet your filtering criteria.
-                        </div>
-                      ) : (
-                        ""
+                        </p>
                       )}
-
-                      {/* {confirm("tum chai pina h ?")} */}
                     </>
                   )}
                 </>

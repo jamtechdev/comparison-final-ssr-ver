@@ -121,7 +121,7 @@ const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
       (value) => value === topValue
     ).length;
 
-    if (occurrences === 1 || occurrences === 2) {
+    if (occurrences === 1) {
       arrayOfObjects.forEach((obj) => {
         const numericValue =
           typeof topValue === "string"
