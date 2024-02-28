@@ -30,9 +30,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log(entries);
         entries.forEach((entry) => {
-          console.log(entry.isIntersecting);
           if (entry.isIntersecting) {
             const heading = entry.target;
             lastHeadingId = heading.id; // Update the lastHeadingId variable
@@ -44,25 +42,23 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
           setCurrentHeading(lastHeadingId);
         }
       },
-      { threshold: 1 }
+      { threshold: 0.5 }
     );
-    const shortTextElement = contentRef.current.querySelector("#shortText");
-    if (shortTextElement) {
-      const headings = contentRef.current.querySelectorAll(
-        "h1, h2, h3, h4, h5, h6"
-      );
-      headings.forEach((heading) => {
-        observer.observe(heading);
-      });
 
-      return () => {
-        headings.forEach((heading) => {
-          observer.unobserve(heading);
-        });
-      };
-    }
+    const headings = contentRef.current.querySelectorAll(
+      "h1, h2, h3, h4, h5, h6"
+    );
+    headings.forEach((heading) => {
+      observer.observe(heading);
+    });
+
+    return () => {
+      headings.forEach((heading) => {
+        observer.unobserve(heading);
+      });
+    };
   }, [currentHeading]);
-  console.log(currentHeading);
+
 
   // Include currentHeading in the dependency array
 
