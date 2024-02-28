@@ -1230,6 +1230,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
 .filter-accordion .accordion-item .form-check input[type="checkbox"] {
   width: 18px;
   height: 18px;
+  cursor: pointer;
 }
 
 .filter-accordion .accordion-item .form-check label {
@@ -1242,6 +1243,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  cursor: pointer;
 }
 
 .color-change .score-detail span {
