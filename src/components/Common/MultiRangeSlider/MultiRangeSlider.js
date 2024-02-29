@@ -65,8 +65,8 @@ const MultiRangeSlider = ({
         step={step}
         onChange={(event) => {
           const value = Math.min(Number(event.target.value), maxVal);
-          setMinVal(value);
-          minValRef.current = value;
+          setMinVal(Number(value.toFixed(1)));
+          minValRef.current = Number(value.toFixed(1));
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
         id={`thumb thumb--left ${classForSlider}`}
@@ -81,8 +81,8 @@ const MultiRangeSlider = ({
         step={step}
         onChange={(event) => {
           const value = Math.max(Number(event.target.value), minVal);
-          setMaxVal(value);
-          maxValRef.current = value;
+          setMaxVal(Number(value.toFixed(1)));
+          maxValRef.current = Number(value.toFixed(1));
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
         id={`thumb thumb--right ${classForSlider}`}

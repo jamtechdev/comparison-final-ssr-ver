@@ -361,6 +361,7 @@ export default function GuidePage({
               searchParam={searchParams}
               removedParam={removedParam}
               orderBy={order}
+              setremovedParam={setremovedParam}
             />
             <div className="desktop-hide">
               <Button className="site_main_btn w-100 d-block btn-icon mb-4">
@@ -404,7 +405,9 @@ export default function GuidePage({
                               {" "}
                               {categoryName === "variant"
                                 ? `Show all variants: Yes`
-                                : `${
+                                : categoryName === "Available"? 
+                                `Available: Yes`:
+                                `${
                                     categoryName.charAt(0).toUpperCase() +
                                     categoryName.slice(1)
                                   }: ${

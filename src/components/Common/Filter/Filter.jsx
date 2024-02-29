@@ -11,6 +11,7 @@ export default function Filter({
   removedParam,
   searchParam,
   orderBy,
+  setremovedParam
 }) {
   // console.log(categoryAttributes);
   const router = useRouter();
@@ -96,7 +97,6 @@ export default function Filter({
         if (isChecked) {
           updatedParams[key] = value;
         } else {
-          console.log(updatedParams)
           deleteQueryFormURL(key, updatedParams, currentParams, url);
         }
         break;
@@ -145,7 +145,6 @@ export default function Filter({
       currentParams.set(paramKey, paramValue);
       url.searchParams.set(paramKey, paramValue);
     });
-    console.log(currentParams)
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
     //call the next router for srr
@@ -153,13 +152,9 @@ export default function Filter({
   };
 
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
-    if(updatedParams.hasOwnProperty(key)){
-      delete updatedParams[key];
-      currentParams.delete([key]);
-      url.searchParams.delete([key]);
-    }else{
-      return
-    }
+    delete updatedParams[key];
+    currentParams.delete([key]);
+    url.searchParams.delete([key]);
   };
 
   useEffect(() => {
@@ -265,7 +260,7 @@ export default function Filter({
             filteredArrayOfAttributeValues?.values[0] == "yes"
           ) {
             const value = filteredArrayOfAttributeValues?.values[0];
-            // handelFilterActions("radioSwitch", removedParam, "no", false);
+            handelFilterActions("radioSwitch", removedParam, "no", false);
             document.getElementById(`${removedParam}`).checked = false;
             console.log("Radio switch", removedParam)
           } else {
@@ -330,6 +325,7 @@ export default function Filter({
       if (removedParam.toLowerCase() == "sort") {
         delete searchParams.sort;
       }
+      setremovedParam('')
     }
   }, [removedParam, searchParam]);
 
