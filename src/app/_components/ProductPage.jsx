@@ -1,3 +1,4 @@
+"use client";
 import { GetCompareId } from "@/components/Product/GetCompareId.jsx";
 import React, { Fragment } from "react";
 import {
@@ -36,25 +37,20 @@ function ProductPage({
 }) {
   let initialDisplay = 5;
   const productsWithAttributeGroup = {};
-  const productCopy = productData[0].data;
+  const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
   const productAttributes = {};
   productData[0].data?.attributes?.forEach((attribute) => {
-    // Extract the category name for the attribute
     const categoryName = attribute?.attribute_category?.name;
-    // Check if the category name exists in the productAttributes object
-
     if (!productAttributes[categoryName]) {
-      // If not, create an empty array for the category
       productAttributes[categoryName] = [];
     }
-    // Push the current attribute to the array corresponding to its category
-    productAttributes[categoryName]?.push(attribute);
+    productAttributes[categoryName]?.push({ ...attribute }); // Create a shallow copy of the attribute
   });
 
   productCopy["attributes"] = productAttributes;
-  // Store the product copy with grouped attributes in the productsWithAttributeGroup object
-  productsWithAttributeGroup[productData[0]?.data?.name] = productCopy;
-  const finalProducts = Object?.values(productsWithAttributeGroup);
+  productsWithAttributeGroup[productData[0]?.data?.name] = { ...productCopy }; // Create a shallow copy of productCopy
+  const finalProducts = Object.values(productsWithAttributeGroup);
+
   let product = finalProducts[0];
   let loading = false;
   let displayedAttributesCount = {};
@@ -343,7 +339,9 @@ function ProductPage({
                               />
                               <p>
                                 N.{item.position} in{" "}
-                                <Link href={`/${item?.permalink}`}>
+                                <Link
+                                  href={`/${item?.category_url}/${item?.permalink}`}
+                                >
                                   <small>{item.guide_name}</small>
                                 </Link>
                               </p>
@@ -364,7 +362,8 @@ function ProductPage({
                 )}
               </div>
             </Col>
-            {product?.available_colors && (
+            {/* {console.log(product?.available_colors && product?.available_colors)} */}
+            {product?.available_colors?.length !== 0 && (
               <Col lg={12} md={12} xl={12}>
                 <div className="alternatives mt-4">
                   <h6>Colors available:</h6>
@@ -372,7 +371,7 @@ function ProductPage({
                     {product?.available_colors?.map((data, key) => {
                       return (
                         <>
-                          <div className="color-item">
+                          <div className="color-item" key={key}>
                             <Form.Check
                               inline
                               label={data?.color}
@@ -389,6 +388,34 @@ function ProductPage({
                 </div>
               </Col>
             )}
+            {/* {console.log(product,"neet")} */} 
+
+            {product?.available_versions &&
+              product?.available_versions?.length !== 0 && (
+                <Col lg={12} md={12} xl={12}>
+                  <div className="alternatives mt-4">
+                    <h6>Available versions:</h6>
+                    <Form className="color-section">
+                      {product?.available_versions?.map((data, key) => {
+                        return (
+                          <>
+                            <div className="color-item" key={key}>
+                              <Form.Check
+                                inline
+                                label={data?.short_name}
+                                name="color"
+                                type="radio"
+                                defaultChecked={key === 0}
+                                id={`inline-${data?.color}-${key}`}
+                              />
+                            </div>
+                          </>
+                        );
+                      })}
+                    </Form>
+                  </div>
+                </Col>
+              )}
           </Row>
         </Container>
       </section>
@@ -491,20 +518,25 @@ function ProductPage({
         </Container>
       </section>
       {/* {console.log(product?.text_part !== "")} */}
-      {product?.text_part !== "" && (
-        <section className="ptb-80">
-          <Container>
-            <Row>
-              <Col md={12}>
-                <h2 className="site-main-heading">Review of {product?.name}</h2>
-              </Col>
-            </Row>
-            <Row className="mt-3">
-              <Col md={4} lg={2}>
-                <div className="outline-section">
-                  <p>Outline</p>
-                  <OutlineGenerator blogData={product?.text_part} />
-                  {/* <ol>
+
+      <section className="ptb-80">
+        <Container>
+          {product?.text_part !== "" && (
+            <>
+              {" "}
+              <Row>
+                <Col md={12}>
+                  <h2 className="site-main-heading">
+                    Review of {product?.name}
+                  </h2>
+                </Col>
+              </Row>
+              <Row className="mt-3">
+                <Col md={4} lg={2}>
+                  <div className="outline-section">
+                    <p>Outline</p>
+                    <OutlineGenerator blogData={product?.text_part} />
+                    {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
                   <li>VS Average</li>
@@ -517,163 +549,192 @@ function ProductPage({
                   </li>
                   <li>Pros/Cons</li>
                 </ol> */}
-                </div>
-              </Col>
-              <Col md={8} lg={8}>
-                <div
-                  id="shortCodeText"
-                  className="review-content"
-                  dangerouslySetInnerHTML={{ __html: product?.text_part }}
-                />
-                <Row className="mt-3">
-                  <Col md={12} lg={6}>
-                    <div className="best-price-section mobile-best-price-section">
-                      <h3 className="site-main-heading">Best Prices</h3>
-                      <ul className="best-list-item">
-                        {product &&
-                          product?.price_websites
-                            .slice(0, showFullPrice ? 8 : 4)
-                            .map((item, index) => {
-                              return (
-                                <li key={index}>
-                                  <Link
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                    href={`/link?p=${btoa(item.url)}`}
-                                  >
-                                    <img
-                                      src={item?.logo}
-                                      width={0}
-                                      height={0}
-                                      sizes="100%"
-                                      alt=""
-                                    />
-                                  </Link>
-                                  <span>
-                                    <a
+                  </div>
+                </Col>
+                <Col md={8} lg={8}>
+                  <div
+                    id="shortCodeText"
+                    className="review-content"
+                    dangerouslySetInnerHTML={{ __html: product?.text_part }}
+                  />
+                  <Row className="mt-3">
+                    <Col md={12} lg={6}>
+                      <div className="best-price-section mobile-best-price-section">
+                        <h3 className="site-main-heading">Best Prices</h3>
+                        <ul className="best-list-item">
+                          {product &&
+                            product?.price_websites
+                              .slice(0, showFullPrice ? 8 : 4)
+                              .map((item, index) => {
+                                return (
+                                  <li key={index}>
+                                    <Link
                                       rel="noopener noreferrer"
                                       target="_blank"
                                       href={`/link?p=${btoa(item.url)}`}
                                     >
-                                      {item?.price} €
-                                    </a>
-                                  </span>
-                                </li>
-                              );
-                            })}
-                      </ul>
-                      {product?.price_websites.length > 5 && (
-                        <Button className="see_all_btn">
-                          See All <i className="ri-arrow-down-s-line"></i>
-                        </Button>
-                      )}
-                    </div>
-                  </Col>
-                  <Col md={12} lg={6}>
-                    <div className="best-price-section mobile-best-price-section ranking">
-                      <h3 className="site-main-heading">Best Rankings</h3>
-                      <ul className="best-list-item">
-                        {product &&
-                          product?.guide_ratings
-                            .slice(0, showFullRanking ? 8 : 4)
-                            .map((item, index) => {
-                              return (
-                                <li key={index}>
-                                  <div className="d-flex align-items-start gap-1">
-                                    <img
-                                      src="/images/double-arrow.png"
-                                      width={0}
-                                      height={0}
-                                      sizes="100%"
-                                      alt=""
-                                    />
-                                    <p>
-                                      N.{item.position} in{" "}
-                                      <Link href={`/${item?.permalink}`}>
-                                        <small>{item.guide_name}</small>
-                                      </Link>
-                                    </p>
-                                  </div>
-                                </li>
-                              );
-                            })}
-                      </ul>
-                      {product?.guide_ratings.length > 5 && (
-                        <Button
-                          className="see_all_btn"
-                          // onClick={() => {
-                          //   showFullRanking = !showFullRanking;
-                          // }}
-                        >
-                          See All <i className="ri-arrow-down-s-line"></i>
-                        </Button>
-                      )}
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-              <Col md={12} lg={2}>
-                <div className="ranking-section">
-                  <div className="site-main-heading">In Rankings</div>
-                  <div className="product-card card-mobile">
-                    <Image
-                      src="/images/p1.png"
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      alt="F"
-                    />
-                    <span>Best Monitors</span>
+                                      <img
+                                        src={item?.logo}
+                                        width={0}
+                                        height={0}
+                                        sizes="100%"
+                                        alt=""
+                                      />
+                                    </Link>
+                                    <span>
+                                      <a
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                        href={`/link?p=${btoa(item.url)}`}
+                                      >
+                                        {item?.price} €
+                                      </a>
+                                    </span>
+                                  </li>
+                                );
+                              })}
+                        </ul>
+                        {product?.price_websites.length > 5 && (
+                          <Button className="see_all_btn">
+                            See All <i className="ri-arrow-down-s-line"></i>
+                          </Button>
+                        )}
+                      </div>
+                    </Col>
+                    <Col md={12} lg={6}>
+                      <div className="best-price-section mobile-best-price-section ranking">
+                        <h3 className="site-main-heading">Best Rankings</h3>
+                        <ul className="best-list-item">
+                          {product &&
+                            product?.guide_ratings
+                              .slice(0, showFullRanking ? 8 : 4)
+                              .map((item, index) => {
+                                return (
+                                  <li key={index}>
+                                    <div className="d-flex align-items-start gap-1">
+                                      <img
+                                        src="/images/double-arrow.png"
+                                        width={0}
+                                        height={0}
+                                        sizes="100%"
+                                        alt=""
+                                      />
+                                      {/* {console.log(item)} */}
+                                      <p>
+                                        N.{item.position} in{" "}
+                                        <Link
+                                          href={`/${item?.category_url}/${item?.permalink}`}
+                                        >
+                                          <small>{item.guide_name}</small>
+                                        </Link>
+                                      </p>
+                                    </div>
+                                  </li>
+                                );
+                              })}
+                        </ul>
+                        {product?.guide_ratings.length > 5 && (
+                          <Button
+                            className="see_all_btn"
+                            // onClick={() => {
+                            //   showFullRanking = !showFullRanking;
+                            // }}
+                          >
+                            See All <i className="ri-arrow-down-s-line"></i>
+                          </Button>
+                        )}
+                      </div>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col md={12} lg={2}>
+                  <div className="ranking-section">
+                    <div className="site-main-heading">In Rankings</div>
+
+                    {product &&
+                      product?.guide_ratings.slice(0, 2).map((data, index) => {
+                        return (
+                          <div className="product-card card-mobile" key={index}>
+                            <Link
+                              className="product-link-cover"
+                              href={`/${data?.category_url}/${data?.permalink}`}
+                              style={{ color: "#326ebf" }}
+                            ></Link>
+                            <img
+                              src={
+                                data?.bannerImage === null
+                                  ? "/images/nofound.png"
+                                  : data?.bannerImage
+                              }
+                              width={0}
+                              height={0}
+                              sizes="100%"
+                              alt=""
+                            />
+                            <span>{data?.guide_short_name}</span>
+                          </div>
+                        );
+                      })}
+                    {/* <Image
+                        src="/images/p1.png"
+                        width={0}
+                        height={0}
+                        sizes="100%"
+                        alt="F"
+                      />
+                      <span>Best Monitors</span> */}
+
+                    <ProductSlider className="slider-show" />
                   </div>
-                  <ProductSlider className="slider-show" />
-                </div>
-              </Col>
-            </Row>
-            <Row className="mt-5">
-              <Col md={6}>
-                <div className="pros-corns-section pros light-background">
-                  <h3 className="pros-header">Pros</h3>
-                  <ul>
-                    {product &&
-                      product?.top_pros?.map((data, key) => {
-                        return (
-                          <>
-                            <li
-                              key={key}
-                              style={{ color: "rgba(39, 48, 78, 0.80)" }}
-                            >
-                              {data?.name} {renderValue(data)}
-                            </li>
-                          </>
-                        );
-                      })}
-                  </ul>
-                </div>
-              </Col>
-              <Col md={6}>
-                <div className="pros-corns-section corns light-background">
-                  <h3 className="pros-header">Cons</h3>
-                  <ul className="cross">
-                    {product &&
-                      product?.top_cons?.map((data, key) => {
-                        return (
-                          <>
-                            <li
-                              key={key}
-                              style={{ color: "rgba(39, 48, 78, 0.80)" }}
-                            >
-                              {data?.name} {renderValue(data)}
-                            </li>
-                          </>
-                        );
-                      })}
-                  </ul>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-      )}
+                </Col>
+              </Row>
+            </>
+          )}
+
+          <Row className="mt-5">
+            <Col md={6}>
+              <div className="pros-corns-section pros light-background">
+                <h3 className="pros-header">Pros</h3>
+                <ul>
+                  {product &&
+                    product?.top_pros?.map((data, key) => {
+                      return (
+                        <>
+                          <li
+                            key={key}
+                            style={{ color: "rgba(39, 48, 78, 0.80)" }}
+                          >
+                            {data?.name} {renderValue(data)}
+                          </li>
+                        </>
+                      );
+                    })}
+                </ul>
+              </div>
+            </Col>
+            <Col md={6}>
+              <div className="pros-corns-section corns light-background">
+                <h3 className="pros-header">Cons</h3>
+                <ul className="cross">
+                  {product &&
+                    product?.top_cons?.map((data, key) => {
+                      return (
+                        <>
+                          <li
+                            key={key}
+                            style={{ color: "rgba(39, 48, 78, 0.80)" }}
+                          >
+                            {data?.name} {renderValue(data)}
+                          </li>
+                        </>
+                      );
+                    })}
+                </ul>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
 
       <ProductTabs />
       {/* <section className="ptb-80">
@@ -724,6 +785,7 @@ function ProductPage({
               <ProductCompareTable
                 products={compareByCatID?.data}
                 categoryAttributes={productCatAttributes?.data}
+                slug={slug}
               />
             </Col>
           </Row>
@@ -734,7 +796,14 @@ function ProductPage({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">Compare With Other Products</h2>
-              <CompareForm location="ON_PRODUCT_PAGE" product_name={product} />
+              <CompareForm
+                location="ON_PRODUCT_PAGE"
+                product_name={product}
+                handelCloseCompareModel={() => {
+                  // Add your close model logic here
+                  console.log("Closing compare model");
+                }}
+              />
             </Col>
           </Row>
         </Container>

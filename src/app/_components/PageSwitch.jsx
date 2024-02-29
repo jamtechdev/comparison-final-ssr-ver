@@ -42,7 +42,8 @@ export default async function PageSwitch({
         product?.category_id
       );
       const getProductCompare = await getCompareProductByCatID(
-        product?.category_id
+        product?.category_id,
+        slug
       );
       PageToRender = (
         <ProductPage
@@ -143,10 +144,11 @@ async function getProductCategroyAttributes(category_id) {
   return response.json();
 }
 
-async function getCompareProductByCatID(category_id) {
+async function getCompareProductByCatID(category_id, slug) {
+  console.log(slug);
   // ${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${id}`
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}?product=${slug}`,
     {
       next: { revalidate: 10 },
       cache: "no-cache",

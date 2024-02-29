@@ -8,7 +8,11 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-const ProductCompareTable = React.memo(({ products, categoryAttributes }) => {
+const ProductCompareTable = React.memo(({ products, categoryAttributes,slug }) => {
+  // console.log(products,"neet");
+
+  
+
   const router = useRouter();
 
   const [winPos, setWinPos] = useState(false);

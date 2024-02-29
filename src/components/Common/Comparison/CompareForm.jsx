@@ -17,13 +17,24 @@ export default function CompareForm({
   const router = useRouter();
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
-  // const ProductPage = product_name;
-  // console.log(ProductPage)
+  const ProductPage = {
+    category_id: product_name?.category_id,
+    permalink: product_name?.permalink,
+    name: product_name?.name,
+    brand: product_name?.brand,
+    overall_score: product_name?.overall_score,
+    technical_score: product_name?.technical_score,
+    main_image: product_name?.main_image,
+    category_url: product_name?.category_url,
+  };
+
+  // console.log(ProductPage);
+
   const [formFields, setFormFields] = useState({
-    productFirst: reduxData?.productFirst || product_name || null,
+    productFirst: reduxData?.productFirst || ProductPage || null,
     productSecond: reduxData?.productSecond || null,
     productThird: reduxData?.productThird || null,
-    category: reduxData?.category || null,
+    category: reduxData?.category || product_name?.category_id || null,
     location: reduxData?.location ? reduxData?.location : location,
   });
 
@@ -98,6 +109,11 @@ export default function CompareForm({
     }, 200);
   };
   // console.log(formFields);
+  useEffect(() => {
+    if (product_name) {
+      dispatch(addCompareProduct(formFields));
+    }
+  }, []);
   useEffect(() => {
     if (isHandelChildValue) {
       dispatch(addCompareProduct(formFields));

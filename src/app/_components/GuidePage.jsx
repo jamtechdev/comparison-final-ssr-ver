@@ -35,9 +35,8 @@ export default function GuidePage({
 
   const guide = guideData[0]?.data;
 
-
   const products = guideData[1]?.data?.products || [];
-  // console.log(products, "guideData");
+
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data.product_names || [];
 
@@ -89,16 +88,19 @@ export default function GuidePage({
     const params = new URLSearchParams(url.search);
     const keys = Array.from(params.keys());
     keys.forEach((key) => {
-      if (key !== 'sort') {
+      if (key !== "sort") {
         params.delete(key);
       }
     });
-    window.history.replaceState(null, '', `${url.pathname}?${params.toString()}`);
+    window.history.replaceState(
+      null,
+      "",
+      `${url.pathname}?${params.toString()}`
+    );
     // Reload the page without removing 'sort'
     router.replace(`${url.pathname}?${params.toString()}`, { scroll: false });
     // window.location.reload();
   };
-
 
   function removeQueryParamAndNavigate(url, paramToRemove) {
     // delete searchParams[`${paramToRemove}`];
@@ -149,6 +151,7 @@ export default function GuidePage({
       const currentUrl = new URL(window.location.href);
       const searchParam = new URLSearchParams(currentUrl.search);
       const sortValue = `${param.algo},${param.rangeAttributes}`;
+
       setorder((prev) => {
         return {
           value: sortValue,
@@ -401,10 +404,17 @@ export default function GuidePage({
                               {" "}
                               {categoryName === "variant"
                                 ? `Show all variants: Yes`
-                                : `${categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}: ${params[categoryName].includes(",")
-                                  ? params[categoryName].replace(/,/g, " - ")
-                                  : params[categoryName]
-                                }`}
+                                : `${
+                                    categoryName.charAt(0).toUpperCase() +
+                                    categoryName.slice(1)
+                                  }: ${
+                                    params[categoryName].includes(",")
+                                      ? params[categoryName].replace(
+                                          /,/g,
+                                          " - "
+                                        )
+                                      : params[categoryName]
+                                  }`}
                               <span
                                 className="text0danger"
                                 onClick={() => {
@@ -555,18 +565,18 @@ export default function GuidePage({
                   )}
                 </>
               )}
-              {products?.length <= 0 &&
+              {products?.length <= 0 && (
                 <ConfirmationModal
                   showModal={showModal}
                   handleClose={handleModalClose}
                   handleConfirm={handleConfirm}
-                />}
+                />
+              )}
               {productPagination?.total_pages > 1 && (
                 <GuidePagination pagination={productPagination} />
               )}
             </Row>
           </Col>
-
         </Row>
       </Container>
       <section className="ptb-25">

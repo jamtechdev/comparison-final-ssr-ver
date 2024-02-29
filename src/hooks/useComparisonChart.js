@@ -11,7 +11,7 @@ import ComparisonVerticalChart from "../_chart/ComparisonVerticalChart/index.js"
 // import { ChartName } from "../_chart/data/enums/ChartName.js";
 
 const useComparisonChart = (chartData, pageType) => {
-  console.log(pageType);
+  // console.log(pageType);
 
   const shortCodepatternsRE = chartData;
   // console.log(shortCodepatternsRE?.type);

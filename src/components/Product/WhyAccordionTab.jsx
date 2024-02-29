@@ -145,7 +145,8 @@ const WhyAccordionTab = React.memo(
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
                 <h3 className="font-20">
-                  Why is {product && product?.name} BETTER than average?
+                  Why is {product && product?.name} BETTER than{" "}
+                  {product && product?.average_title}?
                 </h3>
                 <div className="show-btn">
                   Show All <i className="ri-arrow-down-s-line"></i>
@@ -242,11 +243,13 @@ const WhyAccordionTab = React.memo(
                                           </>
                                         )}
                                       </span>
+
                                       <QuestionIcon
                                         attributes={
-                                          product?.general.pros[item][1]
+                                          product?.general.pros[item][4]
                                         }
                                       />
+
                                       <small className="d-block tooltip-title">
                                         {product?.general.pros[item][1] && (
                                           <>
@@ -393,7 +396,8 @@ const WhyAccordionTab = React.memo(
               <Accordion.Header as="div">
                 <h2 className="font-20">
                   {" "}
-                  Why is {product && product?.name} WORSE than average?
+                  Why is {product && product?.name} WORSE than{" "}
+                  {product && product?.average_title}?
                 </h2>
 
                 <div className="show-btn">
@@ -476,11 +480,11 @@ const WhyAccordionTab = React.memo(
                                             </>
                                           )}
                                         </small>
-                                        {/* <small>
+                                        <small>
                                           {item?.difference_value === "yes" ||
-                                            item?.difference_value === "no" ||
-                                            item?.difference_value === 0 ||
-                                            item?.difference_value === null ? (
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
                                             ""
                                           ) : (
                                             <span
@@ -489,7 +493,7 @@ const WhyAccordionTab = React.memo(
                                               }}
                                             ></span>
                                           )}
-                                        </small> */}
+                                        </small>
                                       </li>
                                     );
                                   } else {
