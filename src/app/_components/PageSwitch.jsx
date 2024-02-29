@@ -145,7 +145,7 @@ async function getProductCategroyAttributes(category_id) {
 }
 
 async function getCompareProductByCatID(category_id, slug) {
-  console.log(slug);
+  // console.log(slug);
   // ${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${id}`
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}?product=${slug}`,

@@ -27,6 +27,8 @@ import { useDispatch, useSelector } from "react-redux";
 import CompareDropDown from "@/components/Product/CompareDropDown";
 import { useRouter } from "next/navigation";
 import { getAttributeHalf } from "@/_helpers";
+import ProductSlider from "../ProductSlider/productSlider";
+import GuidePageTextArea from "../GuidePageOutline/GuidePageTextArea";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -212,6 +214,88 @@ function CompareDiv({
           />
         </Container>
       </section>
+      {/* <section>
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">
+                {`${compareProDataFirst?.name || ""} vs ${
+                  compareProDataSec?.name || ""
+                } ${
+                  compareProDataThird?.name
+                    ? `vs ${compareProDataThird?.name}`
+                    : ""
+                }`}
+              </h2>
+            </Col>
+          </Row>
+          <GuidePageTextArea  />
+        </Container>
+      </section> */}
+      <section className="ptb-80 bg-color">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">
+                Should You Buy {compareProDataFirst?.name} or{" "}
+                {compareProDataSec?.name}{" "}
+                {compareProDataThird?.name && `or ${compareProDataThird?.name}`}
+              </h2>
+            </Col>
+            <Col md={6}>
+              <div className="pros-corns-section pros">
+                <div className="pros-header">
+                  Who SHOULD BUY {compareProDataFirst?.name}?
+                </div>
+                {/* {product?.should_buy.length === 0 && (
+                  <h3 className="no-data text-center mt-2">No data Found</h3>
+                )} */}
+                {/* {console.log(product?.should_not_buy)} */}
+                {/* <ul>
+                  {product &&
+                    product?.should_buy?.map((item, index) => {
+                      return (
+                        <>
+                          <li
+                            key={index}
+                            style={{ color: "rgba(39, 48, 78, 0.7)" }}
+                          >
+                            {item}
+                          </li>
+                        </>
+                      );
+                    })}
+                </ul> */}
+              </div>
+            </Col>
+            <Col md={6}>
+              <div className="pros-corns-section corns">
+                <div className="pros-header">
+                  Who SHOULD NOT BUY {compareProDataSec?.name} ?
+                </div>
+                {/* {product?.should_not_buy.length === 0 && (
+                  <h3 className="no-data text-center mt-2">No data Found</h3>
+                )} */}
+                <ul className="cross">
+                  {/* {product &&
+                    product?.should_not_buy?.map((item, index) => {
+                      return (
+                        <>
+                          <li
+                            key={index}
+                            style={{ color: "rgba(39, 48, 78, 0.7)" }}
+                          >
+                            {item}
+                          </li>
+                        </>
+                      );
+                    })} */}
+                </ul>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
       <section className="ptb-80">
         <Container>
           <Row>
@@ -248,6 +332,44 @@ function CompareDiv({
         slug={slug}
         attributeDropDown={[...categroyAttributes].reverse()}
       />
+      <section className="mt-3">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">Best Alternatives</h2>
+              {/* <p>No Data Found</p> */}
+              {/* {product?.alternative_products?.map((data, index) => {
+                return (
+                  <React.Fragment key={index}>
+                    <h2 className="site-main-heading">{data?.heading}</h2>
+                    {data?.alternative_products.length != 0 ? (
+                      <ReviewSlider favSlider={data?.alternative_products} />
+                    ) : (
+                      <span className="text-center m-2">
+                        No Alternative Products Found
+                      </span>
+                    )}
+                  </React.Fragment>
+                );
+              })} */}
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      <section>
+        <Container>
+          <Row className="my-3">
+            <Col md={12}>
+              <h2 className="heading-primary secondary related-guides">
+                Related Guides
+              </h2>
+            </Col>
+            <Col md={12}>
+              {/* <ProductSlider favSlider={blogData[0]?.data?.related_guides} /> */}
+            </Col>
+          </Row>
+        </Container>
+      </section>
       {isOpen && (
         <CompareModal
           location={"comparison"}

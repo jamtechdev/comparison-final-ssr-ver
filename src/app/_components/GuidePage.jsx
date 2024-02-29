@@ -309,32 +309,59 @@ export default function GuidePage({
       </section>
       <section className="ptb-25">
         <Container>
-          {guideData[0]?.data?.show_catchy_titles_in_text == 1 && (
-            <Row className="catchy_titles_section mb-3">
-              <Col md={7} className="mx-auto p-0">
-                <p>
-                  {" "}
-                  {guideData[0]?.data?.catchy_titles_box_title
-                    ? guideData[0]?.data?.catchy_titles_box_title
-                    : " No title found"}{" "}
-                </p>
-                <ul className="text-center">
-                  {guideData[0]?.data?.catchy_titles?.map((item, index) => {
-                    return (
+          {/* {guideData[0]?.data?.show_catchy_titles_in_text == 1 &&
+            guideData[0]?.data?.catchy_titles_box_title?.length !== 0 && (
+              <Row className="catchy_titles_section mb-3">
+                <Col md={7} className="mx-auto p-0">
+                  {console.log(
+                    guideData[0]?.data?.catchy_titles_box_title?.length
+                  )}
+                  <p>
+                    {" "}
+                    {guideData[0]?.data?.catchy_titles_box_title
+                      ? guideData[0]?.data?.catchy_titles_box_title
+                      : " No title found"}{" "}
+                  </p>
+                  <ul className="text-center">
+                    {guideData[0]?.data?.catchy_titles?.map((item, index) => {
+                      return (
+                        <li key={index}>
+                          <span className="catchy_titles_section_title">
+                            {item?.title}:
+                          </span>
+                          <span className="catchy_titles_section_product_name">
+                            {item?.product?.name}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </Col>
+              </Row>
+            )} */}
+          {guideData[0]?.data?.show_catchy_titles_in_text === 1 &&
+            guideData[0]?.data?.catchy_titles_box_title?.length !== 0 && (
+              <Row className="catchy_titles_section mb-3">
+                <Col md={7} className="mx-auto p-0">
+                  <p>
+                    {guideData[0]?.data?.catchy_titles_box_title ||
+                      "No title found"}
+                  </p>
+                  <ul className="text-center">
+                    {guideData[0]?.data?.catchy_titles?.map((item, index) => (
                       <li key={index}>
                         <span className="catchy_titles_section_title">
-                          {item?.title}:
+                          {item.title}:
                         </span>
                         <span className="catchy_titles_section_product_name">
-                          {item?.product?.name}
+                          {item.product.name}
                         </span>
                       </li>
-                    );
-                  })}
-                </ul>
-              </Col>
-            </Row>
-          )}
+                    ))}
+                  </ul>
+                </Col>
+              </Row>
+            )}
           <Row>
             <Col md={12}>
               <div
@@ -405,9 +432,9 @@ export default function GuidePage({
                               {" "}
                               {categoryName === "variant"
                                 ? `Show all variants: Yes`
-                                : categoryName === "Available"? 
-                                `Available: Yes`:
-                                `${
+                                : categoryName === "available"
+                                ? `Available: Yes`
+                                : `${
                                     categoryName.charAt(0).toUpperCase() +
                                     categoryName.slice(1)
                                   }: ${

@@ -73,14 +73,14 @@ const TechnicalAccordion = React.memo(
                   <div className="spec-col">
                     <div className="query ranking-tooltip-title">
                       Technical Score
-                      <div className="question_hover_container question-marker-icon">
+                      <span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                         >
                           <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
                         </svg>
-                      </div>
+                      </span>
                       <div className="tooltip-display-content">
                         {product?.technical_score_descriptions.description && (
                           <p className="mb-2">
@@ -173,14 +173,14 @@ const TechnicalAccordion = React.memo(
                   <div className="spec-col">
                     <div className="query ranking-tooltip-title">
                       User&rsquo;s Rating
-                      <div className="question_hover_container question-marker-icon" style={{boxShadow:"none"}}>
+                      <span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                         >
                           <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
                         </svg>
-                      </div>
+                      </span>
                       <div className="tooltip-display-content">
                         {product?.users_rating_descriptions.description && (
                           <p className="mb-2">
@@ -308,11 +308,78 @@ const TechnicalAccordion = React.memo(
               <div className="spec-section">
                 <div className="spec-item">
                   <div className="spec-col">
-                    <div className="query">
+                    <div className="query ranking-tooltip-title">
                       Ratio Quality-Price
-                      <QuestionIcon
+                      <span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                        </svg>
+                      </span>
+                      <div className="tooltip-display-content">
+                        {product?.ratio_qulitiy_points_descriptions
+                          .description && (
+                          <p className="mb-2">
+                            <b>What it is: </b>
+                            {
+                              product?.ratio_qulitiy_points_descriptions
+                                ?.description
+                            }
+                          </p>
+                        )}
+                        {product?.ratio_qulitiy_points_descriptions
+                          .when_matters && (
+                          <p className="mb-2">
+                            <b>When it matters: </b>
+                            {
+                              product?.ratio_qulitiy_points_descriptions
+                                ?.when_matters
+                            }
+                          </p>
+                        )}
+                        {/* <p>
+                          <b>Score components:</b>
+                        </p> */}
+                        {/* {product?.ratio_qulitiy_points_descriptions
+                          .score_components &&
+                          product?.ratio_qulitiy_points_descriptions.score_components?.map(
+                            (data, index) => {
+                              return (
+                                <React.Fragment key={index}>
+                                  <div className="scroe_section" key={index}>
+                                    <p className="text-end">
+                                      {`${parseFloat(data?.importance).toFixed(
+                                        1
+                                      )}%`}
+                                    </p>
+                                    <div
+                                      className="score-count"
+                                      style={{
+                                        background:
+                                          data?.attribute_evaluation >= 7.5
+                                            ? "#093673"
+                                            : data?.attribute_evaluation >= 5 &&
+                                              data?.attribute_evaluation < 7.5
+                                            ? "#437ECE"
+                                            : "#85B2F1",
+                                      }}
+                                    >
+                                      {`${parseFloat(
+                                        data?.attribute_evaluation
+                                      ).toFixed(1)}`}
+                                    </div>
+                                    <p>{data?.attribute_category}</p>
+                                  </div>
+                                </React.Fragment>
+                              );
+                            }
+                          )} */}
+                      </div>
+                      {/* <QuestionIcon
                         attributes={product?.ratio_qulitiy_points_descriptions}
-                      />
+                      /> */}
                     </div>
                   </div>
                   <div className="spec-col ">
@@ -357,11 +424,70 @@ const TechnicalAccordion = React.memo(
               <div className="spec-section">
                 <div className="spec-item">
                   <div className="spec-col">
-                    <div className="query text-ellipse">
+                    <div className="query text-ellipse ranking-tooltip-title ">
                       Popularity
-                      <QuestionIcon
+                      <span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                        </svg>
+                      </span>
+                      <div className="tooltip-display-content">
+                        {product?.popularity_descriptions.description && (
+                          <p className="mb-2">
+                            <b>What it is: </b>
+                            {product?.popularity_descriptions?.description}
+                          </p>
+                        )}
+                        {product?.popularity_descriptions.when_matters && (
+                          <p className="mb-2">
+                            <b>When it matters: </b>
+                            {product?.popularity_descriptions?.when_matters}
+                          </p>
+                        )}
+                        {/* <p>
+                          <b>Score components:</b>
+                        </p> */}
+                        {/* {product?.ratio_qulitiy_points_descriptions
+                          .score_components &&
+                          product?.ratio_qulitiy_points_descriptions.score_components?.map(
+                            (data, index) => {
+                              return (
+                                <React.Fragment key={index}>
+                                  <div className="scroe_section" key={index}>
+                                    <p className="text-end">
+                                      {`${parseFloat(data?.importance).toFixed(
+                                        1
+                                      )}%`}
+                                    </p>
+                                    <div
+                                      className="score-count"
+                                      style={{
+                                        background:
+                                          data?.attribute_evaluation >= 7.5
+                                            ? "#093673"
+                                            : data?.attribute_evaluation >= 5 &&
+                                              data?.attribute_evaluation < 7.5
+                                            ? "#437ECE"
+                                            : "#85B2F1",
+                                      }}
+                                    >
+                                      {`${parseFloat(
+                                        data?.attribute_evaluation
+                                      ).toFixed(1)}`}
+                                    </div>
+                                    <p>{data?.attribute_category}</p>
+                                  </div>
+                                </React.Fragment>
+                              );
+                            }
+                          )} */}
+                      </div>
+                      {/* <QuestionIcon
                         attributes={product?.popularity_descriptions}
-                      />
+                      /> */}
                     </div>
                   </div>
                   <div className="spec-col">

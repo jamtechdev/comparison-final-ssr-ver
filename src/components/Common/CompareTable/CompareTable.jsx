@@ -187,6 +187,40 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     return value;
   };
 
+  // add start on Table
+  const addStarOnTable = (defaultNo, type, values) => {
+    // console.log(type);
+    if (
+      type === "overall_score" ||
+      type === "reviews" ||
+      type === "technical_score" ||
+      type === "user_rating" ||
+      type === "ratio" ||
+      type === "popularity"
+    ) {
+      const uniqueValues = [...new Set(values)];
+      const maxValue = Math.max(...uniqueValues);
+      return values.map((value) =>
+        value === maxValue &&
+        values.indexOf(value) === values.lastIndexOf(value) ? (
+          <div>
+            {value}
+            <span key={value} className="tooltip-title-2">
+              <img
+                style={{ float: "right", paddingRight: "5px" }}
+                src="/icons/star.png"
+                alt="star"
+              />
+            </span>
+          </div>
+        ) : (
+          value
+        )
+      );
+    }
+    return values;
+  };
+
   return (
     <div
       className={
@@ -345,11 +379,12 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
               );
             })}
           </tr>
+
           <tr className="tr-bg-color">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 Overall Score
-                {products && products[0]?.overall_score_descriptions && (
+                {products[0]?.overall_score_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.overall_score_descriptions?.description && (
                       <p className="mb-2">
@@ -388,11 +423,11 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
               );
             })}
           </tr>
-          <tr>
+          <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 Technical Score
-                {products && products[0]?.technical_score_descriptions && (
+                {products[0]?.technical_score_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.technical_score_descriptions?.description && (
                       <p className="mb-2">
@@ -417,26 +452,34 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             {finalProducts
               .slice(0, defaultNo)
               .map((product, technicalIndex) => {
-                return <td key={technicalIndex}>{product.technical_score}</td>;
+                const values = finalProducts.map((p) => p.technical_score);
+                return (
+                  <td key={technicalIndex}>
+                    {
+                      addStarOnTable(defaultNo, "technical_score", values)[
+                        technicalIndex
+                      ]
+                    }
+                  </td>
+                );
               })}
           </tr>
-
           <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 User’s Ratings
-                {products && products[0]?.users_rating_descriptions && (
+                {products[0]?.users_rating_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.users_rating_descriptions?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>{" "}
+                        <b>What it is: </b>
                         {products[0]?.users_rating_descriptions?.description}
                       </p>
                     )}
-                    {products[0]?.technical_score_descriptions
+                    {products[0]?.users_rating_descriptions
                       ?.when_it_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>{" "}
+                        <b>When it matters: </b>
                         {
                           products[0]?.technical_score_descriptions
                             ?.when_it_matters
@@ -448,7 +491,12 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
               </div>
             </th>
             {finalProducts.slice(0, defaultNo).map((product, userIndex) => {
-              return <td key={userIndex}>{product.reviews}</td>;
+              const values = finalProducts.map((p) => p.reviews);
+              return (
+                <td key={userIndex}>
+                  {addStarOnTable(defaultNo, "user_rating", values)[userIndex]}
+                </td>
+              );
             })}
           </tr>
           <tr className="">
@@ -473,15 +521,26 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                 )}
               </div>
             </th>
-            {finalProducts.slice(0, defaultNo).map((product, userIndex) => {
-              return <td key={userIndex}>{product.reviews}</td>;
-            })}
+            {finalProducts
+              .slice(0, defaultNo)
+              .map((product, popularityIndex) => {
+                const values = finalProducts.map((p) => p.popularity_points);
+                return (
+                  <td key={popularityIndex}>
+                    {
+                      addStarOnTable(defaultNo, "popularity", values)[
+                        popularityIndex
+                      ]
+                    }
+                  </td>
+                );
+              })}
           </tr>
           <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 Ratio Qlt/Price
-                {products && products[0]?.ratio_qulitiy_points_descriptions && (
+                {products[0]?.ratio_qulitiy_points_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.ratio_qulitiy_points_descriptions
                       ?.description && (
@@ -508,11 +567,17 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
               </div>
             </th>
             {finalProducts.slice(0, defaultNo).map((product, ratioIndex) => {
+              const values = finalProducts.map(
+                (p) => p.ratio_quality_price_points
+              );
               return (
-                <td key={ratioIndex}>{product.ratio_quality_price_points}</td>
+                <td key={ratioIndex}>
+                  {addStarOnTable(defaultNo, "ratio", values)[ratioIndex]}
+                </td>
               );
             })}
           </tr>
+
           {categoryAttributes
             ?.slice(0, fullTable || 2)
             .map((category, categoryIndex) => {

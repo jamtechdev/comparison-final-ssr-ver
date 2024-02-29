@@ -190,6 +190,39 @@ export default function ComparisonTable({ products, categoryAttributes }) {
     return winningProductIndex.length === 1 ? winningProductIndex[0] : -1000;
   };
   const productScoreLabelIndex = findProductsScoreLabelIndex(finalProducts);
+  console.log(finalProducts);
+
+  const addStarOnTable = (defaultNo, type, values) => {
+    // console.log(type);
+    if (
+      type === "overall_score" ||
+      type === "reviews" ||
+      type === "technical_score" ||
+      type === "user_rating" ||
+      type === "ratio"
+    ) {
+      const uniqueValues = [...new Set(values)];
+      const maxValue = Math.max(...uniqueValues);
+      return values.map((value) =>
+        value === maxValue &&
+        values.indexOf(value) === values.lastIndexOf(value) ? (
+          <div>
+            {value}
+            <span key={value} className="tooltip-title-2">
+              <img
+                style={{ float: "right", paddingRight: "5px" }}
+                src="/icons/star.png"
+                alt="star"
+              />
+            </span>
+          </div>
+        ) : (
+          value
+        )
+      );
+    }
+    return values;
+  };
 
   return (
     <div
@@ -420,7 +453,16 @@ export default function ComparisonTable({ products, categoryAttributes }) {
             {finalProducts
               .slice(0, defaultNo)
               .map((product, technicalIndex) => {
-                return <td key={technicalIndex}>{product.technical_score}</td>;
+                const values = finalProducts.map((p) => p.technical_score);
+                return (
+                  <td key={technicalIndex}>
+                    {
+                      addStarOnTable(defaultNo, "technical_score", values)[
+                        technicalIndex
+                      ]
+                    }
+                  </td>
+                );
               })}
           </tr>
           <tr className="">
@@ -435,7 +477,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                         {products[0]?.users_rating_descriptions?.description}
                       </p>
                     )}
-                    {products[0]?.technical_score_descriptions
+                    {products[0]?.users_rating_descriptions
                       ?.when_it_matters && (
                       <p className="mb-2">
                         <b>When it matters: </b>
@@ -450,7 +492,12 @@ export default function ComparisonTable({ products, categoryAttributes }) {
               </div>
             </th>
             {finalProducts.slice(0, defaultNo).map((product, userIndex) => {
-              return <td key={userIndex}>{product.reviews}</td>;
+              const values = finalProducts.map((p) => p.reviews);
+              return (
+                <td key={userIndex}>
+                  {addStarOnTable(defaultNo, "user_rating", values)[userIndex]}
+                </td>
+              );
             })}
           </tr>
           <tr className="">
@@ -484,8 +531,13 @@ export default function ComparisonTable({ products, categoryAttributes }) {
               </div>
             </th>
             {finalProducts.slice(0, defaultNo).map((product, ratioIndex) => {
+              const values = finalProducts.map(
+                (p) => p.ratio_quality_price_points
+              );
               return (
-                <td key={ratioIndex}>{product.ratio_quality_price_points}</td>
+                <td key={ratioIndex}>
+                  {addStarOnTable(defaultNo, "ratio", values)[ratioIndex]}
+                </td>
               );
             })}
           </tr>

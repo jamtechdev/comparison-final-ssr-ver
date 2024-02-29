@@ -36,6 +36,7 @@ const SearchList = ({ search, isFocused }) => {
                       href={`${item?.category_url}/${item?.permalink}`}
                       style={{ cursor: "pointer" }}
                     >
+                      {/* {console.log(item)} */}
                       <li style={{ cursor: "pointer" }}>
                         <span style={{ cursor: "pointer" }}>
                           {item?.short_name || item?.title}
@@ -49,10 +50,11 @@ const SearchList = ({ search, isFocused }) => {
                         )}
                         {category === "products" && (
                           <span className="d-flex justify-content-end">
-                            <i>
+                            <i style={{ opacity: 0.6 }}>
                               (
-                              {item?.category_url
-                                ? item?.category_url.split("-").join(" ")
+                              {item?.category
+                                ? item?.category.charAt(0).toUpperCase() +
+                                  item?.category.slice(1)
                                 : ""}
                               )
                             </i>
