@@ -54,7 +54,7 @@ function GuidePageTextArea({ guide }) {
     };
   }, [currentHeading]); // Ensure this effect runs only once, adjust dependencies if needed
   // Ensure this effect runs only once, you can adjust dependencies if needed
-  console.log(currentHeading);
+  // console.log(currentHeading);
   return (
     <>
       <Row className="mt-3">

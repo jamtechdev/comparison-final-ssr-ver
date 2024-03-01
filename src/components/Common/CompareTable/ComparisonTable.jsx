@@ -49,7 +49,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       // console.log( testDiv.getBoundingClientRect().top);
 
       var tbodyDiv = document.getElementById("tbody");
-      tbodyDiv.getBoundingClientRect().top > 2
+      tbodyDiv?.getBoundingClientRect().top > 2
         ? setWinPos(false)
         : setWinPos(true);
     };
@@ -205,7 +205,7 @@ export default function ComparisonTable({ products, categoryAttributes }) {
     return winningProductIndex.length === 1 ? winningProductIndex[0] : -1000;
   };
   const productScoreLabelIndex = findProductsScoreLabelIndex(finalProducts);
-  console.log(finalProducts);
+  // console.log(finalProducts);
 
   const addStarOnTable = (defaultNo, type, values) => {
     // console.log(type);

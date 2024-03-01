@@ -80,7 +80,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
     handleScrollTo(id, index);
     document.getElementById("shortCodeText").scrollTo(0, 0);
   };
-  console.log(outline)
+  // console.log(outline)
   return (
     <>
       <ol>

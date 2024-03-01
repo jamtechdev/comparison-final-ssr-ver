@@ -1275,3 +1275,7 @@ div#productGraph {
 .compare-container .isSticky tr th:not(:first-child):hover .device-name a {
   color: var(--heading-color) !important;
 }
+.active_class {
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+}

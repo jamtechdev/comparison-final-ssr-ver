@@ -256,17 +256,20 @@ function CompareDiv({
           />
         </Container>
       </section>
-      <section className="contentSec my-3">
-        <Container>
-          <div className="custom-row">
-            <div className="left-side-bar">
-              <div className="outline-section">
-                <p>Outline</p>
-                <OutlineGenerator
-                  // currentIndexId={currentHeading}
-                  blogData={bestAlternative?.text_part}
-                />
-                {/* <ol>
+      {/* {console.log(bestAlternative?.text_part)} */}
+      {bestAlternative?.text_part !== null ||
+        (bestAlternative?.text_part !== undefined && (
+          <section className="contentSec my-3">
+            <Container>
+              <div className="custom-row">
+                <div className="left-side-bar">
+                  <div className="outline-section">
+                    <p>Outline</p>
+                    <OutlineGenerator
+                      // currentIndexId={currentHeading}
+                      blogData={bestAlternative?.text_part}
+                    />
+                    {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
                   <li>VS Average</li>
@@ -279,31 +282,31 @@ function CompareDiv({
                   </li>
                   <li>Pros/Cons</li>
                 </ol> */}
-              </div>
-            </div>
-            <div className="center-section ">
-              <div
-                id="shortCodeText"
-                className="content-para mt-1"
-                dangerouslySetInnerHTML={{
-                  __html: searchForPatternAndReplace(modifiedContent),
-                }}
-              />
-              <div className="social-icon items-icon">
-                <div className="twitter">
-                  <i className="ri-twitter-fill"></i>
+                  </div>
                 </div>
-                <div className="facebook">
-                  <i className="ri-facebook-fill"></i>
-                </div>
-                <div className="printerest">
-                  <i className="ri-pinterest-fill"></i>
-                </div>
-                <div className="linkedIn">
-                  <i className="ri-linkedin-fill"></i>
-                </div>
-              </div>
-              {/* <div className="fonzi p-3 my-md-4 my-xs-0">
+                <div className="center-section ">
+                  <div
+                    id="shortCodeText"
+                    className="content-para mt-1"
+                    dangerouslySetInnerHTML={{
+                      __html: searchForPatternAndReplace(modifiedContent),
+                    }}
+                  />
+                  <div className="social-icon items-icon">
+                    <div className="twitter">
+                      <i className="ri-twitter-fill"></i>
+                    </div>
+                    <div className="facebook">
+                      <i className="ri-facebook-fill"></i>
+                    </div>
+                    <div className="printerest">
+                      <i className="ri-pinterest-fill"></i>
+                    </div>
+                    <div className="linkedIn">
+                      <i className="ri-linkedin-fill"></i>
+                    </div>
+                  </div>
+                  {/* <div className="fonzi p-3 my-md-4 my-xs-0">
                 <div className="profile mb-2">
                   <div className="avatar">
                     <img
@@ -326,24 +329,26 @@ function CompareDiv({
                   </div>
                 </div>
               </div> */}
-            </div>
-            <div className="mobile-hide right-side-bar productSlider-Container">
-              <Row className="mt-3">
-                <Col md={12}>
-                  <div className="heading-primary secondary mb-2">
-                    Related Guides
-                  </div>
-                </Col>
-                <Col md={12}>
-                  <ProductSliderBlog
-                    favSlider={bestAlternative?.related_guides}
-                  />
-                </Col>
-              </Row>
-            </div>
-          </div>
-        </Container>
-      </section>
+                </div>
+                <div className="mobile-hide right-side-bar productSlider-Container">
+                  <Row className="mt-3">
+                    <Col md={12}>
+                      <div className="heading-primary secondary mb-2">
+                        Related Guides
+                      </div>
+                    </Col>
+                    <Col md={12}>
+                      <ProductSliderBlog
+                        favSlider={bestAlternative?.related_guides}
+                      />
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+            </Container>
+          </section>
+        ))}
+
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -438,6 +443,7 @@ function CompareDiv({
               <h2 className="site-main-heading">Compare Other Products</h2>
               <CompareForm
                 location="ON_MAIN_PAGE"
+                comparisonData={products}
                 handelCloseCompareModel={() => {}}
               />
             </Col>

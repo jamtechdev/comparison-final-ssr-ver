@@ -224,10 +224,30 @@
 }
 
 .compare-container thead.isSticky {
-  box-shadow: 0px 2px 8px rgba(77, 82, 136, 0.15);
-  position: sticky;
+  /* box-shadow: 0px 2px 8px rgba(77, 82, 136, 0.15); */
+  position: fixed;
   top: -1px;
   z-index: 1000;
+}
+
+thead.isSticky tr{
+  width: 100%;
+  display: inline;
+}
+
+thead.isSticky {
+  transform: scale(1.2, 1);
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+ thead.isSticky td {
+  min-width: auto !important;
+  max-width: 100% !important;
+  width: 100% !important;
 }
 
 .compare-container thead.isSticky tr th:first-child {
@@ -244,7 +264,7 @@
 
 .compare-container thead.isSticky tr th {
   padding: 0 !important;
-  vertical-align: bottom !important;
+  vertical-align: top !important;
 }
 
 .compare-container thead.isSticky tr th .device-name {
@@ -1820,7 +1840,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
 
 .compare-container-2 thead.isSticky tr th {
   padding: 0 !important;
-  vertical-align: bottom !important;
+  vertical-align: top !important;
 }
 
 .compare-container-2 thead.isSticky tr th .device-name {

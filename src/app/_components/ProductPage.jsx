@@ -115,6 +115,7 @@ function ProductPage({
   const setShowFullPrice = () => {
     showFullPrice = !setShowFullPrice;
   };
+
   return (
     <>
       {/* {console.log(product)} */}
@@ -557,24 +558,40 @@ function ProductPage({
                 <Col lg={12} md={12} xl={12}>
                   <div className="alternatives mt-2">
                     <span>Available versions:</span>
-                    <Form className="color-section">
+                    <di className="color-section">
                       {product?.available_versions?.map((data, key) => {
                         return (
                           <>
                             <div className="color-item" key={key}>
-                              <Form.Check
+                              <li
+                                style={{
+                                  listStyleType: "none",
+                                  width: "auto",
+                                  padding: "3px 5px",
+                                }}
+                              >
+                                {" "}
+                                <Link
+                                  href={`/${data?.category_url}/${data?.permalink}`}
+                                  style={{ color: "#437ed0" }}
+                                >
+                                  {" "}
+                                  {data?.short_name}
+                                </Link>{" "}
+                              </li>
+                              {/* <Form.Check
                                 inline
                                 label={data?.short_name}
                                 name="color"
                                 type="radio"
                                 defaultChecked={key === 0}
                                 id={`inline-${data?.color}-${key}`}
-                              />
+                              /> */}
                             </div>
                           </>
                         );
                       })}
-                    </Form>
+                    </di>
                   </div>
                 </Col>
               )}
@@ -948,9 +965,7 @@ function ProductPage({
                 slug={slug}
               />
             </Col>
-            <Col md={12}>
-              
-            </Col>
+            <Col md={12}></Col>
           </Row>
         </Container>
       </section>
