@@ -1,7 +1,7 @@
 "use client";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
@@ -102,7 +102,7 @@ export default function ProductSliderBlog({ favSlider }) {
                     href={`/${item?.permalink}`}
                     style={{ color: "#27304e" }}
                   >
-                    {item?.short_name}
+                    {item?.short_name || item?.guide_name}
                   </Link>
                 </span>
               </div>

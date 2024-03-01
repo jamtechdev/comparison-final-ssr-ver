@@ -29,6 +29,11 @@ import { useRouter } from "next/navigation";
 import { getAttributeHalf } from "@/_helpers";
 import ProductSlider from "../ProductSlider/productSlider";
 import GuidePageTextArea from "../GuidePageOutline/GuidePageTextArea";
+import axios from "axios";
+import ReviewSlider from "../ReviewSlider/reviewSlider";
+import { searchForPatternAndReplace } from "@/hooks/useChart";
+import OutlineGenerator from "../OutlineGenerator/OutlineGenerator";
+import ProductSliderBlog from "../ProductSliderBlog/ProductSliderBlog";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -51,7 +56,11 @@ function CompareDiv({
     (products[2] && products[2]) || []
   );
   const [otherPermalinks, setOtherPermalinks] = useState([]);
+  // best alternative state
+  const [bestAlternative, setBestAlternative] = useState([]);
+
   const router = useRouter();
+
   const handelRemoveProductFormComparison = (index) => {
     // Remove the last product's URL from the comparison store.
     let remainingProductUrl = "";
@@ -123,6 +132,39 @@ function CompareDiv({
   });
   productCopy["attributes"] = productAttributes;
   // console.log(comparisonTableProductData)
+
+  // best alternative api call
+  useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
+    };
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_API_URL}/compare/products?slug=${slug}`,
+        config
+      )
+      .then((res) => {
+        setBestAlternative(res.data?.data);
+        // console.log(res?.data?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // For Text area we find h2,h3,h4,h5,h6 tag than give it id
+  const content = bestAlternative?.text_part;
+  // Regular expression to match h1, h2, and h3 tags
+  const headingRegex = /<h([1-6])>(.*?)<\/h[1-6]>/g;
+  // Function to add IDs to matched tags
+  const addIds = (match, tag, content) => {
+    const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
+    return `<h${tag} id="${id}" >${content}</h${tag}>`;
+  };
+  // Replace the matched tags with IDs
+  const modifiedContent = content?.replace(headingRegex, addIds);
+
+  // console.log(modifiedContent, "neet");
 
   return (
     <>
@@ -214,24 +256,94 @@ function CompareDiv({
           />
         </Container>
       </section>
-      {/* <section>
+      <section className="contentSec my-3">
         <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                {`${compareProDataFirst?.name || ""} vs ${
-                  compareProDataSec?.name || ""
-                } ${
-                  compareProDataThird?.name
-                    ? `vs ${compareProDataThird?.name}`
-                    : ""
-                }`}
-              </h2>
-            </Col>
-          </Row>
-          <GuidePageTextArea  />
+          <div className="custom-row">
+            <div className="left-side-bar">
+              <div className="outline-section">
+                <p>Outline</p>
+                <OutlineGenerator
+                  // currentIndexId={currentHeading}
+                  blogData={bestAlternative?.text_part}
+                />
+                {/* <ol>
+                  <li>Overall</li>
+                  <li>Technical</li>
+                  <li>VS Average</li>
+                  <li className="outline-active">
+                    Review
+                    <ol>
+                      <li>Subtile</li>
+                      <li>Subtile</li>
+                    </ol>
+                  </li>
+                  <li>Pros/Cons</li>
+                </ol> */}
+              </div>
+            </div>
+            <div className="center-section ">
+              <div
+                id="shortCodeText"
+                className="content-para mt-1"
+                dangerouslySetInnerHTML={{
+                  __html: searchForPatternAndReplace(modifiedContent),
+                }}
+              />
+              <div className="social-icon items-icon">
+                <div className="twitter">
+                  <i className="ri-twitter-fill"></i>
+                </div>
+                <div className="facebook">
+                  <i className="ri-facebook-fill"></i>
+                </div>
+                <div className="printerest">
+                  <i className="ri-pinterest-fill"></i>
+                </div>
+                <div className="linkedIn">
+                  <i className="ri-linkedin-fill"></i>
+                </div>
+              </div>
+              {/* <div className="fonzi p-3 my-md-4 my-xs-0">
+                <div className="profile mb-2">
+                  <div className="avatar">
+                    <img
+                      src={
+                        blogData[0]?.data?.author?.image
+                          ? blogData[0]?.data?.author?.image
+                          : "/images/user.png"
+                      }
+                      width={0}
+                      height={0}
+                      sizes="100%"
+                      alt=""
+                    />
+                  </div>
+                  <div className="label">
+                    <Link href={`/author/${blogData[0]?.data?.author?.id}`}>
+                      <p className="name">{blogData[0]?.data?.author?.name}</p>
+                    </Link>
+                    <p>{blogData[0]?.data?.author?.summary}</p>
+                  </div>
+                </div>
+              </div> */}
+            </div>
+            <div className="mobile-hide right-side-bar productSlider-Container">
+              <Row className="mt-3">
+                <Col md={12}>
+                  <div className="heading-primary secondary mb-2">
+                    Related Guides
+                  </div>
+                </Col>
+                <Col md={12}>
+                  <ProductSliderBlog
+                    favSlider={bestAlternative?.related_guides}
+                  />
+                </Col>
+              </Row>
+            </div>
+          </div>
         </Container>
-      </section> */}
+      </section>
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -247,25 +359,27 @@ function CompareDiv({
                 <div className="pros-header">
                   Who SHOULD BUY {compareProDataFirst?.name}?
                 </div>
-                {/* {product?.should_buy.length === 0 && (
+                {bestAlternative?.should_buy_product_one?.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
-                )} */}
+                )}
                 {/* {console.log(product?.should_not_buy)} */}
-                {/* <ul>
-                  {product &&
-                    product?.should_buy?.map((item, index) => {
-                      return (
-                        <>
-                          <li
-                            key={index}
-                            style={{ color: "rgba(39, 48, 78, 0.7)" }}
-                          >
-                            {item}
-                          </li>
-                        </>
-                      );
-                    })}
-                </ul> */}
+                <ul>
+                  {bestAlternative &&
+                    bestAlternative?.should_buy_product_one?.map(
+                      (item, index) => {
+                        return (
+                          <>
+                            <li
+                              key={index}
+                              style={{ color: "rgba(39, 48, 78, 0.7)" }}
+                            >
+                              {item}
+                            </li>
+                          </>
+                        );
+                      }
+                    )}
+                </ul>
               </div>
             </Col>
             <Col md={6}>
@@ -273,23 +387,25 @@ function CompareDiv({
                 <div className="pros-header">
                   Who SHOULD NOT BUY {compareProDataSec?.name} ?
                 </div>
-                {/* {product?.should_not_buy.length === 0 && (
+                {bestAlternative?.should_buy_product_two?.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
-                )} */}
+                )}
                 <ul className="cross">
-                  {/* {product &&
-                    product?.should_not_buy?.map((item, index) => {
-                      return (
-                        <>
-                          <li
-                            key={index}
-                            style={{ color: "rgba(39, 48, 78, 0.7)" }}
-                          >
-                            {item}
-                          </li>
-                        </>
-                      );
-                    })} */}
+                  {bestAlternative &&
+                    bestAlternative?.should_buy_product_two?.map(
+                      (item, index) => {
+                        return (
+                          <>
+                            <li
+                              key={index}
+                              style={{ color: "rgba(39, 48, 78, 0.7)" }}
+                            >
+                              {item}
+                            </li>
+                          </>
+                        );
+                      }
+                    )}
                 </ul>
               </div>
             </Col>
@@ -338,6 +454,7 @@ function CompareDiv({
             <Col md={12}>
               <h2 className="site-main-heading">Best Alternatives</h2>
               {/* <p>No Data Found</p> */}
+              <ReviewSlider favSlider={bestAlternative?.alternative_products} />
               {/* {product?.alternative_products?.map((data, index) => {
                 return (
                   <React.Fragment key={index}>
@@ -365,7 +482,7 @@ function CompareDiv({
               </h2>
             </Col>
             <Col md={12}>
-              {/* <ProductSlider favSlider={blogData[0]?.data?.related_guides} /> */}
+              <ProductSlider favSlider={bestAlternative?.related_guides} />
             </Col>
           </Row>
         </Container>

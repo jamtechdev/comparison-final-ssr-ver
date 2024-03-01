@@ -115,15 +115,20 @@ export async function generateMetadata({ params: { slug, category } }) {
       return "";
     } else {
       const meta_data = await getSlugMetaData(slug);
+      if (meta_data && meta_data.data) {
+        return {
+          title: meta_data.data.title,
+          description: meta_data.data.meta_description,
+          generator: "Comparison web",
+          applicationName: "Comparison web",
+          referrer: "origin-when-cross-origin",
+          keywords: ["compare", "product"],
+        };
+      } else {
+        console.error("Invalid meta_data response:", meta_data);
+        return "";
+      }
       // console.log("test", meta_data?.data?.meta_description);
-      return {
-        title: meta_data?.data?.title,
-        description: meta_data?.data && meta_data?.data?.meta_description,
-        generator: "Comparison web",
-        applicationName: "Comparison web",
-        referrer: "origin-when-cross-origin",
-        keywords: ["compare", "product"],
-      };
     }
   }
 }

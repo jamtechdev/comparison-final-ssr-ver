@@ -9,17 +9,14 @@ import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 
 const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
-  // console.table(categoryAttributes[0]?.attributes);
-  // console.log(products);
-  // console.log(products?.length);
-  // console.log(categoryAttributes);
   const router = useRouter();
-  const [winPos, setWinPos] = useState(false);
   let initialNoOfCategories = 5;
   const [pagination, setPagination] = useState({});
   const defaultNo = 5;
-
   const [fullTable, setFullTable] = useState(2);
+
+  // this for function for Table product sticky (Start)
+  const [winPos, setWinPos] = useState(false);
   const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
     const [isSticky, setIsSticky] = useState(false);
     const newRef = useRef();
@@ -40,6 +37,23 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
 
     return [isSticky, ref, setIsSticky];
   };
+  if (typeof window !== "undefined") {
+    // Access the window object here
+    window.onscroll = function () {
+      var testDiv = document.getElementById("testone");
+      testDiv?.getBoundingClientRect().top < 2
+        ? setWinPos(true)
+        : setWinPos(false);
+      // console.log( testDiv.getBoundingClientRect().top);
+
+      var tbodyDiv = document.getElementById("tbody");
+      tbodyDiv?.getBoundingClientRect().top > 2
+        ? setWinPos(false)
+        : setWinPos(true);
+    };
+  }
+  const [isSticky, ref] = useDetectSticky();
+  // this for function for Table product sticky (End)
 
   const productsWithAttributeGroup = {};
   products?.forEach((product) => {
@@ -77,7 +91,6 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
     setFullTable(categoryAttributes?.length);
   };
 
-  const [isSticky, ref] = useDetectSticky();
   const addAsterisksToTopValue = (defaultNo, category, catAttribute) => {
     const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
     const filterData = copiedFinalProducts
@@ -266,18 +279,65 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                       sizes="100%"
                     />
                   </p>
-                  <ul className="best-list-item d-none">
-                    <li>
-                      <img
-                        src="/images/amazon.png"
-                        width={0}
-                        height={0}
-                        sizes="100%"
-                        alt=""
-                      />
-                      <span>155.87 €</span>
-                    </li>
-                  </ul>
+                  {product.price_websites &&
+                    product?.price_websites?.every(
+                      (data) => data.price !== null
+                    ) && (
+                      <>
+                        {" "}
+                        <>
+                          <ul className="best-list-item d-none">
+                            {" "}
+                            {product.price_websites &&
+                              product?.price_websites?.every(
+                                (data) => data.price === null
+                              ) && (
+                                <div className="not-availabel p-3">
+                                  <span className="txt">NOT AVAILABLE</span>
+                                  <span className="price">
+                                    ~ {product?.price} €
+                                  </span>
+                                </div>
+                              )}
+                            {product.price_websites &&
+                              product.price_websites.map((data, dIndex) => {
+                                return (
+                                  <React.Fragment key={dIndex}>
+                                    {data.price !== null && (
+                                      <li>
+                                        <>
+                                          <Link
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                            href={`/link?p=${btoa(data.url)}`}
+                                          >
+                                            <img
+                                              src={data?.logo}
+                                              width={0}
+                                              height={0}
+                                              sizes="100vw"
+                                              alt="price"
+                                            />
+                                          </Link>
+                                          <span>
+                                            <a
+                                              rel="noopener noreferrer"
+                                              target="_blank"
+                                              href={`/link?p=${btoa(data.url)}`}
+                                            >
+                                              {data?.price} €
+                                            </a>
+                                          </span>
+                                        </>
+                                      </li>
+                                    )}
+                                  </React.Fragment>
+                                );
+                              })}
+                          </ul>
+                        </>
+                      </>
+                    )}
                 </th>
               );
             })}
@@ -384,22 +444,28 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 Overall Score
-                {products[0]?.overall_score_descriptions && (
-                  <div className="tooltip-display-content">
-                    {products[0]?.overall_score_descriptions?.description && (
-                      <p className="mb-2">
-                        <b>What it is: </b>{" "}
-                        {products[0]?.overall_score_descriptions?.description}
-                      </p>
-                    )}
-                    {products[0]?.overall_score_descriptions?.when_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        {products[0]?.overall_score_descriptions?.when_matters}
-                      </p>
-                    )}
-                  </div>
-                )}
+                {products &&
+                  products.length > 0 &&
+                  products[0]?.overall_score_descriptions && (
+                    <div className="tooltip-display-content">
+                      {products[0]?.overall_score_descriptions?.description && (
+                        <p className="mb-2">
+                          <b>What it is: </b>{" "}
+                          {products[0]?.overall_score_descriptions?.description}
+                        </p>
+                      )}
+                      {products[0]?.overall_score_descriptions
+                        ?.when_matters && (
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.overall_score_descriptions
+                              ?.when_matters
+                          }
+                        </p>
+                      )}
+                    </div>
+                  )}
               </div>
             </th>
             {finalProducts.slice(0, defaultNo).map((product, overAllIndex) => {
@@ -427,26 +493,32 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 Technical Score
-                {products[0]?.technical_score_descriptions && (
-                  <div className="tooltip-display-content">
-                    {products[0]?.technical_score_descriptions?.description && (
-                      <p className="mb-2">
-                        <b>What it is: </b>{" "}
-                        {products[0]?.technical_score_descriptions?.description}
-                      </p>
-                    )}
-                    {products[0]?.technical_score_descriptions
-                      ?.when_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_matters
-                        }
-                      </p>
-                    )}
-                  </div>
-                )}
+                {products &&
+                  products.length > 0 &&
+                  products[0]?.technical_score_descriptions && (
+                    <div className="tooltip-display-content">
+                      {products[0]?.technical_score_descriptions
+                        ?.description && (
+                        <p className="mb-2">
+                          <b>What it is: </b>{" "}
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.description
+                          }
+                        </p>
+                      )}
+                      {products[0]?.technical_score_descriptions
+                        ?.when_matters && (
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_matters
+                          }
+                        </p>
+                      )}
+                    </div>
+                  )}
               </div>
             </th>
             {finalProducts
@@ -468,26 +540,28 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 User’s Ratings
-                {products[0]?.users_rating_descriptions && (
-                  <div className="tooltip-display-content">
-                    {products[0]?.users_rating_descriptions?.description && (
-                      <p className="mb-2">
-                        <b>What it is: </b>
-                        {products[0]?.users_rating_descriptions?.description}
-                      </p>
-                    )}
-                    {products[0]?.users_rating_descriptions
-                      ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
-                  </div>
-                )}
+                {products &&
+                  products.length > 0 &&
+                  products[0]?.users_rating_descriptions && (
+                    <div className="tooltip-display-content">
+                      {products[0]?.users_rating_descriptions?.description && (
+                        <p className="mb-2">
+                          <b>What it is: </b>
+                          {products[0]?.users_rating_descriptions?.description}
+                        </p>
+                      )}
+                      {products[0]?.users_rating_descriptions
+                        ?.when_it_matters && (
+                        <p className="mb-2">
+                          <b>When it matters: </b>
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_it_matters
+                          }
+                        </p>
+                      )}
+                    </div>
+                  )}
               </div>
             </th>
             {finalProducts.slice(0, defaultNo).map((product, userIndex) => {

@@ -12,7 +12,7 @@ export const searchForPatternAndReplace = (data) => {
   const shortCodePatternsRE =
     /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)[^\]]*\]/g;
 
-  const updatedData = data.replace(shortCodePatternsRE, (match) => {
+  const updatedData = data?.replace(shortCodePatternsRE, (match) => {
     return `<h6 class="addClassData">${match}</h6>`;
   });
 

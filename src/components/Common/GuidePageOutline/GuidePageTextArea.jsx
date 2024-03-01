@@ -7,6 +7,7 @@ import Link from "next/link";
 
 function GuidePageTextArea({ guide }) {
   const [currentHeading, setCurrentHeading] = useState("");
+  // console.log(guide)
   // **************Here code for outline section *************************
   // add ids to matched text_part
   const content = guide?.text_third_part_main;

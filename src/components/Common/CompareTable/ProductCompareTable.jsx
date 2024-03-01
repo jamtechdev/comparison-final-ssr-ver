@@ -11,16 +11,15 @@ import Link from "next/link";
 import formatValue from "@/_helpers/formatValue";
 const ProductCompareTable = React.memo(
   ({ products, categoryAttributes, slug }) => {
-    // console.log(products,"neet");
-
     const router = useRouter();
-
-    const [winPos, setWinPos] = useState(false);
     let initialNoOfCategories = 5;
     const [pagination, setPagination] = useState({});
     const defaultNo = 5;
 
     const [fullTable, setFullTable] = useState(2);
+
+    // this for function for Table product sticky (Start)
+    const [winPos, setWinPos] = useState(false);
     const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
       const [isSticky, setIsSticky] = useState(false);
       const newRef = useRef();
@@ -41,6 +40,25 @@ const ProductCompareTable = React.memo(
 
       return [isSticky, ref, setIsSticky];
     };
+
+      if (typeof window !== "undefined") {
+        // Access the window object here
+        window.onscroll = function () {
+          var testDiv = document.getElementById("testone");
+          testDiv?.getBoundingClientRect().top < 2
+            ? setWinPos(true)
+            : setWinPos(false);
+          // console.log( testDiv.getBoundingClientRect().top);
+
+          var tbodyDiv = document.getElementById("tbody");
+          tbodyDiv?.getBoundingClientRect().top > 2
+            ? setWinPos(false)
+            : setWinPos(true);
+        };
+      }
+
+    const [isSticky, ref] = useDetectSticky();
+    // this for function for Table product sticky (End)
 
     const productsWithAttributeGroup = {};
     products?.forEach((product) => {
@@ -79,7 +97,8 @@ const ProductCompareTable = React.memo(
       setFullTable(categoryAttributes?.length);
     };
 
-    const [isSticky, ref] = useDetectSticky();
+    // These funcation for add  Star on table value which was better than other
+    // **start**
 
     const addAsterisksToTopValue = (defaultNo, category, catAttribute) => {
       const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
@@ -188,8 +207,6 @@ const ProductCompareTable = React.memo(
         </>
       );
     };
-    // console.log(finalProducts)
-
     // add startONTable
     const addStarOnTable = (defaultNo, type, values) => {
       // console.log(type);
@@ -222,6 +239,7 @@ const ProductCompareTable = React.memo(
       }
       return values;
     };
+    // **End**
 
     return (
       <div
@@ -265,18 +283,68 @@ const ProductCompareTable = React.memo(
                         sizes="100%"
                       />
                     </p>
-                    <ul className="best-list-item d-none">
-                      <li>
-                        <img
-                          src="/images/amazon.png"
-                          width={0}
-                          height={0}
-                          sizes="100%"
-                          alt=""
-                        />
-                        <span>155.87 €</span>
-                      </li>
-                    </ul>
+
+                    {product.price_websites &&
+                      product?.price_websites?.every(
+                        (data) => data.price !== null
+                      ) && (
+                        <>
+                          {" "}
+                          <>
+                            <ul className="best-list-item d-none">
+                              {" "}
+                              {product.price_websites &&
+                                product?.price_websites?.every(
+                                  (data) => data.price === null
+                                ) && (
+                                  <div className="not-availabel p-3">
+                                    <span className="txt">NOT AVAILABLE</span>
+                                    <span className="price">
+                                      ~ {product?.price} €
+                                    </span>
+                                  </div>
+                                )}
+                              {product.price_websites &&
+                                product.price_websites.map((data, dIndex) => {
+                                  return (
+                                    <React.Fragment key={dIndex}>
+                                      {data.price !== null && (
+                                        <li>
+                                          <>
+                                            <Link
+                                              rel="noopener noreferrer"
+                                              target="_blank"
+                                              href={`/link?p=${btoa(data.url)}`}
+                                            >
+                                              <img
+                                                src={data?.logo}
+                                                width={0}
+                                                height={0}
+                                                sizes="100vw"
+                                                alt="price"
+                                              />
+                                            </Link>
+                                            <span>
+                                              <a
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                                href={`/link?p=${btoa(
+                                                  data.url
+                                                )}`}
+                                              >
+                                                {data?.price} €
+                                              </a>
+                                            </span>
+                                          </>
+                                        </li>
+                                      )}
+                                    </React.Fragment>
+                                  );
+                                })}
+                            </ul>
+                          </>
+                        </>
+                      )}
                   </th>
                 );
               })}

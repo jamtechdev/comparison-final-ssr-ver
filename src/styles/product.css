@@ -139,7 +139,7 @@
   width: 12px;
   height: 12px;
   fill: var(--heading-color);
-  opacity: 70%;
+  /* opacity: 70%; */
 }
 .score-section .score-detail .query span:hover div.tooltip-display-content{
   display: block !important;

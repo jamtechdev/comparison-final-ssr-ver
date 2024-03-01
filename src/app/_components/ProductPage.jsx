@@ -183,7 +183,7 @@ function ProductPage({
                 {product?.overall_score}
               </span>
               <div className="score-detail ">
-                <div className="tooltip-title">
+                <div className="tooltip-title removeUnderlineFrom">
                   <p>
                     Overall Score
                     <span className="">
@@ -269,7 +269,7 @@ function ProductPage({
                 {product?.technical_score}
               </span>
               <div className="score-detail">
-                <div className="tooltip-title ">
+                <div className="tooltip-title removeUnderlineFrom ">
                   <p>
                     Technical Score
                     <span>
@@ -351,7 +351,7 @@ function ProductPage({
                 {product?.reviews}
               </span>
               <div className="score-detail">
-                <div className="tooltip-title">
+                <div className="tooltip-title removeUnderlineFrom">
                   <p>
                     User’s Rating{" "}
                     <span>
@@ -523,11 +523,11 @@ function ProductPage({
                 )}
               </div>
             </Col>
-            {/* {console.log(product?.available_colors && product?.available_colors)} */}
+
             {product?.available_colors?.length !== 0 && (
               <Col lg={12} md={12} xl={12}>
                 <div className="alternatives mt-4">
-                  <h6>Colors available:</h6>
+                  <span>Colors available:</span>
                   <Form className="color-section">
                     {product?.available_colors?.map((data, key) => {
                       return (
@@ -550,12 +550,13 @@ function ProductPage({
               </Col>
             )}
             {/* {console.log(product,"neet")} */}
+            {/* {console.log(product?.available_versions, "hllo")} */}
 
             {product?.available_versions &&
               product?.available_versions?.length !== 0 && (
                 <Col lg={12} md={12} xl={12}>
-                  <div className="alternatives mt-4">
-                    <h6>Available versions:</h6>
+                  <div className="alternatives mt-2">
+                    <span>Available versions:</span>
                     <Form className="color-section">
                       {product?.available_versions?.map((data, key) => {
                         return (
@@ -832,7 +833,7 @@ function ProductPage({
                               sizes="100%"
                               alt=""
                             />
-                            <span>{data?.guide_short_name}</span>
+                            <span>{data?.guide_name}</span>
                           </div>
                         );
                       })}
@@ -941,13 +942,14 @@ function ProductPage({
                 Comparing Samsung New VR Headset Oculus 2.0 with best robot
                 vacuum cleaners
               </h2>
-            </Col>
-            <Col md={12}>
               <ProductCompareTable
                 products={compareByCatID?.data}
                 categoryAttributes={productCatAttributes?.data}
                 slug={slug}
               />
+            </Col>
+            <Col md={12}>
+              
             </Col>
           </Row>
         </Container>

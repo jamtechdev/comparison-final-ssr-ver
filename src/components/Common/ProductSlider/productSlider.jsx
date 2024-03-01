@@ -1,6 +1,6 @@
 "use client";
-import { Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
@@ -69,7 +69,9 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
                         />
 
                         <div className="product-name-wrapper">
-                          <span>{section?.short_name}</span>
+                          <span>
+                            {section?.short_name || section?.guide_name}
+                          </span>
                         </div>
                       </div>
                     </Link>

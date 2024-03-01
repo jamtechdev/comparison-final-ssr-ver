@@ -270,11 +270,12 @@ select {
   justify-content: center;
   background: rgba(67, 126, 206, 0.1);
   border-radius: 50px;
+  cursor: help;
 }
 span.tooltip-title:hover .tooltip-display-content {
   display: block !important;
 }
-div.question-marker-icon{
+div.question-marker-icon {
   width: 16px;
   height: 16px;
   display: inline-flex;
@@ -286,10 +287,10 @@ div.question-marker-icon{
   margin: 0 5px;
 }
 .question-marker-icon svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   fill: var(--heading-color);
-  opacity: 70%;
+  /* opacity: 70%; */
 }
 
 input[type="checkbox"] {
@@ -1254,4 +1255,23 @@ a.outlineLink.outline-active {
 /* css for graph radio chart  */
 div#productGraph {
   margin-top: 50px;
+}
+.removeUnderlineFrom {
+  text-decoration: none !important;
+}
+.stickyPrice {
+  min-width: auto !important;
+  font-size: 15px;
+  line-height: 24px !important;
+  padding: 3px 10px !important;
+}
+
+.isSticky p.device-name:hover {
+  background-color: var(--heading-color);
+}
+.compare-container .isSticky tr th:not(:first-child):hover {
+  background: #f4f7fb !important;
+}
+.compare-container .isSticky tr th:not(:first-child):hover .device-name a {
+  color: var(--heading-color) !important;
 }
