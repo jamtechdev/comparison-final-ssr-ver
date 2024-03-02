@@ -695,18 +695,16 @@ export default function Product({
                     <Form className="color-section">
                       {product?.available_colors?.map((data, key) => {
                         return (
-                          <>
-                            <div className="color-item">
-                              <Form.Check
-                                inline
-                                label={data?.color}
-                                name="color"
-                                type="radio"
-                                defaultChecked={key === 0}
-                                id={`inline-${data?.color}-${key}`}
-                              />
-                            </div>
-                          </>
+                          <div className="color-item" key={key}>
+                            <Form.Check
+                              inline
+                              label={data?.color}
+                              name="color"
+                              type="radio"
+                              defaultChecked={key === 0}
+                              id={`inline-${data?.color}-${key}`}
+                            />
+                          </div>
                         );
                       })}
                     </Form>
