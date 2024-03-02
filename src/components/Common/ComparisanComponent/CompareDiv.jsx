@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Col,
   Container,
@@ -34,6 +34,7 @@ import ReviewSlider from "../ReviewSlider/reviewSlider";
 import { searchForPatternAndReplace } from "@/hooks/useChart";
 import OutlineGenerator from "../OutlineGenerator/OutlineGenerator";
 import ProductSliderBlog from "../ProductSliderBlog/ProductSliderBlog";
+import ComparisionOutlineGenerator from "../OutlineGenerator/ComparisionOutlineGenerator";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -58,6 +59,8 @@ function CompareDiv({
   const [otherPermalinks, setOtherPermalinks] = useState([]);
   // best alternative state
   const [bestAlternative, setBestAlternative] = useState([]);
+  const [activeOutlineId, setActiveOutlineId] = useState("");
+  const contentRef = useRef(null);
 
   const router = useRouter();
 
@@ -152,19 +155,66 @@ function CompareDiv({
       });
   }, []);
 
-  // For Text area we find h2,h3,h4,h5,h6 tag than give it id
-  const content = bestAlternative?.text_part;
-  // Regular expression to match h1, h2, and h3 tags
-  const headingRegex = /<h([1-6])>(.*?)<\/h[1-6]>/g;
-  // Function to add IDs to matched tags
-  const addIds = (match, tag, content) => {
-    const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
-    return `<h${tag} id="${id}" >${content}</h${tag}>`;
-  };
-  // Replace the matched tags with IDs
-  const modifiedContent = content?.replace(headingRegex, addIds);
+  // This code for text part and outline
+  useEffect(() => {
+    const handleScroll = () => {
+      const headings = contentRef.current.querySelectorAll(
+        "h1, h2, h3, h4, h5, h6"
+      );
 
-  // console.log(modifiedContent, "neet");
+      let closestHeading = null;
+      let closestDistance = Number.MAX_VALUE;
+
+      headings.forEach((heading) => {
+        const bounding = heading.getBoundingClientRect();
+        const distanceToTop = bounding.top;
+
+        if (distanceToTop >= 0 && distanceToTop < closestDistance) {
+          closestHeading = heading;
+          closestDistance = distanceToTop;
+        }
+      });
+
+      if (closestHeading) {
+        setActiveOutlineId(closestHeading.id);
+      }
+
+      const shortCodeText = document.getElementById("shortCodeText");
+      if (shortCodeText) {
+        const shortCodeTextBounding = shortCodeText.getBoundingClientRect();
+        if (
+          shortCodeTextBounding.top >= 0 &&
+          shortCodeTextBounding.bottom <= window.innerHeight
+        ) {
+          setActiveOutlineId("shortCodeText");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const addIdsToHeadings = (content) => {
+    const headings = content?.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
+
+    headings.forEach((heading) => {
+      const id = heading
+        .replace(/<\/?[^>]+(>|$)/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+      const newHeading = heading.replace(">", ` id="${id}">`);
+      content = content.replace(heading, newHeading);
+    });
+
+    return content;
+  };
+  const contentWithIds = addIdsToHeadings(bestAlternative?.text_part);
+
+  // console.log(bestAlternative, "neet");
 
   return (
     <>
@@ -256,98 +306,64 @@ function CompareDiv({
           />
         </Container>
       </section>
-      {/* {console.log(bestAlternative?.text_part)} */}
-      {bestAlternative?.text_part !== null ||
-        (bestAlternative?.text_part !== undefined && (
-          <section className="contentSec my-3">
-            <Container>
-              <div className="custom-row">
-                <div className="left-side-bar">
-                  <div className="outline-section">
-                    <p>Outline</p>
-                    <OutlineGenerator
-                      // currentIndexId={currentHeading}
+      {/* {console.log(modifiedContent)} */}
+      {bestAlternative && bestAlternative?.text_part !== null && (
+        <section className="contentSec my-3">
+          <Container>
+            <div className="custom-row">
+              <div className="left-side-bar">
+                <div className="outline-section">
+                  <p>Outline</p>
+                  {bestAlternative?.text_part && (
+                    <ComparisionOutlineGenerator
+                      currentIndexId={activeOutlineId}
                       blogData={bestAlternative?.text_part}
                     />
-                    {/* <ol>
-                  <li>Overall</li>
-                  <li>Technical</li>
-                  <li>VS Average</li>
-                  <li className="outline-active">
-                    Review
-                    <ol>
-                      <li>Subtile</li>
-                      <li>Subtile</li>
-                    </ol>
-                  </li>
-                  <li>Pros/Cons</li>
-                </ol> */}
-                  </div>
-                </div>
-                <div className="center-section ">
-                  <div
-                    id="shortCodeText"
-                    className="content-para mt-1"
-                    dangerouslySetInnerHTML={{
-                      __html: searchForPatternAndReplace(modifiedContent),
-                    }}
-                  />
-                  <div className="social-icon items-icon">
-                    <div className="twitter">
-                      <i className="ri-twitter-fill"></i>
-                    </div>
-                    <div className="facebook">
-                      <i className="ri-facebook-fill"></i>
-                    </div>
-                    <div className="printerest">
-                      <i className="ri-pinterest-fill"></i>
-                    </div>
-                    <div className="linkedIn">
-                      <i className="ri-linkedin-fill"></i>
-                    </div>
-                  </div>
-                  {/* <div className="fonzi p-3 my-md-4 my-xs-0">
-                <div className="profile mb-2">
-                  <div className="avatar">
-                    <img
-                      src={
-                        blogData[0]?.data?.author?.image
-                          ? blogData[0]?.data?.author?.image
-                          : "/images/user.png"
-                      }
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      alt=""
-                    />
-                  </div>
-                  <div className="label">
-                    <Link href={`/author/${blogData[0]?.data?.author?.id}`}>
-                      <p className="name">{blogData[0]?.data?.author?.name}</p>
-                    </Link>
-                    <p>{blogData[0]?.data?.author?.summary}</p>
-                  </div>
-                </div>
-              </div> */}
-                </div>
-                <div className="mobile-hide right-side-bar productSlider-Container">
-                  <Row className="mt-3">
-                    <Col md={12}>
-                      <div className="heading-primary secondary mb-2">
-                        Related Guides
-                      </div>
-                    </Col>
-                    <Col md={12}>
-                      <ProductSliderBlog
-                        favSlider={bestAlternative?.related_guides}
-                      />
-                    </Col>
-                  </Row>
+                  )}
                 </div>
               </div>
-            </Container>
-          </section>
-        ))}
+              <div className="center-section ">
+                <div
+                  id="shortCodeText"
+                  ref={contentRef}
+                  className="content-para mt-1"
+                  dangerouslySetInnerHTML={{
+                    __html: searchForPatternAndReplace(contentWithIds),
+                  }}
+                />
+                <div className="social-icon items-icon">
+                  <div className="twitter">
+                    <i className="ri-twitter-fill"></i>
+                  </div>
+                  <div className="facebook">
+                    <i className="ri-facebook-fill"></i>
+                  </div>
+                  <div className="printerest">
+                    <i className="ri-pinterest-fill"></i>
+                  </div>
+                  <div className="linkedIn">
+                    <i className="ri-linkedin-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <div className="mobile-hide right-side-bar productSlider-Container">
+                <Row className="mt-3">
+                  <Col md={12}>
+                    <div className="heading-primary secondary mb-2">
+                      Related Guides
+                    </div>
+                  </Col>
+                  <Col md={12}>
+                    <ProductSliderBlog
+                      favSlider={bestAlternative?.related_guides}
+                    />
+                  </Col>
+                </Row>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
 
       <section className="ptb-80 bg-color">
         <Container>

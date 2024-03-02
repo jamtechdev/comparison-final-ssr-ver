@@ -18,14 +18,10 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
   // console.log(selectedAttribute)
 
   useEffect(() => {
-    const containerDivs = document.getElementsByClassName("container-div");
-    // setSelectedItem(attributeDropDown[0] || null);
-    // setSelectedAttribute(
-    //   (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
-    // );
-    // console.log(containerDivs.length>1)
-    if (containerDivs.length) {
-      containerDivs[0].remove();
+    const containerDivs = document.querySelectorAll(".container-div");
+    if (containerDivs.length > 1) {
+      const elementsToRemove = Array.from(containerDivs).slice(1);
+      elementsToRemove.forEach((element) => element.remove());
     }
   });
 
@@ -71,7 +67,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
     setSelectedAttribute(selectedAttribute);
   };
 
-  useComparisonChart(chart , pageType);
+  useComparisonChart(chart, pageType);
   return (
     <>
       <section className="ptb-80">

@@ -1,6 +1,6 @@
 "use client";
 import { GetCompareId } from "@/components/Product/GetCompareId.jsx";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import {
   Row,
   Button,
@@ -25,6 +25,7 @@ import ComparisonsSlider from "@/components/Common/ComparisonsSlider/comparisons
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 import CompareForm from "@/components/Common/Comparison/CompareForm";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
+import { searchForPatternAndReplace } from "@/hooks/useChart";
 
 // import Link from "next/link";
 
@@ -35,6 +36,9 @@ function ProductPage({
   slug,
   categorySlug,
 }) {
+  const [activeOutlineId, setActiveOutlineId] = useState("");
+  const contentRef = useRef(null);
+
   let initialDisplay = 5;
   const productsWithAttributeGroup = {};
   const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
@@ -115,6 +119,72 @@ function ProductPage({
   const setShowFullPrice = () => {
     showFullPrice = !setShowFullPrice;
   };
+
+  // available version
+  const [selectedItem, setSelectedItem] = useState(0);
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
+  };
+
+  // This code for text part and outline
+  useEffect(() => {
+    const handleScroll = () => {
+      const headings = contentRef.current.querySelectorAll(
+        "h1, h2, h3, h4, h5, h6"
+      );
+
+      let closestHeading = null;
+      let closestDistance = Number.MAX_VALUE;
+
+      headings.forEach((heading) => {
+        const bounding = heading.getBoundingClientRect();
+        const distanceToTop = bounding.top;
+
+        if (distanceToTop >= 0 && distanceToTop < closestDistance) {
+          closestHeading = heading;
+          closestDistance = distanceToTop;
+        }
+      });
+
+      if (closestHeading) {
+        setActiveOutlineId(closestHeading.id);
+      }
+
+      const shortCodeText = document.getElementById("shortCodeText");
+      if (shortCodeText) {
+        const shortCodeTextBounding = shortCodeText.getBoundingClientRect();
+        if (
+          shortCodeTextBounding.top >= 0 &&
+          shortCodeTextBounding.bottom <= window.innerHeight
+        ) {
+          setActiveOutlineId("shortCodeText");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const addIdsToHeadings = (content) => {
+    const headings = content.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
+
+    headings.forEach((heading) => {
+      const id = heading
+        .replace(/<\/?[^>]+(>|$)/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+      const newHeading = heading.replace(">", ` id="${id}">`);
+      content = content.replace(heading, newHeading);
+    });
+
+    return content;
+  };
+  const contentWithIds = addIdsToHeadings(product?.text_part);
 
   return (
     <>
@@ -567,8 +637,13 @@ function ProductPage({
                                 style={{
                                   listStyleType: "none",
                                   width: "auto",
-                                  padding: "3px 5px",
+                                  padding: "0px 5px",
                                 }}
+                                className={`color-item ${
+                                  selectedItem === key ? "selected" : ""
+                                }`}
+                                key={key}
+                                onClick={() => handleItemClick(key)}
                               >
                                 {" "}
                                 <Link
@@ -714,7 +789,10 @@ function ProductPage({
                 <Col md={4} lg={2}>
                   <div className="outline-section">
                     <p>Outline</p>
-                    <OutlineGenerator blogData={product?.text_part} />
+                    <OutlineGenerator
+                      blogData={product?.text_part}
+                      currentIndexId={activeOutlineId}
+                    />
                     {/* <ol>
                   <li>Overall</li>
                   <li>Technical</li>
@@ -733,8 +811,11 @@ function ProductPage({
                 <Col md={8} lg={8}>
                   <div
                     id="shortCodeText"
+                    ref={contentRef}
                     className="review-content"
-                    dangerouslySetInnerHTML={{ __html: product?.text_part }}
+                    dangerouslySetInnerHTML={{
+                      __html: searchForPatternAndReplace(contentWithIds),
+                    }}
                   />
                   <Row className="mt-3">
                     <Col md={12} lg={6}>

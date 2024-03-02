@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import debounce from "lodash.debounce";
 
-function OutlineGenerator({ blogData, currentIndexId }) {
+function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
   const [outline, setOutline] = useState([]);
   const [activeParentIndex, setActiveParentIndex] = useState(null);
   const debouncedScrollHandler = useRef(null);
@@ -37,7 +37,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
     let currentSubSubMain = null;
 
     headings?.forEach((heading) => {
-      const id = heading.getAttribute("id");
+      const id = heading.getAttribute("id");  
 
       if (heading.tagName === "H2") {
         currentMain = {
@@ -184,4 +184,4 @@ function OutlineGenerator({ blogData, currentIndexId }) {
   );
 }
 
-export default OutlineGenerator;
+export default ComparisionOutlineGenerator;

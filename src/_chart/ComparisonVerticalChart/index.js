@@ -54,11 +54,13 @@ function ComparisonVerticalChart(props) {
     .attr("height", (d) => height - yScale(d.value))
     .style("fill", (d, i) => {
       if (d.selected === 1 && i === fristIndex) {
-        return "#rgb(67, 126, 206)";
+        return "rgb(67, 126, 206)";
       } else if (d.selected === 1 && i === secondIndex) {
         return "#FF8F0B";
       } else if (d.selected === 1 && i === thirdIndex) {
         return "";
+      } else if (d.selected === 2) {
+        return i === fristIndex ? "#437ece" : "#FF8F0B";
       } else {
         return ""; // or any other default color
       }
@@ -87,10 +89,9 @@ function ComparisonVerticalChart(props) {
     .append("rect")
     .attr("class", classnames(["bar-chart__bar rect-hover", barClass]))
     .attr("x", (d) => xScale(d.label))
-    //   .attr("width", (d) =>
-    //   d.productCount > 1 ? xScale.bandwidth() / 2 : xScale.bandwidth()
-    // )
-    .attr("width", (d) => xScale.bandwidth())
+    .attr("width", (d) =>
+      d.selected === 2 ? xScale.bandwidth() / 2 : xScale.bandwidth()
+    )
     .attr("y", (d) => yScale(d.value))
     .attr("height", (d) => height - yScale(d.value))
     .style("fill", (d, i) => {
@@ -100,8 +101,10 @@ function ComparisonVerticalChart(props) {
         return "#FF8F0B";
       } else if (d.selected === 1 && i === thirdIndex) {
         return "";
+      } else if (d.selected === 2) {
+        return i === fristIndex ? "#FF8F0B" : "#437ece";
       } else {
-        return "";
+        return ""; // or any other default color
       }
     })
     .on("mouseover", (e, data) => {

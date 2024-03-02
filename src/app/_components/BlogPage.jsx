@@ -8,59 +8,60 @@ import ProductSliderBlog from "@/components/Common/ProductSliderBlog/ProductSlid
 import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
-export default function BlogPage({ slug, blogData, categorySlug }) {
-  const [currentHeading, setCurrentHeading] = useState("");
-  // //  *******This part of code extract h1,h2,h3 from text_part and add ids to them*************
-  const content = blogData[0]?.data?.text_part;
-  // Regular expression to match h1, h2, and h3 tags
-  const headingRegex = /<h([1-6])>(.*?)<\/h[1-6]>/g;
-  // Function to add IDs to matched tags
-  const addIds = (match, tag, content) => {
-    const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
-    return `<h${tag} id="${id}" >${content}</h${tag}>`;
-  };
-  // Replace the matched tags with IDs
-  const modifiedContent = content.replace(headingRegex, addIds);
-  // console.log(blogData[0])
+import debounce from "lodash/debounce";
 
+export default function BlogPage({ slug, blogData, categorySlug }) {
+  // console.log(blogData[0]?.data?.text_part);
+  const [activeOutlineId, setActiveOutlineId] = useState("");
   const contentRef = useRef(null);
+  const lastHeadingIdRef = useRef(null);
 
   useEffect(() => {
-    let lastHeadingId = null; // Variable to store the ID of the last heading that entered the viewport
+    const handleScroll = () => {
+      const headings = contentRef.current.querySelectorAll(
+        "h1, h2, h3, h4, h5, h6"
+      );
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const heading = entry.target;
-            lastHeadingId = heading.id; // Update the lastHeadingId variable
-          }
-        });
+      let closestHeading = null;
+      let closestDistance = Number.MAX_VALUE;
 
-        // Update the currentHeading state with the last heading ID
-        if (lastHeadingId !== null && lastHeadingId !== currentHeading) {
-          setCurrentHeading(lastHeadingId);
+      headings.forEach((heading) => {
+        const bounding = heading.getBoundingClientRect();
+        const distanceToTop = bounding.top;
+
+        if (distanceToTop >= 0 && distanceToTop < closestDistance) {
+          closestHeading = heading;
+          closestDistance = distanceToTop;
         }
-      },
-      { threshold: 0.5 }
-    );
+      });
 
-    const headings = contentRef.current.querySelectorAll(
-      "h1, h2, h3, h4, h5, h6"
-    );
+      if (closestHeading) {
+        setActiveOutlineId(closestHeading.id);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const addIdsToHeadings = (content) => {
+    const headings = content.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
+
     headings.forEach((heading) => {
-      observer.observe(heading);
+      const id = heading
+        .replace(/<\/?[^>]+(>|$)/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+      const newHeading = heading.replace(">", ` id="${id}">`);
+      content = content.replace(heading, newHeading);
     });
 
-    return () => {
-      headings.forEach((heading) => {
-        observer.unobserve(heading);
-      });
-    };
-  }, [currentHeading]);
-
-  // Include currentHeading in the dependency array
-
+    return content;
+  };
+  const contentWithIds = addIdsToHeadings(blogData[0]?.data?.text_part);
+  // console.log(contentWithIds);
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
@@ -121,8 +122,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
               <div className="outline-section">
                 <p>Outline</p>
                 <OutlineGenerator
-                  currentIndexId={currentHeading}
-                  blogData={blogData[0]?.data?.text_part}
+                  currentIndexId={activeOutlineId}
+                  blogData={contentWithIds}
                 />
                 {/* <ol>
                   <li>Overall</li>
@@ -145,7 +146,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 ref={contentRef}
                 className="content-para mt-1"
                 dangerouslySetInnerHTML={{
-                  __html: searchForPatternAndReplace(modifiedContent),
+                  __html: searchForPatternAndReplace(contentWithIds),
                 }}
               />
               <div className="social-icon items-icon">

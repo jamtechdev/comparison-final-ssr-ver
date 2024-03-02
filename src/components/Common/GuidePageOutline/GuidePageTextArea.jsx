@@ -6,55 +6,66 @@ import { searchForPatternAndReplace } from "@/hooks/useChart";
 import Link from "next/link";
 
 function GuidePageTextArea({ guide }) {
-  const [currentHeading, setCurrentHeading] = useState("");
-  // console.log(guide)
-  // **************Here code for outline section *************************
-  // add ids to matched text_part
-  const content = guide?.text_third_part_main;
-  // Regular expression to match h1, h2, and h3 tags
-  const headingRegex = /<h([1-6])>(.*?)<\/h[1-6]>/g;
-  // Function to add IDs to matched tags
-  const addIds = (match, tag, content) => {
-    const id = content.toLowerCase().replace(/\s+/g, "-"); // Generate ID from content
-    return `<h${tag} id="${id}" >${content}</h${tag}>`;
-  };
-  // Replace the matched tags with IDs
-  const modifiedContent = content.replace(headingRegex, addIds);
-  // console.log(modifiedContent);
-  // console.log(blogData[0])
-
+  const [activeOutlineId, setActiveOutlineId] = useState("");
   const contentRef = useRef(null);
-
+  // This code for text part and outline
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // console.log(entries?.length);
-        entries.forEach((entry) => {
-        //   console.log(entry?.isIntersecting);
-          //   if (entry.isIntersecting) {
-          //     const heading = entry.target;
-          //     const headingId = heading.id;
-          //     setCurrentHeading(headingId);
-          //   }
-        });
-      },
-      { threshold: 0.5 }
-    );
+    const handleScroll = () => {
+      const headings = contentRef.current.querySelectorAll(
+        "h1, h2, h3, h4, h5, h6"
+      );
 
-    const headings = contentRef.current.querySelectorAll(
-      "h1, h2, h3, h4, h5, h6"
-    );
+      let closestHeading = null;
+      let closestDistance = Number.MAX_VALUE;
+
+      headings.forEach((heading) => {
+        const bounding = heading.getBoundingClientRect();
+        const distanceToTop = bounding.top;
+
+        if (distanceToTop >= 0 && distanceToTop < closestDistance) {
+          closestHeading = heading;
+          closestDistance = distanceToTop;
+        }
+      });
+
+      if (closestHeading) {
+        setActiveOutlineId(closestHeading.id);
+      }
+
+      const shortCodeText = document.getElementById("shortCodeText");
+      if (shortCodeText) {
+        const shortCodeTextBounding = shortCodeText.getBoundingClientRect();
+        if (
+          shortCodeTextBounding.top >= 0 &&
+          shortCodeTextBounding.bottom <= window.innerHeight
+        ) {
+          setActiveOutlineId("shortCodeText");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const addIdsToHeadings = (content) => {
+    const headings = content.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
+
     headings.forEach((heading) => {
-      // console.log(heading)
-      observer.observe(heading);
+      const id = heading
+        .replace(/<\/?[^>]+(>|$)/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+      const newHeading = heading.replace(">", ` id="${id}">`);
+      content = content.replace(heading, newHeading);
     });
 
-    return () => {
-      observer.disconnect();
-    };
-  }, [currentHeading]); // Ensure this effect runs only once, adjust dependencies if needed
-  // Ensure this effect runs only once, you can adjust dependencies if needed
-  // console.log(currentHeading);
+    return content;
+  };
+  const contentWithIds = addIdsToHeadings(guide?.text_third_part_main);
   return (
     <>
       <Row className="mt-3">
@@ -62,7 +73,7 @@ function GuidePageTextArea({ guide }) {
           <div className="outline-section">
             <p>Outline</p>
             <OutlineGenerator
-              currentIndexId={currentHeading}
+              currentIndexId={activeOutlineId}
               blogData={guide?.text_third_part_main}
             />
           </div>
@@ -74,7 +85,7 @@ function GuidePageTextArea({ guide }) {
             ref={contentRef}
             className="content-para mt-1"
             dangerouslySetInnerHTML={{
-              __html: searchForPatternAndReplace(modifiedContent),
+              __html: searchForPatternAndReplace(contentWithIds),
             }}
           />
           <br />
