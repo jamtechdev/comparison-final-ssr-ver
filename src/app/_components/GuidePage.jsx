@@ -298,7 +298,7 @@ export default function GuidePage({
               return (
                 <Col className="p-2" md={6} lg={3} sm={6} xs={6} key={index}>
                   <div className="hero-card-content">
-                    <span className="count">{item.count}</span>
+                    <span className="counts">{item.count}</span>
                     <span className="card-heading">{item.heading}</span>
                   </div>
                 </Col>
