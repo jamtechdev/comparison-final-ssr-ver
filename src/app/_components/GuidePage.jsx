@@ -340,7 +340,7 @@ export default function GuidePage({
               </Row>
             )} */}
           {guideData[0]?.data?.show_catchy_titles_in_text === 1 &&
-            guideData[0]?.data?.catchy_titles_box_title?.length !== 0 && (
+            guideData[0]?.data?.catchy_titles?.length > 0 && (
               <Row className="catchy_titles_section mb-3">
                 <Col md={7} className="mx-auto p-0">
                   <p>
@@ -362,6 +362,7 @@ export default function GuidePage({
                 </Col>
               </Row>
             )}
+
           <Row>
             <Col md={12}>
               <div

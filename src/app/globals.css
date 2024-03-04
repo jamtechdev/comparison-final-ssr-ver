@@ -1279,3 +1279,6 @@ div#productGraph {
   border: 1px solid var(--secondary-color);
   border-radius: 6px;
 }
+li.color-item.selected {
+  border: 1px solid var(--secondary-color);
+}

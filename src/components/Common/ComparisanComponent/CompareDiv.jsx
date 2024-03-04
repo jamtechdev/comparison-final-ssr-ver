@@ -158,14 +158,14 @@ function CompareDiv({
   // This code for text part and outline
   useEffect(() => {
     const handleScroll = () => {
-      const headings = contentRef.current.querySelectorAll(
+      const headings = contentRef.current?.querySelectorAll(
         "h1, h2, h3, h4, h5, h6"
       );
 
       let closestHeading = null;
       let closestDistance = Number.MAX_VALUE;
 
-      headings.forEach((heading) => {
+      headings?.forEach((heading) => {
         const bounding = heading.getBoundingClientRect();
         const distanceToTop = bounding.top;
 
@@ -212,7 +212,15 @@ function CompareDiv({
 
     return content;
   };
-  const contentWithIds = addIdsToHeadings(bestAlternative?.text_part);
+
+  let contentWithIds;
+  if (bestAlternative?.text_part) {
+    contentWithIds = addIdsToHeadings(bestAlternative.text_part);
+  } else {
+    // Handle the case where bestAlternative.text_part is undefined
+    contentWithIds = "";
+  }
+  // const contentWithIds = addIdsToHeadings(bestAlternative?.text_part);
 
   // console.log(bestAlternative, "neet");
 
@@ -306,7 +314,7 @@ function CompareDiv({
           />
         </Container>
       </section>
-      {/* {console.log(modifiedContent)} */}
+      {/* {console.log(bestAlternative?.text_part)} */}
       {bestAlternative && bestAlternative?.text_part !== null && (
         <section className="contentSec my-3">
           <Container>
@@ -364,75 +372,84 @@ function CompareDiv({
           </Container>
         </section>
       )}
+      {/* {console.log(bestAlternative?.should_buy_product_one)} */}
+      {bestAlternative &&
+        bestAlternative?.should_buy_product_one?.length > 0 && (
+          <section className="ptb-80 bg-color">
+            <Container>
+              <Row>
+                <Col md={12}>
+                  <h2 className="site-main-heading">
+                    Should You Buy {compareProDataFirst?.name} or{" "}
+                    {compareProDataSec?.name}{" "}
+                    {compareProDataThird?.name &&
+                      `or ${compareProDataThird?.name}`}
+                  </h2>
+                </Col>
+                <Col md={6}>
+                  <div className="pros-corns-section pros">
+                    <div className="pros-header">
+                      Who SHOULD BUY {compareProDataFirst?.name}?
+                    </div>
+                    {bestAlternative?.should_buy_product_one?.length === 0 && (
+                      <h3 className="no-data text-center mt-2">
+                        No data Found
+                      </h3>
+                    )}
+                    {/* {console.log(product?.should_not_buy)} */}
+                    <ul>
+                      {bestAlternative &&
+                        bestAlternative?.should_buy_product_one?.map(
+                          (item, index) => {
+                            return (
+                              <>
+                                <li
+                                  key={index}
+                                  style={{ color: "rgba(39, 48, 78, 0.7)" }}
+                                >
+                                  {item}
+                                </li>
+                              </>
+                            );
+                          }
+                        )}
+                    </ul>
+                  </div>
+                </Col>
+                <Col md={6}>
+                  <div className="pros-corns-section corns">
+                    <div className="pros-header">
+                      Who SHOULD NOT BUY {compareProDataSec?.name} ?
+                    </div>
+                    {bestAlternative?.should_buy_product_two?.length === 0 && (
+                      <h3 className="no-data text-center mt-2">
+                        No data Found
+                      </h3>
+                    )}
+                    <ul className="cross">
+                      {bestAlternative &&
+                        bestAlternative?.should_buy_product_two?.map(
+                          (item, index) => {
+                            return (
+                              <>
+                                <li
+                                  key={index}
+                                  style={{ color: "rgba(39, 48, 78, 0.7)" }}
+                                >
+                                  {item}
+                                </li>
+                              </>
+                            );
+                          }
+                        )}
+                    </ul>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </section>
+        )}
 
-      <section className="ptb-80 bg-color">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                Should You Buy {compareProDataFirst?.name} or{" "}
-                {compareProDataSec?.name}{" "}
-                {compareProDataThird?.name && `or ${compareProDataThird?.name}`}
-              </h2>
-            </Col>
-            <Col md={6}>
-              <div className="pros-corns-section pros">
-                <div className="pros-header">
-                  Who SHOULD BUY {compareProDataFirst?.name}?
-                </div>
-                {bestAlternative?.should_buy_product_one?.length === 0 && (
-                  <h3 className="no-data text-center mt-2">No data Found</h3>
-                )}
-                {/* {console.log(product?.should_not_buy)} */}
-                <ul>
-                  {bestAlternative &&
-                    bestAlternative?.should_buy_product_one?.map(
-                      (item, index) => {
-                        return (
-                          <>
-                            <li
-                              key={index}
-                              style={{ color: "rgba(39, 48, 78, 0.7)" }}
-                            >
-                              {item}
-                            </li>
-                          </>
-                        );
-                      }
-                    )}
-                </ul>
-              </div>
-            </Col>
-            <Col md={6}>
-              <div className="pros-corns-section corns">
-                <div className="pros-header">
-                  Who SHOULD NOT BUY {compareProDataSec?.name} ?
-                </div>
-                {bestAlternative?.should_buy_product_two?.length === 0 && (
-                  <h3 className="no-data text-center mt-2">No data Found</h3>
-                )}
-                <ul className="cross">
-                  {bestAlternative &&
-                    bestAlternative?.should_buy_product_two?.map(
-                      (item, index) => {
-                        return (
-                          <>
-                            <li
-                              key={index}
-                              style={{ color: "rgba(39, 48, 78, 0.7)" }}
-                            >
-                              {item}
-                            </li>
-                          </>
-                        );
-                      }
-                    )}
-                </ul>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
       <section className="ptb-80">
         <Container>
           <Row>

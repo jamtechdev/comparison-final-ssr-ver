@@ -178,7 +178,7 @@ function Radar({ data, activeTab }) {
         .attr("fill", () =>
           data?.length > 2
             ? i === 0
-              ? "#fff"
+              ? "#437ECE"
               : i === 1
               ? "#FF8F0B"
               : "#28A28C"

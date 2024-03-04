@@ -630,6 +630,7 @@ function ProductPage({
                     <span>Available versions:</span>
                     <di className="color-section">
                       {product?.available_versions?.map((data, key) => {
+                        const isCurrentVersion = data.permalink === slug;
                         return (
                           <>
                             <div className="color-item" key={key}>
@@ -638,21 +639,37 @@ function ProductPage({
                                   listStyleType: "none",
                                   width: "auto",
                                   padding: "0px 5px",
+
+                                  border: isCurrentVersion
+                                    ? "1px solid red"
+                                    : "none",
+                                  cursor: isCurrentVersion
+                                    ? "default"
+                                    : "pointer",
                                 }}
                                 className={`color-item ${
                                   selectedItem === key ? "selected" : ""
                                 }`}
                                 key={key}
-                                onClick={() => handleItemClick(key)}
+                                onClick={() =>
+                                  !isCurrentVersion && handleItemClick(key)
+                                }
                               >
                                 {" "}
-                                <Link
-                                  href={`/${data?.category_url}/${data?.permalink}`}
+                                {/* <Link
+                                  href={
+                                    isCurrentVersion
+                                      ? "#"
+                                      : `/${data?.category_url}/${data?.permalink}`
+                                  }
                                   style={{ color: "#437ed0" }}
+                                  onClick={(e) =>
+                                    isCurrentVersion && e.preventDefault()
+                                  }
                                 >
                                   {" "}
                                   {data?.short_name}
-                                </Link>{" "}
+                                </Link>{" "} */}
                               </li>
                               {/* <Form.Check
                                 inline
