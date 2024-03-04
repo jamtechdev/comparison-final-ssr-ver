@@ -143,7 +143,7 @@
 
 .compare-container thead tr th:not(:first-child):hover .device-name span,
 .compare-container thead tr th:not(:first-child):hover .device-name {
-  color: var(--white-color) !important;
+  /* color: var(--white-color) !important; */
 }
 
 .compare-container thead tr th .device-name {
