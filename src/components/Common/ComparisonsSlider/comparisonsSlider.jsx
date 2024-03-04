@@ -4,9 +4,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ComparisonsSlider(products) {
-  console.log(products?.products);
+  const router = useRouter();
+  // console.log(products?.products);
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -97,73 +99,79 @@ export default function ComparisonsSlider(products) {
         }}
         className="product-slider"
       >
-        {products&&products?.products?.map(function (item, index) {
-          return (
-            <SwiperSlide key={index}>
-              <div className="comparisons-wrapper">
-                <div className="comparisons-container">
-               
-                  <div className="comparisons-card">
-                    <Image
-                      src={
-                        item?.product_first_image
-                          ? item?.product_first_image
-                          : "/images/nofound.png"
-                      }
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      alt=""
-                    />
-                    <div className="footer_content">
-                      <span>{item?.product_first}</span>
+        {products &&
+          products?.products?.map(function (item, index) {
+            return (
+              <SwiperSlide key={index}>
+                <div
+                  className="comparisons-wrapper"
+                  onClick={() =>
+                    router.push(`/${item?.category_url}/${item?.permalink}`)
+                  }
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="comparisons-container">
+                    <div className="comparisons-card">
+                      <Image
+                        src={
+                          item?.product_first_image
+                            ? item?.product_first_image
+                            : "/images/nofound.png"
+                        }
+                        width={0}
+                        height={0}
+                        sizes="100%"
+                        alt=""
+                      />
+                      <div className="footer_content">
+                        <span>{item?.product_first}</span>
+                      </div>
+                      <span
+                        className="rating_count"
+                        style={{
+                          background: getColorBasedOnScore(
+                            item?.product_first_overall_counted_score
+                          ),
+                        }}
+                      >
+                        {item?.product_first_overall_counted_score}
+                      </span>
                     </div>
-                    <span
-                      className="rating_count"
-                      style={{
-                        background: getColorBasedOnScore(
-                          item?.product_first_overall_counted_score
-                        ),
-                      }}
-                    >
-                      {item?.product_first_overall_counted_score}
-                    </span>
-                  </div>
-                  <div className="vs-divider">
-                    <span>VS</span>
-                  </div>
-                  <div className="comparisons-card">
-                    <Image
-                      src={
-                        item?.product_second_image
-                          ? item?.product_second_image
-                          : "/images/nofound.png"
-                      }
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      alt=""
-                    />
-                    <div className="footer_content">
-                      <span>{item?.product_second}</span>
+                    <div className="vs-divider">
+                      <span>VS</span>
                     </div>
-                    <span
-                      className="rating_count"
-                      style={{
-                        background: getColorBasedOnScore(
-                          item?.product_second_overall_counted_score
-                        ),
-                      }}
-                    >
-                      {item?.product_second_overall_counted_score}
-                    </span>
+                    <div className="comparisons-card">
+                      <Image
+                        src={
+                          item?.product_second_image
+                            ? item?.product_second_image
+                            : "/images/nofound.png"
+                        }
+                        width={0}
+                        height={0}
+                        sizes="100%"
+                        alt=""
+                      />
+                      <div className="footer_content">
+                        <span>{item?.product_second}</span>
+                      </div>
+                      <span
+                        className="rating_count"
+                        style={{
+                          background: getColorBasedOnScore(
+                            item?.product_second_overall_counted_score
+                          ),
+                        }}
+                      >
+                        {item?.product_second_overall_counted_score}
+                      </span>
+                    </div>
+                    <div className="comparisons-footer">{item?.category}</div>
                   </div>
-                  <div className="comparisons-footer">{item?.category}</div>
                 </div>
-              </div>
-            </SwiperSlide>
-          );
-        })}
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
       <span className="swiper-prev">
         <i className="ri-arrow-left-s-line"></i>

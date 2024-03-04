@@ -66,7 +66,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
     const selectedAttribute = selectedItem.attributes[selectedAttributeIndex];
     setSelectedAttribute(selectedAttribute);
   };
-  // testing 
+  // testing
 
   useComparisonChart(chart, pageType);
   return (

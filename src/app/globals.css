@@ -1282,3 +1282,6 @@ div#productGraph {
 li.color-item.selected {
   border: 1px solid var(--secondary-color);
 }
+.color-section > li:hover {
+  border: 1px solid var(--secondary-color);
+}
