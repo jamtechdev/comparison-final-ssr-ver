@@ -621,7 +621,7 @@ function ProductPage({
               </Col>
             )}
             {/* {console.log(product,"neet")} */}
-            {/* {console.log(product?.available_versions, "hllo")} */}
+            {console.log(product?.available_versions, "hllo")}
 
             {product?.available_versions &&
               product?.available_versions?.length !== 0 && (

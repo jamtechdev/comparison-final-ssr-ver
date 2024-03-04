@@ -117,9 +117,11 @@ select {
 .ptb-80 {
   padding: 40px 0;
 }
+
 .ptb-25 {
   padding: 25px 0px 0px 0px;
 }
+
 /* header {
   position: sticky;
   top: 0;
@@ -178,6 +180,7 @@ select {
   width: 70%;
   height: 100%;
 }
+
 /* fontsize increase */
 .site_tabs .nav-item button {
   color: rgb(39 48 78 / 80%) !important;
@@ -272,9 +275,11 @@ select {
   border-radius: 50px;
   cursor: help;
 }
+
 span.tooltip-title:hover .tooltip-display-content {
   display: block !important;
 }
+
 div.question-marker-icon {
   width: 16px;
   height: 16px;
@@ -286,6 +291,7 @@ div.question-marker-icon {
   box-shadow: 0px 0px 3px #888;
   margin: 0 5px;
 }
+
 .question-marker-icon svg {
   width: 13px;
   height: 13px;
@@ -323,6 +329,7 @@ input[type="checkbox"]:checked {
     justify-content: center;
     gap: 5px;
   }
+
   .swiper .swiper-pagination .swiper-pagination-bullet {
     display: block;
     width: 20px;
@@ -333,9 +340,11 @@ input[type="checkbox"]:checked {
     padding: 3px;
     background-color: #fff;
   }
+
   .swiper .swiper-pagination .swiper-pagination-bullet-active {
     position: relative;
   }
+
   .swiper .swiper-pagination .swiper-pagination-bullet-active::after {
     content: "";
     position: absolute;
@@ -359,11 +368,9 @@ input[type="checkbox"]:checked {
 
 .site-card-active {
   box-shadow: 0px 2px 8px rgba(77, 82, 136, 0.15);
-  background: linear-gradient(
-    0deg,
-    transparent 30%,
-    rgb(67 126 206) 100%
-  ) !important;
+  background: linear-gradient(0deg,
+      transparent 30%,
+      rgb(67 126 206) 100%) !important;
 }
 
 .swiper .swiper-wrapper {
@@ -373,9 +380,11 @@ input[type="checkbox"]:checked {
 .content-para p {
   padding: 0 0 20px;
 }
+
 .search-btn {
   cursor: pointer;
 }
+
 /* .home .hero-searchbar .search-btn:hover {
   background: #326ebf !important;
   color: #fff;
@@ -384,6 +393,7 @@ input[type="checkbox"]:checked {
   position: relative;
   transition: width linear 0.2s;
 }
+
 .electronics::after {
   content: " ";
   width: 0%;
@@ -397,10 +407,12 @@ input[type="checkbox"]:checked {
   bottom: 33%;
   transition: width linear 0.2s;
 }
+
 .electronics:hover::after {
   width: 13.5%;
 }
-.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
+
+.custom-switch .custom-control-input:checked~.custom-control-label::before {
   border: 1px solid grey;
 }
 
@@ -436,23 +448,24 @@ input[type="checkbox"]:checked {
   background-image: linear-gradient(90deg, #f8fafc 50%, #ffffff 50%);
   background-repeat: no-repeat;
 }
+
 .best-product-listing .product-listing-inner-content .listing-container .col {
   width: 50%;
   display: inline-block;
   vertical-align: text-top;
 }
-.best-product-listing
-  .product-listing-inner-content
-  .listing-container
-  .col:last-child {
+
+.best-product-listing .product-listing-inner-content .listing-container .col:last-child {
   border-right: 0px;
 }
+
 .listing-container #pros,
 .listing-container #cons {
   height: 100%;
   transition: all 1s linear;
   background-color: transparent !important;
 }
+
 .not-availabel {
   display: flex;
   align-items: center;
@@ -461,11 +474,13 @@ input[type="checkbox"]:checked {
   flex-direction: column;
   gap: 10px;
 }
+
 .not-availabel .txt {
   font-size: 14px;
   font-style: italic;
   font-weight: 600;
 }
+
 .not-availabel .price {
   padding: 0px 18px;
   border-radius: 100px;
@@ -477,6 +492,7 @@ input[type="checkbox"]:checked {
   line-height: 30px !important;
   min-width: 100px !important;
 }
+
 .not-availabel .guide {
   padding: 5px 10px;
   border-radius: 100px;
@@ -606,8 +622,8 @@ input[type="checkbox"]:checked {
   border-radius: 5px;
 }
 
-.color-section .color-item input:checked + label:before,
-.color-section .color-item input:hover + label:before {
+.color-section .color-item input:checked+label:before,
+.color-section .color-item input:hover+label:before {
   opacity: 1;
   visibility: visible;
 }
@@ -623,38 +639,23 @@ input[type="checkbox"]:checked {
   cursor: pointer;
 }
 
-.best-product-listing
-  .product-listing-inner-content
-  .product-score-container
-  .score-section:before {
+.best-product-listing .product-listing-inner-content .product-score-container .score-section:before {
   display: none;
 }
 
-.best-product-listing
-  .product-listing-inner-content
-  .product-score-container
-  .score-section:first-child::before {
+.best-product-listing .product-listing-inner-content .product-score-container .score-section:first-child::before {
   display: block !important;
 }
 
-body
-  .best-product-listing
-  .product-listing-inner-content
-  .product-score-container {
+body .best-product-listing .product-listing-inner-content .product-score-container {
   gap: 0 !important;
 }
 
-.best-product-listing
-  .product-listing-inner-content
-  .product-score-container
-  .score-section:first-child {
+.best-product-listing .product-listing-inner-content .product-score-container .score-section:first-child {
   margin: 0 0 18px;
 }
 
-.best-product-listing
-  .product-listing-inner-content
-  .product-score-container
-  .score-section {
+.best-product-listing .product-listing-inner-content .product-score-container .score-section {
   margin: 0 0 2px;
 }
 
@@ -669,10 +670,7 @@ body
   text-transform: uppercase !important;
 }
 
-.technical-specifications
-  .table-accordion
-  .accordion-button
-  div.table-accordion-header {
+.technical-specifications .table-accordion .accordion-button div.table-accordion-header {
   width: calc(50% - 100px) !important;
   text-transform: uppercase !important;
 }
@@ -701,18 +699,11 @@ body
   opacity: 70%;
 } */
 
-.best-product-listing
-  .product-listing-inner-content
-  .pros-corns-section
-  ul.pros_crons_open:after {
+.best-product-listing .product-listing-inner-content .pros-corns-section ul.pros_crons_open:after {
   display: none;
 }
-.best-product-listing
-  .product-listing-inner-content
-  .product-score-container
-  .score-section
-  .score-detail
-  .overall {
+
+.best-product-listing .product-listing-inner-content .product-score-container .score-section .score-detail .overall {
   opacity: 100% !important;
 }
 
@@ -728,14 +719,8 @@ body
 }
 
 /*  */
-.best-product-listing
-  .product-listing-inner-content
-  .pros-corns-section.pros
-  ul,
-.best-product-listing
-  .product-listing-inner-content
-  .pros-corns-section.corns
-  ul {
+.best-product-listing .product-listing-inner-content .pros-corns-section.pros ul,
+.best-product-listing .product-listing-inner-content .pros-corns-section.corns ul {
   margin-bottom: 15px !important;
 }
 
@@ -802,9 +787,11 @@ body
   margin: 10px auto -15px;
   background-color: white;
 }
+
 .contentSec .hide-show-btn i {
   font-size: 25px;
 }
+
 /* check */
 /* h2.text-center.electronics:hover {
   color:#dddddd;
@@ -866,9 +853,11 @@ body
   font-size: 16px;
   color: var(--heading-color);
 }
+
 .similar-guides ul li:hover a {
   /* color: #fff !important; */
 }
+
 button.searchBarInner.btn.btn-primary {
   cursor: auto;
 }
@@ -904,6 +893,7 @@ button.searchBarInner.btn.btn-primary {
   justify-content: center;
   cursor: pointer;
 }
+
 .bottom_bar_header_content i.ri-arrow-down-s-line {
   font-size: 35px;
   width: 25px;
@@ -919,7 +909,7 @@ button.searchBarInner.btn.btn-primary {
   gap: 10px;
 }
 
-.bottom_bar_heading > div {
+.bottom_bar_heading>div {
   color: #fff;
   font-size: 17px;
   font-style: italic;
@@ -1061,7 +1051,7 @@ button.searchBarInner.btn.btn-primary {
   gap: 20px;
 }
 
-.catchy_titles_section.row ul li > span {
+.catchy_titles_section.row ul li>span {
   width: 50%;
 }
 
@@ -1109,6 +1099,7 @@ table.compare-container.table.comparison-table .best-list-item li img {
   height: auto;
   max-width: 28%;
 }
+
 .breadcrumb-group .breadcrumb-items.fristWord::first-letter {
   text-transform: capitalize;
 }
@@ -1182,6 +1173,7 @@ table.compare-container.table.comparison-table .best-list-item li img {
   font-size: 15px !important;
   line-height: 30px !important;
 }
+
 .short_code_product_table_price_td_value:hover {
   background: #ff7d00;
 }
@@ -1200,16 +1192,19 @@ table.compare-container.table.comparison-table .best-list-item li img {
   display: flex;
   align-items: center;
 }
+
 .short_code_product_table_price_td img.short_code_product_table_price_td_img {
   width: 80px !important;
 }
-.short_code_product_table_price_td
-  span.short_code_product_table_price_td_value {
+
+.short_code_product_table_price_td span.short_code_product_table_price_td_value {
   min-width: 100px !important;
 }
+
 .short_code_product_table_price_name.text-center {
   justify-content: center;
 }
+
 .outlineList a {
   color: #26272a;
 }
@@ -1217,28 +1212,35 @@ table.compare-container.table.comparison-table .best-list-item li img {
 a.outlineList.outline-active {
   color: var(--secondary-color);
 }
+
 a.outlineLink.outline-active {
   color: var(--secondary-color);
 }
+
 .outline-section ol li {
   padding-left: 0px !important;
   font-size: 13px;
   /* line-height: 1.8; */
 }
+
 .outline-section ol li.outline-active,
 .outline-section ol li a:hover {
   color: var(--secondary-color);
   position: relative;
 }
+
 .outline-section ol li.outline-active:before {
   padding: 13px 0 10px 0 !important;
 }
+
 .outlineList a {
   line-height: 1.7;
 }
+
 #shortCodeText img {
   width: 100%;
 }
+
 /* .outline-section .ol-child li{
   line-height: 2.2;
 }  */
@@ -1249,16 +1251,20 @@ a.outlineLink.outline-active {
 .curser-pointer {
   cursor: pointer;
 }
+
 .curser-pointer .form-check-input {
   cursor: pointer;
 }
+
 /* css for graph radio chart  */
 div#productGraph {
   margin-top: 50px;
 }
+
 .removeUnderlineFrom {
   text-decoration: none !important;
 }
+
 .stickyPrice {
   min-width: auto !important;
   font-size: 15px;
@@ -1269,19 +1275,32 @@ div#productGraph {
 .isSticky p.device-name:hover {
   background-color: var(--heading-color);
 }
+
 .compare-container .isSticky tr th:not(:first-child):hover {
   background: #f4f7fb !important;
 }
+
 .compare-container .isSticky tr th:not(:first-child):hover .device-name a {
   color: var(--heading-color) !important;
 }
+
 .active_class {
   border: 1px solid var(--secondary-color);
   border-radius: 6px;
 }
+
 li.color-item.selected {
   border: 1px solid var(--secondary-color);
 }
-.color-section > li:hover {
+
+.color-section>li:hover {
   border: 1px solid var(--secondary-color);
+}
+
+.color-section .color-item li:hover {
+  outline: 1px solid #437ece !important;
+  border-radius: 5px;
+  list-style-type: none;
+  width: auto;
+  padding: 0px 5px;
 }

@@ -11,7 +11,6 @@ export default function Filter({
   removedParam,
   searchParam,
   orderBy,
-  setremovedParam
 }) {
   // console.log(categoryAttributes);
   const router = useRouter();
@@ -35,7 +34,7 @@ export default function Filter({
   };
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    // console.log(filterName, key, value,"neet")
+    console.log(filterName, key, value, "neet")
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -262,7 +261,7 @@ export default function Filter({
             const value = filteredArrayOfAttributeValues?.values[0];
             handelFilterActions("radioSwitch", removedParam, "no", false);
             document.getElementById(`${removedParam}`).checked = false;
-            // console.log("Radio switch", removedParam)
+            console.log("Radio switch", removedParam)
           } else {
             {
               filteredArrayOfAttributeValues?.values?.map((value, valIndex) => {
@@ -325,7 +324,6 @@ export default function Filter({
       if (removedParam.toLowerCase() == "sort") {
         delete searchParams.sort;
       }
-      setremovedParam('')
     }
   }, [removedParam, searchParam]);
 
@@ -486,7 +484,7 @@ export default function Filter({
                                           <span style={{ cursor: "pointer" }}>
                                             {value.toString()}{" "}
                                             {filteredArrayOfAttributeValues?.unit == "-" ||
-                                            filteredArrayOfAttributeValues?.unit == "?"
+                                              filteredArrayOfAttributeValues?.unit == "?"
                                               ? ""
                                               : filteredArrayOfAttributeValues?.unit}
                                           </span>
@@ -530,13 +528,13 @@ export default function Filter({
                                     <span
                                       dangerouslySetInnerHTML={{
                                         __html: `<p>(${filteredArrayOfAttributeValues.values &&
-                                            filteredArrayOfAttributeValues.product_count &&
-                                            filteredArrayOfAttributeValues
-                                              .product_count[valIndex] !==
-                                            undefined
-                                            ? filteredArrayOfAttributeValues
-                                              .product_count[valIndex]
-                                            : "0"
+                                          filteredArrayOfAttributeValues.product_count &&
+                                          filteredArrayOfAttributeValues
+                                            .product_count[valIndex] !==
+                                          undefined
+                                          ? filteredArrayOfAttributeValues
+                                            .product_count[valIndex]
+                                          : "0"
                                           })</p>`,
                                       }}
                                     />

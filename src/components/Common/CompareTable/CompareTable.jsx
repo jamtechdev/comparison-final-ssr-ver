@@ -175,8 +175,8 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             ) : (
               <>
                 {item?.attribute_value === "-" ||
-                item?.attribute_value === null ||
-                item?.attribute_value === "?" ? (
+                  item?.attribute_value === null ||
+                  item?.attribute_value === "?" ? (
                   item?.attribute_value
                 ) : (
                   <>
@@ -215,7 +215,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
       const maxValue = Math.max(...uniqueValues);
       return values.map((value) =>
         value === maxValue &&
-        values.indexOf(value) === values.lastIndexOf(value) ? (
+          values.indexOf(value) === values.lastIndexOf(value) ? (
           <div>
             {value}
             <span key={value} className="tooltip-title-2">
@@ -243,6 +243,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
       }
       ref={ref}
     >
+
       <Table className="compare-container">
         <thead
           id="testone"
@@ -343,6 +344,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
             })}
           </tr>
         </thead>
+
         <tbody id="tbody">
           <tr className="">
             <th>
@@ -456,14 +458,14 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                       )}
                       {products[0]?.overall_score_descriptions
                         ?.when_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.overall_score_descriptions
-                              ?.when_matters
-                          }
-                        </p>
-                      )}
+                          <p className="mb-2">
+                            <b>When it matters: </b>{" "}
+                            {
+                              products[0]?.overall_score_descriptions
+                                ?.when_matters
+                            }
+                          </p>
+                        )}
                     </div>
                   )}
               </div>
@@ -479,8 +481,8 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                           ? "#093673"
                           : product.overall_score >= 5 &&
                             product.overall_score < 7.5
-                          ? "#437ECE"
-                          : " #85B2F1",
+                            ? "#437ECE"
+                            : " #85B2F1",
                     }}
                   >
                     {formatValue(product.overall_score)}
@@ -499,24 +501,24 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                     <div className="tooltip-display-content">
                       {products[0]?.technical_score_descriptions
                         ?.description && (
-                        <p className="mb-2">
-                          <b>What it is: </b>{" "}
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.description
-                          }
-                        </p>
-                      )}
+                          <p className="mb-2">
+                            <b>What it is: </b>{" "}
+                            {
+                              products[0]?.technical_score_descriptions
+                                ?.description
+                            }
+                          </p>
+                        )}
                       {products[0]?.technical_score_descriptions
                         ?.when_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.when_matters
-                          }
-                        </p>
-                      )}
+                          <p className="mb-2">
+                            <b>When it matters: </b>{" "}
+                            {
+                              products[0]?.technical_score_descriptions
+                                ?.when_matters
+                            }
+                          </p>
+                        )}
                     </div>
                   )}
               </div>
@@ -529,7 +531,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                   <td key={technicalIndex}>
                     {
                       addStarOnTable(defaultNo, "technical_score", values)[
-                        technicalIndex
+                      technicalIndex
                       ]
                     }
                   </td>
@@ -552,14 +554,14 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                       )}
                       {products[0]?.users_rating_descriptions
                         ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+                          <p className="mb-2">
+                            <b>When it matters: </b>
+                            {
+                              products[0]?.technical_score_descriptions
+                                ?.when_it_matters
+                            }
+                          </p>
+                        )}
                     </div>
                   )}
               </div>
@@ -603,7 +605,7 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                   <td key={popularityIndex}>
                     {
                       addStarOnTable(defaultNo, "popularity", values)[
-                        popularityIndex
+                      popularityIndex
                       ]
                     }
                   </td>
@@ -618,24 +620,24 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                   <div className="tooltip-display-content">
                     {products[0]?.ratio_qulitiy_points_descriptions
                       ?.description && (
-                      <p className="mb-2">
-                        <b>What it is: </b>{" "}
-                        {
-                          products[0]?.ratio_qulitiy_points_descriptions
-                            ?.description
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>What it is: </b>{" "}
+                          {
+                            products[0]?.ratio_qulitiy_points_descriptions
+                              ?.description
+                          }
+                        </p>
+                      )}
                     {products[0]?.technical_score_descriptions
                       ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.technical_score_descriptions
+                              ?.when_it_matters
+                          }
+                        </p>
+                      )}
                   </div>
                 )}
               </div>
@@ -694,13 +696,13 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                                   ][0].final_points?.toFixed(1) >= 7.5
                                     ? "#093673"
                                     : product.attributes[
-                                        category.name
-                                      ][0].final_points?.toFixed(1) >= 5 &&
+                                      category.name
+                                    ][0].final_points?.toFixed(1) >= 5 &&
                                       product.attributes[
                                         category.name
                                       ][0].final_points?.toFixed(1) < 7.5
-                                    ? "#437ECE"
-                                    : " #85B2F1",
+                                      ? "#437ECE"
+                                      : " #85B2F1",
                               }}
                             >
                               {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
@@ -725,22 +727,22 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                               {catAttribute.name}
                               {(catAttribute.description ||
                                 catAttribute.when_matters) && (
-                                <div className="tooltip-display-content">
-                                  {catAttribute?.description && (
-                                    <p className="mb-2">
-                                      <b>What it is: </b>
-                                      {catAttribute?.description}
-                                    </p>
-                                  )}
+                                  <div className="tooltip-display-content">
+                                    {catAttribute?.description && (
+                                      <p className="mb-2">
+                                        <b>What it is: </b>
+                                        {catAttribute?.description}
+                                      </p>
+                                    )}
 
-                                  {catAttribute?.when_matters && (
-                                    <p className="mb-2">
-                                      <b>When it matters: </b>{" "}
-                                      {catAttribute?.when_matters}
-                                    </p>
-                                  )}
-                                </div>
-                              )}
+                                    {catAttribute?.when_matters && (
+                                      <p className="mb-2">
+                                        <b>When it matters: </b>{" "}
+                                        {catAttribute?.when_matters}
+                                      </p>
+                                    )}
+                                  </div>
+                                )}
                             </div>
                           </th>
                           {addAsterisksToTopValue(
@@ -753,17 +755,17 @@ const CompareTable = React.memo(({ products, categoryAttributes, slug }) => {
                     })}
                   {category.attributes.length >
                     (pagination[category.name] || initialNoOfCategories) && (
-                    <tr className="text-center show_more_row">
-                      <td colSpan="6">
-                        <span
-                          className="show_more"
-                          onClick={() => handlePagination(category.name)}
-                        >
-                          SHOW MORE <i className="ri-add-line"></i>
-                        </span>
-                      </td>
-                    </tr>
-                  )}
+                      <tr className="text-center show_more_row">
+                        <td colSpan="6">
+                          <span
+                            className="show_more"
+                            onClick={() => handlePagination(category.name)}
+                          >
+                            SHOW MORE <i className="ri-add-line"></i>
+                          </span>
+                        </td>
+                      </tr>
+                    )}
                 </Fragment>
               );
             })}
