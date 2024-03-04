@@ -42,6 +42,7 @@ function ComparisonVerticalChart(props) {
       if (count === 3) thirdIndex = index;
     }
   });
+
   svg
     .selectAll("bar")
     .data(updatedData)
@@ -58,9 +59,63 @@ function ComparisonVerticalChart(props) {
       } else if (d.selected === 1 && i === secondIndex) {
         return "#FF8F0B";
       } else if (d.selected === 1 && i === thirdIndex) {
-        return "";
+        return "#28A28";
       } else if (d.selected === 2) {
         return i === fristIndex ? "#437ece" : "#FF8F0B";
+      } else if (d.selected === 3) {
+        return i === fristIndex
+          ? "#437ece"
+          : i === secondIndex
+          ? "#FF8F0B"
+          : "#28A28C";
+      } else {
+        return ""; // or any other default color
+      }
+    })
+    .on("mouseover", (e, data) => {
+      toolTip.transition().duration(300).style("opacity", 1);
+      toolTip
+        .html(
+          `<div style="font-size: 14px;
+    font-weight: 400;
+    color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
+      data.value
+    }% (${data.productCount ? data.productCount : "0"})</span></div>`
+        )
+        .style("left", e.clientX - 20 + "px")
+        .style("top", e.clientY - 50 + "px");
+    })
+
+    .on("mouseout", (d, data) => {
+      toolTip.transition().duration(300).style("opacity", 0);
+    });
+  svg
+    .selectAll("bar")
+    .data(updatedData)
+    .enter()
+    .append("rect")
+    .attr("class", classnames(["bar-chart__bar rect-hover", barClass]))
+    .attr("x", (d) => xScale(d.label))
+    .attr("width", (d) =>
+      d.selected === 3 ? xScale.bandwidth() / 1.5 : xScale.bandwidth()
+    )
+    .attr("y", (d) => yScale(d.value))
+    .attr("height", (d) => height - yScale(d.value))
+    .style("fill", (d, i) => {
+      if (d.selected === 1 && i === fristIndex) {
+        return "rgb(67, 126, 206)";
+      } else if (d.selected === 1 && i === secondIndex) {
+        return "#FF8F0B";
+      } else if (d.selected === 1 && i === thirdIndex) {
+        return "#28A28C";
+      } else if (d.selected === 2) {
+        return i === fristIndex ? "#437ece" : "#FF8F0B";
+      } else if (d.selected === 3) {
+        return i === fristIndex
+          ? "#437ece"
+          : i === secondIndex
+          ? "#28A28C"
+          : "#FF8F0B";
       } else {
         return ""; // or any other default color
       }
@@ -90,7 +145,11 @@ function ComparisonVerticalChart(props) {
     .attr("class", classnames(["bar-chart__bar rect-hover", barClass]))
     .attr("x", (d) => xScale(d.label))
     .attr("width", (d) =>
-      d.selected === 2 ? xScale.bandwidth() / 2 : xScale.bandwidth()
+      d.selected === 2
+        ? xScale.bandwidth() / 2
+        : d.selected === 3
+        ? xScale.bandwidth() / 3
+        : xScale.bandwidth()
     )
     .attr("y", (d) => yScale(d.value))
     .attr("height", (d) => height - yScale(d.value))
@@ -100,9 +159,15 @@ function ComparisonVerticalChart(props) {
       } else if (d.selected === 1 && i === secondIndex) {
         return "#FF8F0B";
       } else if (d.selected === 1 && i === thirdIndex) {
-        return "";
+        return "#28A28C";
       } else if (d.selected === 2) {
         return i === fristIndex ? "#FF8F0B" : "#437ece";
+      } else if (d.selected === 3) {
+        return i === fristIndex
+          ? "#FF8F0B"
+          : i === secondIndex
+          ? "#28A28C"
+          : "#437ece";
       } else {
         return ""; // or any other default color
       }

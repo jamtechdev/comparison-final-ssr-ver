@@ -2,10 +2,20 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 
-export default function ComparisonsSlider() {
+export default function ComparisonsSlider(products) {
+  // console.log(alternative_comparisons);
+  const getColorBasedOnScore = (score) => {
+    if (score >= 7.5) {
+      return "#093673";
+    } else if (score >= 5 && score < 7.5) {
+      return "#437ECE";
+    } else {
+      return "#85B2F1";
+    }
+  };
   const product = [
     {
       firstImage: "/images/review-image.png",
@@ -87,41 +97,67 @@ export default function ComparisonsSlider() {
         }}
         className="product-slider"
       >
-        {product.map(function (item, index) {
+        {products?.alternative_comparisons?.map(function (item, index) {
           return (
             <SwiperSlide key={index}>
               <div className="comparisons-wrapper">
                 <div className="comparisons-container">
                   <div className="comparisons-card">
                     <Image
-                      src={item.firstImage}
+                      src={
+                        item?.product_first_image
+                          ? item?.product_first_image
+                          : "/images/nofound.png"
+                      }
                       width={0}
                       height={0}
                       sizes="100%"
                       alt=""
                     />
                     <div className="footer_content">
-                      <span>{item.firstReviewName}</span>
+                      <span>{item?.product_first}</span>
                     </div>
-                    <span className="rating_count">{item.rating}</span>
+                    <span
+                      className="rating_count"
+                      style={{
+                        background: getColorBasedOnScore(
+                          item?.product_first_overall_counted_score
+                        ),
+                      }}
+                    >
+                      {item?.product_first_overall_counted_score}
+                    </span>
                   </div>
                   <div className="vs-divider">
                     <span>VS</span>
                   </div>
                   <div className="comparisons-card">
                     <Image
-                      src={item.secondImage}
+                      src={
+                        item?.product_second_image
+                          ? item?.product_second_image
+                          : "/images/nofound.png"
+                      }
                       width={0}
                       height={0}
                       sizes="100%"
                       alt=""
                     />
                     <div className="footer_content">
-                      <span>{item.secondReviewName}</span>
+                      <span>{item?.product_second}</span>
                     </div>
-                    <span className="rating_count">{item.rating}</span>
+                    <span
+                      className="rating_count"
+                      style={{
+                        background: getColorBasedOnScore(
+                          item?.product_second_overall_counted_score
+                        ),
+                      }}
+                    >
+                      {item?.product_second_overall_counted_score}
+                    </span>
                   </div>
-                  <div className="comparisons-footer">{item.reviewContent}</div>
+                  <div className="comparisons-footer">{item?.category}</div>
                 </div>
               </div>
             </SwiperSlide>
