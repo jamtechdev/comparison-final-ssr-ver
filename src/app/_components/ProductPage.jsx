@@ -1104,7 +1104,7 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {/* {console.log(product)} */}
+      {console.log(product?.alternative_comparisons)}
       {product?.alternative_comparisons?.length > 0 && (
         <section className="mt-3 mobile-popular-comparison">
           <Container>
@@ -1112,7 +1112,7 @@ function ProductPage({
               <Col md={12}>
                 <h2 className="site-main-heading">Popular comparisons</h2>
                 <ComparisonsSlider
-                  products={product}
+                  products={product&&product?.alternative_comparisons}
                 />
               </Col>
             </Row>

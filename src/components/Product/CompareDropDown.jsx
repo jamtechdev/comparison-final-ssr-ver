@@ -129,7 +129,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
               </p>
             </Col>
             <Col md={8} lg={8}>
-              <h6 className="addClassData"></h6>
+              <span className="addClassData"></span>
               <div className="barData"></div>
               {/* <h6 className="addClassData">
                 [pie-chart;Overall1;Robot Vacuum Cleaners;Runtime:0-300;Can mop]

@@ -6,7 +6,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 
 export default function ComparisonsSlider(products) {
-  // console.log(alternative_comparisons);
+  console.log(products?.products);
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -97,11 +97,12 @@ export default function ComparisonsSlider(products) {
         }}
         className="product-slider"
       >
-        {products?.alternative_comparisons?.map(function (item, index) {
+        {products&&products?.products?.map(function (item, index) {
           return (
             <SwiperSlide key={index}>
               <div className="comparisons-wrapper">
                 <div className="comparisons-container">
+               
                   <div className="comparisons-card">
                     <Image
                       src={
