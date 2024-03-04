@@ -53,7 +53,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                   aria-label="Search"
                 />
                 <Button className="search-btn">
-                  {favSlider && favSlider?.search_phrase}
+                  {favSlider && favSlider?.search_button}
                 </Button>
                 <SearchList search={search} isFocused={isFocused} />
               </Form>
