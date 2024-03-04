@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
 export default function CompareForm({
   location,
+  favSlider,
   product_name,
   handelCategoryForOffenProduct,
   handelCloseCompareModel,
@@ -140,7 +141,7 @@ export default function CompareForm({
           <div className="position-relative w-100">
             <Form.Control
               type="text"
-              placeholder={"1st product..."}
+              placeholder={`${favSlider && favSlider?.product_first_text}`}
               onBlur={handleBlur}
               value={
                 typeof formFields.productFirst === "string"
@@ -168,7 +169,7 @@ export default function CompareForm({
           <div className="position-relative w-100">
             <Form.Control
               type="text"
-              placeholder="2nd product..."
+              placeholder={`${favSlider && favSlider?.product_second_text}`}
               onBlur={handleBlur}
               value={
                 typeof formFields.productSecond === "string"
@@ -195,7 +196,7 @@ export default function CompareForm({
           <div className="position-relative">
             <Form.Control
               type="text"
-              placeholder="3rd product... (optional)"
+              placeholder={`${favSlider && favSlider?.product_third_text}`}
               onFocus={() => setFocusedProductThird(true)}
               onBlur={handleBlur}
               value={

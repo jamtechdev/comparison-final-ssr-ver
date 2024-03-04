@@ -49,10 +49,12 @@ export default function MainPage({ bannerCounts, favSlider }) {
                   onFocus={() => setIsFocused(true)}
                   onBlur={handleBlur}
                   onChange={handleSearch}
-                  placeholder={`${favSlider&&favSlider?.search_phrase}`}
+                  placeholder={`${favSlider && favSlider?.search_phrase}`}
                   aria-label="Search"
                 />
-                <Button className="search-btn">{favSlider&&favSlider?.search_phrase}</Button>
+                <Button className="search-btn">
+                  {favSlider && favSlider?.search_phrase}
+                </Button>
                 <SearchList search={search} isFocused={isFocused} />
               </Form>
             </Col>
@@ -102,8 +104,11 @@ export default function MainPage({ bannerCounts, favSlider }) {
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Compare Products</h2>
+              <h2 className="site-main-heading">
+                {favSlider && favSlider?.compare_products_text}
+              </h2>
               <CompareForm
+                favSlider={favSlider && favSlider}
                 location="ON_MAIN_PAGE"
                 handelCloseCompareModel={() => {}}
               />
