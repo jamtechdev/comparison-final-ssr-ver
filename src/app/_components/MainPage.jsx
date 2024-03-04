@@ -29,14 +29,15 @@ export default function MainPage({ bannerCounts, favSlider }) {
     setsearch(e.target.value);
   };
   const router = useRouter();
+  // {console.log(favSlider,"neet")}
   return (
     <>
       <section className="hero_section home">
         <Container>
           <Row>
             <Col md={12} className="form-col">
-              <h1>...Where Product’s DATA and REVIEWS Meet</h1>
-              <p>Discover the Best, Leave the Rest!</p>
+              <h1>{favSlider && favSlider?.motto_phrase1}</h1>
+              <p>{favSlider && favSlider?.motto_phrase2}</p>
               <Form className="d-flex hero-searchbar">
                 <div className="search-icon">
                   <i className="ri-search-line"></i>
@@ -48,10 +49,10 @@ export default function MainPage({ bannerCounts, favSlider }) {
                   onFocus={() => setIsFocused(true)}
                   onBlur={handleBlur}
                   onChange={handleSearch}
-                  placeholder="Search The Guide or Product You Need..."
+                  placeholder={`${favSlider&&favSlider?.search_phrase}`}
                   aria-label="Search"
                 />
-                <Button className="search-btn">Search</Button>
+                <Button className="search-btn">{favSlider&&favSlider?.search_phrase}</Button>
                 <SearchList search={search} isFocused={isFocused} />
               </Form>
             </Col>

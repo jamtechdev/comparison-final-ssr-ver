@@ -258,6 +258,7 @@ thead.isSticky {
 
 .compare-container thead.isSticky tr th:first-child {
   opacity: 100% !important;
+  display: none;
 }
 
 .compare-container thead.isSticky tr th .d-none {

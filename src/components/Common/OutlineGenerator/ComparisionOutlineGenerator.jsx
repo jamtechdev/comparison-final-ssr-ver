@@ -71,7 +71,7 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
 
     setOutline(newOutline);
   }, []);
-  console.log(outline);
+  // console.log(outline);
 
   return (
     <>

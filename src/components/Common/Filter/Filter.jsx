@@ -34,7 +34,7 @@ export default function Filter({
   };
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    console.log(filterName, key, value, "neet")
+    // console.log(filterName, key, value, "neet")
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -261,7 +261,7 @@ export default function Filter({
             const value = filteredArrayOfAttributeValues?.values[0];
             handelFilterActions("radioSwitch", removedParam, "no", false);
             document.getElementById(`${removedParam}`).checked = false;
-            console.log("Radio switch", removedParam)
+            // console.log("Radio switch", removedParam)
           } else {
             {
               filteredArrayOfAttributeValues?.values?.map((value, valIndex) => {
