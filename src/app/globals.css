@@ -490,7 +490,7 @@ input[type="checkbox"]:checked {
   padding: 0px 18px;
   border-radius: 100px;
   text-align: center;
-  font-size: 17px;
+  font-size: 16px;
   background-color: #d90808;
   color: #fff;
   font-weight: 600;
@@ -1311,12 +1311,16 @@ div#productGraph {
 }
 
 .isSticky p.device-name:hover {
-  background-color: var(--heading-color);
-  color: var(--white-color);
+  /* background-color: var(--heading-color);
+  color: var(--white-color); */
+  background-color: #f4f7fb;
+    color: #437ece;
+    border: 1px solid #437ece !important;
 }
 
 .compare-container .isSticky tr th:not(:first-child):hover .device-name a {
-  color: var(--white-color) !important;
+  /* color: var(--white-color) !important; */
+  color: #437ece !important;
 }
 
 .isSticky p.device-name:hover a {

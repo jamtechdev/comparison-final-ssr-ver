@@ -151,7 +151,7 @@
   align-items: center;
   justify-content: flex-start;
   font-weight: 600 !important;
-  font-size: 15px;
+  font-size: 15px !important;
   line-height: 20px;
   color: var(--heading-color);
   opacity: 90%;
@@ -258,7 +258,9 @@ thead.isSticky {
 
 .compare-container thead.isSticky tr th:first-child {
   opacity: 100% !important;
-  display: none;
+  /* display: none; */
+  border: 1px solid #ddd0 !important;
+  visibility: hidden;
 }
 
 .compare-container thead.isSticky tr th .d-none {
@@ -276,6 +278,7 @@ thead.isSticky {
 
 .compare-container thead.isSticky tr th .device-name {
   font-size: 12px;
+  border: 1px solid transparent;
 }
 
 .compare-container thead.isSticky tr th .best-tag-product {
