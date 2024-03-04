@@ -271,7 +271,7 @@ thead.isSticky {
 
 .compare-container thead.isSticky tr th {
   padding: 0 !important;
-  vertical-align: top !important;
+  vertical-align: bottom !important;
 }
 
 .compare-container thead.isSticky tr th .device-name {
@@ -1734,7 +1734,6 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   min-width: 45px;
   display: block;
   width: 100%;
-  max-width: 45px !important;
   margin: auto;
 }
 
@@ -1914,6 +1913,14 @@ thead.isSticky tr {
 
 .compare-container-2 tbody tr th .tooltip-display-content p {
   font-weight: 400 !important;
+}
+
+.n-lable{
+  flex-direction: row;
+}
+
+.compare-container thead.isSticky tr th .device-name:hover a {
+  color: #fff !important;
 }
 
 /* ---------asdasds--------------------------------------------------------------------------------------------------------- */

@@ -368,9 +368,11 @@ input[type="checkbox"]:checked {
 
 .site-card-active {
   box-shadow: 0px 2px 8px rgba(77, 82, 136, 0.15);
-  background: linear-gradient(0deg,
-      transparent 30%,
-      rgb(67 126 206) 100%) !important;
+  background: linear-gradient(
+    0deg,
+    transparent 30%,
+    rgb(67 126 206) 100%
+  ) !important;
 }
 
 .swiper .swiper-wrapper {
@@ -412,7 +414,7 @@ input[type="checkbox"]:checked {
   width: 13.5%;
 }
 
-.custom-switch .custom-control-input:checked~.custom-control-label::before {
+.custom-switch .custom-control-input:checked ~ .custom-control-label::before {
   border: 1px solid grey;
 }
 
@@ -455,7 +457,10 @@ input[type="checkbox"]:checked {
   vertical-align: text-top;
 }
 
-.best-product-listing .product-listing-inner-content .listing-container .col:last-child {
+.best-product-listing
+  .product-listing-inner-content
+  .listing-container
+  .col:last-child {
   border-right: 0px;
 }
 
@@ -622,8 +627,8 @@ input[type="checkbox"]:checked {
   border-radius: 5px;
 }
 
-.color-section .color-item input:checked+label:before,
-.color-section .color-item input:hover+label:before {
+.color-section .color-item input:checked + label:before,
+.color-section .color-item input:hover + label:before {
   opacity: 1;
   visibility: visible;
 }
@@ -639,23 +644,38 @@ input[type="checkbox"]:checked {
   cursor: pointer;
 }
 
-.best-product-listing .product-listing-inner-content .product-score-container .score-section:before {
+.best-product-listing
+  .product-listing-inner-content
+  .product-score-container
+  .score-section:before {
   display: none;
 }
 
-.best-product-listing .product-listing-inner-content .product-score-container .score-section:first-child::before {
+.best-product-listing
+  .product-listing-inner-content
+  .product-score-container
+  .score-section:first-child::before {
   display: block !important;
 }
 
-body .best-product-listing .product-listing-inner-content .product-score-container {
+body
+  .best-product-listing
+  .product-listing-inner-content
+  .product-score-container {
   gap: 0 !important;
 }
 
-.best-product-listing .product-listing-inner-content .product-score-container .score-section:first-child {
+.best-product-listing
+  .product-listing-inner-content
+  .product-score-container
+  .score-section:first-child {
   margin: 0 0 18px;
 }
 
-.best-product-listing .product-listing-inner-content .product-score-container .score-section {
+.best-product-listing
+  .product-listing-inner-content
+  .product-score-container
+  .score-section {
   margin: 0 0 2px;
 }
 
@@ -670,7 +690,10 @@ body .best-product-listing .product-listing-inner-content .product-score-contain
   text-transform: uppercase !important;
 }
 
-.technical-specifications .table-accordion .accordion-button div.table-accordion-header {
+.technical-specifications
+  .table-accordion
+  .accordion-button
+  div.table-accordion-header {
   width: calc(50% - 100px) !important;
   text-transform: uppercase !important;
 }
@@ -699,11 +722,19 @@ body .best-product-listing .product-listing-inner-content .product-score-contain
   opacity: 70%;
 } */
 
-.best-product-listing .product-listing-inner-content .pros-corns-section ul.pros_crons_open:after {
+.best-product-listing
+  .product-listing-inner-content
+  .pros-corns-section
+  ul.pros_crons_open:after {
   display: none;
 }
 
-.best-product-listing .product-listing-inner-content .product-score-container .score-section .score-detail .overall {
+.best-product-listing
+  .product-listing-inner-content
+  .product-score-container
+  .score-section
+  .score-detail
+  .overall {
   opacity: 100% !important;
 }
 
@@ -719,8 +750,14 @@ body .best-product-listing .product-listing-inner-content .product-score-contain
 }
 
 /*  */
-.best-product-listing .product-listing-inner-content .pros-corns-section.pros ul,
-.best-product-listing .product-listing-inner-content .pros-corns-section.corns ul {
+.best-product-listing
+  .product-listing-inner-content
+  .pros-corns-section.pros
+  ul,
+.best-product-listing
+  .product-listing-inner-content
+  .pros-corns-section.corns
+  ul {
   margin-bottom: 15px !important;
 }
 
@@ -909,7 +946,7 @@ button.searchBarInner.btn.btn-primary {
   gap: 10px;
 }
 
-.bottom_bar_heading>div {
+.bottom_bar_heading > div {
   color: #fff;
   font-size: 17px;
   font-style: italic;
@@ -1051,7 +1088,7 @@ button.searchBarInner.btn.btn-primary {
   gap: 20px;
 }
 
-.catchy_titles_section.row ul li>span {
+.catchy_titles_section.row ul li > span {
   width: 50%;
 }
 
@@ -1197,7 +1234,8 @@ table.compare-container.table.comparison-table .best-list-item li img {
   width: 80px !important;
 }
 
-.short_code_product_table_price_td span.short_code_product_table_price_td_value {
+.short_code_product_table_price_td
+  span.short_code_product_table_price_td_value {
   min-width: 100px !important;
 }
 
@@ -1274,6 +1312,15 @@ div#productGraph {
 
 .isSticky p.device-name:hover {
   background-color: var(--heading-color);
+  color: var(--white-color);
+}
+
+.compare-container .isSticky tr th:not(:first-child):hover .device-name a {
+  color: var(--white-color) !important;
+}
+
+.isSticky p.device-name:hover a {
+  color: var(--white-color) !important;
 }
 
 .compare-container .isSticky tr th:not(:first-child):hover {
@@ -1281,7 +1328,7 @@ div#productGraph {
 }
 
 .compare-container .isSticky tr th:not(:first-child):hover .device-name a {
-  color: var(--heading-color) !important;
+  /* color: var(--heading-color) !important; */
 }
 
 .active_class {
@@ -1293,7 +1340,7 @@ li.color-item.selected {
   border: 1px solid var(--secondary-color);
 }
 
-.color-section>li:hover {
+.color-section > li:hover {
   border: 1px solid var(--secondary-color);
 }
 
@@ -1303,4 +1350,29 @@ li.color-item.selected {
   list-style-type: none;
   width: auto;
   padding: 0px 5px;
+}
+
+/* sidebar css */
+
+.sidebar_filter {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 13px;
+  margin-right: -9px;
+}
+
+.sidebar_filter div {
+  display: flex;
+  column-gap: 46px;
+  align-items: center;
+}
+
+.sidebar_filter .custom-switch {
+  position: relative;
+  bottom: 4px;
+}
+.best-page-card .hero-card-content .count {
+  padding: 5px 0 15px !important;
+  color: var(--secondary-color);
+  font-size: 30px;
 }

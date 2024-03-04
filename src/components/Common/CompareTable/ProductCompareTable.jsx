@@ -297,15 +297,15 @@ const ProductCompareTable = React.memo(
                                 product?.price_websites?.every(
                                   (data) => data.price === null
                                 ) && (
-                                  <div className="not-availabel p-3">
-                                    <span className="txt">NOT AVAILABLE</span>
+                                  <div className="not-availabel n-lable p-1">
+                                    {/* <span className="txt">NOT AVAILABLE</span> */}
                                     <span className="price">
                                       ~ {product?.price} €
                                     </span>
                                   </div>
                                 )}
                               {product.price_websites &&
-                                product.price_websites.map((data, dIndex) => {
+                                product.price_websites.slice(0,1)?.map((data, dIndex) => {
                                   return (
                                     <React.Fragment key={dIndex}>
                                       {data.price !== null && (

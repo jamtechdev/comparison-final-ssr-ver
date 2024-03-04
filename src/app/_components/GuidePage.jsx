@@ -237,6 +237,7 @@ export default function GuidePage({
     setShowModal(false);
   };
   // console.log(products, "hello");
+  // Testing purpose
 
   return (
     <>
@@ -298,7 +299,7 @@ export default function GuidePage({
               return (
                 <Col className="p-2" md={6} lg={3} sm={6} xs={6} key={index}>
                   <div className="hero-card-content">
-                    <span className="counts">{item.count}</span>
+                    <span className="count">{item.count}</span>
                     <span className="card-heading">{item.heading}</span>
                   </div>
                 </Col>
@@ -423,7 +424,7 @@ export default function GuidePage({
                 <ProductSkeleton />
               ) : (
                 <>
-                  <Col md={8}>
+                  <Col md={6}>
                     <div className="filtered-data">
                       <ul>
                         {Object.keys(params)
@@ -473,7 +474,41 @@ export default function GuidePage({
                       )} */}
                     </div>
                   </Col>
-                  <Col md={4}>
+                  <Col md={6}>
+                    <div className="sidebar_filter">
+                      <div>
+                        Hide non-available:
+                        <div class="custom-switch form-switch">
+                          <input
+                            required=""
+                            id="variant"
+                            class="form-check-input"
+                            type="checkbox"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        {" "}
+                        Hide similar:
+                        <div class="custom-switch form-switch">
+                          <input
+                            required=""
+                            class="form-check-input"
+                            type="checkbox"
+                            id={`variant`}
+                            onChange={(e) =>
+                              handelFilterActions(
+                                "variant",
+                                "variant",
+                                e.target.checked
+                              )
+                            }
+                          />
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="filtered-data-select">
                       <span>Order by :</span>
                       <Form.Select

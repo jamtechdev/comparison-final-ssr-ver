@@ -202,7 +202,6 @@ export default function Filter({
             document.getElementById(`${item}`).checked = false;
           });
         }
-
       }
 
       if (removedParam?.toLowerCase() == "price") {
@@ -282,14 +281,14 @@ export default function Filter({
           let min =
             filteredArrayOfAttributeValues.maxValue -
               filteredArrayOfAttributeValues.minValue >=
-              1
+            1
               ? filteredArrayOfAttributeValues.minValue
               : 0;
 
           let max =
             filteredArrayOfAttributeValues.maxValue -
               filteredArrayOfAttributeValues.minValue >=
-              1
+            1
               ? filteredArrayOfAttributeValues.maxValue
               : 100;
           // alert(min)
@@ -476,15 +475,20 @@ export default function Filter({
                               (value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
                                 return (
-                                  <div key={valIndex} className="d-flex flex-row justify-content-between">
+                                  <div
+                                    key={valIndex}
+                                    className="d-flex flex-row justify-content-between"
+                                  >
                                     <div className="d-flex flex-row curser-pointer">
                                       <Form.Check
                                         required
                                         label={
                                           <span style={{ cursor: "pointer" }}>
                                             {value.toString()}{" "}
-                                            {filteredArrayOfAttributeValues?.unit == "-" ||
-                                              filteredArrayOfAttributeValues?.unit == "?"
+                                            {filteredArrayOfAttributeValues?.unit ==
+                                              "-" ||
+                                            filteredArrayOfAttributeValues?.unit ==
+                                              "?"
                                               ? ""
                                               : filteredArrayOfAttributeValues?.unit}
                                           </span>
@@ -527,15 +531,16 @@ export default function Filter({
                                     </div>
                                     <span
                                       dangerouslySetInnerHTML={{
-                                        __html: `<p>(${filteredArrayOfAttributeValues.values &&
+                                        __html: `<p>(${
+                                          filteredArrayOfAttributeValues.values &&
                                           filteredArrayOfAttributeValues.product_count &&
                                           filteredArrayOfAttributeValues
                                             .product_count[valIndex] !==
-                                          undefined
-                                          ? filteredArrayOfAttributeValues
-                                            .product_count[valIndex]
-                                          : "0"
-                                          })</p>`,
+                                            undefined
+                                            ? filteredArrayOfAttributeValues
+                                                .product_count[valIndex]
+                                            : "0"
+                                        })</p>`,
                                       }}
                                     />
                                   </div>
@@ -561,14 +566,14 @@ export default function Filter({
                             min={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                                1
+                              1
                                 ? filteredArrayOfAttributeValues.minValue
                                 : 0
                             }
                             max={
                               filteredArrayOfAttributeValues.maxValue -
                                 filteredArrayOfAttributeValues.minValue >=
-                                1
+                              1
                                 ? filteredArrayOfAttributeValues.maxValue
                                 : 100
                             }
@@ -591,13 +596,13 @@ export default function Filter({
             </Accordion>
             {countAttribute >
               (pagination[category.name] || initialNoOfCategories) && (
-                <span
-                  className="show_more"
-                  onClick={() => handlePagination(category.name)}
-                >
-                  SHOW MORE <i className="ri-add-line"></i>
-                </span>
-              )}
+              <span
+                className="show_more"
+                onClick={() => handlePagination(category.name)}
+              >
+                SHOW MORE <i className="ri-add-line"></i>
+              </span>
+            )}
           </div>
         );
       })}

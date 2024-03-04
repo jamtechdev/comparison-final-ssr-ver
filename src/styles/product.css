@@ -141,7 +141,7 @@
   fill: var(--heading-color);
   /* opacity: 70%; */
 }
-.score-section .score-detail .query span:hover div.tooltip-display-content{
+.score-section .score-detail .query span:hover div.tooltip-display-content {
   display: block !important;
 }
 
@@ -232,8 +232,8 @@
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  /* min-height: 330px;
-  height: 100%; */
+  min-height: 330px;
+  /* height: 100%;  */
 }
 
 .best-price-section .site-main-heading {
