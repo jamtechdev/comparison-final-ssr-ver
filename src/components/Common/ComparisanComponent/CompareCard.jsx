@@ -137,7 +137,7 @@ const CompareCard = ({
             ) : (
               <>
                 <div className="not-availabel">
-                  <span className="txt">NOT AVAILABLE</span>
+                  {/* <span className="txt">NOT AVAILABLE</span> */}
                   <span className="price">~ {compareProduct?.price} €</span>
                 </div>
               </>

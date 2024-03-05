@@ -71,7 +71,7 @@ function GuidePageTextArea({ guide }) {
       <Row className="mt-3">
         <Col md={4} lg={2}>
           <div className="outline-section">
-            <p>Outline</p>
+            <p>{guide && guide?.page_phrases?.outline}</p>
             <OutlineGenerator
               currentIndexId={activeOutlineId}
               blogData={guide?.text_third_part_main}
@@ -92,7 +92,9 @@ function GuidePageTextArea({ guide }) {
         </Col>
         <Col className="mobile-hide" md={12} lg={2}>
           <div className="ranking-section">
-            <div className="site-main-heading">In Rankings</div>
+            <div className="site-main-heading">
+              {guide && guide?.page_phrases?.in_rankings}
+            </div>
             {guide?.recommended_guides &&
               guide?.recommended_guides.slice(0, 3)?.map((data, index) => {
                 return (

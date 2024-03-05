@@ -337,7 +337,7 @@ export default function GuidePage({
                   </div>
                 )}
                 <span>
-                  updated:
+                  {guide && guide?.page_phrases?.updated}
                   <i> {guide?.updated_at}</i>
                 </span>
               </div>
@@ -444,6 +444,7 @@ export default function GuidePage({
             style={{ display: isShown ? "block" : "none" }}
           >
             <Filter
+              guidePhraseData={guide && guide?.page_phrases}
               categoryAttributes={filters}
               searchParam={searchParams}
               removedParam={removedParam}
@@ -539,7 +540,7 @@ export default function GuidePage({
                   <Col md={6}>
                     <div className="sidebar_filter">
                       <div>
-                        Hide non-available:
+                        {guide && guide?.page_phrases?.hide_non_available}
                         <div class="custom-switch form-switch">
                           <input
                             required=""
@@ -555,7 +556,7 @@ export default function GuidePage({
 
                       <div>
                         {" "}
-                        Hide similar:
+                        {guide && guide?.page_phrases?.hide_similar}
                         <div class="custom-switch form-switch">
                           <input
                             required=""
@@ -570,7 +571,7 @@ export default function GuidePage({
                     </div>
 
                     <div className="filtered-data-select">
-                      <span>Order by :</span>
+                      <span>{guide && guide?.page_phrases?.order_by} :</span>
                       <Form.Select
                         aria-label="Default select example"
                         onChange={(e) => handleSort(e.target.value)}
@@ -582,7 +583,7 @@ export default function GuidePage({
                             rangeAttributes: "Overall",
                           })}
                         >
-                          Overall
+                          {guide && guide?.page_phrases?.overall}
                         </option>
 
                         <option
@@ -591,7 +592,7 @@ export default function GuidePage({
                             rangeAttributes: "technical_score",
                           })}
                         >
-                          Technical score
+                          {guide && guide?.page_phrases?.technical_score}
                         </option>
                         <option
                           value={JSON.stringify({
@@ -599,7 +600,8 @@ export default function GuidePage({
                             rangeAttributes: "price",
                           })}
                         >
-                          Price (Lowest to Highest)
+                          {guide &&
+                            guide?.page_phrases?.price_lowest_to_highest}
                         </option>
                         <option
                           value={JSON.stringify({
@@ -607,21 +609,26 @@ export default function GuidePage({
                             rangeAttributes: "price",
                           })}
                         >
-                          Price (Highest to Lowest)
+                          {guide &&
+                            guide?.page_phrases?.price_highest_to_lowest}
                         </option>
                         <option
                           value={JSON.stringify({
                             algo: "high-low",
                             rangeAttributes: "reviews",
                           })}
-                        >{`User's rating`}</option>
+                        >
+                          {" "}
+                          {guide && guide?.page_phrases?.users_ratings}
+                        </option>
                         <option
                           value={JSON.stringify({
                             algo: "high-low",
                             rangeAttributes: "ratio_quality_price_points",
                           })}
                         >
-                          Ratio quality-price
+                          {guide &&
+                            guide?.page_phrases?.ratio_quality_price_points}
                         </option>
                         <option
                           value={JSON.stringify({
@@ -629,7 +636,7 @@ export default function GuidePage({
                             rangeAttributes: "popularity_points",
                           })}
                         >
-                          Popularity
+                          {guide && guide?.page_phrases?.popularity}
                         </option>
 
                         {
@@ -663,6 +670,7 @@ export default function GuidePage({
                   {products?.length > 0 ? (
                     products ? (
                       <ProductListing
+                        guidePhraseData={guide?.page_phrases}
                         productPositionArray={productPosition}
                         products={products}
                         handleToggleCollapse={handleToggleCollapse}
@@ -708,7 +716,7 @@ export default function GuidePage({
           <Row>
             <Col md={12}>
               <div className="similar-guides">
-                <p>Similar Guides:</p>
+                <p>{guide && guide?.page_phrases?.similar_guides}:</p>
                 <ul>
                   {guide?.recommended_guides &&
                     guide?.recommended_guides?.map((data, index) => {
@@ -737,6 +745,7 @@ export default function GuidePage({
               </h2>
               {guide && products && (
                 <CompareTable
+                  guidePhraseData={guide?.page_phrases}
                   products={productForTable?.products}
                   categoryAttributes={attributesForTable && attributesForTable}
                   slug={slug}
@@ -766,14 +775,16 @@ export default function GuidePage({
               </h2>
             </Col>
           </Row>
-          <GuidePageTextArea guide={guide} />
+          <GuidePageTextArea guide={guide}  />
         </Container>
       </section>
       <section className="ptb-25 mobite-mb-20">
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">See Also Guides</h2>
+              <h2 className="site-main-heading">
+                {guide && guide?.page_phrases?.see_also_guides}
+              </h2>
               <ProductSlider favSlider={guide?.see_also_guides} slug={slug} />
             </Col>
           </Row>
@@ -785,13 +796,13 @@ export default function GuidePage({
         manageCollapsedDiv={manageCollapsedDiv}
         handleManageCollapsedDiv={handleManageCollapsedDiv}
       />
-      {/* {hideSmiliar && (
+      {!hideSmiliar && (
         <ConfirmationModal
           showModal={showModal}
           handleClose={handleModalClose}
           handleConfirm={handleConfirm}
         />
-      )} */}
+      )}
       )
     </>
   );

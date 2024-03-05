@@ -26,6 +26,7 @@ export default function Product({
   incomingProduct,
   handleToggleCollapse,
   handleManageCollapsedDiv,
+  guidePhraseData,
 }) {
   const dispatch = useDispatch();
   const generateProductsWithAttributes = () => {
@@ -225,6 +226,7 @@ export default function Product({
 
     return value;
   };
+  // console.log(product)
 
   return (
     <Fragment>
@@ -555,7 +557,7 @@ export default function Product({
                       (data) => data.price === null
                     ) && (
                       <div className="not-availabel">
-                        <span className="txt">NOT AVAILABLE</span>
+                        {/* <span className="txt">NOT AVAILABLE</span> */}
                         <span className="guide">~ {product?.price} €</span>
                       </div>
                     )}
@@ -611,7 +613,9 @@ export default function Product({
               <div className="listing-container">
                 <div id="pros" className="col light-bg-color guide">
                   <div className="pros-corns-section pros">
-                    <p className="buy-avoid">Why to buy?</p>
+                    <p className="buy-avoid">
+                      {guidePhraseData && guidePhraseData?.why_to_buy}
+                    </p>
                     <ul>
                       {product &&
                         product?.top_pros
@@ -643,7 +647,10 @@ export default function Product({
                 </div>
                 <div id="cons" className="col guide">
                   <div className="pros-corns-section corns">
-                    <p className="buy-avoid">Why to avoid?</p>
+                    <p className="buy-avoid">
+                      {" "}
+                      {guidePhraseData && guidePhraseData?.why_to_avoid}
+                    </p>
                     <ul>
                       {product &&
                         product?.top_cons

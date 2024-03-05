@@ -9,10 +9,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function Filter({
   categoryAttributes,
   removedParam,
+  guidePhraseData,
   searchParam,
   orderBy,
 }) {
-  // console.log(categoryAttributes);
+  console.log(guidePhraseData);
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({
@@ -341,7 +342,7 @@ export default function Filter({
     <div className="filter-container">
       <div className="filter-section">
         <div className="tech-features-price">
-          Price
+          {guidePhraseData && guidePhraseData?.price}
           {price?.[0]?.min_price != null && (
             <MultiRangeSlider
               rangeVal={sliderValues}
@@ -388,7 +389,8 @@ export default function Filter({
         </Accordion.Item> */}
         <Accordion.Item eventKey="777777">
           <Accordion.Header as="div" className="accordion-header">
-            Brand <i className="ri-arrow-down-s-fill"></i>
+            {guidePhraseData && guidePhraseData?.brand_label}{" "}
+            <i className="ri-arrow-down-s-fill"></i>
           </Accordion.Header>
           <Accordion.Body className="brand-list-section">
             {brands?.map((brand, brandIndex) => {
