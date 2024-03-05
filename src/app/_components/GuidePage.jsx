@@ -303,7 +303,11 @@ export default function GuidePage({
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
-              <BreadCrumb firstPageName={categorySlug} secondPageName={guide} />
+              <BreadCrumb
+                firstPageName={categorySlug}
+                secondPageName={guide}
+                productPhaseData={guide && guide?.page_phrases}
+              />
             </Col>
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{guide?.heading_title}</h1>

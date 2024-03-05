@@ -73,6 +73,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
               <BreadCrumb
                 firstPageName={categorySlug}
                 secondPageName={{ heading_title: blogData[0]?.data?.title }}
+                productPhaseData={blogData[0]?.data?.page_phases}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>
