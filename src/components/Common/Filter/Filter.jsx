@@ -60,7 +60,7 @@ export default function Filter({
           deleteQueryFormURL(key, updatedParams, currentParams, url);
         }
 
-        break;
+      //   break;
       // case "variants":
       //   if (value) {
       //     updatedParams.variants = value;
@@ -146,6 +146,9 @@ export default function Filter({
     });
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
+    console.log(currentParams)
+    console.log(currentParams.toString())
+
     //call the next router for srr
     router.push(`?${currentParams.toString()}`, { scroll: false });
   };
@@ -190,10 +193,10 @@ export default function Filter({
         document.getElementById("variant").checked = false;
       }
       //search param remove
-      if (removedParam == "available") {
-        handelFilterActions("available", "available", false);
-        document.getElementById("available").checked = false;
-      }
+      // if (removedParam == "available") {
+      //   handelFilterActions("available", "available", false);
+      //   document.getElementById("available").checked = false;
+      // }
       if (removedParam == "brand") {
         const brandValues = searchParam["brand"]?.split(",");
         if (brandValues) {

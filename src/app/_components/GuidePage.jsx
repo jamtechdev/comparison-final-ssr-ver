@@ -238,6 +238,46 @@ export default function GuidePage({
   };
   // console.log(products, "hello");
   // Testing purpose
+  let updatedParams = {};
+  const handelFilterActions = (filterName, key, value, isChecked = false) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    const url = new URL(window.location.href);
+    switch (filterName) {
+      case "variant":
+        if (value) {
+          updatedParams.variant = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+          deleteQueryFormURL("direct", updatedParams, currentParams, url);
+        }
+        break;
+      case "available":
+        if (value) {
+          updatedParams.available = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        }
+        break;
+      default:
+        return;
+    }
+
+    Object.entries(updatedParams).forEach(([paramKey, paramValue]) => {
+      currentParams.set(paramKey, paramValue);
+      url.searchParams.set(paramKey, paramValue);
+    });
+    // Update the URL without triggering a page reload (hack)
+    window.history.pushState({}, "", url.toString());
+    //call the next router for srr
+    console.log(currentParams.toString());
+    router.push(`?${currentParams.toString()}`, { scroll: false });
+  };
+
+  const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
+    delete updatedParams[key];
+    currentParams.delete([key]);
+    url.searchParams.delete([key]);
+  };
 
   return (
     <>
@@ -429,39 +469,43 @@ export default function GuidePage({
                       <ul>
                         {Object.keys(params)
                           .filter((key) => key !== "direct" && key !== "sort")
-                          .map((categoryName, index) => (
-                            <li key={index}>
-                              {" "}
-                              {categoryName === "variant"
-                                ? `Show all variants: Yes`
-                                : categoryName === "available"
-                                ? `Available: Yes`
-                                : `${
-                                    categoryName.charAt(0).toUpperCase() +
-                                    categoryName.slice(1)
-                                  }: ${
-                                    params[categoryName].includes(",")
-                                      ? params[categoryName].replace(
-                                          /,/g,
-                                          " - "
-                                        )
-                                      : params[categoryName]
-                                  }`}
-                              <span
-                                className="text0danger"
-                                onClick={() => {
-                                  setremovedParam(categoryName);
-                                  removeQueryParamAndNavigate(
-                                    window.location.href,
-                                    categoryName
-                                  );
-                                }}
-                              >
-                                {" "}
-                                <i className="ri-close-fill"></i>{" "}
-                              </span>
-                            </li>
-                          ))}
+                          .map((categoryName, index) =>
+                            categoryName === "variant" ||
+                            categoryName === "available" ? (
+                              ""
+                            ) : (
+                              <li key={index}>
+                                {categoryName === "variant"
+                                  ? `Show all variants: Yes`
+                                  : categoryName === "available"
+                                  ? `Available: Yes`
+                                  : `${
+                                      categoryName.charAt(0).toUpperCase() +
+                                      categoryName.slice(1)
+                                    }: ${
+                                      params[categoryName].includes(",")
+                                        ? params[categoryName].replace(
+                                            /,/g,
+                                            " - "
+                                          )
+                                        : params[categoryName]
+                                    }`}
+                                <span
+                                  className="text0danger"
+                                  onClick={() => {
+                                    setremovedParam(categoryName);
+                                    removeQueryParamAndNavigate(
+                                      window.location.href,
+                                      categoryName
+                                    );
+                                  }}
+                                >
+                                  {" "}
+                                  <i className="ri-close-fill"></i>{" "}
+                                </span>
+                              </li>
+                            )
+                          )}
                       </ul>
                       {/* {Object.keys(params).filter((key) => key !== "direct" && key !== "sort" ).length > 0 && (
                         <span
@@ -484,6 +528,14 @@ export default function GuidePage({
                             id="variant"
                             class="form-check-input"
                             type="checkbox"
+                            checked={isChecked}
+                            onChange={(e) =>
+                              handelFilterActions(
+                                "available",
+                                "available",
+                                e.target.checked
+                              )
+                            }
                           />
                         </div>
                       </div>
