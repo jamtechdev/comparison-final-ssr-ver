@@ -146,8 +146,8 @@ export default function Filter({
     });
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
-    console.log(currentParams)
-    console.log(currentParams.toString())
+    console.log(currentParams);
+    console.log(currentParams.toString());
 
     //call the next router for srr
     router.push(`?${currentParams.toString()}`, { scroll: false });
@@ -327,7 +327,8 @@ export default function Filter({
         delete searchParams.sort;
       }
     }
-  }, [removedParam, searchParam]);
+    // I remove  searchParam   from dependency to stop infinite loop of useEffect
+  }, [removedParam]);
 
   useEffect(() => {
     // console.log(orderBy, "order");
@@ -355,7 +356,7 @@ export default function Filter({
         </div>
       </div>
       <Accordion className="filter-accordion">
-        <Accordion.Item eventKey="888880">
+        {/* <Accordion.Item eventKey="888880">
           <Accordion.Header as="div" className="accordion-header">
             {" "}
             Show all variants
@@ -384,7 +385,7 @@ export default function Filter({
               }
             />
           </Accordion.Header>
-        </Accordion.Item>
+        </Accordion.Item> */}
         <Accordion.Item eventKey="777777">
           <Accordion.Header as="div" className="accordion-header">
             Brand <i className="ri-arrow-down-s-fill"></i>

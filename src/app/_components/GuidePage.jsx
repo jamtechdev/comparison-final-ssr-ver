@@ -228,9 +228,9 @@ export default function GuidePage({
       window.history.pushState(
         {},
         "",
-        `?${queryString}&variant=yes&direct=true`
+        `?${queryString}&variant=no&direct=true`
       );
-      router.push(`?${queryString}&variant=yes&direct=true`, {
+      router.push(`?${queryString}&variant=no&direct=true`, {
         scroll: false,
       });
     }
@@ -238,6 +238,13 @@ export default function GuidePage({
   };
   // console.log(products, "hello");
   // Testing purpose
+  const [isChecked, setIsChecked] = useState(true);
+  const [hideSmiliar, setHideSmiliar] = useState(true);
+  useEffect(() => {
+    // Call handelFilterActions with the initial value of the checkbox
+    handelFilterActions("available", "available", true); // Change false to true if you want it to be checked by default
+    handelFilterActions("variant", "variant", true); // Change false to true if you want it to be checked by default
+  }, []);
   let updatedParams = {};
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
     const currentParams = new URLSearchParams(searchParams.toString());
@@ -245,10 +252,11 @@ export default function GuidePage({
     switch (filterName) {
       case "variant":
         if (value) {
-          updatedParams.variant = value;
-        } else {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
           deleteQueryFormURL("direct", updatedParams, currentParams, url);
+        } else {
+          updatedParams.variant = value;
+          setHideSmiliar(false);
         }
         break;
       case "available":
@@ -269,14 +277,24 @@ export default function GuidePage({
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
     //call the next router for srr
-    console.log(currentParams.toString());
-    router.push(`?${currentParams.toString()}`, { scroll: false });
+    // console.log(url.searchParams.toString());
+    router.push(`?${url.searchParams.toString()}`, { scroll: false });
   };
 
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
     delete updatedParams[key];
     currentParams.delete([key]);
     url.searchParams.delete([key]);
+  };
+  const handleChange = (e) => {
+    const checked = e.target.checked;
+    setIsChecked(checked);
+    handelFilterActions("available", "available", checked);
+  };
+  const handleHideSmiliar = (e) => {
+    const checked = e.target.checked;
+    setHideSmiliar(checked);
+    handelFilterActions("variant", "variant", checked);
   };
 
   return (
@@ -528,14 +546,9 @@ export default function GuidePage({
                             id="variant"
                             class="form-check-input"
                             type="checkbox"
+                            // checked={isChecked}
+                            onChange={handleChange}
                             checked={isChecked}
-                            onChange={(e) =>
-                              handelFilterActions(
-                                "available",
-                                "available",
-                                e.target.checked
-                              )
-                            }
                           />
                         </div>
                       </div>
@@ -549,13 +562,8 @@ export default function GuidePage({
                             class="form-check-input"
                             type="checkbox"
                             id={`variant`}
-                            onChange={(e) =>
-                              handelFilterActions(
-                                "variant",
-                                "variant",
-                                e.target.checked
-                              )
-                            }
+                            onChange={handleHideSmiliar}
+                            checked={hideSmiliar}
                           />
                         </div>
                       </div>
@@ -677,8 +685,6 @@ export default function GuidePage({
                       ) : (
                         ""
                       )}
-
-                      {/* {confirm("tum chai pina h ?")} */}
                     </>
                   )}
                 </>
@@ -779,6 +785,13 @@ export default function GuidePage({
         manageCollapsedDiv={manageCollapsedDiv}
         handleManageCollapsedDiv={handleManageCollapsedDiv}
       />
+      {/* {hideSmiliar && (
+        <ConfirmationModal
+          showModal={showModal}
+          handleClose={handleModalClose}
+          handleConfirm={handleConfirm}
+        />
+      )} */}
       )
     </>
   );

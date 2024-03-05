@@ -621,7 +621,7 @@ function ProductPage({
               </Col>
             )}
             {/* {console.log(product,"neet")} */}
-            {console.log(product?.available_versions, "hllo")}
+            {/* {console.log(product?.available_versions, "hllo")} */}
 
             {product?.available_versions &&
               product?.available_versions?.length !== 0 && (
@@ -1104,7 +1104,7 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {console.log(product?.alternative_comparisons)}
+      {/* {console.log(product?.alternative_comparisons)} */}
       {product?.alternative_comparisons?.length > 0 && (
         <section className="mt-3 mobile-popular-comparison">
           <Container>

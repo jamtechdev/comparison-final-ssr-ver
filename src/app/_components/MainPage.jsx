@@ -90,7 +90,9 @@ export default function MainPage({ bannerCounts, favSlider }) {
       <Container className="ptb-80">
         <Row>
           <Col md={12}>
-            <h2 className="site-main-heading">Favourite Guides</h2>
+            <h2 className="site-main-heading">
+              {favSlider && favSlider?.favourite_guides}
+            </h2>
             {favSlider && favSlider.favorite_guides && (
               <>
                 <LatesGuid favSlider={favSlider.favorite_guides} />
@@ -128,13 +130,18 @@ export default function MainPage({ bannerCounts, favSlider }) {
           </Container>
         </section>
       )}
-      {favSlider && favSlider?.categories.length > 0 && (
+
+      {favSlider && favSlider?.categories_in_home?.length > 0 && (
         <section className="ptb-80">
           <Container>
             <Row>
               <Col md={12}>
-                <h2 className="site-main-heading">Categories</h2>
-                <Category categories={favSlider?.categories} />
+                <h2 className="site-main-heading">
+                  {favSlider && favSlider?.categories}
+                </h2>
+                <Category
+                  categories={favSlider && favSlider?.categories_in_home}
+                />
               </Col>
             </Row>
           </Container>
@@ -144,7 +151,9 @@ export default function MainPage({ bannerCounts, favSlider }) {
         <Container>
           <Row>
             <Col lg={7} md={12}>
-              <h2 className="site-main-heading">How Our Rankings Work?</h2>
+              <h2 className="site-main-heading">
+                {favSlider && favSlider?.how_rankings_work_text}
+              </h2>
               <p
                 className="inner-text-content mt-3"
                 dangerouslySetInnerHTML={{
@@ -167,7 +176,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
       </section>
 
       {favSlider &&
-        favSlider?.categories?.map((data, index) => {
+        favSlider?.categories_in_home?.map((data, index) => {
           return (
             <div key={index}>
               <section className="ptb-80 bg-cat">
@@ -197,7 +206,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                     <Row>
                       <Col md={12}>
                         <h3 className="site-main-heading">
-                          Product categories
+                          {favSlider && favSlider?.product_categories_text}
                         </h3>
                         {/* <div className="product-categories-container">
                           {data?.categories?.map((item, index) => {
@@ -248,16 +257,26 @@ export default function MainPage({ bannerCounts, favSlider }) {
               <Container className="mt-3">
                 <Row>
                   <Col md={12}>
-                    <h3 className="site-main-heading">Guides</h3>
+                    <h3 className="site-main-heading">
+                      {favSlider && favSlider?.guides}
+                    </h3>
                     <Tabs
                       defaultActiveKey="tab-1"
                       id="Review-tab"
                       className="mb-3 site_tabs"
                     >
-                      <Tab eventKey="tab-1" title="Most Popular Guides">
+                      <Tab
+                        eventKey="tab-1"
+                        title={`${
+                          favSlider && favSlider?.most_popular_guides_text
+                        }`}
+                      >
                         <ProductSlider favSlider={data?.popular_guides} />
                       </Tab>
-                      <Tab eventKey="tab-2" title="Latest Guides">
+                      <Tab
+                        eventKey="tab-2"
+                        title={`${favSlider && favSlider?.latest_guides_text}`}
+                      >
                         <LatesGuid favSlider={data?.latest_guides} />
                       </Tab>
                     </Tabs>
@@ -268,13 +287,20 @@ export default function MainPage({ bannerCounts, favSlider }) {
               <Container className="mt-3">
                 <Row>
                   <Col md={12}>
-                    <h3 className="site-main-heading">Review</h3>
+                    <h3 className="site-main-heading">
+                      {favSlider && favSlider?.review_text}
+                    </h3>
                     <Tabs
                       defaultActiveKey="tab-1"
                       id="Review-tab"
                       className="mb-3 site_tabs"
                     >
-                      <Tab eventKey="tab-1" title="Most Popular Reviews">
+                      <Tab
+                        eventKey="tab-1"
+                        title={`${
+                          favSlider && favSlider?.most_popular_review_text
+                        }`}
+                      >
                         {data?.popular_reviews.length > 0 ? (
                           <ReviewSlider favSlider={data?.popular_reviews} />
                         ) : (
@@ -293,7 +319,10 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         )}
                         {/* <ReviewSlider favSlider={data?.popular_reviews} /> */}
                       </Tab>
-                      <Tab eventKey="tab-2" title="Latest Reviews">
+                      <Tab
+                        eventKey="tab-2"
+                        title={`${favSlider && favSlider?.latest_reviews_text}`}
+                      >
                         <ReviewSlider favSlider={data?.latest_reviews} />
                       </Tab>
                     </Tabs>
@@ -305,7 +334,9 @@ export default function MainPage({ bannerCounts, favSlider }) {
                 <Container className="my-3">
                   <Row>
                     <Col md={12}>
-                      <h3 className="site-main-heading">Blog Posts</h3>
+                      <h3 className="site-main-heading">
+                        {favSlider && favSlider?.blog_posts_text}
+                      </h3>
                       <BlogSlider blogData={data?.blog_posts} />
                     </Col>
                   </Row>

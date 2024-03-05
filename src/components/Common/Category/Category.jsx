@@ -4,6 +4,8 @@ import Link from "next/link";
 
 const IMAGE_ALT_TEXT = "Category Images";
 export default function Category({ categories }) {
+  // console.log
+  (categories)
   return (
     <Row>
       {categories?.map((section, index) => (
