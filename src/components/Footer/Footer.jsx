@@ -12,7 +12,7 @@ import {
 import NewsLetter from "../Common/NewsLetter/newsLetter.jsx";
 import { useEffect, useState } from "react";
 export default function Footer({ footerData }) {
-  console.log(footerData);
+  // console.log(footerData);
   // news letter pop up
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
