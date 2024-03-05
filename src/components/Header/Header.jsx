@@ -16,7 +16,7 @@ import {
 } from "react-bootstrap";
 import SearchList from "../Search/SearchList";
 import CompareModal from "../Common/Comparison/CompareModal";
-export default function Header({ headerData }) {
+export default function Header({ headerData, headerPhase }) {
   const [isFocused, setIsFocused] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -59,10 +59,12 @@ export default function Header({ headerData }) {
       setIsFocused(false);
     }, 200);
   };
+  console.log(headerPhase);
   return (
     <header
-      className={`sticky ${scrollDirection === "down" ? "top-sticky-not" : "top-sticky"
-        }`}
+      className={`sticky ${
+        scrollDirection === "down" ? "top-sticky-not" : "top-sticky"
+      }`}
     >
       <Container>
         <Row className="py-2 align-items-center logo-header">
@@ -87,8 +89,10 @@ export default function Header({ headerData }) {
                   <Accordion>
                     {headerData &&
                       headerData?.map((item, headerDataKey) => (
-
-                        <Accordion.Item eventKey={headerDataKey} key={headerDataKey}>
+                        <Accordion.Item
+                          eventKey={headerDataKey}
+                          key={headerDataKey}
+                        >
                           <Accordion.Header as="div">
                             {item?.primary_category}
                           </Accordion.Header>
@@ -99,9 +103,7 @@ export default function Header({ headerData }) {
                                   return (
                                     <Col lg={3} md={6} xs={12} key={index}>
                                       <div className="nav-list-section">
-                                        <span>
-                                          {items?.secondary_category}
-                                        </span>
+                                        <span>{items?.secondary_category}</span>
                                         <ul>
                                           {items?.guides &&
                                             items?.guides?.map(
@@ -125,7 +127,6 @@ export default function Header({ headerData }) {
                             </Row>
                           </Accordion.Body>
                         </Accordion.Item>
-
                       ))}
                   </Accordion>
                   <Navbar className="nav-links-mobile">
@@ -179,16 +180,19 @@ export default function Header({ headerData }) {
           <Col md={6} className="hide-header-list">
             <ul className={styles.navitem}>
               <li onClick={() => setIsOpen(true)} role="button">
-                Compare
+                {headerPhase && headerPhase?.compare}
               </li>
               <li>
-                <Link href="#">How we rank</Link>
+                <Link href="#"> {headerPhase && headerPhase?.how_we_rank}</Link>
+              </li>
+              {/* {console.log(headerPhase)} */}
+              <li>
+                <Link href="/about-us">
+                  {headerPhase && headerPhase?.about_us}
+                </Link>
               </li>
               <li>
-                <Link href="/about-us">About us</Link>
-              </li>
-              <li>
-                <Link href="#">Contact</Link>
+                <Link href="#">{headerData && headerData?.contact}</Link>
               </li>
             </ul>
           </Col>

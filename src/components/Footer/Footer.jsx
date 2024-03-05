@@ -12,6 +12,7 @@ import {
 import NewsLetter from "../Common/NewsLetter/newsLetter.jsx";
 import { useEffect, useState } from "react";
 export default function Footer({ footerData }) {
+  console.log(footerData);
   // news letter pop up
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,11 +25,18 @@ export default function Footer({ footerData }) {
         <Container>
           <Row className="align-items-center ">
             <Col lg={6} md={12} xs={12}>
+              {/* footer_page_phases: {
+      sign_up_text: 'Sign Up Text',
+      sign_up_label: 'Sign Up Label',
+      sign_up_button: 'Sign Up Label',
+      sign_up_placeholder: 'Sign Up Placeholder',
+      copyright: 'Copyright'
+    }, */}
               <div className={"text-uppercase " + styles.singupNewsletter}>
-                Sign up For Newsletter
+                {footerData?.footer_page_phases?.sign_up_text}
               </div>
               <p className="space-bottom-para">
-                Get the latest buying advice
+                {footerData?.footer_page_phases?.sign_up_label}
               </p>
             </Col>
             <Col lg={6} md={12} xs={12} className="top-space">
@@ -38,10 +46,12 @@ export default function Footer({ footerData }) {
                 </div>
                 <Form.Control
                   type="email"
-                  placeholder="Your email..."
+                  placeholder={`${footerData?.footer_page_phases?.sign_up_placeholder}`}
                   aria-label="Search"
                 />
-                <Button onClick={handleShow}>Subscribe</Button>
+                <Button onClick={handleShow}>
+                  {footerData?.footer_page_phases?.sign_up_button}
+                </Button>
                 <NewsLetter
                   show={show}
                   setShow={setShow}
@@ -69,10 +79,12 @@ export default function Footer({ footerData }) {
                   const link = footerData.column_one[platform];
                   const iconClass = `ri-${platform.replace("_link", "")}-fill`;
 
-                  return link && (
-                    <Link key={platform} href={link}>
-                      <i className={iconClass}></i>
-                    </Link>
+                  return (
+                    link && (
+                      <Link key={platform} href={link}>
+                        <i className={iconClass}></i>
+                      </Link>
+                    )
                   );
                 })}
               </div>
@@ -145,10 +157,11 @@ export default function Footer({ footerData }) {
               {footerData &&
                 footerData?.column_four?.categories?.map((cat, index) => {
                   return (
-                    cat?.title && <li key={index}>
-                    <Link href={`/${cat.title}`}>{cat.title}</Link>
-                  </li>
-                    
+                    cat?.title && (
+                      <li key={index}>
+                        <Link href={`/${cat.title}`}>{cat.title}</Link>
+                      </li>
+                    )
                   );
                 })}
             </ul>
@@ -156,7 +169,9 @@ export default function Footer({ footerData }) {
         </Row>
       </Container>
       <div className="copy-right">
-        <p className="text-center">Copyright © 2023. All Right Reserved</p>
+        <p className="text-center">
+          {footerData?.footer_page_phases?.copyright}
+        </p>
       </div>
     </footer>
   );

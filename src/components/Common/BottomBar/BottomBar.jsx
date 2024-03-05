@@ -14,6 +14,7 @@ export default function BottomBar({
   handleToggleCollapse,
   manageCollapsedDiv,
   handleManageCollapsedDiv,
+  guidePhraseData,
 }) {
   const compareGuideData = useSelector(
     (state) => state.comparePro.compareProduct[0]
@@ -91,7 +92,7 @@ export default function BottomBar({
               <div className="bottom_bar_header_content">
                 <Image src="/images/vs.svg" width={40} height={40} alt="" />
                 <div className="bottom_bar_heading">
-                  <div>Comparison</div>
+                  <div>{guidePhraseData && guidePhraseData?.comparison}</div>
                   <span>
                     {
                       Object?.values(compareGuideData)
@@ -181,7 +182,7 @@ export default function BottomBar({
                       />
                     </>
                   )}
-                  Compare
+                  {guidePhraseData && guidePhraseData?.compare_button}
                 </button>
               </div>
             </div>

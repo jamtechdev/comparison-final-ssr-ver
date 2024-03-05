@@ -145,14 +145,17 @@ const WhyAccordionTab = React.memo(
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
                 <h3 className="font-20">
-                  Why is {product && product?.name} BETTER than{" "}
-                  {product && product?.average_title}?
+                  {product && product?.page_phases?.better_then}
+                  {/* Why is {product && product?.name} BETTER than{" "}
+                  {product && product?.average_title}? */}
                 </h3>
                 <div className="show-btn">
-                  Show All <i className="ri-arrow-down-s-line"></i>
+                  {product && product?.page_phases?.show_all}
+                  <i className="ri-arrow-down-s-line"></i>
                 </div>
                 <div className="hide-btn">
-                  Hide All <i className="ri-arrow-up-s-line"></i>
+                  {product && product?.page_phases?.hide_all}{" "}
+                  <i className="ri-arrow-up-s-line"></i>
                 </div>
               </Accordion.Header>
               <Accordion.Body>
@@ -395,16 +398,18 @@ const WhyAccordionTab = React.memo(
             <Accordion.Item eventKey="2">
               <Accordion.Header as="div">
                 <h2 className="font-20">
-                  {" "}
-                  Why is {product && product?.name} WORSE than{" "}
-                  {product && product?.average_title}?
+                  {product && product?.page_phases?.worst_then}
+                  {/* Why is {product && product?.name} WORSE than{" "}
+                  {product && product?.average_title}? */}
                 </h2>
 
                 <div className="show-btn">
-                  Show All <i className="ri-arrow-down-s-line"></i>
+                  {product && product?.page_phases?.show_all}{" "}
+                  <i className="ri-arrow-down-s-line"></i>
                 </div>
                 <div className="hide-btn">
-                  Hide All <i className="ri-arrow-up-s-line"></i>
+                  {product && product?.page_phases?.hide_all}{" "}
+                  <i className="ri-arrow-up-s-line"></i>
                 </div>
               </Accordion.Header>
               <Accordion.Body>

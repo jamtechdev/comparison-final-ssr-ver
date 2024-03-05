@@ -775,7 +775,7 @@ export default function GuidePage({
               </h2>
             </Col>
           </Row>
-          <GuidePageTextArea guide={guide}  />
+          <GuidePageTextArea guide={guide} />
         </Container>
       </section>
       <section className="ptb-25 mobite-mb-20">
@@ -791,6 +791,7 @@ export default function GuidePage({
         </Container>
       </section>
       <BottomBar
+        guidePhraseData={guide?.page_phrases}
         isCollapsed={isCollapsed}
         handleToggleCollapse={handleToggleCollapse}
         manageCollapsedDiv={manageCollapsedDiv}

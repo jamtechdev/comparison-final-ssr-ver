@@ -9,7 +9,11 @@ import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
 import Link from "next/link";
 
-export default function ComparisonTable({ products, categoryAttributes }) {
+export default function ComparisonTable({
+  products,
+  categoryAttributes,
+  comparisonPhaseData,
+}) {
   const router = useRouter();
   let initialNoOfCategories = 5;
   const [pagination, setPagination] = useState({});
@@ -261,7 +265,9 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                 <th key={index}>
                   {productScoreLabelIndex !== "" &&
                     productScoreLabelIndex === index && (
-                      <span className="best-tag-product">Winner</span>
+                      <span className="best-tag-product">
+                        {comparisonPhaseData && comparisonPhaseData?.winner}
+                      </span>
                     )}
                   {/* {productScoreLabelIndex === -1000 && index === 0 && (
                     <div className="comparison-tag">draw! No clear winner</div>
@@ -318,13 +324,13 @@ export default function ComparisonTable({ products, categoryAttributes }) {
                                             target="_blank"
                                             href={`/link?p=${btoa(data.url)}`}
                                           > */}
-                                            <img
-                                              src={data?.logo}
-                                              width={0}
-                                              height={0}
-                                              sizes="100vw"
-                                              alt="price"
-                                            />
+                                          <img
+                                            src={data?.logo}
+                                            width={0}
+                                            height={0}
+                                            sizes="100vw"
+                                            alt="price"
+                                          />
                                           {/* </Link> */}
                                           <span>
                                             <a
@@ -353,7 +359,9 @@ export default function ComparisonTable({ products, categoryAttributes }) {
         <tbody id="tbody">
           <tr className="">
             <th>
-              <p>Image</p>
+              <p>
+                {(comparisonPhaseData && comparisonPhaseData?.image) || "Image"}
+              </p>
             </th>
             {finalProducts.slice(0, defaultNo).map((product, imageIndex) => {
               return (
@@ -706,7 +714,8 @@ export default function ComparisonTable({ products, categoryAttributes }) {
       {fullTable == 2 && (
         <div className="text-center">
           <Button className="see_all_btn_outline" onClick={handleTableShow}>
-            See Full Table <i className="ri-arrow-down-s-line"></i>
+            {comparisonPhaseData && comparisonPhaseData?.see_full_table}{" "}
+            <i className="ri-arrow-down-s-line"></i>
           </Button>
         </div>
       )}

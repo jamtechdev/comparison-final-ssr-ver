@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 const CompareCard = ({
   compareProduct,
+  productPhaseData,
   products,
   productIndex,
   setIsOpen,
@@ -31,7 +32,7 @@ const CompareCard = ({
     }
     return value;
   };
-
+  console.log(productPhaseData && productPhaseData);
   const urlChange = (i) => {
     let x = window.location.pathname.split("/")[2].split("-vs-");
     // Create a new array without the element at the specified index
@@ -46,7 +47,7 @@ const CompareCard = ({
 
     newArray.length <= 1 && handelRemoveProduct(i);
   };
-
+  
   return (
     <div className="comparison-wrapper">
       {compareProduct.length <= 0 ? (
@@ -60,7 +61,9 @@ const CompareCard = ({
         <>
           {productScoreLabelIndex !== "" &&
             productScoreLabelIndex === productIndex && (
-              <div className="comparison-tag">Winner</div>
+              <div className="comparison-tag">
+                {productPhaseData && productPhaseData?.winner}
+              </div>
             )}
           {productScoreLabelIndex === -1000 && productIndex === 0 && (
             <div className="comparison-tag">draw! No clear winner</div>

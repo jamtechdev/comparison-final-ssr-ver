@@ -120,7 +120,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
           <div className="custom-row">
             <div className="left-side-bar">
               <div className="outline-section">
-                <p>Outline</p>
+                <p>{blogData[0]?.data?.page_phases?.outline}</p>
                 <OutlineGenerator
                   currentIndexId={activeOutlineId}
                   blogData={contentWithIds}
@@ -191,7 +191,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
               <Row className="mt-3">
                 <Col md={12}>
                   <div className="heading-primary secondary mb-2">
-                    Related Guides
+                    {blogData[0]?.data?.page_phases?.related_guides_sidebar}
                   </div>
                 </Col>
                 <Col md={12}>
@@ -209,7 +209,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
           <Row className="my-3">
             <Col md={12}>
               <h2 className="heading-primary secondary blog-post">
-                Blog Posts
+                {blogData[0]?.data?.page_phases?.blog_posts}
               </h2>
             </Col>
             <Col md={12}>
@@ -223,7 +223,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
           <Row className="my-3">
             <Col md={12}>
               <h2 className="heading-primary secondary related-guides">
-                Related Guides
+                {blogData[0]?.data?.page_phases?.related_guides_bottom}
               </h2>
             </Col>
             <Col md={12}>

@@ -13,7 +13,7 @@ export default async function Layout({ children, footerData, headerData }) {
   return (
     <>
       <Provider store={store}>
-        <Header headerData={headerData} />
+        <Header headerData={headerData} headerPhase={footerData?.header_page_phases} />
         {children}
         <Footer footerData={footerData} />
       </Provider>

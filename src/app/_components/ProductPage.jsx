@@ -194,6 +194,7 @@ function ProductPage({
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
+                productPhaseData={product?.page_phases}
                 firstPageName={categorySlug}
                 secondPageName={product}
               />
@@ -256,7 +257,7 @@ function ProductPage({
               <div className="score-detail ">
                 <div className="tooltip-title removeUnderlineFrom">
                   <p>
-                    Overall Score
+                    {product && product?.page_phases?.overall_score}
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -269,18 +270,22 @@ function ProductPage({
                   <div className="tooltip-display-content bottom-tooltip-display">
                     {product?.overall_score_descriptions.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>
+                        <b>{product && product?.page_phases?.what_it_is}: </b>
                         {product?.overall_score_descriptions?.description}
                       </p>
                     )}
                     {product?.overall_score_descriptions.when_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>
+                        <b>
+                          {product && product?.page_phases?.when_it_matters}:{" "}
+                        </b>
                         {product?.overall_score_descriptions?.when_matters}
                       </p>
                     )}
                     <p>
-                      <b>Score components:</b>
+                      <b>
+                        {product && product?.page_phases?.score_components} :
+                      </b>
                     </p>
                     {product.overall_score_descriptions.score_components &&
                       product.overall_score_descriptions.score_components?.map(
@@ -342,7 +347,7 @@ function ProductPage({
               <div className="score-detail">
                 <div className="tooltip-title removeUnderlineFrom ">
                   <p>
-                    Technical Score
+                    {product && product?.page_phases?.technical_score}
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -355,18 +360,22 @@ function ProductPage({
                   <div className="tooltip-display-content bottom-tooltip-display">
                     {product?.technical_score_descriptions.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>
+                        <b>{product && product?.page_phases?.what_it_is}: </b>
                         {product?.technical_score_descriptions?.description}
                       </p>
                     )}
                     {product?.technical_score_descriptions.when_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>
+                        <b>
+                          {product && product?.page_phases?.when_it_matters}:{" "}
+                        </b>
                         {product?.technical_score_descriptions?.when_matters}
                       </p>
                     )}
                     <p>
-                      <b>Score components:</b>
+                      <b>
+                        {product && product?.page_phases?.score_components}:
+                      </b>
                     </p>
                     {product.technical_score_descriptions.score_components &&
                       product.technical_score_descriptions.score_components?.map(
@@ -424,7 +433,7 @@ function ProductPage({
               <div className="score-detail">
                 <div className="tooltip-title removeUnderlineFrom">
                   <p>
-                    User’s Rating{" "}
+                    {product && product?.page_phases?.users_ratings}
                     <span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -437,18 +446,22 @@ function ProductPage({
                   <div className="tooltip-display-content bottom-tooltip-display">
                     {product?.users_rating_descriptions.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>
+                        <b>{product && product?.page_phases?.what_it_is}: </b>
                         {product?.users_rating_descriptions?.description}
                       </p>
                     )}
                     {product?.technical_score_descriptions.when_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>
+                        <b>
+                          {product && product?.page_phases?.when_it_matters}:{" "}
+                        </b>
                         {product?.users_rating_descriptions?.when_matters}
                       </p>
                     )}
                     <p>
-                      <b>Score components:</b>
+                      <b>
+                        {product && product?.page_phases?.score_components}:
+                      </b>
                     </p>
                     {product.users_rating_descriptions.score_components &&
                       product.users_rating_descriptions.score_components?.map(
@@ -510,7 +523,9 @@ function ProductPage({
             </Col>
             <Col lg={6} md={6} xl={4}>
               <div className="best-price-section">
-                <h2 className="site-main-heading">Best Prices</h2>
+                <h2 className="site-main-heading">
+                  {product && product?.page_phases?.best_prices}
+                </h2>
                 <ul className="best-list-item">
                   {product &&
                     product?.price_websites
@@ -553,7 +568,10 @@ function ProductPage({
             </Col>
             <Col lg={6} md={6} xl={4}>
               <div className="best-price-section ranking">
-                <h2 className="site-main-heading">Best Rankings</h2>
+                <h2 className="site-main-heading">
+                  {" "}
+                  {product && product?.page_phases?.best_rankings}
+                </h2>
                 <ul className="best-list-item">
                   {product &&
                     product?.guide_ratings
@@ -714,7 +732,9 @@ function ProductPage({
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Technical Specifications</h2>
+              <h2 className="site-main-heading">
+                {product && product?.page_phases?.technical_specifications}
+              </h2>
             </Col>
             <Col md={12} xs={12}>
               <Row className="m-0 technical-specifications">
@@ -735,7 +755,9 @@ function ProductPage({
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">{product?.name}</h2>
+              <h2 className="site-main-heading">
+                {product && product?.page_phases?.radio_chart_title}
+              </h2>
             </Col>
           </Row>
           <WhyAccordionTab product={product} slug={slug} />
@@ -752,12 +774,14 @@ function ProductPage({
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Who is it For</h2>
+              <h2 className="site-main-heading">
+                {product && product?.page_phases?.who_is_it_for}
+              </h2>
             </Col>
             <Col md={6}>
               <div className="pros-corns-section pros">
                 <div className="pros-header">
-                  Who SHOULD BUY {product?.name}?
+                  {product && product?.page_phases?.should_buy}
                 </div>
                 {product?.should_buy.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
@@ -783,7 +807,7 @@ function ProductPage({
             <Col md={6}>
               <div className="pros-corns-section corns">
                 <div className="pros-header">
-                  Who SHOULD NOT BUY {product?.name}?
+                  {product && product?.page_phases?.should_not_buy}
                 </div>
                 {product?.should_not_buy.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
@@ -818,14 +842,15 @@ function ProductPage({
               <Row>
                 <Col md={12}>
                   <h2 className="site-main-heading">
-                    Review of {product?.name}
+                    {product && product?.page_phases?.main_text_title}
+                    {/* Review of {product?.name} */}
                   </h2>
                 </Col>
               </Row>
               <Row className="mt-3">
                 <Col md={4} lg={2}>
                   <div className="outline-section">
-                    <p>Outline</p>
+                    <p>{product && product?.page_phases?.outline}</p>
                     <OutlineGenerator
                       blogData={product?.text_part}
                       currentIndexId={activeOutlineId}
@@ -991,7 +1016,9 @@ function ProductPage({
           <Row className="mt-5">
             <Col md={6}>
               <div className="pros-corns-section pros light-background">
-                <h3 className="pros-header">Pros</h3>
+                <h3 className="pros-header">
+                  {product && product?.page_phases?.pros}
+                </h3>
                 <ul>
                   {product &&
                     product?.top_pros?.map((data, key) => {
@@ -1011,7 +1038,9 @@ function ProductPage({
             </Col>
             <Col md={6}>
               <div className="pros-corns-section corns light-background">
-                <h3 className="pros-header">Cons</h3>
+                <h3 className="pros-header">
+                  {product && product?.page_phases?.cons}
+                </h3>
                 <ul className="cross">
                   {product &&
                     product?.top_cons?.map((data, key) => {
@@ -1033,7 +1062,7 @@ function ProductPage({
         </Container>
       </section>
 
-      <ProductTabs />
+      <ProductTabs product={product?.page_phases?.third_party_reviews} />
       {/* <section className="ptb-80">
         <Container>
           <Row>
@@ -1074,8 +1103,7 @@ function ProductPage({
           <Row className="table-section-mobile">
             <Col md={12}>
               <h2 className="site-main-heading pt-5">
-                Comparing Samsung New VR Headset Oculus 2.0 with best robot
-                vacuum cleaners
+                {product?.page_phases?.table_compare_title}
               </h2>
               <ProductCompareTable
                 products={compareByCatID?.data}
@@ -1091,7 +1119,9 @@ function ProductPage({
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Compare With Other Products</h2>
+              <h2 className="site-main-heading">
+                {product?.page_phases?.compare_with_other_products}
+              </h2>
               <CompareForm
                 location="ON_PRODUCT_PAGE"
                 product_name={product}
@@ -1110,9 +1140,11 @@ function ProductPage({
           <Container>
             <Row>
               <Col md={12}>
-                <h2 className="site-main-heading">Popular comparisons</h2>
+                <h2 className="site-main-heading">
+                  {product?.page_phases?.popular_comparison}
+                </h2>
                 <ComparisonsSlider
-                  products={product&&product?.alternative_comparisons}
+                  products={product && product?.alternative_comparisons}
                 />
               </Col>
             </Row>

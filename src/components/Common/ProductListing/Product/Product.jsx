@@ -267,7 +267,9 @@ export default function Product({
               }}
             >
               <i className="ri-add-fill"></i>
-              <p className="compare-text">Compare</p>
+              <p className="compare-text">
+                {guidePhraseData && guidePhraseData?.add_to_comparison}
+              </p>
             </span>
             <img
               className="compare_image"
@@ -786,7 +788,11 @@ export default function Product({
                                 return (
                                   <Link href={`/${data.permalink}`} key={key}>
                                     <p>
-                                      <span>#{data?.position} in </span>
+                                      <span>
+                                        #{data?.position}{" "}
+                                        {guidePhraseData &&
+                                          guidePhraseData?.in_text}{" "}
+                                      </span>
                                       {data?.guide_short_name};
                                     </p>
                                   </Link>

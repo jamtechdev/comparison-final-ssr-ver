@@ -44,7 +44,7 @@ function CompareDiv({
 }) {
   const dispatch = useDispatch();
   const products = comparisonData.map((item) => item.data);
-  // console.log(products[0]);
+  // console.log(comparisonData?.length);
   const [isOpen, setIsOpen] = useState(false);
   const [compareProDataFirst, setCompareProDataFirst] = useState(
     (products[0] && products[0]) || []
@@ -222,8 +222,6 @@ function CompareDiv({
   }
   // const contentWithIds = addIdsToHeadings(bestAlternative?.text_part);
 
-  // console.log(bestAlternative, "neet");
-
   return (
     <>
       <section className="product-header">
@@ -231,6 +229,7 @@ function CompareDiv({
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
+                productPhaseData={bestAlternative?.page_phases}
                 pageType="comparision"
                 firstPageName={categorySlug}
                 secondPageName={`${compareProDataFirst?.name || ""} vs ${
@@ -257,7 +256,11 @@ function CompareDiv({
             <Col md={12} className="table-section-mobile">
               <div className="comparison-tool">
                 {/* First Crd */}
+                {console.log(bestAlternative?.page_phases)}
                 <CompareCard
+                  productPhaseData={
+                    bestAlternative && bestAlternative?.page_phases
+                  }
                   compareProduct={compareProDataFirst}
                   products={products}
                   productIndex={0}
@@ -271,6 +274,9 @@ function CompareDiv({
                 </div>
                 {/* second  Card*/}
                 <CompareCard
+                  productPhaseData={
+                    bestAlternative && bestAlternative?.page_phases
+                  }
                   compareProduct={compareProDataSec}
                   products={products}
                   productIndex={1}
@@ -284,6 +290,9 @@ function CompareDiv({
                 </div>
                 {/* Third Card */}
                 <CompareCard
+                  productPhaseData={
+                    bestAlternative && bestAlternative?.page_phases
+                  }
                   compareProduct={compareProDataThird}
                   products={products}
                   productIndex={2}
@@ -304,10 +313,18 @@ function CompareDiv({
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Graph Comparison</h2>
+              <h2 className="site-main-heading">
+                {comparisonData?.length > 2
+                  ? bestAlternative &&
+                    bestAlternative?.page_phases
+                      ?.three_products_graph_comparison
+                  : bestAlternative &&
+                    bestAlternative?.page_phases?.two_products_graph_comparison}
+              </h2>
             </Col>
           </Row>
           <CompareAccordionTab
+            comparePhaseData={bestAlternative?.page_phases}
             sendProductProps={comparisonProductData}
             product={graphComparisonProsCons}
             pageType={"comparison"}
@@ -321,7 +338,9 @@ function CompareDiv({
             <div className="custom-row">
               <div className="left-side-bar">
                 <div className="outline-section">
-                  <p>Outline</p>
+                  <p>
+                    {bestAlternative && bestAlternative?.page_phases?.outline}
+                  </p>
                   {bestAlternative?.text_part && (
                     <ComparisionOutlineGenerator
                       currentIndexId={activeOutlineId}
@@ -354,11 +373,13 @@ function CompareDiv({
                   </div>
                 </div>
               </div>
+
               <div className="mobile-hide right-side-bar productSlider-Container">
                 <Row className="mt-3">
                   <Col md={12}>
                     <div className="heading-primary secondary mb-2">
-                      Related Guides
+                      {bestAlternative &&
+                        bestAlternative?.page_phases?.related_guides_sidebar}
                     </div>
                   </Col>
                   <Col md={12}>
@@ -380,16 +401,21 @@ function CompareDiv({
               <Row>
                 <Col md={12}>
                   <h2 className="site-main-heading">
-                    Should You Buy {compareProDataFirst?.name} or{" "}
+                    {comparisonData?.length > 2
+                      ? bestAlternative?.page_phases?.three_products_should_buy
+                      : bestAlternative &&
+                        bestAlternative?.page_phases?.two_products_should_buy}
+                    {/* Should You Buy {compareProDataFirst?.name} or{" "}
                     {compareProDataSec?.name}{" "}
                     {compareProDataThird?.name &&
-                      `or ${compareProDataThird?.name}`}
+                      `or ${compareProDataThird?.name}`} */}
                   </h2>
                 </Col>
                 <Col md={6}>
                   <div className="pros-corns-section pros">
                     <div className="pros-header">
-                      Who SHOULD BUY {compareProDataFirst?.name}?
+                      {bestAlternative?.page_phases?.when_should_buy}
+                      {/* Who SHOULD BUY {compareProDataFirst?.name}? */}
                     </div>
                     {bestAlternative?.should_buy_product_one?.length === 0 && (
                       <h3 className="no-data text-center mt-2">
@@ -419,7 +445,8 @@ function CompareDiv({
                 <Col md={6}>
                   <div className="pros-corns-section corns">
                     <div className="pros-header">
-                      Who SHOULD NOT BUY {compareProDataSec?.name} ?
+                      {bestAlternative?.page_phases?.when_should_buy}
+                      {/* Who SHOULD NOT BUY {compareProDataSec?.name} ? */}
                     </div>
                     {bestAlternative?.should_buy_product_two?.length === 0 && (
                       <h3 className="no-data text-center mt-2">
@@ -454,10 +481,21 @@ function CompareDiv({
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Table Comparison</h2>
+              <h2 className="site-main-heading">
+                {comparisonData?.length > 2
+                  ? bestAlternative &&
+                    bestAlternative?.page_phases
+                      ?.three_products_table_compare_title
+                  : bestAlternative &&
+                    bestAlternative?.page_phases
+                      ?.two_products_table_compare_title}
+              </h2>
             </Col>
             <Col md={12} className="table-section-mobile">
               <ComparisonTable
+                comparisonPhaseData={
+                  bestAlternative && bestAlternative?.page_phases
+                }
                 products={comparisonProductData}
                 categoryAttributes={categroyAttributes}
               />
@@ -473,7 +511,10 @@ function CompareDiv({
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Compare Other Products</h2>
+              <h2 className="site-main-heading">
+                {bestAlternative &&
+                  bestAlternative?.page_phases?.compare_with_other_products}
+              </h2>
               <CompareForm
                 location="ON_MAIN_PAGE"
                 comparisonData={products}
@@ -484,6 +525,7 @@ function CompareDiv({
         </Container>
       </section>
       <CompareDropDown
+        product={bestAlternative && bestAlternative}
         slug={slug}
         attributeDropDown={[...categroyAttributes].reverse()}
       />
@@ -517,7 +559,8 @@ function CompareDiv({
           <Row className="my-3">
             <Col md={12}>
               <h2 className="heading-primary secondary related-guides">
-                Related Guides
+                {bestAlternative &&
+                  bestAlternative?.page_phases?.related_guides_bottom}
               </h2>
             </Col>
             <Col md={12}>

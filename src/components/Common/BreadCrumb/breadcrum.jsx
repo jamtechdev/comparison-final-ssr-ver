@@ -7,13 +7,19 @@ import {
   Col,
   BreadcrumbItem,
 } from "react-bootstrap";
-export default function BreadCrum({ firstPageName, secondPageName, pageType }) {
+export default function BreadCrum({
+  firstPageName,
+  secondPageName,
+  pageType,
+  productPhaseData,
+}) {
   const router = useRouter();
+  console.log(secondPageName);
   return (
     <>
       <Breadcrumb className="breadcrumb-group">
         <BreadcrumbItem className="breadcrumb-items" href="/">
-          Home
+          {productPhaseData?.breadcrumb_homepage}
         </BreadcrumbItem>
         {firstPageName == "" ? (
           ""

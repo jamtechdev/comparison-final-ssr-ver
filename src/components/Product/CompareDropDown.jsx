@@ -7,7 +7,8 @@ import axios from "axios";
 import useComparisonChart from "@/hooks/useComparisonChart";
 
 function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
-  // console.log(slug)
+  console.log(product);
+
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null
   );
@@ -76,14 +77,17 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">
-                Comparison With All Other Vaccuum Cleaners
+                {(product && product?.page_phases?.compare_with_others) ||
+                  (product && product?.page_phases?.compare_with_all_others)}
               </h2>
             </Col>
           </Row>
           <Row className="mt-3">
             <Col md={4} lg={4}>
               <div className="filtered-data-select justify-content-start">
-                <span>Attribute category:</span>
+                <span>
+                  {product && product?.page_phases?.attribute_category}:
+                </span>
                 <Form.Select
                   aria-label="Category select"
                   onChange={handleItemChange}
@@ -97,7 +101,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
                 </Form.Select>
               </div>
               <div className="filtered-data-select justify-content-start mt-3">
-                <span>Attribute:</span>
+                <span>{product && product?.page_phases?.attribute}:</span>
                 {selectedItem && (
                   <Form.Select
                     aria-label="Attribute select"
@@ -115,14 +119,14 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
               <p className="text-end para_content_text mt-3">
                 {selectedAttribute && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>
-                    What it is:
+                    {product && product?.page_phases?.what_it_is}:
                   </span>
                 )}
                 {selectedAttribute.description}
                 <br />
                 {selectedAttribute && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>
-                    When matters:
+                    {product && product?.page_phases?.when_it_matters}:
                   </span>
                 )}
                 {selectedAttribute.when_matters}
