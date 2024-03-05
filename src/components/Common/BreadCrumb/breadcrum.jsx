@@ -14,7 +14,7 @@ export default function BreadCrum({
   productPhaseData,
 }) {
   const router = useRouter();
-  console.log(secondPageName);
+  // console.log(secondPageName);
   return (
     <>
       <Breadcrumb className="breadcrumb-group">

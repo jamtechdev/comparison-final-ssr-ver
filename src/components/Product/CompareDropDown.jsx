@@ -7,7 +7,7 @@ import axios from "axios";
 import useComparisonChart from "@/hooks/useComparisonChart";
 
 function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
-  console.log(product);
+  // console.log(product);
 
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null

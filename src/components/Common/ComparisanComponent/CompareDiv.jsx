@@ -256,7 +256,7 @@ function CompareDiv({
             <Col md={12} className="table-section-mobile">
               <div className="comparison-tool">
                 {/* First Crd */}
-                {console.log(bestAlternative?.page_phases)}
+                {/* {console.log(bestAlternative?.page_phases)} */}
                 <CompareCard
                   productPhaseData={
                     bestAlternative && bestAlternative?.page_phases

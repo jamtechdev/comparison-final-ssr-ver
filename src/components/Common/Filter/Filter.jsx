@@ -13,7 +13,7 @@ export default function Filter({
   searchParam,
   orderBy,
 }) {
-  console.log(guidePhraseData);
+  // console.log(guidePhraseData);
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({
@@ -147,8 +147,8 @@ export default function Filter({
     });
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
-    console.log(currentParams);
-    console.log(currentParams.toString());
+    // console.log(currentParams);
+    // console.log(currentParams.toString());
 
     //call the next router for srr
     router.push(`?${currentParams.toString()}`, { scroll: false });

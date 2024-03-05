@@ -32,7 +32,7 @@ const CompareCard = ({
     }
     return value;
   };
-  console.log(productPhaseData && productPhaseData);
+  // console.log(productPhaseData && productPhaseData);
   const urlChange = (i) => {
     let x = window.location.pathname.split("/")[2].split("-vs-");
     // Create a new array without the element at the specified index
@@ -47,7 +47,7 @@ const CompareCard = ({
 
     newArray.length <= 1 && handelRemoveProduct(i);
   };
-  
+
   return (
     <div className="comparison-wrapper">
       {compareProduct.length <= 0 ? (
