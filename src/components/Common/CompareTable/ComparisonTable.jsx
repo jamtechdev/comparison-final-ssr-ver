@@ -459,13 +459,21 @@ export default function ComparisonTable({
                   <div className="tooltip-display-content">
                     {products[0]?.overall_score_descriptions?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>{" "}
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.what_it_is}
+                          :{" "}
+                        </b>{" "}
                         {products[0]?.overall_score_descriptions?.description}
                       </p>
                     )}
                     {products[0]?.overall_score_descriptions?.when_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>{" "}
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.when_it_matters}
+                          :{" "}
+                        </b>{" "}
                         {products[0]?.overall_score_descriptions?.when_matters}
                       </p>
                     )}
@@ -497,19 +505,29 @@ export default function ComparisonTable({
           <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
-                Technical Score
+                {comparisonPhaseData && comparisonPhaseData?.technical_score}
                 {products[0]?.technical_score_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.technical_score_descriptions?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>{" "}
+                        <b>
+                          {" "}
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.what_it_is}
+                          :{" "}
+                        </b>{" "}
                         {products[0]?.technical_score_descriptions?.description}
                       </p>
                     )}
                     {products[0]?.technical_score_descriptions
                       ?.when_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>{" "}
+                        <b>
+                          {" "}
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.when_it_matters}
+                          :{" "}
+                        </b>{" "}
                         {
                           products[0]?.technical_score_descriptions
                             ?.when_matters
@@ -538,19 +556,26 @@ export default function ComparisonTable({
           <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
-                User’s Ratings
+                {comparisonPhaseData && comparisonPhaseData?.users_ratings}
                 {products[0]?.users_rating_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.users_rating_descriptions?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.what_it_is}{" "}
+                        </b>
                         {products[0]?.users_rating_descriptions?.description}
                       </p>
                     )}
                     {products[0]?.users_rating_descriptions
                       ?.when_it_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.when_it_matters}
+                          :{" "}
+                        </b>
                         {
                           products[0]?.technical_score_descriptions
                             ?.when_it_matters
@@ -573,13 +598,18 @@ export default function ComparisonTable({
           <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
-                Ratio Qlt/Price
+                {comparisonPhaseData &&
+                  comparisonPhaseData?.ratio_quality_price_points}
                 {products[0]?.ratio_qulitiy_points_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.ratio_qulitiy_points_descriptions
                       ?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>{" "}
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.what_it_is}
+                          :{" "}
+                        </b>{" "}
                         {
                           products[0]?.ratio_qulitiy_points_descriptions
                             ?.description
@@ -589,7 +619,11 @@ export default function ComparisonTable({
                     {products[0]?.technical_score_descriptions
                       ?.when_it_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>{" "}
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.when_it_matters}
+                          :{" "}
+                        </b>{" "}
                         {
                           products[0]?.technical_score_descriptions
                             ?.when_it_matters
@@ -624,14 +658,21 @@ export default function ComparisonTable({
                           <div className="tooltip-display-content">
                             {category?.description && (
                               <p className="mb-2">
-                                <b>What it is: </b>
+                                <b>
+                                  {comparisonPhaseData &&
+                                    comparisonPhaseData?.what_it_is}{" "}
+                                </b>
                                 {category?.description}
                               </p>
                             )}
 
                             {category?.when_matters && (
                               <p className="mb-2">
-                                <b>When it matters: </b>{" "}
+                                <b>
+                                  {comparisonPhaseData &&
+                                    comparisonPhaseData?.when_it_matters}
+                                  :{" "}
+                                </b>{" "}
                                 {category?.when_matters}
                               </p>
                             )}
@@ -670,14 +711,22 @@ export default function ComparisonTable({
                                 <div className="tooltip-display-content">
                                   {catAttribute?.description && (
                                     <p className="mb-2">
-                                      <b>What it is: </b>
+                                      <b>
+                                        {comparisonPhaseData &&
+                                          comparisonPhaseData?.what_it_is}
+                                        :{" "}
+                                      </b>
                                       {catAttribute?.description}
                                     </p>
                                   )}
 
                                   {catAttribute?.when_matters && (
                                     <p className="mb-2">
-                                      <b>When it matters: </b>{" "}
+                                      <b>
+                                        {comparisonPhaseData &&
+                                          comparisonPhaseData?.when_it_matters}
+                                        :{" "}
+                                      </b>{" "}
                                       {catAttribute?.when_matters}
                                     </p>
                                   )}
