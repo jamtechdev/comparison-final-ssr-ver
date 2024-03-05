@@ -298,7 +298,7 @@ export default function Product({
                     {product?.overall_score_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span className="overall" style={{ color: "#27304E" }}>
-                          {console.log(guidePhraseData)}
+                          {/* {console.log(guidePhraseData)} */}
                           {guidePhraseData && guidePhraseData?.overall_score}
                         </span>
                         <div className="tooltip-display-content">
