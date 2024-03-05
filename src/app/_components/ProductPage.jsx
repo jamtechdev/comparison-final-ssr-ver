@@ -1106,6 +1106,7 @@ function ProductPage({
                 {product?.page_phases?.table_compare_title}
               </h2>
               <ProductCompareTable
+                productPhaseData={product?.page_phases}
                 products={compareByCatID?.data}
                 categoryAttributes={productCatAttributes?.data}
                 slug={slug}

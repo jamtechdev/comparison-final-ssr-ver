@@ -298,18 +298,26 @@ export default function Product({
                     {product?.overall_score_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span className="overall" style={{ color: "#27304E" }}>
-                          Overall Score
+                          {console.log(guidePhraseData)}
+                          {guidePhraseData && guidePhraseData?.overall_score}
                         </span>
                         <div className="tooltip-display-content">
                           {product?.overall_score_descriptions.description && (
                             <p className="mb-2">
-                              <b>What it is: </b>
+                              <b>
+                                {guidePhraseData && guidePhraseData?.what_it_is}
+                                :{" "}
+                              </b>
                               {product?.overall_score_descriptions?.description}
                             </p>
                           )}
                           {product?.overall_score_descriptions.when_matters && (
                             <p className="mb-2">
-                              <b>When it matters: </b>
+                              <b>
+                                {guidePhraseData &&
+                                  guidePhraseData?.when_it_matters}
+                                :{" "}
+                              </b>
                               {
                                 product?.overall_score_descriptions
                                   ?.when_matters
@@ -317,7 +325,11 @@ export default function Product({
                             </p>
                           )}
                           <p>
-                            <b>Score components:</b>
+                            <b>
+                              {guidePhraseData &&
+                                guidePhraseData?.score_components}
+                              :
+                            </b>
                           </p>
                           {product.overall_score_descriptions
                             .score_components &&
@@ -375,12 +387,17 @@ export default function Product({
                     </span>
                     {product?.technical_score_descriptions && (
                       <div className="score-detail tooltip-title">
-                        <span>Technical Score</span>
+                        <span>
+                          {guidePhraseData && guidePhraseData?.technical_score}
+                        </span>
                         <div className="tooltip-display-content">
                           {product?.technical_score_descriptions
                             .description && (
                             <p className="mb-2">
-                              <b>What it is: </b>
+                              <b>
+                                {guidePhraseData && guidePhraseData?.what_it_is}
+                                :{" "}
+                              </b>
                               {
                                 product?.technical_score_descriptions
                                   ?.description
@@ -390,7 +407,11 @@ export default function Product({
                           {product?.technical_score_descriptions
                             .when_matters && (
                             <p className="mb-2">
-                              <b>When it matters: </b>
+                              <b>
+                                {guidePhraseData &&
+                                  guidePhraseData?.when_it_matters}
+                                :{" "}
+                              </b>
                               {
                                 product?.technical_score_descriptions
                                   ?.when_matters
@@ -398,7 +419,11 @@ export default function Product({
                             </p>
                           )}
                           <p>
-                            <b>Score components:</b>
+                            <b>
+                              {guidePhraseData &&
+                                guidePhraseData?.score_components}
+                              :
+                            </b>
                           </p>
                           {product?.technical_score_descriptions
                             .score_components &&
@@ -461,18 +486,29 @@ export default function Product({
                         <div className="tooltip-display-content">
                           {product?.users_rating_descriptions.description && (
                             <p className="mb-2">
-                              <b>What it is: </b>
+                              <b>
+                                {guidePhraseData && guidePhraseData?.what_it_is}
+                                :{" "}
+                              </b>
                               {product?.users_rating_descriptions?.description}
                             </p>
                           )}
                           {product?.users_rating_descriptions.when_matters && (
                             <p className="mb-2">
-                              <b>When it matters: </b>
+                              <b>
+                                {guidePhraseData &&
+                                  guidePhraseData?.when_it_matters}
+                                :{" "}
+                              </b>
                               {product?.users_rating_descriptions?.when_matters}
                             </p>
                           )}
                           <p>
-                            <b>Score components:</b>
+                            <b>
+                              {guidePhraseData &&
+                                guidePhraseData?.score_components}
+                              :
+                            </b>
                           </p>
                           {product?.users_rating_descriptions
                             .score_components &&
@@ -535,13 +571,20 @@ export default function Product({
                         <div className="tooltip-display-content">
                           {product?.popularity_descriptions.description && (
                             <p className="mb-2">
-                              <b>What it is: </b>
+                              <b>
+                                {guidePhraseData && guidePhraseData?.what_it_is}
+                                :{" "}
+                              </b>
                               {product?.popularity_descriptions?.description}
                             </p>
                           )}
                           {product?.popularity_descriptions.when_matters && (
                             <p className="mb-2">
-                              <b>When it matters: </b>
+                              <b>
+                                {guidePhraseData &&
+                                  guidePhraseData?.when_it_matters}
+                                :{" "}
+                              </b>
                               {product?.popularity_descriptions?.when_matters}
                             </p>
                           )}
@@ -844,7 +887,11 @@ export default function Product({
                                         {product?.technical_score_descriptions
                                           .description && (
                                           <p className="mb-2">
-                                            <b>What it is: </b>
+                                            <b>
+                                              {guidePhraseData &&
+                                                guidePhraseData?.what_it_is}
+                                              :{" "}
+                                            </b>
                                             {
                                               product
                                                 ?.technical_score_descriptions
@@ -855,7 +902,11 @@ export default function Product({
                                         {product?.technical_score_descriptions
                                           .when_matters && (
                                           <p className="mb-2">
-                                            <b>When it matters: </b>
+                                            <b>
+                                              {guidePhraseData &&
+                                                guidePhraseData?.when_it_matters}
+                                              :{" "}
+                                            </b>
                                             {
                                               product
                                                 ?.technical_score_descriptions
@@ -864,7 +915,11 @@ export default function Product({
                                           </p>
                                         )}
                                         <p>
-                                          <b>Score components:</b>
+                                          <b>
+                                            {guidePhraseData &&
+                                              guidePhraseData?.score_components}
+                                            :
+                                          </b>
                                         </p>
                                         {product?.technical_score_descriptions
                                           .score_components &&
@@ -969,7 +1024,11 @@ export default function Product({
                                         {product?.users_rating_descriptions
                                           .description && (
                                           <p className="mb-2">
-                                            <b>What it is: </b>
+                                            <b>
+                                              {guidePhraseData &&
+                                                guidePhraseData?.what_it_is}
+                                              :{" "}
+                                            </b>
                                             {
                                               product?.users_rating_descriptions
                                                 ?.description
@@ -979,7 +1038,11 @@ export default function Product({
                                         {product?.users_rating_descriptions
                                           .when_matters && (
                                           <p className="mb-2">
-                                            <b>When it matters: </b>
+                                            <b>
+                                              {guidePhraseData &&
+                                                guidePhraseData?.when_it_matters}
+                                              :{" "}
+                                            </b>
                                             {
                                               product?.users_rating_descriptions
                                                 ?.when_matters
@@ -987,7 +1050,11 @@ export default function Product({
                                           </p>
                                         )}
                                         <p>
-                                          <b>Score components:</b>
+                                          <b>
+                                            {guidePhraseData &&
+                                              guidePhraseData?.score_components}
+                                            :
+                                          </b>
                                         </p>
                                         {product?.users_rating_descriptions
                                           .score_components &&

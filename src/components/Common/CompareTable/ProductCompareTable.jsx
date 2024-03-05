@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import formatValue from "@/_helpers/formatValue";
 const ProductCompareTable = React.memo(
-  ({ products, categoryAttributes, slug }) => {
+  ({ products, categoryAttributes, slug, productPhaseData }) => {
     const router = useRouter();
     let initialNoOfCategories = 5;
     const [pagination, setPagination] = useState({});
@@ -305,42 +305,46 @@ const ProductCompareTable = React.memo(
                                   </div>
                                 )}
                               {product.price_websites &&
-                                product.price_websites.slice(0,1)?.map((data, dIndex) => {
-                                  return (
-                                    <React.Fragment key={dIndex}>
-                                      {data.price !== null && (
-                                        <li>
-                                          <>
-                                            <Link
-                                              rel="noopener noreferrer"
-                                              target="_blank"
-                                              href={`/link?p=${btoa(data.url)}`}
-                                            >
-                                              <img
-                                                src={data?.logo}
-                                                width={0}
-                                                height={0}
-                                                sizes="100vw"
-                                                alt="price"
-                                              />
-                                            </Link>
-                                            <span>
-                                              <a
+                                product.price_websites
+                                  .slice(0, 1)
+                                  ?.map((data, dIndex) => {
+                                    return (
+                                      <React.Fragment key={dIndex}>
+                                        {data.price !== null && (
+                                          <li>
+                                            <>
+                                              <Link
                                                 rel="noopener noreferrer"
                                                 target="_blank"
                                                 href={`/link?p=${btoa(
                                                   data.url
                                                 )}`}
                                               >
-                                                {data?.price} €
-                                              </a>
-                                            </span>
-                                          </>
-                                        </li>
-                                      )}
-                                    </React.Fragment>
-                                  );
-                                })}
+                                                <img
+                                                  src={data?.logo}
+                                                  width={0}
+                                                  height={0}
+                                                  sizes="100vw"
+                                                  alt="price"
+                                                />
+                                              </Link>
+                                              <span>
+                                                <a
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                                  href={`/link?p=${btoa(
+                                                    data.url
+                                                  )}`}
+                                                >
+                                                  {data?.price} €
+                                                </a>
+                                              </span>
+                                            </>
+                                          </li>
+                                        )}
+                                      </React.Fragment>
+                                    );
+                                  })}
                             </ul>
                           </>
                         </>
@@ -353,7 +357,7 @@ const ProductCompareTable = React.memo(
           <tbody id="tbody">
             <tr className="">
               <th>
-                <p>Image</p>
+                <p>{productPhaseData?.image || "Image"}</p>
               </th>
               {finalProducts.slice(0, defaultNo).map((product, imageIndex) => {
                 return (
@@ -387,7 +391,7 @@ const ProductCompareTable = React.memo(
                           (data) => data.price === null
                         ) && (
                           <div className="not-availabel">
-                            <span className="txt">NOT AVAILABLE</span>
+                            {/* <span className="txt">NOT AVAILABLE</span> */}
                             <span className="price">~ {product?.price} €</span>
                           </div>
                         )}
@@ -446,19 +450,19 @@ const ProductCompareTable = React.memo(
             <tr className="tr-bg-color">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Overall Score
+                  {productPhaseData && productPhaseData?.overall_score}
                   {products[0]?.overall_score_descriptions && (
                     <div className="tooltip-display-content">
                       {products[0]?.overall_score_descriptions?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{productPhaseData?.what_it_is} : </b>{" "}
                           {products[0]?.overall_score_descriptions?.description}
                         </p>
                       )}
                       {products[0]?.overall_score_descriptions
                         ?.when_matters && (
                         <p className="mb-2">
-                          <b>When it matters: </b>{" "}
+                          <b>{productPhaseData?.when_it_matters}: </b>{" "}
                           {
                             products[0]?.overall_score_descriptions
                               ?.when_matters
@@ -495,13 +499,13 @@ const ProductCompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Technical Score
+                  {productPhaseData && productPhaseData?.technical_score}
                   {products[0]?.technical_score_descriptions && (
                     <div className="tooltip-display-content">
                       {products[0]?.technical_score_descriptions
                         ?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{productPhaseData?.what_it_is}: </b>{" "}
                           {
                             products[0]?.technical_score_descriptions
                               ?.description
@@ -511,7 +515,7 @@ const ProductCompareTable = React.memo(
                       {products[0]?.technical_score_descriptions
                         ?.when_matters && (
                         <p className="mb-2">
-                          <b>When it matters: </b>{" "}
+                          <b>{productPhaseData?.when_it_matters}: </b>{" "}
                           {
                             products[0]?.technical_score_descriptions
                               ?.when_matters
@@ -540,19 +544,19 @@ const ProductCompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  User’s Ratings
+                  {productPhaseData && productPhaseData?.users_ratings}
                   {products[0]?.users_rating_descriptions && (
                     <div className="tooltip-display-content">
                       {products[0]?.users_rating_descriptions?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>
+                          <b>{productPhaseData?.what_it_is}: </b>
                           {products[0]?.users_rating_descriptions?.description}
                         </p>
                       )}
                       {products[0]?.users_rating_descriptions
                         ?.when_it_matters && (
                         <p className="mb-2">
-                          <b>When it matters: </b>
+                          <b>{productPhaseData?.when_it_matters}: </b>
                           {
                             products[0]?.technical_score_descriptions
                               ?.when_it_matters
@@ -579,13 +583,16 @@ const ProductCompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Ratio Qlt/Price
+                  {productPhaseData &&
+                    productPhaseData?.ratio_quality_price_points}
                   {products[0]?.ratio_qulitiy_points_descriptions && (
                     <div className="tooltip-display-content">
                       {products[0]?.ratio_qulitiy_points_descriptions
                         ?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>
+                            {productPhaseData && productPhaseData?.what_it_is}:{" "}
+                          </b>{" "}
                           {
                             products[0]?.ratio_qulitiy_points_descriptions
                               ?.description
@@ -595,7 +602,11 @@ const ProductCompareTable = React.memo(
                       {products[0]?.technical_score_descriptions
                         ?.when_it_matters && (
                         <p className="mb-2">
-                          <b>When it matters: </b>{" "}
+                          <b>
+                            {productPhaseData &&
+                              productPhaseData?.when_it_matters}
+                            :{" "}
+                          </b>{" "}
                           {
                             products[0]?.technical_score_descriptions
                               ?.when_it_matters
@@ -630,14 +641,22 @@ const ProductCompareTable = React.memo(
                             <div className="tooltip-display-content">
                               {category?.description && (
                                 <p className="mb-2">
-                                  <b>What it is: </b>
+                                  <b>
+                                    {productPhaseData &&
+                                      productPhaseData?.what_it_is}
+                                    :{" "}
+                                  </b>
                                   {category?.description}
                                 </p>
                               )}
 
                               {category?.when_matters && (
                                 <p className="mb-2">
-                                  <b>When it matters: </b>{" "}
+                                  <b>
+                                    {productPhaseData &&
+                                      productPhaseData?.when_it_matters}
+                                    :{" "}
+                                  </b>{" "}
                                   {category?.when_matters}
                                 </p>
                               )}
@@ -693,14 +712,22 @@ const ProductCompareTable = React.memo(
                                   <div className="tooltip-display-content">
                                     {catAttribute?.description && (
                                       <p className="mb-2">
-                                        <b>What it is: </b>
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.what_it_is}
+                                          :{" "}
+                                        </b>
                                         {catAttribute?.description}
                                       </p>
                                     )}
 
                                     {catAttribute?.when_matters && (
                                       <p className="mb-2">
-                                        <b>When it matters: </b>{" "}
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.when_it_matters}
+                                          :{" "}
+                                        </b>{" "}
                                         {catAttribute?.when_matters}
                                       </p>
                                     )}
@@ -737,7 +764,9 @@ const ProductCompareTable = React.memo(
         {fullTable == 2 && (
           <div className="text-center">
             <Button className="see_all_btn_outline" onClick={handleTableShow}>
-              See Full Table <i className="ri-arrow-down-s-line"></i>
+              {/* {console.log(productPhaseData)} */}
+              {productPhaseData && productPhaseData?.see_full_table}{" "}
+              <i className="ri-arrow-down-s-line"></i>
             </Button>
           </div>
         )}
