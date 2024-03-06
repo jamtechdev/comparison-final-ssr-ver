@@ -68,7 +68,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
       <div>{useChart()}</div>
       <section className="product-header">
         <Container>
-          <Row className="align-items-center">
+          <Row className="align-items-center">      
             <Col md={12}>
               <BreadCrumb
                 firstPageName={categorySlug}

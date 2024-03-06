@@ -34,6 +34,7 @@ export default function GuidePage({
   const [currentHeading, setCurrentHeading] = useState("");
 
   const guide = guideData[0]?.data;
+  // console.log(guideData[1]);
 
   const products = guideData[1]?.data?.products || [];
 
@@ -78,6 +79,10 @@ export default function GuidePage({
       handelSetFilterActive(false);
     }, 1000);
   }, [searchParams]);
+  useEffect(() => {
+    handelFilterActions("variant", "variant", false);
+    handelFilterActions("available", "available", false);
+  }, []);
 
   // const removeFilters = () => {
   //   window.history.replaceState(null, "", window.location.pathname);
@@ -238,16 +243,18 @@ export default function GuidePage({
   };
   // console.log(products, "hello");
   // Testing purpose
-  const [isChecked, setIsChecked] = useState(true);
-  const [hideSmiliar, setHideSmiliar] = useState(true);
-  useEffect(() => {
-    // Call handelFilterActions with the initial value of the checkbox
-    handelFilterActions("available", "available", true); // Change false to true if you want it to be checked by default
-    handelFilterActions("variant", "variant", true); // Change false to true if you want it to be checked by default
-  }, []);
+  const [isChecked, setIsChecked] = useState(
+    products?.length < 12 ? false : true
+  );
+  const [hideSmiliar, setHideSmiliar] = useState(
+    products?.length < 12 ? false : true
+  );
+
   let updatedParams = {};
+
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
     const currentParams = new URLSearchParams(searchParams.toString());
+    console.log(value);
     const url = new URL(window.location.href);
     switch (filterName) {
       case "variant":
@@ -256,11 +263,11 @@ export default function GuidePage({
           deleteQueryFormURL("direct", updatedParams, currentParams, url);
         } else {
           updatedParams.variant = value;
-          setHideSmiliar(false);
+          // setHideSmiliar(false);
         }
         break;
       case "available":
-        if (value) {
+        if (!value) {
           updatedParams.available = value;
         } else {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
@@ -296,6 +303,8 @@ export default function GuidePage({
     setHideSmiliar(checked);
     handelFilterActions("variant", "variant", checked);
   };
+
+  // console.log(products);
 
   return (
     <>

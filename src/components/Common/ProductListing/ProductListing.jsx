@@ -17,7 +17,7 @@ export default function ProductListing({ products, productPositionArray, handleT
         <Product
         guidePhraseData={guidePhraseData}
           incomingProduct={product}
-          key={index}
+          KeyIndex={index}
           position={findProductPosition(product.name)}
           handleToggleCollapse={handleToggleCollapse}
           handleManageCollapsedDiv={handleManageCollapsedDiv}

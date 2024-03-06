@@ -27,6 +27,7 @@ export default function Product({
   handleToggleCollapse,
   handleManageCollapsedDiv,
   guidePhraseData,
+  KeyIndex,
 }) {
   const dispatch = useDispatch();
   const generateProductsWithAttributes = () => {
@@ -235,7 +236,8 @@ export default function Product({
         <div className="flex-box">
           <div className="left_box">
             <span className="ribbon-number">
-              <p>{position}</p>
+              {/* <p>{position}</p> */}
+              <p>{KeyIndex + 1}</p>
               <RightPointingArrow />
             </span>
             <div className="box_content light-bg-color">
@@ -602,7 +604,7 @@ export default function Product({
                       (data) => data.price === null
                     ) && (
                       <div className="not-availabel">
-                        {/* <span className="txt">NOT AVAILABLE</span> */}
+                        <span className="txt">NOT AVAILABLE</span>
                         <span className="guide">~ {product?.price} €</span>
                       </div>
                     )}

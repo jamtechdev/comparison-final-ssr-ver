@@ -158,6 +158,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
       let productApiUrl = `${
         process.env.NEXT_PUBLIC_API_URL
       }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
+      // console.log(productApiUrl);
 
       if (searchParams?.page) {
         productApiUrl += `&page=${searchParams.page}`;
