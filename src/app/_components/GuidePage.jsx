@@ -79,10 +79,23 @@ export default function GuidePage({
       handelSetFilterActive(false);
     }, 1000);
   }, [searchParams]);
+  // console.log(searchParams);
   useEffect(() => {
-    handelFilterActions("variant", "variant", false);
-    handelFilterActions("available", "available", false);
-  }, []);
+    let timeout;
+
+    const debounceApiCall = () => {
+      timeout = setTimeout(() => {
+        if (products?.length < 12) {
+          handelFilterActions("variant", "variant", false);
+          handelFilterActions("available", "available", false);
+        }
+      }, 500); // Adjust the delay as needed
+    };
+
+    debounceApiCall();
+
+    return () => clearTimeout(timeout);
+  }, [searchParams]);
 
   // const removeFilters = () => {
   //   window.history.replaceState(null, "", window.location.pathname);
