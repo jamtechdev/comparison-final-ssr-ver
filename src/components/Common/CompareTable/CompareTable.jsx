@@ -304,42 +304,46 @@ const CompareTable = React.memo(
                                   </div>
                                 )}
                               {product.price_websites &&
-                                product.price_websites.map((data, dIndex) => {
-                                  return (
-                                    <React.Fragment key={dIndex}>
-                                      {data.price !== null && (
-                                        <li>
-                                          <>
-                                            <Link
-                                              rel="noopener noreferrer"
-                                              target="_blank"
-                                              href={`/link?p=${btoa(data.url)}`}
-                                            >
-                                              <img
-                                                src={data?.logo}
-                                                width={0}
-                                                height={0}
-                                                sizes="100vw"
-                                                alt="price"
-                                              />
-                                            </Link>
-                                            <span>
-                                              <a
+                                product.price_websites
+                                  ?.slice(0, 1)
+                                  ?.map((data, dIndex) => {
+                                    return (
+                                      <React.Fragment key={dIndex}>
+                                        {data.price !== null && (
+                                          <li>
+                                            <>
+                                              <Link
                                                 rel="noopener noreferrer"
                                                 target="_blank"
                                                 href={`/link?p=${btoa(
                                                   data.url
                                                 )}`}
                                               >
-                                                {data?.price} €
-                                              </a>
-                                            </span>
-                                          </>
-                                        </li>
-                                      )}
-                                    </React.Fragment>
-                                  );
-                                })}
+                                                <img
+                                                  src={data?.logo}
+                                                  width={0}
+                                                  height={0}
+                                                  sizes="100vw"
+                                                  alt="price"
+                                                />
+                                              </Link>
+                                              <span>
+                                                <a
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                                  href={`/link?p=${btoa(
+                                                    data.url
+                                                  )}`}
+                                                >
+                                                  {data?.price} €
+                                                </a>
+                                              </span>
+                                            </>
+                                          </li>
+                                        )}
+                                      </React.Fragment>
+                                    );
+                                  })}
                             </ul>
                           </>
                         </>

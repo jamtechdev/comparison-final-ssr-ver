@@ -134,6 +134,36 @@ const TechnicalAccordion = React.memo(
                               );
                             }
                           )}
+
+                        <b>User's Ratings:</b>
+                        <div className="rating__section">
+                          <img src="https://panel.mondopedia.it/storage/upload/prices/1706003665_amazon.png" />
+                          <div className="rating__content">
+                            <b>5.0</b>
+                            <div className="rate-star">
+                              <i className="ri-star-fill"></i>
+                              <i className="ri-star-fill"></i>
+                              <i className="ri-star-fill"></i>
+                              <i className="ri-star-fill"></i>
+                              <i className="ri-star-fill"></i>
+                            </div>
+                            <small>(1876)</small>
+                          </div>
+                        </div>
+                        <div className="rating__section">
+                          <img src="https://panel.mondopedia.it/storage/upload/prices/1706003665_amazon.png" />
+                          <div className="rating__content">
+                            <b>5.0</b>
+                            <div className="rate-star">
+                              <i className="ri-star-fill"></i>
+                              <i className="ri-star-fill"></i>
+                              <i className="ri-star-fill"></i>
+                              <i className="ri-star-fill"></i>
+                              <i className="ri-star-fill"></i>
+                            </div>
+                            <small>(1876)</small>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

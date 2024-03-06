@@ -81,21 +81,9 @@ export default function GuidePage({
   }, [searchParams]);
   // console.log(searchParams);
   useEffect(() => {
-    let timeout;
-
-    const debounceApiCall = () => {
-      timeout = setTimeout(() => {
-        if (products?.length < 12) {
-          handelFilterActions("variant", "variant", false);
-          handelFilterActions("available", "available", false);
-        }
-      }, 500); // Adjust the delay as needed
-    };
-
-    debounceApiCall();
-
-    return () => clearTimeout(timeout);
-  }, [searchParams]);
+    handelFilterActions("variant", "variant", false);
+    handelFilterActions("available", "available", false);
+  }, []);
 
   // const removeFilters = () => {
   //   window.history.replaceState(null, "", window.location.pathname);

@@ -130,7 +130,7 @@ function ProductPage({
   // This code for text part and outline
   useEffect(() => {
     const handleScroll = () => {
-      const headings = contentRef.current.querySelectorAll(
+      const headings = contentRef.current?.querySelectorAll(
         "h1, h2, h3, h4, h5, h6"
       );
 
@@ -185,6 +185,8 @@ function ProductPage({
     return content;
   };
   const contentWithIds = addIdsToHeadings(product?.text_part);
+
+  console.log(finalProducts);
 
   return (
     <>
@@ -1062,7 +1064,10 @@ function ProductPage({
         </Container>
       </section>
 
-      <ProductTabs product={product?.page_phases?.third_party_reviews} />
+      <ProductTabs
+        productPhaseData={product?.page_phases?.third_party_reviews}
+        productReview={product?.reviews_websites}
+      />
       {/* <section className="ptb-80">
         <Container>
           <Row>
@@ -1123,7 +1128,9 @@ function ProductPage({
               <h2 className="site-main-heading">
                 {product?.page_phases?.compare_with_other_products}
               </h2>
+              {/* {console.log(product?.page_phases)} */}
               <CompareForm
+                favSlider={product&&product?.page_phases}
                 location="ON_PRODUCT_PAGE"
                 product_name={product}
                 handelCloseCompareModel={() => {

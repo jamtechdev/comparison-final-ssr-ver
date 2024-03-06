@@ -1314,8 +1314,8 @@ div#productGraph {
   /* background-color: var(--heading-color);
   color: var(--white-color); */
   background-color: #f4f7fb;
-    color: #437ece;
-    border: 1px solid #437ece !important;
+  color: #437ece;
+  border: 1px solid #437ece !important;
 }
 
 .compare-container .isSticky tr th:not(:first-child):hover .device-name a {
@@ -1379,4 +1379,149 @@ li.color-item.selected {
   padding: 5px 0 15px !important;
   color: var(--secondary-color);
   font-size: 30px;
+}
+
+.rating__section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0;
+}
+
+.rating__section img {
+  width: 60px;
+}
+
+.rating__content {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  color: #000;
+}
+
+.rating__content small {
+  font-style: italic;
+  color: #888;
+}
+
+.rating__content .rate-star i {
+  color: #fec109;
+}
+
+.review__card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.review__card .review__card-body {
+  margin: 10px 0;
+}
+
+.review__card .review__card-body p {
+  color: #52526c;
+}
+
+.review__card .review__card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review__card .review__card-footer span {
+  color: #437ece;
+}
+
+.review__card .review__card-footer small {
+  font-style: italic;
+  color: #52526c;
+}
+
+.review__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review__card-header .review__name {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.review__card-header .review__name img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.review__card-header .review__name h6 {
+  font-weight: 600;
+}
+
+.review__rating span {
+  background: var(--secondary-color);
+  padding: 6px;
+  border-radius: 5px;
+  color: var(--white-color);
+  font-weight: 400;
+  min-width: 35px;
+  text-align: center;
+}
+
+.review__card-header .review__rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review__card-header .review__rating p {
+  font-size: 14px;
+}
+
+/* User Rating */
+.userating__card {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0;
+}
+/* custom rating start css */
+.rating {
+  display: inline-block;
+}
+
+.rating i {
+  color: #fec100;
+  font-size: 1.2em;
+}
+
+.rating .rating-value {
+  margin-left: 0.5em;
+}
+
+.user__rating-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.rating__count {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.rating__count span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.user__rating-card .rating__review {
+  color: #888;
+  font-style: italic;
 }

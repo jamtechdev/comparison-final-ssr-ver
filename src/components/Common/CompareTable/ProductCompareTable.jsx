@@ -20,18 +20,26 @@ const ProductCompareTable = React.memo(
 
     // this for function for Table product sticky (Start)
     const [winPos, setWinPos] = useState(false);
+    const [afterTableSticky, setAfterTableSticky] = useState(false);
     const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
       const [isSticky, setIsSticky] = useState(false);
+      const [afterTableSticky, setAfterTableSticky] = useState(false);
+      const aftertableRef = useRef();
       const newRef = useRef();
       ref ||= newRef;
 
       // mount
       useEffect(() => {
-        const cachedRef = ref.current,
-          observer = new IntersectionObserver(
-            ([e]) => setIsSticky(e.intersectionRatio < 1),
-            observerSettings
-          );
+        const cachedRef = ref.current;
+        const observer = new IntersectionObserver(([entry]) => {
+          setIsSticky(entry.intersectionRatio < 1);
+          if (entry.intersectionRatio === 0) {
+            setAfterTableSticky(true);
+          } else {
+            setAfterTableSticky(false);
+          }
+        }, observerSettings);
+
         observer.observe(cachedRef);
         return () => {
           observer.unobserve(cachedRef);
@@ -54,6 +62,10 @@ const ProductCompareTable = React.memo(
         tbodyDiv?.getBoundingClientRect().top > 2
           ? setWinPos(false)
           : setWinPos(true);
+
+        console.log(tbodyDiv?.getBoundingClientRect().bottom == 0);
+
+        setAfterTableSticky(true);
       };
     }
 
@@ -761,6 +773,7 @@ const ProductCompareTable = React.memo(
               })}
           </tbody>
         </Table>
+        <div ref={ref} className={winPos ? "isSticky" : "nonSticky"}></div>
         {fullTable == 2 && (
           <div className="text-center">
             <Button className="see_all_btn_outline" onClick={handleTableShow}>
