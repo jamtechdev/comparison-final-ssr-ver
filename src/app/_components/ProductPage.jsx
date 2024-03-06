@@ -26,6 +26,7 @@ import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenera
 import CompareForm from "@/components/Common/Comparison/CompareForm";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import { searchForPatternAndReplace } from "@/hooks/useChart";
+import Rating from "@/components/Common/Rating/Rating";
 
 // import Link from "next/link";
 
@@ -493,6 +494,25 @@ function ProductPage({
                               </div>
                               <p>{data?.attribute_category}</p>
                             </div>
+                          );
+                        }
+                      )}
+                    <b>User's Ratings:</b>
+                    {product?.users_rating_descriptions?.reviews_websites &&
+                      product?.users_rating_descriptions?.reviews_websites?.map(
+                        (data, index) => {
+                          return (
+                            <>
+                              <div className="rating__section">
+                                <img src={`${data?.logo}`} />
+                                <div className="rating__content">
+                                  <b>{data?.rating}</b>
+                                  <Rating value={data?.rating} />
+
+                                  <small>({data?.reviews})</small>
+                                </div>
+                              </div>
+                            </>
                           );
                         }
                       )}
@@ -1066,7 +1086,7 @@ function ProductPage({
 
       <ProductTabs
         productPhaseData={product?.page_phases?.third_party_reviews}
-        productReview={product?.reviews_websites}
+        productReview={product && product?.reviews_websites}
       />
       {/* <section className="ptb-80">
         <Container>
@@ -1130,7 +1150,7 @@ function ProductPage({
               </h2>
               {/* {console.log(product?.page_phases)} */}
               <CompareForm
-                favSlider={product&&product?.page_phases}
+                favSlider={product && product?.page_phases}
                 location="ON_PRODUCT_PAGE"
                 product_name={product}
                 handelCloseCompareModel={() => {

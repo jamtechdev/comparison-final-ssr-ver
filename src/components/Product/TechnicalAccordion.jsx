@@ -10,6 +10,7 @@ import {
 import Questiontool from "../Svg/Questiontool";
 import ProsConsToolTip from "../Svg/ProsConsToolTip";
 import Skeleton from "react-loading-skeleton";
+import Rating from "../Common/Rating/Rating";
 
 const TechnicalAccordion = React.memo(
   ({ product, overallScoreColor, initialDisplay }) => {
@@ -134,36 +135,6 @@ const TechnicalAccordion = React.memo(
                               );
                             }
                           )}
-
-                        <b>User's Ratings:</b>
-                        <div className="rating__section">
-                          <img src="https://panel.mondopedia.it/storage/upload/prices/1706003665_amazon.png" />
-                          <div className="rating__content">
-                            <b>5.0</b>
-                            <div className="rate-star">
-                              <i className="ri-star-fill"></i>
-                              <i className="ri-star-fill"></i>
-                              <i className="ri-star-fill"></i>
-                              <i className="ri-star-fill"></i>
-                              <i className="ri-star-fill"></i>
-                            </div>
-                            <small>(1876)</small>
-                          </div>
-                        </div>
-                        <div className="rating__section">
-                          <img src="https://panel.mondopedia.it/storage/upload/prices/1706003665_amazon.png" />
-                          <div className="rating__content">
-                            <b>5.0</b>
-                            <div className="rate-star">
-                              <i className="ri-star-fill"></i>
-                              <i className="ri-star-fill"></i>
-                              <i className="ri-star-fill"></i>
-                              <i className="ri-star-fill"></i>
-                              <i className="ri-star-fill"></i>
-                            </div>
-                            <small>(1876)</small>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -257,6 +228,26 @@ const TechnicalAccordion = React.memo(
                                     <p>{data?.attribute_category}</p>
                                   </div>
                                 </React.Fragment>
+                              );
+                            }
+                          )}
+
+                        <b>User's Ratings:</b>
+                        {product?.users_rating_descriptions?.reviews_websites &&
+                          product?.users_rating_descriptions?.reviews_websites?.map(
+                            (data, index) => {
+                              return (
+                                <>
+                                  <div className="rating__section">
+                                    <img src={`${data?.logo}`} />
+                                    <div className="rating__content">
+                                      <b>{data?.rating}</b>
+                                      <Rating value={data?.rating}/>
+                                      
+                                      <small>({data?.reviews})</small>
+                                    </div>
+                                  </div>
+                                </> 
                               );
                             }
                           )}

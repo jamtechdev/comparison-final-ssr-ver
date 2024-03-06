@@ -12,7 +12,10 @@ function AuthorPage({ authorData }) {
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName="author" secondPageName={authorData.name} />
+              <BreadCrumb
+                firstPageName="author"
+                secondPageName={authorData.name}
+              />
             </Col>
             <Col md={12}>
               <h1 className="heading-primary">{authorData.name}</h1>

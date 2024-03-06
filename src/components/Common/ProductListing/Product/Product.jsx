@@ -550,6 +550,27 @@ export default function Product({
                                 );
                               }
                             )}
+                          {console.log(product?.users_rating_descriptions)}
+
+                          {product?.users_rating_descriptions
+                            ?.reviews_websites &&
+                            product?.users_rating_descriptions?.reviews_websites?.map(
+                              (data, index) => {
+                                return (
+                                  <>
+                                    <div className="rating__section">
+                                      <img src={`${data?.logo}`} />
+                                      <div className="rating__content">
+                                        <b>{data?.rating}</b>
+                                        <Rating value={data?.rating} />
+
+                                        <small>({data?.reviews})</small>
+                                      </div>
+                                    </div>
+                                  </>
+                                );
+                              }
+                            )}
                         </div>
                       </div>
                     )}
