@@ -4,11 +4,28 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 
-function ExperReviwes() {
+function ExperReviwes({ expertReview }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  // console.log(expertReview?.length)
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
+  };
+  const getEvaluation = (score) => {
+    if (score >= 9) {
+      return "Outstanding";
+    } else if (score >= 8) {
+      return "Excellent";
+    } else if (score >= 7) {
+      return "Very good";
+    } else if (score >= 5) {
+      return "Good";
+    } else if (score >= 3) {
+      return "Fair";
+    } else if (score >= 1) {
+      return "Poor";
+    }
+    return "Poor"; // Handle other cases as needed
   };
 
   return (
@@ -42,119 +59,76 @@ function ExperReviwes() {
         }}
         className="blog-slider"
       >
-        <SwiperSlide>
-          <div className="review__card">
-            <div className="review__card-header">
-              <div className="review__name">
-                <img src="https://seeklogo.com/images/L/logo-com-hr-logo-5636A4D2D5-seeklogo.com.png" />
-                <h6>NationalPost</h6>
+        {expertReview?.map((data) => {
+          return (
+            <SwiperSlide>
+              <div className="review__card">
+                <div className="review__card-header">
+                  <div className="review__name">
+                    <img src={`${data?.image}`} />
+                    <h6>{data?.name}</h6>
+                  </div>
+                  <div className="review__rating">
+                    {typeof data?.evaluation === "string" ? (
+                      <>
+                        <p>no rating assigned</p>
+                        <span>{data?.evaluation}</span>
+                      </>
+                    ) : (
+                      <>
+                        <p>{getEvaluation(data?.evaluation)}</p>
+                        <span>{data?.evaluation}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div className="review__card-body">
+                  <p>
+                    <i>
+                      {isExpanded
+                        ? data?.comment
+                        : data?.comment.length >150
+                        ? `${data?.comment.substring(0, 150)}...`
+                        : data?.comment}
+                    </i>
+                    {!isExpanded && (
+                      <b
+                        onClick={toggleExpand}
+                        className="btn btn-link"
+                        style={{
+                          textDecoration: "none",
+                          fontWeight: "600",
+                          padding: "0px",
+                          color: "#071b42",
+                        }}
+                      >
+                        read more
+                      </b>
+                    )}
+                    {isExpanded && (
+                      <b
+                        className="btn btn-link"
+                        onClick={toggleExpand}
+                        style={{
+                          textDecoration: "none",
+                          fontWeight: "600",
+                          padding: "0px",
+                          color: "#071b42",
+                        }}
+                      >
+                        ..less
+                      </b>
+                    )}
+                  </p>
+                </div>
+                <div className="review__card-footer">
+                  <span>translate</span>
+                  <small>{data?.date_of_review}</small>
+                </div>
               </div>
-              <div className="review__rating">
-                <p>Very good</p>
-                <span>8.0</span>
-              </div>
-            </div>
-            <div className="review__card-body">
-              <p>
-                <i>
-                  {isExpanded
-                    ? "The Botslab S8 Plus is a great example of a modern robot vacuum that can do it all: it can vacuum, mop, and self-empty to take over the cleaning of your house completely. However, it’s not a perfect device and has flaws, like the irritating voice that can’t be sadasdasdasd sadasdasdasd asdasdasdasd asdasdasdasda aasdas"
-                    : "The Botslab S8 Plus is a great example of a modern robot vacuum that can do it all: it can vacuum, mop, and self-empty to take over the cleaning of your house completely. However, it’s not a perfect device and has flaws,can’t be"}
-                </i>
-                {!isExpanded && (
-                  <b
-                    onClick={toggleExpand}
-                    className="btn btn-link"
-                    style={{
-                      textDecoration: "none",
-                      fontWeight: "600",
-                      padding: "0px",
-                      color: "#071b42",
-                    }}
-                  >
-                    ....read more
-                  </b>
-                )}
-                {isExpanded && (
-                  <b
-                    className="btn btn-link"
-                    onClick={toggleExpand}
-                    style={{
-                      textDecoration: "none",
-                      fontWeight: "600",
-                      padding: "0px",
-                      color: "#071b42",
-                    }}
-                  >
-                    ..less
-                  </b>
-                )}
-              </p>
-            </div>
-            <div className="review__card-footer">
-              <span>translate</span>
-              <small>04/03/2024</small>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="review__card">
-            <div className="review__card-header">
-              <div className="review__name">
-                <img src="https://seeklogo.com/images/L/logo-com-hr-logo-5636A4D2D5-seeklogo.com.png" />
-                <h6>NationalPost</h6>
-              </div>
-              <div className="review__rating">
-                <p>Very good</p>
-                <span>8.0</span>
-              </div>
-            </div>
-            <div className="review__card-body">
-              <p>
-                <i>
-                  The Botslab S8 Plus is a great example of a modern robot
-                  vacuum that can do it all: it can vacuum, mop, and self-empty
-                  to take over the cleaning of your house completely. However,
-                  it’s not a perfect device and has flaws, like the irritating
-                  voice that can’t be
-                </i>
-              </p>
-            </div>
-            <div className="review__card-footer">
-              <span>translate</span>
-              <small>04/03/2024</small>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="review__card">
-            <div className="review__card-header">
-              <div className="review__name">
-                <img src="https://seeklogo.com/images/L/logo-com-hr-logo-5636A4D2D5-seeklogo.com.png" />
-                <h6>NationalPost</h6>
-              </div>
-              <div className="review__rating">
-                <p>Very good</p>
-                <span>8.0</span>
-              </div>
-            </div>
-            <div className="review__card-body">
-              <p>
-                <i>
-                  The Botslab S8 Plus is a great example of a modern robot
-                  vacuum that can do it all: it can vacuum, mop, and self-empty
-                  to take over the cleaning of your house completely. However,
-                  it’s not a perfect device and has flaws, like the irritating
-                  voice that can’t be
-                </i>
-              </p>
-            </div>
-            <div className="review__card-footer">
-              <span>translate</span>
-              <small>04/03/2024</small>
-            </div>
-          </div>
-        </SwiperSlide>
+            </SwiperSlide>
+          );
+        })}
 
         {/* {blogPageType == "listPage" &&
     blogDataList &&

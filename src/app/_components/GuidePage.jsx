@@ -255,7 +255,7 @@ export default function GuidePage({
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
     const currentParams = new URLSearchParams(searchParams.toString());
-    console.log(value);
+    // console.log(value);
     const url = new URL(window.location.href);
     switch (filterName) {
       case "variant":

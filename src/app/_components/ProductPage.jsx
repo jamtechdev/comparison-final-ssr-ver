@@ -171,7 +171,7 @@ function ProductPage({
   }, []);
 
   const addIdsToHeadings = (content) => {
-    const headings = content.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
+    const headings = content?.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
 
     headings.forEach((heading) => {
       const id = heading
@@ -187,7 +187,7 @@ function ProductPage({
   };
   const contentWithIds = addIdsToHeadings(product?.text_part);
 
-  console.log(finalProducts);
+  // console.log(finalProducts);
 
   return (
     <>
@@ -1087,6 +1087,7 @@ function ProductPage({
       <ProductTabs
         productPhaseData={product?.page_phases?.third_party_reviews}
         productReview={product && product?.reviews_websites}
+        expertReview={product?.expert_reviews_websites}
       />
       {/* <section className="ptb-80">
         <Container>

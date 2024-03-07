@@ -6,7 +6,8 @@ import ExperReviwes from "../Common/ExpertReviews/ExperReviwes";
 import Rating from "../Common/Rating/Rating";
 import ProductReviewTab from "./ProductReviewTab";
 
-function ProductTabs({ productReview, productPhaseData }) {
+function ProductTabs({ productReview, productPhaseData, expertReview }) {
+  // console.log(expertReview)
   return (
     <>
       <section className="ptb-80 bg-color">
@@ -24,9 +25,12 @@ function ProductTabs({ productReview, productPhaseData }) {
                 <Tab eventKey="tab-1" title="User’s Reviews">
                   <ProductReviewTab productReview={productReview} />
                 </Tab>
-                <Tab eventKey="tab-2" title="Expert Reviews">
-                  <ExperReviwes />
-                </Tab>
+                {expertReview && expertReview.length > 0 && (
+                  <Tab eventKey="tab-2" title="Expert Reviews">
+                    <ExperReviwes expertReview={expertReview} />
+                  </Tab>
+                )}
+
                 {/* <Tab eventKey="tab-2" title="Video Reviews"></Tab> */}
                 {/* <Tab eventKey="tab-3" title="Expert Reviews"></Tab> */}
               </Tabs>

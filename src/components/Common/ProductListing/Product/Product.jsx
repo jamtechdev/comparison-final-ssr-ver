@@ -553,9 +553,7 @@ export default function Product({
                             )}
                           {/* {console.log(product)} */}
                           <p>
-                            <b>
-                             User's Rating :
-                            </b>
+                            <b>User's Rating :</b>
                           </p>
                           {product?.users_rating_descriptions
                             ?.reviews_websites &&

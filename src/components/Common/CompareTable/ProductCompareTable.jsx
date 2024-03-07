@@ -63,7 +63,7 @@ const ProductCompareTable = React.memo(
           ? setWinPos(false)
           : setWinPos(true);
 
-        console.log(tbodyDiv?.getBoundingClientRect().bottom == 0);
+        // console.log(tbodyDiv?.getBoundingClientRect().bottom == 0);
 
         setAfterTableSticky(true);
       };

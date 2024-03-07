@@ -136,12 +136,13 @@
   vertical-align: top;
 }
 
-.compare-container thead.nonSticky tr th:not(:first-child):hover{
+.compare-container thead.nonSticky tr th:not(:first-child):hover {
   border: 1px solid var(--secondary-color) !important;
 }
 
-thead.nonSticky tr th:first-child, .compare-container tbody tr th {
-    border-right: none !important;
+thead.nonSticky tr th:first-child,
+.compare-container tbody tr th {
+  border-right: none !important;
 }
 
 /* .compare-container thead tr th:not(:first-child):hover {
@@ -163,7 +164,7 @@ thead.nonSticky tr th:first-child, .compare-container tbody tr th {
   color: var(--heading-color);
   opacity: 90%;
   gap: 10px;
-  padding: 2px 12px;
+  padding: 8px 12px;
   text-align: left;
   cursor: pointer;
 }
@@ -171,7 +172,7 @@ thead.nonSticky tr th:first-child, .compare-container tbody tr th {
   color: var(--heading-color);
 }
 .compare-container thead tr th:hover .device-name a {
-  color: #437ece!important;
+  color: #437ece !important;
 }
 
 .compare-container thead tr th .device-name span {
@@ -286,6 +287,7 @@ thead.isSticky {
 .compare-container thead.isSticky tr th .device-name {
   font-size: 12px;
   border: 1px solid transparent;
+  padding: 2px 12px !important;
 }
 
 .compare-container thead.isSticky tr th .best-tag-product {
@@ -1768,7 +1770,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   min-width: 33.33%;
 }
 
-.flex_wrap .inner_wrap:nth-child(n+2) {
+.flex_wrap .inner_wrap:nth-child(n + 2) {
   text-align: center;
 }
 
@@ -1926,7 +1928,7 @@ thead.isSticky tr {
   font-weight: 400 !important;
 }
 
-.n-lable{
+.n-lable {
   flex-direction: row;
 }
 
