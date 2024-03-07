@@ -6,7 +6,12 @@ import ExperReviwes from "../Common/ExpertReviews/ExperReviwes";
 import Rating from "../Common/Rating/Rating";
 import ProductReviewTab from "./ProductReviewTab";
 
-function ProductTabs({ productReview, productPhaseData, expertReview }) {
+function ProductTabs({
+  productReview,
+  productPhaseData,
+  expertReview,
+  videoReview,
+}) {
   // console.log(expertReview)
   return (
     <>
@@ -30,9 +35,27 @@ function ProductTabs({ productReview, productPhaseData, expertReview }) {
                     <ExperReviwes expertReview={expertReview} />
                   </Tab>
                 )}
-
-                {/* <Tab eventKey="tab-2" title="Video Reviews"></Tab> */}
-                {/* <Tab eventKey="tab-3" title="Expert Reviews"></Tab> */}
+                <Tab eventKey="tab-3" title="Video Reviews">
+                  <Container>
+                    <Row>
+                      {console.log(videoReview)}
+                      {videoReview?.map((data, index) => {
+                        return (
+                          <Col md={4}>
+                            <iframe
+                              id="video"
+                              width="100%"
+                              height="250"
+                              src={`${data?.url}`}
+                              frameborder="0"
+                              allowfullscreen
+                            ></iframe>
+                          </Col>
+                        );
+                      })}
+                    </Row>
+                  </Container>
+                </Tab>
               </Tabs>
             </Col>
             {/* <Col md={12} className="">

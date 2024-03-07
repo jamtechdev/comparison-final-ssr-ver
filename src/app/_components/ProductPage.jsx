@@ -1085,6 +1085,7 @@ function ProductPage({
       </section>
 
       <ProductTabs
+        videoReview={product?.reviews_videos}
         productPhaseData={product?.page_phases?.third_party_reviews}
         productReview={product && product?.reviews_websites}
         expertReview={product?.expert_reviews_websites}

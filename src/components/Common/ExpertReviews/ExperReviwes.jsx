@@ -5,12 +5,17 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 
 function ExperReviwes({ expertReview }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  // console.log(expertReview?.length)
+  const [expandedId, setExpandedId] = useState(null);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+  const toggleExpand = (id, event) => {
+    // Prevent default click behavior to stop slider navigation
+    if (event) {
+      event.preventDefault();
+    }
+    // event.preventDefault();
+    setExpandedId(expandedId === id ? null : id);
   };
+
   const getEvaluation = (score) => {
     if (score >= 9) {
       return "Outstanding";
@@ -59,9 +64,10 @@ function ExperReviwes({ expertReview }) {
         }}
         className="blog-slider"
       >
-        {expertReview?.map((data) => {
+        {expertReview?.map((data, index) => {
+          const isExpanded = data.id === expandedId;
           return (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <div className="review__card">
                 <div className="review__card-header">
                   <div className="review__name">
@@ -87,13 +93,13 @@ function ExperReviwes({ expertReview }) {
                     <i>
                       {isExpanded
                         ? data?.comment
-                        : data?.comment.length >150
-                        ? `${data?.comment.substring(0, 150)}...`
+                        : data?.comment.length > 190
+                        ? `${data?.comment.substring(0, 190)}...`
                         : data?.comment}
                     </i>
-                    {!isExpanded && (
+                    {/* {!isExpanded && (
                       <b
-                        onClick={toggleExpand}
+                        onClick={() => toggleExpand(data.id)}
                         className="btn btn-link"
                         style={{
                           textDecoration: "none",
@@ -108,7 +114,7 @@ function ExperReviwes({ expertReview }) {
                     {isExpanded && (
                       <b
                         className="btn btn-link"
-                        onClick={toggleExpand}
+                        onClick={() => toggleExpand(data.id)}
                         style={{
                           textDecoration: "none",
                           fontWeight: "600",
@@ -118,7 +124,7 @@ function ExperReviwes({ expertReview }) {
                       >
                         ..less
                       </b>
-                    )}
+                    )} */}
                   </p>
                 </div>
                 <div className="review__card-footer">
@@ -129,42 +135,6 @@ function ExperReviwes({ expertReview }) {
             </SwiperSlide>
           );
         })}
-
-        {/* {blogPageType == "listPage" &&
-    blogDataList &&
-    blogDataList?.map(function (item, index) {
-      return (
-        <SwiperSlide key={index}>
-          <Link
-            href={`/blog${
-              item?.category_url === null && item?.category_url === ""
-                ? `/${item?.permalink}`
-                : `/${item?.category_url}/${item?.permalink}`
-            }`}
-            style={{ color: "#27304e" }}
-          >
-            <div className="blog-card">
-              <div className="blog-card-img">
-                <img
-                  src={
-                    item.banner_image
-                      ? item.banner_image
-                      : "/images/nofound.png"
-                  }
-                  width={0}
-                  height={0}
-                  sizes="100%"
-                  alt=""
-                />
-                <p className="dates">{item.published_at}</p>
-              </div>
-              <span className="blog-title">{item.title}</span>
-              <p className="category">{item.category}</p>
-            </div>
-          </Link>
-        </SwiperSlide>
-      );
-    })} */}
       </Swiper>
     </>
   );
