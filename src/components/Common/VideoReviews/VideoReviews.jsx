@@ -35,7 +35,7 @@ function VideoReviews({ videoReview }) {
             spaceBetween: 10,
           },
           1200: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 10,
           },
         }}
