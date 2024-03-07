@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "remixicon/fonts/remixicon.css";
 import "./globals.css";
 import "../../public/font/font.css";
 import Layout from "@/components/Layout";

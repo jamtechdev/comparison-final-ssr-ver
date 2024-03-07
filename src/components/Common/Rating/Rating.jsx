@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const Rating = ({ value }) => {
   const stars = [];
   for (let i = 0; i < 5; i++) {

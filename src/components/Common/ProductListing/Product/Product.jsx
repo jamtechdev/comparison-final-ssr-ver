@@ -21,6 +21,7 @@ import {
   updateCompareProduct,
 } from "@/redux/features/compareProduct/compareProSlice";
 import toast, { Toaster } from "react-hot-toast";
+import Rating from "../../Rating/Rating";
 export default function Product({
   position,
   incomingProduct,
@@ -550,8 +551,12 @@ export default function Product({
                                 );
                               }
                             )}
-                          {console.log(product?.users_rating_descriptions)}
-
+                          {/* {console.log(product)} */}
+                          <p>
+                            <b>
+                             User's Rating :
+                            </b>
+                          </p>
                           {product?.users_rating_descriptions
                             ?.reviews_websites &&
                             product?.users_rating_descriptions?.reviews_websites?.map(

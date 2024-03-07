@@ -821,7 +821,7 @@ thead.isSticky {
   font-weight: 400 !important;
 }
 
-.best-product-listing
+/* .best-product-listing
   .product-listing-inner-content
   .product-score-container
   .score-section
@@ -837,7 +837,7 @@ thead.isSticky {
   font-family: "Lato", sans-serif !important;
   border-bottom: 1px dashed var(--heading-color);
   cursor: pointer;
-}
+} */
 
 .best-product-listing
   .product-listing-inner-content

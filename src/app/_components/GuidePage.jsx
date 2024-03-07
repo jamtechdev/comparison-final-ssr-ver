@@ -811,13 +811,6 @@ export default function GuidePage({
         manageCollapsedDiv={manageCollapsedDiv}
         handleManageCollapsedDiv={handleManageCollapsedDiv}
       />
-      {!hideSmiliar && (
-        <ConfirmationModal
-          showModal={showModal}
-          handleClose={handleModalClose}
-          handleConfirm={handleConfirm}
-        />
-      )}
       )
     </>
   );
