@@ -5,6 +5,7 @@ import Image from "next/image";
 import ExperReviwes from "../Common/ExpertReviews/ExperReviwes";
 import Rating from "../Common/Rating/Rating";
 import ProductReviewTab from "./ProductReviewTab";
+import VideoReviews from "../Common/VideoReviews/VideoReviews";
 
 function ProductTabs({
   productReview,
@@ -35,26 +36,10 @@ function ProductTabs({
                     <ExperReviwes expertReview={expertReview} />
                   </Tab>
                 )}
+           
                 <Tab eventKey="tab-3" title="Video Reviews">
-                  <Container>
-                    <Row>
-                      {console.log(videoReview)}
-                      {videoReview?.map((data, index) => {
-                        return (
-                          <Col md={4}>
-                            <iframe
-                              id="video"
-                              width="100%"
-                              height="250"
-                              src={`${data?.url}`}
-                              frameborder="0"
-                              allowfullscreen
-                            ></iframe>
-                          </Col>
-                        );
-                      })}
-                    </Row>
-                  </Container>
+                  {console.log(videoReview)}
+                  <VideoReviews videoReview={videoReview} />
                 </Tab>
               </Tabs>
             </Col>
