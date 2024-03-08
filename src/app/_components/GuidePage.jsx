@@ -81,8 +81,8 @@ export default function GuidePage({
   }, [searchParams]);
   // console.log(searchParams);
   useEffect(() => {
-    handelFilterActions("variant", "variant", false);
-    handelFilterActions("available", "available", false);
+    handelFilterActions("variant", "variant", true);
+    // handelFilterActions("available", "available", false);
   }, []);
 
   // const removeFilters = () => {
@@ -247,9 +247,7 @@ export default function GuidePage({
   const [isChecked, setIsChecked] = useState(
     products?.length < 12 ? false : true
   );
-  const [hideSmiliar, setHideSmiliar] = useState(
-    products?.length < 12 ? false : true
-  );
+  const [hideSmiliar, setHideSmiliar] = useState(true);
 
   let updatedParams = {};
 
@@ -260,10 +258,10 @@ export default function GuidePage({
     switch (filterName) {
       case "variant":
         if (value) {
+          updatedParams.variant = value;
+        } else {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
           deleteQueryFormURL("direct", updatedParams, currentParams, url);
-        } else {
-          updatedParams.variant = value;
           // setHideSmiliar(false);
         }
         break;
@@ -553,7 +551,7 @@ export default function GuidePage({
                   </Col>
                   <Col md={6}>
                     <div className="sidebar_filter">
-                      <div>
+                      {/* <div>
                         {guide && guide?.page_phrases?.hide_non_available}
                         <div class="custom-switch form-switch">
                           <input
@@ -566,7 +564,7 @@ export default function GuidePage({
                             checked={isChecked}
                           />
                         </div>
-                      </div>
+                      </div> */}
 
                       <div>
                         {" "}
@@ -597,7 +595,17 @@ export default function GuidePage({
                             rangeAttributes: "Overall",
                           })}
                         >
-                          {guide && guide?.page_phrases?.overall}
+                          {/* {guide && guide?.page_phrases?.overall} */}
+                          Overall (Available)
+                        </option>
+                        <option
+                          value={JSON.stringify({
+                            algo: "",
+                            rangeAttributes: "Overall all",
+                          })}
+                        >
+                          Overall (All)
+                          {/* {guide && guide?.page_phrases?.overall} */}
                         </option>
 
                         <option
