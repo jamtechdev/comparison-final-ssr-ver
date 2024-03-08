@@ -8,7 +8,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 
 function VideoReviews({ videoReview }) {
-  console.log(videoReview);
+  console.log(videoReview?.length);
   return (
     <>
       {" "}
@@ -17,8 +17,8 @@ function VideoReviews({ videoReview }) {
         spaceBetween={30}
         loop={true}
         navigation={{
-          nextEl: ".blog-slider .swiper-next",
-          prevEl: ".blog-slider .swiper-prev",
+          nextEl: ".swiper-next",
+          prevEl: ".swiper-prev",
         }}
         pagination={true}
         breakpoints={{
@@ -43,14 +43,14 @@ function VideoReviews({ videoReview }) {
         {videoReview?.map((data, index) => {
           return (
             <SwiperSlide key={index}>
-            <iframe
-              id="video"
-              width="100%"
-              height="250"
-              src={`${data?.url}`}
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
+              <iframe
+                id="video"
+                width="100%"
+                height="250"
+                src={`${data?.url}`}
+                frameborder="0"
+                allowfullscreen
+              ></iframe>
             </SwiperSlide>
           );
         })}
@@ -91,7 +91,7 @@ function VideoReviews({ videoReview }) {
           );
         })} */}
       </Swiper>
-      {videoReview?.length >= 8 ? (
+      {videoReview?.length > 3 ? (
         <>
           <span className="swiper-prev">
             <i className="ri-arrow-left-s-line"></i>

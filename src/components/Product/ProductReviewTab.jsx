@@ -51,7 +51,7 @@ function ProductReviewTab({ productReview }) {
                       src={data?.logo ? data?.logo : "/images/nofound.png"}
                     />
                     <div className="rating__count">
-                      <span>4.8</span>
+                      <span>{data?.rating}</span>
                       <Rating value={data?.rating} />
                     </div>
                     <small className="rating__review">

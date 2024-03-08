@@ -38,7 +38,7 @@ function ProductTabs({
                 )}
            
                 <Tab eventKey="tab-3" title="Video Reviews">
-                  {console.log(videoReview)}
+                  
                   <VideoReviews videoReview={videoReview} />
                 </Tab>
               </Tabs>
