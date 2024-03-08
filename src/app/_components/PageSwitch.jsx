@@ -16,7 +16,7 @@ export default async function PageSwitch({
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
-      // console.log(pageData[0]?.data,"neets");
+      // console.log(pageData[1]?.data,"neets");
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
       const productTable = await getProductForTable(slug);
       PageToRender = (

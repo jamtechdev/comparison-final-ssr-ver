@@ -200,6 +200,7 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
 
       if (!response.ok) {
       }
+
       return response.json();
     })
   );

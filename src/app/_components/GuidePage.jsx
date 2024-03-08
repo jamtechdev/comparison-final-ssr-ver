@@ -41,9 +41,9 @@ export default function GuidePage({
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data.product_names || [];
 
-  const sortedProducts = products.sort(
-    (a, b) => b.overall_score - a.overall_score
-  );
+  // const sortedProducts = products.sort(
+  //   (a, b) => b.overall_score - a.overall_score
+  // );
 
   const productPagination = guideData[1]?.data?.pagination;
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -81,7 +81,7 @@ export default function GuidePage({
   }, [searchParams]);
   // console.log(searchParams);
   useEffect(() => {
-    handelFilterActions("variant", "variant", true);
+    // handelFilterActions("variant", "variant", true);
     // handelFilterActions("available", "available", false);
   }, []);
 
@@ -257,11 +257,12 @@ export default function GuidePage({
     const url = new URL(window.location.href);
     switch (filterName) {
       case "variant":
-        if (value) {
+        if (!value) {
           updatedParams.variant = value;
         } else {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
           deleteQueryFormURL("direct", updatedParams, currentParams, url);
+
           // setHideSmiliar(false);
         }
         break;
@@ -303,7 +304,7 @@ export default function GuidePage({
     handelFilterActions("variant", "variant", checked);
   };
 
-  // console.log(products);
+  // console.log(products,"neet");
 
   return (
     <>
@@ -598,15 +599,14 @@ export default function GuidePage({
                           {/* {guide && guide?.page_phrases?.overall} */}
                           Overall (Available)
                         </option>
-                        <option
+                        {/* <option
                           value={JSON.stringify({
                             algo: "",
                             rangeAttributes: "Overall all",
                           })}
                         >
                           Overall (All)
-                          {/* {guide && guide?.page_phrases?.overall} */}
-                        </option>
+                        </option> */}
 
                         <option
                           value={JSON.stringify({
