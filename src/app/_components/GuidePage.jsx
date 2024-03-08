@@ -39,7 +39,8 @@ export default function GuidePage({
   const products = guideData[1]?.data?.products || [];
 
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
-  const productPosition = guideData[1]?.data.product_names || [];
+  const productPosition = guideData[1]?.data?.product_names || [];
+  // console.log(productPosition);
 
   // const sortedProducts = products.sort(
   //   (a, b) => b.overall_score - a.overall_score
@@ -153,11 +154,14 @@ export default function GuidePage({
   }, [searchParams]);
   const handleSort = (sortAttribute) => {
     let param = JSON.parse(sortAttribute);
+
+    // console.log(param.rangeAttributes);
     if (param.algo) {
       const currentUrl = new URL(window.location.href);
+      console.log(currentUrl);
       const searchParam = new URLSearchParams(currentUrl.search);
       const sortValue = `${param.algo},${param.rangeAttributes}`;
-
+      console.log(sortValue);
       setorder((prev) => {
         return {
           value: sortValue,
@@ -234,11 +238,15 @@ export default function GuidePage({
       window.history.pushState(
         {},
         "",
-        `?${queryString}&variant=no&direct=true`
+        `?${queryString}&variant=no`
+        // `?${queryString}&variant=no&direct=true`
       );
-      router.push(`?${queryString}&variant=no&direct=true`, {
+      router.push(`?${queryString}&variant=no`, {
         scroll: false,
       });
+      // router.push(`?${queryString}&variant=no&direct=true`, {
+      //   scroll: false,
+      // });
     }
     setShowModal(false);
   };
@@ -599,6 +607,15 @@ export default function GuidePage({
                           {/* {guide && guide?.page_phrases?.overall} */}
                           Overall (Available)
                         </option>
+                        <option
+                          value={JSON.stringify({
+                            algo: "available",
+                            rangeAttributes: "false",
+                          })}
+                        >
+                          {/* {guide && guide?.page_phrases?.overall} */}
+                          Overall (All)
+                        </option>
                         {/* <option
                           value={JSON.stringify({
                             algo: "",
@@ -637,7 +654,7 @@ export default function GuidePage({
                         <option
                           value={JSON.stringify({
                             algo: "high-low",
-                            rangeAttributes: "reviews",
+                            rangeAttributes: "rating",
                           })}
                         >
                           {" "}
@@ -680,7 +697,8 @@ export default function GuidePage({
                                     {algoAttribute?.rangeAttributes}
                                     {algoAttribute?.algo ==
                                       "lowest_to_highest" &&
-                                      " (Lowest to Highest)"}
+                                      " (Lowest to Highest)" &&
+                                      "available"}
                                   </option>
                                 );
                             }
