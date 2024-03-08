@@ -313,6 +313,15 @@ export default function GuidePage({
   };
 
   // console.log(products,"neet");
+  const swapPriceWebsites = (data) => {
+    // Similar logic to sort elements based on price_websites
+    const withWebsites = data.filter((item) => item.price_websites?.length);
+    const withoutWebsites = data.filter((item) => !item.price_websites?.length);
+
+    // Combine results with websites first
+    return [...withWebsites, ...withoutWebsites];
+  };
+  const sortedData = swapPriceWebsites(products);
 
   return (
     <>
@@ -712,7 +721,7 @@ export default function GuidePage({
                       <ProductListing
                         guidePhraseData={guide?.page_phrases}
                         productPositionArray={productPosition}
-                        products={products}
+                        products={sortedData}
                         handleToggleCollapse={handleToggleCollapse}
                         handleManageCollapsedDiv={handleManageCollapsedDiv}
                       />
