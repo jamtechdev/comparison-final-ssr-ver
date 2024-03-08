@@ -155,7 +155,7 @@ export default function GuidePage({
   const handleSort = (sortAttribute) => {
     let param = JSON.parse(sortAttribute);
 
-    // console.log(param.rangeAttributes);
+    console.log(param.rangeAttributes);
     if (param.algo) {
       const currentUrl = new URL(window.location.href);
       console.log(currentUrl);
@@ -238,15 +238,11 @@ export default function GuidePage({
       window.history.pushState(
         {},
         "",
-        `?${queryString}&variant=no`
-        // `?${queryString}&variant=no&direct=true`
+        `?${queryString}&variant=no&direct=true`
       );
-      router.push(`?${queryString}&variant=no`, {
+      router.push(`?${queryString}&variant=no&direct=true`, {
         scroll: false,
       });
-      // router.push(`?${queryString}&variant=no&direct=true`, {
-      //   scroll: false,
-      // });
     }
     setShowModal(false);
   };
@@ -654,7 +650,7 @@ export default function GuidePage({
                         <option
                           value={JSON.stringify({
                             algo: "high-low",
-                            rangeAttributes: "rating",
+                            rangeAttributes: "reviews",
                           })}
                         >
                           {" "}
@@ -697,8 +693,7 @@ export default function GuidePage({
                                     {algoAttribute?.rangeAttributes}
                                     {algoAttribute?.algo ==
                                       "lowest_to_highest" &&
-                                      " (Lowest to Highest)" &&
-                                      "available"}
+                                      " (Lowest to Highest)"}
                                   </option>
                                 );
                             }
