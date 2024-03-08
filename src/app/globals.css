@@ -1423,6 +1423,8 @@ li.color-item.selected {
 
 .review__card .review__card-body p {
   color: #52526c;
+  min-height: 210px ;
+  max-height: 210px;
 }
 
 .review__card .review__card-footer {
@@ -1529,6 +1531,7 @@ li.color-item.selected {
 .rating__count span {
   font-size: 20px;
   font-weight: 600;
+  color: #000000;
 }
 
 .user__rating-card .rating__review {
@@ -1539,4 +1542,12 @@ li.color-item.selected {
 .rating__count .rating i {
   color: #fec100 !important;
   font-size: 1.2em !important;
+}
+
+
+.video_review_slider span.swiper-prev{
+  left: 5px !important;
+}
+.video_review_slider span.swiper-next{
+  right: 5px !important;
 }

@@ -17,8 +17,8 @@ function VideoReviews({ videoReview }) {
         spaceBetween={30}
         loop={true}
         navigation={{
-          nextEl: ".swiper-next",
-          prevEl: ".swiper-prev",
+          nextEl: ".video_review_slider .swiper-next",
+          prevEl: ".video_review_slider .swiper-prev",
         }}
         pagination={true}
         breakpoints={{
@@ -39,6 +39,7 @@ function VideoReviews({ videoReview }) {
             spaceBetween: 10,
           },
         }}
+        className="video_review_slider"
       >
         {videoReview?.map((data, index) => {
           return (
@@ -90,19 +91,19 @@ function VideoReviews({ videoReview }) {
             </SwiperSlide>
           );
         })} */}
+        {videoReview?.length > 3 ? (
+          <>
+            <span className="swiper-prev">
+              <i className="ri-arrow-left-s-line"></i>
+            </span>
+            <span className="swiper-next">
+              <i className="ri-arrow-right-s-line"></i>
+            </span>
+          </>
+        ) : (
+          ""
+        )}
       </Swiper>
-      {videoReview?.length > 3 ? (
-        <>
-          <span className="swiper-prev">
-            <i className="ri-arrow-left-s-line"></i>
-          </span>
-          <span className="swiper-next">
-            <i className="ri-arrow-right-s-line"></i>
-          </span>
-        </>
-      ) : (
-        ""
-      )}
     </>
   );
 }

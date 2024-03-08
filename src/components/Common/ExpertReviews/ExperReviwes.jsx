@@ -32,6 +32,15 @@ function ExperReviwes({ expertReview }) {
     }
     return "Poor"; // Handle other cases as needed
   };
+  const getColorBasedOnScore = (score) => {
+    if (score >= 7.5) {
+      return "#093673";
+    } else if (score >= 5 && score < 7.5) {
+      return "#437ECE";
+    } else {
+      return "#85B2F1";
+    }
+  };
 
   return (
     <>
@@ -66,64 +75,65 @@ function ExperReviwes({ expertReview }) {
       >
         {expertReview?.map((data, index) => {
           const isExpanded = data.id === expandedId;
+          const maxLength = 385;
+          const isLong = data?.comment.length > maxLength;
+          let truncatedComment = data?.comment;
+
+          if (isLong) {
+            const lastSpaceIndex = truncatedComment.lastIndexOf(" ", maxLength);
+            truncatedComment =
+              lastSpaceIndex > 0
+                ? truncatedComment.substring(0, lastSpaceIndex) + "..."
+                : truncatedComment.substring(0, maxLength) + "...";
+          }
           return (
             <SwiperSlide key={index}>
               <div className="review__card">
                 <div className="review__card-header">
                   <div className="review__name">
-                    <img src={`${data?.image}`} />
+                    {data?.image !== null && <img src={`${data?.image}`} />}
+
                     <h6>{data?.name}</h6>
                   </div>
                   <div className="review__rating">
                     {typeof data?.evaluation === "string" ? (
                       <>
                         <p>no rating assigned</p>
-                        <span>{data?.evaluation}</span>
+                        <span style={{ background: "#D0D0D0" }}>
+                          {data?.evaluation}
+                        </span>
                       </>
                     ) : (
                       <>
                         <p>{getEvaluation(data?.evaluation)}</p>
-                        <span>{data?.evaluation}</span>
+                        <span
+                          style={{
+                            background: getColorBasedOnScore(data?.evaluation),
+                          }}
+                        >
+                          {data?.evaluation}
+                        </span>
                       </>
                     )}
                   </div>
                 </div>
                 <div className="review__card-body">
                   <p>
-                    <i>
-                      {isExpanded
-                        ? data?.comment
-                        : data?.comment.length > 190
-                        ? `${data?.comment.substring(0, 190)}...`
-                        : data?.comment}
-                    </i>
-                    {/* {!isExpanded && (
-                      <b
-                        onClick={() => toggleExpand(data.id)}
+                    {isExpanded ? data?.comment : truncatedComment}
+                    {/* {!isExpanded && isLong && (
+                      <span
+                        onClick={toggleExpand}
                         className="btn btn-link"
                         style={{
                           textDecoration: "none",
                           fontWeight: "600",
                           padding: "0px",
                           color: "#071b42",
+                          cursor: "pointer",
                         }}
                       >
                         read more
-                      </b>
-                    )}
-                    {isExpanded && (
-                      <b
-                        className="btn btn-link"
-                        onClick={() => toggleExpand(data.id)}
-                        style={{
-                          textDecoration: "none",
-                          fontWeight: "600",
-                          padding: "0px",
-                          color: "#071b42",
-                        }}
-                      >
-                        ..less
-                      </b>
+                      </span>
                     )} */}
                   </p>
                 </div>

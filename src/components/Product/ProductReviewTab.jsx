@@ -46,7 +46,10 @@ function ProductReviewTab({ productReview }) {
             return (
               <>
                 <SwiperSlide key={index}>
-                  <div className="user__rating-card">
+                  <a
+                    href={`/link?p=${btoa(data.url)}`}
+                    className="user__rating-card"
+                  >
                     <img
                       src={data?.logo ? data?.logo : "/images/nofound.png"}
                     />
@@ -57,7 +60,7 @@ function ProductReviewTab({ productReview }) {
                     <small className="rating__review">
                       {data?.reviews} Reviews
                     </small>
-                  </div>
+                  </a>
                 </SwiperSlide>
               </>
             );
