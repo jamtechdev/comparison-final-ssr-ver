@@ -237,8 +237,11 @@ export default function Product({
         <div className="flex-box">
           <div className="left_box">
             <span className="ribbon-number">
+              {/* {console.log(product?.price_websites?.length)} */}
+              {product?.price_websites?.length > 0 ? <p>{KeyIndex + 1}</p> : ""}
+
               {/* <p>{position}</p> */}
-              <p>{KeyIndex + 1}</p>
+
               <RightPointingArrow />
             </span>
             <div className="box_content light-bg-color">
