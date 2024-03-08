@@ -151,7 +151,7 @@ async function getSlugType(slug) {
 }
 
 async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
-  console.log("Abhay", JSON.stringify(searchParams));
+  // console.log("Abhay", JSON.stringify(searchParams));
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
