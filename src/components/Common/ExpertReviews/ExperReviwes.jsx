@@ -73,78 +73,84 @@ function ExperReviwes({ expertReview }) {
         }}
         className="blog-slider"
       >
-        {expertReview?.map((data, index) => {
-          const isExpanded = data.id === expandedId;
-          const maxLength = 385;
-          const isLong = data?.comment.length > maxLength;
-          let truncatedComment = data?.comment;
+{expertReview?.map((data, index) => {
+  const maxLength = 385;
+  const isLong = data?.comment.length > maxLength;
+  let truncatedComment = data?.comment;
+  const [isExpanded, setIsExpanded] = useState(false);
 
-          if (isLong) {
-            const lastSpaceIndex = truncatedComment.lastIndexOf(" ", maxLength);
-            truncatedComment =
-              lastSpaceIndex > 0
-                ? truncatedComment.substring(0, lastSpaceIndex) + "..."
-                : truncatedComment.substring(0, maxLength) + "...";
-          }
-          return (
-            <SwiperSlide key={index}>
-              <div className="review__card">
-                <div className="review__card-header">
-                  <div className="review__name">
-                    {data?.image !== null && <img src={`${data?.image}`} />}
+  if (!isExpanded && isLong) {
+    const lastSpaceIndex = truncatedComment.lastIndexOf(" ", maxLength);
+    truncatedComment =
+      lastSpaceIndex > 0
+        ? truncatedComment.substring(0, lastSpaceIndex) + "..."
+        : truncatedComment.substring(0, maxLength) + "...";
+  }
 
-                    <h6>{data?.name}</h6>
-                  </div>
-                  <div className="review__rating">
-                    {typeof data?.evaluation === "string" ? (
-                      <>
-                        <p>no rating assigned</p>
-                        <span style={{ background: "#D0D0D0" }}>
-                          {data?.evaluation}
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <p>{getEvaluation(data?.evaluation)}</p>
-                        <span
-                          style={{
-                            background: getColorBasedOnScore(data?.evaluation),
-                          }}
-                        >
-                          {data?.evaluation}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-                <div className="review__card-body">
-                  <p>
-                    {isExpanded ? data?.comment : truncatedComment}
-                    {/* {!isExpanded && isLong && (
-                      <span
-                        onClick={toggleExpand}
-                        className="btn btn-link"
-                        style={{
-                          textDecoration: "none",
-                          fontWeight: "600",
-                          padding: "0px",
-                          color: "#071b42",
-                          cursor: "pointer",
-                        }}
-                      >
-                        read more
-                      </span>
-                    )} */}
-                  </p>
-                </div>
-                <div className="review__card-footer">
-                  <span>translate</span>
-                  <small>{data?.date_of_review}</small>
-                </div>
-              </div>
-            </SwiperSlide>
-          );
-        })}
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  return (
+    <SwiperSlide key={index}>
+      <div className="review__card">
+        <div className="review__card-header">
+          <div className="review__name">
+            {data?.image !== null && <img src={`${data?.image}`} />}
+
+            <h6>{data?.name}</h6>
+          </div>
+          <div className="review__rating">
+            {typeof data?.evaluation === "string" ? (
+              <>
+                <p>no rating assigned</p>
+                <span style={{ background: "#D0D0D0" }}>
+                  {data?.evaluation}
+                </span>
+              </>
+            ) : (
+              <>
+                <p>{getEvaluation(data?.evaluation)}</p>
+                <span
+                  style={{
+                    background: getColorBasedOnScore(data?.evaluation),
+                  }}
+                >
+                  {data?.evaluation}
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="review__card-body">
+          <p>
+            {isExpanded ? data?.comment : truncatedComment}
+            {isLong && (
+              <span
+                onClick={toggleExpand}
+                className="btn btn-link"
+                style={{
+                  textDecoration: "none",
+                  fontWeight: "600",
+                  padding: "0px",
+                  color: "#071b42",
+                  cursor: "pointer",
+                }}
+              >
+                {isExpanded ? "Read less" : "Read more"}
+              </span>
+            )}
+          </p>
+        </div>
+        <div className="review__card-footer">
+          <span>translate</span>
+          <small>{data?.date_of_review}</small>
+        </div>
+      </div>
+    </SwiperSlide>
+  );
+})}
+
       </Swiper>
     </>
   );

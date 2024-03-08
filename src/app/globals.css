@@ -1424,7 +1424,7 @@ li.color-item.selected {
 .review__card .review__card-body p {
   color: #52526c;
   min-height: 210px ;
-  max-height: 210px;
+  /* max-height: 210px; */
 }
 
 .review__card .review__card-footer {

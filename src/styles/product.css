@@ -254,9 +254,16 @@
   padding: 6px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap:wrap;
 }
-
+@media screen and (min-width:1201px) {
+  .best-list-item li {
+   
+    justify-content:space-around;
+    
+  }
+}
 .best-list-item li:nth-child(odd) {
   background: #f4f7fb;
 }
