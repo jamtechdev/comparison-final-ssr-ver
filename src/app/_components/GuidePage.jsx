@@ -320,6 +320,10 @@ export default function GuidePage({
   const swapPriceWebsites = (data) => {
     // Similar logic to sort elements based on price_websites
     const splitData = order?.value.split(",");
+    const currentParams = new URLSearchParams(searchParams.toString());
+    // console.log(order.value);
+
+    // console.log(splitData[0] === "available");
     if (splitData[0] === "available") {
       const sortedData = data.sort((a, b) => b.overall_score - a.overall_score);
       return [...sortedData];
@@ -328,14 +332,12 @@ export default function GuidePage({
       const withoutWebsites = data.filter(
         (item) => !item.price_websites?.length
       );
-
-      // Combine results with websites first
       return [...withWebsites, ...withoutWebsites];
     }
   };
   const sortedData = swapPriceWebsites(products);
 
-  // console.log(sortedData?.length);
+  // console.log(sortedData);
 
   return (
     <>
@@ -623,7 +625,7 @@ export default function GuidePage({
                         {/* <option>Autonomy</option> */}
                         <option
                           value={JSON.stringify({
-                            algo: "",
+                            algo: "remove",
                             rangeAttributes: "Overall",
                           })}
                         >
