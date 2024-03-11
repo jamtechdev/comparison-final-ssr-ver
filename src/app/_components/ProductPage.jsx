@@ -239,11 +239,37 @@ function ProductPage({
               </div>
             </Col>
 
-            <Col md={12}>
-              <p className="product-inner-content">
-                {product?.meta_description}
-              </p>
-            </Col>
+            <Row className="w-100 m-0 ">
+              <Col md={12}>
+                <div class="inline-power-section w-100">
+                  <img
+                    src="/images/double-arrow.png"
+                    width={0}
+                    height={0}
+                    sizes="100%"
+                    alt=""
+                  />
+                  <ul>
+                    {/* {console.log(product?.tech_data)} */}
+                    {product?.tech_data?.map((data, key) => {
+                      return (
+                        <React.Fragment key={key}>
+                          <li>
+                            <b>{data?.name}:</b> {data?.value}
+                          </li>
+                        </React.Fragment>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </Col>
+              <Col md={12}>
+                {" "}
+                <p className="product-inner-content">
+                  {product?.meta_description}
+                </p>
+              </Col>
+            </Row>
           </Row>
         </Container>
       </section>
@@ -1154,7 +1180,7 @@ function ProductPage({
               <CompareForm
                 favSlider={product && product?.page_phases}
                 location="ON_PRODUCT_PAGE"
-                product_name={product&&product}
+                product_name={product && product}
                 handelCloseCompareModel={() => {
                   // Add your close model logic here
                   console.log("Closing compare model");

@@ -793,6 +793,34 @@ export default function Product({
                 </Col>
               )}
             </Row>
+            <Row className="w-100 m-0 alternatives-border-top">
+              <Col md={12}>
+                <div class="inline-power-section w-100">
+                  <img
+                    src="/images/double-arrow.png"
+                    width={0}
+                    height={0}
+                    sizes="100%"
+                    alt=""
+                  />
+                  {console.log(product?.tech_data)}
+                  <ul>
+                    {/* {product?.tech_data?.map((data, key) => {
+                      data?.permalink === slug
+                    })} */}
+                    {/* {product?.permalink?.map((data, key) => {
+                      return (
+                        <React.Fragment key={key}>
+                          <li>
+                            <b>{data?.name}:</b> {data?.value}
+                          </li>
+                        </React.Fragment>
+                      );
+                    })} */}
+                  </ul>
+                </div>
+              </Col>
+            </Row>
             {product?.summary && product?.summary.length !== 0 && (
               <>
                 <div className="w-100">

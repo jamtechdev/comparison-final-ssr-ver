@@ -55,9 +55,7 @@ export default function CompareForm({
 
   const [formFields, setFormFields] = useState({
     productFirst:
-      reduxData?.productFirst ||
-      compareProductFirst ||
-      (ProductPage ? ProductPage : null),
+      reduxData?.productFirst || ProductPage || compareProductFirst || null,
     productSecond: reduxData?.productSecond || compareProductSecond || null,
     productThird: reduxData?.productThird || null,
     category:
@@ -67,7 +65,6 @@ export default function CompareForm({
       null,
     location: reduxData?.location ? reduxData?.location : location,
   });
-  // console.log(ProductPage);
 
   const [isFocusedProductFirst, setFocusedProductFirst] = useState(false);
   const [isFocusedProductSecond, setFocusedProductSecond] = useState(false);

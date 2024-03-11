@@ -18,7 +18,7 @@ function GuidePageTextArea({ guide }) {
       let closestHeading = null;
       let closestDistance = Number.MAX_VALUE;
 
-      headings.forEach((heading) => {
+      headings?.forEach((heading) => {
         const bounding = heading.getBoundingClientRect();
         const distanceToTop = bounding.top;
 

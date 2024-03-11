@@ -1551,3 +1551,36 @@ li.color-item.selected {
 .video_review_slider span.swiper-next{
   right: 5px !important;
 }
+.inline-power-section {
+  display: flex;
+  gap: 10px;
+  padding: 8px 15px;
+  align-items: center;
+}
+.inline-power-section img {
+  width: 10px;
+  height: 10px;
+}
+.inline-power-section ul{
+  color: #27304E;
+  opacity: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.inline-power-section ul li{
+  position: relative;
+}
+.inline-power-section ul li:before{
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: calc(100% - 10px);
+  border-radius: 50%;
+  background: #27304E;
+  opacity: 70%;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: calc(100% + 5px);
+}
