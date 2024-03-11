@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
 export default function CompareForm({
   location,
+  comparisonData,
   favSlider,
   product_name,
   handelCategoryForOffenProduct,
@@ -29,15 +30,48 @@ export default function CompareForm({
     category_url: product_name?.category_url,
   };
 
+  // console.log(comparisonData?.length);
+  const compareProductFirst = {
+    category_id: comparisonData?.[0]?.category_id,
+    permalink: comparisonData?.[0]?.permalink,
+    name: comparisonData?.[0]?.name,
+    brand: comparisonData?.[0]?.brand,
+    overall_score: comparisonData?.[0]?.overall_score,
+    technical_score: comparisonData?.[0]?.technical_score,
+    main_image: comparisonData?.[0]?.main_image,
+    category_url: comparisonData?.[0]?.category_url,
+  };
+  const compareProductSecond = {
+    category_id: comparisonData?.[1]?.category_id,
+    permalink: comparisonData?.[1]?.permalink,
+    name: comparisonData?.[1]?.name,
+    brand: comparisonData?.[1]?.brand,
+    overall_score: comparisonData?.[1]?.overall_score,
+    technical_score: comparisonData?.[1]?.technical_score,
+    main_image: comparisonData?.[1]?.main_image,
+    category_url: comparisonData?.[1]?.category_url,
+  };
   // console.log(ProductPage);
 
   const [formFields, setFormFields] = useState({
-    productFirst: reduxData?.productFirst || ProductPage || null,
-    productSecond: reduxData?.productSecond || null,
+    productFirst:
+      reduxData?.productFirst ||
+      compareProductFirst ||
+      (ProductPage ? ProductPage : null),
+    productSecond: reduxData?.productSecond || compareProductSecond || null,
     productThird: reduxData?.productThird || null,
-    category: reduxData?.category || product_name?.category_id || null,
+    category:
+      reduxData?.category ||
+      comparisonData?.[0]?.category_id ||
+      product_name?.category_id ||
+      null,
     location: reduxData?.location ? reduxData?.location : location,
   });
+  // useEffect(() => {
+  //   console.log(formFields);
+  // }, [formFields]);
+
+  // console.log(formFields);
 
   const [isFocusedProductFirst, setFocusedProductFirst] = useState(false);
   const [isFocusedProductSecond, setFocusedProductSecond] = useState(false);

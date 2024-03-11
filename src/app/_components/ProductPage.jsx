@@ -1154,7 +1154,7 @@ function ProductPage({
               <CompareForm
                 favSlider={product && product?.page_phases}
                 location="ON_PRODUCT_PAGE"
-                product_name={product}
+                product_name={product&&product}
                 handelCloseCompareModel={() => {
                   // Add your close model logic here
                   console.log("Closing compare model");
