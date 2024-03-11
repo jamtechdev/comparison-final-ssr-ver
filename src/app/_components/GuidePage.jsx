@@ -158,7 +158,7 @@ export default function GuidePage({
     // console.log(param.rangeAttributes);
     if (param.algo) {
       const currentUrl = new URL(window.location.href);
-      console.log(currentUrl);
+      // console.log(currentUrl);
       const searchParam = new URLSearchParams(currentUrl.search);
       const sortValue = `${param.algo},${param.rangeAttributes}`;
       console.log(sortValue);
@@ -319,15 +319,23 @@ export default function GuidePage({
   // console.log(products,"neet");
   const swapPriceWebsites = (data) => {
     // Similar logic to sort elements based on price_websites
-    const withWebsites = data.filter((item) => item.price_websites?.length);
-    const withoutWebsites = data.filter((item) => !item.price_websites?.length);
+    const splitData = order?.value.split(",");
+    if (splitData[0] === "available") {
+      const sortedData = data.sort((a, b) => b.overall_score - a.overall_score);
+      return [...sortedData];
+    } else {
+      const withWebsites = data.filter((item) => item.price_websites?.length);
+      const withoutWebsites = data.filter(
+        (item) => !item.price_websites?.length
+      );
 
-    // Combine results with websites first
-    return [...withWebsites, ...withoutWebsites];
+      // Combine results with websites first
+      return [...withWebsites, ...withoutWebsites];
+    }
   };
   const sortedData = swapPriceWebsites(products);
 
-  console.log(sortedData?.length);
+  // console.log(sortedData?.length);
 
   return (
     <>
@@ -593,10 +601,10 @@ export default function GuidePage({
                       <div>
                         {" "}
                         {guide && guide?.page_phrases?.hide_similar}
-                        <div class="custom-switch form-switch">
+                        <div className="custom-switch form-switch">
                           <input
                             required=""
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             id={`variant`}
                             onChange={handleHideSmiliar}
@@ -730,6 +738,7 @@ export default function GuidePage({
                         products={sortedData && sortedData}
                         handleToggleCollapse={handleToggleCollapse}
                         handleManageCollapsedDiv={handleManageCollapsedDiv}
+                        slug={slug}
                       />
                     ) : (
                       <ProductSkeleton />

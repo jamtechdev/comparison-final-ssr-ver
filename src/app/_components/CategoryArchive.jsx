@@ -1,3 +1,4 @@
+"use client";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import React from "react";
@@ -21,21 +22,23 @@ function CategoryArchive({ slug, ArchiveData }) {
         <Container>
           {ArchiveData[0].data &&
             ArchiveData[0].data?.categories?.map((item, index) => {
-              return (
-                <Row key={index}>
-                  <Col md={12}>
-                    <div className="heading-primary secondary">
-                      {item?.title}
-                    </div>
-                  </Col>
-                  <Col md={12}>
-                    <ProductSlider
-                      favSlider={item?.guides}
-                      indexSlider={index}
-                    />
-                  </Col>
-                </Row>
-              );
+              if (item?.guides?.length > 0) {
+                return (
+                  <Row key={index}>
+                    <Col md={12}>
+                      <div className="heading-primary secondary">
+                        {item?.title}
+                      </div>
+                    </Col>
+                    <Col md={12}>
+                      <ProductSlider
+                        favSlider={item?.guides}
+                        indexSlider={index}
+                      />
+                    </Col>
+                  </Row>
+                );
+              }
             })}
         </Container>
       </section>

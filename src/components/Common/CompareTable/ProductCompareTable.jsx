@@ -773,7 +773,7 @@ const ProductCompareTable = React.memo(
               })}
           </tbody>
         </Table>
-        <div ref={ref} className={winPos ? "isSticky" : "nonSticky"}></div>
+
         {fullTable == 2 && (
           <div className="text-center">
             <Button className="see_all_btn_outline" onClick={handleTableShow}>

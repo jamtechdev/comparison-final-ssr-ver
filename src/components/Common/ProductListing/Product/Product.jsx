@@ -29,6 +29,7 @@ export default function Product({
   handleManageCollapsedDiv,
   guidePhraseData,
   KeyIndex,
+  slug,
 }) {
   const dispatch = useDispatch();
   const generateProductsWithAttributes = () => {
@@ -229,6 +230,9 @@ export default function Product({
     return value;
   };
   // console.log(product)
+  const filteredTech_data = product?.tech_data?.filter(
+    (item) => item?.permalink === slug
+  );
 
   return (
     <Fragment>
@@ -563,7 +567,7 @@ export default function Product({
                             product?.users_rating_descriptions?.reviews_websites?.map(
                               (data, index) => {
                                 return (
-                                  <>
+                                  <Fragment key={index}>
                                     <div className="rating__section">
                                       <img src={`${data?.logo}`} />
                                       <div className="rating__content">
@@ -573,7 +577,7 @@ export default function Product({
                                         <small>({data?.reviews})</small>
                                       </div>
                                     </div>
-                                  </>
+                                  </Fragment>
                                 );
                               }
                             )}
@@ -793,34 +797,34 @@ export default function Product({
                 </Col>
               )}
             </Row>
-            <Row className="w-100 m-0 alternatives-border-top">
-              <Col md={12}>
-                <div class="inline-power-section w-100">
-                  <img
-                    src="/images/double-arrow.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  {console.log(product?.tech_data)}
-                  <ul>
-                    {/* {product?.tech_data?.map((data, key) => {
-                      data?.permalink === slug
-                    })} */}
-                    {/* {product?.permalink?.map((data, key) => {
-                      return (
-                        <React.Fragment key={key}>
-                          <li>
-                            <b>{data?.name}:</b> {data?.value}
+            {filteredTech_data?.[0]?.data !== undefined && (
+              <Row className="w-100 m-0 alternatives-border-top">
+                <Col md={12}>
+                  <div className="inline-power-section w-100">
+                    <img
+                      src="/images/double-arrow.png"
+                      width={0}
+                      height={0}
+                      sizes="100%"
+                      alt=""
+                    />
+                    {/* {console.log(filteredTech_data[0]?.data)} */}
+
+                    <ul>
+                      {filteredTech_data[0]?.data.map((data, key) => {
+                        return (
+                          <li key={key}>
+                            {/* {console.log(data[0])} */}
+                            <b>{data && data?.name}:</b> {data && data?.value}{" "}
+                            {data && data?.unit}
                           </li>
-                        </React.Fragment>
-                      );
-                    })} */}
-                  </ul>
-                </div>
-              </Col>
-            </Row>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </Col>
+              </Row>
+            )}
             {product?.summary && product?.summary.length !== 0 && (
               <>
                 <div className="w-100">

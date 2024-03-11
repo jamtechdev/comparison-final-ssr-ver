@@ -7,6 +7,7 @@ export default function ProductListing({
   handleToggleCollapse,
   handleManageCollapsedDiv,
   guidePhraseData,
+  slug
 }) {
   function findProductPosition(name) {
     const index = Object.values(productPositionArray).indexOf(name);
@@ -27,6 +28,7 @@ export default function ProductListing({
           position={findProductPosition(product.name)}
           handleToggleCollapse={handleToggleCollapse}
           handleManageCollapsedDiv={handleManageCollapsedDiv}
+          slug={slug}
         />
       ))}
     </div>

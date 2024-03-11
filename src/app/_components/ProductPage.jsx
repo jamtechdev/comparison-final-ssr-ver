@@ -142,7 +142,11 @@ function ProductPage({
         const bounding = heading.getBoundingClientRect();
         const distanceToTop = bounding.top;
 
-        if (distanceToTop >= 0 && distanceToTop < closestDistance) {
+        // Calculate the threshold as half the viewport height
+        const threshold = window.innerHeight / 2;
+
+        // Check if heading is more than halfway into the viewport
+        if (distanceToTop >= -threshold && distanceToTop < closestDistance) {
           closestHeading = heading;
           closestDistance = distanceToTop;
         }
@@ -163,7 +167,6 @@ function ProductPage({
         }
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
