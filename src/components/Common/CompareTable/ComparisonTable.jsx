@@ -313,7 +313,7 @@ export default function ComparisonTable({
                                 </div>
                               )}
                             {product.price_websites &&
-                              product.price_websites.map((data, dIndex) => {
+                              product.price_websites.slice(0,1).map((data, dIndex) => {
                                 return (
                                   <React.Fragment key={dIndex}>
                                     {data.price !== null && (
