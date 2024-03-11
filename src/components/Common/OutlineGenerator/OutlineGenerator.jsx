@@ -8,17 +8,17 @@ function OutlineGenerator({ blogData, currentIndexId }) {
   const [activeParentIndex, setActiveParentIndex] = useState(null);
   const debouncedScrollHandler = useRef(null);
 
-  // useEffect(() => {
-  //   // Define a debounced version of the scroll event handler
-  //   debouncedScrollHandler.current = debounce((id) => {
-  //     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  //   }, 200); // Adjust the debounce delay as needed
+  useEffect(() => {
+    // Define a debounced version of the scroll event handler
+    debouncedScrollHandler.current = debounce((id) => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 200); // Adjust the debounce delay as needed
 
-  //   return () => {
-  //     // Cleanup the debounced function on unmount
-  //     debouncedScrollHandler.current.cancel();
-  //   };
-  // }, []);
+    return () => {
+      // Cleanup the debounced function on unmount
+      debouncedScrollHandler.current.cancel();
+    };
+  }, []);
 
   useEffect(() => {
     if (currentIndexId) {
@@ -92,13 +92,14 @@ function OutlineGenerator({ blogData, currentIndexId }) {
               }}
             >
               {/* {console.log(section.text)} */}
-              <span
+              <Link
+                href={`#${section?.id}`}
                 className={`outlineLink ${
                   activeParentIndex === section?.id ? "outline-active" : ""
                 }`}
               >
                 {`${mainNumber}. ${section.text}`}
-              </span>
+              </Link>
               {section.children && (
                 <ol className="ol-child">
                   {section.children.map((child, childIndex) => {
@@ -116,10 +117,11 @@ function OutlineGenerator({ blogData, currentIndexId }) {
                           e.preventDefault();
                           e.stopPropagation();
                           setActiveParentIndex(child?.id);
-                          // debouncedScrollHandler.current(child?.id);
+                          debouncedScrollHandler.current(child?.id);
                         }}
                       >
-                        <span
+                        <Link
+                          href={`#${child?.id}`}
                           className={`outlineLink ${
                             activeParentIndex === child?.id
                               ? "outline-active"
@@ -127,7 +129,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
                           }`}
                         >
                           {`${subMainNumber}. ${child.text}`}
-                        </span>
+                        </Link>
                         {child?.children && (
                           <ol className="ol-sub-child">
                             {child?.children.map(
@@ -148,12 +150,13 @@ function OutlineGenerator({ blogData, currentIndexId }) {
                                       e.preventDefault();
                                       e.stopPropagation();
                                       setActiveParentIndex(subSubMain?.id);
-                                      // debouncedScrollHandler.current(
-                                      //   subSubMain?.id
-                                      // );
+                                      debouncedScrollHandler.current(
+                                        subSubMain?.id
+                                      );
                                     }}
                                   >
-                                    <span
+                                    <Link
+                                      href={`#${subSubMain?.id}`}
                                       className={`outlineLink ${
                                         activeParentIndex === subSubMain?.id
                                           ? "outline-active"
@@ -161,7 +164,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
                                       }`}
                                     >
                                       {`${subSubMainNumber}. ${subSubMain.text}`}
-                                    </span>
+                                    </Link>
                                   </li>
                                 );
                               }

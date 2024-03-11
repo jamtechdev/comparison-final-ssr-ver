@@ -7,17 +7,19 @@ export default function ProductListing({
   handleToggleCollapse,
   handleManageCollapsedDiv,
   guidePhraseData,
-  slug
+  slug,
+  order,
 }) {
   function findProductPosition(name) {
     const index = Object.values(productPositionArray).indexOf(name);
+
     if (index !== -1) {
       return index + 1;
     } else {
       return null;
-    } 
+    }
   }
-  // console.log(guidePhraseData)
+  // console.log(findProductPosition(product.name)
   return (
     <div className="best-product-wrapper">
       {products.map((product, index) => (
@@ -29,6 +31,7 @@ export default function ProductListing({
           handleToggleCollapse={handleToggleCollapse}
           handleManageCollapsedDiv={handleManageCollapsedDiv}
           slug={slug}
+          order={order}
         />
       ))}
     </div>

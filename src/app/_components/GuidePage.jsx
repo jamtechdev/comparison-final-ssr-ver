@@ -315,6 +315,7 @@ export default function GuidePage({
     setHideSmiliar(checked);
     handelFilterActions("variant", "variant", checked);
   };
+  // console.log(order)
 
   // console.log(products,"neet");
   const swapPriceWebsites = (data) => {
@@ -741,6 +742,8 @@ export default function GuidePage({
                         handleToggleCollapse={handleToggleCollapse}
                         handleManageCollapsedDiv={handleManageCollapsedDiv}
                         slug={slug}
+                        order={order}
+                       
                       />
                     ) : (
                       <ProductSkeleton />

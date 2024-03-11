@@ -30,6 +30,7 @@ export default function Product({
   guidePhraseData,
   KeyIndex,
   slug,
+  order,
 }) {
   const dispatch = useDispatch();
   const generateProductsWithAttributes = () => {
@@ -234,6 +235,28 @@ export default function Product({
     (item) => item?.permalink === slug
   );
 
+  //
+  const [splitData, setSplitData] = useState([]);
+
+  useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+    const searchParam = new URLSearchParams(currentUrl.search);
+    const variantValue = searchParam.get("variant");
+    const sortValue = searchParam.get("sort");
+
+    setSplitData(sortValue?.split(","));
+  }, [order]);
+
+  // useEffect(() => {
+  //   const currentUrl = new URL(window.location.href);
+  //   const searchParam = new URLSearchParams(currentUrl.search);
+  //   const variantValue = searchParam.get("variant");
+  //   const sortValue = searchParam.get("sort");
+
+  //   // console.log(splitData);
+  // });
+  // console.log(splitData);
+
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
@@ -242,7 +265,11 @@ export default function Product({
           <div className="left_box">
             <span className="ribbon-number">
               {/* {console.log(product?.price_websites?.length)} */}
-              {product?.price_websites?.length > 0 ? <p>{KeyIndex + 1}</p> : ""}
+              {/* {product?.price_websites?.length > 0 ? <p>{KeyIndex + 1}</p> : ""} */}
+              {splitData?.[0] === "available" ||
+              (product?.price_websites?.length > 0 && KeyIndex !== null) ? (
+                <p>{KeyIndex + 1}</p>
+              ) : null}
 
               {/* <p>{position}</p> */}
 
