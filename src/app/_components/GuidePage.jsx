@@ -238,10 +238,11 @@ export default function GuidePage({
       window.history.pushState(
         {},
         "",
-        `?${queryString}&variant=no`
+        `?${queryString}&variant=false`
         // `?${queryString}&variant=no&direct=true`
       );
-      router.push(`?${queryString}&variant=no`, {
+      setHideSmiliar(false);
+      router.push(`?${queryString}&variant=false`, {
         scroll: false,
       });
       // router.push(`?${queryString}&variant=no&direct=true`, {
@@ -255,6 +256,9 @@ export default function GuidePage({
   const [isChecked, setIsChecked] = useState(
     products?.length < 12 ? false : true
   );
+
+  // Handle case-insensitive variant query parameter
+
   const [hideSmiliar, setHideSmiliar] = useState(true);
 
   let updatedParams = {};
@@ -322,6 +326,8 @@ export default function GuidePage({
     return [...withWebsites, ...withoutWebsites];
   };
   const sortedData = swapPriceWebsites(products);
+
+  console.log(sortedData?.length);
 
   return (
     <>
@@ -721,7 +727,7 @@ export default function GuidePage({
                       <ProductListing
                         guidePhraseData={guide?.page_phrases}
                         productPositionArray={productPosition}
-                        products={sortedData}
+                        products={sortedData && sortedData}
                         handleToggleCollapse={handleToggleCollapse}
                         handleManageCollapsedDiv={handleManageCollapsedDiv}
                       />

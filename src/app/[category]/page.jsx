@@ -59,18 +59,29 @@ async function getSlugMetaData(category) {
   }
   return response.json();
 }
+
 export async function generateMetadata({ params: { category } }) {
-  const meta_data = await getSlugMetaData(category);
+  let meta_data = { data: {} };
+
+  try {
+    const response = await getSlugMetaData(category);
+    if (response && response.data) {
+      meta_data = response.data;
+    }
+  } catch (error) {
+    console.error("Error fetching metadata:", error);
+  }
+
   return {
-    title: meta_data?.data?.title || "Comparison web",
+    title: meta_data?.title || "Comparison web",
     generator: "Comparison web",
     applicationName: "Comparison web",
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
-    description:
-      meta_data?.data?.meta_description || "Comparison web description",
+    description: meta_data?.meta_description || "Comparison web description",
   };
 }
+
 async function fetchDataBasedOnPageType(slug, pageType) {
   let apiUrls = [];
   switch (pageType) {

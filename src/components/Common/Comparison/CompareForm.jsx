@@ -67,11 +67,7 @@ export default function CompareForm({
       null,
     location: reduxData?.location ? reduxData?.location : location,
   });
-  // useEffect(() => {
-  //   console.log(formFields);
-  // }, [formFields]);
-
-  // console.log(formFields);
+  // console.log(ProductPage);
 
   const [isFocusedProductFirst, setFocusedProductFirst] = useState(false);
   const [isFocusedProductSecond, setFocusedProductSecond] = useState(false);
