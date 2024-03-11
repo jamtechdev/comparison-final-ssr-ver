@@ -14,7 +14,7 @@ export default function BreadCrum({
   productPhaseData,
 }) {
   const router = useRouter();
-  // console.log(secondPageName);
+  console.log(firstPageName);
   return (
     <>
       <Breadcrumb className="breadcrumb-group">
@@ -28,8 +28,8 @@ export default function BreadCrum({
             className="breadcrumb-items fristWord"
             href={`/${firstPageName}`}
           >
-            {firstPageName.replace(/-/g, " ").charAt(0).toUpperCase() +
-              firstPageName.replace(/-/g, " ").slice(1).toLowerCase()}
+            {firstPageName?.replace(/-/g, " ").charAt(0).toUpperCase() +
+              firstPageName?.replace(/-/g, " ").slice(1).toLowerCase()}
           </BreadcrumbItem>
         )}
         {secondPageName == "" ? (

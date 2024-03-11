@@ -27,6 +27,7 @@ import CompareForm from "@/components/Common/Comparison/CompareForm";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import { searchForPatternAndReplace } from "@/hooks/useChart";
 import Rating from "@/components/Common/Rating/Rating";
+import ProductBottomBar from "@/components/Common/ProductBottomBar/ProductBottomBar";
 
 // import Link from "next/link";
 
@@ -1210,6 +1211,7 @@ function ProductPage({
           </Container>
         </section>
       )}
+      <ProductBottomBar />
     </>
   );
 }

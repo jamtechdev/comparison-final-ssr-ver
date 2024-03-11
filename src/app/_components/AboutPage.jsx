@@ -5,14 +5,15 @@ import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 
-function AboutPage({ aboutData }) {
+function AboutPage({ slug, aboutData }) {
+  // console.log(aboutData?.page_phases);
   return (
     <>
       <section className="breadcrumb-section">
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName="" secondPageName="About us" />
+              <BreadCrumb firstPageName={"About us"} secondPageName={""} />
             </Col>
 
             <Col md={12}>
