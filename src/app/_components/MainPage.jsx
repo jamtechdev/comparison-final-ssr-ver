@@ -183,7 +183,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                 <Container className="small-p-0 ">
                   <Row key={data?.id}>
                     <Col md={12} xs={12}>
-                      <Link
+                      <a
                         href={`/${data?.primary_archive_category?.toLowerCase()}`}
                         className="text-center electronics"
                       >
@@ -195,7 +195,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         >
                           {data?.primary_archive_category}
                         </h2>
-                      </Link>
+                      </a>
                     </Col>
                   </Row>
                 </Container>
@@ -237,12 +237,12 @@ export default function MainPage({ bannerCounts, favSlider }) {
                                     className="product-categories-item"
                                     style={{ cursor: "pointer" }}
                                   >
-                                    <Link
+                                    <a
                                       style={{ color: "#27304e" }}
                                       href={`/${item?.category_url?.toLowerCase()}`}
                                     >
                                       {item?.title}
-                                    </Link>
+                                    </a>
                                   </span>
                                 </div>
                               );

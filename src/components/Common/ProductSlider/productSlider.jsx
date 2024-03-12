@@ -48,7 +48,7 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
               return (
                 <React.Fragment key={section?.short_name + index}>
                   <SwiperSlide key={section?.short_name}>
-                    <Link
+                    <a
                       href={`/${
                         section?.category_url ? section?.category_url : slug
                       }/${section?.permalink}`}
@@ -74,7 +74,7 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
                           </span>
                         </div>
                       </div>
-                    </Link>
+                    </a>
                   </SwiperSlide>
                 </React.Fragment>
               );

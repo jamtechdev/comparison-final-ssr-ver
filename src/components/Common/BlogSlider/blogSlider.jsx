@@ -45,7 +45,7 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
             blogData?.map(function (item, index) {
               return (
                 <SwiperSlide key={index}>
-                  <Link
+                  <a
                     href={`/${
                       item.category_url
                         ? item.category_url
@@ -71,7 +71,7 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
                       <span className="blog-title">{item.title}</span>
                       <p className="category">{item.category}</p>
                     </div>
-                  </Link>
+                  </a>
                 </SwiperSlide>
               );
             })

@@ -53,7 +53,7 @@ export default function ReviewSlider({ favSlider }) {
           const url = item?.category?.replace(/\s+/g, "-").toLowerCase();
           return (
             <SwiperSlide key={index}>
-              <Link href={`/${url}/${item?.permalink}`}>
+              <a href={`/${url}/${item?.permalink}`}>
                 <div className="review-wrapper">
                   <div className="review-card">
                     <Image
@@ -82,7 +82,7 @@ export default function ReviewSlider({ favSlider }) {
                     </span>
                   </div>
                 </div>
-              </Link>
+              </a>
             </SwiperSlide>
           );
         })}
