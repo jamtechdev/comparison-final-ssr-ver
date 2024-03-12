@@ -4,10 +4,11 @@ export default async function Page({ params: { category } }) {
   // console.log(category);
 
   const slugType = await getSlugType(category);
-  // console.log(slugType)
+  console.log(slugType);
 
   if (slugType.type) {
     const pageData = await fetchDataBasedOnPageType(category, slugType.type);
+    console.log(pageData);
 
     if (pageData != null) {
       return (
@@ -95,6 +96,8 @@ async function fetchDataBasedOnPageType(slug, pageType) {
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/category/archive-page/${slug}`,
       ];
+    case "SinglePage":
+      apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/single-page/${slug}`];
       break;
     default:
       return null;

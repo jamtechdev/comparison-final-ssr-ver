@@ -7,7 +7,7 @@ import Link from "next/link";
 
 function AboutPage({ slug, aboutData }) {
   // console.log(aboutData);
-  return (
+  return (  
     <>
       <section className="breadcrumb-section">
         <Container>

@@ -5,6 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
+  console.log(categoryData)
   return (
     <div>
       {categoryData != null && (

@@ -4,13 +4,17 @@ import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 function CategoryArchive({ slug, ArchiveData }) {
+  // console.log(ArchiveData);
   return (
     <>
       <section className="breadcrumb-section">
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName={slug} secondPageName={""} />
+              <BreadCrumb
+                firstPageName={"Breadcrumb Homepage"}
+                secondPageName={{ name: slug }}
+              />
             </Col>
             <Col md={12}>
               <h1 className="heading-primary">{ArchiveData[0].data?.title}</h1>

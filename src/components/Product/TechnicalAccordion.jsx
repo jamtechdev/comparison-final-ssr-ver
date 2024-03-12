@@ -242,12 +242,12 @@ const TechnicalAccordion = React.memo(
                                     <img src={`${data?.logo}`} />
                                     <div className="rating__content">
                                       <b>{data?.rating}</b>
-                                      <Rating value={data?.rating}/>
-                                      
+                                      <Rating value={data?.rating} />
+
                                       <small>({data?.reviews})</small>
                                     </div>
                                   </div>
-                                </> 
+                                </>
                               );
                             }
                           )}
@@ -608,7 +608,7 @@ const TechnicalAccordion = React.memo(
                                   <div className="spec-item">
                                     <div className="spec-col">
                                       <div className="query">
-                                        {attributeValues.attribute}
+                                        {attributeValues?.attribute_display_name}
                                         <QuestionIcon
                                           attributes={
                                             attributeValues && attributeValues
@@ -902,11 +902,12 @@ const TechnicalAccordion = React.memo(
                           )
                           .map((attributeValues, valueIndex) => (
                             <React.Fragment key={valueIndex}>
+                              {/* {console.log(attributeValues)} */}
                               <div className="spec-section" key={valueIndex}>
                                 <div className="spec-item">
                                   <div className="spec-col">
                                     <div className="query">
-                                      {attributeValues.attribute}
+                                      {attributeValues?.attribute_display_name}
                                       <QuestionIcon
                                         attributes={
                                           attributeValues && attributeValues

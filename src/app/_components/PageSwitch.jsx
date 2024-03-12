@@ -4,6 +4,7 @@ import ProductPage from "./ProductPage";
 import CategoryArchive from "./CategoryArchive";
 import ProductCategoryArchivePage from "./ProductCategoryArchivePage";
 import Comparison from "./Comparison";
+import SinglePage from "./SinglePage";
 export default async function PageSwitch({
   PageType,
   slug,
@@ -82,6 +83,16 @@ export default async function PageSwitch({
           graphComparisonProsCons={graphComparisonProsCons}
         />
       );
+      break;
+    case "SinglePage":
+      PageToRender = (
+        <SinglePage
+          slug={slug}
+          categorySlug={categorySlug}
+          singlePageData={pageData[0]?.data}
+        />
+      );
+
       break;
     default:
       PageToRender = () => <div>No Page Found</div>;

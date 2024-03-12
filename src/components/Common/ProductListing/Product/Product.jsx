@@ -1483,7 +1483,7 @@ export default function Product({
                                                       <div className="spec-col">
                                                         <div className="query">
                                                           {
-                                                            attributeValues.attribute
+                                                            attributeValues.attribute_display_name
                                                           }
                                                           <QuestionIcon
                                                             attributes={
@@ -1803,7 +1803,7 @@ export default function Product({
                                                     <div className="spec-col">
                                                       <div className="query">
                                                         {
-                                                          attributeValues.attribute
+                                                          attributeValues.attribute_display_name
                                                         }
                                                         <QuestionIcon
                                                           attributes={

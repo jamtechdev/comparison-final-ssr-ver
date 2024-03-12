@@ -3,13 +3,6 @@ import AboutPage from "../_components/AboutPage";
 import { aboutUsService } from "@/_services";
 import Head from "next/head";
 
-export const metadata = {
-  title: "About us",
-  openGraph: {
-    title: "Acme",
-    description: "Acme is a...",
-  },
-};
 export default async function Page() {
   const aboutData = await aboutUsService.aboutUsAPi();
   return (
@@ -25,3 +18,14 @@ export default async function Page() {
     </>
   );
 }
+export const generateMetadata = async (router) => {
+  const aboutData = await aboutUsService.aboutUsAPi();
+  const title = aboutData?.title;
+  const description = aboutData?.meta_description;
+
+  return {
+    title,
+    description,
+    // Add other metadata properties as needed
+  };
+};
