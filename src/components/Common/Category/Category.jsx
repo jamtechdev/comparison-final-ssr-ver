@@ -21,7 +21,7 @@ export default function Category({ categories }) {
           // }}
         >
           <div className="category-section">
-            <Link href={`/${section?.primary_archive_category}`}>
+            <a href={`/${section?.primary_archive_category}`}>
               <Image
                 src={
                   section?.square_image
@@ -36,7 +36,7 @@ export default function Category({ categories }) {
               <span className="category_name">
                 {section?.primary_archive_category || "NOT FOUND"}
               </span>
-            </Link>
+            </a>
           </div>
         </Col>
       ))}
