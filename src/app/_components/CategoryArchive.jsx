@@ -11,7 +11,24 @@ function CategoryArchive({ slug, ArchiveData }) {
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName={slug} secondPageName={""} />
+              {/* <BreadCrumb
+                productPhaseData={categoryData?.page_phases}
+                firstPageName={""}
+                secondPageName={{
+                  name:
+                    slug?.replace(/-/g, " ").charAt(0).toUpperCase() +
+                    slug?.replace(/-/g, " ").slice(1).toLowerCase(),
+                }}
+              /> */}
+              <BreadCrumb
+                // productPhaseData={categoryData?.page_phases}
+                firstPageName={""}
+                secondPageName={{
+                  name:
+                    slug?.replace(/-/g, " ").charAt(0).toUpperCase() +
+                    slug?.replace(/-/g, " ").slice(1).toLowerCase(),
+                }}
+              />
             </Col>
             <Col md={12}>
               <h1 className="heading-primary">{ArchiveData[0].data?.title}</h1>
