@@ -6,14 +6,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 function AboutPage({ slug, aboutData }) {
-  // console.log(aboutData?.page_phases);
+  // console.log(aboutData);
   return (
     <>
       <section className="breadcrumb-section">
         <Container>
           <Row>
             <Col md={12}>
-              <BreadCrumb firstPageName={"About us"} secondPageName={""} />
+              <BreadCrumb
+                firstPageName={aboutData?.page_phases?.breadcrumb_homepage}
+                secondPageName={{name:"About us"}}
+              />
             </Col>
 
             <Col md={12}>

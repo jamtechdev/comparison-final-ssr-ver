@@ -517,7 +517,7 @@ function CompareDiv({
               </h2>
               <CompareForm
                 location="ON_MAIN_PAGE"
-                comparisonData={products&&products}
+                comparisonData={products && products}
                 handelCloseCompareModel={() => {}}
               />
             </Col>

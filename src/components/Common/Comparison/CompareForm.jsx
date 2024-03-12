@@ -51,11 +51,15 @@ export default function CompareForm({
     main_image: comparisonData?.[1]?.main_image,
     category_url: comparisonData?.[1]?.category_url,
   };
-  // console.log(ProductPage);
+  // console.log(comparisonData);
+  // console.log(compareProductSecond);
+  // console.log(product_name);
 
   const [formFields, setFormFields] = useState({
     productFirst:
-      reduxData?.productFirst || ProductPage || compareProductFirst || null,
+      product_name !== undefined
+        ? reduxData?.productFirst || ProductPage || null
+        : reduxData?.productFirst || compareProductFirst || null,
     productSecond: reduxData?.productSecond || compareProductSecond || null,
     productThird: reduxData?.productThird || null,
     category:
@@ -139,6 +143,11 @@ export default function CompareForm({
   // console.log(formFields);
   useEffect(() => {
     if (product_name) {
+      dispatch(addCompareProduct(formFields));
+    }
+  }, []);
+  useEffect(() => {
+    if (comparisonData) {
       dispatch(addCompareProduct(formFields));
     }
   }, []);
