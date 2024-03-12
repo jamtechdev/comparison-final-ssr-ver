@@ -73,7 +73,6 @@ export async function generateMetadata({ params: { category } }) {
   } catch (error) {
     console.error("Error fetching metadata:", error);
   }
-
   return {
     title: meta_data?.title || "Comparison web",
     generator: "Comparison web",

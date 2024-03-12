@@ -14,8 +14,9 @@ function AboutPage({ slug, aboutData }) {
           <Row>
             <Col md={12}>
               <BreadCrumb
-                firstPageName={aboutData?.page_phases?.breadcrumb_homepage}
-                secondPageName={{name:"About us"}}
+                firstPageName={"About us"}
+                secondPageName={""} 
+                
               />
             </Col>
 
