@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 function AboutPage({ slug, aboutData }) {
-  console.log(aboutData);
+  // console.log(aboutData);
   return (  
     <>
       <section className="breadcrumb-section">
@@ -77,7 +77,7 @@ function AboutPage({ slug, aboutData }) {
                 return (
                   <>
                     <Col md={3} lg={3}>
-                      <Link href={`/author/${item?.id}`}>
+                      <a href={`/author/${item?.id}`}>
                         <div className="author-page-section about-card-section">
                           <img
                             src={
@@ -93,7 +93,7 @@ function AboutPage({ slug, aboutData }) {
                             <span>{item?.name}</span>
                           </div>
                         </div>
-                      </Link>
+                      </a>
                     </Col>
                   </>
                 );

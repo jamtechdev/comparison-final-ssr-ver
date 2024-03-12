@@ -98,12 +98,12 @@ export default function ProductSliderBlog({ favSlider }) {
                 />
                 <span>
                   {" "}
-                  <Link
-                    href={`/${item?.permalink}`}
+                  <a
+                    href={`/${item?.category_url}/${item?.permalink}`}
                     style={{ color: "#27304e" }}
                   >
                     {item?.short_name || item?.guide_name}
-                  </Link>
+                  </a>
                 </span>
               </div>
               // </SwiperSlide>

@@ -276,12 +276,12 @@ export default function Product({
               <RightPointingArrow />
             </span>
             <div className="box_content light-bg-color">
-              <Link
+              <a
                 href={`/${product?.category_url}/${product?.permalink}`}
                 style={{ color: "#27304E" }}
               >
                 {product?.name}
-              </Link>
+              </a>
             </div>
           </div>
           {product?.assigned_title && (
@@ -679,7 +679,7 @@ export default function Product({
                                   {data.price !== null && (
                                     <li>
                                       <>
-                                        <Link
+                                        <a
                                           rel="noopener noreferrer"
                                           target="_blank"
                                           href={`/link?p=${btoa(data.url)}`}
@@ -691,7 +691,7 @@ export default function Product({
                                             sizes="100vw"
                                             alt=""
                                           />
-                                        </Link>
+                                        </a>
                                         <span>
                                           <a
                                             rel="noopener noreferrer"
@@ -917,7 +917,7 @@ export default function Product({
                               .slice(0, 5)
                               ?.map((data, key) => {
                                 return (
-                                  <Link href={`/${data.permalink}`} key={key}>
+                                  <a href={`/${data.permalink}`} key={key}>
                                     <p>
                                       <span>
                                         #{data?.position}{" "}
@@ -926,7 +926,7 @@ export default function Product({
                                       </span>
                                       {data?.guide_short_name};
                                     </p>
-                                  </Link>
+                                  </a>
                                 );
                               })}
                           </div>

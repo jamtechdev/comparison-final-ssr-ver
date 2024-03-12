@@ -2,7 +2,7 @@ import * as React from "react";
 import * as d3 from "d3";
 
 function lineChart(svgRef, lineChartData) {
-  console.log(lineChartData);
+  // console.log(lineChartData);
   const parseDate = d3.timeParse("%Y-%m");
 
   const data = [
@@ -17,7 +17,7 @@ function lineChart(svgRef, lineChartData) {
         { date: "2020-06", price: 600 },
       ].map((line) => {
         const date = parseDate(line.date);
-        console.log(date);
+        // console.log(date);
 
         return {
           date: line?.data,
@@ -26,7 +26,7 @@ function lineChart(svgRef, lineChartData) {
       }),
     },
   ];
-  console.log(data);
+  // console.log(data);
   const svg = d3.select(svgRef.current);
   const width = 700;
   const height = 400;

@@ -231,9 +231,9 @@ function ProductPage({
                     )}
                     <div className="user-detail">
                       <p>
-                        <Link href={`/author/${product?.author?.id}`}>
+                        <a href={`/author/${product?.author?.id}`}>
                           {product?.author?.name}
-                        </Link>
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -587,7 +587,7 @@ function ProductPage({
                       .map((item, index) => {
                         return (
                           <li key={index}>
-                            <Link
+                            <a
                               rel="noopener noreferrer"
                               target="_blank"
                               href={`/link?p=${btoa(item.url)}`}
@@ -599,7 +599,7 @@ function ProductPage({
                                 sizes="100%"
                                 alt="price"
                               />
-                            </Link>
+                            </a>
                             <span>
                               <a
                                 rel="noopener noreferrer"
@@ -643,11 +643,11 @@ function ProductPage({
                               />
                               <p>
                                 N.{item.position} in{" "}
-                                <Link
+                                <a
                                   href={`/${item?.category_url}/${item?.permalink}`}
                                 >
                                   <small>{item.guide_name}</small>
-                                </Link>
+                                </a>
                               </p>
                             </div>
                           </li>
@@ -746,7 +746,7 @@ function ProductPage({
                                       : "pointer",
                                   }}
                                 >
-                                  <Link
+                                  <a
                                     href={`/${data?.category_url}/${data?.permalink}`}
                                     style={{
                                       color: "#437ed0",
@@ -759,7 +759,7 @@ function ProductPage({
                                     onClick={(e) => handleItemClick(key)}
                                   >
                                     {data.short_name}
-                                  </Link>
+                                  </a>
                                 </li>
                               )}
 
@@ -944,7 +944,7 @@ function ProductPage({
                               .map((item, index) => {
                                 return (
                                   <li key={index}>
-                                    <Link
+                                    <a
                                       rel="noopener noreferrer"
                                       target="_blank"
                                       href={`/link?p=${btoa(item.url)}`}
@@ -956,7 +956,7 @@ function ProductPage({
                                         sizes="100%"
                                         alt=""
                                       />
-                                    </Link>
+                                    </a>
                                     <span>
                                       <a
                                         rel="noopener noreferrer"
@@ -998,11 +998,11 @@ function ProductPage({
                                       {/* {console.log(item)} */}
                                       <p>
                                         N.{item.position} in{" "}
-                                        <Link
+                                        <a
                                           href={`/${item?.category_url}/${item?.permalink}`}
                                         >
                                           <small>{item.guide_name}</small>
-                                        </Link>
+                                        </a>
                                       </p>
                                     </div>
                                   </li>
@@ -1031,11 +1031,11 @@ function ProductPage({
                       product?.guide_ratings.slice(0, 2).map((data, index) => {
                         return (
                           <div className="product-card card-mobile" key={index}>
-                            <Link
+                            <a
                               className="product-link-cover"
                               href={`/${data?.category_url}/${data?.permalink}`}
                               style={{ color: "#326ebf" }}
-                            ></Link>
+                            ></a>
                             <img
                               src={
                                 data?.bannerImage === null

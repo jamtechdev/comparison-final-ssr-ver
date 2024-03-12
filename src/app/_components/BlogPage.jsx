@@ -18,7 +18,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      const headings = contentRef.current.querySelectorAll(
+      const headings = contentRef?.current?.querySelectorAll(
         "h1, h2, h3, h4, h5, h6"
       );
 

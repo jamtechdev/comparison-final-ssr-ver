@@ -161,7 +161,7 @@ export default function GuidePage({
       // console.log(currentUrl);
       const searchParam = new URLSearchParams(currentUrl.search);
       const sortValue = `${param.algo},${param.rangeAttributes}`;
-      console.log(sortValue);
+      // console.log(sortValue);
       setorder((prev) => {
         return {
           value: sortValue,
