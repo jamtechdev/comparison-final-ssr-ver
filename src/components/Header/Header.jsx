@@ -109,12 +109,12 @@ export default function Header({ headerData, headerPhase }) {
                                             items?.guides?.map(
                                               (guide, guideIndex) => (
                                                 <li key={guideIndex}>
-                                                  <Link
+                                                  <a
                                                     href={`/${guide?.category_url}/${guide?.permalink}`}
                                                     style={{ color: "#fff" }}
                                                   >
                                                     {guide?.title}
-                                                  </Link>
+                                                  </a>
                                                 </li>
                                               )
                                             )}
@@ -141,7 +141,7 @@ export default function Header({ headerData, headerPhase }) {
             </div>
           </Col>
           <Col lg={2} md={4} xs={4}>
-            <Link href="/">
+            <a href="/">
               <img
                 src={`https://panel.mondopedia.it/logos/app_logo.png`}
                 className="logo"
@@ -149,7 +149,7 @@ export default function Header({ headerData, headerPhase }) {
                 height={52}
                 alt="Logo"
               />
-            </Link>
+            </a>
           </Col>
           <Col lg={4} md={4} xs={4} className="form-search">
             {pathname !== "/" && (
@@ -183,16 +183,16 @@ export default function Header({ headerData, headerPhase }) {
                 {headerPhase && headerPhase?.compare}
               </li>
               <li>
-                <Link href="#"> {headerPhase && headerPhase?.how_we_rank}</Link>
+                <a href="#"> {headerPhase && headerPhase?.how_we_rank}</a>
               </li>
               {/* {console.log(headerPhase)} */}
               <li>
-                <Link href="/about-us">
+                <a href="/about-us">
                   {headerPhase && headerPhase?.about_us}
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#">{headerData && headerData?.contact}</Link>
+                <a href="#">{headerData && headerData?.contact}</a>
               </li>
             </ul>
           </Col>
@@ -205,12 +205,12 @@ export default function Header({ headerData, headerPhase }) {
               headerData?.map((item, headerDataKey) => (
                 <div className="cat-nav-item" key={headerDataKey}>
                   <div className="dropdown-toggle nav-link">
-                    <Link
+                    <a
                       href={`/${item?.primary_category}`}
                       style={{ color: "#fff" }}
                     >
                       {item?.primary_category}
-                    </Link>
+                    </a>
                   </div>
 
                   <Container className="dropdown-menu">
@@ -224,12 +224,12 @@ export default function Header({ headerData, headerPhase }) {
                                 {items?.guides &&
                                   items?.guides?.map((guide, guideIndex) => (
                                     <li key={guideIndex}>
-                                      <Link
+                                      <a
                                         href={`/${guide?.category_url}/${guide?.permalink}`}
                                         style={{ color: "#fff" }}
                                       >
                                         {guide?.title}
-                                      </Link>
+                                      </a>
                                     </li>
                                   ))}
                               </ul>

@@ -91,9 +91,10 @@ function CompareDiv({
     // Log the last remaining product URL
     if (removeEmptyArray.length === 1) {
       const lastPermalink = removeEmptyArray[0];
-      router.push(
-        `/${lastPermalink?.category_url}/${lastPermalink?.permalink}`
-      );
+      window.location.href = `/${lastPermalink?.category_url}/${lastPermalink?.permalink}`;
+      // router.push(
+      //   `/${lastPermalink?.category_url}/${lastPermalink?.permalink}`
+      // );
     }
   };
 

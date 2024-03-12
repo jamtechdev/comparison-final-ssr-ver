@@ -81,9 +81,9 @@ export default function Footer({ footerData }) {
 
                   return (
                     link && (
-                      <Link key={platform} href={link}>
+                      <a key={platform} href={link}>
                         <i className={iconClass}></i>
-                      </Link>
+                      </a>
                     )
                   );
                 })}
@@ -139,11 +139,11 @@ export default function Footer({ footerData }) {
                     key={index}
                   >
                     <li>
-                      <Link href={item[`link${index + 1}`] || ""}>
+                      <a href={item[`link${index + 1}`] || ""}>
                         {item[`name${index + 1}`] != null
                           ? item[`name${index + 1}`]
                           : ""}
-                      </Link>
+                      </a>
                     </li>
                   </ul>
                 );
@@ -159,7 +159,7 @@ export default function Footer({ footerData }) {
                   return (
                     cat?.title && (
                       <li key={index}>
-                        <Link href={`/${cat.title}`}>{cat.title}</Link>
+                        <a href={`/${cat.title}`}>{cat.title}</a>
                       </li>
                     )
                   );

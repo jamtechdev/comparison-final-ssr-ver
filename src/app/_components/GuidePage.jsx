@@ -376,9 +376,9 @@ export default function GuidePage({
 
                     <div className="user-detail">
                       <p>
-                        <Link href={`/author/${guide?.guide?.id}`}>
+                        <a href={`/author/${guide?.guide?.id}`}>
                           {guide?.author?.name}
-                        </Link>
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -743,7 +743,6 @@ export default function GuidePage({
                         handleManageCollapsedDiv={handleManageCollapsedDiv}
                         slug={slug}
                         order={order}
-                       
                       />
                     ) : (
                       <ProductSkeleton />
@@ -791,13 +790,13 @@ export default function GuidePage({
                     guide?.recommended_guides?.map((data, index) => {
                       return (
                         <li key={index}>
-                          <Link
+                          <a
                             href={`/${data?.category_url}/${data?.permalink}`}
                             style={{ color: "#437ece" }}
                             scroll={false}
                           >
                             {data?.short_name}
-                          </Link>
+                          </a>
                         </li>
                       );
                     })}
