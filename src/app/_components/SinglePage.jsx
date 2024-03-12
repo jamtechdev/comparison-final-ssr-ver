@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 
 function SinglePage({ singlePageData }) {
-  console.log(singlePageData);
+  console.log(singlePageData?.page_phases);
   return (
     <>
       <section className="breadcrumb-section">
@@ -12,8 +12,9 @@ function SinglePage({ singlePageData }) {
           <Row>
             <Col md={12}>
               <BreadCrumb
-                firstPageName={singlePageData?.title }
-                secondPageName={""}
+                productPhaseData={singlePageData?.page_phases}
+                firstPageName={""}
+                secondPageName={{name:singlePageData?.title}}
               />
             </Col>
             <Col md={12}>

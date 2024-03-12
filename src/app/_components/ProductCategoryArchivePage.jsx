@@ -6,7 +6,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
-  console.log(categoryData);
+  // console.log(categoryData);
   return (
     <div>
       {categoryData != null && (
@@ -15,7 +15,15 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
             <Container>
               <Row>
                 <Col md={12}>
-                  <BreadCrumb firstPageName={slug} secondPageName={""} />
+                  <BreadCrumb
+                    productPhaseData={categoryData?.page_phases}
+                    firstPageName={""}
+                    secondPageName={{
+                      name:
+                        slug?.replace(/-/g, " ").charAt(0).toUpperCase() +
+                        slug?.replace(/-/g, " ").slice(1).toLowerCase(),
+                    }}
+                  />
                 </Col>
 
                 <Col md={12}>
