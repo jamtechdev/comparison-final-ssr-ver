@@ -28,6 +28,8 @@ import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import { searchForPatternAndReplace } from "@/hooks/useChart";
 import Rating from "@/components/Common/Rating/Rating";
 import ProductBottomBar from "@/components/Common/ProductBottomBar/ProductBottomBar";
+import LineChart from "@/_chart/LineChart/LineChart";
+import DrawChart from "@/_chart/LineChart/LineChart";
 
 // import Link from "next/link";
 
@@ -1212,6 +1214,11 @@ function ProductPage({
         </section>
       )}
       <ProductBottomBar />
+      <div className="draw-chart-container">
+        <Container>
+          <DrawChart lineChartData={product?.line_chart_data} />
+        </Container>
+      </div>
     </>
   );
 }

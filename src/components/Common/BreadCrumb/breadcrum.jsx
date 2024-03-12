@@ -18,8 +18,9 @@ export default function BreadCrum({
   return (
     <>
       <Breadcrumb className="breadcrumb-group">
+      
         <BreadcrumbItem className="breadcrumb-items" href="/">
-          {productPhaseData?.breadcrumb_homepage}
+          {productPhaseData?.breadcrumb_homepage || "Home"}
         </BreadcrumbItem>
         {firstPageName == "" ? (
           ""

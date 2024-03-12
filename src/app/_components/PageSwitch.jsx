@@ -13,7 +13,7 @@ export default async function PageSwitch({
   searchParams,
 }) {
   let PageToRender;
-  // console.log(PageType)
+  // console.log(PageType);
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
@@ -60,6 +60,7 @@ export default async function PageSwitch({
       PageToRender = <CategoryArchive slug={slug} ArchiveData={pageData} />;
       break;
     case "ProductCategory":
+      console.log(pageData)
       PageToRender = (
         <ProductCategoryArchivePage slug={slug} categoryData={pageData} />
       );
@@ -84,16 +85,16 @@ export default async function PageSwitch({
         />
       );
       break;
-    case "SinglePage":
-      PageToRender = (
-        <SinglePage
-          slug={slug}
-          categorySlug={categorySlug}
-          singlePageData={pageData[0]?.data}
-        />
-      );
+    // case "SinglePage":
+    //   PageToRender = (
+    //     <SinglePage
+    //       slug={slug}
+    //       categorySlug={categorySlug}
+    //       singlePageData={pageData[0]?.data}
+    //     />
+    //   );
 
-      break;
+    //   break;
     default:
       PageToRender = () => <div>No Page Found</div>;
       break;

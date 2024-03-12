@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,7 +6,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
-  console.log(categoryData)
+  console.log(categoryData);
   return (
     <div>
       {categoryData != null && (
@@ -14,7 +15,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
             <Container>
               <Row>
                 <Col md={12}>
-                  <BreadCrumb firstPageName={slug} secondPageName={slug} />
+                  <BreadCrumb firstPageName={slug} secondPageName={""} />
                 </Col>
 
                 <Col md={12}>

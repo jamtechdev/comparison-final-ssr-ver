@@ -8,7 +8,7 @@ export default async function Page({ params: { category } }) {
 
   if (slugType.type) {
     const pageData = await fetchDataBasedOnPageType(category, slugType.type);
-    console.log(pageData);
+    console.log(slugType);
 
     if (pageData != null) {
       return (
@@ -96,6 +96,7 @@ async function fetchDataBasedOnPageType(slug, pageType) {
       apiUrls = [
         `${process.env.NEXT_PUBLIC_API_URL}/category/archive-page/${slug}`,
       ];
+      break;
     case "SinglePage":
       apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/single-page/${slug}`];
       break;

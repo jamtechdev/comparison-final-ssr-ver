@@ -472,7 +472,7 @@ export default function Filter({
                             as="div"
                             className="accordion-header"
                           >
-                            {attribute.name}{" "}
+                            {attribute.attribute_display_name}{" "}
                             <i className="ri-arrow-down-s-fill"></i>
                           </Accordion.Header>
 
