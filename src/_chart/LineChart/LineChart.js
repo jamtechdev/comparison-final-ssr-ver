@@ -2,42 +2,29 @@ import * as React from "react";
 import * as d3 from "d3";
 
 function lineChart(svgRef, lineChartData) {
+  const parseDate = d3.timeParse("%Y-%m-%d");
   // console.log(lineChartData);
-  const parseDate = d3.timeParse("%Y-%m");
+  const data = lineChartData?.lineChartData.map((chartData) => ({
+    name: chartData.name,
+    values: chartData.values.map((value) => ({
+      date: new Date(value.date),
+      price: value.price,
+    })),
+  }));
 
-  const data = [
-    {
-      name: "Price",
-      values: [
-        { date: "2020-01", price: 400 },
-        { date: "2020-02", price: 100 },
-        { date: "2020-03", price: 200 },
-        { date: "2020-04", price: 320 },
-        { date: "2020-05", price: 210 },
-        { date: "2020-06", price: 600 },
-      ].map((line) => {
-        const date = parseDate(line.date);
-        // console.log(date);
+  // console.log(data)
 
-        return {
-          date: line?.data,
-          price: line.price,
-        };
-      }),
-    },
-  ];
-  // console.log(data);
   const svg = d3.select(svgRef.current);
-  const width = 700;
+  const width = 1080;
   const height = 400;
   const margin = 100;
   const duration = 250;
 
-  const lineOpacity = "1";
-  const lineOpacityHover = "0.85";
-  const otherLinesOpacityHover = "0.1";
-  const lineStroke = "3.5";
-  const lineStrokeHover = "5";
+  const lineOpacity = "2.5";
+  const lineOpacityHover = "0.5";
+  const otherLinesOpacityHover = "0";
+  const lineStroke = "2.5";
+  const lineStrokeHover = "2.5";
 
   const circleOpacity = "0.85";
   const circleOpacityOnLineHover = "0.85";
@@ -69,7 +56,7 @@ function lineChart(svgRef, lineChartData) {
     .axisBottom(xScale)
     .tickSize(height - margin)
     .tickSizeOuter(0)
-    .tickFormat(d3.timeFormat("%b"))
+    .tickFormat(d3.timeFormat("%Y-%m-%d"))
     .tickPadding(15);
 
   const yAxis = d3
@@ -84,7 +71,7 @@ function lineChart(svgRef, lineChartData) {
     .attr("class", "x axis")
     .attr("transform", `translate(${margin}, ${margin})`)
     .attr("font-weight", "100")
-    .attr("font-family", '"Roboto", "sans-serif"')
+    // .attr("font-family", '"Roboto", "sans-serif"')
     .call(xAxis);
 
   svg
@@ -92,7 +79,7 @@ function lineChart(svgRef, lineChartData) {
     .attr("class", "y axis")
     .attr("transform", `translate(${margin}, ${margin})`)
     .attr("font-weight", "100")
-    .attr("font-family", '"Roboto", "sans-serif"')
+    // .attr("font-family", '"Roboto", "sans-serif"')
     .call(yAxis)
     .append("text")
     .attr("y", 15)
@@ -114,23 +101,23 @@ function lineChart(svgRef, lineChartData) {
     .enter()
     .append("g")
     .attr("class", "line-group")
-    .on("mouseover", function (_e, d) {
-      svg
-        .append("text")
-        .attr("class", "title-text")
-        .style("fill", "#33BBFF")
-        .text(d.name)
-        .attr("text-anchor", "middle")
-        .attr("x", (width - margin) / 2)
-        .attr("y", 70);
-    })
-    .on("mouseout", function (_d) {
-      svg.select(".title-text").remove();
-    })
+    // .on("mouseover", function (_e, d) {
+    //   svg
+    //     .append("text")
+    //     .attr("class", "title-text")
+    //     .style("fill", "#33BBFF")
+    //     .text(d.name)
+    //     .attr("text-anchor", "middle")
+    //     .attr("x", (width - margin) / 2)
+    //     .attr("y", 70);
+    // })
+    // .on("mouseout", function (_d) {
+    //   svg.select(".title-text").remove();
+    // })
     .append("path")
     .attr("class", "line")
     .attr("d", (d) => line(d.values))
-    .style("stroke", "#33BBFF")
+    .style("stroke", "#437ECE")
     .style("fill", "none")
     .style("opacity", lineOpacity)
     .on("mouseover", function () {
