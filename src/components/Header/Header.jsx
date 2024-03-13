@@ -59,7 +59,7 @@ export default function Header({ headerData, headerPhase }) {
       setIsFocused(false);
     }, 200);
   };
-  // console.log(headerData);
+  console.log(headerPhase);
   return (
     <header
       className={`sticky ${
@@ -244,7 +244,7 @@ export default function Header({ headerData, headerPhase }) {
           </div>
         </nav>
       </nav>
-      {isOpen && <CompareModal setIsOpen={setIsOpen} />}
+      {isOpen && <CompareModal favSlider={headerPhase} setIsOpen={setIsOpen} />}
     
     </header>
   );
