@@ -894,27 +894,29 @@ export default function Product({
                         {product?.available_versions?.map((data, key) => {
                           return (
                             <>
-                              <li
-                                style={{
-                                  listStyleType: "none",
-                                  width: "auto",
-                                  padding: "0px 5px",
-                                }}
-                                className="current_version_not_found"
-                              >
-                                <a
-                                  href={`/${data?.category_url}/${data?.permalink}`}
+                              <div className="color-item" key={key}>
+                                <li
                                   style={{
-                                    color: "#437ed0",
+                                    listStyleType: "none",
+                                    width: "auto",
                                     padding: "0px 5px",
-                                    cursor: "pointer",
                                   }}
-                                  className={`color-item `}
-                                  // onClick={(e) => handleItemClick(key)}
+                                  className="current_version_not_found"
                                 >
-                                  {data.short_name}
-                                </a>
-                              </li>
+                                  <a
+                                    href={`/${data?.category_url}/${data?.permalink}`}
+                                    style={{
+                                      color: "#437ed0",
+                                      padding: "0px 5px",
+                                      cursor: "pointer",
+                                    }}
+                                    className={`color-item `}
+                                    // onClick={(e) => handleItemClick(key)}
+                                  >
+                                    {data.short_name}
+                                  </a>
+                                </li>
+                              </div>
                             </>
                           );
                         })}
