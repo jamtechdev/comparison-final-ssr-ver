@@ -77,7 +77,7 @@ function lineChart(svgRef, lineChartData) {
 
   const yAxis = d3
     .axisLeft(yScale)
-    .tickSize(margin - width)
+    .tickSize(margin - width) // Keep ticks for labels (optional)
     .tickSizeOuter(0)
     .tickValues(yIntervals)
     .tickPadding(20);
@@ -87,8 +87,9 @@ function lineChart(svgRef, lineChartData) {
     .attr("class", "x axis")
     .attr("transform", `translate(${margin}, ${margin})`)
     // .attr("font-weight", "100")
-    .style("stroke", "#27314BB2") // Set the stroke color of the axis lines to grey
-    .style("opacity", 0.5)
+    .style("stroke", "#27314BB2")
+
+    .style("opacity", 1)
     // .style("color", "red")
     // .attr("font-family", '"Roboto", "sans-serif"')
     .call(xAxis);
@@ -104,7 +105,7 @@ function lineChart(svgRef, lineChartData) {
     // .attr("font-family", '"Roboto", "sans-serif"')
     .call(yAxis)
     .append("text")
-    .attr("y", 0)
+    .attr("y", 500)
     .attr("transform", "rotate(-90)");
 
   const line = d3
@@ -116,7 +117,9 @@ function lineChart(svgRef, lineChartData) {
     .append("g")
     .attr("class", "lines")
     .attr("transform", `translate(${margin}, ${margin})`)
-    .style("stroke", "#437ECE");
+    .style("stroke", "#437ECE")
+    .style("opacity", 0.8);
+    
 
   lines
     .selectAll("line-group")
@@ -177,7 +180,9 @@ function lineChart(svgRef, lineChartData) {
         .html(
           `<div style="font-size: 15px"> <b style="opacity: 0.6">${
             d.price
-          } € </b>   <i style="opacity: 0.5">(${formatDate(d?.date)} )</i> </div>`
+          } € </b>   <i style="opacity: 0.5">(${formatDate(
+            d?.date
+          )} )</i> </div>`
         )
         .style("background-color", "white")
         .style("left", event.clientX + "px")

@@ -395,7 +395,7 @@ export default function ComparisonTable({
                         (data) => data.price === null
                       ) && (
                         <div className="not-availabel">
-                          <span className="txt">NOT AVAILABLE</span>
+                          {/* <span className="txt">NOT AVAILABLE</span> */}
                           <span className="price">~ {product?.price} €</span>
                         </div>
                       )}

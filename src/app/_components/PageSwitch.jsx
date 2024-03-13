@@ -60,7 +60,7 @@ export default async function PageSwitch({
       PageToRender = <CategoryArchive slug={slug} ArchiveData={pageData} />;
       break;
     case "ProductCategory":
-      console.log(pageData);
+      // console.log(pageData);
       PageToRender = (
         <ProductCategoryArchivePage slug={slug} categoryData={pageData} />
       );

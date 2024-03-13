@@ -517,6 +517,7 @@ function CompareDiv({
                   bestAlternative?.page_phases?.compare_with_other_products}
               </h2>
               <CompareForm
+                favSlider={bestAlternative && bestAlternative?.page_phases}
                 location="ON_MAIN_PAGE"
                 comparisonData={products && products}
                 handelCloseCompareModel={() => {}}

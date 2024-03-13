@@ -108,8 +108,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   </div>
                 )}
                 <span>
-                  updated:
-                  <i>{blogData[0]?.data?.updated_at}</i>
+                  updated :{""}
+                 {""} <i>{""} {blogData[0]?.data?.updated_at}</i>
                 </span>
               </div>
             </Col>

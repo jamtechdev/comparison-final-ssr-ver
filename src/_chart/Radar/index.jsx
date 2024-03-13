@@ -186,7 +186,7 @@ function Radar({ data, activeTab }) {
             ? "#437ECE"
             : "#FF8F0B"
         )
-        .attr("opacity", activeTab == i ? 0.9 : 0.1)
+        .attr("opacity", activeTab == i ? 0.9 : 0.3)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
       cord.forEach((point, index) => {
         svg
@@ -224,14 +224,18 @@ function Radar({ data, activeTab }) {
               backgroundColor = "#28A28C";
             }
             const attribute = select(this).attr("data-attribute");
-            tooltip
-              .style("display", "block")
-              .style("opacity", 0.9)
-              .html(`${attribute}: ${parseFloat(value).toFixed(1)}`)
-              .style("background-color", backgroundColor)
-              .style("left", event.clientX + "px")
-              .style("top", event.clientY + "px")
-              .style("color", "#fff");
+            {
+              activeTab == i
+                ? tooltip
+                    .style("display", "block")
+                    .style("opacity", 0.9)
+                    .html(`${attribute}: ${parseFloat(value).toFixed(1)}`)
+                    .style("background-color", backgroundColor)
+                    .style("left", event.clientX + "px")
+                    .style("top", event.clientY + "px")
+                    .style("color", "#fff")
+                : "";
+            }
           })
           .on("mouseout", function () {
             // Remove the tooltip and the value label on mouse leave

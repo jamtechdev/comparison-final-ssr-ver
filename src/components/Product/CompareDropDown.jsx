@@ -101,7 +101,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
                 </Form.Select>
               </div>
               <div className="filtered-data-select justify-content-start mt-3">
-                <span>{product && product?.page_phases?.attribute}:</span>
+                <span>{product && product?.page_phases?.attribute} : </span>
                 {selectedItem && (
                   <Form.Select
                     aria-label="Attribute select"
@@ -119,17 +119,17 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
               <p className="text-end para_content_text mt-3">
                 {selectedAttribute && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>
-                    {product && product?.page_phases?.what_it_is}:
-                  </span>
+                    {product && product?.page_phases?.what_it_is} :
+                   </span>
                 )}
-                {selectedAttribute.description}
+                 {""} {selectedAttribute.description}
                 <br />
                 {selectedAttribute && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>
-                    {product && product?.page_phases?.when_it_matters}:
+                    {product && product?.page_phases?.when_it_matters} :
                   </span>
                 )}
-                {selectedAttribute.when_matters}
+                {""} {selectedAttribute.when_matters}
               </p>
             </Col>
             <Col md={8} lg={8}>

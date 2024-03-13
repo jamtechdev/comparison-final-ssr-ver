@@ -174,7 +174,7 @@ function ProductPage({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  });
 
   const addIdsToHeadings = (content) => {
     const headings = content?.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
@@ -194,6 +194,13 @@ function ProductPage({
   const contentWithIds = addIdsToHeadings(product?.text_part);
 
   // console.log(finalProducts);
+
+  useEffect(() => {
+    const element = document.querySelector('.domain');
+    if (element) {
+      element.remove();
+    }
+  }, []);
 
   return (
     <>
@@ -239,8 +246,8 @@ function ProductPage({
                   </div>
                 )}
                 <span>
-                  updated:
-                  <i>{product?.updated_at}</i>
+                  updated :
+                  <i>{""} {product?.updated_at}</i>
                 </span>
               </div>
             </Col>
@@ -958,7 +965,7 @@ function ProductPage({
                   <div
                     id="shortCodeText"
                     ref={contentRef}
-                    className="review-content"
+                    className="content-para review-content"
                     dangerouslySetInnerHTML={{
                       __html: searchForPatternAndReplace(contentWithIds),
                     }}
@@ -973,7 +980,7 @@ function ProductPage({
                               .slice(0, showFullPrice ? 8 : 4)
                               .map((item, index) => {
                                 return (
-                                  <li key={index}>
+                                  <li key={index} className="product_page_best_price">
                                     <a
                                       rel="noopener noreferrer"
                                       target="_blank"

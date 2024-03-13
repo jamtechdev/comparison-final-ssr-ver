@@ -144,7 +144,7 @@ export const getAttributeHalf = (product, half) => {
     firstHalfKeys.forEach((key) => {
       firstHalfAttributes[key] = product.attributes_new[key];
     });
-    console.log(firstHalfAttributes)
+    // console.log(firstHalfAttributes)
     return firstHalfAttributes;
     
   } else if (half === "second") {
