@@ -55,11 +55,11 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                 key={`guide-${index}`}
                               >
                                 <div className="product-card">
-                                  <Link
+                                  <a
                                     href={`${item?.category_url}/${item?.permalink}`}
                                     style={{ color: "#27304e" }}
                                     className="product-link-cover"
-                                  ></Link>
+                                  ></a>
                                   <Image
                                     src={
                                       item?.bannerImage === null
@@ -110,7 +110,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                 className="px-2 mb-3"
                                 key={`review-${index}`}
                               >
-                                <Link
+                                <a
                                   href={`/${item?.category_url}/${item?.permalink}`}
                                 >
                                   <div className="review-wrapper">
@@ -145,7 +145,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                       </span>
                                     </div>
                                   </div>
-                                </Link>
+                                </a>
                               </Col>
                             );
                           }
@@ -183,7 +183,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                 key={`articles-${index}`}
                               >
                                 <div className="blog-card" role="button">
-                                  <Link
+                                  <a
                                     href={`/${
                                       item.category_url
                                         ? item.category_url
@@ -209,7 +209,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                       {item?.title}
                                     </span>
                                     <p className="category">{item?.category}</p>
-                                  </Link>
+                                  </a>
                                 </div>
                               </Col>
                             );

@@ -31,11 +31,12 @@ const SearchList = ({ search, isFocused }) => {
                 </h2>
                 <ul>
                   {filteredData[category].map((item, itemIndex) => (
-                    <Link
+                    <a
                       key={itemIndex}
-                      href={`${item?.category_url}/${item?.permalink}`}
+                      href={`/${item?.category_url}/${item?.permalink}`}
                       style={{ cursor: "pointer" }}
                     >
+                      {/* {console.log(${item?.category_url}/${item?.permalink})} */}
                       {/* {console.log(item)} */}
                       <li style={{ cursor: "pointer" }}>
                         <span style={{ cursor: "pointer" }}>
@@ -61,7 +62,7 @@ const SearchList = ({ search, isFocused }) => {
                           </span>
                         )}
                       </li>
-                    </Link>
+                    </a>
                   ))}
                 </ul>
               </div>

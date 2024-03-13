@@ -481,6 +481,7 @@ footer .search-icon{
     padding: 35px 0 0;
     position: relative;
     min-height: 235px;
+    cursor: pointer;
 }
 
 .review-card:hover{

@@ -669,26 +669,55 @@ function ProductPage({
 
             {product?.available_colors?.length !== 0 && (
               <Col lg={12} md={12} xl={12}>
-                <div className="alternatives mt-4">
+                <div className="alternatives mt-2">
                   <span>Colors available:</span>
-                  <Form className="color-section">
+                  <div className="color-section">
                     {product?.available_colors?.map((data, key) => {
+                      // const isCurrentVersion = data.permalink === slug;
                       return (
                         <>
                           <div className="color-item" key={key}>
-                            <Form.Check
-                              inline
-                              label={data?.color}
-                              name="color"
-                              type="radio"
-                              defaultChecked={key === 0}
-                              id={`inline-${data?.color}-${key}`}
-                            />
+                            <li
+                              style={{
+                                listStyleType: "none",
+                                width: "auto",
+                                padding: "0px 5px",
+                                borderRadius: "5px",
+
+                                border:
+                                  data.color === product?.color
+                                    ? "1px solid #437ed0"
+                                    : "none",
+                              }}
+                              className="current_version_not_found"
+                            >
+                              <a
+                                href={`/link?p=${btoa(data.url)}`}
+                                style={{
+                                  color: "#437ed0",
+                                  padding: "0px 5px",
+                                  cursor: "pointer",
+                                }}
+                                className={`color-item `}
+                                // onClick={(e) => handleItemClick(key)}
+                              >
+                                {data.color}
+                              </a>
+                            </li>
+
+                            {/* <Form.Check
+                                inline
+                                label={data?.short_name}
+                                name="color"
+                                type="radio"
+                                defaultChecked={key === 0}
+                                id={`inline-${data?.color}-${key}`}
+                              /> */}
                           </div>
                         </>
                       );
                     })}
-                  </Form>
+                  </div>
                 </div>
               </Col>
             )}
@@ -700,7 +729,7 @@ function ProductPage({
                 <Col lg={12} md={12} xl={12}>
                   <div className="alternatives mt-2">
                     <span>Available versions:</span>
-                    <di className="color-section">
+                    <div className="color-section">
                       {product?.available_versions?.map((data, key) => {
                         const isCurrentVersion = data.permalink === slug;
                         return (
@@ -745,6 +774,7 @@ function ProductPage({
                                       ? "default"
                                       : "pointer",
                                   }}
+                                  className="current_version_not_found"
                                 >
                                   <a
                                     href={`/${data?.category_url}/${data?.permalink}`}
@@ -775,7 +805,7 @@ function ProductPage({
                           </>
                         );
                       })}
-                    </di>
+                    </div>
                   </div>
                 </Col>
               )}
@@ -1213,12 +1243,34 @@ function ProductPage({
           </Container>
         </section>
       )}
-      <ProductBottomBar />
-      <div className="draw-chart-container">
+      <ProductBottomBar favSlider={product && product} />
+      <section className="mt-3 mobile-popular-comparison">
         <Container>
-          <DrawChart lineChartData={product?.line_chart_data} />
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">
+                Price trend in the past 6 months
+              </h2>
+              <div className="draw-chart-container">
+                <Container className="position-relative">
+                  <div className="chart__data">
+                    <span></span>
+                    <p
+                      style={{
+                        color: "var(--heading-color)",
+                        fontSize: "15px",
+                      }}
+                    >
+                      Lowest price
+                    </p>
+                  </div>
+                  <DrawChart lineChartData={product?.line_chart_data} />
+                </Container>
+              </div>
+            </Col>
+          </Row>
         </Container>
-      </div>
+      </section>
     </>
   );
 }

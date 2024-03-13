@@ -54,12 +54,12 @@ export default function Header({ headerData, headerPhase }) {
 
     return scrollDirection;
   }
-  const handleBlur = () => {
+    const handleBlur = () => {
     setTimeout(() => {
       setIsFocused(false);
     }, 200);
   };
-  // console.log(headerPhase);
+  // console.log(headerData);
   return (
     <header
       className={`sticky ${
@@ -245,6 +245,7 @@ export default function Header({ headerData, headerPhase }) {
         </nav>
       </nav>
       {isOpen && <CompareModal setIsOpen={setIsOpen} />}
+    
     </header>
   );
 }

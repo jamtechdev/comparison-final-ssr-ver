@@ -3,16 +3,17 @@ import * as d3 from "d3";
 
 function lineChart(svgRef, lineChartData) {
   const parseDate = d3.timeParse("%Y-%m-%d");
+
   // console.log(lineChartData);
   const data = lineChartData?.lineChartData.map((chartData) => ({
     name: chartData.name,
     values: chartData.values.map((value) => ({
-      date: new Date(value.date),
+      date: parseDate(value.date),
       price: value.price,
     })),
   }));
 
-  // console.log(data)
+  // console.log(data);
 
   const svg = d3.select(svgRef.current);
   const width = 1080;
@@ -36,11 +37,25 @@ function lineChart(svgRef, lineChartData) {
   // console.log(yIntervals);
   const xScale = d3
     .scaleTime()
-    .domain([minX, maxX])
+    .domain([d3.timeWeek.offset(maxX, -24), maxX]) // Show data for the last 24 weeks
     .range([0, width - margin]);
 
   const [minY, maxY] = d3.extent(data[0].values, (d) => d.price);
-  // console.log(maxY);
+  const maxDifference = maxY / 15;
+  const maxInterval = Math.round(maxY + maxDifference);
+  const minInterval = Math.max(0, Math.round(minY - maxDifference));
+  const intervalDifference = (maxInterval - minInterval) / 5;
+
+  const yIntervals = [
+    maxInterval,
+    maxInterval - intervalDifference,
+    maxInterval - 2 * intervalDifference,
+    maxInterval - 3 * intervalDifference,
+    maxInterval - 4 * intervalDifference,
+    maxInterval - 5 * intervalDifference,
+  ];
+
+  // Day
   const yScale = d3
     .scaleLinear()
     .domain([minY, maxY])
@@ -57,20 +72,24 @@ function lineChart(svgRef, lineChartData) {
     .tickSize(height - margin)
     .tickSizeOuter(0)
     .tickFormat(d3.timeFormat("%Y-%m-%d"))
-    .tickPadding(15);
+    .tickPadding(15)
+    .ticks(4);
 
   const yAxis = d3
     .axisLeft(yScale)
     .tickSize(margin - width)
     .tickSizeOuter(0)
-    .ticks(6)
+    .tickValues(yIntervals)
     .tickPadding(20);
 
   svg
     .append("g")
     .attr("class", "x axis")
     .attr("transform", `translate(${margin}, ${margin})`)
-    .attr("font-weight", "100")
+    // .attr("font-weight", "100")
+    .style("stroke", "#27314BB2") // Set the stroke color of the axis lines to grey
+    .style("opacity", 0.5)
+    // .style("color", "red")
     // .attr("font-family", '"Roboto", "sans-serif"')
     .call(xAxis);
 
@@ -79,10 +98,13 @@ function lineChart(svgRef, lineChartData) {
     .attr("class", "y axis")
     .attr("transform", `translate(${margin}, ${margin})`)
     .attr("font-weight", "100")
+    .style("stroke", "#27314BB2") // Set the stroke color of the axis lines to grey
+    .style("opacity", 0.1)
+
     // .attr("font-family", '"Roboto", "sans-serif"')
     .call(yAxis)
     .append("text")
-    .attr("y", 15)
+    .attr("y", 0)
     .attr("transform", "rotate(-90)");
 
   const line = d3
@@ -93,7 +115,8 @@ function lineChart(svgRef, lineChartData) {
   const lines = svg
     .append("g")
     .attr("class", "lines")
-    .attr("transform", `translate(${margin}, ${margin})`);
+    .attr("transform", `translate(${margin}, ${margin})`)
+    .style("stroke", "#437ECE");
 
   lines
     .selectAll("line-group")
@@ -101,27 +124,15 @@ function lineChart(svgRef, lineChartData) {
     .enter()
     .append("g")
     .attr("class", "line-group")
-    // .on("mouseover", function (_e, d) {
-    //   svg
-    //     .append("text")
-    //     .attr("class", "title-text")
-    //     .style("fill", "#33BBFF")
-    //     .text(d.name)
-    //     .attr("text-anchor", "middle")
-    //     .attr("x", (width - margin) / 2)
-    //     .attr("y", 70);
-    // })
-    // .on("mouseout", function (_d) {
-    //   svg.select(".title-text").remove();
-    // })
     .append("path")
     .attr("class", "line")
     .attr("d", (d) => line(d.values))
     .style("stroke", "#437ECE")
+    .style("stroke-width", 2.5)
     .style("fill", "none")
-    .style("opacity", lineOpacity)
+    .style("opacity", 5)
     .on("mouseover", function () {
-      d3.selectAll(".line").style("opacity", otherLinesOpacityHover);
+      // d3.selectAll(".line").style("opacity", otherLinesOpacityHover);
       d3.selectAll(".circle").style("opacity", circleOpacityOnLineHover);
       d3.select(this)
         .style("opacity", lineOpacityHover)
@@ -129,17 +140,23 @@ function lineChart(svgRef, lineChartData) {
         .style("cursor", "pointer");
     })
     .on("mouseout", function () {
-      d3.selectAll(".line").style("opacity", lineOpacity);
+      // d3.selectAll(".line").style("opacity", lineOpacity);
       d3.selectAll(".circle").style("opacity", circleOpacity);
       d3.select(this).style("stroke-width", lineStroke).style("cursor", "none");
     });
+
+  const tooltip = d3
+    .selectAll(`.chart__data`)
+    .append("div")
+    .attr("class", "tooltip")
+    .style("display", "none");
 
   lines
     .selectAll("circle-group")
     .data(data)
     .enter()
     .append("g")
-    .style("fill", "#33BBFF")
+    .style("fill", "#437ECE")
     .selectAll("circle")
     .data((d) => d.values)
     .enter()
@@ -149,18 +166,32 @@ function lineChart(svgRef, lineChartData) {
       d3.select(this)
         .style("cursor", "pointer")
         .append("text")
-        .attr("class", "text")
-        .text(`${d.price}`)
-        .attr("x", (d) => xScale(d.date) + 5)
-        .attr("y", (d) => yScale(d.price) - 10);
+        .attr("class", "text");
+      // .attr("x", (d) => xScale(d.date) + 5)
+      // .attr("y", (d) => yScale(d.price) - 10);
+      const formatDate = d3.timeFormat("%Y-%m-%d");
+      // const formatDate = d3.timeFormat("%d.%m.%y");
+      tooltip
+        .style("display", "block")
+        .style("opacity", 1)
+        .html(
+          `<div style="font-size: 15px"> <b style="opacity: 0.6">${
+            d.price
+          } € </b>   <i style="opacity: 0.5">(${formatDate(d?.date)} )</i> </div>`
+        )
+        .style("background-color", "white")
+        .style("left", event.clientX + "px")
+        .style("top", event.clientY + "px")
+        .style("color", "#000");
+      // .text(`${d.price}`)
     })
     .on("mouseout", function () {
       d3.select(this)
         .style("cursor", "none")
         .transition()
         .duration(duration)
-        .selectAll(".text")
-        .remove();
+        .selectAll(".text");
+      tooltip.style("opacity", 0);
     })
     .append("circle")
     .attr("cx", (d) => xScale(d.date))

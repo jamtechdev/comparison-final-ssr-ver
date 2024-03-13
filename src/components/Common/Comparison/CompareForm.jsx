@@ -30,7 +30,6 @@ export default function CompareForm({
     category_url: product_name?.category_url,
   };
 
-  // console.log(comparisonData?.length);
   const compareProductFirst = {
     category_id: comparisonData?.[0]?.category_id,
     permalink: comparisonData?.[0]?.permalink,
@@ -54,13 +53,17 @@ export default function CompareForm({
   // console.log(comparisonData);
   // console.log(compareProductSecond);
   // console.log(product_name);
+  // console.log(comparisonData);
 
   const [formFields, setFormFields] = useState({
     productFirst:
       product_name !== undefined
         ? reduxData?.productFirst || ProductPage || null
         : reduxData?.productFirst || compareProductFirst || null,
-    productSecond: reduxData?.productSecond || compareProductSecond || null,
+    productSecond:
+      comparisonData !== undefined
+        ? reduxData?.productSecond || compareProductSecond || null
+        : reduxData?.productSecond || null,
     productThird: reduxData?.productThird || null,
     category:
       reduxData?.category ||

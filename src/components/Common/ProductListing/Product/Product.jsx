@@ -797,33 +797,8 @@ export default function Product({
               </div>
             </div>
           </Col>
-          {/* Yaha tak sahi hai  */}
+
           <Col md={12} className="p-0">
-            <Row className="w-100 m-0 alternatives-border-top">
-              {product?.available_colors?.length != 0 && (
-                <Col md={12}>
-                  <div className="alternatives">
-                    <p className="version-availabel">Colors available:</p>
-                    <Form className="color-section">
-                      {product?.available_colors?.map((data, key) => {
-                        return (
-                          <div className="color-item" key={key}>
-                            <Form.Check
-                              inline
-                              label={data?.color}
-                              name="color"
-                              type="radio"
-                              defaultChecked={key === 0}
-                              id={`inline-${data?.color}-${key}`}
-                            />
-                          </div>
-                        );
-                      })}
-                    </Form>
-                  </div>
-                </Col>
-              )}
-            </Row>
             {filteredTech_data?.[0]?.data !== undefined && (
               <Row className="w-100 m-0 alternatives-border-top">
                 <Col md={12}>
@@ -852,6 +827,102 @@ export default function Product({
                 </Col>
               </Row>
             )}
+
+            <Row className="w-100 m-0 alternatives-border-top">
+              {product?.available_colors?.length !== 0 && (
+                <Col lg={12} md={12} xl={12}>
+                  <div className="alternatives mt-2">
+                    <span>Colors available:</span>
+                    <div className="color-section">
+                      {product?.available_colors?.map((data, key) => {
+                        // const isCurrentVersion = data.permalink === slug;
+                        return (
+                          <>
+                            <div className="color-item" key={key}>
+                              <li
+                                style={{
+                                  listStyleType: "none",
+                                  width: "auto",
+                                  padding: "0px 5px",
+                                  borderRadius: "5px",
+
+                                  border:
+                                    data.color === product?.color
+                                      ? "1px solid #437ed0"
+                                      : "none",
+                                }}
+                                className="current_version_not_found"
+                              >
+                                <a
+                                  href={`/link?p=${btoa(data.url)}`}
+                                  style={{
+                                    color: "#437ed0",
+                                    padding: "0px 5px",
+                                    cursor: "pointer",
+                                  }}
+                                  className={`color-item `}
+                                  // onClick={(e) => handleItemClick(key)}
+                                >
+                                  {data.color}
+                                </a>
+                              </li>
+
+                              {/* <Form.Check
+                                inline
+                                label={data?.short_name}
+                                name="color"
+                                type="radio"
+                                defaultChecked={key === 0}
+                                id={`inline-${data?.color}-${key}`}
+                              /> */}
+                            </div>
+                          </>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </Col>
+              )}
+            </Row>
+            <Row className="w-100 m-0 alternatives-border-top">
+              {product?.available_versions &&
+                product?.available_versions?.length !== 0 && (
+                  <Col lg={12} md={12} xl={12}>
+                    <div className="alternatives mt-2">
+                      <span>Available versions:</span>
+                      <div className="color-section">
+                        {product?.available_versions?.map((data, key) => {
+                          return (
+                            <>
+                              <li
+                                style={{
+                                  listStyleType: "none",
+                                  width: "auto",
+                                  padding: "0px 5px",
+                                }}
+                                className="current_version_not_found"
+                              >
+                                <a
+                                  href={`/${data?.category_url}/${data?.permalink}`}
+                                  style={{
+                                    color: "#437ed0",
+                                    padding: "0px 5px",
+                                    cursor: "pointer",
+                                  }}
+                                  className={`color-item `}
+                                  // onClick={(e) => handleItemClick(key)}
+                                >
+                                  {data.short_name}
+                                </a>
+                              </li>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </Col>
+                )}
+            </Row>
             {product?.summary && product?.summary.length !== 0 && (
               <>
                 <div className="w-100">
@@ -1400,6 +1471,11 @@ export default function Product({
                                     <Accordion.Header as="div">
                                       <div className="table-accordion-header">
                                         {attribute}
+                                        {/* {console.log(
+                                          product.attributes_new[attribute][0]
+                                            ?.attribute_evaluation,
+                                          product.attributes_new[attribute][0]
+                                        )} */}
                                         <Questiontool
                                           attributes={
                                             product.attributes_new[attribute][0]
@@ -1425,26 +1501,10 @@ export default function Product({
                                               : "#85B2F1",
                                         }}
                                       >
-                                        {product.attributes_new[attribute][0]
-                                          .attribute_evaluation != null
-                                          ? parseInt(
-                                              product.attributes_new[
-                                                attribute
-                                              ][0].attribute_evaluation
-                                            ) >= 10
-                                            ? Math.trunc(
-                                                parseInt(
-                                                  product.attributes_new[
-                                                    attribute
-                                                  ][0].attribute_evaluation
-                                                )
-                                              )
-                                            : parseInt(
-                                                product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation
-                                              ).toFixed(1)
-                                          : "0.0"}
+                                        {
+                                          product.attributes_new[attribute][0]
+                                            ?.attribute_evaluation
+                                        }
                                       </span>
                                       <div className="show-btn">
                                         Show All{" "}
@@ -1758,14 +1818,10 @@ export default function Product({
                                               : "#85B2F1",
                                         }}
                                       >
-                                        {product.attributes_new[attribute][0]
-                                          .attribute_evaluation != null
-                                          ? parseInt(
-                                              product.attributes_new[
-                                                attribute
-                                              ][0].attribute_evaluation
-                                            ).toFixed(1)
-                                          : "0.0"}
+                                        {
+                                          product.attributes_new[attribute][0]
+                                            ?.attribute_evaluation
+                                        }
                                       </span>
                                       <div className="show-btn">
                                         Show All{" "}

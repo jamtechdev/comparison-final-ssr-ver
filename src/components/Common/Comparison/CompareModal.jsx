@@ -9,7 +9,7 @@ import {
   updateCompareProduct,
 } from "@/redux/features/compareProduct/compareProSlice";
 import toast from "react-hot-toast";
-const CompareModal = ({ setIsOpen, location }) => {
+const CompareModal = ({ setIsOpen, location ,favSlider}) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const [oftenProducts, setOftenProducts] = useState();
@@ -25,6 +25,7 @@ const CompareModal = ({ setIsOpen, location }) => {
   };
   // console.log(reduxData);
   const handelOffenProductClick = (product, index) => {
+    console.log(reduxData?.productSecond)
     if (
       reduxData?.productSecond === undefined ||
       reduxData?.productSecond === null
@@ -97,6 +98,7 @@ const CompareModal = ({ setIsOpen, location }) => {
               <h2 className="site-main-heading">Add to Comparison</h2>
               <CompareForm
                 location="ON_MODEL"
+                favSlider={favSlider && favSlider?.page_phases}
                 handelCloseCompareModel={handelCloseCompareModel}
                 handelCategoryForOffenProduct={handelCategoryForOffenProduct}
               />

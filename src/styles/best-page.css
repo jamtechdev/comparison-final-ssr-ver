@@ -1619,7 +1619,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   font-size: 14px !important;
   line-height: 20px !important;
   display: block !important;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 
 .compare-container tbody tr th .tooltip-display-content p {

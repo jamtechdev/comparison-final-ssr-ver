@@ -576,10 +576,7 @@ const TechnicalAccordion = React.memo(
                                 : "#85B2F1",
                           }}
                         >
-                          {parseInt(
-                            product?.attributes[attribute][0]
-                              .attribute_evaluation
-                          ).toFixed(1)}
+                         {product?.attributes[attribute][0].attribute_evaluation.toFixed(1)}
                         </span>
                         <div className="show-btn" onClick={() => {}}>
                           Show All <i className="ri-arrow-down-s-line"></i>
@@ -608,7 +605,9 @@ const TechnicalAccordion = React.memo(
                                   <div className="spec-item">
                                     <div className="spec-col">
                                       <div className="query">
-                                        {attributeValues?.attribute_display_name}
+                                        {
+                                          attributeValues?.attribute_display_name
+                                        }
                                         <QuestionIcon
                                           attributes={
                                             attributeValues && attributeValues
@@ -873,13 +872,7 @@ const TechnicalAccordion = React.memo(
                               : "#85B2F1",
                         }}
                       >
-                        {product.attributes[attribute][0]
-                          .attribute_evaluation != null
-                          ? parseInt(
-                              product.attributes[attribute][0]
-                                .attribute_evaluation
-                            ).toFixed(1)
-                          : "0.0"}
+                        {product?.attributes[attribute][0].attribute_evaluation.toFixed(1)}
                       </span>
                       <div className="show-btn">
                         Show All <i className="ri-arrow-down-s-line"></i>
