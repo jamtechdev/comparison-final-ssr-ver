@@ -21,6 +21,7 @@ export default function Filter({
     maxVal: 0,
   });
   let price = categoryAttributes?.price;
+  console.log(price)
   let brands = categoryAttributes?.brands;
   let productCount = categoryAttributes?.attributes;
   let attributeCategories = categoryAttributes?.attribute_categories;
@@ -181,8 +182,8 @@ export default function Filter({
         setSliderValues((pre) => {
           return {
             ...pre,
-            maxVal: price[0]?.max_price,
-            minVal: price[0]?.min_price,
+            maxVal: price?.max_price,
+            minVal: price?.min_price,
           };
         });
       }
@@ -343,11 +344,12 @@ export default function Filter({
       <div className="filter-section">
         <div className="tech-features-price">
           {guidePhraseData && guidePhraseData?.price}
-          {price?.[0]?.min_price != null && (
+       {   console.log(guidePhraseData?.price, "price")}
+          {price?.min_price != null && (
             <MultiRangeSlider
               rangeVal={sliderValues}
-              min={price[0]?.min_price}
-              max={price[0]?.max_price}
+              min={price?.min_price}
+              max={price?.max_price}
               unit="€"
               onChange={({ min, max }) => {
                 handelFilterActions("price", "price", `${min},${max}`, true);
