@@ -275,14 +275,14 @@ export default function Product({
 
               <RightPointingArrow />
             </span>
-            <div className="box_content light-bg-color">
+            <h2 className="box_content light-bg-color">
               <a
                 href={`/${product?.category_url}/${product?.permalink}`}
                 style={{ color: "#27304E" }}
               >
                 {product?.name}
               </a>
-            </div>
+            </h2>
           </div>
           {product?.assigned_title && (
             <span className="best-tag-product">{product?.assigned_title}</span>

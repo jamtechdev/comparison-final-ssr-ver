@@ -375,8 +375,9 @@ export default function GuidePage({
                     )}
 
                     <div className="user-detail">
+                   {/* {   console.log(guide)} */}
                       <p>
-                        <a href={`/author/${guide?.guide?.id}`}>
+                        <a href={`/author/${guide?.author?.id}`}>
                           {guide?.author?.name}
                         </a>
                       </p>

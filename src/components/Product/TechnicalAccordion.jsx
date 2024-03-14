@@ -129,7 +129,17 @@ const TechnicalAccordion = React.memo(
                                         data?.attribute_evaluation
                                       ).toFixed(1)}`}
                                     </div>
-                                    <p>{data?.attribute_category}</p>
+                                    <p>
+                                      {" "}
+                                      {data?.attribute_category
+                                        ?.replace(/-/g, " ")
+                                        .charAt(0)
+                                        .toUpperCase() +
+                                        data?.attribute_category
+                                          ?.replace(/-/g, " ")
+                                          .slice(1)
+                                          .toLowerCase()}{" "}
+                                    </p>
                                   </div>
                                 </React.Fragment>
                               );
@@ -576,7 +586,9 @@ const TechnicalAccordion = React.memo(
                                 : "#85B2F1",
                           }}
                         >
-                         {product?.attributes[attribute][0].attribute_evaluation.toFixed(1)}
+                          {product?.attributes[
+                            attribute
+                          ][0].attribute_evaluation.toFixed(1)}
                         </span>
                         <div className="show-btn" onClick={() => {}}>
                           Show All <i className="ri-arrow-down-s-line"></i>
@@ -872,7 +884,9 @@ const TechnicalAccordion = React.memo(
                               : "#85B2F1",
                         }}
                       >
-                        {product?.attributes[attribute][0].attribute_evaluation.toFixed(1)}
+                        {product?.attributes[
+                          attribute
+                        ][0].attribute_evaluation.toFixed(1)}
                       </span>
                       <div className="show-btn">
                         Show All <i className="ri-arrow-down-s-line"></i>

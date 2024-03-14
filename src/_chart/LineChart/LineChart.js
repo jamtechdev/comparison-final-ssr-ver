@@ -16,8 +16,8 @@ function lineChart(svgRef, lineChartData) {
   // console.log(data);
 
   const svg = d3.select(svgRef.current);
-  const width = 1080;
-  const height = 400;
+  const width = 850;
+  const height = 350;
   const margin = 100;
   const duration = 250;
 
@@ -54,6 +54,8 @@ function lineChart(svgRef, lineChartData) {
     maxInterval - 4 * intervalDifference,
     maxInterval - 5 * intervalDifference,
   ];
+  // [0, 200, 400, 600, 800, 980];
+  // console.log(yIntervals);
 
   // Day
   const yScale = d3
@@ -88,6 +90,7 @@ function lineChart(svgRef, lineChartData) {
     .attr("transform", `translate(${margin}, ${margin})`)
     // .attr("font-weight", "100")
     .style("stroke", "#27314BB2")
+    .attr("x", 1200)
 
     .style("opacity", 1)
     // .style("color", "red")
@@ -100,12 +103,12 @@ function lineChart(svgRef, lineChartData) {
     .attr("transform", `translate(${margin}, ${margin})`)
     .attr("font-weight", "100")
     .style("stroke", "#27314BB2") // Set the stroke color of the axis lines to grey
-    .style("opacity", 0.1)
+    .style("opacity", 1)
 
     // .attr("font-family", '"Roboto", "sans-serif"')
     .call(yAxis)
     .append("text")
-    .attr("y", 500)
+    .attr("y", 900)
     .attr("transform", "rotate(-90)");
 
   const line = d3
@@ -119,7 +122,6 @@ function lineChart(svgRef, lineChartData) {
     .attr("transform", `translate(${margin}, ${margin})`)
     .style("stroke", "#437ECE")
     .style("opacity", 0.8);
-    
 
   lines
     .selectAll("line-group")

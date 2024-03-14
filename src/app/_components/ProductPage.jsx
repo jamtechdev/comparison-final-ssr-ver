@@ -196,7 +196,7 @@ function ProductPage({
   // console.log(finalProducts);
 
   useEffect(() => {
-    const element = document.querySelector('.domain');
+    const element = document.querySelector(".domain");
     if (element) {
       element.remove();
     }
@@ -247,7 +247,9 @@ function ProductPage({
                 )}
                 <span>
                   updated :
-                  <i>{""} {product?.updated_at}</i>
+                  <i>
+                    {""} {product?.updated_at}
+                  </i>
                 </span>
               </div>
             </Col>
@@ -980,7 +982,10 @@ function ProductPage({
                               .slice(0, showFullPrice ? 8 : 4)
                               .map((item, index) => {
                                 return (
-                                  <li key={index} className="product_page_best_price">
+                                  <li
+                                    key={index}
+                                    className="product_page_best_price"
+                                  >
                                     <a
                                       rel="noopener noreferrer"
                                       target="_blank"
@@ -1265,7 +1270,7 @@ function ProductPage({
                     <p
                       style={{
                         color: "var(--heading-color)",
-                        fontSize: "15px",
+                        fontSize: "17px",
                       }}
                     >
                       Lowest price

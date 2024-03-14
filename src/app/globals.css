@@ -95,6 +95,14 @@ p {
   padding: 0 0 12px !important;
 }
 
+.content-para p *{
+  opacity: 100% !important;
+}
+
+.content-para ul *{
+  opacity: 100% !important;
+}
+
 .content-para h2:after {
   content: "";
   display: block;
@@ -1674,4 +1682,15 @@ li.color-item.selected {
   height: 20px;
   background: #437ece;
   border-radius: 50px;
+}
+
+.input__close__icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 5px;
+  line-height: 1;
+  height: fit-content;
+  font-size: 20px;
 }

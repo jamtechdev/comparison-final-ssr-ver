@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import SearchList from "../../Search/SearchList";
 import { useRouter, usePathname } from "next/navigation";
-import { addCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
+import {
+  addCompareProduct,
+  deleteCompareProduct,
+} from "@/redux/features/compareProduct/compareProSlice";
 import CompareSearchList from "@/components/Search/CompareSearchList";
 import { useSelector, useDispatch } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
@@ -50,7 +53,7 @@ export default function CompareForm({
     main_image: comparisonData?.[1]?.main_image,
     category_url: comparisonData?.[1]?.category_url,
   };
-  // console.log(comparisonData);
+  console.log(compareProductSecond);
   // console.log(compareProductSecond);
   // console.log(product_name);
   // console.log(comparisonData);
@@ -59,7 +62,10 @@ export default function CompareForm({
     productFirst:
       product_name !== undefined
         ? reduxData?.productFirst || ProductPage || null
-        : reduxData?.productFirst || compareProductFirst || null,
+        : reduxData?.productFirst ||
+          (compareProductFirst?.category_id !== undefined
+            ? compareProductFirst
+            : null),
     productSecond:
       comparisonData !== undefined
         ? reduxData?.productSecond || compareProductSecond || null
@@ -120,9 +126,10 @@ export default function CompareForm({
       setTimeout(() => {
         handelCloseCompareModel();
       }, 2500);
-      router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
-        scroll: false,
-      });
+      window.location.href = `/${categoryInURL}/${permalinkSlug}`;
+      // router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
+      //   scroll: false,
+      // });
     }
   };
   const handelCategoryUpdate = (id) => {
@@ -166,6 +173,11 @@ export default function CompareForm({
     }));
   }, [reduxData]);
   // console.log(formFields.productFirst)
+  // remove select product from searhList
+  const removeSelectedProduct = (product, fieldName) => {
+    dispatch(deleteCompareProduct({ key: product }));
+    // console.log(product, fieldName);
+  };
   return (
     <>
       <div className="compare-section">
@@ -178,20 +190,36 @@ export default function CompareForm({
         </div>
         <div className="compare-section-form">
           <div className="position-relative w-100">
-            <Form.Control
-              type="text"
-              placeholder={`${favSlider && favSlider?.product_first_text}`}
-              onBlur={handleBlur}
-              value={
-                typeof formFields.productFirst === "string"
-                  ? formFields.productFirst
-                  : formFields.productFirst?.name || ""
-              }
-              onFocus={() => setFocusedProductFirst(true)}
-              onChange={(e) =>
-                handleFieldChange("productFirst", e.target.value.trim())
-              }
-            />
+            <div className="position-relative">
+              <Form.Control
+                type="text"
+                placeholder={`${favSlider && favSlider?.product_first_text}`}
+                onBlur={handleBlur}
+                value={
+                  typeof formFields.productFirst === "string"
+                    ? formFields.productFirst
+                    : formFields.productFirst?.name || ""
+                }
+                onFocus={() => setFocusedProductFirst(true)}
+                onChange={(e) =>
+                  handleFieldChange("productFirst", e.target.value.trim())
+                }
+              />
+
+              {formFields.productFirst?.category_id !== undefined && (
+                <i
+                  className="ri-close-fill input__close__icon"
+                  style={{ cursor: "pointer" }}
+                  onClick={(e) =>
+                    removeSelectedProduct(
+                      "productFirst",
+                      formFields.productFirst
+                    )
+                  }
+                ></i>
+              )}
+              {/*  */}
+            </div>
             {/* {console.log(formFields.productFirst && formFields.productFirst)} */}
             {formFields.productFirst && (
               <CompareSearchList
@@ -206,21 +234,35 @@ export default function CompareForm({
             )}
           </div>
           <div className="position-relative w-100">
-            <Form.Control
-              type="text"
-              placeholder={`${favSlider && favSlider?.product_second_text}`}
-              onBlur={handleBlur}
-              value={
-                typeof formFields.productSecond === "string"
-                  ? formFields.productSecond
-                  : formFields.productSecond?.name || ""
-              }
-              onFocus={() => setFocusedProductSecond(true)}
-              onChange={(e) =>
-                handleFieldChange("productSecond", e.target.value.trim())
-              }
-              disabled={formFields.productFirst ? false : true}
-            />
+            <div className="position-relative">
+              <Form.Control
+                type="text"
+                placeholder={`${favSlider && favSlider?.product_second_text}`}
+                onBlur={handleBlur}
+                value={
+                  typeof formFields.productSecond === "string"
+                    ? formFields.productSecond
+                    : formFields.productSecond?.name || ""
+                }
+                onFocus={() => setFocusedProductSecond(true)}
+                onChange={(e) =>
+                  handleFieldChange("productSecond", e.target.value.trim())
+                }
+                disabled={formFields.productFirst ? false : true}
+              />
+              {formFields.productSecond?.category_id !== undefined && (
+                <i
+                  className="ri-close-fill input__close__icon"
+                  style={{ cursor: "pointer" }}
+                  onClick={(e) =>
+                    removeSelectedProduct(
+                      "productSecond",
+                      formFields.productSecond
+                    )
+                  }
+                ></i>
+              )}
+            </div>
             {formFields.productSecond && isFocusedProductSecond && (
               <CompareSearchList
                 isFocused={isFocusedProductSecond}
@@ -233,21 +275,32 @@ export default function CompareForm({
             )}
           </div>
           <div className="position-relative">
-            <Form.Control
-              type="text"
-              placeholder={`${favSlider && favSlider?.product_third_text}`}
-              onFocus={() => setFocusedProductThird(true)}
-              onBlur={handleBlur}
-              value={
-                typeof formFields.productThird === "string"
-                  ? formFields.productThird
-                  : formFields.productThird?.name || ""
-              }
-              onChange={(e) =>
-                handleFieldChange("productThird", e.target.value.trim())
-              }
-              disabled={formFields.productSecond ? false : true}
-            />
+            <div className="position-relative">
+              <Form.Control
+                type="text"
+                placeholder={`${favSlider && favSlider?.product_third_text}`}
+                onFocus={() => setFocusedProductThird(true)}
+                onBlur={handleBlur}
+                value={
+                  typeof formFields.productThird === "string"
+                    ? formFields.productThird
+                    : formFields.productThird?.name || ""
+                }
+                onChange={(e) =>
+                  handleFieldChange("productThird", e.target.value.trim())
+                }
+                disabled={formFields.productSecond ? false : true}
+              />
+            </div>
+            {formFields.productThird?.category_id !== undefined && (
+              <i
+                className="ri-close-fill input__close__icon"
+                style={{ cursor: "pointer" }}
+                onClick={(e) =>
+                  removeSelectedProduct("productThird", formFields.productThird)
+                }
+              ></i>
+            )}
             {formFields.productThird && isFocusedProductThird && (
               <CompareSearchList
                 isFocused={isFocusedProductThird}

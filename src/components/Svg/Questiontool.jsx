@@ -27,25 +27,36 @@ const Questiontool = ({ attributes }) => {
                   ? Math.floor(roundedNumber)
                   : roundedNumber.toFixed(1);
               return (
-                  <div className="scroe_section" key={index}>
-                    <p className="text-end">{`${parseFloat(data?.importance).toFixed(1)}%`}</p>
-                    <span
-                      className="score-count"
-                      style={{
-                        background:
-                          data?.attribute_evaluation >= 7.5
-                            ? "#093673"
-                            : data?.attribute_evaluation >= 5 &&
-                              data?.attribute_evaluation < 7.5
-                            ? "#437ECE"
-                            : "#85B2F1",
-                      }}
-                    >
-                      {formattedNumber != "NaN" ? formattedNumber : "0.0"}
-                    </span>
-                    <p> {data?.attribute_category}</p>
-                  </div>
-               
+                <div className="scroe_section" key={index}>
+                  <p className="text-end">{`${parseFloat(
+                    data?.importance
+                  ).toFixed(1)}%`}</p>
+                  <span
+                    className="score-count"
+                    style={{
+                      background:
+                        data?.attribute_evaluation >= 7.5
+                          ? "#093673"
+                          : data?.attribute_evaluation >= 5 &&
+                            data?.attribute_evaluation < 7.5
+                          ? "#437ECE"
+                          : "#85B2F1",
+                    }}
+                  >
+                    {formattedNumber != "NaN" ? formattedNumber : "0.0"}
+                  </span>
+                  <p style={{ textTransform: "none" }}>
+                    {" "}
+                    {data?.attribute_category
+                      ?.replace(/-/g, " ")
+                      .charAt(0)
+                      .toUpperCase() +
+                      data?.attribute_category
+                        ?.replace(/-/g, " ")
+                        .slice(1)
+                        .toLowerCase()}
+                  </p>
+                </div>
               );
             })}
         </div>

@@ -265,8 +265,9 @@ const CompareTable = React.memo(
                     )}
 
                     <p className="device-name">
+                    {/* {  console.log((product))} */}
                       <span>{index + 1}</span>
-                      <a href={`/${slug}/${product?.permalink}`}>
+                      <a href={`/${product?.category_url}/${product?.permalink}`}>
                         {product?.name}
                       </a>
 
