@@ -213,14 +213,14 @@ export default function Filter({
         handelFilterActions(
           "price",
           "price",
-          `${price[0]?.min_price},${price[0]?.max_price}`,
+          `${price?.min_price},${price?.max_price}`,
           false
         );
         setSliderValues((pre) => {
           return {
             ...pre,
-            maxVal: price[0]?.max_price,
-            minVal: price[0]?.min_price,
+            maxVal: price?.max_price,
+            minVal: price?.min_price,
           };
         });
       }
