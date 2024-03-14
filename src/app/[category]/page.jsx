@@ -1,15 +1,9 @@
 import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "../not-found";
 export default async function Page({ params: { category } }) {
-  // console.log(category);
-
   const slugType = await getSlugType(category);
-  // console.log(slugType);
-
   if (slugType.type) {
     const pageData = await fetchDataBasedOnPageType(category, slugType.type);
-    // console.log(slugType);
-
     if (pageData != null) {
       return (
         <PageSwitch
@@ -64,6 +58,7 @@ async function getSlugMetaData(category) {
 
 export async function generateMetadata({ params: { category } }) {
   let meta_data = { data: {} };
+  const siteURL = "https://mondopedia.it";
 
   try {
     const response = await getSlugMetaData(category);
@@ -80,6 +75,10 @@ export async function generateMetadata({ params: { category } }) {
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
     description: meta_data?.meta_description || "Comparison web description",
+    alternates: {
+      canonical: `${siteURL}/${category}`,
+    },
+    
   };
 }
 

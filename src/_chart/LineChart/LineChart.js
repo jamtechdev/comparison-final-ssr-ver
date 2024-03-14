@@ -16,7 +16,7 @@ function lineChart(svgRef, lineChartData) {
   // console.log(data);
 
   const svg = d3.select(svgRef.current);
-  const width = 850;
+  const width =1020;
   const height = 350;
   const margin = 100;
   const duration = 250;
@@ -33,6 +33,20 @@ function lineChart(svgRef, lineChartData) {
   const circleRadiusHover = 6;
 
   const [minX, maxX] = d3.extent(data[0].values, (d) => d.date);
+
+  const numWeeks = 24;
+  const intervalWeeks = 2;
+
+  const lastSunday = d3.timeSunday.floor(maxX); // Get the last Sunday from the maxX date
+  // console.log(lastSunday)
+  const firstSunday = d3.timeSunday.offset(
+    lastSunday,
+    -numWeeks * intervalWeeks
+  ); // Get the Sunday 24 weeks ago
+  const middleSunday1 = d3.timeSunday.offset(lastSunday, -8 * intervalWeeks); // Get the Sunday 8 weeks ago
+  const middleSunday2 = d3.timeSunday.offset(lastSunday, -16 * intervalWeeks); // Get the Sunday 16 weeks ago
+
+  // console.log(firstSunday, middleSunday1, middleSunday2, lastSunday);
 
   // console.log(yIntervals);
   const xScale = d3
@@ -54,13 +68,15 @@ function lineChart(svgRef, lineChartData) {
     maxInterval - 4 * intervalDifference,
     maxInterval - 5 * intervalDifference,
   ];
+  const yIntervalsInt = yIntervals.map((value) => parseInt(value));
   // [0, 200, 400, 600, 800, 980];
   // console.log(yIntervals);
+  // console.log(yIntervalsInt);
 
   // Day
   const yScale = d3
     .scaleLinear()
-    .domain([minY, maxY])
+    .domain([minInterval, maxInterval])
     .range([height - margin, 0]);
 
   svg
@@ -72,38 +88,38 @@ function lineChart(svgRef, lineChartData) {
   const xAxis = d3
     .axisBottom(xScale)
     .tickSize(height - margin)
-    .tickSizeOuter(0)
+    // .tickSizeOuter(0)
     .tickFormat(d3.timeFormat("%Y-%m-%d"))
-    .tickPadding(15)
+    .tickPadding(10)
     .ticks(4);
+    // .tickValues([firstSunday, middleSunday2, middleSunday1, lastSunday]);
 
   const yAxis = d3
     .axisLeft(yScale)
     .tickSize(margin - width) // Keep ticks for labels (optional)
     .tickSizeOuter(0)
-    .tickValues(yIntervals)
-    .tickPadding(20);
+    .tickValues(yIntervalsInt)
+    .tickPadding(20)
+    .tickFormat((d) => `${d} €`);
 
   svg
     .append("g")
     .attr("class", "x axis")
-    .attr("transform", `translate(${margin}, ${margin})`)
-    // .attr("font-weight", "100")
-    .style("stroke", "#27314BB2")
-    .attr("x", 1200)
-
+    .attr("transform", `translate(${margin}, ${margin})`) // Move the x-axis to the bottom of the chart
     .style("opacity", 1)
-    // .style("color", "red")
-    // .attr("font-family", '"Roboto", "sans-serif"')
-    .call(xAxis);
+    .style("font-weight", "800")
+    .call(xAxis)
+    .append("text");
+  // Move the label 30 units below the x-axis
 
   svg
     .append("g")
     .attr("class", "y axis")
     .attr("transform", `translate(${margin}, ${margin})`)
     .attr("font-weight", "100")
-    .style("stroke", "#27314BB2") // Set the stroke color of the axis lines to grey
+    // .style("stroke", "#27314BB2") // Set the stroke color of the axis lines to grey
     .style("opacity", 1)
+    .style("stroke", "none")
 
     // .attr("font-family", '"Roboto", "sans-serif"')
     .call(yAxis)

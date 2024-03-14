@@ -53,10 +53,8 @@ export default function CompareForm({
     main_image: comparisonData?.[1]?.main_image,
     category_url: comparisonData?.[1]?.category_url,
   };
-  console.log(compareProductSecond);
-  // console.log(compareProductSecond);
-  // console.log(product_name);
-  // console.log(comparisonData);
+
+
 
   const [formFields, setFormFields] = useState({
     productFirst:

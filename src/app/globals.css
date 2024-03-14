@@ -95,11 +95,11 @@ p {
   padding: 0 0 12px !important;
 }
 
-.content-para p *{
+.content-para p * {
   opacity: 100% !important;
 }
 
-.content-para ul *{
+.content-para ul * {
   opacity: 100% !important;
 }
 
@@ -1674,7 +1674,7 @@ li.color-item.selected {
   color: #437ece;
   position: absolute;
   top: 30px;
-  right: 60px;
+  right: 100px;
 }
 
 .chart__data span {
@@ -1693,4 +1693,10 @@ li.color-item.selected {
   line-height: 1;
   height: fit-content;
   font-size: 20px;
+}
+.line-chart-parent svg path.domain {
+  display: none;
+}
+.line-chart-parent svg line {
+  opacity: 0.1;
 }

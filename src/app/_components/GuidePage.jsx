@@ -375,7 +375,7 @@ export default function GuidePage({
                     )}
 
                     <div className="user-detail">
-                   {/* {   console.log(guide)} */}
+                      {/* {   console.log(guide)} */}
                       <p>
                         <a href={`/author/${guide?.author?.id}`}>
                           {guide?.author?.name}
@@ -401,6 +401,7 @@ export default function GuidePage({
           </Row>
 
           <Row className="pt-3 best-page-card">
+            {/* {console.log(guide.top_guide_counts)} */}
             {Object.values(guide.top_guide_counts).map(function (item, index) {
               return (
                 <Col className="p-2" md={6} lg={3} sm={6} xs={6} key={index}>
@@ -416,36 +417,6 @@ export default function GuidePage({
       </section>
       <section className="ptb-25">
         <Container>
-          {/* {guideData[0]?.data?.show_catchy_titles_in_text == 1 &&
-            guideData[0]?.data?.catchy_titles_box_title?.length !== 0 && (
-              <Row className="catchy_titles_section mb-3">
-                <Col md={7} className="mx-auto p-0">
-                  {console.log(
-                    guideData[0]?.data?.catchy_titles_box_title?.length
-                  )}
-                  <p>
-                    {" "}
-                    {guideData[0]?.data?.catchy_titles_box_title
-                      ? guideData[0]?.data?.catchy_titles_box_title
-                      : " No title found"}{" "}
-                  </p>
-                  <ul className="text-center">
-                    {guideData[0]?.data?.catchy_titles?.map((item, index) => {
-                      return (
-                        <li key={index}>
-                          <span className="catchy_titles_section_title">
-                            {item?.title}:
-                          </span>
-                          <span className="catchy_titles_section_product_name">
-                            {item?.product?.name}
-                          </span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </Col>
-              </Row>
-            )} */}
           {guideData[0]?.data?.show_catchy_titles_in_text === 1 &&
             guideData[0]?.data?.catchy_titles?.length > 0 && (
               <Row className="catchy_titles_section mb-3">
@@ -461,7 +432,14 @@ export default function GuidePage({
                           {item.title}:
                         </span>
                         <span className="catchy_titles_section_product_name">
-                          {item.product.name}
+                          {/* {console.log(item)} */}
+                          <a
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            href={`/link?p=${btoa(item?.product.url)}`}
+                          >
+                            {item.product.name}
+                          </a>
                         </span>
                       </li>
                     ))}

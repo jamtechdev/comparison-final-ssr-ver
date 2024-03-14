@@ -4,6 +4,7 @@ import * as d3 from "d3";
 
 import "./index.scss";
 
+
 function ComparisonVerticalChart(props) {
   const {
     svgRef,
@@ -28,6 +29,8 @@ function ComparisonVerticalChart(props) {
     label: label.split("-").map(Number).join("-"),
   }));
 
+
+
   // Bar chart Valur Based on selected product
   let fristIndex = -1;
   let secondIndex = -1;
@@ -37,12 +40,15 @@ function ComparisonVerticalChart(props) {
   updatedData.forEach((item, index) => {
     if (item.selected === 1) {
       count++;
+      // console.log(item);
+      // console.log(count, index);
       if (count === 1) fristIndex = index;
       if (count === 2) secondIndex = index;
       if (count === 3) thirdIndex = index;
     }
   });
 
+  // console.log(fristIndex, secondIndex, thirdIndex);
   svg
     .selectAll("bar")
     .data(updatedData)

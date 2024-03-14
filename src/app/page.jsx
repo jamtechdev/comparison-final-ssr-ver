@@ -13,6 +13,7 @@ export default async function Page() {
 }
 export async function generateMetadata(params) {
   const meta_data = await getMetaData();
+  const siteURL = "https://mondopedia.it";
   return {
     title: meta_data?.data?.title || "Comparison web",
     generator: "Comparison web",
@@ -20,6 +21,9 @@ export async function generateMetadata(params) {
     referrer: "origin-when-cross-origin",
     keywords: ["compare", "product"],
     description: meta_data?.data?.description || "Comparison web",
+    alternates: {
+      canonical: `${siteURL}`,
+    },
   };
 }
 async function getMetaData() {

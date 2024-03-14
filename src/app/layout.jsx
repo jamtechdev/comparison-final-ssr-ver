@@ -4,9 +4,12 @@ import "./globals.css";
 import "../../public/font/font.css";
 import Layout from "@/components/Layout";
 import { getterService } from "@/_services";
+
 export default async function RootLayout({ children }) {
   const footerData = await getterService.getFooterData();
   const headerData = await getterService.getTopNavBarData();
+  // Function to construct the canonical URL dynamically
+
   return (
     <html lang="en">
       <link

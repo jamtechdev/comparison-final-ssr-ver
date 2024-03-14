@@ -61,14 +61,13 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
     return content;
   };
   const contentWithIds = addIdsToHeadings(blogData[0]?.data?.text_part);
-  // console.log(contentWithIds);
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
       <div>{useChart()}</div>
       <section className="product-header">
         <Container>
-          <Row className="align-items-center">      
+          <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
                 firstPageName={categorySlug}
@@ -109,7 +108,10 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 )}
                 <span>
                   updated :{""}
-                 {""} <i>{""} {blogData[0]?.data?.updated_at}</i>
+                  {""}{" "}
+                  <i>
+                    {""} {blogData[0]?.data?.updated_at}
+                  </i>
                 </span>
               </div>
             </Col>

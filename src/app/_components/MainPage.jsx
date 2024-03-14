@@ -14,6 +14,7 @@ import CompareForm from "@/components/Common/Comparison/CompareForm";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { resetGuideCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
+import Head from "next/head";
 
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");

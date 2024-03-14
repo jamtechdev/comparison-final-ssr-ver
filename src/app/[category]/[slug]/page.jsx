@@ -5,17 +5,14 @@ export default async function Page({
   params: { category, slug },
   searchParams,
 }) {
-  // console.log(slug , 'slugggss' , category);
   try {
     const categoryslugType = await getSlugType(category);
-    // console.log(categoryslugType)
 
-    // console.log(categoryslugType);
     if (categoryslugType.error) {
       return <NotFound />;
     }
     const slugType = await getSlugType(slug);
-    // console.log(slugType);
+
     // if (slugType.error === "Permalink not found") {
     //   return <NotFound />;
     // }
@@ -26,7 +23,6 @@ export default async function Page({
         "Comparison",
         searchParams
       );
-
       return (
         <PageSwitch
           PageType="Comparison"
@@ -37,14 +33,12 @@ export default async function Page({
         />
       );
     }
-
     if (slugType.type) {
       const pageData = await fetchDataBasedOnPageType(
         slug,
         slugType.type,
         searchParams
       );
-
       if (pageData) {
         return (
           <PageSwitch
@@ -87,6 +81,8 @@ export async function generateMetadata({ params: { slug, category } }) {
     str.replace(/-/g, " ").replace(/\b(\w)/g, (match) => match.toUpperCase());
 
   const generateComparisonMetaData = (extractedUrls, category) => {
+    const siteURL = "https://mondopedia.it";
+    // console.log(category);
     const firstTitle = capitalizeFirstLetter(extractedUrls[0]);
     const secondTitle = capitalizeFirstLetter(extractedUrls[1]);
     const thirdTitle =
@@ -103,6 +99,9 @@ export async function generateMetadata({ params: { slug, category } }) {
       referrer: "origin-when-cross-origin",
       keywords: ["compare", "product"],
       description: "compare-page",
+      alternates: {
+        canonical: `${siteURL}/${category}/${extractedUrls}`,
+      },
     };
   };
 
@@ -115,6 +114,7 @@ export async function generateMetadata({ params: { slug, category } }) {
       return "";
     } else {
       const meta_data = await getSlugMetaData(slug);
+      const siteURL = "https://mondopedia.it";
       if (meta_data && meta_data.data) {
         return {
           title: meta_data.data.title,
@@ -123,6 +123,9 @@ export async function generateMetadata({ params: { slug, category } }) {
           applicationName: "Comparison web",
           referrer: "origin-when-cross-origin",
           keywords: ["compare", "product"],
+          alternates: {
+            canonical: `${siteURL}/${category}/${slug}`,
+          },
         };
       } else {
         console.error("Invalid meta_data response:", meta_data);

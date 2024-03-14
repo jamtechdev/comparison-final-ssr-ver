@@ -25,7 +25,7 @@ const CompareModal = ({ setIsOpen, location ,favSlider}) => {
   };
   // console.log(reduxData);
   const handelOffenProductClick = (product, index) => {
-    console.log(reduxData?.productSecond)
+    // console.log(reduxData?.productSecond)
     if (
       reduxData?.productSecond === undefined ||
       reduxData?.productSecond === null

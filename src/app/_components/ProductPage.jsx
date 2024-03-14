@@ -1264,7 +1264,7 @@ function ProductPage({
                 Price trend in the past 6 months
               </h2>
               <div className="draw-chart-container">
-                <Container className="position-relative">
+                <Container className="position-relative  line-chart-parent">
                   <div className="chart__data">
                     <span></span>
                     <p

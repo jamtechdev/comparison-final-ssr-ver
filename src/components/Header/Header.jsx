@@ -59,7 +59,7 @@ export default function Header({ headerData, headerPhase }) {
       setIsFocused(false);
     }, 200);
   };
-  console.log(headerPhase);
+  // console.log(headerPhase);
   return (
     <header
       className={`sticky ${

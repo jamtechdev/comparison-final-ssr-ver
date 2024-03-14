@@ -4,22 +4,12 @@ import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 function CategoryArchive({ slug, ArchiveData }) {
-  // console.log(ArchiveData);
   return (
     <>
       <section className="breadcrumb-section">
         <Container>
           <Row>
             <Col md={12}>
-              {/* <BreadCrumb
-                productPhaseData={categoryData?.page_phases}
-                firstPageName={""}
-                secondPageName={{
-                  name:
-                    slug?.replace(/-/g, " ").charAt(0).toUpperCase() +
-                    slug?.replace(/-/g, " ").slice(1).toLowerCase(),
-                }}
-              /> */}
               <BreadCrumb
                 // productPhaseData={categoryData?.page_phases}
                 firstPageName={""}
