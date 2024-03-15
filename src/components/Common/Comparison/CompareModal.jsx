@@ -68,7 +68,10 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
       reduxData?.productThird === undefined ||
       reduxData?.productThird === null
     ) {
-      if (reduxData?.productSecond?.permalink === product.permalink) {
+      if (
+        reduxData?.productSecond?.permalink === product.permalink ||
+        reduxData?.productFirst?.permalink === product.permalink
+      ) {
         toast.error("This product has already been added to compare list.");
         return;
       }
