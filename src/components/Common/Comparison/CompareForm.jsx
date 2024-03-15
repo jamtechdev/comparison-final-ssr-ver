@@ -54,8 +54,6 @@ export default function CompareForm({
     category_url: comparisonData?.[1]?.category_url,
   };
 
-
-
   const [formFields, setFormFields] = useState({
     productFirst:
       product_name !== undefined

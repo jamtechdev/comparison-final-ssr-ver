@@ -8,10 +8,11 @@ import {
   addCompareProductForGuide,
   updateCompareProduct,
 } from "@/redux/features/compareProduct/compareProSlice";
-import toast from "react-hot-toast";
-const CompareModal = ({ setIsOpen, location ,favSlider}) => {
+import toast, { Toaster } from "react-hot-toast";
+const CompareModal = ({ setIsOpen, location, favSlider }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
+  console.log(reduxData);
   const [oftenProducts, setOftenProducts] = useState();
   const [categoryId, setCategoryId] = useState(
     reduxData?.category ? reduxData?.category : undefined
@@ -25,11 +26,32 @@ const CompareModal = ({ setIsOpen, location ,favSlider}) => {
   };
   // console.log(reduxData);
   const handelOffenProductClick = (product, index) => {
-    // console.log(reduxData?.productSecond)
+    console.log(reduxData?.productFirst?.name);
+    // console.log(product);
+    if (
+      reduxData?.productFirst === undefined ||
+      reduxData?.productFirst === null
+    ) {
+      let productData = {
+        name: product.name,
+        category_id: product.category_id,
+        category_url: product.category_url,
+        permalink: product.permalink,
+        image: product.main_image ? product.main_image : "/images/nofound.png",
+      };
+      dispatch(
+        updateCompareProduct({ key: "productFirst", data: productData })
+      );
+      return;
+    }
     if (
       reduxData?.productSecond === undefined ||
       reduxData?.productSecond === null
     ) {
+      if (reduxData?.productFirst?.permalink === product.permalink) {
+        toast.error("This product has already been added to compare list.");
+        return;
+      }
       let productData = {
         name: product.name,
         category_id: product.category_id,
@@ -46,6 +68,10 @@ const CompareModal = ({ setIsOpen, location ,favSlider}) => {
       reduxData?.productThird === undefined ||
       reduxData?.productThird === null
     ) {
+      if (reduxData?.productSecond?.permalink === product.permalink) {
+        toast.error("This product has already been added to compare list.");
+        return;
+      }
       let productData = {
         name: product.name,
         category_id: product.category_id,
@@ -60,8 +86,11 @@ const CompareModal = ({ setIsOpen, location ,favSlider}) => {
       return;
     }
   };
+  // console.log(reduxData?.productSecond?.name);
+
   useEffect(() => {
     if (categoryId) {
+      console.log(categoryId, "NEET");
       productService
         .getComparedoftenProduct(categoryId)
         .then((res) => {
@@ -72,6 +101,10 @@ const CompareModal = ({ setIsOpen, location ,favSlider}) => {
                 item.name !== reduxData?.productThird?.name &&
                 item.name !== reduxData?.productFirst?.name
             );
+
+            console.log(reduxData);
+
+            console.log(filteredProducts?.length);
             setOftenProducts(filteredProducts);
           }
         })
@@ -83,6 +116,7 @@ const CompareModal = ({ setIsOpen, location ,favSlider}) => {
 
   return (
     <section className="add-product-modal">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="add-product-modal-header">
         <Container>
           <Row>

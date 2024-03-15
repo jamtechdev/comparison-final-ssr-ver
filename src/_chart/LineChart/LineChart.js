@@ -3,6 +3,7 @@ import * as d3 from "d3";
 
 function lineChart(svgRef, lineChartData) {
   const parseDate = d3.timeParse("%Y-%m-%d");
+  const europeanDateFormat = "%d/%m/%Y";
 
   // console.log(lineChartData);
   const data = lineChartData?.lineChartData.map((chartData) => ({
@@ -12,11 +13,10 @@ function lineChart(svgRef, lineChartData) {
       price: value.price,
     })),
   }));
-
-  // console.log(data);
+  // console.log(data[0]?.values);
 
   const svg = d3.select(svgRef.current);
-  const width =1020;
+  const width = 1020;
   const height = 350;
   const margin = 100;
   const duration = 250;
@@ -89,10 +89,10 @@ function lineChart(svgRef, lineChartData) {
     .axisBottom(xScale)
     .tickSize(height - margin)
     // .tickSizeOuter(0)
-    .tickFormat(d3.timeFormat("%Y-%m-%d"))
+    .tickFormat(d3.timeFormat(europeanDateFormat))
     .tickPadding(10)
     .ticks(4);
-    // .tickValues([firstSunday, middleSunday2, middleSunday1, lastSunday]);
+  // .tickValues([firstSunday, middleSunday2, middleSunday1, lastSunday]);
 
   const yAxis = d3
     .axisLeft(yScale)
