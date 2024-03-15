@@ -8,41 +8,35 @@ function lineChart(svgRef, lineChartData) {
   // console.log(lineChartData);
   const data = lineChartData?.lineChartData.map((chartData) => ({
     name: chartData.name,
-    values: chartData.values.map((value) => ({
+    values: chartData.values?.map((value) => ({
       date: parseDate(value.date),
       price: value.price,
     })),
   }));
 
-  // Function to get the previous Sunday for a given date
-  function getPreviousSunday(date) {
-    const day = date.getDay(); // Get the day of the week (0 for Sunday)
-    const diff = day === 0 ? 0 : 7 - day; // Calculate days to subtract to get last Sunday
-    return new Date(date.getTime() - diff * 24 * 60 * 60 * 1000); // Subtract days in milliseconds
-  }
+  const dates = [
+    new Date("2023-10-15T18:30:00.000Z"),
 
-  // Find the most recent Sunday
-  const lastSunday = getPreviousSunday(new Date());
-
-  // Calculate interval in milliseconds (24 weeks = 7 * 24 * 60 * 60 * 1000 milliseconds per week)
-  const interval = 7 * 24 * 60 * 60 * 1000;
-
-  // Define labels for the x-axis (you can customize these)
-  const xAxisLabels = [
-    `Week 24 (Last Sunday)`,
-    `Week 16`,
-    `Week 8`,
-    `Week 0 (Current Sunday)`,
+    // Add more dates here
   ];
 
-  // Loop through intervals and calculate corresponding Sundays
-  const sundayDates = [];
-  for (let i = 0; i < 4; i++) {
-    sundayDates.push(new Date(lastSunday.getTime() - i * interval));
-  }
+  dates.forEach((date) => {
+    console.log(
+      date.toDateString(),
+      "is a",
+      [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ][date.getDay()]
+    );
+  });
 
-  // console.log(xAxisLabels); // Output: ["Week 24 (Last Sunday)", "Week 16", "Week 8", "Week 0 (Current Sunday)"]
-  // console.log(sundayDates); // Output: [Array of 4 Sunday Date objects]
+  // console.log(sundays);
 
   const svg = d3.select(svgRef.current);
   const width = 1020;
@@ -62,6 +56,20 @@ function lineChart(svgRef, lineChartData) {
   const circleRadiusHover = 6;
 
   const [minX, maxX] = d3.extent(data[0].values, (d) => d.date);
+
+  const numWeeks = 24;
+  const intervalWeeks = 2;
+
+  const lastSunday = d3.timeSunday.floor(maxX); // Get the last Sunday from the maxX date
+  // console.log(lastSunday)
+  const firstSunday = d3.timeSunday.offset(
+    lastSunday,
+    -numWeeks * intervalWeeks
+  ); // Get the Sunday 24 weeks ago
+  const middleSunday1 = d3.timeSunday.offset(lastSunday, -8 * intervalWeeks); // Get the Sunday 8 weeks ago
+  const middleSunday2 = d3.timeSunday.offset(lastSunday, -16 * intervalWeeks); // Get the Sunday 16 weeks ago
+
+  // console.log(firstSunday, middleSunday1, middleSunday2, lastSunday);
 
   // console.log(yIntervals);
   const xScale = d3

@@ -179,7 +179,7 @@ const WhyAccordionTab = React.memo(
                                           {typeof item?.difference_value ==
                                           "number"
                                             ? item?.difference
-                                            : item?.phrase?.toFixed(2)}
+                                            : item?.phrase}
 
                                           {item?.hover_phase && (
                                             <>
@@ -292,7 +292,7 @@ const WhyAccordionTab = React.memo(
                                         {typeof item?.difference_value ==
                                         "number"
                                           ? item?.difference
-                                          : item?.phrase.toFixed(2)}
+                                          : item?.phrase}
 
                                         {item?.hover_phase && (
                                           <>
@@ -359,8 +359,26 @@ const WhyAccordionTab = React.memo(
                               TOTAL
                             </Nav.Link>
                           </Nav.Item>
+                          {product &&
+                            Object?.values(product?.general.pros).some(
+                              (category) =>
+                                category.pros?.length > 0 ? (
+                                  <Nav.Item>
+                                    <Nav.Link
+                                      eventKey="general"
+                                      onClick={() =>
+                                        handleAccordionChange("general", "pros")
+                                      }
+                                    >
+                                      General
+                                    </Nav.Link>
+                                  </Nav.Item>
+                                ) : (
+                                  ""
+                                )
+                            )}
 
-                          <Nav.Item>
+                          {/* <Nav.Item>
                             <Nav.Link
                               eventKey="general"
                               onClick={() =>
@@ -369,7 +387,7 @@ const WhyAccordionTab = React.memo(
                             >
                               General
                             </Nav.Link>
-                          </Nav.Item>
+                          </Nav.Item> */}
                           {product &&
                             Object?.keys(product?.average_pros)?.map(
                               (item, index) => {
@@ -515,7 +533,7 @@ const WhyAccordionTab = React.memo(
                                           {typeof item?.difference_value ==
                                           "number"
                                             ? item?.difference
-                                            : item?.phrase.toFixed(2)}
+                                            : item?.phrase}
 
                                           {item?.hover_phase && (
                                             <>
@@ -571,7 +589,7 @@ const WhyAccordionTab = React.memo(
                                           {typeof item?.difference_value ==
                                           "number"
                                             ? item?.difference
-                                            : item?.phrase.toFixed(2)}
+                                            : item?.phrase}
 
                                           {item?.hover_phase && (
                                             <>
