@@ -10,7 +10,7 @@ import CorrelationChart from "../_chart/CorrelationChart/index.js";
 import ComparisonVerticalChart from "../_chart/ComparisonVerticalChart/index.js";
 // import { ChartName } from "../_chart/data/enums/ChartName.js";
 
-const useComparisonChart = (chartData, pageType) => {
+const useComparisonChart = (chartData, pageType,slug) => {
   // console.log(pageType);
 
   const shortCodepatternsRE = chartData;
@@ -125,6 +125,7 @@ const useComparisonChart = (chartData, pageType) => {
                   }}
                   chartTitle={chartTitle}
                   pageType={pageType}
+                  slug={slug}
                   data={plotData}
                   strokeWidth={4}
                 />

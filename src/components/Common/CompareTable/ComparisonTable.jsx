@@ -22,6 +22,7 @@ export default function ComparisonTable({
   const [fullTable, setFullTable] = useState(2);
   // this for function for Table product sticky (Start)
   const [winPos, setWinPos] = useState(false);
+  const [stickyWith, setStickyWidth] = useState(true);
   const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
     const [isSticky, setIsSticky] = useState(false);
     const newRef = useRef();
@@ -56,6 +57,10 @@ export default function ComparisonTable({
       tbodyDiv?.getBoundingClientRect().top > 2
         ? setWinPos(false)
         : setWinPos(true);
+      var nextHeadingDiv = document.getElementById("h2");
+      nextHeadingDiv?.getBoundingClientRect().bottom > 0
+        ? setStickyWidth(false)
+        : setStickyWidth(true);
     };
   }
 
@@ -243,6 +248,12 @@ export default function ComparisonTable({
     return values;
   };
 
+  const conditionClassName = winPos
+    ? stickyWith
+      ? "isSticky widthFull" // Both winPos and stickyWith are true
+      : "isSticky" // Only winPos is true
+    : "nonSticky";
+
   return (
     <div
       className={
@@ -253,11 +264,7 @@ export default function ComparisonTable({
       ref={ref}
     >
       <Table className="compare-container comparison-table">
-        <thead
-          id="testone"
-          className={winPos ? "isSticky" : "nonSticky"}
-          ref={ref}
-        >
+        <thead id="testone" className={conditionClassName} ref={ref}>
           <tr className="">
             <th></th>
             {finalProducts.slice(0, defaultNo).map((product, index) => {
@@ -313,40 +320,44 @@ export default function ComparisonTable({
                                 </div>
                               )}
                             {product.price_websites &&
-                              product.price_websites.slice(0,1).map((data, dIndex) => {
-                                return (
-                                  <React.Fragment key={dIndex}>
-                                    {data.price !== null && (
-                                      <li>
-                                        <>
-                                          {/* <Link
+                              product.price_websites
+                                .slice(0, 1)
+                                .map((data, dIndex) => {
+                                  return (
+                                    <React.Fragment key={dIndex}>
+                                      {data.price !== null && (
+                                        <li>
+                                          <>
+                                            {/* <Link
                                             rel="noopener noreferrer"
                                             target="_blank"
                                             href={`/link?p=${btoa(data.url)}`}
                                           > */}
-                                          <img
-                                            src={data?.logo}
-                                            width={0}
-                                            height={0}
-                                            sizes="100vw"
-                                            alt="price"
-                                          />
-                                          {/* </Link> */}
-                                          <span>
-                                            <a
-                                              rel="noopener noreferrer"
-                                              target="_blank"
-                                              href={`/link?p=${btoa(data.url)}`}
-                                            >
-                                              {data?.price} €
-                                            </a>
-                                          </span>
-                                        </>
-                                      </li>
-                                    )}
-                                  </React.Fragment>
-                                );
-                              })}
+                                            <img
+                                              src={data?.logo}
+                                              width={0}
+                                              height={0}
+                                              sizes="100vw"
+                                              alt="price"
+                                            />
+                                            {/* </Link> */}
+                                            <span>
+                                              <a
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                                href={`/link?p=${btoa(
+                                                  data.url
+                                                )}`}
+                                              >
+                                                {data?.price} €
+                                              </a>
+                                            </span>
+                                          </>
+                                        </li>
+                                      )}
+                                    </React.Fragment>
+                                  );
+                                })}
                           </ul>
                         </>
                       </>
@@ -768,6 +779,7 @@ export default function ComparisonTable({
           </Button>
         </div>
       )}
+      <h2 id="h2"></h2>
     </div>
   );
 }

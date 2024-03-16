@@ -12,7 +12,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
     // Define a debounced version of the scroll event handler
     debouncedScrollHandler.current = debounce((id) => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }, 200); // Adjust the debounce delay as needed
+    }, 100); // Adjust the debounce delay as needed
 
     return () => {
       // Cleanup the debounced function on unmount
@@ -72,6 +72,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
     setOutline(newOutline);
   }, []);
   // console.log(outline);
+  // console.log(activeParentIndex);
 
   return (
     <>
@@ -88,7 +89,8 @@ function OutlineGenerator({ blogData, currentIndexId }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setActiveParentIndex(section?.id);
+                setActiveParentIndex(section?.id, index);
+                debouncedScrollHandler.current(section?.id);
               }}
             >
               {/* {console.log(section.text)} */}

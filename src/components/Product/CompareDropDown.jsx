@@ -69,7 +69,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
   };
   // testing
 
-  useComparisonChart(chart, pageType);
+  useComparisonChart(chart, pageType,slug);
   return (
     <>
       <section className="ptb-80">

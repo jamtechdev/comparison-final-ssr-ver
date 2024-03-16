@@ -144,12 +144,14 @@ function ProductPage({
       headings.forEach((heading) => {
         const bounding = heading.getBoundingClientRect();
         const distanceToTop = bounding.top;
-
-        // Calculate the threshold as half the viewport height
         const threshold = window.innerHeight / 2;
 
-        // Check if heading is more than halfway into the viewport
-        if (distanceToTop >= -threshold && distanceToTop < closestDistance) {
+        // Check if heading is more than halfway into the viewport AND at least partially visible
+        if (
+          distanceToTop >= -threshold &&
+          distanceToTop < closestDistance &&
+          isPartiallyVisible(heading)
+        ) {
           closestHeading = heading;
           closestDistance = distanceToTop;
         }
@@ -170,6 +172,13 @@ function ProductPage({
         }
       }
     };
+    function isPartiallyVisible(element) {
+      const bounding = element.getBoundingClientRect();
+      return (
+        (bounding.top >= 0 && bounding.top < window.innerHeight) ||
+        (bounding.bottom > 0 && bounding.bottom <= window.innerHeight)
+      );
+    }
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -856,6 +865,7 @@ function ProductPage({
           <WhyAccordionTab product={product} slug={slug} />
         </Container>
       </section>
+
       <CompareDropDown
         attributeDropDown={[...productCatAttributes?.data].reverse()}
         pageType="product"
@@ -926,7 +936,33 @@ function ProductPage({
         </Container>
       </section>
       {/* {console.log(product?.text_part !== "")} */}
-
+      <section className="mt-3 mobile-popular-comparison">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">
+                Price trend in the past 6 months
+              </h2>
+              <div className="draw-chart-container">
+                <Container className="position-relative  line-chart-parent">
+                  <div className="chart__data">
+                    <span></span>
+                    <p
+                      style={{
+                        color: "var(--heading-color)",
+                        fontSize: "17px",
+                      }}
+                    >
+                      Lowest price
+                    </p>
+                  </div>
+                  <DrawChart lineChartData={product?.line_chart_data} />
+                </Container>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
       <section className="ptb-80">
         <Container>
           {product?.text_part !== "" && (
@@ -1256,33 +1292,6 @@ function ProductPage({
         </section>
       )}
       <ProductBottomBar favSlider={product && product} />
-      <section className="mt-3 mobile-popular-comparison">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                Price trend in the past 6 months
-              </h2>
-              <div className="draw-chart-container">
-                <Container className="position-relative  line-chart-parent">
-                  <div className="chart__data">
-                    <span></span>
-                    <p
-                      style={{
-                        color: "var(--heading-color)",
-                        fontSize: "17px",
-                      }}
-                    >
-                      Lowest price
-                    </p>
-                  </div>
-                  <DrawChart lineChartData={product?.line_chart_data} />
-                </Container>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
     </>
   );
 }

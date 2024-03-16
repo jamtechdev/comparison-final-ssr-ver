@@ -9,6 +9,7 @@ function GuidePageTextArea({ guide }) {
   const [activeOutlineId, setActiveOutlineId] = useState("");
   const contentRef = useRef(null);
   // This code for text part and outline
+  // This code for text part and outline
   useEffect(() => {
     const handleScroll = () => {
       const headings = contentRef.current?.querySelectorAll(
@@ -18,11 +19,17 @@ function GuidePageTextArea({ guide }) {
       let closestHeading = null;
       let closestDistance = Number.MAX_VALUE;
 
-      headings?.forEach((heading) => {
+      headings.forEach((heading) => {
         const bounding = heading.getBoundingClientRect();
         const distanceToTop = bounding.top;
+        const threshold = window.innerHeight / 2;
 
-        if (distanceToTop >= 0 && distanceToTop < closestDistance) {
+        // Check if heading is more than halfway into the viewport AND at least partially visible
+        if (
+          distanceToTop >= -threshold &&
+          distanceToTop < closestDistance &&
+          isPartiallyVisible(heading)
+        ) {
           closestHeading = heading;
           closestDistance = distanceToTop;
         }
@@ -43,12 +50,18 @@ function GuidePageTextArea({ guide }) {
         }
       }
     };
-
+    function isPartiallyVisible(element) {
+      const bounding = element.getBoundingClientRect();
+      return (
+        (bounding.top >= 0 && bounding.top < window.innerHeight) ||
+        (bounding.bottom > 0 && bounding.bottom <= window.innerHeight)
+      );
+    }
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  });
 
   const addIdsToHeadings = (content) => {
     const headings = content.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];

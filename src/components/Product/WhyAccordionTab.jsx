@@ -604,7 +604,6 @@ const WhyAccordionTab = React.memo(
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                         />
-
                                         <small className="d-block tooltip-title">
                                           {item?.hover_phase && (
                                             <>

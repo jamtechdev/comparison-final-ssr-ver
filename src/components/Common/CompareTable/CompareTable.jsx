@@ -18,6 +18,7 @@ const CompareTable = React.memo(
 
     // this for function for Table product sticky (Start)
     const [winPos, setWinPos] = useState(false);
+    const [stickyWith, setStickyWidth] = useState(true);
     const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
       const [isSticky, setIsSticky] = useState(false);
       const newRef = useRef();
@@ -51,6 +52,10 @@ const CompareTable = React.memo(
         tbodyDiv?.getBoundingClientRect().top > 2
           ? setWinPos(false)
           : setWinPos(true);
+        var nextHeadingDiv = document.getElementById("h2");
+        nextHeadingDiv?.getBoundingClientRect().bottom > 0
+          ? setStickyWidth(false)
+          : setStickyWidth(true);
       };
     }
     const [isSticky, ref] = useDetectSticky();
@@ -238,6 +243,12 @@ const CompareTable = React.memo(
       return values;
     };
 
+    const conditionClassName = winPos
+      ? stickyWith
+        ? "isSticky widthFull" // Both winPos and stickyWith are true
+        : "isSticky" // Only winPos is true
+      : "nonSticky";
+
     return (
       <div
         className={
@@ -248,11 +259,7 @@ const CompareTable = React.memo(
         ref={ref}
       >
         <Table className="compare-container">
-          <thead
-            id="testone"
-            className={winPos ? "isSticky" : "nonSticky"}
-            ref={ref}
-          >
+          <thead id="testone" className={conditionClassName} ref={ref}>
             <tr className="">
               <th></th>
               {finalProducts.slice(0, defaultNo).map((product, index) => {
@@ -265,9 +272,11 @@ const CompareTable = React.memo(
                     )}
 
                     <p className="device-name">
-                    {/* {  console.log((product))} */}
+                      {/* {  console.log((product))} */}
                       <span>{index + 1}</span>
-                      <a href={`/${product?.category_url}/${product?.permalink}`}>
+                      <a
+                        href={`/${product?.category_url}/${product?.permalink}`}
+                      >
                         {product?.name}
                       </a>
 
@@ -805,6 +814,7 @@ const CompareTable = React.memo(
             </Button>
           </div>
         )}
+        <h2 id="h2"></h2>
       </div>
     );
   }

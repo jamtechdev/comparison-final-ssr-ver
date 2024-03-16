@@ -1700,3 +1700,6 @@ li.color-item.selected {
 .line-chart-parent svg line {
   opacity: 0.1;
 }
+.compare-container thead.isSticky.widthFull tr th:first-child {
+  display: none;
+}

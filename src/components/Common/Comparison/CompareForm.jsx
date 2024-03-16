@@ -53,6 +53,16 @@ export default function CompareForm({
     main_image: comparisonData?.[1]?.main_image,
     category_url: comparisonData?.[1]?.category_url,
   };
+  const compareProductThird = {
+    category_id: comparisonData?.[2]?.category_id,
+    permalink: comparisonData?.[2]?.permalink,
+    name: comparisonData?.[2]?.name,
+    brand: comparisonData?.[2]?.brand,
+    overall_score: comparisonData?.[2]?.overall_score,
+    technical_score: comparisonData?.[2]?.technical_score,
+    main_image: comparisonData?.[2]?.main_image,
+    category_url: comparisonData?.[2]?.category_url,
+  };
 
   const [formFields, setFormFields] = useState({
     productFirst:
@@ -66,7 +76,7 @@ export default function CompareForm({
       comparisonData !== undefined
         ? reduxData?.productSecond || compareProductSecond || null
         : reduxData?.productSecond || null,
-    productThird: reduxData?.productThird || null,
+    productThird: reduxData?.productThird || compareProductThird || null,
     category:
       reduxData?.category ||
       comparisonData?.[0]?.category_id ||

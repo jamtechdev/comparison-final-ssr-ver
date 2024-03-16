@@ -12,6 +12,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
       chartTitle,
       axisProps,
       data,
+      slug,
       containerId,
       svgProps,
       tooltipClass,
@@ -28,6 +29,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
 
     const xMinValue = d3.min(data, (d) => d.label);
     const xMaxValue = d3.max(data, (d) => d.label);
+    console.log(slug)
 
     let xScale = d3
       .scaleLinear()
@@ -83,6 +85,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
         svgRef,
         tooltipRef,
         data,
+        slug,
         xScale,
         yScale,
         ...svgProps,
