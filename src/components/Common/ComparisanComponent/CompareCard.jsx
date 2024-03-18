@@ -113,7 +113,9 @@ const CompareCard = ({
                   <Image
                     src={
                       compareProduct?.price_websites[0]?.price != null &&
-                      compareProduct?.price_websites[0]?.logo
+                      compareProduct?.price_websites[0]?.logo === null
+                        ? "/images/No-Image.png"
+                        : compareProduct?.price_websites[0]?.logo
                     }
                     width={0}
                     height={0}
@@ -126,7 +128,11 @@ const CompareCard = ({
                 </div>
                 <div className="comparison-product-item">
                   <Image
-                    src={compareProduct?.price_websites[1]?.logo}
+                    src={
+                      compareProduct?.price_websites[1]?.logo === null
+                        ? "/images/No-Image.png"
+                        : compareProduct?.price_websites[1]?.logo
+                    }
                     width={0}
                     height={0}
                     sizes="100%"
