@@ -179,8 +179,8 @@ function lineChart(svgRef, lineChartData) {
       // d3.selectAll(".line").style("opacity", otherLinesOpacityHover);
       d3.selectAll(".circle").style("opacity", circleOpacityOnLineHover);
       d3.select(this)
-        .style("opacity", lineOpacityHover)
-        .style("stroke-width", lineStrokeHover)
+        // .style("opacity", lineOpacityHover)
+        // .style("stroke-width", lineStrokeHover)
         .style("cursor", "pointer");
     })
     .on("mouseout", function () {

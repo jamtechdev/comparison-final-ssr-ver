@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ReviewSlider({ favSlider }) {
-  // console.log(favSlider);
+  console.log(favSlider);
   // if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {
@@ -71,9 +71,10 @@ export default function ReviewSlider({ favSlider }) {
                       className="rating_count"
                       style={{
                         background:
-                          item.rating >= 7.5
+                          item.overall_score >= 7.5
                             ? "#093673"
-                            : item.rating >= 5 && item.rating < 7.5
+                            : item.overall_score >= 5 &&
+                              item.overall_score < 7.5
                             ? "#437ECE"
                             : "#85B2F1",
                       }}

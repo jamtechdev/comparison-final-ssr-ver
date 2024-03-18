@@ -104,7 +104,7 @@ export default function Product({
     const numericValue = parseFloat(item?.value);
 
     if (!isNaN(numericValue)) {
-      return `(${numericValue} ${item.unit ? item.unit : ""})`;
+      return `(${numericValue}${item.unit && item.unit ? item.unit : ""})`;
     } else {
       return item?.value === undefined ||
         item?.value === "" ||
@@ -769,7 +769,7 @@ export default function Product({
                               <React.Fragment key={index}>
                                 <li className="tooltip-title">
                                   <span className="pros-crons-text">
-                                    {data?.name} {renderValue(data)}
+                                    {data?.name} {renderValue(data).trim()}
                                   </span>
                                   <ProsConsToolTip
                                     typeComp={`cons`}
@@ -835,6 +835,7 @@ export default function Product({
                     <span>Colors available:</span>
                     <div className="color-section">
                       {product?.available_colors?.map((data, key) => {
+                        // console.log(data);
                         // const isCurrentVersion = data.permalink === slug;
                         return (
                           <>
@@ -845,8 +846,12 @@ export default function Product({
                                   width: "auto",
                                   padding: "0px 5px",
                                   borderRadius: "5px",
+                                  cursor:
+                                    data.color === product?.color
+                                      ? "default"
+                                      : "pointer",
 
-                                  border:
+                                  outline:
                                     data.color === product?.color
                                       ? "1px solid #437ed0"
                                       : "none",
@@ -858,7 +863,10 @@ export default function Product({
                                   style={{
                                     color: "#437ed0",
                                     padding: "0px 5px",
-                                    cursor: "pointer",
+                                    cursor:
+                                      data.color === product?.color
+                                        ? "default"
+                                        : "pointer",
                                   }}
                                   className={`color-item `}
                                   // onClick={(e) => handleItemClick(key)}
@@ -891,35 +899,54 @@ export default function Product({
                     <div className="alternatives mt-2">
                       <span>Available versions:</span>
                       <div className="color-section">
-                        {product?.available_versions?.map((data, key) => {
-                          return (
-                            <>
-                              <div className="color-item" key={key}>
-                                <li
-                                  style={{
-                                    listStyleType: "none",
-                                    width: "auto",
-                                    padding: "0px 5px",
-                                  }}
-                                  className="current_version_not_found"
-                                >
-                                  <a
-                                    href={`/${data?.category_url}/${data?.permalink}`}
+                        {product?.available_versions
+                          ?.sort((a, b) =>
+                            a.permalink === product?.permalink ? -1 : 1
+                          )
+                          .map((data, key) => {
+                            console.log(data);
+                            return (
+                              <>
+                                <div className="color-item" key={key}>
+                                  <li
                                     style={{
-                                      color: "#437ed0",
+                                      listStyleType: "none",
+                                      width: "auto",
                                       padding: "0px 5px",
-                                      cursor: "pointer",
+                                      borderRadius: "5px",
+                                      cursor:
+                                        data.permalink === product?.permalink
+                                          ? "default"
+                                          : "pointer",
+
+                                      outline:
+                                        data.permalink === product?.permalink
+                                          ? "1px solid #437ed0"
+                                          : "none",
                                     }}
-                                    className={`color-item `}
-                                    // onClick={(e) => handleItemClick(key)}
+                                    className="current_version_not_found"
                                   >
-                                    {data.short_name}
-                                  </a>
-                                </li>
-                              </div>
-                            </>
-                          );
-                        })}
+                                    <a
+                                      href={`/${data?.category_url}/${data?.permalink}`}
+                                      style={{
+                                        color: "#437ed0",
+                                        padding: "0px 5px",
+                                        borderRadius: "5px",
+                                        cursor:
+                                          data.permalink === product?.permalink
+                                            ? "default"
+                                            : "pointer",
+                                      }}
+                                      className={`color-item `}
+                                      // onClick={(e) => handleItemClick(key)}
+                                    >
+                                      {data.short_name}
+                                    </a>
+                                  </li>
+                                </div>
+                              </>
+                            );
+                          })}
                       </div>
                     </div>
                   </Col>
@@ -990,7 +1017,10 @@ export default function Product({
                               .slice(0, 5)
                               ?.map((data, key) => {
                                 return (
-                                  <a href={`/${data.permalink}`} key={key}>
+                                  <a
+                                    href={`/${data?.category_url}/${data.permalink}`}
+                                    key={key}
+                                  >
                                     <p>
                                       <span>
                                         #{data?.position}{" "}

@@ -304,6 +304,7 @@ const CompareAccordionTab = React.memo(
                                     ?.map((item, index) => {
                                       return (
                                         <li key={index}>
+                                          {/* {console.log(item?.difference)} */}
                                           <span className="tooltip-title">
                                             {extractedUrls.length > 2
                                               ? typeof item?.difference_value ==
