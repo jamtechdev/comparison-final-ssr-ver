@@ -873,6 +873,34 @@ function ProductPage({
         slug={slug}
       />
 
+      <section className="mt-3 mobile-popular-comparison">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">
+                Price trend in the past 6 months
+              </h2>
+              <div className="draw-chart-container">
+                <Container className="position-relative  line-chart-parent">
+                  <div className="chart__data">
+                    <span></span>
+                    <p
+                      style={{
+                        color: "var(--heading-color)",
+                        fontSize: "17px",
+                      }}
+                    >
+                      Lowest price
+                    </p>
+                  </div>
+                  <DrawChart lineChartData={product?.line_chart_data} />
+                </Container>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -936,33 +964,7 @@ function ProductPage({
         </Container>
       </section>
       {/* {console.log(product?.text_part !== "")} */}
-      <section className="mt-3 mobile-popular-comparison">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                Price trend in the past 6 months
-              </h2>
-              <div className="draw-chart-container">
-                <Container className="position-relative  line-chart-parent">
-                  <div className="chart__data">
-                    <span></span>
-                    <p
-                      style={{
-                        color: "var(--heading-color)",
-                        fontSize: "17px",
-                      }}
-                    >
-                      Lowest price
-                    </p>
-                  </div>
-                  <DrawChart lineChartData={product?.line_chart_data} />
-                </Container>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+
       <section className="ptb-80">
         <Container>
           {product?.text_part !== "" && (
