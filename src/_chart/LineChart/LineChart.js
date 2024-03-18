@@ -200,7 +200,7 @@ function lineChart(svgRef, lineChartData) {
     })
     .on("mouseout", function () {
       // d3.selectAll(".line").style("opacity", lineOpacity);
-      d3.selectAll(".circle").style("opacity", circleOpacity);
+      d3.selectAll(".circle");
       d3.select(this).style("stroke-width", lineStroke).style("cursor", "none");
     });
 
@@ -258,7 +258,7 @@ function lineChart(svgRef, lineChartData) {
     .attr("cx", (d) => xScale(d.date))
     .attr("cy", (d) => yScale(d.price))
     .attr("r", circleRadius)
-    .style("opacity", circleOpacity)
+    // .style("opacity", circleOpacity)
     .on("mouseover", function () {
       d3.select(this)
         .transition()
