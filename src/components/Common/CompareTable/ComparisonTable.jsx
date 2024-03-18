@@ -567,6 +567,43 @@ export default function ComparisonTable({
           <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
+                Popularity
+                {products && products[0]?.popularity_descriptions && (
+                  <div className="tooltip-display-content">
+                    {products[0]?.popularity_descriptions?.description && (
+                      <p className="mb-2">
+                        <b>What it is: </b>{" "}
+                        {products[0]?.popularity_descriptions?.description}
+                      </p>
+                    )}
+                    {products[0]?.popularity_points?.when_it_matters && (
+                      <p className="mb-2">
+                        <b>When it matters: </b>{" "}
+                        {products[0]?.popularity_descriptions?.when_it_matters}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </th>
+            {finalProducts
+              .slice(0, defaultNo)
+              .map((product, popularityIndex) => {
+                const values = finalProducts.map((p) => p.popularity_points);
+                return (
+                  <td key={popularityIndex}>
+                    {
+                      addStarOnTable(defaultNo, "popularity", values)[
+                        popularityIndex
+                      ]
+                    }
+                  </td>
+                );
+              })}
+          </tr>
+          <tr className="">
+            <th className="sub-inner-padding">
+              <div className="tooltip-title">
                 {comparisonPhaseData && comparisonPhaseData?.users_ratings}
                 {products[0]?.users_rating_descriptions && (
                   <div className="tooltip-display-content">
@@ -655,6 +692,45 @@ export default function ComparisonTable({
                 </td>
               );
             })}
+          </tr>
+          <tr className="">
+            <th className="sub-inner-padding">
+              <div className="tooltip-title">
+                Expert Reviews
+                {products && products[0]?.expert_reviews_rating && (
+                  <div className="tooltip-display-content">
+                    {products[0]?.popularity_descriptions?.description && (
+                      <p className="mb-2">
+                        <b>What it is: </b>{" "}
+                        {products[0]?.popularity_descriptions?.description}
+                      </p>
+                    )}
+                    {products[0]?.popularity_points?.when_it_matters && (
+                      <p className="mb-2">
+                        <b>When it matters: </b>{" "}
+                        {products[0]?.popularity_descriptions?.when_it_matters}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </th>
+            {finalProducts
+              .slice(0, defaultNo)
+              .map((product, expert_reviews_rating) => {
+                const values = finalProducts.map(
+                  (p) => p.expert_reviews_rating
+                );
+                return (
+                  <td key={expert_reviews_rating}>
+                    {
+                      addStarOnTable(defaultNo, "reviews", values)[
+                        expert_reviews_rating
+                      ]
+                    }
+                  </td>
+                );
+              })}
           </tr>
           {removeLastObjectFromCategory
             ?.slice(0, fullTable || 2)
