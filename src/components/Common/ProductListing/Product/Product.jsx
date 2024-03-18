@@ -926,22 +926,43 @@ export default function Product({
                                     }}
                                     className="current_version_not_found"
                                   >
-                                    <a
-                                      href={`/${data?.category_url}/${data?.permalink}`}
-                                      style={{
-                                        color: "#437ed0",
-                                        padding: "0px 5px",
-                                        borderRadius: "5px",
-                                        cursor:
-                                          data.permalink === product?.permalink
-                                            ? "default"
-                                            : "pointer",
-                                      }}
-                                      className={`color-item `}
-                                      // onClick={(e) => handleItemClick(key)}
-                                    >
-                                      {data.short_name}
-                                    </a>
+                                    {data.permalink === product?.permalink ? (
+                                      <a
+                                        href=""
+                                        style={{
+                                          color: "#437ed0",
+                                          padding: "0px 5px",
+                                          borderRadius: "5px",
+                                          cursor:
+                                            data.permalink ===
+                                            product?.permalink
+                                              ? "default"
+                                              : "pointer",
+                                        }}
+                                        className={`color-item `}
+                                        // onClick={(e) => handleItemClick(key)}
+                                      >
+                                        {data.short_name}
+                                      </a>
+                                    ) : (
+                                      <a
+                                        href={`/${data?.category_url}/${data?.permalink}`}
+                                        style={{
+                                          color: "#437ed0",
+                                          padding: "0px 5px",
+                                          borderRadius: "5px",
+                                          cursor:
+                                            data.permalink ===
+                                            product?.permalink
+                                              ? "default"
+                                              : "pointer",
+                                        }}
+                                        className={`color-item `}
+                                        // onClick={(e) => handleItemClick(key)}
+                                      >
+                                        {data.short_name}
+                                      </a>
+                                    )}
                                   </li>
                                 </div>
                               </>
