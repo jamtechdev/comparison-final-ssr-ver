@@ -14,8 +14,8 @@ function lineChart(svgRef, lineChartData) {
     date_time_store = "%d-%m-%Y";
   } else if (lineChartData?.lineChartData[0]?.format === "m-d-Y") {
     date_time_store = "%m-%d-%Y";
-  } else {
-    date_time_store = "%d.%m.%y";
+  } else if (lineChartData?.lineChartData[0]?.format === "d.m.Y") {
+    date_time_store = "%d.%m.%Y";
   }
   const parseDate = d3.timeParse(date_time_store);
   const europeanDateFormat = date_time_store;
