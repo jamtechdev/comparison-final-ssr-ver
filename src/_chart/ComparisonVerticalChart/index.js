@@ -244,7 +244,7 @@ function ComparisonVerticalChart(props) {
     .attr("y", (d) => yScale(d.value))
     .attr("height", (d) => height - yScale(d.value))
     .style("fill", (d, i) => {
-      console.log(d.product_id);
+      // console.log(d.product_id);
       if (d.selected === 1 && d.product_id?.[0] === 1) {
         return "rgb(67, 126, 206)";
       } else if (d.selected === 1 && d.product_id?.[0] === 2) {

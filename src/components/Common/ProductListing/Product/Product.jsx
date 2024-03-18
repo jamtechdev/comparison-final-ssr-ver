@@ -904,7 +904,7 @@ export default function Product({
                             a.permalink === product?.permalink ? -1 : 1
                           )
                           .map((data, key) => {
-                            console.log(data);
+                            // console.log(data);
                             return (
                               <>
                                 <div className="color-item" key={key}>

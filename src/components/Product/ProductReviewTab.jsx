@@ -9,7 +9,7 @@ import Image from "next/image";
 import Rating from "../Common/Rating/Rating";
 
 function ProductReviewTab({ productReview }) {
-  console.log(productReview?.length);
+  // console.log(productReview?.length);
   return (
     <>
       {" "}

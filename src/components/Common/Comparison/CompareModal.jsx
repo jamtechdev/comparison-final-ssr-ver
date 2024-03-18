@@ -12,7 +12,7 @@ import toast, { Toaster } from "react-hot-toast";
 const CompareModal = ({ setIsOpen, location, favSlider }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
-  console.log(reduxData);
+  // console.log(reduxData);
   const [oftenProducts, setOftenProducts] = useState();
   const [categoryId, setCategoryId] = useState(
     reduxData?.category ? reduxData?.category : undefined
@@ -26,7 +26,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
   };
   // console.log(reduxData);
   const handelOffenProductClick = (product, index) => {
-    console.log(reduxData?.productFirst?.name);
+    // console.log(reduxData?.productFirst?.name);
     // console.log(product);
     if (
       reduxData?.productFirst === undefined ||
@@ -93,7 +93,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
 
   useEffect(() => {
     if (categoryId) {
-      console.log(categoryId, "NEET");
+      // console.log(categoryId, "NEET");
       productService
         .getComparedoftenProduct(categoryId)
         .then((res) => {
@@ -105,9 +105,9 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
                 item.name !== reduxData?.productFirst?.name
             );
 
-            console.log(reduxData);
+            // console.log(reduxData);
 
-            console.log(filteredProducts?.length);
+            // console.log(filteredProducts?.length);
             setOftenProducts(filteredProducts);
           }
         })

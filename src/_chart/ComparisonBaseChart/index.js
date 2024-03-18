@@ -29,7 +29,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
 
     const xMinValue = d3.min(data, (d) => d.label);
     const xMaxValue = d3.max(data, (d) => d.label);
-    console.log(slug)
+    // console.log(slug)
 
     let xScale = d3
       .scaleLinear()

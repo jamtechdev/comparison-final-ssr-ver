@@ -21,19 +21,19 @@ function lineChart(svgRef, lineChartData) {
   ];
 
   dates.forEach((date) => {
-    console.log(
-      date.toDateString(),
-      "is a",
-      [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ][date.getDay()]
-    );
+    // console.log(
+    //   date.toDateString(),
+    //   "is a",
+    //   [
+    //     "Sunday",
+    //     "Monday",
+    //     "Tuesday",
+    //     "Wednesday",
+    //     "Thursday",
+    //     "Friday",
+    //     "Saturday",
+    //   ][date.getDay()]
+    // );
   });
 
   // console.log(sundays);

@@ -21,7 +21,7 @@ export default function Filter({
     maxVal: 0,
   });
   let price = categoryAttributes?.price;
-  console.log(price);
+  // console.log(price);
   let brands = categoryAttributes?.brands;
   let productCount = categoryAttributes?.attributes;
   let attributeCategories = categoryAttributes?.attribute_categories;
@@ -344,7 +344,7 @@ export default function Filter({
       <div className="filter-section">
         <div className="tech-features-price">
           {guidePhraseData && guidePhraseData?.price}
-          {console.log(guidePhraseData?.price, "price")}
+          {/* {console.log(guidePhraseData?.price, "price")} */}
           {price?.min_price != null && (
             <MultiRangeSlider
               rangeVal={sliderValues}
