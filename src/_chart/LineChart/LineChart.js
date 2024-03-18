@@ -2,8 +2,23 @@ import * as React from "react";
 import * as d3 from "d3";
 
 function lineChart(svgRef, lineChartData) {
-  const parseDate = d3.timeParse("%Y-%m-%d");
-  const europeanDateFormat = "%d/%m/%Y";
+  // console.log(lineChartData?.lineChartData[0]?.format);
+  let date_time_store = "";
+  if (lineChartData?.lineChartData[0]?.format === "Y-m-d") {
+    date_time_store = "%Y-%m-%d";
+  } else if (lineChartData?.lineChartData[0]?.format === "d/m/Y") {
+    date_time_store = "%d/%m/%Y";
+  } else if (lineChartData?.lineChartData[0]?.format === "m/d/Y") {
+    date_time_store = "%m/%d/%Y";
+  } else if (lineChartData?.lineChartData[0]?.format === "d-m-Y") {
+    date_time_store = "%d-%m-%Y";
+  } else if (lineChartData?.lineChartData[0]?.format === "m-d-Y") {
+    date_time_store = "%m-%d-%Y";
+  } else {
+    date_time_store = "%d.%m.%y";
+  }
+  const parseDate = d3.timeParse(date_time_store);
+  const europeanDateFormat = date_time_store;
 
   // console.log(lineChartData);
   const data = lineChartData?.lineChartData.map((chartData) => ({
