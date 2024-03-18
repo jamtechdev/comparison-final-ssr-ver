@@ -141,7 +141,7 @@ function ProductPage({
       let closestHeading = null;
       let closestDistance = Number.MAX_VALUE;
 
-      headings.forEach((heading) => {
+      headings?.forEach((heading) => {
         const bounding = heading.getBoundingClientRect();
         const distanceToTop = bounding.top;
         const threshold = window.innerHeight / 2;
@@ -188,7 +188,7 @@ function ProductPage({
   const addIdsToHeadings = (content) => {
     const headings = content?.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
 
-    headings.forEach((heading) => {
+    headings?.forEach((heading) => {
       const id = heading
         .replace(/<\/?[^>]+(>|$)/g, "")
         .trim()
@@ -611,7 +611,7 @@ function ProductPage({
                               href={`/link?p=${btoa(item.url)}`}
                             >
                               <Image
-                                src={item?.logo}
+                                src={item?.logo===null?'/images/No-Image.png':item?.logo}
                                 width={0}
                                 height={0}
                                 sizes="100%"
