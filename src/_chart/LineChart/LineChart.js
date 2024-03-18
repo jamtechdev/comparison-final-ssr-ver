@@ -189,7 +189,7 @@ function lineChart(svgRef, lineChartData) {
     .style("stroke", "#437ECE")
     .style("stroke-width", 2.5)
     .style("fill", "none")
-    .style("opacity", 5)
+    // .style("opacity", 5)
     .on("mouseover", function () {
       // d3.selectAll(".line").style("opacity", otherLinesOpacityHover);
       d3.selectAll(".circle").style("opacity", circleOpacityOnLineHover);
