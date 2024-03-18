@@ -76,7 +76,11 @@ export default function CompareForm({
       comparisonData !== undefined
         ? reduxData?.productSecond || compareProductSecond || null
         : reduxData?.productSecond || null,
-    productThird: reduxData?.productThird || compareProductThird || null,
+
+    productThird:
+      compareProductThird?.category_id !== undefined
+        ? reduxData?.productThird || compareProductThird || null
+        : reduxData?.productThird || null,
     category:
       reduxData?.category ||
       comparisonData?.[0]?.category_id ||
@@ -123,9 +127,13 @@ export default function CompareForm({
       ].filter((product) => product && product.permalink !== "");
 
       const categoryInURL = formFields?.productFirst?.category_url;
-      const sortedPermalinksArray = [...permalinksArray].sort((a, b) =>
-        a.permalink.localeCompare(b.permalink)
-      );
+      const sortedPermalinksArray = [...permalinksArray].sort((a, b) => {
+        if (a.permalink && b.permalink) {
+          return a.permalink.localeCompare(b.permalink);
+        }
+        return 0;
+      });
+      console.log(sortedPermalinksArray);
       const permalinks = sortedPermalinksArray.map((item) => item.permalink);
       const permalinkSlug = permalinks.join("-vs-");
       dispatch(addCompareProduct(formFields));
