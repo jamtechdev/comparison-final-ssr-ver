@@ -175,7 +175,7 @@ function lineChart(svgRef, lineChartData) {
     .attr("class", "lines")
     .attr("transform", `translate(${margin}, ${margin})`)
     .style("stroke", "#437ECE")
-    .style("opacity", 0.8);
+    // .style("opacity", 0.8);
 
   lines
     .selectAll("line-group")
