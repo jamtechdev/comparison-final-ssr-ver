@@ -228,7 +228,7 @@ function lineChart(svgRef, lineChartData) {
         .attr("class", "text");
       // .attr("x", (d) => xScale(d.date) + 5)
       // .attr("y", (d) => yScale(d.price) - 10);
-      const formatDate = d3.timeFormat("%Y-%m-%d");
+      const formatDate = d3.timeFormat(europeanDateFormat);
       // const formatDate = d3.timeFormat("%d.%m.%y");
       tooltip
         .style("display", "block")
