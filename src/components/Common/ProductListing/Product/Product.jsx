@@ -927,8 +927,7 @@ export default function Product({
                                     className="current_version_not_found"
                                   >
                                     {data.permalink === product?.permalink ? (
-                                      <a
-                                        href=""
+                                      <span
                                         style={{
                                           color: "#437ed0",
                                           padding: "0px 5px",
@@ -943,7 +942,7 @@ export default function Product({
                                         // onClick={(e) => handleItemClick(key)}
                                       >
                                         {data.short_name}
-                                      </a>
+                                      </span>
                                     ) : (
                                       <a
                                         href={`/${data?.category_url}/${data?.permalink}`}
