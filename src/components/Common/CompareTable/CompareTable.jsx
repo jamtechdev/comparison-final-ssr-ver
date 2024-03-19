@@ -142,7 +142,7 @@ const CompareTable = React.memo(
       const occurrences = numericValues?.filter(
         (value) => value === topValue
       ).length;
-      // console.log(occurrences, "neet");
+
       //  if (occurrences === 1 || occurrences === 2)
       if (occurrences === 1) {
         arrayOfObjects.forEach((obj) => {
@@ -301,64 +301,59 @@ const CompareTable = React.memo(
                         (data) => data.price !== null
                       ) && (
                         <>
-                          {" "}
-                          <>
-                            <ul className="best-list-item d-none">
-                              {" "}
-                              {product.price_websites &&
-                                product?.price_websites?.every(
-                                  (data) => data.price === null
-                                ) && (
-                                  <div className="not-availabel n-lable p-1">
-                                    {/* <span className="txt">NOT AVAILABLE</span> */}
-                                    <span className="price">
-                                      ~ {product?.price} €
-                                    </span>
-                                  </div>
-                                )}
-                              {product.price_websites &&
-                                product.price_websites
-                                  ?.slice(0, 1)
-                                  ?.map((data, dIndex) => {
-                                    return (
-                                      <React.Fragment key={dIndex}>
-                                        {data.price !== null && (
-                                          <li>
-                                            <>
-                                              <Link
+                          <ul className="best-list-item d-none">
+                            {" "}
+                            {product.price_websites &&
+                              product?.price_websites?.every(
+                                (data) => data.price === null
+                              ) && (
+                                <div className="not-availabel n-lable p-1">
+                                  {/* <span className="txt">NOT AVAILABLE</span> */}
+                                  <span className="price">
+                                    ~ {product?.price} €
+                                  </span>
+                                </div>
+                              )}
+                            {product.price_websites &&
+                              product.price_websites
+                                ?.slice(0, 1)
+                                ?.map((data, dIndex) => {
+                                  return (
+                                    <React.Fragment key={dIndex}>
+                                      {data.price !== null && (
+                                        <li>
+                                          <>
+                                            <Link
+                                              rel="noopener noreferrer"
+                                              target="_blank"
+                                              href={`/link?p=${btoa(data.url)}`}
+                                            >
+                                              <img
+                                                src={data?.logo}
+                                                width={0}
+                                                height={0}
+                                                sizes="100vw"
+                                                alt="price"
+                                              />
+                                            </Link>
+                                            <span>
+                                              <a
                                                 rel="noopener noreferrer"
                                                 target="_blank"
                                                 href={`/link?p=${btoa(
                                                   data.url
                                                 )}`}
                                               >
-                                                <img
-                                                  src={data?.logo}
-                                                  width={0}
-                                                  height={0}
-                                                  sizes="100vw"
-                                                  alt="price"
-                                                />
-                                              </Link>
-                                              <span>
-                                                <a
-                                                  rel="noopener noreferrer"
-                                                  target="_blank"
-                                                  href={`/link?p=${btoa(
-                                                    data.url
-                                                  )}`}
-                                                >
-                                                  {data?.price} €
-                                                </a>
-                                              </span>
-                                            </>
-                                          </li>
-                                        )}
-                                      </React.Fragment>
-                                    );
-                                  })}
-                            </ul>
-                          </>
+                                                {data?.price} €
+                                              </a>
+                                            </span>
+                                          </>
+                                        </li>
+                                      )}
+                                    </React.Fragment>
+                                  );
+                                })}
+                          </ul>
                         </>
                       )}
                   </th>
@@ -519,6 +514,7 @@ const CompareTable = React.memo(
                   );
                 })}
             </tr>
+
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
@@ -570,6 +566,7 @@ const CompareTable = React.memo(
                   );
                 })}
             </tr>
+
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
@@ -618,6 +615,7 @@ const CompareTable = React.memo(
                 );
               })}
             </tr>
+
             {finalProducts.some(
               (product) => product.expert_reviews_rating !== 0
             ) && (

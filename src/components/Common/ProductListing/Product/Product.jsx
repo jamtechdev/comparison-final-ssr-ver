@@ -799,6 +799,25 @@ export default function Product({
           </Col>
 
           <Col md={12} className="p-0">
+          <Row className="w-100 m-0 alternatives-border-top">
+                <Col md={12}>
+                  <div className="inline-power-section w-100">
+                    <img
+                      src="/images/double-arrow.png"
+                      width={0}
+                      height={0}
+                      sizes="100%"
+                      alt=""
+                    />
+                    {/* {console.log(filteredTech_data[0]?.data)} */}
+
+                    <ul className="badge-list-section">
+                      <li><span>9.5</span><b>For pets</b></li>
+                      <li><span>9.7</span><b>For soups</b></li>
+                    </ul>
+                  </div>
+                </Col>
+              </Row>
             {filteredTech_data?.[0]?.data !== undefined && (
               <Row className="w-100 m-0 alternatives-border-top">
                 <Col md={12}>

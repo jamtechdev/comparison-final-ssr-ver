@@ -53,6 +53,11 @@
   margin: 30px 0;
   padding: 8px 0px;
   display: flex;
+  flex-wrap: wrap;
+}
+
+.last-border-none:before{
+  display: none;
 }
 
 .score-section {

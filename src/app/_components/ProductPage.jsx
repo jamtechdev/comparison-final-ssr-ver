@@ -480,7 +480,7 @@ function ProductPage({
                 </small>
               </div>
             </div>
-            <div className="score-section color-change score-section-2">
+            <div className="score-section color-change score-section-2 last-border-none">
               <span className="count" style={{ backgroundColor: RatingColor }}>
                 {product?.reviews}
               </span>
@@ -585,6 +585,16 @@ function ProductPage({
                 </small>
               </div>
             </div>
+            <Row className="w-100 m-0 alternatives-border-top">
+                <Col md={12}>
+                  <div className="inline-power-section w-100">
+                    <ul className="badge-list-section">
+                      <li><span>9.5</span><b>For pets</b></li>
+                      <li><span>9.7</span><b>For soups</b></li>
+                    </ul>
+                  </div>
+                </Col>
+              </Row>
           </div>
         </Container>
       </section>

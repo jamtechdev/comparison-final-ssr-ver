@@ -1707,3 +1707,18 @@ li.color-item.selected {
   border: 1px solid #093673;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+.badge-list-section {
+  opacity: 100% !important;
+}
+.badge-list-section li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.badge-list-section li span {
+  background: #093673;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 13px;
+}
