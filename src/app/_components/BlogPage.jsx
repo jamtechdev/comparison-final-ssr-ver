@@ -25,7 +25,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
       let closestHeading = null;
       let closestDistance = Number.MAX_VALUE;
 
-      headings.forEach((heading) => {
+      headings?.forEach((heading) => {
         const bounding = heading.getBoundingClientRect();
         const distanceToTop = bounding.top;
 
@@ -46,7 +46,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
     };
   }, []);
   const addIdsToHeadings = (content) => {
-    const headings = content.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
+    const headings = content?.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
 
     headings.forEach((heading) => {
       const id = heading

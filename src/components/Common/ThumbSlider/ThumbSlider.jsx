@@ -22,12 +22,18 @@ export default function ThumbSlider({ productData }) {
     },
   ];
   const [swiper, setSwiper] = useState(null);
+  const [activeThumb, setActiveThumb] = useState(0);
 
   const setSwiperRef = (swiper) => {
     setSwiper(swiper);
   };
-
+  console.log(activeThumb);
   const handleThumbClick = (index) => {
+    if (index === productData?.all_images.length - 1) {
+      setActiveThumb(0); // Reset activeThumb to 0
+    } else {
+      setActiveThumb(index);
+    }
     if (swiper) {
       swiper.slideTo(index); // Navigate to the clicked thumbnail's corresponding slide
     }
@@ -36,10 +42,17 @@ export default function ThumbSlider({ productData }) {
   const handlePrevious = () => {
     if (swiper) {
       swiper.slidePrev();
+      setActiveThumb(activeThumb - 1);
     }
   };
 
   const handleNext = () => {
+    // console.log(activeThumb);
+    if (activeThumb === productData?.all_images.length - 1) {
+      setActiveThumb(0); // Reset activeThumb to 0
+    } else {
+      setActiveThumb(activeThumb + 1);
+    }
     if (swiper) {
       swiper.slideNext();
     }
@@ -53,6 +66,7 @@ export default function ThumbSlider({ productData }) {
               <li
                 key={index}
                 onClick={() => handleThumbClick(index)}
+                className={index === activeThumb ? "active" : ""}
                 style={{ cursor: "pointer" }}
               >
                 <Image
@@ -68,21 +82,23 @@ export default function ThumbSlider({ productData }) {
         </>
       ) : (
         <ul className="thumb-images">
-          {productData && productData?.all_images?.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => handleThumbClick(index)}
-              style={{ cursor: "pointer" }}
-            >
-              <Image
-                src={item.image}
-                width={0}
-                height={0}
-                sizes="100%"
-                alt=""
-              />
-            </li>
-          ))}
+          {productData &&
+            productData?.all_images?.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handleThumbClick(index)}
+                className={index === activeThumb ? "active" : ""}
+                style={{ cursor: "pointer" }}
+              >
+                <Image
+                  src={item.image}
+                  width={0}
+                  height={0}
+                  sizes="100%"
+                  alt=""
+                />
+              </li>
+            ))}
         </ul>
       )}
 
@@ -157,10 +173,13 @@ export default function ThumbSlider({ productData }) {
           </Swiper>
         )}
 
-        <span className="swiper-prev" onClick={handlePrevious}>
+        <span
+          className="swiper-prev"
+          onClick={() => handlePrevious(activeThumb)}
+        >
           <i className="ri-arrow-left-s-line"></i>
         </span>
-        <span className="swiper-next" onClick={handleNext}>
+        <span className="swiper-next" onClick={() => handleNext(activeThumb)}>
           <i className="ri-arrow-right-s-line"></i>
         </span>
       </section>

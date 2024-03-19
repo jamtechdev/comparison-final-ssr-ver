@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Col, Container, Row } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
+import formatValue from "@/_helpers/formatValue";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
   // console.log(categoryData);
@@ -141,7 +142,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                               : "#85B2F1",
                                         }}
                                       >
-                                        {item?.overall_score}
+                                        {formatValue(item?.overall_score)}
                                       </span>
                                     </div>
                                   </div>

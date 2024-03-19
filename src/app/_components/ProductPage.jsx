@@ -30,6 +30,7 @@ import Rating from "@/components/Common/Rating/Rating";
 import ProductBottomBar from "@/components/Common/ProductBottomBar/ProductBottomBar";
 import LineChart from "@/_chart/LineChart/LineChart";
 import DrawChart from "@/_chart/LineChart/LineChart";
+import formatValue from "@/_helpers/formatValue";
 
 // import Link from "next/link";
 
@@ -305,7 +306,7 @@ function ProductPage({
                 className="count"
                 style={{ backgroundColor: overallScoreColor }}
               >
-                {product?.overall_score}
+                {formatValue(product?.overall_score)}
               </span>
               <div className="score-detail ">
                 <div className="tooltip-title removeUnderlineFrom">
@@ -611,7 +612,11 @@ function ProductPage({
                               href={`/link?p=${btoa(item.url)}`}
                             >
                               <Image
-                                src={item?.logo===null?'/images/No-Image.png':item?.logo}
+                                src={
+                                  item?.logo === null
+                                    ? "/images/No-Image.png"
+                                    : item?.logo
+                                }
                                 width={0}
                                 height={0}
                                 sizes="100%"

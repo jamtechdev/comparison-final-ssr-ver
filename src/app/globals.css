@@ -1703,3 +1703,7 @@ li.color-item.selected {
 .compare-container thead.isSticky.widthFull tr th:first-child {
   display: none;
 }
+.thumb-images li.active {
+  border: 1px solid #093673;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

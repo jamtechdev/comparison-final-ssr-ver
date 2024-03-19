@@ -11,6 +11,7 @@ import Questiontool from "../Svg/Questiontool";
 import ProsConsToolTip from "../Svg/ProsConsToolTip";
 import Skeleton from "react-loading-skeleton";
 import Rating from "../Common/Rating/Rating";
+import formatValue from "@/_helpers/formatValue";
 
 const TechnicalAccordion = React.memo(
   ({ product, overallScoreColor, initialDisplay }) => {
@@ -59,7 +60,7 @@ const TechnicalAccordion = React.memo(
             <Accordion.Header as="div">
               <div className="table-accordion-header">OVERALL</div>
               <span className="count" style={{ background: overallScoreColor }}>
-                {product?.overall_score}
+                {formatValue(product?.overall_score)}
               </span>
               <div className="show-btn">
                 Show All <i className="ri-arrow-down-s-line"></i>
@@ -171,7 +172,7 @@ const TechnicalAccordion = React.memo(
                         textUnderlineOffset: "5px",
                       }}
                     >
-                      {product.technical_score}
+                      {formatValue(product?.technical_score)}
                       <ProsConsToolTip
                         hover_phrase={product.technical_score_phase}
                       />
