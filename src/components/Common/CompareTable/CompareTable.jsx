@@ -211,10 +211,9 @@ const CompareTable = React.memo(
 
     // add start on Table
     const addStarOnTable = (defaultNo, type, values, starPhase) => {
-      console.log(starPhase);
       if (
         type === "overall_score" ||
-        type === "reviews" ||
+        type === "expert_reviews" ||
         type === "technical_score" ||
         type === "user_rating" ||
         type === "ratio" ||
@@ -237,6 +236,8 @@ const CompareTable = React.memo(
                 <ProsConsToolTip hover_phrase={starPhase} />
               </span>
             </div>
+          ) : value === 0 ? (
+            "?"
           ) : (
             value
           )
@@ -648,25 +649,25 @@ const CompareTable = React.memo(
                     </div>
                   </div>
                 </th>
-                {finalProducts.slice(0, defaultNo).map((product) => {
-                  const expertRating = product.expert_reviews_rating ?? "?";
-                  const values = finalProducts.map(
-                    (p) => p.expert_reviews_rating
-                  );
-                  return (
-                    <td key={product.id}>
-                      {
-                        addStarOnTable(
-                          defaultNo,
-                          "reviews",
-                          values,
-                          product?.expert_reviews_rating_star_phase
-                        )[product.id]
-                      }
-                      {expertRating}
-                    </td>
-                  );
-                })}
+                {finalProducts
+                  .slice(0, defaultNo)
+                  .map((product, expert_reviews) => {
+                    const values = finalProducts.map(
+                      (p) => p.expert_reviews_rating
+                    );
+                    return (
+                      <td key={expert_reviews}>
+                        {
+                          addStarOnTable(
+                            defaultNo,
+                            "expert_reviews",
+                            values,
+                            product?.expert_reviews_rating_star_phase
+                          )[expert_reviews]
+                        }
+                      </td>
+                    );
+                  })}
               </tr>
             )}
             <tr className="">

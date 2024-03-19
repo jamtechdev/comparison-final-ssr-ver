@@ -216,14 +216,14 @@ export default function ComparisonTable({
   const productScoreLabelIndex = findProductsScoreLabelIndex(finalProducts);
   // console.log(finalProducts);
 
-  const addStarOnTable = (defaultNo, type, values) => {
-    // console.log(type);
+  const addStarOnTable = (defaultNo, type, values, starPhase) => {
     if (
       type === "overall_score" ||
-      type === "reviews" ||
+      type === "expert_reviews" ||
       type === "technical_score" ||
       type === "user_rating" ||
-      type === "ratio"
+      type === "ratio" ||
+      type === "popularity"
     ) {
       const uniqueValues = [...new Set(values)];
       const maxValue = Math.max(...uniqueValues);
@@ -238,8 +238,12 @@ export default function ComparisonTable({
                 src="/icons/star.png"
                 alt="star"
               />
+              {/* {console.log(values, "neet")} */}
+              <ProsConsToolTip hover_phrase={starPhase} />
             </span>
           </div>
+        ) : value === 0 ? (
+          "?"
         ) : (
           value
         )
@@ -693,45 +697,54 @@ export default function ComparisonTable({
               );
             })}
           </tr>
-          <tr className="">
-            <th className="sub-inner-padding">
-              <div className="tooltip-title">
-                Expert Reviews
-                {products && products[0]?.expert_reviews_rating && (
+          {finalProducts.some(
+            (product) => product.expert_reviews_rating !== 0
+          ) && (
+            <tr className="">
+              <th className="sub-inner-padding">
+                <div className="tooltip-title">
+                  Expert Reviews
                   <div className="tooltip-display-content">
-                    {products[0]?.popularity_descriptions?.description && (
+                    {products[0]?.expert_reviews_descriptions?.description && (
                       <p className="mb-2">
                         <b>What it is: </b>{" "}
-                        {products[0]?.popularity_descriptions?.description}
+                        {products[0]?.expert_reviews_descriptions?.description}
                       </p>
                     )}
-                    {products[0]?.popularity_points?.when_it_matters && (
+                    {products[0]?.expert_reviews_descriptions
+                      ?.when_it_matters && (
                       <p className="mb-2">
                         <b>When it matters: </b>{" "}
-                        {products[0]?.popularity_descriptions?.when_it_matters}
+                        {
+                          products[0]?.expert_reviews_descriptions
+                            ?.when_it_matters
+                        }
                       </p>
                     )}
                   </div>
-                )}
-              </div>
-            </th>
-            {finalProducts
-              .slice(0, defaultNo)
-              .map((product, expert_reviews_rating) => {
-                const values = finalProducts.map(
-                  (p) => p.expert_reviews_rating
-                );
-                return (
-                  <td key={expert_reviews_rating}>
-                    {
-                      addStarOnTable(defaultNo, "reviews", values)[
-                        expert_reviews_rating
-                      ]
-                    }
-                  </td>
-                );
-              })}
-          </tr>
+                </div>
+              </th>
+              {finalProducts
+                .slice(0, defaultNo)
+                .map((product, expert_reviews) => {
+                  const values = finalProducts.map(
+                    (p) => p.expert_reviews_rating
+                  );
+                  return (
+                    <td key={expert_reviews}>
+                      {
+                        addStarOnTable(
+                          defaultNo,
+                          "expert_reviews",
+                          values,
+                          product?.expert_reviews_rating_star_phase
+                        )[expert_reviews]
+                      }
+                    </td>
+                  );
+                })}
+            </tr>
+          )}
           {removeLastObjectFromCategory
             ?.slice(0, fullTable || 2)
             .map((category, categoryIndex) => {

@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Rating from "../Common/Rating/Rating";
+import formatValue from "@/_helpers/formatValue";
 
 function ProductReviewTab({ productReview }) {
   // console.log(productReview?.length);
@@ -54,7 +55,7 @@ function ProductReviewTab({ productReview }) {
                       src={data?.logo ? data?.logo : "/images/nofound.png"}
                     />
                     <div className="rating__count">
-                      <span>{data?.rating}</span>
+                      <span>{formatValue(data?.rating)}</span>
                       <Rating value={data?.rating} />
                     </div>
                     <small className="rating__review">
@@ -102,10 +103,10 @@ function ProductReviewTab({ productReview }) {
         })} */}
         {productReview?.length > 4 ? (
           <>
-            <span className="swiper-prev">
+            <span className="swiper-prev" style={{left:"5px"}}>
               <i className="ri-arrow-left-s-line"></i>
             </span>
-            <span className="swiper-next">
+            <span className="swiper-next" style={{right:"5px"}}>
               <i className="ri-arrow-right-s-line"></i>
             </span>
           </>
