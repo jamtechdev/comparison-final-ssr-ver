@@ -211,13 +211,15 @@ const CompareTable = React.memo(
 
     // add start on Table
     const addStarOnTable = (defaultNo, type, values, starPhase) => {
+      console.log(type === "evaluation", values, "neet");
       if (
         type === "overall_score" ||
         type === "expert_reviews" ||
         type === "technical_score" ||
         type === "user_rating" ||
         type === "ratio" ||
-        type === "popularity"
+        type === "popularity" ||
+        type === "evaluation"
       ) {
         const uniqueValues = [...new Set(values)];
         const maxValue = Math.max(...uniqueValues);
@@ -225,7 +227,7 @@ const CompareTable = React.memo(
           value === maxValue &&
           values.indexOf(value) === values.lastIndexOf(value) ? (
             <div>
-              {value}
+              {parseFloat(value).toFixed(1)}
               <span key={value} className="tooltip-title-2">
                 <img
                   style={{ float: "right", paddingRight: "5px" }}
@@ -251,6 +253,9 @@ const CompareTable = React.memo(
         ? "isSticky widthFull" // Both winPos and stickyWith are true
         : "isSticky" // Only winPos is true
       : "nonSticky";
+    const EvalutionalTitle = finalProducts?.area_evaluation?.map((p) =>
+      p?.area_evaluation?.map((d) => d.value)
+    );
 
     return (
       <div
@@ -759,6 +764,58 @@ const CompareTable = React.memo(
                 );
               })}
             </tr>
+            {products[0]?.area_evaluation?.map((data, index) => {
+              return (
+                <tr className="">
+                  <th className="sub-inner-padding">
+                    <div className="tooltip-title">
+                      {data?.title}
+                      {/* {products[0]?.ratio_qulitiy_points_descriptions && (
+                          <div className="tooltip-display-content">
+                            {products[0]?.ratio_qulitiy_points_descriptions
+                              ?.description && (
+                              <p className="mb-2">
+                                <b>What it is: </b>{" "}
+                                {
+                                  products[0]?.ratio_qulitiy_points_descriptions
+                                    ?.description
+                                }
+                              </p>
+                            )}
+                            {products[0]?.technical_score_descriptions
+                              ?.when_it_matters && (
+                              <p className="mb-2">
+                                <b>When it matters: </b>{" "}
+                                {
+                                  products[0]?.technical_score_descriptions
+                                    ?.when_it_matters
+                                }
+                              </p>
+                            )}
+                          </div>
+                        )} */}
+                    </div>
+                  </th>
+                  {finalProducts
+                    .slice(0, defaultNo)
+                    .map((product) => {
+                      const values = product?.area_evaluation?.map(
+                        (p) => p.value
+                      );
+                      // console.log(values);
+                      return (
+                        <td key={index}>
+                          {
+                            addStarOnTable(defaultNo, "evaluation", values, "")[
+                              [index]
+                            ]
+                          }
+                        </td>
+                      );
+                    })}
+                </tr>
+              );
+            })}
 
             {categoryAttributes
               ?.slice(0, fullTable || 2)

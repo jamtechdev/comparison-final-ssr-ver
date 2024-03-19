@@ -586,15 +586,99 @@ function ProductPage({
               </div>
             </div>
             <Row className="w-100 m-0 alternatives-border-top">
-                <Col md={12}>
-                  <div className="inline-power-section w-100">
-                    <ul className="badge-list-section">
-                      <li><span>9.5</span><b>For pets</b></li>
-                      <li><span>9.7</span><b>For soups</b></li>
-                    </ul>
-                  </div>
-                </Col>
-              </Row>
+              <Col md={12}>
+                <div className="inline-power-section w-100">
+                  <img
+                    src="/images/double-arrow.png"
+                    width={0}
+                    height={0}
+                    sizes="100%"
+                    alt=""
+                  />
+                  {/* {console.log(filteredTech_data[0]?.data)} */}
+
+                  <ul className="badge-list-section">
+                    {product?.area_evaluation?.map((data) => {
+                      return (
+                        <li>
+                          <span
+                            style={{
+                              background:
+                                data?.value >= 7.5
+                                  ? "#093673"
+                                  : data?.value >= 5 && data?.value < 7.5
+                                  ? "#437ECE"
+                                  : "#85B2F1",
+                            }}
+                          >
+                            {parseFloat(data?.value).toFixed(1)}
+                          </span>
+                          <div className="tooltip-title">
+                            <b className="">{data?.title}</b>
+                            <div className="tooltip-display-content">
+                              {
+                                <p className="mb-2">
+                                  <b>What it is : </b>
+                                  {data?.hover_phase?.what_is_it}
+                                </p>
+                              }
+
+                              <p>
+                                <b>Score components :</b>
+                              </p>
+                              {data?.hover_phase.attributes?.map(
+                                (hoverPhaseData, index) => {
+                                  return (
+                                    <div className="scroe_section" key={index}>
+                                      <p className="text-end">
+                                        {`${parseFloat(
+                                          hoverPhaseData?.percentage
+                                        ).toFixed(1)}%`}
+                                      </p>
+                                      <div
+                                        className="score-count"
+                                        style={{
+                                          background:
+                                            hoverPhaseData?.attribute_value >=
+                                            7.5
+                                              ? "#093673"
+                                              : hoverPhaseData?.attribute_value >=
+                                                  5 &&
+                                                hoverPhaseData?.attribute_value <
+                                                  7.5
+                                              ? "#437ECE"
+                                              : "#85B2F1",
+                                        }}
+                                      >
+                                        {hoverPhaseData?.attribute_value != null
+                                          ? hoverPhaseData?.attribute_value >=
+                                            10
+                                            ? Math.trunc(
+                                                hoverPhaseData?.attribute_value
+                                              )
+                                            : hoverPhaseData?.attribute_value
+                                          : "0.0"}
+                                      </div>
+                                      <p>{hoverPhaseData?.attribute_name}</p>
+                                    </div>
+                                  );
+                                }
+                              )}
+                              {/* {console.log(product)} */}
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+
+                    {/* <li>
+                          <span>9.7</span>
+                          <b>For soups</b>
+                        </li> */}
+                  </ul>
+                </div>
+              </Col>
+            </Row>
           </div>
         </Container>
       </section>

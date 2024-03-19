@@ -766,6 +766,58 @@ const ProductCompareTable = React.memo(
                 );
               })}
             </tr>
+            {products[0]?.area_evaluation?.map((data, index) => {
+              return (
+                <tr className="">
+                  <th className="sub-inner-padding">
+                    <div className="tooltip-title">
+                      {data?.title}
+                      {/* {products[0]?.ratio_qulitiy_points_descriptions && (
+                          <div className="tooltip-display-content">
+                            {products[0]?.ratio_qulitiy_points_descriptions
+                              ?.description && (
+                              <p className="mb-2">
+                                <b>What it is: </b>{" "}
+                                {
+                                  products[0]?.ratio_qulitiy_points_descriptions
+                                    ?.description
+                                }
+                              </p>
+                            )}
+                            {products[0]?.technical_score_descriptions
+                              ?.when_it_matters && (
+                              <p className="mb-2">
+                                <b>When it matters: </b>{" "}
+                                {
+                                  products[0]?.technical_score_descriptions
+                                    ?.when_it_matters
+                                }
+                              </p>
+                            )}
+                          </div>
+                        )} */}
+                    </div>
+                  </th>
+                  {finalProducts
+                    .slice(0, defaultNo)
+                    .map((product) => {
+                      const values = product?.area_evaluation?.map(
+                        (p) => p.value
+                      );
+                      // console.log(values);
+                      return (
+                        <td key={index}>
+                          {
+                            addStarOnTable(defaultNo, "evaluation", values, "")[
+                              [index]
+                            ]
+                          }
+                        </td>
+                      );
+                    })}
+                </tr>
+              );
+            })}
 
             {removeLastObjectFromCategory
               ?.slice(0, fullTable || 2)
