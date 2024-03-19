@@ -27,7 +27,7 @@ export default function ThumbSlider({ productData }) {
   const setSwiperRef = (swiper) => {
     setSwiper(swiper);
   };
-  console.log(activeThumb);
+  // console.log(activeThumb);
   const handleThumbClick = (index) => {
     if (index === productData?.all_images.length - 1) {
       setActiveThumb(0); // Reset activeThumb to 0
