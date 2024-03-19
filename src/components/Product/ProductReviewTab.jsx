@@ -18,8 +18,8 @@ function ProductReviewTab({ productReview }) {
         spaceBetween={30}
         loop={true}
         navigation={{
-          nextEl: ".blog-slider .swiper-next",
-          prevEl: ".blog-slider .swiper-prev",
+          nextEl: ".swiper-next",
+          prevEl: ".swiper-prev",
         }}
         pagination={true}
         breakpoints={{
@@ -100,19 +100,19 @@ function ProductReviewTab({ productReview }) {
             </SwiperSlide>
           );
         })} */}
+        {productReview?.length > 4 ? (
+          <>
+            <span className="swiper-prev">
+              <i className="ri-arrow-left-s-line"></i>
+            </span>
+            <span className="swiper-next">
+              <i className="ri-arrow-right-s-line"></i>
+            </span>
+          </>
+        ) : (
+          ""
+        )}
       </Swiper>
-      {productReview?.length >= 8 ? (
-        <>
-          <span className="swiper-prev">
-            <i className="ri-arrow-left-s-line"></i>
-          </span>
-          <span className="swiper-next">
-            <i className="ri-arrow-right-s-line"></i>
-          </span>
-        </>
-      ) : (
-        ""
-      )}
     </>
   );
 }

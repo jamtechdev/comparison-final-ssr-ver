@@ -608,6 +608,44 @@ const CompareTable = React.memo(
                 );
               })}
             </tr>
+            {finalProducts.some(
+              (product) => product.expert_reviews_rating !== 0
+            ) && (
+              <tr className="">
+                <th className="sub-inner-padding">
+                  <div className="tooltip-title">
+                    Expert Reviews
+                    <div className="tooltip-display-content">
+                      {products[0]?.expert_reviews_descriptions?.description && (
+                        <p className="mb-2">
+                          <b>What it is: </b>{" "}
+                          {products[0]?.expert_reviews_descriptions?.description}
+                        </p>
+                      )}
+                      {products[0]?.expert_reviews_descriptions?.when_it_matters && (
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.expert_reviews_descriptions
+                              ?.when_it_matters
+                          }
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </th>
+                {finalProducts.slice(0, defaultNo).map((product) => {
+                  const expertRating = product.expert_reviews_rating ?? "?";
+                  const values = finalProducts.map((p) => p.expert_reviews_rating);
+                  return (
+                    <td key={product.id}>
+                      {addStarOnTable(defaultNo, "reviews", values)[product.id]}
+                      {expertRating}
+                    </td>
+                  );
+                })}
+              </tr>
+            )}
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
@@ -689,46 +727,7 @@ const CompareTable = React.memo(
                 );
               })}
             </tr>
-            <tr className="">
-              <th className="sub-inner-padding">
-                <div className="tooltip-title">
-                  Expert Reviews
-                  {products && products[0]?.expert_reviews_rating && (
-                    <div className="tooltip-display-content">
-                      {products[0]?.popularity_descriptions?.description && (
-                        <p className="mb-2">
-                          <b>What it is: </b>{" "}
-                          {products[0]?.popularity_descriptions?.description}
-                        </p>
-                      )}
-                      {products[0]?.popularity_points?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.popularity_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </th>
-              {finalProducts
-                .slice(0, defaultNo)
-                .map((product, expert_reviews_rating) => {
-                  const values = finalProducts.map((p) => p.expert_reviews_rating);
-                  return (
-                    <td key={expert_reviews_rating}>
-                      {
-                        addStarOnTable(defaultNo, "reviews", values)[
-                          expert_reviews_rating
-                        ]
-                      }
-                    </td>
-                  );
-                })}
-            </tr>
+           
 
             {categoryAttributes
               ?.slice(0, fullTable || 2)

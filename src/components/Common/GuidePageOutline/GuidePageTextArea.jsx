@@ -112,11 +112,11 @@ function GuidePageTextArea({ guide }) {
               guide?.recommended_guides.slice(0, 3)?.map((data, index) => {
                 return (
                   <div className="product-card" key={index}>
-                    <Link
+                    <a
                       className="product-link-cover"
                       href={`/${data?.category_url}/${data?.permalink}`}
                       style={{ color: "#326ebf" }}
-                    ></Link>
+                    ></a>
                     <img
                       src={
                         data?.bannerImage === null

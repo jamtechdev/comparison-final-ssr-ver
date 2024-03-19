@@ -104,7 +104,7 @@ export default function Product({
     const numericValue = parseFloat(item?.value);
 
     if (!isNaN(numericValue)) {
-      return `(${numericValue}${item.unit && item.unit ? item.unit : ""})`;
+      return `(${numericValue}${item.unit ? " " + item.unit : ""})`;
     } else {
       return item?.value === undefined ||
         item?.value === "" ||
@@ -112,8 +112,8 @@ export default function Product({
         ? ""
         : `(${item?.value})`;
     }
-    // return ""; // Return null for strings
   };
+
   const getColorAttr = (attributeValues) => {
     if (
       attributeValues.attribute_value == "yes" ||
@@ -858,21 +858,37 @@ export default function Product({
                                 }}
                                 className="current_version_not_found"
                               >
-                                <a
-                                  href={`/link?p=${btoa(data.url)}`}
-                                  style={{
-                                    color: "#437ed0",
-                                    padding: "0px 5px",
-                                    cursor:
-                                      data.color === product?.color
-                                        ? "default"
-                                        : "pointer",
-                                  }}
-                                  className={`color-item `}
-                                  // onClick={(e) => handleItemClick(key)}
-                                >
-                                  {data.color}
-                                </a>
+                                {data.color === product?.color ? (
+                                  <span
+                                    className="color-check"
+                                    style={{
+                                      color: "#437ed0",
+                                      padding: "0px 5px",
+                                      cursor:
+                                        data.color === product?.color
+                                          ? "default"
+                                          : "pointer",
+                                    }}
+                                  >
+                                    {data.color}
+                                  </span>
+                                ) : (
+                                  <a
+                                    href={`/link?p=${btoa(data.url)}`}
+                                    style={{
+                                      color: "#437ed0",
+                                      padding: "0px 5px",
+                                      cursor:
+                                        data.color === product?.color
+                                          ? "default"
+                                          : "pointer",
+                                    }}
+                                    className={`color-item `}
+                                    // onClick={(e) => handleItemClick(key)}
+                                  >
+                                    {data.color}
+                                  </a>
+                                )}
                               </li>
 
                               {/* <Form.Check
