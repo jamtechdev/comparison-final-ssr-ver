@@ -210,8 +210,8 @@ const CompareTable = React.memo(
     };
 
     // add start on Table
-    const addStarOnTable = (defaultNo, type, values) => {
-      // console.log(type);
+    const addStarOnTable = (defaultNo, type, values, starPhase) => {
+      console.log(starPhase);
       if (
         type === "overall_score" ||
         type === "reviews" ||
@@ -233,6 +233,8 @@ const CompareTable = React.memo(
                   src="/icons/star.png"
                   alt="star"
                 />
+                {/* {console.log(values, "neet")} */}
+                <ProsConsToolTip hover_phrase={starPhase} />
               </span>
             </div>
           ) : (
@@ -548,6 +550,7 @@ const CompareTable = React.memo(
                     )}
                 </div>
               </th>
+
               {finalProducts
                 .slice(0, defaultNo)
                 .map((product, technicalIndex) => {
@@ -555,9 +558,12 @@ const CompareTable = React.memo(
                   return (
                     <td key={technicalIndex}>
                       {
-                        addStarOnTable(defaultNo, "technical_score", values)[
-                          technicalIndex
-                        ]
+                        addStarOnTable(
+                          defaultNo,
+                          "technical_score",
+                          values,
+                          product?.technical_score_star_phrase
+                        )[technicalIndex]
                       }
                     </td>
                   );
@@ -586,7 +592,7 @@ const CompareTable = React.memo(
                           <p className="mb-2">
                             <b>When it matters: </b>
                             {
-                              products[0]?.technical_score_descriptions
+                              products[0]?.users_rating_descriptions
                                 ?.when_it_matters
                             }
                           </p>
@@ -600,9 +606,12 @@ const CompareTable = React.memo(
                 return (
                   <td key={userIndex}>
                     {
-                      addStarOnTable(defaultNo, "user_rating", values)[
-                        userIndex
-                      ]
+                      addStarOnTable(
+                        defaultNo,
+                        "user_rating",
+                        values,
+                        product?.reviews_star_phase
+                      )[userIndex]
                     }
                   </td>
                 );
@@ -616,13 +625,18 @@ const CompareTable = React.memo(
                   <div className="tooltip-title">
                     Expert Reviews
                     <div className="tooltip-display-content">
-                      {products[0]?.expert_reviews_descriptions?.description && (
+                      {products[0]?.expert_reviews_descriptions
+                        ?.description && (
                         <p className="mb-2">
                           <b>What it is: </b>{" "}
-                          {products[0]?.expert_reviews_descriptions?.description}
+                          {
+                            products[0]?.expert_reviews_descriptions
+                              ?.description
+                          }
                         </p>
                       )}
-                      {products[0]?.expert_reviews_descriptions?.when_it_matters && (
+                      {products[0]?.expert_reviews_descriptions
+                        ?.when_it_matters && (
                         <p className="mb-2">
                           <b>When it matters: </b>{" "}
                           {
@@ -636,10 +650,19 @@ const CompareTable = React.memo(
                 </th>
                 {finalProducts.slice(0, defaultNo).map((product) => {
                   const expertRating = product.expert_reviews_rating ?? "?";
-                  const values = finalProducts.map((p) => p.expert_reviews_rating);
+                  const values = finalProducts.map(
+                    (p) => p.expert_reviews_rating
+                  );
                   return (
                     <td key={product.id}>
-                      {addStarOnTable(defaultNo, "reviews", values)[product.id]}
+                      {
+                        addStarOnTable(
+                          defaultNo,
+                          "reviews",
+                          values,
+                          product?.expert_reviews_rating_star_phase
+                        )[product.id]
+                      }
                       {expertRating}
                     </td>
                   );
@@ -678,9 +701,12 @@ const CompareTable = React.memo(
                   return (
                     <td key={popularityIndex}>
                       {
-                        addStarOnTable(defaultNo, "popularity", values)[
-                          popularityIndex
-                        ]
+                        addStarOnTable(
+                          defaultNo,
+                          "popularity",
+                          values,
+                          product?.popularity_points_star_phase
+                        )[popularityIndex]
                       }
                     </td>
                   );
@@ -722,12 +748,18 @@ const CompareTable = React.memo(
                 );
                 return (
                   <td key={ratioIndex}>
-                    {addStarOnTable(defaultNo, "ratio", values)[ratioIndex]}
+                    {
+                      addStarOnTable(
+                        defaultNo,
+                        "ratio",
+                        values,
+                        product?.ratio_quality_price_points_star_phase
+                      )[ratioIndex]
+                    }
                   </td>
                 );
               })}
             </tr>
-           
 
             {categoryAttributes
               ?.slice(0, fullTable || 2)
