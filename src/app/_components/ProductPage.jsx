@@ -557,7 +557,7 @@ function ProductPage({
                               <div className="rating__section">
                                 <img src={`${data?.logo}`} />
                                 <div className="rating__content">
-                                  <b>{data?.rating}</b>
+                                  <b>{formatValue(data?.rating)}</b>
                                   <Rating value={data?.rating} />
 
                                   <small>({data?.reviews})</small>
