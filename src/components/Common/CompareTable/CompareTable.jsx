@@ -273,9 +273,10 @@ const CompareTable = React.memo(
               {finalProducts.slice(0, defaultNo).map((product, index) => {
                 return (
                   <th key={index}>
-                    {product?.catchy_title && (
+                    {/* {console.log(product)} */}
+                    {product?.assigned_title && (
                       <span className="best-tag-product">
-                        {product?.catchy_title?.title}
+                        {product?.assigned_title}
                       </span>
                     )}
 
