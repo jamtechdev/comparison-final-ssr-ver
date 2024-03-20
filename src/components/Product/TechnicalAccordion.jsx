@@ -262,9 +262,9 @@ const TechnicalAccordion = React.memo(
                               );
                             }
                           )}
-                           <div className="test__phrase__content">
+                        {/* <div className="test__phrase__content">
                           Testing comment phrase
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -698,13 +698,15 @@ const TechnicalAccordion = React.memo(
                                                       : "")}
                                                 </span>
                                               }
-
-                                              <ProsConsToolTip
-                                                hover_phrase={
-                                                  attributeValues &&
-                                                  attributeValues.hover_phase
-                                                }
-                                              />
+                                              {attributeValues.attribute_value !==
+                                                "?" && (
+                                                <ProsConsToolTip
+                                                  hover_phrase={
+                                                    attributeValues &&
+                                                    attributeValues.hover_phase
+                                                  }
+                                                />
+                                              )}
                                             </div>
                                           )}
 

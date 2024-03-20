@@ -11,6 +11,7 @@ const ProsConsToolTip = (props) => {
             className="mb-2 prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}
           ></div>
+          <div className="test__phrase__content">Testing comment phrase</div>
           {info_not_verified && (
             <>
               <hr />
