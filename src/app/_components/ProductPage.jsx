@@ -696,6 +696,15 @@ function ProductPage({
                   {product && product?.page_phases?.best_prices}
                 </h2>
                 <ul className="best-list-item">
+                  {product.price_websites &&
+                    product?.price_websites?.every(
+                      (data) => data.price === null
+                    ) && (
+                      <div className="not-availabel">
+                        <span className="txt">NOT AVAILABLE</span>
+                        <span className="guide">~ {product?.price} €</span>
+                      </div>
+                    )}
                   {product &&
                     product?.price_websites
                       .slice(0, showFullPrice ? 8 : 4)

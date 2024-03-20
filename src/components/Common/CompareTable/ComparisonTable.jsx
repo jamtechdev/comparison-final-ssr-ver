@@ -139,7 +139,12 @@ export default function ComparisonTable({
       const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
 
       if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-        const targetString = stringArray[0] === "yes" ? "yes" : "no";
+        const targetString =
+          stringArray[0] === "yes"
+            ? "yes"
+            : "no" || stringArray[0] === "no"
+            ? "yes"
+            : "yes";
         numericValues = stringArray.filter((value) => value === targetString);
       }
     }

@@ -262,6 +262,9 @@ const TechnicalAccordion = React.memo(
                               );
                             }
                           )}
+                           <div className="test__phrase__content">
+                          Testing comment phrase
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -618,9 +621,7 @@ const TechnicalAccordion = React.memo(
                                   <div className="spec-item">
                                     <div className="spec-col">
                                       <div className="query">
-                                        {
-                                          attributeValues?.attribute_display_name
-                                        }
+                                        {attributeValues?.attribute}
                                         <QuestionIcon
                                           attributes={
                                             attributeValues && attributeValues
@@ -915,7 +916,7 @@ const TechnicalAccordion = React.memo(
                                 <div className="spec-item">
                                   <div className="spec-col">
                                     <div className="query">
-                                      {attributeValues?.attribute_display_name}
+                                      {attributeValues?.attribute}
                                       <QuestionIcon
                                         attributes={
                                           attributeValues && attributeValues

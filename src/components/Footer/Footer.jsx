@@ -88,6 +88,25 @@ export default function Footer({ footerData }) {
                   );
                 })}
               </div>
+              <div className="location__select">
+                <label for="footer-country-switch-id">
+                  <i class="ri-map-pin-line"></i>
+                </label>
+                <select id="footer-country-switch-id">
+                  <option value="" selected="">
+                    Italia
+                  </option>
+                  <option value="">Cechia</option>
+                  <option value="">Slovacchia</option>
+                  <option value="">Olanda</option>
+                  <option value="">Romania</option>
+                  <option value="">Brasile</option>
+                  <option value="">Ungheria</option>
+                  <option value="">Portogallo</option>
+                  <option value="">Grecia</option>
+                  <option value="">Bulgaria</option>
+                </select>
+              </div>
             </div>
           </Col>
           <Col lg={3} md={6} className="">

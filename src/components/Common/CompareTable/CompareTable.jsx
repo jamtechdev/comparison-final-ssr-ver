@@ -131,7 +131,7 @@ const CompareTable = React.memo(
         const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
 
         if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-          const targetString = stringArray[0] === "yes" ? "yes" : "no";
+          const targetString = stringArray[0] === "yes" ? "yes" : "no" ||stringArray[0] === "no" ? "yes" : "yes";
           numericValues = stringArray.filter((value) => value === targetString);
         }
       }
@@ -211,7 +211,7 @@ const CompareTable = React.memo(
 
     // add start on Table
     const addStarOnTable = (defaultNo, type, values, starPhase) => {
-      console.log(type === "evaluation", values, "neet");
+      // console.log(type === "evaluation", values, "neet");
       if (
         type === "overall_score" ||
         type === "expert_reviews" ||
@@ -796,23 +796,21 @@ const CompareTable = React.memo(
                         )} */}
                     </div>
                   </th>
-                  {finalProducts
-                    .slice(0, defaultNo)
-                    .map((product) => {
-                      const values = product?.area_evaluation?.map(
-                        (p) => p.value
-                      );
-                      // console.log(values);
-                      return (
-                        <td key={index}>
-                          {
-                            addStarOnTable(defaultNo, "evaluation", values, "")[
-                              [index]
-                            ]
-                          }
-                        </td>
-                      );
-                    })}
+                  {finalProducts.slice(0, defaultNo).map((product) => {
+                    const values = product?.area_evaluation?.map(
+                      (p) => p.value
+                    );
+                    // console.log(values);
+                    return (
+                      <td key={index}>
+                        {
+                          addStarOnTable(defaultNo, "evaluation", values, "")[
+                            [index]
+                          ]
+                        }
+                      </td>
+                    );
+                  })}
                 </tr>
               );
             })}

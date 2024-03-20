@@ -1725,3 +1725,37 @@ li.color-item.selected {
   border-radius: 4px;
   font-size: 13px;
 }
+.test__phrase__content {
+  border-top: 1px solid #ddd;
+  padding: 8px 0 0;
+}
+.location__select {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 0;
+  width: fit-content;
+  position: relative;
+  color: var(--secondary-color);
+}
+.location__select > label {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: -1;
+}
+.location__select select {
+  background: transparent !important;
+  appearance: none;
+  padding: 0 0 0 25px !important;
+  line-height: 2;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  color: var(--secondary-color) !important;
+  cursor: pointer;
+}

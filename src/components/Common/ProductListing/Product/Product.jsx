@@ -597,7 +597,7 @@ export default function Product({
                                     <div className="rating__section">
                                       <img src={`${data?.logo}`} />
                                       <div className="rating__content">
-                                        <b>{data?.rating}</b>
+                                        <b>{formatValue(data?.rating)}</b>
                                         <Rating value={data?.rating} />
 
                                         <small>({data?.reviews})</small>
@@ -1703,7 +1703,7 @@ export default function Product({
                                                       <div className="spec-col">
                                                         <div className="query">
                                                           {
-                                                            attributeValues.attribute_display_name
+                                                            attributeValues.name
                                                           }
                                                           <QuestionIcon
                                                             attributes={
@@ -2019,7 +2019,7 @@ export default function Product({
                                                     <div className="spec-col">
                                                       <div className="query">
                                                         {
-                                                          attributeValues.attribute_display_name
+                                                          attributeValues.name
                                                         }
                                                         <QuestionIcon
                                                           attributes={
