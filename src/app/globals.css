@@ -1833,3 +1833,12 @@ li.color-item.selected {
   object-fit: cover;
   margin: 0 0 10px;
 }
+
+.box__content__section {
+  border: 1px solid rgba(39, 48, 78, 0.2);
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin: 10px 0;
+  padding: 20px;
+} 
