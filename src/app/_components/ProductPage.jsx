@@ -598,9 +598,9 @@ function ProductPage({
                   {/* {console.log(filteredTech_data[0]?.data)} */}
 
                   <ul className="badge-list-section">
-                    {product?.area_evaluation?.map((data) => {
+                    {product?.area_evaluation?.map((data, index) => {
                       return (
-                        <li>
+                        <li key={index}>
                           <span
                             style={{
                               background:
@@ -614,7 +614,9 @@ function ProductPage({
                             {parseFloat(data?.value).toFixed(1)}
                           </span>
                           <div className="tooltip-title">
-                            <b className="">{data?.title}</b>
+                            <div className="" style={{ fontWeight: 400 }}>
+                              {data?.title}
+                            </div>
                             <div className="tooltip-display-content">
                               {
                                 <p className="mb-2">

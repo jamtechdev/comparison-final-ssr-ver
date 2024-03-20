@@ -697,10 +697,7 @@ export default function Product({
                                             target="_blank"
                                             href={`/link?p=${btoa(data.url)}`}
                                           >
-                                            {Math.round(data?.price)?.toFixed(
-                                              1
-                                            )}{" "}
-                                            €
+                                            {formatValue(data?.price)}€
                                           </a>
                                         </span>
                                       </>
@@ -828,7 +825,7 @@ export default function Product({
                           </span>
                           <div className="tooltip-title">
                             {" "}
-                            <b className="">{data?.title}</b>
+                            <div className="" style={{fontWeight:"400"}}>{data?.title}</div>
                             <div className="tooltip-display-content">
                               {
                                 <p className="mb-2">
