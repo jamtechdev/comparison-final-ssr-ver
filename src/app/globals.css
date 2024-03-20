@@ -1635,7 +1635,8 @@ li.color-item.selected {
   content: "";
   position: absolute;
   width: 2px;
-  height: calc(100% - 10px);
+  /* height: calc(100% - 10px); */
+  height: calc(100% - 0px);
   border-radius: 50%;
   background: #27304e;
   opacity: 70%;
