@@ -330,8 +330,6 @@ span.tooltip-title:hover .tooltip-display-content {
   display: block !important;
 }
 
-
-
 div.question-marker-icon {
   width: 16px;
   height: 16px;
@@ -1758,4 +1756,80 @@ li.color-item.selected {
   text-underline-offset: 8px;
   color: var(--secondary-color) !important;
   cursor: pointer;
+}
+
+.attribute__card__wrapper > * {
+  margin: 0 0 20px;
+}
+
+.attribute__card__wrapper > *:first-child .attribute__rating {
+  font-size: 22px;
+}
+
+.attribute__card__wrapper > *:first-child .attribute__title {
+  font-size: 22px;
+}
+
+.attribute__card {
+  border: 1px solid rgba(39, 48, 78, 0.2);
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin: 10px 0;
+  padding: 20px;
+  height: 100%;
+  max-height: 100%;
+}
+
+.attribute__card__header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 0 15px;
+  margin: 0 0 15px;
+}
+
+.attribute__rating {
+  background: var(--heading-color);
+  padding: 4px 8px;
+  border-radius: 5px;
+  color: var(--white-color);
+  font-weight: 400;
+  min-width: 45px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.attribute__title {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--primary-color);
+  margin-left: 10px !important;
+}
+
+.attribute__questionmark__icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f5ff;
+  border-radius: 50px;
+  box-shadow: 0 0 3px #888;
+  margin: 0 5px;
+}
+
+.attribute__questionmark__icon svg {
+  width: 13px;
+  height: 13px;
+  fill: var(--heading-color);
+}
+
+.attribute__display__img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  margin: 0 0 10px;
 }

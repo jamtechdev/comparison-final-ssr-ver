@@ -1123,7 +1123,7 @@ function ProductPage({
                 </ol> */}
                   </div>
                 </Col>
-                <Col md={8} lg={8}>
+                <Col md={8} lg={10}>
                   <div
                     id="shortCodeText"
                     ref={contentRef}
@@ -1132,6 +1132,82 @@ function ProductPage({
                       __html: searchForPatternAndReplace(contentWithIds),
                     }}
                   />
+                  <Row className="attribute__card__wrapper">
+                    <Col lg={12} md={12}>
+                      <div className="attribute__card">
+                        <div className="attribute__card__header">
+                          <span className="attribute__rating">6.5</span>
+                          <h6 className="attribute__title">Battery</h6>
+                          <div className="attribute__questionmark__icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526                         11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                            </svg>
+                          </div>
+                        </div>
+                        <div className="attribute__card__body">
+                          <Row className="mb-3">
+                            <Col lg={6} md={12}>
+                              <p>
+                                <b>Bagless:</b> yes
+                              </p>
+                            </Col>
+                            <Col lg={6} md={12}>
+                              <p>
+                                <b>Full Indicator:</b> yes
+                              </p>
+                            </Col>
+                          </Row>
+                          <p>
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem ipsum has been the
+                            industry's standard dummy text Lorem Ipsum is simply
+                            dummy.
+                          </p>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col lg={6} md={12}>
+                      <div className="attribute__card">
+                        <div className="attribute__card__header">
+                          <span className="attribute__rating">6.5</span>
+                          <h6 className="attribute__title">
+                            Charging time: 120 min
+                          </h6>
+                        </div>
+                        <div className="attribute__card__body">
+                          <p>
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem ipsum has been the
+                            industry's standard dummy text Lorem Ipsum is simply
+                            dummy.
+                          </p>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col lg={6} md={12}>
+                      <div className="attribute__card">
+                        <div className="attribute__card__header">
+                          <span className="attribute__rating">6.5</span>
+                          <h6 className="attribute__title">Runtime: 200 min</h6>
+                        </div>
+                        <div className="attribute__card__body">
+                          <img
+                            className="attribute__display__img"
+                            src="https://images.unsplash.com/photo-1489945052260-4f21c52268b9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=200&ixid=MnwxfDB8MXxyYW5kb218MHx8d2VsY29tZXx8fHx8fDE3MTA5MjkxMTU&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=200"
+                          />
+                          <p>
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem ipsum has been the
+                            industry's standard dummy text Lorem Ipsum is simply
+                            dummy.
+                          </p>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
                   <Row className="mt-3">
                     <Col md={12} lg={6}>
                       <div className="best-price-section mobile-best-price-section">
@@ -1224,46 +1300,6 @@ function ProductPage({
                       </div>
                     </Col>
                   </Row>
-                </Col>
-                <Col md={12} lg={2}>
-                  <div className="ranking-section">
-                    <div className="site-main-heading">In Rankings</div>
-
-                    {product &&
-                      product?.guide_ratings.slice(0, 2).map((data, index) => {
-                        return (
-                          <div className="product-card card-mobile" key={index}>
-                            <a
-                              className="product-link-cover"
-                              href={`/${data?.category_url}/${data?.permalink}`}
-                              style={{ color: "#326ebf" }}
-                            ></a>
-                            <img
-                              src={
-                                data?.bannerImage === null
-                                  ? "/images/nofound.png"
-                                  : data?.bannerImage
-                              }
-                              width={0}
-                              height={0}
-                              sizes="100%"
-                              alt=""
-                            />
-                            <span>{data?.guide_name}</span>
-                          </div>
-                        );
-                      })}
-                    {/* <Image
-                        src="/images/p1.png"
-                        width={0}
-                        height={0}
-                        sizes="100%"
-                        alt="F"
-                      />
-                      <span>Best Monitors</span> */}
-
-                    <ProductSlider className="slider-show" />
-                  </div>
                 </Col>
               </Row>
             </>
