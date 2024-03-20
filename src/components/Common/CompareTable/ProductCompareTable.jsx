@@ -152,7 +152,12 @@ const ProductCompareTable = React.memo(
         const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
 
         if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-          const targetString = stringArray[0] === "yes" ? "yes" : "no" ||stringArray[0] === "no" ? "yes" : "yes";
+          const targetString =
+            stringArray[0] === "yes"
+              ? "yes"
+              : "no" || stringArray[0] === "no"
+              ? "yes"
+              : "yes";
           numericValues = stringArray.filter((value) => value === targetString);
         }
       }
@@ -767,57 +772,34 @@ const ProductCompareTable = React.memo(
               })}
             </tr>
             {products[0]?.area_evaluation?.map((data, index) => {
+              const max = Math.max(
+                ...finalProducts.flatMap(
+                  (product) =>
+                    product?.area_evaluation?.map((p) => p.value) ?? []
+                )
+              );
+              // console.log(max);
               return (
                 <tr className="">
                   <th className="sub-inner-padding">
-                    <div className="tooltip-title">
-                      {data?.title}
-                      {/* {products[0]?.ratio_qulitiy_points_descriptions && (
-                          <div className="tooltip-display-content">
-                            {products[0]?.ratio_qulitiy_points_descriptions
-                              ?.description && (
-                              <p className="mb-2">
-                                <b>What it is: </b>{" "}
-                                {
-                                  products[0]?.ratio_qulitiy_points_descriptions
-                                    ?.description
-                                }
-                              </p>
-                            )}
-                            {products[0]?.technical_score_descriptions
-                              ?.when_it_matters && (
-                              <p className="mb-2">
-                                <b>When it matters: </b>{" "}
-                                {
-                                  products[0]?.technical_score_descriptions
-                                    ?.when_it_matters
-                                }
-                              </p>
-                            )}
-                          </div>
-                        )} */}
-                    </div>
+                    <div className="tooltip-title">{data?.title}</div>
                   </th>
-                  {finalProducts
-                    .slice(0, defaultNo)
-                    .map((product) => {
-                      const values = product?.area_evaluation?.map(
-                        (p) => p.value
-                      );
-                      // console.log(values);
-                      return (
-                        <td key={index}>
-                          {
-                            addStarOnTable(defaultNo, "evaluation", values, "")[
-                              [index]
-                            ]
-                          }
-                        </td>
-                      );
-                    })}
+                  {finalProducts.slice(0, defaultNo).map((product, idx) => {
+                    const values = product?.area_evaluation?.map(
+                      (p) => p.value
+                    );
+                    const value = values ? values[index] : null;
+                    // console.log(values);
+                    return (
+                      <td key={idx}>
+                        {value}
+                        {value === max ? "⭐️" : ""}
+                      </td>
+                    );
+                  })}
                 </tr>
               );
-            })}
+            })} 
 
             {removeLastObjectFromCategory
               ?.slice(0, fullTable || 2)
