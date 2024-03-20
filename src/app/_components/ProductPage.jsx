@@ -1203,51 +1203,35 @@ function ProductPage({
                                     </div>
                                     <div className="attribute__card__body">
                                       <Row className="mb-3">
-                                        {product.attributes[attribute]
-                                          .slice(
-                                            0,
-                                            displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                              displayedAttributesCount[
-                                                product.name
-                                              ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay
+                                        {product.attributes[attribute].map(
+                                          (attributeValues, valueIndex) => (
+                                            <React.Fragment key={valueIndex}>
+                                              <Col lg={6} md={12}>
+                                                <p>
+                                                  <b>
+                                                    {" "}
+                                                    {attributeValues?.attribute}
+                                                    :
+                                                  </b>{" "}
+                                                  {(attributeValues.attribute_value !=
+                                                  null
+                                                    ? attributeValues.attribute_value
+                                                    : "") +
+                                                    " " +
+                                                    (attributeValues.attribute_value ===
+                                                      "?" ||
+                                                    attributeValues.attribute_value ===
+                                                      "-"
+                                                      ? ""
+                                                      : attributeValues.unit !=
+                                                        null
+                                                      ? attributeValues.unit
+                                                      : "")}
+                                                </p>
+                                              </Col>
+                                            </React.Fragment>
                                           )
-                                          .map(
-                                            (attributeValues, valueIndex) => (
-                                              <React.Fragment key={valueIndex}>
-                                                <Col lg={6} md={12}>
-                                                  <p>
-                                                    <b>
-                                                      {" "}
-                                                      {
-                                                        attributeValues?.attribute
-                                                      }
-                                                      :
-                                                    </b>{" "}
-                                                    {(attributeValues.attribute_value !=
-                                                    null
-                                                      ? attributeValues.attribute_value
-                                                      : "") +
-                                                      " " +
-                                                      (attributeValues.attribute_value ===
-                                                        "?" ||
-                                                      attributeValues.attribute_value ===
-                                                        "-"
-                                                        ? ""
-                                                        : attributeValues.unit !=
-                                                          null
-                                                        ? attributeValues.unit
-                                                        : "")}
-                                                  </p>
-                                                </Col>
-                                              </React.Fragment>
-                                            )
-                                          )}
+                                        )}
                                       </Row>
                                       <div
                                         dangerouslySetInnerHTML={{
@@ -1259,19 +1243,8 @@ function ProductPage({
                                     </div>
                                   </div>
                                 </Col>
-                                {product.attributes[attribute]
-                                  .slice(
-                                    0,
-                                    displayedAttributesCount[product.name] &&
-                                      displayedAttributesCount[product.name][
-                                        attribute
-                                      ]
-                                      ? displayedAttributesCount[product.name][
-                                          attribute
-                                        ]
-                                      : initialDisplay
-                                  )
-                                  .map((attributeValues, valueIndex) => (
+                                {product.attributes[attribute].map(
+                                  (attributeValues, valueIndex) => (
                                     <React.Fragment key={valueIndex}>
                                       <Col lg={6} md={12}>
                                         <div className="attribute__card">
@@ -1323,7 +1296,8 @@ function ProductPage({
                                         </div>
                                       </Col>
                                     </React.Fragment>
-                                  ))}
+                                  )
+                                )}
                               </Row>
                             </>
                           );
@@ -1384,51 +1358,35 @@ function ProductPage({
                                     </div>
                                     <div className="attribute__card__body">
                                       <Row className="mb-3">
-                                        {product.attributes[attribute]
-                                          .slice(
-                                            0,
-                                            displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                              displayedAttributesCount[
-                                                product.name
-                                              ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay
+                                        {product.attributes[attribute].map(
+                                          (attributeValues, valueIndex) => (
+                                            <React.Fragment key={valueIndex}>
+                                              <Col lg={6} md={12}>
+                                                <p>
+                                                  <b>
+                                                    {" "}
+                                                    {attributeValues?.attribute}
+                                                    :
+                                                  </b>{" "}
+                                                  {(attributeValues.attribute_value !=
+                                                  null
+                                                    ? attributeValues.attribute_value
+                                                    : "") +
+                                                    " " +
+                                                    (attributeValues.attribute_value ===
+                                                      "?" ||
+                                                    attributeValues.attribute_value ===
+                                                      "-"
+                                                      ? ""
+                                                      : attributeValues.unit !=
+                                                        null
+                                                      ? attributeValues.unit
+                                                      : "")}
+                                                </p>
+                                              </Col>
+                                            </React.Fragment>
                                           )
-                                          .map(
-                                            (attributeValues, valueIndex) => (
-                                              <React.Fragment key={valueIndex}>
-                                                <Col lg={6} md={12}>
-                                                  <p>
-                                                    <b>
-                                                      {" "}
-                                                      {
-                                                        attributeValues?.attribute
-                                                      }
-                                                      :
-                                                    </b>{" "}
-                                                    {(attributeValues.attribute_value !=
-                                                    null
-                                                      ? attributeValues.attribute_value
-                                                      : "") +
-                                                      " " +
-                                                      (attributeValues.attribute_value ===
-                                                        "?" ||
-                                                      attributeValues.attribute_value ===
-                                                        "-"
-                                                        ? ""
-                                                        : attributeValues.unit !=
-                                                          null
-                                                        ? attributeValues.unit
-                                                        : "")}
-                                                  </p>
-                                                </Col>
-                                              </React.Fragment>
-                                            )
-                                          )}
+                                        )}
                                       </Row>
                                       <div
                                         dangerouslySetInnerHTML={{
@@ -1440,19 +1398,8 @@ function ProductPage({
                                     </div>
                                   </div>
                                 </Col>
-                                {product.attributes[attribute]
-                                  .slice(
-                                    0,
-                                    displayedAttributesCount[product.name] &&
-                                      displayedAttributesCount[product.name][
-                                        attribute
-                                      ]
-                                      ? displayedAttributesCount[product.name][
-                                          attribute
-                                        ]
-                                      : initialDisplay
-                                  )
-                                  .map((attributeValues, valueIndex) => (
+                                {product.attributes[attribute].map(
+                                  (attributeValues, valueIndex) => (
                                     <React.Fragment key={valueIndex}>
                                       <Col lg={6} md={12}>
                                         <div className="attribute__card">
@@ -1504,7 +1451,8 @@ function ProductPage({
                                         </div>
                                       </Col>
                                     </React.Fragment>
-                                  ))}
+                                  )
+                                )}
                               </Row>
                             </>
                           );
