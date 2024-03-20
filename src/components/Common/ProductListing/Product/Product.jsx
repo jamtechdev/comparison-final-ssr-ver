@@ -283,6 +283,7 @@ export default function Product({
               </a>
             </h2>
           </div>
+          {/* {console.log(product?.assigned_title)} */}
           {product?.assigned_title && (
             <span className="best-tag-product">{product?.assigned_title}</span>
           )}
