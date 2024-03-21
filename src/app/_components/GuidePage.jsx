@@ -716,6 +716,8 @@ export default function GuidePage({
                     products ? (
                       <ProductListing
                         guidePhraseData={guide?.page_phrases}
+                        text_before_listing={guide?.text_before_listing}
+                        text_after_listing={guide?.text_after_listing}
                         productPositionArray={productPosition}
                         products={sortedData && sortedData}
                         handleToggleCollapse={handleToggleCollapse}

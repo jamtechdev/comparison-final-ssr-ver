@@ -216,7 +216,7 @@ function ProductPage({
 
   return (
     <>
-      {/* {console.log(product)} */}
+      {console.log(product?.text_under_ranking)}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -562,7 +562,6 @@ function ProductPage({
                                 <div className="rating__content">
                                   <b>{formatValue(data?.rating)}</b>
                                   <Rating value={data?.rating} />
-
                                   <small>({data?.reviews})</small>
                                 </div>
                               </div>
@@ -691,7 +690,7 @@ function ProductPage({
         <Container>
           <Row>
             <Col md={12} lg={12} xl={4}>
-              <ThumbSlider productData={product} />
+              <ThumbSlider productData={product}  is_tested ={product?.is_tested} />
             </Col>
             <Col lg={6} md={6} xl={4}>
               <div className="best-price-section">
@@ -800,6 +799,8 @@ function ProductPage({
                 )}
               </div>
             </Col>
+{console.log(product,"neety")}
+            <span className="testing__text"><i>{product?.text_under_ranking}</i></span>
 
             {product?.available_colors?.length !== 0 && (
               <Col lg={12} md={12} xl={12}>
@@ -972,14 +973,14 @@ function ProductPage({
       <section className="my-4">
         <Container>
           <Row className="mb-3">
-            <span className="testing__text">
+            {/* <span className="testing__text">
               <b>Updated 25/03/2024:</b> We've updated the text in the review to
               account for the new tests and scoring methodology in Vacuum Test
               Bench 1.0 and Vacuum Test Bench 1.1.
-            </span>
-            <span className="testing__text">
-              <b>Updated 19/03/2024:</b> Product test based on methodology v1.0
-            </span>
+            </span> */}
+            <div className="testing__text" dangerouslySetInnerHTML={{__html:product?.product_updates_text}}>
+              {/* <b>Updated 19/03/2024:</b> Product test based on methodology v1.0 */}
+            </div>
           </Row>
           <Row>
             <Col md={12}>
