@@ -957,6 +957,7 @@ function ProductPage({
               <div className="box__content__section">
                 <h2 class="site-main-heading">Verdict</h2>
                 <div
+                  className="box__content__section__textarea"
                   dangerouslySetInnerHTML={{ __html: product?.vedict_text }}
                 ></div>
               </div>
@@ -1105,14 +1106,6 @@ function ProductPage({
             <>
               {product?.display_product_review === true && (
                 <>
-                  <Row>
-                    <Col md={12}>
-                      <h2 className="site-main-heading">
-                        {product && product?.page_phases?.main_text_title}
-                        {/* Review of {product?.name} */}
-                      </h2>
-                    </Col>
-                  </Row>
                   <Row className="mt-3">
                     <Col md={4} lg={2}>
                       <div className="outline-section">
@@ -1135,6 +1128,15 @@ function ProductPage({
                         />
                       ) : (
                         <>
+                          <Row>
+                            <Col md={12}>
+                              <h2 className="site-main-heading">
+                                {product &&
+                                  product?.page_phases?.main_text_title}
+                                {/* Review of {product?.name} */}
+                              </h2>
+                            </Col>
+                          </Row>
                           {product &&
                             getAttributeProductHalf(product, "first") &&
                             Object.keys(
@@ -1149,35 +1151,42 @@ function ProductPage({
                                     <Col lg={12} md={12}>
                                       <div className="attribute__card">
                                         <div className="attribute__card__header">
-                                          <span
-                                            className="attribute__rating"
-                                            style={{
-                                              background:
-                                                product?.attributes[
-                                                  attribute
-                                                ][0].attribute_evaluation >= 7.5
-                                                  ? "#093673"
-                                                  : product?.attributes[
-                                                      attribute
-                                                    ][0].attribute_evaluation >=
-                                                      5 &&
-                                                    product?.attributes[
-                                                      attribute
-                                                    ][0].attribute_evaluation <
-                                                      7.5
-                                                  ? "#437ECE"
-                                                  : "#85B2F1",
-                                            }}
-                                          >
-                                            {product?.attributes[
-                                              attribute
-                                            ][0].attribute_evaluation.toFixed(
-                                              1
-                                            )}
-                                          </span>
-                                          <h6 className="attribute__title">
+                                          {product?.attributes[attribute]
+                                            ?.attribute_evaluation !== 0 && (
+                                            <span
+                                              className="attribute__rating"
+                                              style={{
+                                                background:
+                                                  product?.attributes[
+                                                    attribute
+                                                  ][0].attribute_evaluation >=
+                                                  7.5
+                                                    ? "#093673"
+                                                    : product?.attributes[
+                                                        attribute
+                                                      ][0]
+                                                        .attribute_evaluation >=
+                                                        5 &&
+                                                      product?.attributes[
+                                                        attribute
+                                                      ][0]
+                                                        .attribute_evaluation <
+                                                        7.5
+                                                    ? "#437ECE"
+                                                    : "#85B2F1",
+                                              }}
+                                            >
+                                              {product?.attributes[
+                                                attribute
+                                              ][0].attribute_evaluation.toFixed(
+                                                1
+                                              )}
+                                            </span>
+                                          )}
+
+                                          <h3 className="attribute__title">
                                             {attribute}
-                                          </h6>
+                                          </h3>
                                           <Questiontool
                                             attributes={
                                               product.attributes[attribute][0]
@@ -1229,12 +1238,14 @@ function ProductPage({
                                               )
                                             )}
                                           </Row>
+
                                           <div
                                             dangerouslySetInnerHTML={{
                                               __html:
                                                 product?.attributes[
                                                   attribute
-                                                ][0].text_part,
+                                                ][0]?.attribute_category
+                                                  ?.text_part,
                                             }}
                                           ></div>
                                         </div>
@@ -1243,56 +1254,76 @@ function ProductPage({
                                     {product.attributes[attribute].map(
                                       (attributeValues, valueIndex) => (
                                         <React.Fragment key={valueIndex}>
-                                          <Col lg={6} md={12}>
-                                            <div className="attribute__card">
-                                              <div className="attribute__card__header">
-                                                <span
-                                                  className="attribute__rating"
-                                                  style={{
-                                                    background:
-                                                      attributeValues?.final_points >=
-                                                      7.5
-                                                        ? "#093673"
-                                                        : attributeValues?.final_points >=
-                                                            5 &&
-                                                          attributeValues?.final_points <
-                                                            7.5
-                                                        ? "#437ECE"
-                                                        : "#85B2F1",
-                                                  }}
-                                                >
-                                                  {attributeValues?.final_points?.toFixed(
-                                                    1
-                                                  )}
-                                                </span>
-                                                <h6 className="attribute__title">
-                                                  {attributeValues?.attribute}:{" "}
-                                                  {(attributeValues.attribute_value !=
-                                                  null
-                                                    ? attributeValues.attribute_value
-                                                    : "") +
-                                                    " " +
-                                                    (attributeValues.attribute_value ===
-                                                      "?" ||
-                                                    attributeValues.attribute_value ===
-                                                      "-"
-                                                      ? ""
-                                                      : attributeValues.unit !=
-                                                        null
-                                                      ? attributeValues.unit
-                                                      : "")}
-                                                </h6>
+                                          {attributeValues?.text_part === "" ||
+                                          attributeValues?.text_part ===
+                                            null ? (
+                                            ""
+                                          ) : (
+                                            <Col lg={6} md={12}>
+                                              <div className="attribute__card">
+                                                <div className="attribute__card__header">
+                                                  <span
+                                                    className="attribute__rating"
+                                                    style={{
+                                                      background:
+                                                        attributeValues?.final_points >=
+                                                        7.5
+                                                          ? "#093673"
+                                                          : attributeValues?.final_points >=
+                                                              5 &&
+                                                            attributeValues?.final_points <
+                                                              7.5
+                                                          ? "#437ECE"
+                                                          : "#85B2F1",
+                                                    }}
+                                                  >
+                                                    {attributeValues?.final_points >=
+                                                    10
+                                                      ? attributeValues?.final_points.toFixed(
+                                                          0
+                                                        )
+                                                      : attributeValues?.final_points.toFixed(
+                                                          1
+                                                        )}
+                                                    {/* {formatValue(8.125)} */}
+                                                    {/* {attributeValues?.final_points?.toFixed(
+                                                      1
+                                                    )} */}
+                                                  </span>
+                                                  <h4 className="attribute__title">
+                                                    <b>
+                                                      {
+                                                        attributeValues?.attribute
+                                                      }
+                                                      :{" "}
+                                                    </b>
+                                                    {(attributeValues.attribute_value !=
+                                                    null
+                                                      ? attributeValues.attribute_value
+                                                      : "") +
+                                                      " " +
+                                                      (attributeValues.attribute_value ===
+                                                        "?" ||
+                                                      attributeValues.attribute_value ===
+                                                        "-"
+                                                        ? ""
+                                                        : attributeValues.unit !=
+                                                          null
+                                                        ? attributeValues.unit
+                                                        : "")}
+                                                  </h4>
+                                                </div>
+                                                <div className="attribute__card__body">
+                                                  <div
+                                                    dangerouslySetInnerHTML={{
+                                                      __html:
+                                                        attributeValues?.text_part,
+                                                    }}
+                                                  ></div>
+                                                </div>
                                               </div>
-                                              <div className="attribute__card__body">
-                                                <div
-                                                  dangerouslySetInnerHTML={{
-                                                    __html:
-                                                      attributeValues?.text_part,
-                                                  }}
-                                                ></div>
-                                              </div>
-                                            </div>
-                                          </Col>
+                                            </Col>
+                                          )}
                                         </React.Fragment>
                                       )
                                     )}
@@ -1399,7 +1430,8 @@ function ProductPage({
                                               __html:
                                                 product?.attributes[
                                                   attribute
-                                                ][0].text_part,
+                                                ][0]?.attribute_category
+                                                  ?.text_part,
                                             }}
                                           ></div>
                                         </div>
@@ -1408,56 +1440,76 @@ function ProductPage({
                                     {product.attributes[attribute].map(
                                       (attributeValues, valueIndex) => (
                                         <React.Fragment key={valueIndex}>
-                                          <Col lg={6} md={12}>
-                                            <div className="attribute__card">
-                                              <div className="attribute__card__header">
-                                                <span
-                                                  className="attribute__rating"
-                                                  style={{
-                                                    background:
-                                                      attributeValues?.final_points >=
-                                                      7.5
-                                                        ? "#093673"
-                                                        : attributeValues?.final_points >=
-                                                            5 &&
-                                                          attributeValues?.final_points <
-                                                            7.5
-                                                        ? "#437ECE"
-                                                        : "#85B2F1",
-                                                  }}
-                                                >
-                                                  {attributeValues?.final_points?.toFixed(
-                                                    1
-                                                  )}
-                                                </span>
-                                                <h6 className="attribute__title">
-                                                  {attributeValues?.attribute}:{" "}
-                                                  {(attributeValues.attribute_value !=
-                                                  null
-                                                    ? attributeValues.attribute_value
-                                                    : "") +
-                                                    " " +
-                                                    (attributeValues.attribute_value ===
-                                                      "?" ||
-                                                    attributeValues.attribute_value ===
-                                                      "-"
-                                                      ? ""
-                                                      : attributeValues.unit !=
-                                                        null
-                                                      ? attributeValues.unit
-                                                      : "")}
-                                                </h6>
+                                          {attributeValues?.text_part === "" ||
+                                          attributeValues?.text_part ===
+                                            null ? (
+                                            ""
+                                          ) : (
+                                            <Col lg={6} md={12}>
+                                              <div className="attribute__card">
+                                                <div className="attribute__card__header">
+                                                  <span
+                                                    className="attribute__rating"
+                                                    style={{
+                                                      background:
+                                                        attributeValues?.final_points >=
+                                                        7.5
+                                                          ? "#093673"
+                                                          : attributeValues?.final_points >=
+                                                              5 &&
+                                                            attributeValues?.final_points <
+                                                              7.5
+                                                          ? "#437ECE"
+                                                          : "#85B2F1",
+                                                    }}
+                                                  >
+                                                    {attributeValues?.final_points >=
+                                                    10
+                                                      ? attributeValues?.final_points.toFixed(
+                                                          0
+                                                        )
+                                                      : attributeValues?.final_points.toFixed(
+                                                          1
+                                                        )}
+                                                    {/* {formatValue(8.125)} */}
+                                                    {/* {attributeValues?.final_points?.toFixed(
+                                                      1
+                                                    )} */}
+                                                  </span>
+                                                  <h4 className="attribute__title">
+                                                    <b>
+                                                      {
+                                                        attributeValues?.attribute
+                                                      }
+                                                      :{" "}
+                                                    </b>
+                                                    {(attributeValues.attribute_value !=
+                                                    null
+                                                      ? attributeValues.attribute_value
+                                                      : "") +
+                                                      " " +
+                                                      (attributeValues.attribute_value ===
+                                                        "?" ||
+                                                      attributeValues.attribute_value ===
+                                                        "-"
+                                                        ? ""
+                                                        : attributeValues.unit !=
+                                                          null
+                                                        ? attributeValues.unit
+                                                        : "")}
+                                                  </h4>
+                                                </div>
+                                                <div className="attribute__card__body">
+                                                  <div
+                                                    dangerouslySetInnerHTML={{
+                                                      __html:
+                                                        attributeValues?.text_part,
+                                                    }}
+                                                  ></div>
+                                                </div>
                                               </div>
-                                              <div className="attribute__card__body">
-                                                <div
-                                                  dangerouslySetInnerHTML={{
-                                                    __html:
-                                                      attributeValues?.text_part,
-                                                  }}
-                                                ></div>
-                                              </div>
-                                            </div>
-                                          </Col>
+                                            </Col>
+                                          )}
                                         </React.Fragment>
                                       )
                                     )}

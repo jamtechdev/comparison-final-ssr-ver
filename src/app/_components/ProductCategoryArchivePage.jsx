@@ -134,10 +134,10 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                         className="rating_count"
                                         style={{
                                           background:
-                                            item.rating >= 7.5
+                                            item.overall_score >= 7.5
                                               ? "#093673"
-                                              : item.rating >= 5 &&
-                                                item.rating < 7.5
+                                              : item.overall_score >= 5 &&
+                                                item.overall_score < 7.5
                                               ? "#437ECE"
                                               : "#85B2F1",
                                         }}
