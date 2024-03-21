@@ -138,7 +138,7 @@ function lineChart(svgRef, lineChartData) {
     .tickSizeOuter(0)
     .tickValues(yIntervalsInt)
     .tickPadding(20)
-    .tickFormat((d) => `${d} €`);
+    .tickFormat((d) => `${d} ${lineChartData?.lineChartData[0]?.currency}`);
 
   svg
     .append("g")
@@ -174,8 +174,8 @@ function lineChart(svgRef, lineChartData) {
     .append("g")
     .attr("class", "lines")
     .attr("transform", `translate(${margin}, ${margin})`)
-    .style("stroke", "#437ECE")
-    // .style("opacity", 0.8);
+    .style("stroke", "#437ECE");
+  // .style("opacity", 0.8);
 
   lines
     .selectAll("line-group")
@@ -234,11 +234,9 @@ function lineChart(svgRef, lineChartData) {
         .style("display", "block")
         .style("opacity", 1)
         .html(
-          `<div style="font-size: 15px"> <b style="opacity: 0.6">${
-            d.price
-          } € </b>   <i style="opacity: 0.5">(${formatDate(
-            d?.date
-          )} )</i> </div>`
+          `<div style="font-size: 15px"> <b style="opacity: 0.6">${d.price} ${
+            lineChartData?.lineChartData[0]?.currency
+          } </b>   <i style="opacity: 0.5">(${formatDate(d?.date)} )</i> </div>`
         )
         .style("background-color", "white")
         .style("left", event.clientX + "px")

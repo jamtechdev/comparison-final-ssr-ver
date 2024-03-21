@@ -227,6 +227,7 @@ function ProductPage({
                 secondPageName={product}
               />
             </Col>
+            {console.log(product?.currency,"neet")}
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{product?.heading_title}</h1>
             </Col>
@@ -697,6 +698,7 @@ function ProductPage({
                 <h2 className="site-main-heading">
                   {product && product?.page_phases?.best_prices}
                 </h2>
+                
                 <ul className="best-list-item">
                   {product.price_websites &&
                     product?.price_websites?.every(
@@ -704,7 +706,7 @@ function ProductPage({
                     ) && (
                       <div className="not-availabel">
                         <span className="txt">NOT AVAILABLE</span>
-                        <span className="guide">~ {product?.price} €</span>
+                        <span className="guide">~ {product?.price} {product?.currency}</span>
                       </div>
                     )}
                   {product &&
@@ -736,7 +738,7 @@ function ProductPage({
                                 target="_blank"
                                 href={`/link?p=${btoa(item.url)}`}
                               >
-                                {item?.price} €
+                                {item?.price} {product?.currency}
                               </a>
                             </span>
                           </li>
@@ -1553,7 +1555,7 @@ function ProductPage({
                                             target="_blank"
                                             href={`/link?p=${btoa(item.url)}`}
                                           >
-                                            {item?.price} €
+                                            {item?.price} {product?.currency}
                                           </a>
                                         </span>
                                       </li>

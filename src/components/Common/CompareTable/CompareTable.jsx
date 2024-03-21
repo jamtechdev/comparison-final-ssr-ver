@@ -131,7 +131,12 @@ const CompareTable = React.memo(
         const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
 
         if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-          const targetString = stringArray[0] === "yes" ? "yes" : "no" ||stringArray[0] === "no" ? "yes" : "yes";
+          const targetString =
+            stringArray[0] === "yes"
+              ? "yes"
+              : "no" || stringArray[0] === "no"
+              ? "yes"
+              : "yes";
           numericValues = stringArray.filter((value) => value === targetString);
         }
       }
@@ -316,7 +321,7 @@ const CompareTable = React.memo(
                                 <div className="not-availabel n-lable p-1">
                                   {/* <span className="txt">NOT AVAILABLE</span> */}
                                   <span className="price">
-                                    ~ {product?.price} €
+                                    ~ {product?.price} {product?.currency}
                                   </span>
                                 </div>
                               )}
@@ -350,7 +355,7 @@ const CompareTable = React.memo(
                                                   data.url
                                                 )}`}
                                               >
-                                                {data?.price} €
+                                                {data?.price} {product?.currency}
                                               </a>
                                             </span>
                                           </>
@@ -409,7 +414,9 @@ const CompareTable = React.memo(
                         ) && (
                           <div className="not-availabel">
                             {/* <span className="txt">NOT AVAILABLE</span> */}
-                            <span className="price">~ {product?.price} €</span>
+                            <span className="price">
+                              ~ {product?.price} {product?.currency}
+                            </span>
                           </div>
                         )}
                       {product.price_websites &&
@@ -435,7 +442,7 @@ const CompareTable = React.memo(
                                             href="#"
                                           >
                                             <img
-                                              src={data?.logo}
+                                              src={data?.logo}  
                                               width={0}
                                               height={0}
                                               sizes="100vw"
@@ -448,7 +455,7 @@ const CompareTable = React.memo(
                                               target="_blank"
                                               href={`/link?p=${btoa(data.url)}`}
                                             >
-                                              {data?.price} €
+                                              {data?.price} {product?.currency}
                                             </Link>
                                           </span>
                                         </>

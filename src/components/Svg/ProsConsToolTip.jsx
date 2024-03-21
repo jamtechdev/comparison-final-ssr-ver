@@ -2,7 +2,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 
 const ProsConsToolTip = (props) => {
-  const { hover_phrase, info_not_verified, data } = props;
+  const { hover_phrase, info_not_verified, data, comment } = props;
   return (
     <>
       {hover_phrase && (
@@ -11,7 +11,9 @@ const ProsConsToolTip = (props) => {
             className="mb-2 prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}
           ></div>
-          <div className="test__phrase__content">Testing comment phrase</div>
+       {   console.log(comment)}
+          {comment && <div className="test__phrase__content">{comment}</div>}
+
           {info_not_verified && (
             <>
               <hr />

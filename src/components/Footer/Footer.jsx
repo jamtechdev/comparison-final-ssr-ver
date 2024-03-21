@@ -16,6 +16,17 @@ export default function Footer({ footerData }) {
   // news letter pop up
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [language, setLanguage] = useState("italian");
+  const handleOnchangeLanguage = (e) => {
+    setLanguage(e.target.value);
+    const selectedLanguage = e.target.value;
+    const selectedLanguageData = footerData.languages.find(
+      (langData) => langData.language === selectedLanguage
+    );
+    if (selectedLanguageData && selectedLanguageData.url) {
+      window.location.href = selectedLanguageData.url;
+    }
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -92,19 +103,23 @@ export default function Footer({ footerData }) {
                 <label for="footer-country-switch-id">
                   <i class="ri-map-pin-line"></i>
                 </label>
-                <select id="footer-country-switch-id">
-                  <option value="" selected="">
-                    Italia
-                  </option>
-                  <option value="">Cechia</option>
-                  <option value="">Slovacchia</option>
-                  <option value="">Olanda</option>
-                  <option value="">Romania</option>
-                  <option value="">Brasile</option>
-                  <option value="">Ungheria</option>
-                  <option value="">Portogallo</option>
-                  <option value="">Grecia</option>
-                  <option value="">Bulgaria</option>
+                <select
+                  id="footer-country-switch-id"
+                  value={language}
+                  onChange={handleOnchangeLanguage}
+                >
+                  {footerData?.languages?.map((langData, index) => {
+                    return (
+                      <>
+                        <option value="" selected="">
+                          Italia
+                        </option>
+                        <option value={langData?.language} key={index}>
+                          {langData?.language}
+                        </option>
+                      </>
+                    );
+                  })}
                 </select>
               </div>
             </div>
