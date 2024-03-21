@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import Tested from "../Tested/Tested";
 
-export default function ThumbSlider({ productData }) {
+export default function ThumbSlider({ productData, is_tested }) {
   const product = [
     {
       image: "/images/nofound.png",
@@ -104,9 +104,12 @@ export default function ThumbSlider({ productData }) {
       )}
 
       <section className="thumb-slider">
-        <div className="product-page-tested">
-          <Tested />
-        </div>
+        {is_tested && (
+          <div className="product-page-tested">
+            <Tested />
+          </div>
+        )}
+
         {productData?.main_image === null ? (
           <>
             <Swiper

@@ -30,6 +30,7 @@ export default function Product({
   handleManageCollapsedDiv,
   guidePhraseData,
   KeyIndex,
+  text_before_listing,
   slug,
   order,
 }) {
@@ -256,7 +257,7 @@ export default function Product({
   //   // console.log(splitData);
   // });
   // console.log(splitData);
-
+console.log(text_before_listing,"neet");
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
