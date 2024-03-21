@@ -108,12 +108,12 @@ export default function Footer({ footerData }) {
                   value={language}
                   onChange={handleOnchangeLanguage}
                 >
+                  <option value={`${footerData?.default_language}`} selected="">
+                    {footerData?.default_language}
+                  </option>
                   {footerData?.languages?.map((langData, index) => {
                     return (
                       <>
-                        <option value="" selected="">
-                          Italia
-                        </option>
                         <option value={langData?.language} key={index}>
                           {langData?.language}
                         </option>
