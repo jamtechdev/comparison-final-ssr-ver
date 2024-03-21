@@ -167,6 +167,10 @@ export default function ComparisonsSlider(products) {
                       </span>
                     </div>
                     <div className="comparisons-footer">{item?.category}</div>
+                    {/* <div className="comparisons-footer comparisons__footer__text">
+                      <p>The Dyson V15 Detect is slightly better overall than the Dyson V8. The V15 has a slightly bigger dirt compartment, a surface-type adjustment feature, lasts longer on a single charge, and clears debris more effectively on all surface types. Meanwhile, the V8 is easier to pick up and carry and has fewer parts that require regular maintenance.</p>
+                      <span>See full comparsion</span>
+                    </div> */}
                   </div>
                 </div>
               </SwiperSlide>

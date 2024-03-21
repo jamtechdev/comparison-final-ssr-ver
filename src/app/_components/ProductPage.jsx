@@ -227,7 +227,7 @@ function ProductPage({
                 secondPageName={product}
               />
             </Col>
-            {console.log(product?.currency,"neet")}
+            {console.log(product?.currency, "neet")}
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{product?.heading_title}</h1>
             </Col>
@@ -698,7 +698,7 @@ function ProductPage({
                 <h2 className="site-main-heading">
                   {product && product?.page_phases?.best_prices}
                 </h2>
-                
+
                 <ul className="best-list-item">
                   {product.price_websites &&
                     product?.price_websites?.every(
@@ -706,7 +706,9 @@ function ProductPage({
                     ) && (
                       <div className="not-availabel">
                         <span className="txt">NOT AVAILABLE</span>
-                        <span className="guide">~ {product?.price} {product?.currency}</span>
+                        <span className="guide">
+                          ~ {product?.price} {product?.currency}
+                        </span>
                       </div>
                     )}
                   {product &&
@@ -969,6 +971,16 @@ function ProductPage({
       </section>
       <section className="my-4">
         <Container>
+          <Row className="mb-3">
+            <span className="testing__text">
+              <b>Updated 25/03/2024:</b> We've updated the text in the review to
+              account for the new tests and scoring methodology in Vacuum Test
+              Bench 1.0 and Vacuum Test Bench 1.1.
+            </span>
+            <span className="testing__text">
+              <b>Updated 19/03/2024:</b> Product test based on methodology v1.0
+            </span>
+          </Row>
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">

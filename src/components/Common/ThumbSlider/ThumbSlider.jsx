@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useCallback, useState } from "react";
+import Tested from "../Tested/Tested";
 
 export default function ThumbSlider({ productData }) {
   const product = [
@@ -103,6 +104,9 @@ export default function ThumbSlider({ productData }) {
       )}
 
       <section className="thumb-slider">
+        <div className="product-page-tested">
+          <Tested />
+        </div>
         {productData?.main_image === null ? (
           <>
             <Swiper

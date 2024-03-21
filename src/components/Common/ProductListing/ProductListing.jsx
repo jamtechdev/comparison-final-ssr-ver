@@ -22,6 +22,7 @@ export default function ProductListing({
   // console.log(findProductPosition(product.name)
   return (
     <div className="best-product-wrapper">
+      <span className="testing__text"><i>This is a testing text that I’d like to add in this page.</i></span>
       {products.map((product, index) => (
         <Product
           guidePhraseData={guidePhraseData}
@@ -34,6 +35,7 @@ export default function ProductListing({
           order={order}
         />
       ))}
+      <span className="testing__text"><i>This is a testing text that I’d like to add in this page.</i></span>
     </div>
   );
 }

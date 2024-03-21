@@ -22,6 +22,7 @@ import {
 } from "@/redux/features/compareProduct/compareProSlice";
 import toast, { Toaster } from "react-hot-toast";
 import Rating from "../../Rating/Rating";
+import Tested from "../../Tested/Tested";
 export default function Product({
   position,
   incomingProduct,
@@ -320,6 +321,9 @@ export default function Product({
               alt=""
               sizes="100%"
             />
+            <div className="guide-page-tested">
+              <Tested />
+            </div>
           </Col>
           <Col md={12} lg={9} xl={10} className="p-0 product-listing-width-80">
             <div className="product-listing-inner-content">
