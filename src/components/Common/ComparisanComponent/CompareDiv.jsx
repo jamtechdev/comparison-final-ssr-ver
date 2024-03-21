@@ -308,6 +308,19 @@ function CompareDiv({
               {/* <MobileComparisonTool /> */}
             </Col>
           </Row>
+          {bestAlternative?.vedict_text !== null && (
+            <Row>
+              <div className="box__content__section">
+                <h2 class="site-main-heading">Verdict</h2>
+                <div
+                  className="box__content__section__textarea"
+                  dangerouslySetInnerHTML={{
+                    __html: bestAlternative?.vedict_text,
+                  }}
+                ></div>
+              </div>
+            </Row>
+          )}
         </Container>
       </section>
       <section className="ptb-80 bg-color">
@@ -359,7 +372,7 @@ function CompareDiv({
                     __html: searchForPatternAndReplace(contentWithIds),
                   }}
                 />
-                <div className="social-icon items-icon">
+                {/* <div className="social-icon items-icon">
                   <div className="twitter">
                     <i className="ri-twitter-fill"></i>
                   </div>
@@ -372,7 +385,7 @@ function CompareDiv({
                   <div className="linkedIn">
                     <i className="ri-linkedin-fill"></i>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="mobile-hide right-side-bar productSlider-Container">

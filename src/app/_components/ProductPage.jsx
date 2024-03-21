@@ -216,7 +216,7 @@ function ProductPage({
 
   return (
     <>
-      {console.log(product?.text_under_ranking)}
+      {/* {console.log(product?.text_under_ranking)} */}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -227,7 +227,7 @@ function ProductPage({
                 secondPageName={product}
               />
             </Col>
-            {console.log(product?.currency, "neet")}
+            {/* {console.log(product?.currency, "neet")} */}
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{product?.heading_title}</h1>
             </Col>
@@ -690,7 +690,10 @@ function ProductPage({
         <Container>
           <Row>
             <Col md={12} lg={12} xl={4}>
-              <ThumbSlider productData={product}  is_tested ={product?.is_tested} />
+              <ThumbSlider
+                productData={product}
+                is_tested={product?.is_tested}
+              />
             </Col>
             <Col lg={6} md={6} xl={4}>
               <div className="best-price-section">
@@ -799,8 +802,10 @@ function ProductPage({
                 )}
               </div>
             </Col>
-{console.log(product,"neety")}
-            <span className="testing__text"><i>{product?.text_under_ranking}</i></span>
+            {/* {console.log(product,"neety")} */}
+            <span className="testing__text text-center">
+              <i>{product?.text_under_ranking}</i>
+            </span>
 
             {product?.available_colors?.length !== 0 && (
               <Col lg={12} md={12} xl={12}>
@@ -978,7 +983,12 @@ function ProductPage({
               account for the new tests and scoring methodology in Vacuum Test
               Bench 1.0 and Vacuum Test Bench 1.1.
             </span> */}
-            <div className="testing__text" dangerouslySetInnerHTML={{__html:product?.product_updates_text}}>
+            <div
+              className="testing__text"
+              dangerouslySetInnerHTML={{
+                __html: product?.product_updates_text,
+              }}
+            >
               {/* <b>Updated 19/03/2024:</b> Product test based on methodology v1.0 */}
             </div>
           </Row>

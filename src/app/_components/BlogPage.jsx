@@ -152,7 +152,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   __html: searchForPatternAndReplace(contentWithIds),
                 }}
               />
-              <div className="social-icon items-icon">
+              {/* <div className="social-icon items-icon">
                 <div className="twitter">
                   <i className="ri-twitter-fill"></i>
                 </div>
@@ -165,7 +165,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 <div className="linkedIn">
                   <i className="ri-linkedin-fill"></i>
                 </div>
-              </div>
+              </div> */}
               <div className="fonzi p-3 my-md-4 my-xs-0">
                 <div className="profile mb-2">
                   <div className="avatar">
