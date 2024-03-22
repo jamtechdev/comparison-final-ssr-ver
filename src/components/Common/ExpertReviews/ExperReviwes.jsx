@@ -75,7 +75,7 @@ function ExperReviwes({ expertReview }) {
       >
         {expertReview?.map((data, index) => {
           const maxLength = 385;
-          const isLong = data?.comment.length > maxLength;
+          const isLong = data?.comment?.length > maxLength;
           let truncatedComment = data?.comment;
           const [isExpanded, setIsExpanded] = useState(false);
 

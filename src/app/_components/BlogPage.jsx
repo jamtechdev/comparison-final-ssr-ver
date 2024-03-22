@@ -166,29 +166,33 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   <i className="ri-linkedin-fill"></i>
                 </div>
               </div> */}
-              <div className="fonzi p-3 my-md-4 my-xs-0">
-                <div className="profile mb-2">
-                  <div className="avatar">
-                    <img
-                      src={
-                        blogData[0]?.data?.author?.image
-                          ? blogData[0]?.data?.author?.image
-                          : "/images/user.png"
-                      }
-                      width={0}
-                      height={0}
-                      sizes="100%"
-                      alt=""
-                    />
-                  </div>
-                  <div className="label">
-                    <Link href={`/author/${blogData[0]?.data?.author?.id}`}>
-                      <p className="name">{blogData[0]?.data?.author?.name}</p>
-                    </Link>
-                    <p>{blogData[0]?.data?.author?.summary}</p>
+              {blogData[0]?.data?.author && (
+                <div className="fonzi p-3 my-md-4 my-xs-0">
+                  <div className="profile mb-2">
+                    <div className="avatar">
+                      <img
+                        src={
+                          blogData[0]?.data?.author?.image
+                            ? blogData[0]?.data?.author?.image
+                            : "/images/user.png"
+                        }
+                        width={0}
+                        height={0}
+                        sizes="100%"
+                        alt=""
+                      />
+                    </div>
+                    <div className="label">
+                      <Link href={`/author/${blogData[0]?.data?.author?.id}`}>
+                        <p className="name">
+                          {blogData[0]?.data?.author?.name}
+                        </p>
+                      </Link>
+                      <p>{blogData[0]?.data?.author?.summary}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className="mobile-hide right-side-bar productSlider-Container">
               <Row className="mt-3">

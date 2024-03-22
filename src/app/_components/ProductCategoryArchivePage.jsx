@@ -160,6 +160,70 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                   )}
                 </Row>
               )}
+
+              {/* --------------TEST LOGS------------- */}
+              {categoryData[0]?.data?.tested_blogs?.length > 0 && (
+                <Row className="py-3">
+                  <Col md={12}>
+                    <h2 className="heading-primary secondary">Test logs</h2>
+                  </Col>
+                  {/* if data found */}
+
+                  <Col md={12}>
+                    <Row>
+                      {categoryData[0]?.data?.tested_blogs?.length > 0 &&
+                        categoryData[0]?.data?.tested_blogs?.map(
+                          (item, index) => {
+                            return (
+                              <Col
+                                lg={3}
+                                md={3}
+                                xs={6}
+                                className="px-2 mb-3"
+                                key={`articles-${index}`}
+                              >
+                                <div className="blog-card" role="button">
+                                  <a
+                                    href={`/${
+                                      item.category_url
+                                        ? item.category_url
+                                        : item.primary_category.toLowerCase()
+                                    }/${item?.permalink}`}
+                                  >
+                                    <div className="blog-card-img">
+                                      <img
+                                        src={
+                                          item?.banner_image === null
+                                            ? "/images/cat7.png"
+                                            : item?.banner_image
+                                        }
+                                        width={0}
+                                        height={0}
+                                        sizes="100%"
+                                        alt=""
+                                        className="card-img"
+                                      />
+                                    </div>
+                                    <p className="dates">SEPTEMBER 20 2022</p>
+                                    <span className="blog-title">
+                                      {item?.title}
+                                    </span>
+                                    <p className="category">{item?.category}</p>
+                                  </a>
+                                </div>
+                              </Col>
+                            );
+                          }
+                        )}
+                    </Row>
+                  </Col>
+
+                  {/* if no data found */}
+                  {categoryData[0]?.data?.popular_blogs?.length == 0 && (
+                    <p className="">No records to display</p>
+                  )}
+                </Row>
+              )}
               {/*-------------------- POPULAR ARTICLES --------------------------------*/}
               {categoryData[0]?.data?.popular_blogs?.length > 0 && (
                 <Row className="py-3">

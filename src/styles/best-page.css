@@ -700,7 +700,7 @@ thead.isSticky {
 
 .filtered-data-select select {
   max-width: 220px;
-  font-size: 17px;
+  font-size: 16px;
   padding-right: 30px !important;
 }
 
@@ -709,7 +709,6 @@ thead.isSticky {
   font-size: 17px;
   line-height: 34px;
   color: var(--heading-color);
-  opacity: 80%;
   width: 100%;
   max-width: 100%;
   text-align: end;

@@ -40,11 +40,11 @@
 }
 
 .product-header .product-inner-content {
-  font-weight: 400;
-  font-size: 18px;
-  color: var(--heading-color);
-  /* opacity: 80%; */
+  font-weight: 400 !important;
   margin: 20px 0 0 !important;
+  font-size: 18px;
+  line-height: 20px;
+  color: rgb(39 48 78 / 70%);
 }
 
 .product-score-container {

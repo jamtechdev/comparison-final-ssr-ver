@@ -78,7 +78,7 @@ export default function Footer({ footerData }) {
         <Row>
           <Col lg={3} md={6}>
             <div className="footer-content">
-              <Image
+              <img
                 src={`https://panel.mondopedia.it/logos/app_logo.png`}
                 alt="Logo"
                 width={118}
@@ -131,7 +131,7 @@ export default function Footer({ footerData }) {
             <div className="address-section">
               {footerData?.column_two?.address && (
                 <div className="inner-item">
-                  <Image
+                  <img
                     src="/images/location.svg"
                     width={20}
                     height={20}
@@ -142,13 +142,13 @@ export default function Footer({ footerData }) {
               )}
               {footerData?.column_two?.phone && (
                 <div className="inner-item">
-                  <Image src="/images/call.svg" width={20} height={20} alt="" />
+                  <img src="/images/call.svg" width={20} height={20} alt="" />
                   <p>{footerData?.column_two?.phone}</p>
                 </div>
               )}
               {footerData?.column_two?.email && (
                 <div className="inner-item">
-                  <Image
+                  <img
                     src="/images/message.svg"
                     width={20}
                     height={20}

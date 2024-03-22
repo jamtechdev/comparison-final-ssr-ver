@@ -1383,6 +1383,7 @@ li.color-item.selected {
   justify-content: end;
   margin-bottom: 13px;
   margin-right: -9px;
+  font-size: 17px;
 }
 
 .sidebar_filter div {
@@ -1725,14 +1726,6 @@ li.color-item.selected {
   cursor: pointer;
 }
 
-.attribute__card__wrapper > *:first-child .attribute__rating {
-  font-size: 22px;
-}
-
-.attribute__card__wrapper > *:first-child .attribute__title {
-  font-size: 22px;
-}
-
 .attribute__card {
   border: 1px solid rgba(39, 48, 78, 0.2);
   border-radius: 10px;
@@ -1762,8 +1755,15 @@ li.color-item.selected {
   font-size: 18px;
 }
 
+h3.attribute__title{
+  font-size: 24px !important;
+}
+
+h4.attribute__title{
+  font-size: 20px !important;
+}
+
 .attribute__title {
-  font-size: 17px !important;
   font-weight: 400 !important;
   line-height: 28px !important;
   opacity: 90% !important;
@@ -1836,6 +1836,10 @@ li.color-item.selected {
   margin: auto;
   border-radius: 5px;
   color: #fff;
+}
+
+.tested__ok__section img {
+  width: 25px;
 }
 
 .tested__ok__section span {

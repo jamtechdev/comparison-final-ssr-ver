@@ -33,6 +33,7 @@ import DrawChart from "@/_chart/LineChart/LineChart";
 import formatValue from "@/_helpers/formatValue";
 import { getAttributeProductHalf } from "@/_helpers";
 import Questiontool from "@/components/Svg/Questiontool";
+import ProductPageOutline from "@/components/Common/OutlineGenerator/ProductPageOutline";
 
 // import Link from "next/link";
 
@@ -836,21 +837,38 @@ function ProductPage({
                               }}
                               className="current_version_not_found"
                             >
-                              <a
-                                href={`/link?p=${btoa(data.url)}`}
-                                style={{
-                                  color: "#437ed0",
-                                  padding: "0px 5px",
-                                  cursor:
-                                    data.color === product?.color
-                                      ? "default"
-                                      : "pointer",
-                                }}
-                                className={`color-item `}
-                                // onClick={(e) => handleItemClick(key)}
-                              >
-                                {data.color}
-                              </a>
+                              {data.color === product?.color ? (
+                                <span
+                                  style={{
+                                    color: "#437ed0",
+                                    padding: "0px 5px",
+                                    cursor:
+                                      data.color === product?.color
+                                        ? "default"
+                                        : "pointer",
+                                  }}
+                                  className={`color-item `}
+                                  // onClick={(e) => handleItemClick(key)}
+                                >
+                                  {data.color}
+                                </span>
+                              ) : (
+                                <a
+                                  href={`/link?p=${btoa(data.url)}`}
+                                  style={{
+                                    color: "#437ed0",
+                                    padding: "0px 5px",
+                                    cursor:
+                                      data.color === product?.color
+                                        ? "default"
+                                        : "pointer",
+                                  }}
+                                  className={`color-item `}
+                                  // onClick={(e) => handleItemClick(key)}
+                                >
+                                  {data.color}
+                                </a>
+                              )}
                             </li>
 
                             {/* <Form.Check
@@ -1135,10 +1153,14 @@ function ProductPage({
                     <Col md={4} lg={2}>
                       <div className="outline-section">
                         <p>{product && product?.page_phases?.outline}</p>
-                        <OutlineGenerator
-                          blogData={product?.text_part}
-                          currentIndexId={activeOutlineId}
-                        />
+                        {product?.display_product_review === false ? (
+                          <OutlineGenerator
+                            blogData={product?.text_part}
+                            currentIndexId={activeOutlineId}
+                          />
+                        ) : (
+                          <ProductPageOutline />
+                        )}
                       </div>
                     </Col>
                     <Col md={8} lg={10}>
@@ -1172,7 +1194,10 @@ function ProductPage({
                                   {/* {console.log(
                             product?.attributes[attribute][0]
                           )} */}
-                                  <Row className="attribute__card__wrapper">
+                                  <Row
+                                    className="attribute__card__wrapper"
+                                    id="attribute__card"
+                                  >
                                     <Col lg={12} md={12}>
                                       <div className="attribute__card">
                                         <div className="attribute__card__header">
@@ -1396,9 +1421,9 @@ function ProductPage({
                                               1
                                             )}
                                           </span>
-                                          <h6 className="attribute__title">
+                                          <h3 className="attribute__title">
                                             {attribute}
-                                          </h6>
+                                          </h3>
                                           <Questiontool
                                             attributes={
                                               product.attributes[attribute][0]
