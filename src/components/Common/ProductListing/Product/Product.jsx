@@ -257,7 +257,7 @@ export default function Product({
   //   // console.log(splitData);
   // });
   // console.log(splitData);
-console.log(text_before_listing,"neet");
+  console.log(text_before_listing, "neet");
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
@@ -322,9 +322,11 @@ console.log(text_before_listing,"neet");
               alt=""
               sizes="100%"
             />
-            <div className="guide-page-tested">
-              <Tested />
-            </div>
+            {product?.is_tested && (
+              <div className="guide-page-tested">
+                <Tested />
+              </div>
+            )}
           </Col>
           <Col md={12} lg={9} xl={10} className="p-0 product-listing-width-80">
             <div className="product-listing-inner-content">
