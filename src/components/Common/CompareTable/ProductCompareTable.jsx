@@ -294,9 +294,9 @@ const ProductCompareTable = React.memo(
                       <a
                         href={`/${product?.category_url}/${product?.permalink}`}
                       >
-                        {product?.name}
+                        {" "}
                       </a>
-
+                      {product?.name}
                       <img
                         className="compare_image"
                         src={
@@ -799,7 +799,7 @@ const ProductCompareTable = React.memo(
                   })}
                 </tr>
               );
-            })} 
+            })}
 
             {removeLastObjectFromCategory
               ?.slice(0, fullTable || 2)

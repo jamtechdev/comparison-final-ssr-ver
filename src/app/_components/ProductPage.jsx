@@ -875,7 +875,7 @@ function ProductPage({
             {product?.available_versions &&
               product?.available_versions?.length !== 0 && (
                 <Col lg={12} md={12} xl={12}>
-                  <div className="alternatives mt-2">
+                  <div className="alternatives my-4">
                     <span>Available versions:</span>
                     <div className="color-section">
                       {product?.available_versions

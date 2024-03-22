@@ -290,7 +290,7 @@
 
 .best-list-item li span > a {
   color: var(--white-color);
-  min-width: 80px !important;
+  /* min-width: 80px !important; */
   font-size: 17px !important;
   line-height: 30px !important;
   font-weight: 400;
@@ -375,6 +375,23 @@
   flex-wrap: wrap;
   align-items: baseline;
   margin: 0 0 20px;
+}
+
+.alternatives > span {
+  color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alternatives > span:before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-image: url(/images/double-arrow.png);
+  display: block;
+  background-size: contain;
+  background-position: center;
 }
 
 .alternatives p {
@@ -832,13 +849,13 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
-  color: var(--heading-color);
+  color: rgb(39 48 78 / 70%);
   font-family: "Lato", sans-serif !important;
 }
-
+/* 
 .pros-corns-section ul li span.pros-crons-text {
   opacity: 70%;
-}
+} */
 
 .review-content {
   color: var(--heading-color);

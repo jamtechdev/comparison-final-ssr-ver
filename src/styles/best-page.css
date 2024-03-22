@@ -78,6 +78,10 @@
   vertical-align: middle !important;
 }
 
+.compare-container tr:nth-child(1) td {
+  background: transparent !important;
+}
+
 .compare-container tr.show_more_row:nth-child(odd) td,
 .compare-container tr.show_more_row:nth-child(odd) th {
   background: transparent;
@@ -161,15 +165,21 @@ thead.nonSticky tr th:first-child,
   font-weight: 600 !important;
   font-size: 15px !important;
   line-height: 20px;
-  color: var(--heading-color);
-  opacity: 90%;
+  color: rgb(39 48 78 / 90%);
   gap: 10px;
   padding: 8px 12px;
   text-align: left;
   cursor: pointer;
+  position: relative;
 }
 .compare-container thead tr th .device-name a {
-  color: var(--heading-color);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 .compare-container thead tr th:hover .device-name a {
   color: #437ece !important;
@@ -871,7 +881,7 @@ thead.isSticky {
   .best-list-item
   li
   span {
-  min-width: 80px !important;
+  /* min-width: 80px !important; */
   font-size: 15px !important;
   line-height: 30px !important;
 }
@@ -1607,7 +1617,8 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   text-align: left;
   bottom: 100%;
   left: 5px;
-  color: rgb(39 48 78 / 70%);
+  /* color: rgb(39 48 78 / 70%); */
+  color: var(--primary-color);
   line-height: 20px;
   z-index: 10000;
   border: 1px solid #d4d6dc;

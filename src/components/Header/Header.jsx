@@ -151,7 +151,7 @@ export default function Header({ headerData, headerPhase }) {
               />
             </a>
           </Col>
-          <Col lg={4} md={4} xs={4} className="form-search">
+          <Col lg={5} md={4} xs={4} className="form-search">
             {pathname !== "/" && (
               <>
                 <Form className={"d-flex " + styles.searchbar}>
@@ -177,7 +177,7 @@ export default function Header({ headerData, headerPhase }) {
               </>
             )}
           </Col>
-          <Col md={6} className="hide-header-list">
+          <Col lg={5} md={6} className="hide-header-list">
             <ul className={styles.navitem}>
               <li onClick={() => setIsOpen(true)} role="button">
                 {headerPhase && headerPhase?.compare}

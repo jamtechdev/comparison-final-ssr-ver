@@ -317,10 +317,15 @@ footer .search-icon {
   margin: 0;
 }
 
-.search-dropdown-list .search-data-list ul li {
+.search-dropdown-list .search-data-list ul li a{
   display: flex;
   gap: 10px;
   padding: 5px;
+  width: 100%;
+}
+
+.search-dropdown-list .search-data-list ul li a:hover > span {
+  color: var(--secondary-color);
 }
 
 .search-dropdown-list .search-data-list ul li span {

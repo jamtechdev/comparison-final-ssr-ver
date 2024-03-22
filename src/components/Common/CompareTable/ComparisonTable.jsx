@@ -291,10 +291,10 @@ export default function ComparisonTable({
 
                   <p className="device-name">
                     <span>{index + 1}</span>
-                    <a href={`/${product?.category_url}/${product?.permalink}`}>
-                      {product?.name}
-                    </a>
-
+                    <a
+                      href={`/${product?.category_url}/${product?.permalink}`}
+                    ></a>
+                    {product?.name}
                     <img
                       className="compare_image"
                       src={

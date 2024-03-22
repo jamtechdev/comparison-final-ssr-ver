@@ -1155,7 +1155,7 @@ button.searchBarInner.btn.btn-primary {
   line-height: 180%;
 }
 
-.catchy_titles_section.row span.catchy_titles_section_product_name a{
+.catchy_titles_section.row span.catchy_titles_section_product_name a {
   text-align: start;
   color: var(--secondary-color);
   font-size: 18px;
@@ -1217,10 +1217,7 @@ table.compare-container.table.comparison-table .best-list-item li img {
   border: 1px solid #ddd;
   padding: 8px;
   font-size: 15px;
-}
-
-.shortcode_table_wrapper tbody tr:nth-child(even) {
-  background-color: #fafbfd;
+  background: #fff;
 }
 
 .shortcode_info_wrapper {
@@ -1243,8 +1240,6 @@ table.compare-container.table.comparison-table .best-list-item li img {
   min-width: 45px;
   text-align: center;
 }
-
-
 
 .short_code_product_table_price_name {
   display: flex;
@@ -1592,11 +1587,10 @@ li.color-item.selected {
   height: 10px;
 }
 .inline-power-section ul {
-  color: #27304e;
-  opacity: 70%;
+  color: rgb(39 48 78 / 70%);
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 25px;
 }
 .inline-power-section ul li {
   position: relative;
@@ -1605,13 +1599,13 @@ li.color-item.selected {
   content: "";
   position: absolute;
   width: 2px;
-  height: calc(100% - 3px);
+  height: calc(100% - 5px);
   background: #27304e;
   opacity: 70%;
   top: 0;
   bottom: 0;
   margin: auto;
-  left: calc(100% + 8px);
+  left: calc(100% + 12px);
 }
 .inline-power-section ul li:last-child:before {
   display: none !important;
@@ -1622,6 +1616,7 @@ li.color-item.selected {
   right: 100px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   background: #437ece;
   padding: 5px 20px 5px 5px;
@@ -1629,6 +1624,8 @@ li.color-item.selected {
   color: #fff;
   border-radius: 10px 10px 0;
   cursor: pointer;
+  width: 100%;
+  max-width: 170px;
 }
 
 .product-bottom-bar i {
@@ -1892,6 +1889,10 @@ li.color-item.selected {
   background: #fff !important;
 }
 
+.best-price-section:not(.ranking) .best-list-item li:nth-child(odd) {
+  background: transparent !important;
+}
+
 /* price-image-section-css-start */
 
 .best-price-section:not(.ranking) .best-list-item li:not(.d-flex),
@@ -1942,8 +1943,7 @@ li.color-item.selected {
   background: #ff7d00 !important;
 }
 
-
-/* shortocde-css-start */
+/* shortcode-css-start */
 
 .short_code_product_table_price_td {
   display: grid !important;
@@ -1982,6 +1982,6 @@ li.color-item.selected {
   margin: auto;
 }
 
-/* shortocde-css-end */
+/* shortcode-css-end */
 
 /* price-image-section-css-end */

@@ -290,10 +290,8 @@ const CompareTable = React.memo(
                       <span>{index + 1}</span>
                       <a
                         href={`/${product?.category_url}/${product?.permalink}`}
-                      >
-                        {product?.name}
-                      </a>
-
+                      ></a>
+                      {product?.name}
                       <img
                         className="compare_image"
                         src={
@@ -355,7 +353,8 @@ const CompareTable = React.memo(
                                                   data.url
                                                 )}`}
                                               >
-                                                {data?.price} {product?.currency}
+                                                {data?.price}{" "}
+                                                {product?.currency}
                                               </a>
                                             </span>
                                           </>
@@ -442,7 +441,7 @@ const CompareTable = React.memo(
                                             href="#"
                                           >
                                             <img
-                                              src={data?.logo}  
+                                              src={data?.logo}
                                               width={0}
                                               height={0}
                                               sizes="100vw"
