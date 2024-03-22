@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Tested() {
+function Tested({product}) {
   return (
     <div className='tested__ok__section'>
       <img src='/images/tested.svg' />

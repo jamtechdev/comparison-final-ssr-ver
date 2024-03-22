@@ -6,16 +6,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 function AboutPage({ slug, aboutData }) {
-  return (  
+  return (
     <>
       <section className="breadcrumb-section">
         <Container>
           <Row>
             <Col md={12}>
-            <BreadCrumb
+              <BreadCrumb
                 productPhaseData={aboutData?.page_phases}
                 firstPageName={""}
-                secondPageName={{name:"About us"}}
+                secondPageName={{ name: "About us" }}
               />
             </Col>
 
@@ -40,7 +40,7 @@ function AboutPage({ slug, aboutData }) {
               <Row className="mt-3">
                 <Col md={12} xs={6}>
                   <div className="category-section">
-                    <Image
+                    <img
                       src="/images/how-work.png"
                       width={0}
                       height={0}
@@ -53,7 +53,7 @@ function AboutPage({ slug, aboutData }) {
                 </Col>
                 <Col md={12} xs={6} className="ps">
                   <div className="category-section">
-                    <Image
+                    <img
                       src="/images/tab.png"
                       width={0}
                       height={0}
@@ -75,7 +75,7 @@ function AboutPage({ slug, aboutData }) {
               aboutData?.authors?.map((item, index) => {
                 return (
                   <>
-                    <Col md={3} lg={3}>
+                    <Col md={4} lg={4}>
                       <a href={`/author/${item?.id}`}>
                         <div className="author-page-section about-card-section">
                           <img

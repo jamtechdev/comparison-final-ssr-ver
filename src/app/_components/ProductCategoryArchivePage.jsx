@@ -61,7 +61,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                     style={{ color: "#27304e" }}
                                     className="product-link-cover"
                                   ></a>
-                                  <Image
+                                  <img
                                     src={
                                       item?.bannerImage === null
                                         ? `/images/nofound.png`
@@ -116,7 +116,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                 >
                                   <div className="review-wrapper">
                                     <div className="review-card">
-                                      <Image
+                                      <img
                                         src={
                                           item?.main_image ||
                                           "/images/nofound.png"
@@ -192,7 +192,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                     }/${item?.permalink}`}
                                   >
                                     <div className="blog-card-img">
-                                      <Image
+                                      <img
                                         src={
                                           item?.banner_image === null
                                             ? "/images/cat7.png"

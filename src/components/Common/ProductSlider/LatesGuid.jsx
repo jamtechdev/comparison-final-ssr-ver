@@ -32,7 +32,7 @@ export default function LatesGuid({ favSlider }) {
                   href={`${section?.category_url}/${section?.permalink}`}
                   style={{ color: "#27304e" }}
                 >
-                  <Image
+                  <img
                     src={
                       section.bannerImage === null
                         ? `/images/nofound.png`

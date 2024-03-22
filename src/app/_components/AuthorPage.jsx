@@ -6,6 +6,7 @@ import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 function AuthorPage({ slug, authorData }) {
+console.log(authorData)
   return (
     <>
       <section className="breadcrumb-section">
@@ -14,7 +15,7 @@ function AuthorPage({ slug, authorData }) {
             <Col md={12}>
               <BreadCrumb
                 firstPageName="author"
-                secondPageName={authorData.name}
+                secondPageName={{name:authorData?.name}}
               />
             </Col>
             <Col md={12}>

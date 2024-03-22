@@ -724,7 +724,7 @@ function ProductPage({
                               target="_blank"
                               href={`/link?p=${btoa(item.url)}`}
                             >
-                              <Image
+                              <img
                                 src={
                                   item?.logo === null
                                     ? "/images/No-Image.png"

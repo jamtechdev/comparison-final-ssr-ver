@@ -308,14 +308,15 @@ function CompareDiv({
               {/* <MobileComparisonTool /> */}
             </Col>
           </Row>
-          {bestAlternative?.vedict_text !== null && (
+          {/* {console.log(bestAlternative?.verdict_text)} */}
+          {bestAlternative?.verdict_text !== null && (
             <Row>
               <div className="box__content__section">
                 <h2 class="site-main-heading">Verdict</h2>
                 <div
                   className="box__content__section__textarea"
                   dangerouslySetInnerHTML={{
-                    __html: bestAlternative?.vedict_text,
+                    __html: bestAlternative?.verdict_text,
                   }}
                 ></div>
               </div>

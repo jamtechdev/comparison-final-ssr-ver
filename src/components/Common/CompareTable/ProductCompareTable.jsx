@@ -9,6 +9,7 @@ import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import formatValue from "@/_helpers/formatValue";
+import Rating from "../Rating/Rating";
 const ProductCompareTable = React.memo(
   ({ products, categoryAttributes, slug, productPhaseData }) => {
     const router = useRouter();
@@ -608,6 +609,46 @@ const ProductCompareTable = React.memo(
                             }
                           </p>
                         )}
+                        <p>
+                          <b>
+                            {/* {product && product?.page_phases?.score_components}: */}
+                            Score components :
+                          </b>
+                        </p>
+                        {products[0]?.users_rating_descriptions
+                          .score_components &&
+                          products[0]?.users_rating_descriptions.score_components?.map(
+                            (data, index) => {
+                              return (
+                                <div className="scroe_section" key={index}>
+                                  <p className="text-end">
+                                    {`${parseFloat(data?.importance).toFixed(
+                                      1
+                                    )}%`}
+                                  </p>
+                                  <div
+                                    className="score-count"
+                                    style={{
+                                      background:
+                                        data?.attribute_evaluation >= 7.5
+                                          ? "#093673"
+                                          : data?.attribute_evaluation >= 5 &&
+                                            data?.attribute_evaluation < 7.5
+                                          ? "#437ECE"
+                                          : "#85B2F1",
+                                    }}
+                                  >
+                                    {data?.attribute_evaluation != null
+                                      ? data?.attribute_evaluation >= 10
+                                        ? Math.trunc(data?.attribute_evaluation)
+                                        : data?.attribute_evaluation.toFixed(1)
+                                      : "0.0"}
+                                  </div>
+                                  <p>{data?.attribute_category}</p>
+                                </div>
+                              );
+                            }
+                          )}
                       </div>
                     )}
                 </div>

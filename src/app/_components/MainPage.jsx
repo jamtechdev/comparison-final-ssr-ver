@@ -163,7 +163,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
               ></p>
             </Col>
             <Col lg={5} md={12} className="top-space">
-              <Image
+              <img
                 className="site_image"
                 src="/images/side-img.png"
                 width={10}

@@ -22,7 +22,7 @@ export default function Category({ categories }) {
         >
           <div className="category-section">
             <a href={`/${section?.primary_archive_category}`}>
-              <Image
+              <img
                 src={
                   section?.square_image
                     ? section?.square_image

@@ -80,7 +80,7 @@ export default function ProductSliderBlog({ favSlider }) {
       > */}
       {favSlider &&
         favSlider
-          ?.slice(0, showFullData ? favSlider?.length : 3)
+          ?.slice(0, showFullData ? favSlider?.length : 2)
           .map(function (item, index) {
             return (
               // <SwiperSlide key={index}>
