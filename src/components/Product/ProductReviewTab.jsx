@@ -49,7 +49,7 @@ function ProductReviewTab({ productReview }) {
                 <SwiperSlide key={index}>
                   <a
                     href={`/link?p=${btoa(data.url)}`}
-                    className="user__rating-card"
+                  className="user__rating-card"
                   >
                     <img
                       src={data?.logo ? data?.logo : "/images/nofound.png"}
@@ -58,6 +58,7 @@ function ProductReviewTab({ productReview }) {
                       <span>{formatValue(data?.rating)}</span>
                       <Rating value={data?.rating} />
                     </div>
+                    {/* {console.log(data?.url, "neet")} */}
                     <small className="rating__review">
                       {data?.reviews} Reviews
                     </small>

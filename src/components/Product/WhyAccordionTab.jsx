@@ -103,7 +103,17 @@ const WhyAccordionTab = React.memo(
         '[role="presentation"] button'
       );
       attributeAdd.forEach((button, index) => {
-        button.setAttribute("data-count", formatValue(product?.overall_score));
+        if (index === 0) {
+          button.setAttribute(
+            "data-count",
+            formatValue(product?.overall_score)
+          );
+        } else if (index === 1) {
+          button.setAttribute(
+            "data-count",
+            parseFloat(product?.average_overall_score).toFixed(1)
+          );
+        }
         button.style.setProperty("--color-bg", getColor[index]);
       });
     }, []);
