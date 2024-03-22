@@ -503,43 +503,6 @@ const ProductCompareTable = React.memo(
                             }
                           </p>
                         )}
-                        <p>
-                          <b>Score Components:</b>
-                        </p>
-                        {products[0].overall_score_descriptions
-                          .score_components &&
-                          products[0].overall_score_descriptions.score_components?.map(
-                            (data, index) => {
-                              return (
-                                <div className="scroe_section" key={index}>
-                                  <p className="text-end">
-                                    {`${parseFloat(data?.importance).toFixed(
-                                      1
-                                    )}%`}
-                                  </p>
-                                  <div
-                                    className="score-count"
-                                    style={{
-                                      background:
-                                        data?.attribute_evaluation >= 7.5
-                                          ? "#093673"
-                                          : data?.attribute_evaluation >= 5 &&
-                                            data?.attribute_evaluation < 7.5
-                                          ? "#437ECE"
-                                          : "#85B2F1",
-                                    }}
-                                  >
-                                    {data?.attribute_evaluation != null
-                                      ? data?.attribute_evaluation >= 10
-                                        ? Math.trunc(data?.attribute_evaluation)
-                                        : data?.attribute_evaluation.toFixed(1)
-                                      : "0.0"}
-                                  </div>
-                                  <p>{data?.attribute_category}</p>
-                                </div>
-                              );
-                            }
-                          )}
                       </div>
                     )}
                 </div>
@@ -595,48 +558,6 @@ const ProductCompareTable = React.memo(
                             }
                           </p>
                         )}
-
-                        <p>
-                          <b>
-                            {/* {products[0] &&
-                              products[0]?.page_phases?.score_components} */}
-                            Score components :
-                          </b>
-                        </p>
-                        {products[0]?.technical_score_descriptions
-                          .score_components &&
-                          products[0]?.technical_score_descriptions.score_components?.map(
-                            (data, index) => {
-                              return (
-                                <div className="scroe_section" key={index}>
-                                  <p className="text-end">
-                                    {`${parseFloat(data?.importance).toFixed(
-                                      1
-                                    )}%`}
-                                  </p>
-                                  <div
-                                    className="score-count"
-                                    style={{
-                                      background:
-                                        data?.attribute_evaluation >= 7.5
-                                          ? "#093673"
-                                          : data?.attribute_evaluation >= 5 &&
-                                            data?.attribute_evaluation < 7.5
-                                          ? "#437ECE"
-                                          : "#85B2F1",
-                                    }}
-                                  >
-                                    {data?.attribute_evaluation != null
-                                      ? data?.attribute_evaluation >= 10
-                                        ? Math.trunc(data?.attribute_evaluation)
-                                        : data?.attribute_evaluation.toFixed(1)
-                                      : "0.0"}
-                                  </div>
-                                  <p>{data?.attribute_category}</p>
-                                </div>
-                              );
-                            }
-                          )}
                       </div>
                     )}
                 </div>
@@ -725,25 +646,6 @@ const ProductCompareTable = React.memo(
                                   </div>
                                   <p>{data?.attribute_category}</p>
                                 </div>
-                              );
-                            }
-                          )}
-                        <b>User's Ratings:</b>
-                        {products[0]?.users_rating_descriptions
-                          ?.reviews_websites &&
-                          products[0]?.users_rating_descriptions?.reviews_websites?.map(
-                            (data, index) => {
-                              return (
-                                <>
-                                  <div className="rating__section">
-                                    <img src={`${data?.logo}`} />
-                                    <div className="rating__content">
-                                      <b>{formatValue(data?.rating)}</b>
-                                      <Rating value={data?.rating} />
-                                      <small>({data?.reviews})</small>
-                                    </div>
-                                  </div>
-                                </>
                               );
                             }
                           )}
