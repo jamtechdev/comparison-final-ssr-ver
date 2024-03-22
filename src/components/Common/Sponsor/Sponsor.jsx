@@ -9,7 +9,7 @@ export default function Sponsor({ asSeenOn }) {
           return (
               <Col lg={2} md={4} xs={6} key={index}>
                 <div className="sponsor-image-container">
-                  <Image
+                  <img
                     src={section.image}
                     width={0}
                     height={0}

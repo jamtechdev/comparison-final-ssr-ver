@@ -90,7 +90,7 @@ export default function BottomBar({
               }}
             >
               <div className="bottom_bar_header_content">
-                <Image src="/images/vs.svg" width={40} height={40} alt="" />
+                <img src="/images/vs.svg" width={40} height={40} alt="" />
                 <div className="bottom_bar_heading">
                   <div>{guidePhraseData && guidePhraseData?.comparison}</div>
                   <span>
@@ -123,7 +123,7 @@ export default function BottomBar({
                   ?.map((item, index) => {
                     return (
                       <li key={index}>
-                        <Image
+                        <img
                           src={item.image ? item.image : "/images/vs.svg"}
                           width={0}
                           height={0}

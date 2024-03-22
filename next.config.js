@@ -16,7 +16,7 @@ const nextConfig = {
       "admin.elegantum.it",
       "via.placeholder.com",
       "frontum.online",
-      "localhost:3000",
+
       "source.unsplash.com",
     ], // Add any other domains as needed
   },

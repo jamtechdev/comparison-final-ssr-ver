@@ -40,7 +40,7 @@ function AboutPage({ slug, aboutData }) {
               <Row className="mt-3">
                 <Col md={12} xs={6}>
                   <div className="category-section">
-                    <Image
+                    <img
                       src="/images/how-work.png"
                       width={0}
                       height={0}
@@ -53,7 +53,7 @@ function AboutPage({ slug, aboutData }) {
                 </Col>
                 <Col md={12} xs={6} className="ps">
                   <div className="category-section">
-                    <Image
+                    <img
                       src="/images/tab.png"
                       width={0}
                       height={0}

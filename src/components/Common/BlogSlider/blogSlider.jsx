@@ -55,7 +55,7 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
                   >
                     <div className="blog-card">
                       <div className="blog-card-img">
-                        <Image
+                        <img
                           src={
                             item.banner_image
                               ? item.banner_image
