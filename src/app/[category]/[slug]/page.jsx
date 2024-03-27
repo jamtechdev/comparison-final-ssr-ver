@@ -98,7 +98,11 @@ export async function generateMetadata({ params: { slug, category } }) {
       applicationName: "Comparison web",
       referrer: "origin-when-cross-origin",
       keywords: ["compare", "product"],
+      lang: "en",
       description: "compare-page",
+      openGraph: {
+        type: "website",
+      },
       alternates: {
         canonical: `${siteURL}/${category}/${extractedUrls}`,
       },
@@ -122,9 +126,13 @@ export async function generateMetadata({ params: { slug, category } }) {
           generator: "Comparison web",
           applicationName: "Comparison web",
           referrer: "origin-when-cross-origin",
+          lang: "en",
           keywords: ["compare", "product"],
           alternates: {
             canonical: `${siteURL}/${category}/${slug}`,
+          },
+          openGraph: {
+            type: "website",
           },
         };
       } else {

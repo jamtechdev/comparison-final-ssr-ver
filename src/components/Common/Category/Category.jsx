@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Image from "next/image";
 import { Col, Row } from "react-bootstrap";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import Link from "next/link";
 const IMAGE_ALT_TEXT = "Category Images";
 export default function Category({ categories }) {
   // console.log
-  (categories)
+  categories;
   return (
     <Row>
       {categories?.map((section, index) => (
@@ -31,7 +31,7 @@ export default function Category({ categories }) {
                 width={0}
                 height={0}
                 sizes="100%"
-                alt={IMAGE_ALT_TEXT}
+                alt={`/${section?.primary_archive_category}`}
               />
               <span className="category_name">
                 {section?.primary_archive_category || "NOT FOUND"}

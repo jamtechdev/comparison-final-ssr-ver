@@ -56,7 +56,7 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
                     >
                       {" "}
                       <div className="product-card">
-                        <Image
+                        <img
                           src={
                             section.bannerImage == null
                               ? `/images/nofound.png`
@@ -65,7 +65,9 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
                           width={0}
                           height={0}
                           sizes="100%"
-                          alt="Not found"
+                          alt={`/${
+                            section?.category_url ? section?.category_url : slug
+                          }/${section?.permalink}`}
                         />
 
                         <div className="product-name-wrapper">

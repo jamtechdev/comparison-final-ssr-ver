@@ -21,7 +21,7 @@ export default function ProductListing({
       return null;
     }
   }
-  console.log(text_before_listing,"kakashi")
+  // console.log(text_before_listing,"kakashi")
   return (
     <div className="best-product-wrapper">
       <span className="testing__text"><i>{text_before_listing}</i></span>

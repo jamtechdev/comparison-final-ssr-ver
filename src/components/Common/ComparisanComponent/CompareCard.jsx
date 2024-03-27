@@ -53,7 +53,7 @@ const CompareCard = ({
       {compareProduct.length <= 0 ? (
         <div className="add-product" onClick={() => setIsOpen(true)}>
           <div className="add-product-inner-content">
-            <Image src="/images/add_icon.svg" width={50} height={50} alt="" />
+            <img src="/images/add_icon.svg" width={50} height={50} alt="compare product" />
             <p>add a product to compare</p>
           </div>
         </div>

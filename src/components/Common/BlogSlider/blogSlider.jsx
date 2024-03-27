@@ -64,7 +64,11 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
                           width={0}
                           height={0}
                           sizes="100%"
-                          alt=""
+                          alt={`/${
+                            item.category_url
+                              ? item.category_url
+                              : item.primary_category.toLowerCase()
+                          }/${item?.permalink}`}
                         />
                         <p className="dates">{item.published_at}</p>
                       </div>

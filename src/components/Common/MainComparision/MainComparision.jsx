@@ -108,10 +108,7 @@ export default function MainComparision(products) {
           filteredComparisons?.map(function (item, index) {
             return (
               <SwiperSlide key={index}>
-                <div
-                  className="comparisons-wrapper"
-                
-                >
+                <div className="comparisons-wrapper">
                   <div className="comparisons-container">
                     <div className="comparisons-card">
                       <Image
@@ -188,8 +185,7 @@ export default function MainComparision(products) {
                       <span
                         onClick={() =>
                           window.open(
-                            `/${item?.category_url}/${item?.permalink}`,
-                            "_blank"
+                            `/${item?.category_url}/${item?.permalink}`
                           )
                         }
                         style={{ cursor: "pointer" }}

@@ -24,6 +24,8 @@ export async function generateMetadata(params) {
     alternates: {
       canonical: `${siteURL}`,
     },
+    ogType: "FRONTUM",
+    language: "en", // Language meta tag
   };
 }
 async function getMetaData() {

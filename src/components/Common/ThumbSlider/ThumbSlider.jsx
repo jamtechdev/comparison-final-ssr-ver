@@ -7,7 +7,8 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import Tested from "../Tested/Tested";
 
-export default function ThumbSlider({ productData, is_tested }) {
+export default function ThumbSlider({ productData, is_tested,slug }) {
+  console.log(slug)
   const product = [
     {
       image: "/images/nofound.png",
@@ -70,12 +71,12 @@ export default function ThumbSlider({ productData, is_tested }) {
                 className={index === activeThumb ? "active" : ""}
                 style={{ cursor: "pointer" }}
               >
-                <Image
+                <img
                   src={item.image}
                   width={0}
                   height={0}
                   sizes="100%"
-                  alt=""
+                  alt={`${slug}`}
                 />
               </li>
             ))}
@@ -96,7 +97,7 @@ export default function ThumbSlider({ productData, is_tested }) {
                   width={0}
                   height={0}
                   sizes="100%"
-                  alt=""
+                  alt={`${slug}`}
                 />
               </li>
             ))}
@@ -139,7 +140,7 @@ export default function ThumbSlider({ productData, is_tested }) {
                     width={0}
                     height={0}
                     sizes="100%"
-                    alt=""
+                    alt={`${slug}`}
                   />
                 </SwiperSlide>
               ))}

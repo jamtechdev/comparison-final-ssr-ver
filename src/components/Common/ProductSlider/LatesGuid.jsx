@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
 export default function LatesGuid({ favSlider }) {
@@ -41,7 +41,7 @@ export default function LatesGuid({ favSlider }) {
                     width={0}
                     height={0}
                     sizes="100%"
-                    alt=""
+                    alt={`${section?.category_url}/${section?.permalink}`}
                   />
                   <div className="product-name-wrapper">
                     <span>{section?.short_name}</span>

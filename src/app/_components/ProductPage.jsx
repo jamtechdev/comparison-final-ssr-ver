@@ -220,8 +220,8 @@ function ProductPage({
   const is_found = product?.alternative_comparisons?.filter(
     (comparison) => comparison.verdict_text !== null
   );
-  console.log(is_found?.length);
-
+  // console.log(is_found?.length);
+  // console.log(slug)
   return (
     <>
       {/* {console.log(product?.text_under_ranking)} */}
@@ -699,6 +699,7 @@ function ProductPage({
           <Row>
             <Col md={12} lg={12} xl={4}>
               <ThumbSlider
+                slug={slug}
                 productData={product}
                 is_tested={product?.is_tested}
               />
