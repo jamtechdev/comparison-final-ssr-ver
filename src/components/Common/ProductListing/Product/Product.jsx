@@ -1753,13 +1753,13 @@ export default function Product({
                                                                   fontSize:
                                                                     "15px",
                                                                   textDecoration:
-                                                                    attributeValues.attribute_value !==
-                                                                    "?"
+                                                                    attributeValues.hover_phase !==
+                                                                    ""
                                                                       ? "underline"
                                                                       : "",
                                                                   textDecorationStyle:
-                                                                    attributeValues.attribute_value !==
-                                                                    "?"
+                                                                    attributeValues.hover_phase !==
+                                                                    ""
                                                                       ? "dotted"
                                                                       : "",
                                                                   textDecorationThickness:
@@ -2124,11 +2124,6 @@ export default function Product({
                                                             <>
                                                               <div
                                                                 className={`${
-                                                                  attributeValues.attribute_value !==
-                                                                    "?" &&
-                                                                  !attributeValues.attribute_value.includes(
-                                                                    "-"
-                                                                  ) &&
                                                                   attributeValues.hover_phase !==
                                                                     "" &&
                                                                   "tooltip-title"
@@ -2147,15 +2142,13 @@ export default function Product({
                                                                   fontSize:
                                                                     "15px",
                                                                   textDecoration:
-                                                                    attributeValues.attribute_value !==
-                                                                      "?" &&
                                                                     attributeValues?.hover_phase !==
-                                                                      ""
+                                                                    ""
                                                                       ? "underline"
                                                                       : "",
                                                                   textDecorationStyle:
-                                                                    attributeValues.attribute_value !==
-                                                                    "?"
+                                                                    attributeValues?.hover_phase !==
+                                                                    ""
                                                                       ? "dotted"
                                                                       : "",
                                                                   textDecorationThickness:
