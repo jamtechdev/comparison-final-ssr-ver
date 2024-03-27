@@ -62,15 +62,22 @@ function ProductPageOutline({ product }) {
                           )} */}
                 <div>
                   <ol className="ol-child">
-                    <li className="outlineList" id="attribute">
-                      {attribute}
+                    <li className="outlineList">
+                      <a href={`#${attribute}`}>{attribute}</a>
                       {product.attributes[attribute].map(
                         (attributeValues, valueIndex) => (
-                          <ol key={valueIndex} className="ol-child">
-                            <li className="outlineList">
-                              {attributeValues.attribute}
-                            </li>
-                          </ol>
+                          <React.Fragment>
+                            {attributeValues?.text_part === "" ||
+                            attributeValues?.text_part === null ? (
+                              ""
+                            ) : (
+                              <ol key={valueIndex} className="ol-child">
+                                <li className="outlineList">
+                                  {attributeValues.attribute}
+                                </li>
+                              </ol>
+                            )}
+                          </React.Fragment>
                         )
                       )}
                     </li>
@@ -92,14 +99,22 @@ function ProductPageOutline({ product }) {
                 <div>
                   <ol className="ol-child">
                     <li className="outlineList">
-                      {attribute}
+                      <a href={`#${attribute}`}>{attribute}</a>
+
                       {product.attributes[attribute].map(
                         (attributeValues, valueIndex) => (
-                          <ol key={valueIndex} className="ol-child">
-                            <li className="outlineList">
-                              {attributeValues.attribute}
-                            </li>
-                          </ol>
+                          <React.Fragment>
+                            {attributeValues?.text_part === "" ||
+                            attributeValues?.text_part === null ? (
+                              ""
+                            ) : (
+                              <ol key={valueIndex} className="ol-child">
+                                <li className="outlineList">
+                                  {attributeValues.attribute}
+                                </li>
+                              </ol>
+                            )}
+                          </React.Fragment>
                         )
                       )}
                     </li>
