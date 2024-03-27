@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function ProductPageOutline() {
+function ProductPageOutline({ product }) {
   const [outline, setOutline] = useState([]);
   useEffect(() => {
     const headings = document
@@ -47,7 +47,11 @@ function ProductPageOutline() {
 
     setOutline(newOutline);
   }, []);
-  return <div>productPageOutline</div>;
+  return (
+    <>
+     
+    </>
+  );
 }
 
 export default ProductPageOutline;

@@ -762,7 +762,12 @@ const TechnicalAccordion = React.memo(
                                           attributeValues.attribute_value ==
                                             "no") && (
                                           <div
-                                            className="tooltip-title"
+                                            className={`${
+                                              attributeValues?.hover_phase !==
+                                              ""
+                                                ? "tooltip-title"
+                                                : ""
+                                            }`}
                                             style={{
                                               color:
                                                 attributeValues.attribute_value ==
@@ -779,8 +784,16 @@ const TechnicalAccordion = React.memo(
                                                   ? "red"
                                                   : "#27304e",
                                               fontSize: "15px",
-                                              textDecoration: "underline",
-                                              textDecorationStyle: "dotted",
+                                              textDecoration:
+                                                attributeValues?.hover_phase !==
+                                                ""
+                                                  ? "underline"
+                                                  : "",
+                                              textDecorationStyle:
+                                                attributeValues?.hover_phase !==
+                                                ""
+                                                  ? "dotted"
+                                                  : "",
                                               textDecorationThickness: "1.5px",
                                               textDecorationColor:
                                                 attributeValues.attribute_value ==
@@ -979,6 +992,7 @@ const TechnicalAccordion = React.memo(
                                         attributeValues.attribute_value !=
                                           "no" && (
                                           <>
+                                            {console.log()}
                                             <div
                                               className={`${
                                                 attributeValues.attribute_value !==
@@ -986,6 +1000,8 @@ const TechnicalAccordion = React.memo(
                                                 !attributeValues.attribute_value.includes(
                                                   "-"
                                                 ) &&
+                                                attributeValues.hover_phase !==
+                                                  "" &&
                                                 "tooltip-title"
                                               }`}
                                               style={{
@@ -1002,12 +1018,16 @@ const TechnicalAccordion = React.memo(
                                                 fontSize: "15px",
                                                 textDecoration:
                                                   attributeValues.attribute_value !==
-                                                  "?"
+                                                    "?" &&
+                                                  attributeValues?.hover_phase !==
+                                                    ""
                                                     ? "underline"
                                                     : "",
                                                 textDecorationStyle:
                                                   attributeValues.attribute_value !==
-                                                  "?"
+                                                    "?" &&
+                                                  attributeValues?.hover_phase !==
+                                                    ""
                                                     ? "dotted"
                                                     : "",
                                                 textDecorationThickness:
@@ -1105,7 +1125,11 @@ const TechnicalAccordion = React.memo(
                                         attributeValues.attribute_value ==
                                           "no") && (
                                         <div
-                                          className="tooltip-title"
+                                          className={`${
+                                            attributeValues?.hover_phase !== ""
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
                                           style={{
                                             color:
                                               attributeValues.attribute_value ==
@@ -1122,8 +1146,16 @@ const TechnicalAccordion = React.memo(
                                                 ? "red"
                                                 : "#27304e",
                                             fontSize: "15px",
-                                            textDecoration: "underline",
-                                            textDecorationStyle: "dotted",
+                                            textDecoration:
+                                              attributeValues?.hover_phase !==
+                                              ""
+                                                ? "underline"
+                                                : "",
+                                            textDecorationStyle:
+                                              attributeValues?.hover_phase !==
+                                              ""
+                                                ? "dotted"
+                                                : "",
                                             textDecorationThickness: "1.5px",
                                             textDecorationColor:
                                               attributeValues.attribute_value ==

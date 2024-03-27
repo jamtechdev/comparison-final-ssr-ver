@@ -34,6 +34,7 @@ import formatValue from "@/_helpers/formatValue";
 import { getAttributeProductHalf } from "@/_helpers";
 import Questiontool from "@/components/Svg/Questiontool";
 import ProductPageOutline from "@/components/Common/OutlineGenerator/ProductPageOutline";
+import MainComparision from "@/components/Common/MainComparision/MainComparision";
 
 // import Link from "next/link";
 
@@ -1159,7 +1160,7 @@ function ProductPage({
                             currentIndexId={activeOutlineId}
                           />
                         ) : (
-                          <ProductPageOutline />
+                          <ProductPageOutline product={product} />
                         )}
                       </div>
                     </Col>
@@ -1234,7 +1235,12 @@ function ProductPage({
                                             </span>
                                           )}
 
-                                          <h3 className="attribute__title">
+                                          <h3
+                                            className="attribute__title"
+                                            id={attribute
+                                              .trim()
+                                              .replace(/\s+/g, "-")}
+                                          >
                                             {attribute}
                                           </h3>
                                           <Questiontool
@@ -1340,7 +1346,12 @@ function ProductPage({
                                                       1
                                                     )} */}
                                                   </span>
-                                                  <h4 className="attribute__title">
+                                                  <h4
+                                                    className="attribute__title"
+                                                    id={attributeValues?.attribute
+                                                      .trim()
+                                                      .replace(/\s+/g, "-")}
+                                                  >
                                                     <b>
                                                       {
                                                         attributeValues?.attribute
@@ -1803,6 +1814,20 @@ function ProductPage({
           </Row>
         </Container>
       </section>
+
+      <section className="mt-3 mobile-popular-comparison">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">Main Comparision</h2>
+              <MainComparision
+                products={product && product?.alternative_comparisons}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
       {/* {console.log(product?.alternative_comparisons)} */}
       {product?.alternative_comparisons?.length > 0 && (
         <section className="mt-3 mobile-popular-comparison">

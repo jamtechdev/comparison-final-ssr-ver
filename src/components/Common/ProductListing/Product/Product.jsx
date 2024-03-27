@@ -1674,10 +1674,10 @@ export default function Product({
                                               : "#85B2F1",
                                         }}
                                       >
-                                        {
+                                        {formatValue(
                                           product.attributes_new[attribute][0]
                                             ?.attribute_evaluation
-                                        }
+                                        )}
                                       </span>
                                       <div className="show-btn">
                                         Show All{" "}
@@ -2137,7 +2137,9 @@ export default function Product({
                                                                     "15px",
                                                                   textDecoration:
                                                                     attributeValues.attribute_value !==
-                                                                    "?"
+                                                                      "?" &&
+                                                                    attributeValues?.hover_phase !==
+                                                                      ""
                                                                       ? "underline"
                                                                       : "",
                                                                   textDecorationStyle:
@@ -2258,7 +2260,12 @@ export default function Product({
                                                           attributeValues.attribute_value ==
                                                             "no") && (
                                                           <div
-                                                            className="tooltip-title"
+                                                            className={`${
+                                                              attributeValues?.hover_phase !==
+                                                              ""
+                                                                ? "tooltip-title"
+                                                                : ""
+                                                            }`}
                                                             style={{
                                                               color:
                                                                 attributeValues.attribute_value ==
@@ -2276,9 +2283,15 @@ export default function Product({
                                                                   : "#27304e",
                                                               fontSize: "15px",
                                                               textDecoration:
-                                                                "underline",
+                                                                attributeValues?.hover_phase !==
+                                                                ""
+                                                                  ? "underline"
+                                                                  : "",
                                                               textDecorationStyle:
-                                                                "dotted",
+                                                                attributeValues?.hover_phase !==
+                                                                ""
+                                                                  ? "dotted"
+                                                                  : "",
                                                               textDecorationThickness:
                                                                 "1.5px",
                                                               textDecorationColor:

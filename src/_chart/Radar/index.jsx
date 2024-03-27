@@ -186,8 +186,60 @@ function Radar({ data, activeTab }) {
             ? "#437ECE"
             : "#FF8F0B"
         )
-        .attr("opacity", activeTab == i ? 0.9 : 0.3)
+        .attr("opacity", activeTab == i ? 0.9 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
+      cord.forEach((point, index) => {
+        svg
+          .append("circle")
+          .attr("cx", point.x + width / 2)
+          .attr("cy", point.y + height / 2)
+          .attr("r", 5)
+          .style(
+            "stroke",
+            data?.length > 2
+              ? i === 0
+                ? "#437ECE"
+                : i === 1
+                ? "#FF8F0B"
+                : "#28A28C"
+              : i === 0
+              ? "#437ECE"
+              : "#FF8F0B"
+          )
+          .style("fill", "white")
+          .attr("opacity", activeTab == i ? 0.9 : 0.1)
+          .attr("class", `data-point${i}`)
+          .attr("data-value", point.value)
+          .attr("data-attribute", point.attribute)
+          .on("mouseover", function (event, d) {
+            const value = select(this).attr("data-value");
+            const hoverClass = d3.select(this).attr("class");
+            let backgroundColor = "";
+
+            if (hoverClass === "data-point0") {
+              backgroundColor = "#437ECE";
+            } else if (hoverClass === "data-point1") {
+              backgroundColor = "#ff8f0b";
+            } else {
+              backgroundColor = "#28A28C";
+            }
+            const attribute = select(this).attr("data-attribute");
+            tooltip
+              .style("display", "block")
+              .style("opacity", 0.9)
+              .html(`${attribute}: ${parseFloat(value).toFixed(1)}`)
+              .style("background-color", backgroundColor)
+              .style("left", event.clientX + "px")
+              .style("top", event.clientY + "px")
+              .style("color", "#fff");
+          })
+          .on("mouseout", function () {
+            // Remove the tooltip and the value label on mouse leave
+            // svg.selectAll(".data-point-label").remove();
+            // tooltip.style("display", "none");
+            tooltip.style("opacity", 0);
+          });
+      });
     }
   }, [activeTab]);
 

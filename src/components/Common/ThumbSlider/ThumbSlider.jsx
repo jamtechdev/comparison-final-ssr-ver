@@ -91,7 +91,7 @@ export default function ThumbSlider({ productData, is_tested }) {
                 className={index === activeThumb ? "active" : ""}
                 style={{ cursor: "pointer" }}
               >
-                <Image
+                <img
                   src={item.image}
                   width={0}
                   height={0}
@@ -134,7 +134,7 @@ export default function ThumbSlider({ productData, is_tested }) {
             >
               {product.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <Image
+                  <img
                     src={item.image}
                     width={0}
                     height={0}
@@ -168,7 +168,7 @@ export default function ThumbSlider({ productData, is_tested }) {
           >
             {productData?.all_images.map((item, index) => (
               <SwiperSlide key={index}>
-                <Image
+                <img
                   src={item.image}
                   width={0}
                   height={0}

@@ -1897,6 +1897,20 @@ h4.attribute__title{
   background: transparent !important;
 }
 
+.winner__badge {
+  box-shadow: 0px 2px 2px 0px #00000040;
+  background: #FF8F0B;
+  color: #fff;
+  width: fit-content;
+  padding: 3px 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
 /* price-image-section-css-start */
 
 .best-price-section:not(.ranking) .best-list-item li:not(.d-flex),
