@@ -257,7 +257,7 @@ export default function Product({
   //   // console.log(splitData);
   // });
   // console.log(splitData);
-  console.log(text_before_listing, "neet");
+  // console.log(text_before_listing, "neet");
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
@@ -739,7 +739,11 @@ export default function Product({
                           ?.map((data, index) => {
                             return (
                               <React.Fragment key={index}>
-                                <li className="tooltip-title">
+                                <li
+                                  className={`${
+                                    data?.hover_phrase !== "" && "tooltip-title"
+                                  }`}
+                                >
                                   <span className="pros-crons-text">
                                     {data?.name} {renderValue(data)}
                                   </span>
@@ -774,7 +778,11 @@ export default function Product({
                           ?.map((data, index) => {
                             return (
                               <React.Fragment key={index}>
-                                <li className="tooltip-title">
+                                <li
+                                  className={`${
+                                    data?.hover_phrase !== "" && "tooltip-title"
+                                  }`}
+                                >
                                   <span className="pros-crons-text">
                                     {data?.name} {renderValue(data).trim()}
                                   </span>
