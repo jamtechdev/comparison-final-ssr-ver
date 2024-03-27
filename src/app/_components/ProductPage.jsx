@@ -216,6 +216,12 @@ function ProductPage({
     }
   }, []);
 
+  // check mai comparsion found or not
+  const is_found = product?.alternative_comparisons?.filter(
+    (comparison) => comparison.verdict_text !== null
+  );
+  console.log(is_found?.length);
+
   return (
     <>
       {/* {console.log(product?.text_under_ranking)} */}
@@ -1814,19 +1820,20 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-
-      <section className="mt-3 mobile-popular-comparison">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">Main Comparision</h2>
-              <MainComparision
-                products={product && product?.alternative_comparisons}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </section>
+      {is_found?.length > 0 && (
+        <section className="mt-3 mobile-popular-comparison">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <h2 className="site-main-heading">Main Comparision</h2>
+                <MainComparision
+                  products={product && product?.alternative_comparisons}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
 
       {/* {console.log(product?.alternative_comparisons)} */}
       {product?.alternative_comparisons?.length > 0 && (
