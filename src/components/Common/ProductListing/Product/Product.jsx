@@ -1732,13 +1732,9 @@ export default function Product({
                                                           attributeValues.attribute_value !=
                                                             "no" && (
                                                             <>
+                                                              {/* {console.log(attributeValues.hover_phase,"neets")} */}
                                                               <div
                                                                 className={`${
-                                                                  attributeValues.attribute_value !==
-                                                                    "?" &&
-                                                                  !attributeValues.attribute_value.includes(
-                                                                    "-"
-                                                                  ) &&
                                                                   attributeValues.hover_phase !==
                                                                     "" &&
                                                                   "tooltip-title"

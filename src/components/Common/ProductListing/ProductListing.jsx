@@ -24,7 +24,9 @@ export default function ProductListing({
   // console.log(text_before_listing,"kakashi")
   return (
     <div className="best-product-wrapper">
-      <span className="testing__text"><i>{text_before_listing}</i></span>
+      <span className="testing__text">
+        <i>{text_before_listing}</i>
+      </span>
       {products.map((product, index) => (
         <Product
           guidePhraseData={guidePhraseData}
@@ -37,7 +39,9 @@ export default function ProductListing({
           order={order}
         />
       ))}
-      <span className="testing__text"><i>{text_after_listing}</i></span>
+      <span className="testing__text">
+        <i>{text_after_listing}</i>
+      </span>
     </div>
   );
 }

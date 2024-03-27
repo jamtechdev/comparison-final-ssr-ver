@@ -54,7 +54,7 @@ export default function Header({ headerData, headerPhase }) {
 
     return scrollDirection;
   }
-    const handleBlur = () => {
+  const handleBlur = () => {
     setTimeout(() => {
       setIsFocused(false);
     }, 200);
@@ -187,9 +187,7 @@ export default function Header({ headerData, headerPhase }) {
               </li>
               {/* {console.log(headerPhase)} */}
               <li>
-                <a href="/about-us">
-                  {headerPhase && headerPhase?.about_us}
-                </a>
+                <a href="/about-us">{headerPhase && headerPhase?.about_us}</a>
               </li>
               <li>
                 <a href="#">{headerData && headerData?.contact}</a>
@@ -245,7 +243,6 @@ export default function Header({ headerData, headerPhase }) {
         </nav>
       </nav>
       {isOpen && <CompareModal favSlider={headerPhase} setIsOpen={setIsOpen} />}
-    
     </header>
   );
 }

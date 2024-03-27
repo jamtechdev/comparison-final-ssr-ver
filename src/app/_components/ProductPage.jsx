@@ -742,7 +742,7 @@ function ProductPage({
                                 width={0}
                                 height={0}
                                 sizes="100%"
-                                alt="price"
+                                alt={item?.alt}
                               />
                             </a>
                             <span>
@@ -784,7 +784,7 @@ function ProductPage({
                                 width={0}
                                 height={0}
                                 sizes="100%"
-                                alt=""
+                                alt={item?.alt}
                               />
                               <p>
                                 N.{item.position} in{" "}
