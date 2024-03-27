@@ -26,7 +26,7 @@ function SinglePage({ singlePageData }) {
       <section className="contentSec pt-3 pb-5">
         <Container>
           <Row>
-            <Col md={12}>
+            <Col xl={9} lg={9} md={12}>
               <div
                 className="contentPara"
                 dangerouslySetInnerHTML={{
@@ -34,6 +34,7 @@ function SinglePage({ singlePageData }) {
                 }}
               ></div>
             </Col>
+            <Col xl={3} lg={3} md={12}></Col>
           </Row>
         </Container>
       </section>

@@ -24,6 +24,15 @@ function AboutPage({ slug, aboutData }) {
                   <h1 className="heading-primary">About us</h1>
                 </Col>
               </Row>
+            </Col>
+            <Col xl={3} lg={3} md={12}></Col>
+          </Row>
+        </Container>
+      </section>
+      <section className="py-4">
+        <Container>
+          <Row>
+            <Col xl={9} lg={9} md={12}>
               <Row>
                 <Col md={12}>
                   <div

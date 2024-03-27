@@ -1739,6 +1739,8 @@ export default function Product({
                                                                   !attributeValues.attribute_value.includes(
                                                                     "-"
                                                                   ) &&
+                                                                  attributeValues.hover_phase !==
+                                                                    "" &&
                                                                   "tooltip-title"
                                                                 }`}
                                                                 style={{
@@ -1876,7 +1878,12 @@ export default function Product({
                                                           attributeValues.attribute_value ==
                                                             "no") && (
                                                           <div
-                                                            className="tooltip-title"
+                                                            className={`${
+                                                              attributeValues?.hover_phase !==
+                                                              ""
+                                                                ? "tooltip-title"
+                                                                : ""
+                                                            }`}
                                                             style={{
                                                               color:
                                                                 attributeValues.attribute_value ==
@@ -1894,9 +1901,15 @@ export default function Product({
                                                                   : "#27304e",
                                                               fontSize: "15px",
                                                               textDecoration:
-                                                                "underline",
+                                                                attributeValues?.hover_phase !==
+                                                                ""
+                                                                  ? "underline"
+                                                                  : "",
                                                               textDecorationStyle:
-                                                                "dotted",
+                                                                attributeValues?.hover_phase !==
+                                                                ""
+                                                                  ? "dotted"
+                                                                  : "",
                                                               textDecorationThickness:
                                                                 "1.5px",
                                                               textDecorationColor:
@@ -2120,6 +2133,8 @@ export default function Product({
                                                                   !attributeValues.attribute_value.includes(
                                                                     "-"
                                                                   ) &&
+                                                                  attributeValues.hover_phase !==
+                                                                    "" &&
                                                                   "tooltip-title"
                                                                 }`}
                                                                 style={{
