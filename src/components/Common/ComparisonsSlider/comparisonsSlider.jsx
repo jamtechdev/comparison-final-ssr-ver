@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import formatValue from "@/_helpers/formatValue";
 
 export default function ComparisonsSlider(products) {
   const router = useRouter();
@@ -68,6 +69,9 @@ export default function ComparisonsSlider(products) {
       rating: "8.0",
     },
   ];
+  const filteredComparisons = products?.products?.filter(
+    (comparison) => comparison.verdict_text === null
+  );
   return (
     <section className="comparisons-slider">
       <Swiper
@@ -100,7 +104,7 @@ export default function ComparisonsSlider(products) {
         className="product-slider"
       >
         {products &&
-          products?.products?.map(function (item, index) {
+          filteredComparisons?.map(function (item, index) {
             return (
               <SwiperSlide key={index}>
                 <div
@@ -112,7 +116,7 @@ export default function ComparisonsSlider(products) {
                 >
                   <div className="comparisons-container">
                     <div className="comparisons-card">
-                      <Image
+                      <img
                         src={
                           item?.product_first_image
                             ? item?.product_first_image
@@ -134,7 +138,7 @@ export default function ComparisonsSlider(products) {
                           ),
                         }}
                       >
-                        {item?.product_first_overall_counted_score}
+                        {formatValue(item?.product_first_overall_counted_score)}
                       </span>
                     </div>
                     <div className="vs-divider">
@@ -163,14 +167,16 @@ export default function ComparisonsSlider(products) {
                           ),
                         }}
                       >
-                        {item?.product_second_overall_counted_score}
+                        {formatValue(
+                          item?.product_second_overall_counted_score
+                        )}
                       </span>
                     </div>
                     <div className="comparisons-footer">{item?.category}</div>
-                    <div className="comparisons-footer comparisons__footer__text">
+                    {/* <div className="comparisons-footer comparisons__footer__text">
                       <p>The Dyson V15 Detect is slightly better overall than the Dyson V8. The V15 has a slightly bigger dirt compartment, a surface-type adjustment feature, lasts longer on a single charge, and clears debris more effectively on all surface types. Meanwhile, the V8 is easier to pick up and carry and has fewer parts that require regular maintenance.</p>
                       <span>See full comparsion</span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </SwiperSlide>

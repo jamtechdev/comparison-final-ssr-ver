@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import formatValue from "@/_helpers/formatValue";
 
 export default function MainComparision(products) {
   const router = useRouter();
@@ -68,6 +69,10 @@ export default function MainComparision(products) {
       rating: "8.0",
     },
   ];
+
+  const filteredComparisons = products?.products?.filter(
+    (comparison) => comparison.verdict_text !== null
+  );
   return (
     <section className="comparisons-slider">
       <Swiper
@@ -100,15 +105,12 @@ export default function MainComparision(products) {
         className="product-slider"
       >
         {products &&
-          products?.products?.map(function (item, index) {
+          filteredComparisons?.map(function (item, index) {
             return (
               <SwiperSlide key={index}>
                 <div
                   className="comparisons-wrapper"
-                  onClick={() =>
-                    router.push(`/${item?.category_url}/${item?.permalink}`)
-                  }
-                  style={{ cursor: "pointer" }}
+                
                 >
                   <div className="comparisons-container">
                     <div className="comparisons-card">
@@ -123,6 +125,10 @@ export default function MainComparision(products) {
                         sizes="100%"
                         alt=""
                       />
+                      {item?.product_first_overall_counted_score >
+                        item?.product_second_overall_counted_score && (
+                        <div className="winner__badge">WINNER</div>
+                      )}
                       <div className="footer_content">
                         <span>{item?.product_first}</span>
                       </div>
@@ -134,14 +140,14 @@ export default function MainComparision(products) {
                           ),
                         }}
                       >
-                        {item?.product_first_overall_counted_score}
+                        {formatValue(item?.product_first_overall_counted_score)}
                       </span>
                     </div>
                     <div className="vs-divider">
                       <span>VS</span>
                     </div>
                     <div className="comparisons-card">
-                      <Image
+                      <img
                         src={
                           item?.product_second_image
                             ? item?.product_second_image
@@ -152,7 +158,11 @@ export default function MainComparision(products) {
                         sizes="100%"
                         alt=""
                       />
-                      <div className="winner__badge">WINNER</div>
+                      {item?.product_second_overall_counted_score >
+                        item?.product_first_overall_counted_scoret && (
+                        <div className="winner__badge">WINNER</div>
+                      )}
+
                       <div className="footer_content">
                         <span>{item?.product_second}</span>
                       </div>
@@ -164,21 +174,28 @@ export default function MainComparision(products) {
                           ),
                         }}
                       >
-                        {item?.product_second_overall_counted_score}
+                        {formatValue(
+                          item?.product_second_overall_counted_score
+                        )}
                       </span>
                     </div>
                     <div className="comparisons-footer">{item?.category}</div>
                     <div className="comparisons-footer comparisons__footer__text">
-                      <p>
-                        The Dyson V15 Detect is slightly better overall than the
-                        Dyson V8. The V15 has a slightly bigger dirt
-                        compartment, a surface-type adjustment feature, lasts
-                        longer on a single charge, and clears debris more
-                        effectively on all surface types. Meanwhile, the V8 is
-                        easier to pick up and carry and has fewer parts that
-                        require regular maintenance.
-                      </p>
-                      <span>See full comparsion</span>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: item?.verdict_text }}
+                      ></div>
+
+                      <span
+                        onClick={() =>
+                          window.open(
+                            `/${item?.category_url}/${item?.permalink}`,
+                            "_blank"
+                          )
+                        }
+                        style={{ cursor: "pointer" }}
+                      >
+                        See full comparsion
+                      </span>
                     </div>
                   </div>
                 </div>

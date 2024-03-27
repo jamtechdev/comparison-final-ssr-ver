@@ -1837,6 +1837,7 @@ function ProductPage({
                 <h2 className="site-main-heading">
                   {product?.page_phases?.popular_comparison}
                 </h2>
+                
                 <ComparisonsSlider
                   products={product && product?.alternative_comparisons}
                 />

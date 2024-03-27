@@ -1,6 +1,8 @@
+import { getAttributeProductHalf } from "@/_helpers";
 import React, { useEffect, useState } from "react";
 
 function ProductPageOutline({ product }) {
+  console.log(product, "productdetails");
   const [outline, setOutline] = useState([]);
   useEffect(() => {
     const headings = document
@@ -49,7 +51,64 @@ function ProductPageOutline({ product }) {
   }, []);
   return (
     <>
-     
+      {product &&
+        getAttributeProductHalf(product, "first") &&
+        Object.keys(getAttributeProductHalf(product, "first")).map(
+          (attribute, index) => {
+            return (
+              <>
+                {/* {console.log(
+                            product?.attributes[attribute][0]
+                          )} */}
+                <div>
+                  <ol className="ol-child">
+                    <li className="outlineList" id="attribute">
+                      {attribute}
+                      {product.attributes[attribute].map(
+                        (attributeValues, valueIndex) => (
+                          <ol key={valueIndex} className="ol-child">
+                            <li className="outlineList">
+                              {attributeValues.attribute}
+                            </li>
+                          </ol>
+                        )
+                      )}
+                    </li>
+                  </ol>
+                </div>
+              </>
+            );
+          }
+        )}
+      {product &&
+        getAttributeProductHalf(product, "second") &&
+        Object.keys(getAttributeProductHalf(product, "second")).map(
+          (attribute, index) => {
+            return (
+              <>
+                {/* {console.log(
+                            product?.attributes[attribute][0]
+                          )} */}
+                <div>
+                  <ol className="ol-child">
+                    <li className="outlineList">
+                      {attribute}
+                      {product.attributes[attribute].map(
+                        (attributeValues, valueIndex) => (
+                          <ol key={valueIndex} className="ol-child">
+                            <li className="outlineList">
+                              {attributeValues.attribute}
+                            </li>
+                          </ol>
+                        )
+                      )}
+                    </li>
+                  </ol>
+                </div>
+              </>
+            );
+          }
+        )}
     </>
   );
 }
