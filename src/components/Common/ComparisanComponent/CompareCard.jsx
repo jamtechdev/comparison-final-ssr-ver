@@ -70,7 +70,7 @@ const CompareCard = ({
           )}
 
           <div className="comparison-card">
-            <Image
+            <img
               src={
                 compareProduct?.main_image
                   ? compareProduct?.main_image
@@ -110,7 +110,7 @@ const CompareCard = ({
             {compareProduct?.price_websites?.length > 0 ? (
               <>
                 <div className="comparison-product-item">
-                  <Image
+                  <img
                     src={
                       compareProduct?.price_websites[0]?.price != null &&
                       compareProduct?.price_websites[0]?.logo === null
@@ -127,7 +127,7 @@ const CompareCard = ({
                   )}
                 </div>
                 <div className="comparison-product-item">
-                  <Image
+                  <img
                     src={
                       compareProduct?.price_websites[1]?.logo === null
                         ? "/images/No-Image.png"
