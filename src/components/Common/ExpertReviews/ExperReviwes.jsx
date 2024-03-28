@@ -87,7 +87,7 @@ function ExperReviwes({ expertReview }) {
         className="expert_reviews_slider"
       >
         {expertReview?.map((data, index) => {
-          console.log(data);
+          // console.log(data);
           const [isExpanded, setIsExpanded] = useState(false);
           const [isTranslating, setIsTranslating] = useState(false);
           const maxLength = 385;
