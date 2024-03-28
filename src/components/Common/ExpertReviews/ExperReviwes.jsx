@@ -203,9 +203,15 @@ function ExperReviwes({ expertReview }) {
                   )}
                 </div>
                 <div className="review__card-footer">
-                  <span onClick={toggleTranslate} style={{ cursor: "pointer" }}>
-                    {isTranslating ? "Show original" : "Translate"}
-                  </span>
+                  {data?.language !== true && (
+                    <span
+                      onClick={toggleTranslate}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {isTranslating ? "Show original" : "Translate"}
+                    </span>
+                  )}
+
                   <small>{data?.date_of_review}</small>
                 </div>
               </div>
