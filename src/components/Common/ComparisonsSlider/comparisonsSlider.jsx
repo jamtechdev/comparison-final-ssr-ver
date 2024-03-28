@@ -125,7 +125,7 @@ export default function ComparisonsSlider(products) {
                         width={0}
                         height={0}
                         sizes="100%"
-                        alt=""
+                        alt={item?.product_first}
                       />
                       <div className="footer_content">
                         <span>{item?.product_first}</span>
@@ -145,7 +145,7 @@ export default function ComparisonsSlider(products) {
                       <span>VS</span>
                     </div>
                     <div className="comparisons-card">
-                      <Image
+                      <img
                         src={
                           item?.product_second_image
                             ? item?.product_second_image
@@ -154,7 +154,7 @@ export default function ComparisonsSlider(products) {
                         width={0}
                         height={0}
                         sizes="100%"
-                        alt=""
+                        alt={item?.product_second_image}
                       />
                       <div className="footer_content">
                         <span>{item?.product_second}</span>

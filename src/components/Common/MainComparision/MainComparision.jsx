@@ -111,7 +111,7 @@ export default function MainComparision(products) {
                 <div className="comparisons-wrapper">
                   <div className="comparisons-container">
                     <div className="comparisons-card">
-                      <Image
+                      <img
                         src={
                           item?.product_first_image
                             ? item?.product_first_image
@@ -120,7 +120,7 @@ export default function MainComparision(products) {
                         width={0}
                         height={0}
                         sizes="100%"
-                        alt=""
+                        alt={item?.product_first}
                       />
                       {item?.product_first_overall_counted_score >
                         item?.product_second_overall_counted_score && (
@@ -153,7 +153,7 @@ export default function MainComparision(products) {
                         width={0}
                         height={0}
                         sizes="100%"
-                        alt=""
+                        alt={item?.product_second}
                       />
                       {item?.product_second_overall_counted_score >
                         item?.product_first_overall_counted_scoret && (
@@ -197,7 +197,7 @@ export default function MainComparision(products) {
       <span className="swiper-prev">
         <i className="ri-arrow-left-s-line"></i>
       </span>
-      <span className="swiper-next">
+      <span className="swiper-next">  
         <i className="ri-arrow-right-s-line"></i>
       </span>
     </section>

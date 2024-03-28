@@ -812,7 +812,7 @@ function ProductPage({
               </div>
             </Col>
             {/* {console.log(product,"neety")} */}
-            <span className="testing__text text-center">
+            <span className="testing__text text-end">
               <i>{product?.text_under_ranking}</i>
             </span>
 

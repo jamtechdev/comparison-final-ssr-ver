@@ -61,7 +61,7 @@ export default function ReviewSlider({ favSlider }) {
                       width={0}
                       height={0}
                       sizes="100%"
-                      alt={`/${url}/${item?.permalink}`}
+                      alt={`${item?.permalink}`}
                     />
                     <div className="footer_content">
                       <span>{item?.name}</span>

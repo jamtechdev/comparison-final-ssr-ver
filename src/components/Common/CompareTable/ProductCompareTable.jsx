@@ -308,7 +308,7 @@ const ProductCompareTable = React.memo(
                         }
                         width={0}
                         height={0}
-                        alt={`${product?.category_url}/${product?.permalink}`}
+                        alt={`${product?.permalink}`}
                         sizes="100%"
                       />
                     </p>
@@ -400,7 +400,7 @@ const ProductCompareTable = React.memo(
                       }
                       width={0}
                       height={0}
-                      alt={`${product?.category_url}/${product?.permalink}`}
+                      alt={`${product?.permalink}`}
                       sizes="100%"
                     />
                   </td>
