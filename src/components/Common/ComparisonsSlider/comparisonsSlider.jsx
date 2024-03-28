@@ -154,7 +154,7 @@ export default function ComparisonsSlider(products) {
                         width={0}
                         height={0}
                         sizes="100%"
-                        alt={item?.product_second_image}
+                        alt={item?.product_second}
                       />
                       <div className="footer_content">
                         <span>{item?.product_second}</span>
