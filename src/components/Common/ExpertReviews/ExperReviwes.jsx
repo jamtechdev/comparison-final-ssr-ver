@@ -87,10 +87,14 @@ function ExperReviwes({ expertReview }) {
         className="expert_reviews_slider"
       >
         {expertReview?.map((data, index) => {
+          console.log(data);
+          const [isExpanded, setIsExpanded] = useState(false);
+          const [isTranslating, setIsTranslating] = useState(false);
           const maxLength = 385;
           const isLong = data?.comment?.length > maxLength;
           let truncatedComment = data?.comment;
-          const [isExpanded, setIsExpanded] = useState(false);
+          const isTransLong = data?.translation?.length > maxLength;
+          let truncatedTranslation = data?.translation;
 
           if (!isExpanded && isLong) {
             const lastSpaceIndex = truncatedComment.lastIndexOf(" ", maxLength);
@@ -102,6 +106,9 @@ function ExperReviwes({ expertReview }) {
 
           const toggleExpand = () => {
             setIsExpanded(!isExpanded);
+          };
+          const toggleTranslate = () => {
+            setIsTranslating(!isTranslating);
           };
 
           return (
@@ -137,8 +144,44 @@ function ExperReviwes({ expertReview }) {
                 </div>
                 <div className="review__card-body">
                   <p>
-                    {isExpanded ? data?.comment : truncatedComment}
-                    {isLong && (
+                    {isTranslating && data?.translation
+                      ? isTransLong
+                        ? truncatedTranslation
+                        : data?.translation
+                      : isLong
+                      ? truncatedComment
+                      : data?.comment}
+                    {isTranslating && isTransLong  ? (
+                      <span
+                        onClick={toggleExpand}
+                        className="btn btn-link"
+                        style={{
+                          textDecoration: "none",
+                          fontWeight: "600",
+                          padding: "0px",
+                          color: "#071b42",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {isExpanded ? "Read less" : "Read more"}
+                      </span>
+                    ):isLong && (
+                      <span
+                        onClick={toggleExpand}
+                        className="btn btn-link"
+                        style={{
+                          textDecoration: "none",
+                          fontWeight: "600",
+                          padding: "0px",
+                          color: "#071b42",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {isExpanded ? "Read less" : "Read more"}
+                      </span>
+                    )}
+                    
+                    {isTransLong && (
                       <span
                         onClick={toggleExpand}
                         className="btn btn-link"
@@ -156,7 +199,9 @@ function ExperReviwes({ expertReview }) {
                   </p>
                 </div>
                 <div className="review__card-footer">
-                  <span>translate</span>
+                  <span onClick={toggleTranslate} style={{ cursor: "pointer" }}>
+                    {isTranslating ? "Show original" : "Translate"}
+                  </span>
                   <small>{data?.date_of_review}</small>
                 </div>
               </div>
