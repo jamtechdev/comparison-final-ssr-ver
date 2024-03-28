@@ -182,15 +182,10 @@ export default function MainComparision(products) {
                         dangerouslySetInnerHTML={{ __html: item?.verdict_text }}
                       ></div>
 
-                      <span
-                        onClick={() =>
-                          window.open(
-                            `/${item?.category_url}/${item?.permalink}`
-                          )
-                        }
-                        style={{ cursor: "pointer" }}
-                      >
-                        See full comparsion
+                      <span style={{ cursor: "pointer" }}>
+                        <a href={`/${item?.category_url}/${item?.permalink}`}>
+                          See full comparsion
+                        </a>
                       </span>
                     </div>
                   </div>

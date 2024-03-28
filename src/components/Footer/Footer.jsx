@@ -135,14 +135,19 @@ export default function Footer({ footerData }) {
                     src="/images/location.svg"
                     width={20}
                     height={20}
-                    alt=""
+                    alt={footerData?.column_two?.address}
                   />
                   <p>{footerData?.column_two?.address}</p>
                 </div>
               )}
               {footerData?.column_two?.phone && (
                 <div className="inner-item">
-                  <img src="/images/call.svg" width={20} height={20} alt="" />
+                  <img
+                    src="/images/call.svg"
+                    width={20}
+                    height={20}
+                    alt={footerData?.column_two?.phone}
+                  />
                   <p>{footerData?.column_two?.phone}</p>
                 </div>
               )}
@@ -152,7 +157,7 @@ export default function Footer({ footerData }) {
                     src="/images/message.svg"
                     width={20}
                     height={20}
-                    alt=""
+                    alt={footerData?.column_two?.email}
                   />
                   <p>{footerData?.column_two?.email}</p>
                 </div>

@@ -992,7 +992,6 @@ const TechnicalAccordion = React.memo(
                                         attributeValues.attribute_value !=
                                           "no" && (
                                           <>
-                                            {console.log()}
                                             <div
                                               className={`${
                                                 attributeValues.attribute_value !==

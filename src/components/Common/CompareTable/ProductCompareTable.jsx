@@ -199,6 +199,7 @@ const ProductCompareTable = React.memo(
                       <img
                         style={{ float: "right", paddingRight: "5px" }}
                         src="/icons/star.png"
+                        alt="star"
                       />
                       <ProsConsToolTip hover_phrase={item.start_phase} />
                     </span>
@@ -307,7 +308,7 @@ const ProductCompareTable = React.memo(
                         }
                         width={0}
                         height={0}
-                        alt=""
+                        alt={`${product?.category_url}/${product?.permalink}`}
                         sizes="100%"
                       />
                     </p>
@@ -353,7 +354,7 @@ const ProductCompareTable = React.memo(
                                                   width={0}
                                                   height={0}
                                                   sizes="100vw"
-                                                  alt="price"
+                                                  alt={data?.alt}
                                                 />
                                               </Link>
                                               <span>
@@ -399,7 +400,7 @@ const ProductCompareTable = React.memo(
                       }
                       width={0}
                       height={0}
-                      alt=""
+                      alt={`${product?.category_url}/${product?.permalink}`}
                       sizes="100%"
                     />
                   </td>
@@ -446,7 +447,7 @@ const ProductCompareTable = React.memo(
                                                 width={0}
                                                 height={0}
                                                 sizes="100vw"
-                                                alt="price"
+                                                alt={data?.alt}
                                               />
                                             </Link>
                                             <span>

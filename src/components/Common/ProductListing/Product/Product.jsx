@@ -319,7 +319,7 @@ export default function Product({
               }
               width={0}
               height={0}
-              alt=""
+              alt={`${product?.category_url}/${product?.permalink}`}
               sizes="100%"
             />
             {product?.is_tested && (
@@ -698,7 +698,7 @@ export default function Product({
                                             width={0}
                                             height={0}
                                             sizes="100vw"
-                                            alt=""
+                                            alt={data?.alt}
                                           />
                                         </a>
                                         <span>
@@ -822,7 +822,7 @@ export default function Product({
                     width={0}
                     height={0}
                     sizes="100%"
-                    alt=""
+                    alt="double-arrow"
                   />
                   {/* {console.log(filteredTech_data[0]?.data)} */}
 
@@ -921,7 +921,7 @@ export default function Product({
                       width={0}
                       height={0}
                       sizes="100%"
-                      alt=""
+                      alt="double-arrow"
                     />
                     {/* {console.log(filteredTech_data[0]?.data)} */}
 
@@ -1159,7 +1159,7 @@ export default function Product({
                             width={0}
                             height={0}
                             sizes="100%"
-                            alt=""
+                            alt="double-arrow"
                           />
                           <div className="ranking-item-list-sec">
                             {product?.guide_ratings
@@ -2072,10 +2072,10 @@ export default function Product({
                                               : "#85B2F1",
                                         }}
                                       >
-                                        {
+                                        {formatValue(
                                           product.attributes_new[attribute][0]
                                             ?.attribute_evaluation
-                                        }
+                                        )}
                                       </span>
                                       <div className="show-btn">
                                         Show All{" "}

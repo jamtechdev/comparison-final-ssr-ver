@@ -116,6 +116,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
         });
     }
   }, [categoryId]);
+  // console.log(reduxData?.productFirst);
 
   return (
     <section className="add-product-modal">
@@ -150,58 +151,60 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
               <h2 className="site-main-heading">Often Compared With...</h2>
             </Col>
           </Row>
-          <Row>
-            {oftenProducts?.map(function (item, index) {
-              return (
-                <Col
-                  xl={2}
-                  lg={3}
-                  md={4}
-                  sm={6}
-                  xs={6}
-                  className="my-3"
-                  key={index}
-                  onClick={() => handelOffenProductClick(item, index + 1)}
-                >
-                  <div className="review-wrapper">
-                    <div className="review-card">
-                      <img
-                        src={
-                          item?.main_image === null
-                            ? "/images/nofound.png"
-                            : item?.main_image
-                        }
-                        width={0}
-                        height={0}
-                        sizes="100%"
-                        alt="Not Found"
-                      />
+          {reduxData?.productFirst !== null && (
+            <Row>
+              {oftenProducts?.map(function (item, index) {
+                return (
+                  <Col
+                    xl={2}
+                    lg={3}
+                    md={4}
+                    sm={6}
+                    xs={6}
+                    className="my-3"
+                    key={index}
+                    onClick={() => handelOffenProductClick(item, index + 1)}
+                  >
+                    <div className="review-wrapper">
+                      <div className="review-card">
+                        <img
+                          src={
+                            item?.main_image === null
+                              ? "/images/nofound.png"
+                              : item?.main_image
+                          }
+                          width={0}
+                          height={0}
+                          sizes="100%"
+                          alt="Not Found"
+                        />
 
-                      <div className="footer_content">
-                        <span>{item?.name || ""}</span>
-                        {/* <p dangerouslySetInnerHTML={{ __html: item?.text_part}}></p> */}
-                        <p>{item?.category || ""}</p>
+                        <div className="footer_content">
+                          <span>{item?.name || ""}</span>
+                          {/* <p dangerouslySetInnerHTML={{ __html: item?.text_part}}></p> */}
+                          <p>{item?.category || ""}</p>
+                        </div>
+                        <span
+                          className="rating_count"
+                          style={{
+                            background:
+                              item?.overall_score >= 7.5
+                                ? "#093673"
+                                : item?.overall_score >= 5 &&
+                                  item?.overall_score < 7.5
+                                ? "#437ECE"
+                                : " #85B2F1",
+                          }}
+                        >
+                          {item?.overall_score || ""}
+                        </span>
                       </div>
-                      <span
-                        className="rating_count"
-                        style={{
-                          background:
-                            item?.overall_score >= 7.5
-                              ? "#093673"
-                              : item?.overall_score >= 5 &&
-                                item?.overall_score < 7.5
-                              ? "#437ECE"
-                              : " #85B2F1",
-                        }}
-                      >
-                        {item?.overall_score || ""}
-                      </span>
                     </div>
-                  </div>
-                </Col>
-              );
-            })}
-          </Row>
+                  </Col>
+                );
+              })}
+            </Row>
+          )}
         </Container>
       )}
     </section>

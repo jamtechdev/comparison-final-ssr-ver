@@ -254,7 +254,7 @@ function ProductPage({
                         width={0}
                         height={0}
                         sizes="100%"
-                        alt=""
+                        alt="author"
                       />
                     )}
                     <div className="user-detail">
@@ -283,7 +283,7 @@ function ProductPage({
                     width={0}
                     height={0}
                     sizes="100%"
-                    alt=""
+                    alt="double-arrow"
                   />
                   <ul>
                     {/* {console.log(product?.tech_data)} */}
@@ -603,7 +603,7 @@ function ProductPage({
                     width={0}
                     height={0}
                     sizes="100%"
-                    alt=""
+                    alt="double-arrow"
                   />
                   {/* {console.log(filteredTech_data[0]?.data)} */}
 
@@ -784,7 +784,7 @@ function ProductPage({
                                 width={0}
                                 height={0}
                                 sizes="100%"
-                                alt={item?.alt}
+                                alt={"double-arrow"}
                               />
                               <p>
                                 N.{item.position} in{" "}
@@ -1612,7 +1612,7 @@ function ProductPage({
                                             width={0}
                                             height={0}
                                             sizes="100%"
-                                            alt=""
+                                            alt={item?.alt}
                                           />
                                         </a>
                                         <span>
@@ -1651,7 +1651,7 @@ function ProductPage({
                                             width={0}
                                             height={0}
                                             sizes="100%"
-                                            alt=""
+                                            alt="double-arrow"
                                           />
                                           {/* {console.log(item)} */}
                                           <p>

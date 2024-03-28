@@ -182,6 +182,7 @@ export default function ComparisonTable({
                     <img
                       style={{ float: "right", paddingRight: "5px" }}
                       src="/icons/star.png"
+                      alt="star"
                     />
                     <ProsConsToolTip hover_phrase={item.start_phase} />
                   </span>

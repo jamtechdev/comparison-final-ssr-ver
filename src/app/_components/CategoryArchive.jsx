@@ -26,7 +26,7 @@ function CategoryArchive({ slug, ArchiveData }) {
           </Row>
         </Container>
       </section>
-      {console.log(ArchiveData[0]?.data)}
+      {/* {console.log(ArchiveData[0]?.data)} */}
       <section className="blog_post_section py-5">
         <Container>
           {ArchiveData[0].data &&

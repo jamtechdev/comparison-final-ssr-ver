@@ -370,7 +370,7 @@ export default function GuidePage({
                         width={0}
                         height={0}
                         sizes="100%"
-                        alt=""
+                        alt="author"
                       />
                     )}
 

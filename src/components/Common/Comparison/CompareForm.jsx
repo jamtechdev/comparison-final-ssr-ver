@@ -133,7 +133,7 @@ export default function CompareForm({
         }
         return 0;
       });
-      console.log(sortedPermalinksArray);
+      // console.log(sortedPermalinksArray);
       const permalinks = sortedPermalinksArray.map((item) => item.permalink);
       const permalinkSlug = permalinks.join("-vs-");
       dispatch(addCompareProduct(formFields));

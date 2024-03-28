@@ -8,7 +8,7 @@ import { useCallback, useState } from "react";
 import Tested from "../Tested/Tested";
 
 export default function ThumbSlider({ productData, is_tested,slug }) {
-  console.log(slug)
+  // console.log(slug)
   const product = [
     {
       image: "/images/nofound.png",
@@ -174,7 +174,7 @@ export default function ThumbSlider({ productData, is_tested,slug }) {
                   width={0}
                   height={0}
                   sizes="100%"
-                  alt=""
+                  alt={`${slug}`}
                 />
               </SwiperSlide>
             ))}

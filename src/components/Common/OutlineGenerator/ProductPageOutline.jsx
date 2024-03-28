@@ -2,7 +2,7 @@ import { getAttributeProductHalf } from "@/_helpers";
 import React, { useEffect, useState } from "react";
 
 function ProductPageOutline({ product }) {
-  console.log(product, "productdetails");
+  // console.log(product, "productdetails");
   const [outline, setOutline] = useState([]);
   useEffect(() => {
     const headings = document

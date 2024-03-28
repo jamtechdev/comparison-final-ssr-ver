@@ -42,6 +42,19 @@ function ExperReviwes({ expertReview }) {
     }
   };
 
+  const ExpertReviewsSlider = ({ expertReview }) => {
+    const [language, setLanguage] = useState("EN");
+
+    const getTranslatedText = (text) => {
+      // Assume you have a function to get translated text based on the language
+      // For simplicity, I'll use a simple object for translation
+      const translations = {
+        EN: "Translate",
+        FN: "Translated Text",
+      };
+      return translations[text] || text;
+    };
+  };
   return (
     <>
       <Swiper
