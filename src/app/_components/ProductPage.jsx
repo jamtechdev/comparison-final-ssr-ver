@@ -1591,7 +1591,10 @@ function ProductPage({
                       <Row className="mt-3">
                         <Col md={12} lg={6}>
                           <div className="best-price-section mobile-best-price-section">
-                            <h3 className="site-main-heading">Best Prices</h3>
+                            <h3 className="site-main-heading">
+                              {" "}
+                              {product && product?.page_phases?.best_prices}
+                            </h3>
                             <ul className="best-list-item">
                               {product &&
                                 product?.price_websites
@@ -1637,7 +1640,9 @@ function ProductPage({
                         </Col>
                         <Col md={12} lg={6}>
                           <div className="best-price-section mobile-best-price-section ranking">
-                            <h3 className="site-main-heading">Best Rankings</h3>
+                            <h3 className="site-main-heading">
+                              {product && product?.page_phases?.best_rankings}
+                            </h3>
                             <ul className="best-list-item">
                               {product &&
                                 product?.guide_ratings
