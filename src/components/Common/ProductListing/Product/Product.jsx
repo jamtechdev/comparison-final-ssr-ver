@@ -319,7 +319,7 @@ export default function Product({
               }
               width={0}
               height={0}
-              alt={`${product?.category_url}/${product?.permalink}`}
+              alt={`${product?.permalink}`}
               sizes="100%"
             />
             {product?.is_tested && (
