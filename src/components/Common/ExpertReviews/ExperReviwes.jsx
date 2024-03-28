@@ -89,13 +89,23 @@ function ExperReviwes({ expertReview }) {
         {expertReview?.map((data, index) => {
           // console.log(data);
           const [isExpanded, setIsExpanded] = useState(false);
+          const [isTranslateExpanded, setIsTranslateExpanded] = useState(false);
           const [isTranslating, setIsTranslating] = useState(false);
           const maxLength = 385;
           const isLong = data?.comment?.length > maxLength;
           let truncatedComment = data?.comment;
           const isTransLong = data?.translation?.length > maxLength;
           let truncatedTranslation = data?.translation;
-
+          if (isTranslateExpanded && isTransLong) {
+            const lastSpaceIndex = truncatedTranslation.lastIndexOf(
+              " ",
+              maxLength
+            );
+            truncatedTranslation =
+              lastSpaceIndex > 0
+                ? truncatedTranslation.substring(0, lastSpaceIndex) + "..."
+                : truncatedTranslation.substring(0, maxLength) + "...";
+          }
           if (!isExpanded && isLong) {
             const lastSpaceIndex = truncatedComment.lastIndexOf(" ", maxLength);
             truncatedComment =
@@ -106,6 +116,9 @@ function ExperReviwes({ expertReview }) {
 
           const toggleExpand = () => {
             setIsExpanded(!isExpanded);
+          };
+          const toggleTranslateExpand = () => {
+            setIsTranslateExpanded(!isTranslateExpanded);
           };
           const toggleTranslate = () => {
             setIsTranslating(!isTranslating);
@@ -143,60 +156,51 @@ function ExperReviwes({ expertReview }) {
                   </div>
                 </div>
                 <div className="review__card-body">
-                  <p>
-                    {isTranslating && data?.translation
-                      ? isTransLong
-                        ? truncatedTranslation
-                        : data?.translation
-                      : isLong
-                      ? truncatedComment
-                      : data?.comment}
-                    {isTranslating && isTransLong  ? (
-                      <span
-                        onClick={toggleExpand}
-                        className="btn btn-link"
-                        style={{
-                          textDecoration: "none",
-                          fontWeight: "600",
-                          padding: "0px",
-                          color: "#071b42",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {isExpanded ? "Read less" : "Read more"}
-                      </span>
-                    ):isLong && (
-                      <span
-                        onClick={toggleExpand}
-                        className="btn btn-link"
-                        style={{
-                          textDecoration: "none",
-                          fontWeight: "600",
-                          padding: "0px",
-                          color: "#071b42",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {isExpanded ? "Read less" : "Read more"}
-                      </span>
-                    )}
-                    
-                    {isTransLong && (
-                      <span
-                        onClick={toggleExpand}
-                        className="btn btn-link"
-                        style={{
-                          textDecoration: "none",
-                          fontWeight: "600",
-                          padding: "0px",
-                          color: "#071b42",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {isExpanded ? "Read less" : "Read more"}
-                      </span>
-                    )}
-                  </p>
+                  {isTranslating ? (
+                    <>
+                      <p>
+                        {isTranslateExpanded
+                          ? data?.translation
+                          : truncatedTranslation}
+                        {isTransLong && (
+                          <span
+                            onClick={toggleTranslateExpand}
+                            className="btn btn-link"
+                            style={{
+                              textDecoration: "none",
+                              fontWeight: "600",
+                              padding: "0px",
+                              color: "#071b42",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {isTranslateExpanded ? "Read less" : "Read more"}
+                          </span>
+                        )}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p>
+                        {isExpanded ? data?.comment : truncatedComment}
+                        {isLong && (
+                          <span
+                            onClick={toggleExpand}
+                            className="btn btn-link"
+                            style={{
+                              textDecoration: "none",
+                              fontWeight: "600",
+                              padding: "0px",
+                              color: "#071b42",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {isExpanded ? "Read less" : "Read more"}
+                          </span>
+                        )}
+                      </p>
+                    </>
+                  )}
                 </div>
                 <div className="review__card-footer">
                   <span onClick={toggleTranslate} style={{ cursor: "pointer" }}>
