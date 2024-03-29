@@ -1914,6 +1914,14 @@ h4.attribute__title{
   font-style: italic;
 }
 
+.expert_reviews_slider .swiper-slide {
+  height: auto !important;
+}
+
+.expert_reviews_slider .swiper-slide .review__card{
+  height: 100% !important;
+}
+
 /* price-image-section-css-start */
 
 .best-price-section:not(.ranking) .best-list-item li:not(.d-flex),
