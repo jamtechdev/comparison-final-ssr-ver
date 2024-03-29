@@ -55,6 +55,14 @@ function ExperReviwes({ expertReview }) {
       return translations[text] || text;
     };
   };
+  const extractDomainName = (url) => {
+    const domain = url
+      .replace("https://", "")
+      .replace("http://", "")
+      .replace("www.", "")
+      .split(/[/?#]/)[0];
+    return domain;
+  };
   return (
     <>
       <Swiper
@@ -131,7 +139,9 @@ function ExperReviwes({ expertReview }) {
                   <div className="review__name">
                     {data?.image !== null && <img src={`${data?.image}`} />}
 
-                    <h6>{data?.name}</h6>
+                    <h6>
+                      {data?.name !== null ? data?.name : <a href={data?.website_name} style={{color:"inherit"}}> {extractDomainName(data?.website_name)}</a>}
+                    </h6>
                   </div>
                   <div className="review__rating">
                     {typeof data?.evaluation === "string" ? (
@@ -220,10 +230,10 @@ function ExperReviwes({ expertReview }) {
         })}
         {expertReview?.length > 3 ? (
           <>
-            <span className="swiper-prev">
+            <span className="swiper-prev" style={{ left: "0px" }}>
               <i className="ri-arrow-left-s-line"></i>
             </span>
-            <span className="swiper-next">
+            <span className="swiper-next" style={{ right: "0px" }}>
               <i className="ri-arrow-right-s-line"></i>
             </span>
           </>

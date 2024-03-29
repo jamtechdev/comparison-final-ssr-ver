@@ -811,9 +811,9 @@ function ProductPage({
                 )}
               </div>
             </Col>
-            {/* {console.log(product,"neety")} */}
+            {/* {console.log(product?.text_under_ranking,"neety")} */}
             <span className="testing__text text-end">
-              <i>{product?.text_under_ranking}</i>
+              <i>{product?.page_phases?.text_under_ranking}</i>
             </span>
 
             {product?.available_colors?.length !== 0 && (
