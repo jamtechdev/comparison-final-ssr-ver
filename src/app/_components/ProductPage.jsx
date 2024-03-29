@@ -25,7 +25,7 @@ import ComparisonsSlider from "@/components/Common/ComparisonsSlider/comparisons
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 import CompareForm from "@/components/Common/Comparison/CompareForm";
 import ReviewSlider from "@/components/Common/ReviewSlider/reviewSlider";
-import { searchForPatternAndReplace } from "@/hooks/useChart";
+import useChart, { searchForPatternAndReplace } from "@/hooks/useChart";
 import Rating from "@/components/Common/Rating/Rating";
 import ProductBottomBar from "@/components/Common/ProductBottomBar/ProductBottomBar";
 import LineChart from "@/_chart/LineChart/LineChart";
@@ -225,6 +225,7 @@ function ProductPage({
   return (
     <>
       {/* {console.log(product?.text_under_ranking)} */}
+      <div>{useChart()}</div>
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
