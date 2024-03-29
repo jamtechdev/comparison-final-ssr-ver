@@ -9,7 +9,7 @@ import CorrelationChart from "../_chart/CorrelationChart";
 import { ChartName } from "../_chart/data/enums/ChartName.ts";
 
 export const searchForPatternAndReplace = (data) => {
-  console.log(data)
+  // console.log(data)
   const shortCodePatternsRE =
     /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)[^\]]*\]/g;
 
@@ -101,7 +101,7 @@ const useChart = () => {
             // console.log(
             //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
             // );
-            console.log(shortCodesMatched[indx].pattern)
+            // console.log(shortCodesMatched[indx].pattern)
             if (numberOfChartAppends == 1) {
               if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
                 root.render(

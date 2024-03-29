@@ -17,6 +17,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ConfirmationModal from "@/components/Common/Modal/ConfirmationModal";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 import GuidePageTextArea from "@/components/Common/GuidePageOutline/GuidePageTextArea";
+import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
 export default function GuidePage({
   slug,
   categorySlug,
@@ -153,6 +154,7 @@ export default function GuidePage({
     });
   }, [searchParams]);
   const handleSort = (sortAttribute) => {
+    // console.log(sortAttribute, "neet");
     let param = JSON.parse(sortAttribute);
 
     // console.log(param.rangeAttributes);
@@ -168,62 +170,11 @@ export default function GuidePage({
           ischecked: true,
         };
       });
-
-      // setorder(sortValue);
-      // searchParam.set("sort", sortValue);
-      // searchParams.sort = sortValue;
-      // setparams((prev) => {
-      //   return {
-      //     ...prev,
-      //     sort: `${param.algo},${param.rangeAttributes}`,
-      //   };
-      // });
-      // const newUrl = `${currentUrl.origin}${
-      //   currentUrl.pathname
-      // }?${searchParam.toString()}`;
-      // searchParams.sort = `${param.algo},${param.rangeAttributes}`;
-      // window.history.pushState({ path: newUrl }, "", newUrl);
     } else {
       removeQueryParamAndNavigate(window.location.href, "sort");
       delete searchParams.sort;
     }
-
-    // sortRangeAttribute.current = JSON.parse(sortAttribute);
-    // setFilteredProducts([
-    //   ...filterProducts(
-    //     filterObj,
-    //     guide.products,
-    //     sortRangeAttribute.current
-    //   ),
-    // ]);
-    // console.log(JSON.parse(sortAttribute))
   };
-
-  // if (products.length === 0) {
-  //   if (products.length <= 0 && !currentParams.variant) {
-  //     const queryString = Object.keys(searchParams)
-  //       .map((key) => key + "=" + encodeURI(searchParams[key]))
-  //       .join("&");
-  //     window.history.pushState(
-  //       {},
-  //       "",
-  //       `?${queryString}&variant=true&direct=true`
-  //     );
-  //     router.push(`?${queryString}&variant=true&direct=true`, {
-  //       scroll: false,
-  //     });
-  //   }
-  // }
-
-  // When initial product load than store in local storage
-  // this code is  only for testing when will  API create than remove  this code
-  // useEffect(() => {
-  //   if (!localStorage.getItem("products")) {
-  //     localStorage.setItem("products", JSON.stringify(products));
-  //   }
-  // }, []);
-  // console.log(products, "allproduct");
-
   const [showModal, setShowModal] = useState(true);
   const handleModalClose = () => {
     setShowModal(false);
@@ -339,6 +290,14 @@ export default function GuidePage({
   const sortedData = swapPriceWebsites(products);
 
   // console.log(sortedData);
+
+  // toggle mobile filter
+  const openClick = (event) => {
+    setIsShown(true);
+  };
+  const closeClick = (event) => {
+    setIsShown(false);
+  };
 
   return (
     <>
@@ -478,7 +437,10 @@ export default function GuidePage({
               setremovedParam={setremovedParam}
             />
             <div className="desktop-hide">
-              <Button className="site_main_btn w-100 d-block btn-icon mb-4">
+              <Button
+                className="site_main_btn w-100 d-block btn-icon mb-4"
+                onClick={closeClick}
+              >
                 <i className="ri-close-fill"></i>
                 Close Filter
               </Button>
@@ -486,7 +448,7 @@ export default function GuidePage({
           </Col>
           <Col md={12} lg={9} xl={9} className="main-content">
             <Row className="mobile-hide"></Row>
-            <Row className="desktop-hide">
+            <Row className="desktop-hide" onClick={openClick}>
               <Col sm={6} xs={6}>
                 <Button className="site_main_btn w-100 d-block btn-icon">
                   <i className="ri-filter-line"></i>
@@ -494,7 +456,17 @@ export default function GuidePage({
                 </Button>
               </Col>
               <Col sm={6} xs={6}>
-                <span className="filter-data">
+                <span
+                  className="filter-data"
+                  onClick={() =>
+                    handleSort(
+                      JSON.stringify({
+                        algo: "high-low",
+                        rangeAttributes: "ratio_quality_price_points",
+                      })
+                    )
+                  }
+                >
                   Ratio Quality Price{" "}
                   <div>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -785,6 +757,15 @@ export default function GuidePage({
               </div>
             </Col>
           </Row>
+          {/* <section className="mobile-table-section">
+            <Container>
+              <Row className="table-section-desktop p-0">
+                <Col md={12} className="p-0">
+                  <MobileCompareTable />
+                </Col>
+              </Row>
+            </Container>
+          </section> */}
           <Row className="table-section-mobile">
             <Col md={12}>
               <h2 className="site-main-heading pt-5">
@@ -804,7 +785,7 @@ export default function GuidePage({
           </Row>
         </Container>
       </section>
-      {/* Isko baad mai sahi karna hai <section className="mobile-table-section">
+      {/* <section>
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">

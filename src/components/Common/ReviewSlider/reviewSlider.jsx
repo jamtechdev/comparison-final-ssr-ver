@@ -5,9 +5,10 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 export default function ReviewSlider({ favSlider }) {
-  // console.log(favSlider);
+  console.log(favSlider);
   // if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {
@@ -15,6 +16,8 @@ export default function ReviewSlider({ favSlider }) {
     }
     return value;
   };
+
+  const { isMobile } = useScreenSize();
   return (
     <section className="review-slider">
       <Swiper
@@ -28,7 +31,7 @@ export default function ReviewSlider({ favSlider }) {
           nextEl: ".review-slider .swiper-next",
           prevEl: ".review-slider .swiper-prev",
         }}
-        pagination={true}
+        pagination={favSlider?.length > 1 ? true : false}
         breakpoints={{
           320: {
             slidesPerView: 2,
@@ -87,29 +90,28 @@ export default function ReviewSlider({ favSlider }) {
             </SwiperSlide>
           );
         })}
+        {isMobile
+          ? favSlider?.length > 2 && (
+              <>
+                <span className="swiper-prev">
+                  <i className="ri-arrow-left-s-line"></i>
+                </span>
+                <span className="swiper-next">
+                  <i className="ri-arrow-right-s-line"></i>
+                </span>
+              </>
+            )
+          : favSlider?.length > 6 && (
+              <>
+                <span className="swiper-prev">
+                  <i className="ri-arrow-left-s-line"></i>
+                </span>
+                <span className="swiper-next">
+                  <i className="ri-arrow-right-s-line"></i>
+                </span>
+              </>
+            )}
       </Swiper>
-      {favSlider?.length >= 6 && (
-        <>
-          <span
-            className="swiper-prev"
-            onClick={(e) => {
-              {
-              }
-            }}
-          >
-            <i className="ri-arrow-left-s-line"></i>
-          </span>
-          <span
-            className="swiper-next"
-            onClick={(e) => {
-              {
-              }
-            }}
-          >
-            <i className="ri-arrow-right-s-line"></i>
-          </span>
-        </>
-      )}
     </section>
   );
 }

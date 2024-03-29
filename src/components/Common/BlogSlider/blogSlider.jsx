@@ -6,8 +6,10 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
+  const { isMobile } = useScreenSize();
   return (
     <section className="blog-slider">
       <Swiper
@@ -116,18 +118,28 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
             );
           })} */}
       </Swiper>
-      {blogData?.length >= 8 ? (
-        <>
-          <span className="swiper-prev">
-            <i className="ri-arrow-left-s-line"></i>
-          </span>
-          <span className="swiper-next">
-            <i className="ri-arrow-right-s-line"></i>
-          </span>
-        </>
-      ) : (
-        ""
-      )}
+
+      {isMobile
+        ? blogData?.length > 2 && (
+            <>
+              <span className="swiper-prev">
+                <i className="ri-arrow-left-s-line"></i>
+              </span>
+              <span className="swiper-next">
+                <i className="ri-arrow-right-s-line"></i>
+              </span>
+            </>
+          )
+        : blogData?.length > 6 && (
+            <>
+              <span className="swiper-prev">
+                <i className="ri-arrow-left-s-line"></i>
+              </span>
+              <span className="swiper-next">
+                <i className="ri-arrow-right-s-line"></i>
+              </span>
+            </>
+          )}
     </section>
   );
 }

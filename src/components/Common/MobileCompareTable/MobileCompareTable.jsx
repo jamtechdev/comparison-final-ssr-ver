@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useCallback, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Button, Col, Row, Table } from "react-bootstrap";
@@ -10,40 +10,40 @@ import { Navigation } from "swiper";
 
 export default function MobileCompareTable() {
   const [swiperRef, setSwiperRef] = useState();
-  const [winPos, setWinPos] = useState(false);
+  const [winPos, setWinPos] = useState(false)
 
-  // if (typeof window !== 'undefined') {
-  //   // Access the window object here
-  //   window.onscroll = function(){
-  //     var testDiv = document.getElementById("mobile-compare-tabler");
-  //     testDiv?.getBoundingClientRect().top < 100  ? setWinPos(true)  : setWinPos(false)
-  //     testDiv?.getBoundingClientRect().top , 'top';
-
-  //   var tbodyDiv = document.getElementById("mobile-compare-tablerBody");
-  //   tbodyDiv.getBoundingClientRect().top > 100  ? setWinPos(false)   : setWinPos(true)
-  //   }
-  // }
-
+  if (typeof window !== 'undefined') {
+    // Access the window object here
+    window.onscroll = function(){
+      var testDiv = document.getElementById("mobile-compare-tabler");
+      testDiv.getBoundingClientRect().top < 100  ? setWinPos(true)  : setWinPos(false) 
+      testDiv.getBoundingClientRect().top , 'top'; 
+  
+    var tbodyDiv = document.getElementById("mobile-compare-tablerBody");
+    tbodyDiv.getBoundingClientRect().top > 100  ? setWinPos(false)   : setWinPos(true) 
+    }
+  }
+ 
   // if (typeof window !== 'undefined') {
   //   // Access the window object here
   //   window.onscroll = function(){
   //     var testDiv = document.getElementById("mobile-compare-tabler-1");
-  //     testDiv.getBoundingClientRect().top < 100  ? setWinPos(true)  : setWinPos(false)
-  //     testDiv.getBoundingClientRect().top , 'top';
+  //     testDiv.getBoundingClientRect().top < 100  ? setWinPos(true)  : setWinPos(false) 
+  //     testDiv.getBoundingClientRect().top , 'top'; 
   //     console.log(testDiv.getBoundingClientRect().top);
-
+  
   //   var tbodyDiv = document.getElementById("mobile-compare-tablerBody-1");
-  //   tbodyDiv.getBoundingClientRect().top > 100  ? setWinPos(false)   : setWinPos(true)
+  //   tbodyDiv.getBoundingClientRect().top > 100  ? setWinPos(false)   : setWinPos(true) 
   //   }
   // }
-  const [tabData, setTabData] = useState(false);
+const [tabData, setTabData] = useState(false)
   const handlePrevious = useCallback(() => {
-    setTabData(false);
+    setTabData(false)
     swiperRef?.slidePrev();
   }, [swiperRef]);
 
   const handleNext = useCallback(() => {
-    setTabData(true);
+    setTabData(true)
     swiperRef?.slideNext();
   }, [swiperRef]);
 
@@ -58,6 +58,7 @@ export default function MobileCompareTable() {
           observerSettings
         );
       observer.observe(cachedRef);
+      console.log(observerSettings);
       return () => {
         observer.unobserve(cachedRef);
       };
@@ -68,29 +69,22 @@ export default function MobileCompareTable() {
   const [isSticky, ref] = useDetectSticky();
   return (
     <section className="comparisons-slider">
-      <Table
-        id="mobile-compare-tabler"
-        className={
-          winPos == true
-            ? "isSticky compare-container"
-            : "nonSticky compare-container"
-        }
-      >
-        <thead>
-          <tr>
-            <th>
-              <p className="device-name">
-                <span>{!tabData ? 1 : 3}</span>Samsung Galaxy S23 Ultra
-                <Image
-                  className="compare_image"
+       <Table  id='mobile-compare-tabler' className={winPos == true ? "isSticky compare-container" : "nonSticky compare-container"}>
+            <thead  >
+                <tr>
+                  <th>
+                    <p className="device-name">
+                      <span>{!tabData ? 1 : 3}</span>Samsung Galaxy S23 Ultra
+                      <Image
+                className="compare_image"
                   src="/images/compare.png"
                   width={0}
                   height={0}
                   alt=""
                   sizes="100%"
                 />
-              </p>
-              <ul className="best-list-item ">
+                    </p>
+                    <ul className="best-list-item ">
                 <li>
                   <Image
                     src="/images/amazon.png"
@@ -102,11 +96,11 @@ export default function MobileCompareTable() {
                   <span>155.87 €</span>
                 </li>
               </ul>
-            </th>
-            <th>
-              <p className="device-name">
-                <span>{!tabData ? 2 : 4}</span>Samsung Galaxy S23 Ultra
-                <Image
+                  </th>
+                  <th>
+                    <p className="device-name">
+                      <span>{!tabData ? 2 : 4}</span>Samsung Galaxy S23 Ultra
+                      <Image
                   className="compare_image"
                   src="/images/compare.png"
                   width={0}
@@ -114,8 +108,8 @@ export default function MobileCompareTable() {
                   alt=""
                   sizes="100%"
                 />
-              </p>
-              <ul className="best-list-item ">
+                    </p>
+                    <ul className="best-list-item ">
                 <li>
                   <Image
                     src="/images/amazon.png"
@@ -127,10 +121,10 @@ export default function MobileCompareTable() {
                   <span>155.87 €</span>
                 </li>
               </ul>
-            </th>
-          </tr>
-        </thead>
-      </Table>
+                  </th>
+                </tr>
+              </thead>
+            </Table>
       <Row className="mt-3 align-items-center">
         <Col sm="6" xs="9" className="p-0">
           <p>
@@ -175,9 +169,10 @@ export default function MobileCompareTable() {
           }}
           className="product-slider"
         >
-          <SwiperSlide>
+          <SwiperSlide >
+           
             <Table className="compare-container">
-              <thead data-sticky-header-offset-y ref={ref}>
+              <thead data-sticky-header-offset-y   ref={ref} >
                 <tr>
                   <th>
                     <p className="device-name">
@@ -191,7 +186,7 @@ export default function MobileCompareTable() {
                   </th>
                 </tr>
               </thead>
-              <tbody id="mobile-compare-tablerBody">
+              <tbody id='mobile-compare-tablerBody'>
                 <tr>
                   <td>
                     <Image
@@ -480,7 +475,7 @@ export default function MobileCompareTable() {
             </Table>
           </SwiperSlide>
           <SwiperSlide>
-            {/* <Table className="compare-container">
+          {/* <Table className="compare-container">
             <thead   id='mobile-compare-tabler-1' className={winPos == true ? "isSticky" : "nonSticky"} ref={ref} >
             <tr>
                   <th>
@@ -497,7 +492,7 @@ export default function MobileCompareTable() {
               </thead>
             </Table> */}
             <Table className="compare-container">
-              <thead ref={ref}>
+              <thead  ref={ref}>
                 <tr>
                   <th>
                     <p className="device-name">
@@ -511,7 +506,7 @@ export default function MobileCompareTable() {
                   </th>
                 </tr>
               </thead>
-              <tbody id="mobile-compare-tablerBody-1">
+              <tbody id='mobile-compare-tablerBody-1'>
                 <tr>
                   <td>
                     <Image

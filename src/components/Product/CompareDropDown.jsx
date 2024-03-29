@@ -41,9 +41,9 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
         });
     }
 
-    const containerDivs = document.getElementsByClassName("container-divs");
-    for (let i = 0; i < containerDivs.length; i++) {
-      containerDivs[i].remove();
+    const containerDivss = document.getElementsByClassName("container-divs");
+    for (let i = 0; i < containerDivss.length; i++) {
+      containerDivss[i].remove();
     }
     const legendBoxDivs = document.getElementsByClassName("legendBox");
     for (let i = 0; i < legendBoxDivs.length; i++) {

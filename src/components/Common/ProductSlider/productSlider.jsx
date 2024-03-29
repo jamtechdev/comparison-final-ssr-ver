@@ -6,10 +6,13 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 export default function ProductSlider({ favSlider, slug, indexSlider }) {
   const prevButtonClass = `prev-${indexSlider}`;
   const nextButtonClass = `next-${indexSlider}`;
+
+  const { isMobile } = useScreenSize();
   return (
     <>
       <div className="product-slider m-0">
@@ -81,19 +84,28 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
                 </React.Fragment>
               );
             })}
+          {isMobile
+            ? favSlider?.length > 2 && (
+                <>
+                  <span className={`swiper-prev prev-${indexSlider}`}>
+                    <i className="ri-arrow-left-s-line"></i>
+                  </span>
+                  <span className={`swiper-next next-${indexSlider}`}>
+                    <i className="ri-arrow-right-s-line"></i>
+                  </span>
+                </>
+              )
+            : favSlider?.length > 6 && (
+                <>
+                  <span className={`swiper-prev prev-${indexSlider}`}>
+                    <i className="ri-arrow-left-s-line"></i>
+                  </span>
+                  <span className={`swiper-next next-${indexSlider}`}>
+                    <i className="ri-arrow-right-s-line"></i>
+                  </span>
+                </>
+              )}
         </Swiper>
-        {favSlider?.length > 6 ? (
-          <>
-            <span className={`swiper-prev prev-${indexSlider}`}>
-              <i className="ri-arrow-left-s-line"></i>
-            </span>
-            <span className={`swiper-next next-${indexSlider}`}>
-              <i className="ri-arrow-right-s-line"></i>
-            </span>
-          </>
-        ) : (
-          ""
-        )}
       </div>
     </>
   );

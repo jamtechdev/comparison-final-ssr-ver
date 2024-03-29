@@ -307,20 +307,20 @@ function ComparisonVerticalChart(props) {
     .enter()
     .append("td")
     .each(function (d, i) {
-      if (i == 0) {
-        d3.select(this)
-          .append("div")
-          .attr("class", "legend-avatar barChartProduct")
-          .style("width", "12px")
-          .style("height", "12px")
-          .style("background-color", d);
-      }
-      if (i == 1) {
-        d3.select(this)
-          .append("span")
-          .attr("class", "legend-text barChartProduct")
-          .text((d) => `${d}`);
-      }
+      // if (i == 0) {
+      //   d3.select(this)
+      //     .append("div")
+      //     .attr("class", "legend-avatar barChartProduct")
+      //     .style("width", "12px")
+      //     .style("height", "12px")
+      //     .style("background-color", d);
+      // }
+      // if (i == 1) {
+      //   d3.select(this)
+      //     .append("span")
+      //     .attr("class", "legend-text barChartProduct")
+      //     .text((d) => `${d}`);
+      // }
     });
 }
 

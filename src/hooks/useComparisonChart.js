@@ -44,9 +44,9 @@ const useComparisonChart = (chartData, pageType,slug) => {
     chartData
   ) {
     if (!chartData) {
-      const containerDivs = document.getElementsByClassName("container-divs");
-      for (let i = 0; i < containerDivs.length; i++) {
-        containerDivs[i].remove();
+      const containerDivss = document.getElementsByClassName("container-divs");
+      for (let i = 0; i < containerDivss.length; i++) {
+        containerDivss[i].remove();
       }
       return;
     } else {

@@ -4,7 +4,9 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
+import useScreenSize from "@/_helpers/useScreenSize";
 export default function LatesGuid({ favSlider }) {
+  const { isMobile } = useScreenSize();
   return (
     <>
       <div className="product-slider">
@@ -49,17 +51,28 @@ export default function LatesGuid({ favSlider }) {
                 </a>
               </SwiperSlide>
             ))}
+          {isMobile
+            ? favSlider?.length > 2 && (
+                <>
+                  <span className="swiper-prev">
+                    <i className="ri-arrow-left-s-line"></i>
+                  </span>
+                  <span className="swiper-next">
+                    <i className="ri-arrow-right-s-line"></i>
+                  </span>
+                </>
+              )
+            : favSlider?.length > 6 && (
+                <>
+                  <span className="swiper-prev">
+                    <i className="ri-arrow-left-s-line"></i>
+                  </span>
+                  <span className="swiper-next">
+                    <i className="ri-arrow-right-s-line"></i>
+                  </span>
+                </>
+              )}
         </Swiper>
-        {favSlider?.length > 6 && (
-          <>
-            <span className="swiper-prev">
-              <i className="ri-arrow-left-s-line"></i>
-            </span>
-            <span className="swiper-next">
-              <i className="ri-arrow-right-s-line"></i>
-            </span>
-          </>
-        )}
       </div>
     </>
   );
