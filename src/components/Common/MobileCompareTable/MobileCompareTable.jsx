@@ -58,7 +58,7 @@ const [tabData, setTabData] = useState(false)
           observerSettings
         );
       observer.observe(cachedRef);
-      console.log(observerSettings);
+      // console.log(observerSettings);
       return () => {
         observer.unobserve(cachedRef);
       };
