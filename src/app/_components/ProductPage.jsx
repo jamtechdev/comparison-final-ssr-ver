@@ -1305,10 +1305,12 @@ function ProductPage({
                                           <div
                                             dangerouslySetInnerHTML={{
                                               __html:
-                                                product?.attributes[
-                                                  attribute
-                                                ][0]?.attribute_category
-                                                  ?.text_part,
+                                                searchForPatternAndReplace(
+                                                  product?.attributes[
+                                                    attribute
+                                                  ][0]?.attribute_category
+                                                    ?.text_part
+                                                ),
                                             }}
                                           ></div>
                                         </div>
@@ -1385,7 +1387,9 @@ function ProductPage({
                                                   <div
                                                     dangerouslySetInnerHTML={{
                                                       __html:
-                                                        attributeValues?.text_part,
+                                                        searchForPatternAndReplace(
+                                                          attributeValues?.text_part
+                                                        ),
                                                     }}
                                                   ></div>
                                                 </div>
@@ -1496,10 +1500,12 @@ function ProductPage({
                                           <div
                                             dangerouslySetInnerHTML={{
                                               __html:
-                                                product?.attributes[
-                                                  attribute
-                                                ][0]?.attribute_category
-                                                  ?.text_part,
+                                                searchForPatternAndReplace(
+                                                  product?.attributes[
+                                                    attribute
+                                                  ][0]?.attribute_category
+                                                    ?.text_part
+                                                ),
                                             }}
                                           ></div>
                                         </div>
@@ -1571,7 +1577,9 @@ function ProductPage({
                                                   <div
                                                     dangerouslySetInnerHTML={{
                                                       __html:
-                                                        attributeValues?.text_part,
+                                                        searchForPatternAndReplace(
+                                                          attributeValues?.text_part
+                                                        ),
                                                     }}
                                                   ></div>
                                                 </div>

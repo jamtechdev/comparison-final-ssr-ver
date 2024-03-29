@@ -185,7 +185,7 @@ const ProductCompareTable = React.memo(
 
       // Adjust this function according to your context as I don't have the complete code
       // It would be good to ensure that you have the required variables (finalProducts) in scope.
-
+      const value__data=[]
       return (
         <>
           {arrayOfObjects.map((item, attrIndex) => (
@@ -801,6 +801,7 @@ const ProductCompareTable = React.memo(
                 );
                 return (
                   <td key={ratioIndex}>
+                    {/* {console.log(values, "neetxy")} */}
                     {
                       addStarOnTable(
                         defaultNo,
@@ -826,14 +827,21 @@ const ProductCompareTable = React.memo(
                   <th className="sub-inner-padding">
                     <div className="tooltip-title">{data?.title}</div>
                   </th>
+                 
                   {finalProducts.slice(0, defaultNo).map((product, idx) => {
                     const values = product?.area_evaluation?.map(
                       (p) => p.value
+                    );
+                    console.log(
+                      Array.isArray(values[0])
+                        ? values[0].map((v) => parseFloat(v))
+                        : values[0]
                     );
                     const value = values ? values[index] : null;
                     // console.log(values);
                     return (
                       <td key={idx}>
+                        {/* {console.log(value , value === max , "neetxy")} */}
                         {value}
                         {value === max ? "⭐️" : ""}
                       </td>
