@@ -19,7 +19,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
   // console.log(selectedAttribute)
 
   useEffect(() => {
-    const containerDivs = document.querySelectorAll(".container-div");
+    const containerDivs = document.querySelectorAll(".container-divs");
     if (containerDivs.length > 1) {
       const elementsToRemove = Array.from(containerDivs).slice(1);
       elementsToRemove.forEach((element) => element.remove());
@@ -41,7 +41,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
         });
     }
 
-    const containerDivs = document.getElementsByClassName("container-div");
+    const containerDivs = document.getElementsByClassName("container-divs");
     for (let i = 0; i < containerDivs.length; i++) {
       containerDivs[i].remove();
     }
@@ -69,7 +69,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
   };
   // testing
 
-  useComparisonChart(chart, pageType,slug);
+  useComparisonChart(chart, pageType, slug);
   return (
     <>
       <section className="ptb-80">
@@ -120,9 +120,9 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
                 {selectedAttribute && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>
                     {product && product?.page_phases?.what_it_is} :
-                   </span>
+                  </span>
                 )}
-                 {""} {selectedAttribute.description}
+                {""} {selectedAttribute.description}
                 <br />
                 {selectedAttribute && (
                   <span style={{ fontWeight: 800, fontSize: 17 }}>

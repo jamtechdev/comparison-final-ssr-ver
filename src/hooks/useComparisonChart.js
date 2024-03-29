@@ -44,14 +44,14 @@ const useComparisonChart = (chartData, pageType,slug) => {
     chartData
   ) {
     if (!chartData) {
-      const containerDivs = document.getElementsByClassName("container-div");
+      const containerDivs = document.getElementsByClassName("container-divs");
       for (let i = 0; i < containerDivs.length; i++) {
         containerDivs[i].remove();
       }
       return;
     } else {
       const parentDiv = document.createElement("div");
-      parentDiv.classList.add("container-div");
+      parentDiv.classList.add("container-divs");
       element.insertAdjacentElement("afterend", parentDiv);
 
       if (chartData) {

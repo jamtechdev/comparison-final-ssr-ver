@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
+import formatValue from "@/_helpers/formatValue";
 
 function ExperReviwes({ expertReview }) {
   const [expandedId, setExpandedId] = useState(null);
@@ -137,10 +138,30 @@ function ExperReviwes({ expertReview }) {
               <div className="review__card">
                 <div className="review__card-header">
                   <div className="review__name">
-                    {data?.image !== null && <img src={`${data?.image}`} />}
+                    {data?.image !== null && (
+                      <a href={`/link?p=${btoa(data?.website_name)}`}>
+                        <img src={`${data?.image}`} />
+                      </a>
+                    )}
 
                     <h6>
-                      {data?.name !== null ? data?.name : <a href={data?.website_name} style={{color:"inherit"}}> {extractDomainName(data?.website_name)}</a>}
+                      {data?.name !== null ? (
+                        <a
+                          href={`/link?p=${btoa(data?.website_name)}`}
+                          style={{ color: "inherit" }}
+                        >
+                          {" "}
+                          {data?.name}
+                        </a>
+                      ) : (
+                        <a
+                          href={`/link?p=${btoa(data?.website_name)}`}
+                          style={{ color: "inherit" }}
+                        >
+                          {" "}
+                          {extractDomainName(data?.website_name)}
+                        </a>
+                      )}
                     </h6>
                   </div>
                   <div className="review__rating">
@@ -159,7 +180,7 @@ function ExperReviwes({ expertReview }) {
                             background: getColorBasedOnScore(data?.evaluation),
                           }}
                         >
-                          {data?.evaluation}
+                          {formatValue(data?.evaluation)}
                         </span>
                       </>
                     )}
