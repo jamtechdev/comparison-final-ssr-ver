@@ -24,86 +24,16 @@ function ComparisonVerticalChart(props) {
   // console.log(data, "data");
 
   // Remove zero after decimal point
-  // let updatedData = data.map(({ label, ...rest }) => ({
-  //   ...rest,
-  //   label: label.split("-").map(Number).join("-"),
-  // }));
+  let updatedData = data.map(({ label, ...rest }) => ({
+    ...rest,
+    label: label.split("-").map(Number).join("-"),
+  }));
+
+  // console.log(updatedData, "neet");
 
   // console.log(updatedData);
   const slugsExtract = slug.split("-vs-");
   // console.log(slugsExtract);
-
-  let updatedData = [
-    {
-      value: 40,
-      productCount: 2,
-      products: "",
-      product_url: [""],
-      product_id: [0],
-      selected: 0,
-      label: "0-2",
-    },
-    {
-      value: 0,
-      productCount: 0,
-      products: "AIRROBO T10+",
-      selected: 0,
-      label: "2-3",
-    },
-    {
-      value: 0,
-      productCount: 0,
-      products: "amarey A90+",
-      selected: 0,
-      label: "3-4",
-    },
-    {
-      value: 0,
-      productCount: 0,
-      products: undefined,
-      selected: 0,
-      label: "4-5",
-    },
-    {
-      value: 55,
-      productCount: 0,
-      product_url: [""],
-      product_id: [0],
-      selected: 0,
-
-      label: "5-6",
-    },
-    {
-      value: 60,
-      productCount: 3,
-      products: undefined,
-      product_url: ["product2", "product3", "product1"],
-      product_id: [2, 1, 3],
-      selected: 3,
-      label: "6-7",
-    },
-    {
-      value: 0,
-      productCount: 0,
-      products: undefined,
-      selected: 0,
-      label: "7-8",
-    },
-    {
-      value: 0,
-      productCount: 0,
-      products: undefined,
-      selected: 0,
-      label: "8-9",
-    },
-    {
-      value: 0,
-      productCount: 0,
-      products: undefined,
-      selected: 0,
-      label: "9-10",
-    },
-  ];
   // console.log(slug);
   // console.log(updatedData)
 
@@ -163,10 +93,10 @@ function ComparisonVerticalChart(props) {
       toolTip
         .html(
           `<div style="font-size: 14px;
-      font-weight: 400;
-      color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
-        data.value
-      }% (${data.productCount ? data.productCount : "0"})</span></div>`
+        font-weight: 400;
+        color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
+          data.value
+        }% (${data.product_count ? data.product_count : "0"})</span></div>`
         )
         .style("left", e.clientX - 20 + "px")
         .style("top", e.clientY - 50 + "px");
@@ -215,10 +145,10 @@ function ComparisonVerticalChart(props) {
       toolTip
         .html(
           `<div style="font-size: 14px;
-        font-weight: 400;
-        color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
-          data.value
-        }% (${data.productCount ? data.productCount : "0"})</span></div>`
+          font-weight: 400;
+          color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
+            data.value
+          }% (${data.product_count ? data.product_count : "0"})</span></div>`
         )
         .style("left", e.clientX - 20 + "px")
         .style("top", e.clientY - 50 + "px");
@@ -272,10 +202,10 @@ function ComparisonVerticalChart(props) {
       toolTip
         .html(
           `<div style="font-size: 14px;
-        font-weight: 400;
-        color: rgba(39, 48, 78, 0.8);"><span style="margin-right:8px">${
-          data.value
-        }% (${data.productCount ? data.productCount : "0"})</span></div>`
+          font-weight: 400;
+          color: rgba(39, 48, 78, 0.8);"><span style="margin-right:8px">${
+            data.value
+          }% (${data.product_count ? data.product_count : "0"})</span></div>`
         )
         .style("left", e.clientX - 20 + "px")
         .style("top", e.clientY - 50 + "px");
@@ -294,33 +224,47 @@ function ComparisonVerticalChart(props) {
     .attr("class", "legendBoxBarChart");
 
   // remove object were products is undefined
-  let filteredData = data.filter((item) => item.products !== undefined);
+  let filteredData = data.filter((item) => item.products?.length > 0);
+  // console.log(filteredData , "filter");
   const table = legendContainer.append("table");
   const tbody = table.append("tbody");
   const rows = tbody.selectAll("tr").data(filteredData).enter().append("tr");
-  let color = ["#437ECE", "#FF8F0B", "rgb(40, 162, 140)"];
+  let color = ["", "#437ECE", "#FF8F0B", "rgb(40, 162, 140)"];
   const cells = rows
     .selectAll("td")
-    .data(function (d, i) {
-      return [color[i], d.products];
+    .data((d, i) => {
+      // Check if products is an array and return a nested array for multiple products
+      if (d.products?.length > 1) {
+        return d.products.map((product, index) => [
+          color[d.product_id[0]],
+          product,
+        ]);
+      } else {
+        return [color[d.product_id[0]], d.products];
+      }
     })
+
     .enter()
     .append("td")
     .each(function (d, i) {
-      // if (i == 0) {
-      //   d3.select(this)
-      //     .append("div")
-      //     .attr("class", "legend-avatar barChartProduct")
-      //     .style("width", "12px")
-      //     .style("height", "12px")
-      //     .style("background-color", d);
-      // }
-      // if (i == 1) {
-      //   d3.select(this)
-      //     .append("span")
-      //     .attr("class", "legend-text barChartProduct")
-      //     .text((d) => `${d}`);
-      // }
+      // console.log(d?.length);
+      if (i == 0) {
+        console.log(d);
+        d3.select(this)
+          .append("div")
+          .attr("class", "legend-avatar barChartProduct")
+          .style("width", "12px")
+          .style("height", "12px")
+          .style("background-color", d);
+      }
+
+      if (i == 1) {
+        console.log(d);
+        d3.select(this)
+          .append("span")
+          .attr("class", "legend-text barChartProduct")
+          .text((d) => `${d}`);
+      }
     });
 }
 

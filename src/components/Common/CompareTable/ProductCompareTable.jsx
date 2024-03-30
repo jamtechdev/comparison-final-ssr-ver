@@ -832,11 +832,11 @@ const ProductCompareTable = React.memo(
                     const values = product?.area_evaluation?.map(
                       (p) => p.value
                     );
-                    console.log(
-                      Array.isArray(values[0])
-                        ? values[0].map((v) => parseFloat(v))
-                        : values[0]
-                    );
+                    // console.log(
+                    //   Array.isArray(values[0])
+                    //     ? values[0].map((v) => parseFloat(v))
+                    //     : values[0]
+                    // );
                     const value = values ? values[index] : null;
                     // console.log(values);
                     return (

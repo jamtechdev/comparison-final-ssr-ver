@@ -129,6 +129,7 @@ export default function ComparisonTable({
     // console.log(arrayOfObjects, "neet");
 
     if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
+      // console.log(numericValues)
       numericValues.sort((a, b) => b - a);
     } else {
       numericValues.sort((a, b) => a - b);
@@ -137,19 +138,22 @@ export default function ComparisonTable({
     // Adding logic for String case
     if (numericValues.length === 0) {
       const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
+      // console.log(stringArray, "starTesting");
 
       if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
         const targetString =
-          stringArray[0] === "yes"
+          stringArray[0] === "yes" && stringArray[1] === "-"
+            ? "no"
+            : "yes" || (stringArray[0] === "no" && stringArray[1] !== "-")
             ? "yes"
-            : "no" || stringArray[0] === "no"
-            ? "yes"
-            : "yes";
+            : "no";
+
         numericValues = stringArray.filter((value) => value === targetString);
       }
     }
 
     const topValue = numericValues[0];
+    // console.log(topValue);
     const occurrences = numericValues?.filter(
       (value) => value === topValue
     ).length;
@@ -160,6 +164,7 @@ export default function ComparisonTable({
           typeof topValue === "string"
             ? obj.attribute_value
             : parseFloat(obj.attribute_value);
+            // console.log(numericValue)
         if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
           obj.attribute_value += "⭐";
         }

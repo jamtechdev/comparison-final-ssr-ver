@@ -1,9 +1,23 @@
 import { getAttributeProductHalf } from "@/_helpers";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import debounce from "lodash.debounce";
 
-function ProductPageOutline({ product }) {
-  // console.log(product, "productdetails");
+function ProductPageOutline({ product, currentIndexId }) {
   const [outline, setOutline] = useState([]);
+  const [activeParentIndex, setActiveParentIndex] = useState(null);
+  const debouncedScrollHandler = useRef(null);
+
+  useEffect(() => {
+    // Define a debounced version of the scroll event handler
+    debouncedScrollHandler.current = debounce((id) => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 100); // Adjust the debounce delay as needed
+
+    return () => {
+      // Cleanup the debounced function on unmount
+      debouncedScrollHandler.current.cancel();
+    };
+  }, []);
   useEffect(() => {
     const headings = document
       ?.getElementById("attribute__card")
@@ -49,6 +63,13 @@ function ProductPageOutline({ product }) {
 
     setOutline(newOutline);
   }, []);
+
+  useEffect(() => {
+    if (currentIndexId) {
+      setActiveParentIndex(currentIndexId);
+    }
+  }, [currentIndexId]);
+
   return (
     <>
       {product &&
@@ -62,8 +83,20 @@ function ProductPageOutline({ product }) {
                           )} */}
                 <div>
                   <ol className="ol-child">
-                    <li className="outlineList">
-                      <a href={`#${attribute}`}>{attribute}</a>
+                    <li
+                      className={`outlineList ${
+                        activeParentIndex === attribute ? "outline-active" : ""
+                      }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setActiveParentIndex(attribute, index);
+                        debouncedScrollHandler.current(attribute);
+                      }}
+                    >
+                      <a href={`#${attribute.trim().replace(/\s+/g, "-")}`}>
+                        {attribute}
+                      </a>
                       {product.attributes[attribute].map(
                         (attributeValues, valueIndex) => (
                           <React.Fragment>
@@ -73,7 +106,13 @@ function ProductPageOutline({ product }) {
                             ) : (
                               <ol key={valueIndex} className="ol-child">
                                 <li className="outlineList">
-                                  {attributeValues.attribute}
+                                  <a
+                                    href={`#${attributeValues.attribute
+                                      .trim()
+                                      .replace(/\s+/g, "-")}`}
+                                  >
+                                    {attributeValues.attribute}
+                                  </a>
                                 </li>
                               </ol>
                             )}
@@ -98,8 +137,20 @@ function ProductPageOutline({ product }) {
                           )} */}
                 <div>
                   <ol className="ol-child">
-                    <li className="outlineList">
-                      <a href={`#${attribute}`}>{attribute}</a>
+                    <li
+                      className={`outlineList ${
+                        activeParentIndex === attribute ? "outline-active" : ""
+                      }`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setActiveParentIndex(attribute, index);
+                        debouncedScrollHandler.current(attribute);
+                      }}
+                    >
+                      <a href={`#${attribute.trim().replace(/\s+/g, "-")}`}>
+                        {attribute}
+                      </a>
 
                       {product.attributes[attribute].map(
                         (attributeValues, valueIndex) => (
@@ -110,7 +161,13 @@ function ProductPageOutline({ product }) {
                             ) : (
                               <ol key={valueIndex} className="ol-child">
                                 <li className="outlineList">
-                                  {attributeValues.attribute}
+                                  <a
+                                    href={`#${attributeValues.attribute
+                                      .trim()
+                                      .replace(/\s+/g, "-")}`}
+                                  >
+                                    {attributeValues.attribute}
+                                  </a>
                                 </li>
                               </ol>
                             )}

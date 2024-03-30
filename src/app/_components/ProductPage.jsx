@@ -278,7 +278,7 @@ function ProductPage({
 
             <Row className="w-100 m-0 ">
               <Col md={12}>
-                <div class="inline-power-section w-100">
+                <div className="inline-power-section w-100">
                   <img
                     src="/images/double-arrow.png"
                     width={0}
@@ -920,13 +920,12 @@ function ProductPage({
                                       listStyleType: "none",
                                       width: "auto",
                                       padding: "0px 5px",
-
                                       border: isCurrentVersion
                                         ? "1px solid #437ece"
-                                        : "none",
+                                        : "none", // Added closing parenthesis here
                                       cursor: isCurrentVersion
                                         ? "default"
-                                        : "pointer",
+                                        : "pointer", // Check if isCurrentVersion is truthy
                                     }}
                                     className={`color-item ${
                                       selectedItem === key ? "selected" : ""
@@ -936,8 +935,8 @@ function ProductPage({
                                       !isCurrentVersion && handleItemClick(key)
                                     }
                                   >
-                                    {" "}
-                                    {data.short_name}
+                                    {/* <span>{data.short_name}</span> */}
+                                    {/* {data?.short_name} */}
                                   </li>
                                 ) : (
                                   <li
@@ -967,7 +966,7 @@ function ProductPage({
                                       }`}
                                       onClick={(e) => handleItemClick(key)}
                                     >
-                                      {data.short_name}
+                                      {/* {data.short_name} */}
                                     </a>
                                   </li>
                                 )}
@@ -1356,13 +1355,12 @@ function ProductPage({
                                                       1
                                                     )} */}
                                                   </span>
-                                                  <h4
-                                                    className="attribute__title"
-                                                    id={attributeValues?.attribute
-                                                      .trim()
-                                                      .replace(/\s+/g, "-")}
-                                                  >
-                                                    <b>
+                                                  <h4 className="attribute__title">
+                                                    <b
+                                                      id={attributeValues?.attribute
+                                                        .trim()
+                                                        .replace(/\s+/g, "-")}
+                                                    >
                                                       {
                                                         attributeValues?.attribute
                                                       }
@@ -1444,7 +1442,12 @@ function ProductPage({
                                               1
                                             )}
                                           </span>
-                                          <h3 className="attribute__title">
+                                          <h3
+                                            className="attribute__title"
+                                            id={attribute
+                                              .trim()
+                                              .replace(/\s+/g, "-")}
+                                          >
                                             {attribute}
                                           </h3>
                                           <Questiontool
@@ -1549,10 +1552,14 @@ function ProductPage({
                                                     {/* {formatValue(8.125)} */}
                                                     {/* {attributeValues?.final_points?.toFixed(
                                                       1
-                                                    )} */}
+                                                    )} */}  
                                                   </span>
                                                   <h4 className="attribute__title">
-                                                    <b>
+                                                    <b
+                                                      id={attributeValues?.attribute
+                                                        .trim()
+                                                        .replace(/\s+/g, "-")}
+                                                    >
                                                       {
                                                         attributeValues?.attribute
                                                       }
