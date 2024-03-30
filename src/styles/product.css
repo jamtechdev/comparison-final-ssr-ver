@@ -883,8 +883,8 @@
   padding: 10px;
   border-radius: 5px;
   position: sticky;
-  top: 15px;
-  max-height: calc(100vh - 50px);
+  top: 145px;
+  max-height: calc(100vh - 165px);
   overflow-y: auto;
 }
 
