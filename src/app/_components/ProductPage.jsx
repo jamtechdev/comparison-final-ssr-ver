@@ -1159,17 +1159,20 @@ function ProductPage({
                 <>
                   <Row className="mt-3">
                     <Col md={4} lg={2}>
-                      <div className="outline-section">
-                        <p>{product && product?.page_phases?.outline}</p>
-                        {product?.display_product_review === false ? (
+                      {product?.display_product_review === false ? (
+                        <div className="outline-section">
+                          <p>{product && product?.page_phases?.outline}</p>
                           <OutlineGenerator
                             blogData={product?.text_part}
                             currentIndexId={activeOutlineId}
                           />
-                        ) : (
+                        </div>
+                      ) : (
+                        <div className="outline-section  attribute_card_outline-section">
+                          <p>{product && product?.page_phases?.outline}</p>
                           <ProductPageOutline product={product} />
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </Col>
                     <Col md={8} lg={10}>
                       {product?.display_product_review === false ? (
@@ -1199,9 +1202,6 @@ function ProductPage({
                             ).map((attribute, index) => {
                               return (
                                 <>
-                                  {/* {console.log(
-                            product?.attributes[attribute][0]
-                          )} */}
                                   <Row
                                     className="attribute__card__wrapper"
                                     id="attribute__card"

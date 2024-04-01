@@ -379,9 +379,9 @@
 
 .alternatives > span {
   color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .alternatives > span:before {
@@ -884,6 +884,18 @@
   border-radius: 5px;
   position: sticky;
   top: 145px;
+  max-height: calc(100vh - 165px);
+  overflow-y: auto;
+}
+
+.attribute_card_outline-section {
+  background: #f4f7fb;
+  border-radius: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 12px;
   max-height: calc(100vh - 165px);
   overflow-y: auto;
 }
