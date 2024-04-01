@@ -93,10 +93,10 @@ function ComparisonVerticalChart(props) {
       toolTip
         .html(
           `<div style="font-size: 14px;
-        font-weight: 400;
-        color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
-          data.value
-        }% (${data.product_count ? data.product_count : "0"})</span></div>`
+          font-weight: 400;
+          color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
+            data.value
+          }% (${data.product_count ? data.product_count : "0"})</span></div>`
         )
         .style("left", e.clientX - 20 + "px")
         .style("top", e.clientY - 50 + "px");
@@ -145,10 +145,10 @@ function ComparisonVerticalChart(props) {
       toolTip
         .html(
           `<div style="font-size: 14px;
-          font-weight: 400;
-          color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
-            data.value
-          }% (${data.product_count ? data.product_count : "0"})</span></div>`
+            font-weight: 400;
+            color: rgba(39, 48, 78, 0.8); cursor: pointer;"><span style="margin-right:8px">${
+              data.value
+            }% (${data.product_count ? data.product_count : "0"})</span></div>`
         )
         .style("left", e.clientX - 20 + "px")
         .style("top", e.clientY - 50 + "px");
@@ -202,10 +202,10 @@ function ComparisonVerticalChart(props) {
       toolTip
         .html(
           `<div style="font-size: 14px;
-          font-weight: 400;
-          color: rgba(39, 48, 78, 0.8);"><span style="margin-right:8px">${
-            data.value
-          }% (${data.product_count ? data.product_count : "0"})</span></div>`
+            font-weight: 400;
+            color: rgba(39, 48, 78, 0.8);"><span style="margin-right:8px">${
+              data.value
+            }% (${data.product_count ? data.product_count : "0"})</span></div>`
         )
         .style("left", e.clientX - 20 + "px")
         .style("top", e.clientY - 50 + "px");
@@ -225,10 +225,10 @@ function ComparisonVerticalChart(props) {
 
   // remove object were products is undefined
   let filteredData = data.filter((item) => item.products?.length > 0);
-  // console.log(filteredData , "filter");
+  // console.log(filteredData, "filter");
   const table = legendContainer.append("table");
   const tbody = table.append("tbody");
-  const rows = tbody.selectAll("tr").data(filteredData).enter().append("tr");
+  const rows = tbody.selectAll("td").data(filteredData).enter().append("td");
   let color = ["", "#437ECE", "#FF8F0B", "rgb(40, 162, 140)"];
   const cells = rows
     .selectAll("td")
@@ -236,34 +236,53 @@ function ComparisonVerticalChart(props) {
       // Check if products is an array and return a nested array for multiple products
       if (d.products?.length > 1) {
         return d.products.map((product, index) => [
-          color[d.product_id[0]],
+          color[d.product_id[index]],
           product,
         ]);
       } else {
-        return [color[d.product_id[0]], d.products];
+        return [[color[d.product_id[0]], d.products]]; // Wrap single product in an array
       }
     })
-
     .enter()
-    .append("td")
+    .append("tr")
     .each(function (d, i) {
-      // console.log(d?.length);
-      if (i == 0) {
-        console.log(d);
+      if (Array.isArray(d)) {
+        // Case when d is an array containing [color, product_name]
+        const [colorName, productName] = d;
+
+        // console.log(colorName); // Log the color name
+        // console.log(productName); // Log the product name
+
+        // Append div for color and span for product name
         d3.select(this)
           .append("div")
           .attr("class", "legend-avatar barChartProduct")
           .style("width", "12px")
           .style("height", "12px")
-          .style("background-color", d);
-      }
+          .style("background-color", colorName);
 
-      if (i == 1) {
-        console.log(d);
         d3.select(this)
           .append("span")
           .attr("class", "legend-text barChartProduct")
-          .text((d) => `${d}`);
+          .text(productName);
+      } else {
+        // Case when d is just a color name or a product name
+        console.log(d); // Log the value of d
+
+        // Append div for color or span for product name based on the index i
+        if (i === 0) {
+          d3.select(this)
+            .append("div")
+            .attr("class", "legend-avatar barChartProduct")
+            .style("width", "12px")
+            .style("height", "12px")
+            .style("background-color", d); // Assuming d is a color name here
+        } else if (i === 1) {
+          d3.select(this)
+            .append("span")
+            .attr("class", "legend-text barChartProduct")
+            .text(d); // Assuming d is a product name here
+        }
       }
     });
 }

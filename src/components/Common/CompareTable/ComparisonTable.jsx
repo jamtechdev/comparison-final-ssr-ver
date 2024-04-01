@@ -142,9 +142,10 @@ export default function ComparisonTable({
 
       if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
         const targetString =
-          stringArray[0] === "yes" && stringArray[1] === "-"
+          (stringArray[0] === "yes" && stringArray[1] === "-") ||
+          (stringArray[0] === "yes" && stringArray[1] === "?")
             ? "no"
-            : "yes" || (stringArray[0] === "no" && stringArray[1] !== "-")
+            : "yes" || (stringArray[0] === "no" && stringArray[1] !== "-" || stringArray[1] === "?")
             ? "yes"
             : "no";
 
@@ -164,7 +165,7 @@ export default function ComparisonTable({
           typeof topValue === "string"
             ? obj.attribute_value
             : parseFloat(obj.attribute_value);
-            // console.log(numericValue)
+        // console.log(numericValue)
         if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
           obj.attribute_value += "⭐";
         }

@@ -773,49 +773,38 @@ const CompareTable = React.memo(
               })}
             </tr>
             {products[0]?.area_evaluation?.map((data, index) => {
+              // Calculate the maximum value for the current index across all products
+              const maxValues = finalProducts.map(
+                (product) => product?.area_evaluation?.[index]?.value ?? null
+              );
+              const max = Math.max(
+                ...maxValues.filter((value) => value !== null)
+              );
+
               return (
-                <tr className="">
+                <tr className="" key={index}>
+                  {" "}
+                  {/* Ensure to set a unique key for each <tr> */}
                   <th className="sub-inner-padding">
-                    <div className="tooltip-title">
-                      {data?.title}
-                      {/* {products[0]?.ratio_qulitiy_points_descriptions && (
-                          <div className="tooltip-display-content">
-                            {products[0]?.ratio_qulitiy_points_descriptions
-                              ?.description && (
-                              <p className="mb-2">
-                                <b>What it is: </b>{" "}
-                                {
-                                  products[0]?.ratio_qulitiy_points_descriptions
-                                    ?.description
-                                }
-                              </p>
-                            )}
-                            {products[0]?.technical_score_descriptions
-                              ?.when_it_matters && (
-                              <p className="mb-2">
-                                <b>When it matters: </b>{" "}
-                                {
-                                  products[0]?.technical_score_descriptions
-                                    ?.when_it_matters
-                                }
-                              </p>
-                            )}
-                          </div>
-                        )} */}
-                    </div>
+                    <div className="tooltip-title">{data?.title}</div>
                   </th>
-                  {finalProducts.slice(0, defaultNo).map((product) => {
-                    const values = product?.area_evaluation?.map(
-                      (p) => p.value
-                    );
-                    // console.log(values);
+                  {finalProducts.slice(0, defaultNo).map((product, idx) => {
+                    const value =
+                      product?.area_evaluation?.[index]?.value ?? null;
                     return (
-                      <td key={index}>
-                        {
-                          addStarOnTable(defaultNo, "evaluation", values, "")[
-                            [index]
-                          ]
-                        }
+                      <td key={idx}>
+                        {value}
+                        {value === max && (
+                          <span key={value} className="tooltip-title-2">
+                            <img
+                              style={{ float: "right", paddingRight: "5px" }}
+                              src="/icons/star.png"
+                              alt="star"
+                            />
+                            {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
+                          </span>
+                        )}
+                        {/* Add star if the value is the maximum for this index */}
                       </td>
                     );
                   })}

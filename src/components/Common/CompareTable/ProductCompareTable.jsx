@@ -185,7 +185,7 @@ const ProductCompareTable = React.memo(
 
       // Adjust this function according to your context as I don't have the complete code
       // It would be good to ensure that you have the required variables (finalProducts) in scope.
-      const value__data=[]
+      const value__data = [];
       return (
         <>
           {arrayOfObjects.map((item, attrIndex) => (
@@ -815,35 +815,38 @@ const ProductCompareTable = React.memo(
               })}
             </tr>
             {products[0]?.area_evaluation?.map((data, index) => {
-              const max = Math.max(
-                ...finalProducts.flatMap(
-                  (product) =>
-                    product?.area_evaluation?.map((p) => p.value) ?? []
-                )
+              // Calculate the maximum value for the current index across all products
+              const maxValues = finalProducts.map(
+                (product) => product?.area_evaluation?.[index]?.value ?? null
               );
-              // console.log(max);
+              const max = Math.max(
+                ...maxValues.filter((value) => value !== null)
+              );
+
               return (
-                <tr className="">
+                <tr className="" key={index}>
+                  {" "}
+                  {/* Ensure to set a unique key for each <tr> */}
                   <th className="sub-inner-padding">
                     <div className="tooltip-title">{data?.title}</div>
                   </th>
-                 
                   {finalProducts.slice(0, defaultNo).map((product, idx) => {
-                    const values = product?.area_evaluation?.map(
-                      (p) => p.value
-                    );
-                    // console.log(
-                    //   Array.isArray(values[0])
-                    //     ? values[0].map((v) => parseFloat(v))
-                    //     : values[0]
-                    // );
-                    const value = values ? values[index] : null;
-                    // console.log(values);
+                    const value =
+                      product?.area_evaluation?.[index]?.value ?? null;
                     return (
                       <td key={idx}>
-                        {/* {console.log(value , value === max , "neetxy")} */}
                         {value}
-                        {value === max ? "⭐️" : ""}
+                        {value === max && (
+                          <span key={value} className="tooltip-title-2">
+                            <img
+                              style={{ float: "right", paddingRight: "5px" }}
+                              src="/icons/star.png"
+                              alt="star"
+                            />
+                            {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
+                          </span>
+                        )}
+                        {/* Add star if the value is the maximum for this index */}
                       </td>
                     );
                   })}
