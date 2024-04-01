@@ -1292,12 +1292,9 @@ a.outlineLink.outline-active {
   line-height: 1.7;
 }
 
-
 #shortCodeText img {
   width: auto;
   max-width: 100%;
-
-
 }
 
 /* .outline-section .ol-child li{
@@ -1759,11 +1756,11 @@ li.color-item.selected {
   font-size: 18px;
 }
 
-h3.attribute__title{
+h3.attribute__title {
   font-size: 24px !important;
 }
 
-h4.attribute__title{
+h4.attribute__title {
   font-size: 20px !important;
 }
 
@@ -1903,7 +1900,7 @@ h4.attribute__title{
 
 .winner__badge {
   box-shadow: 0px 2px 2px 0px #00000040;
-  background: #FF8F0B;
+  background: #ff8f0b;
   color: #fff;
   width: fit-content;
   padding: 3px 10px;
@@ -1919,11 +1916,11 @@ h4.attribute__title{
   height: auto !important;
 }
 
-.expert_reviews_slider .swiper-slide .review__card{
+.expert_reviews_slider .swiper-slide .review__card {
   height: 100% !important;
 }
 
-.shortcode_table_scroll{
+.shortcode_table_scroll {
   overflow-y: auto;
 }
 
@@ -2019,3 +2016,12 @@ h4.attribute__title{
 /* shortcode-css-end */
 
 /* price-image-section-css-end */
+.legendBoxBarChart table tr td span {
+  margin: 0 !important;
+}
+
+.legendBoxBarChart table tr td {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}

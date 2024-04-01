@@ -47,26 +47,26 @@ const [tabData, setTabData] = useState(false)
     swiperRef?.slideNext();
   }, [swiperRef]);
 
-  const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
-    const [isSticky, setIsSticky] = useState(false);
-    const newRef = useRef();
-    ref ||= newRef;
-    useEffect(() => {
-      const cachedRef = ref.current,
-        observer = new IntersectionObserver(
-          ([e]) => setIsSticky(e.intersectionRatio < 1),
-          observerSettings
-        );
-      observer.observe(cachedRef);
-      // console.log(observerSettings);
-      return () => {
-        observer.unobserve(cachedRef);
-      };
-    }, []);
+  // const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
+  //   const [isSticky, setIsSticky] = useState(false);
+  //   const newRef = useRef();
+  //   ref ||= newRef;
+  //   useEffect(() => {
+  //     const cachedRef = ref.current,
+  //       observer = new IntersectionObserver(
+  //         ([e]) => setIsSticky(e.intersectionRatio < 1),
+  //         observerSettings
+  //       );
+  //     observer.observe(cachedRef);
+  //     // console.log(observerSettings);
+  //     return () => {
+  //       observer.unobserve(cachedRef);
+  //     };
+  //   }, []);
 
-    return [isSticky, ref, setIsSticky];
-  };
-  const [isSticky, ref] = useDetectSticky();
+  //   return [isSticky, ref, setIsSticky];
+  // };
+  // const [isSticky, ref] = useDetectSticky();
   return (
     <section className="comparisons-slider">
        <Table  id='mobile-compare-tabler' className={winPos == true ? "isSticky compare-container" : "nonSticky compare-container"}>

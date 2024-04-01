@@ -83,7 +83,7 @@ function ProductPageOutline({ product, currentIndexId }) {
     }
   };
 
-  console.log(activeParentIndex)
+  console.log(activeParentIndex);
 
   return (
     <>
@@ -144,7 +144,9 @@ function ProductPageOutline({ product, currentIndexId }) {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    setActiveParentIndex(attributeValues.attribute)
+                                    setActiveParentIndex(
+                                      attributeValues.attribute
+                                    );
                                   }}
                                 >
                                   <a

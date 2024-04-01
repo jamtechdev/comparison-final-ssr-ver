@@ -145,7 +145,9 @@ export default function ComparisonTable({
           (stringArray[0] === "yes" && stringArray[1] === "-") ||
           (stringArray[0] === "yes" && stringArray[1] === "?")
             ? "no"
-            : "yes" || (stringArray[0] === "no" && stringArray[1] !== "-" || stringArray[1] === "?")
+            : "yes" ||
+              (stringArray[0] === "no" && stringArray[1] !== "-") ||
+              stringArray[1] === "?"
             ? "yes"
             : "no";
 

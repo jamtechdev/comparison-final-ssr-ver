@@ -785,7 +785,7 @@ export default function GuidePage({
           </Row>
         </Container>
       </section>
-      {/* <section>
+      <section>
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
@@ -793,7 +793,7 @@ export default function GuidePage({
             </Col>
           </Row>
         </Container>
-      </section> */}
+      </section>
       <section>
         <Container>
           <Row>

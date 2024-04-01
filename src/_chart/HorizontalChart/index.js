@@ -47,7 +47,10 @@ function HorizontalChart(props) {
     const svg = d3
       .select(svgContainer.current)
       .append("svg")
+      
+
       .attr("width", newWidth + margin.left + margin.right)
+      
       .attr("height", newHeight + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
