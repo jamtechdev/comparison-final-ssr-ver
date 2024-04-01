@@ -815,13 +815,21 @@ const ProductCompareTable = React.memo(
               })}
             </tr>
             {products[0]?.area_evaluation?.map((data, index) => {
-              // Calculate the maximum value for the current index across all products
               const maxValues = finalProducts.map(
                 (product) => product?.area_evaluation?.[index]?.value ?? null
               );
               const max = Math.max(
                 ...maxValues.filter((value) => value !== null)
               );
+
+              // Count occurrences of each value
+              const valueCounts = finalProducts.reduce((acc, product) => {
+                const value = product?.area_evaluation?.[index]?.value;
+                if (value !== null) {
+                  acc[value] = (acc[value] || 0) + 1;
+                }
+                return acc;
+              }, {});
 
               return (
                 <tr className="" key={index}>
@@ -836,7 +844,7 @@ const ProductCompareTable = React.memo(
                     return (
                       <td key={idx}>
                         {value}
-                        {value === max && (
+                        {value === max && valueCounts[value] <= 1 && (
                           <span key={value} className="tooltip-title-2">
                             <img
                               style={{ float: "right", paddingRight: "5px" }}
@@ -846,7 +854,7 @@ const ProductCompareTable = React.memo(
                             {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
                           </span>
                         )}
-                        {/* Add star if the value is the maximum for this index */}
+                        {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
                       </td>
                     );
                   })}

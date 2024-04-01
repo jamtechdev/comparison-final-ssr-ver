@@ -228,10 +228,10 @@ function ComparisonVerticalChart(props) {
   // console.log(filteredData, "filter");
   const table = legendContainer.append("table");
   const tbody = table.append("tbody");
-  const rows = tbody.selectAll("td").data(filteredData).enter().append("td");
+  const rows = tbody.selectAll("tr").data(filteredData).enter().append("tr");
   let color = ["", "#437ECE", "#FF8F0B", "rgb(40, 162, 140)"];
   const cells = rows
-    .selectAll("td")
+    .selectAll("tr")
     .data((d, i) => {
       // Check if products is an array and return a nested array for multiple products
       if (d.products?.length > 1) {
@@ -244,7 +244,7 @@ function ComparisonVerticalChart(props) {
       }
     })
     .enter()
-    .append("tr")
+    .append("td")
     .each(function (d, i) {
       if (Array.isArray(d)) {
         // Case when d is an array containing [color, product_name]

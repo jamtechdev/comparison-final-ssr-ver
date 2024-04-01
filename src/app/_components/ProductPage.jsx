@@ -1552,7 +1552,7 @@ function ProductPage({
                                                     {/* {formatValue(8.125)} */}
                                                     {/* {attributeValues?.final_points?.toFixed(
                                                       1
-                                                    )} */}  
+                                                    )} */}
                                                   </span>
                                                   <h4 className="attribute__title">
                                                     <b
