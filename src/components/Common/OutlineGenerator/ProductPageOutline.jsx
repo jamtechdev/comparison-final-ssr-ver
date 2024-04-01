@@ -71,7 +71,7 @@ function ProductPageOutline({ product, currentIndexId }) {
   }, [currentIndexId]);
 
   const scrollToSection = (sectionId) => (e) => {
-    console.log(sectionId, "sectionId");
+    // console.log(sectionId, "sectionId");
     e.preventDefault();
     const section = document.getElementById(sectionId);
     if (section) {
@@ -82,6 +82,8 @@ function ProductPageOutline({ product, currentIndexId }) {
       });
     }
   };
+
+  console.log(activeParentIndex)
 
   return (
     <>
@@ -110,6 +112,9 @@ function ProductPageOutline({ product, currentIndexId }) {
                     }}
                   >
                     <a
+                      className={`outlineLink ${
+                        activeParentIndex === attribute ? "outline-active" : ""
+                      }`}
                       href=""
                       onClick={scrollToSection(
                         attribute.trim().replace(/\s+/g, "-")
@@ -130,14 +135,29 @@ function ProductPageOutline({ product, currentIndexId }) {
                             ) : (
                               <ol key={valueIndex} className="ol-child">
                                 <li
-                                  className="outlineList"
-                                  onClick={scrollToSection(
+                                  className={`outlineList ${
+                                    activeParentIndex ===
                                     attributeValues.attribute
-                                      .trim()
-                                      .replace(/\s+/g, "-")
-                                  )}
+                                      ? "outline-active"
+                                      : ""
+                                  }`}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setActiveParentIndex(attributeValues.attribute)
+                                  }}
                                 >
-                                  {`${subMainNumber}. ${attributeValues.attribute}`}
+                                  <a
+                                    href="#"
+                                    onClick={scrollToSection(
+                                      attributeValues.attribute
+                                        .trim()
+                                        .replace(/\s+/g, "-")
+                                    )}
+                                  >
+                                    {" "}
+                                    {`${subMainNumber}. ${attributeValues.attribute}`}
+                                  </a>
                                 </li>
                               </ol>
                             )}

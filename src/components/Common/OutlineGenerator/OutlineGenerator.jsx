@@ -98,7 +98,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
                 href={`#${section?.id}`}
                 className={`outlineLink ${
                   activeParentIndex === section?.id ? "outline-active" : ""
-                }`}
+                }`} 
               >
                 {`${mainNumber}. ${section.text}`}
               </Link>
