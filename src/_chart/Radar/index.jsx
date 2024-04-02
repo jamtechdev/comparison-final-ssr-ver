@@ -5,7 +5,7 @@ import "./index.css";
 
 function Radar({ data, activeTab }) {
   // console.log(props, "neet");
-  console.log(data ,"neet")
+  console.log(data ,)
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 490 - margin.left - margin.right;

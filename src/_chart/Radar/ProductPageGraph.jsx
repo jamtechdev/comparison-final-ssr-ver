@@ -59,8 +59,7 @@ function ProductPageGraph({ data, activeTab }) {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .attr("fill", "gray");
 
-    const attributes = Object?.keys(data);
-    // console.log(attributes)
+    const attributes = Object?.keys(data[0]);
 
     const radius = 150;
 
@@ -201,13 +200,17 @@ function ProductPageGraph({ data, activeTab }) {
             : "#FF8F0B"
         )
         .attr("opacity", activeTab == i ? 0.9 : 0.1)
-        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+        .attr("transform", `translate(${width / 2}, ${height / 2})`)
+        .style("z-index", activeTab == i ? 99999 : 2)
+      .style("display", activeTab == i ? "block" : "none");
       cord.forEach((point, index) => {
         svg
           .append("circle")
           .attr("cx", point.x + width / 2)
           .attr("cy", point.y + height / 2)
           .attr("r", 5)
+          .style("display", activeTab == i ? "block" : "none")
+          .style("z-index", activeTab == i ? 99999 : 2)
           .style(
             "stroke",
             data?.length > 2
@@ -237,9 +240,12 @@ function ProductPageGraph({ data, activeTab }) {
             } else {
               backgroundColor = "#28A28C";
             }
+            console.log(i, "check");
             const attribute = select(this).attr("data-attribute");
             tooltip
-              .style("display", "block")
+              // .style("display", "block")
+              .style("display", activeTab == i ? "block" : "none")
+              .style("z-index", activeTab == i ? 99999 : 2)
               .style("opacity", 0.9)
               .html(`${attribute}: ${parseFloat(value).toFixed(1)}`)
               .style("background-color", backgroundColor)
