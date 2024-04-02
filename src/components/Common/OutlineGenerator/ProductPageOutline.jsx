@@ -83,7 +83,7 @@ function ProductPageOutline({ product, currentIndexId }) {
     }
   };
 
-  console.log(activeParentIndex);
+  // console.log(activeParentIndex);
 
   return (
     <>
@@ -150,6 +150,12 @@ function ProductPageOutline({ product, currentIndexId }) {
                                   }}
                                 >
                                   <a
+                                    className={`outlineList ${
+                                      activeParentIndex ===
+                                      attributeValues.attribute
+                                        ? "outline-active"
+                                        : ""
+                                    }`}
                                     href="#"
                                     onClick={scrollToSection(
                                       attributeValues.attribute
@@ -192,6 +198,9 @@ function ProductPageOutline({ product, currentIndexId }) {
                     }}
                   >
                     <a
+                      className={`outlineList ${
+                        activeParentIndex === attribute ? "outline-active" : ""
+                      }`}
                       href=""
                       onClick={scrollToSection(
                         attribute.trim().replace(/\s+/g, "-")
@@ -212,14 +221,37 @@ function ProductPageOutline({ product, currentIndexId }) {
                             ) : (
                               <ol key={valueIndex} className="ol-child">
                                 <li
-                                  className="outlineList"
-                                  onClick={scrollToSection(
+                                  className={`outlineList ${
+                                    activeParentIndex ===
                                     attributeValues.attribute
-                                      .trim()
-                                      .replace(/\s+/g, "-")
-                                  )}
+                                      ? "outline-active"
+                                      : ""
+                                  }`}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setActiveParentIndex(
+                                      attributeValues.attribute
+                                    );
+                                  }}
                                 >
-                                  {`${subMainNumber}. ${attributeValues.attribute}`}
+                                  <a
+                                    className={`outlineList ${
+                                      activeParentIndex ===
+                                      attributeValues.attribute
+                                        ? "outline-active"
+                                        : ""
+                                    }`}
+                                    href="#"
+                                    onClick={scrollToSection(
+                                      attributeValues.attribute
+                                        .trim()
+                                        .replace(/\s+/g, "-")
+                                    )}
+                                  >
+                                    {" "}
+                                    {`${subMainNumber}. ${attributeValues.attribute}`}
+                                  </a>
                                 </li>
                               </ol>
                             )}
