@@ -202,7 +202,7 @@ function ProductPageGraph({ data, activeTab }) {
         .attr("opacity", activeTab == i ? 0.9 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`)
         .style("z-index", activeTab == i ? 99999 : 2)
-      .style("display", activeTab == i ? "block" : "none");
+      // .style("display", activeTab == i ? "block" : "none");
       cord.forEach((point, index) => {
         svg
           .append("circle")
