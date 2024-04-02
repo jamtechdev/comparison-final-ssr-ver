@@ -126,7 +126,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
                   chartTitle={chartTitle}
                   pageType={pageType}
                   slug={slug}
-                  data={plotData}
+                  data={chartData?.data}
                   strokeWidth={4}
                 />
               );
@@ -279,70 +279,133 @@ const useComparisonChart = (chartData, pageType, slug) => {
     }
   }
 
+  // async function regenerateData(chartData) {
+  //   const dataForChart = [];
+
+  //   if (chartData && chartData.data && chartData.data.length > 0) {
+  //     chartData.data.forEach((val, index) => {
+  //       // console.log(val, "result");
+  //       dataForChart.push({
+  //         label: val.label,
+  //         value: Number(val?.value),
+  //         selected: Number(val?.selected),
+  //         product_id: val?.product_id,
+  //         product_count: val?.product_count,
+  //         products: val?.products,
+  //         // product_url: val?.product_url,
+  //       });
+  //       // if (chartData.produt_name)
+  //       //   dataForChart[index]["productName"] = chartData.produt_name[index];
+  //       // console.log(dataForChart, "ttt");
+  //       // if (chartData.product_count) {
+  //       //   dataForChart[index]["productCount"] = chartData.product_count[index];
+  //       // }
+  //       // if (chartData.products) {
+  //       //   dataForChart[index]["products"] = chartData.products[index];
+  //       // }
+  //       // if (chartData.selected) {
+  //       //   dataForChart[index]["selected"] = chartData.selected[index];
+  //       // }
+  //       // if (chartData.produt_name)
+  //       //   dataForChart[index]["productName"] = chartData.produt_name[index];
+  //     });
+  //   } else if (chartData && chartData.data && chartData.data.length > 0) {
+  //     chartData.data.forEach((val, index) => {
+  //       dataForChart.push({
+  //         label: val.label,
+  //         value: Number(val?.value),
+  //         selected: Number(val?.selected),
+  //         product_id: val?.product_id,
+  //         product_count: val?.product_count,
+  //         products: val?.products,
+  //         product_url: val?.product_url,
+  //       });
+  //     });
+  //   } else if (chartData && chartData.data && chartData.data.length > 0) {
+  //     chartData.data.forEach((val, index) => {
+  //       dataForChart.push({
+  //         label: val.label,
+  //         value: Number(val?.value),
+  //         selected: Number(val?.selected),
+  //         product_id: val?.product_id,
+  //         product_count: val?.product_count,
+  //         products: val?.products,
+  //         product_url: val?.product_url,
+  //       });
+  //     });
+  //   } else if (chartData && chartData.data && chartData.data.length > 0) {
+  //     chartData.data.forEach((val) => {
+  //       dataForChart.push({
+  //         label: val.label,
+  //         value: Number(val?.value),
+  //         selected: Number(val?.selected),
+  //         product_id: val?.product_id,
+  //         product_count: val?.product_count,
+  //         products: val?.products,
+  //         product_url: val?.product_url,
+  //       });
+  //     });
+  //   }
+  //   return dataForChart;
+  // }
   async function regenerateData(chartData) {
     const dataForChart = [];
 
-    if (chartData && chartData.data && chartData.data.length > 0) {
+    if (
+      chartData &&
+      chartData.data &&
+      chartData.data.length > 0 &&
+      chartData.lable &&
+      chartData.selected &&
+      chartData.products &&
+      (chartData.product_count || chartData.produt_name)
+    ) {
       chartData.data.forEach((val, index) => {
-        // console.log(val, "result");
         dataForChart.push({
-          label: val.label,
-          value: Number(val?.value),
-          selected: Number(val?.selected),
-          product_id: val?.product_id,
-          product_count: val?.product_count,
-          products: val?.products,
-          // product_url: val?.product_url,
+          label: chartData.lable[index],
+          value: Number(val),
         });
-        // if (chartData.produt_name)
-        //   dataForChart[index]["productName"] = chartData.produt_name[index];
-        // console.log(dataForChart, "ttt");
-        // if (chartData.product_count) {
-        //   dataForChart[index]["productCount"] = chartData.product_count[index];
-        // }
-        // if (chartData.products) {
-        //   dataForChart[index]["products"] = chartData.products[index];
-        // }
-        // if (chartData.selected) {
-        //   dataForChart[index]["selected"] = chartData.selected[index];
-        // }
-        // if (chartData.produt_name)
-        //   dataForChart[index]["productName"] = chartData.produt_name[index];
+        if (chartData.product_count) {
+          dataForChart[index]["productCount"] = chartData.product_count[index];
+        }
+        if (chartData.products) {
+          dataForChart[index]["products"] = chartData.products[index];
+        }
+        if (chartData.selected) {
+          dataForChart[index]["selected"] = chartData.selected[index];
+        }
+        if (chartData.produt_name)
+          dataForChart[index]["productName"] = chartData.produt_name[index];
       });
-    } else if (chartData && chartData.data && chartData.data.length > 0) {
+    } else if (
+      chartData &&
+      chartData.data &&
+      chartData.data.length > 0 &&
+      chartData.lable
+    ) {
       chartData.data.forEach((val, index) => {
         dataForChart.push({
-          label: val.label,
-          value: Number(val?.value),
-          selected: Number(val?.selected),
-          product_id: val?.product_id,
-          product_count: val?.product_count,
-          products: val?.products,
-          product_url: val?.product_url,
+          label: chartData.lable[index],
+          value: Number(val),
         });
       });
-    } else if (chartData && chartData.data && chartData.data.length > 0) {
+    } else if (
+      chartData &&
+      chartData.data &&
+      chartData.data.length > 0 &&
+      chartData.label
+    ) {
       chartData.data.forEach((val, index) => {
         dataForChart.push({
-          label: val.label,
-          value: Number(val?.value),
-          selected: Number(val?.selected),
-          product_id: val?.product_id,
-          product_count: val?.product_count,
-          products: val?.products,
-          product_url: val?.product_url,
+          label: chartData.label[index],
+          value: Number(val),
         });
       });
     } else if (chartData && chartData.data && chartData.data.length > 0) {
       chartData.data.forEach((val) => {
         dataForChart.push({
-          label: val.label,
-          value: Number(val?.value),
-          selected: Number(val?.selected),
-          product_id: val?.product_id,
-          product_count: val?.product_count,
-          products: val?.products,
-          product_url: val?.product_url,
+          label: val,
+          value: Number(val),
         });
       });
     }

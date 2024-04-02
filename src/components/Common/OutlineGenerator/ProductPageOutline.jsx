@@ -77,8 +77,8 @@ function ProductPageOutline({ product, currentIndexId }) {
     if (section) {
       section.scrollIntoView({
         behavior: "smooth",
-        block: "center",
-        inline: "nearest",
+        block: "start",
+        inline: "start",
       });
     }
   };
