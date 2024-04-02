@@ -42,6 +42,8 @@ export default async function PageSwitch({
       const productCatAttribute = await getProductCategroyAttributes(
         product?.category_id
       );
+
+      // console.log(productCatAttribute , "productCatAttribute");
       const getProductCompare = await getCompareProductByCatID(
         product?.category_id,
         slug
@@ -157,7 +159,7 @@ async function getProductCategroyAttributes(category_id) {
 }
 
 async function getCompareProductByCatID(category_id, slug) {
-  // console.log(slug);
+  // console.log(slug,category_id);
   // ${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${id}`
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}?product=${slug}`,

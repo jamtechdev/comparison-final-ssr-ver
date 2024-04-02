@@ -84,13 +84,13 @@ const TechnicalAccordion = React.memo(
                         </svg>
                       </span>
                       <div className="tooltip-display-content">
-                        {product?.technical_score_descriptions.description && (
+                        {product?.technical_score_descriptions?.description && (
                           <p className="mb-2">
                             <b>What it is: </b>
                             {product?.technical_score_descriptions?.description}
                           </p>
                         )}
-                        {product?.technical_score_descriptions.when_matters && (
+                        {product?.technical_score_descriptions?.when_matters && (
                           <p className="mb-2">
                             <b>When it matters: </b>
                             {
@@ -103,8 +103,8 @@ const TechnicalAccordion = React.memo(
                           <b>Score components:</b>
                         </p>
                         {product?.technical_score_descriptions
-                          .score_components &&
-                          product?.technical_score_descriptions.score_components?.map(
+                          ?.score_components &&
+                          product?.technical_score_descriptions?.score_components?.map(
                             (data, index) => {
                               return (
                                 <React.Fragment key={index}>
@@ -194,13 +194,13 @@ const TechnicalAccordion = React.memo(
                         </svg>
                       </span>
                       <div className="tooltip-display-content">
-                        {product?.users_rating_descriptions.description && (
+                        {product?.users_rating_descriptions?.description && (
                           <p className="mb-2">
                             <b>What it is: </b>
                             {product?.users_rating_descriptions?.description}
                           </p>
                         )}
-                        {product?.users_rating_descriptions.when_matters && (
+                        {product?.users_rating_descriptions?.when_matters && (
                           <p className="mb-2">
                             <b>When it matters: </b>
                             {product?.users_rating_descriptions?.when_matters}
@@ -209,8 +209,8 @@ const TechnicalAccordion = React.memo(
                         <p>
                           <b>Score components:</b>
                         </p>
-                        {product?.users_rating_descriptions.score_components &&
-                          product?.users_rating_descriptions.score_components?.map(
+                        {product?.users_rating_descriptions?.score_components &&
+                          product?.users_rating_descriptions?.score_components?.map(
                             (data, index) => {
                               return (
                                 <React.Fragment key={index}>
@@ -291,13 +291,13 @@ const TechnicalAccordion = React.memo(
                         textUnderlineOffset: "5px",
                       }}
                     >
-                      {product.reviews}
-                      <ProsConsToolTip hover_phrase={product.reviews_phase} />
+                      {product?.reviews}
+                      <ProsConsToolTip hover_phrase={product?.reviews_phase} />
                     </span>
                   </div>
                 </div>
               </div>
-              {product.expert_reviews_rating > 0 && (
+              {product?.expert_reviews_rating > 0 && (
                 <div className="spec-section">
                   <div className="spec-item">
                     <div className="spec-col">
@@ -313,9 +313,9 @@ const TechnicalAccordion = React.memo(
                         className="tooltip-title"
                         style={{
                           color:
-                            product.expert_reviews_is_better_than * 100 >= 70
+                            product?.expert_reviews_is_better_than * 100 >= 70
                               ? "#437ece"
-                              : product.expert_reviews_is_worse_than * 100 > 70
+                              : product?.expert_reviews_is_worse_than * 100 > 70
                               ? "#ce434b"
                               : "#27304e",
                           fontSize: "15px",
@@ -333,7 +333,7 @@ const TechnicalAccordion = React.memo(
                       >
                         {product.expert_reviews_rating}
                         <ProsConsToolTip
-                          hover_phrase={product.expert_reviews_rating_phase}
+                          hover_phrase={product?.expert_reviews_rating_phase}
                         />
                       </div>
                     </div>
@@ -355,7 +355,7 @@ const TechnicalAccordion = React.memo(
                       </span>
                       <div className="tooltip-display-content">
                         {product?.ratio_qulitiy_points_descriptions
-                          .description && (
+                          ?.description && (
                           <p className="mb-2">
                             <b>What it is: </b>
                             {
@@ -365,7 +365,7 @@ const TechnicalAccordion = React.memo(
                           </p>
                         )}
                         {product?.ratio_qulitiy_points_descriptions
-                          .when_matters && (
+                          ?.when_matters && (
                           <p className="mb-2">
                             <b>When it matters: </b>
                             {
@@ -470,13 +470,13 @@ const TechnicalAccordion = React.memo(
                         </svg>
                       </span>
                       <div className="tooltip-display-content">
-                        {product?.popularity_descriptions.description && (
+                        {product?.popularity_descriptions?.description && (
                           <p className="mb-2">
                             <b>What it is: </b>
                             {product?.popularity_descriptions?.description}
                           </p>
                         )}
-                        {product?.popularity_descriptions.when_matters && (
+                        {product?.popularity_descriptions?.when_matters && (
                           <p className="mb-2">
                             <b>When it matters: </b>
                             {product?.popularity_descriptions?.when_matters}
@@ -548,9 +548,9 @@ const TechnicalAccordion = React.memo(
                         textUnderlineOffset: "5px",
                       }}
                     >
-                      {product.popularity_points}
+                      {product?.popularity_points}
                       <ProsConsToolTip
-                        hover_phrase={product.popularity_points_phase}
+                        hover_phrase={product?.popularity_points_phase}
                       />
                     </div>
                   </div>

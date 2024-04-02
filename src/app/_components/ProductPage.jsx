@@ -35,6 +35,7 @@ import { getAttributeProductHalf } from "@/_helpers";
 import Questiontool from "@/components/Svg/Questiontool";
 import ProductPageOutline from "@/components/Common/OutlineGenerator/ProductPageOutline";
 import MainComparision from "@/components/Common/MainComparision/MainComparision";
+import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
 
 // import Link from "next/link";
 
@@ -334,13 +335,13 @@ function ProductPage({
                     </span>
                   </p>
                   <div className="tooltip-display-content bottom-tooltip-display">
-                    {product?.overall_score_descriptions.description && (
+                    {product?.overall_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
                         {product?.overall_score_descriptions?.description}
                       </p>
                     )}
-                    {product?.overall_score_descriptions.when_matters && (
+                    {product?.overall_score_descriptions?.when_matters && (
                       <p className="mb-2">
                         <b>
                           {product && product?.page_phases?.when_it_matters}:{" "}
@@ -353,8 +354,8 @@ function ProductPage({
                         {product && product?.page_phases?.score_components} :
                       </b>
                     </p>
-                    {product.overall_score_descriptions.score_components &&
-                      product.overall_score_descriptions.score_components?.map(
+                    {product.overall_score_descriptions?.score_components &&
+                      product.overall_score_descriptions?.score_components?.map(
                         (data, index) => {
                           return (
                             <div className="scroe_section" key={index}>
@@ -424,13 +425,13 @@ function ProductPage({
                     </span>
                   </p>
                   <div className="tooltip-display-content bottom-tooltip-display">
-                    {product?.technical_score_descriptions.description && (
+                    {product?.technical_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
                         {product?.technical_score_descriptions?.description}
                       </p>
                     )}
-                    {product?.technical_score_descriptions.when_matters && (
+                    {product?.technical_score_descriptions?.when_matters && (
                       <p className="mb-2">
                         <b>
                           {product && product?.page_phases?.when_it_matters}:{" "}
@@ -443,8 +444,8 @@ function ProductPage({
                         {product && product?.page_phases?.score_components}:
                       </b>
                     </p>
-                    {product.technical_score_descriptions.score_components &&
-                      product.technical_score_descriptions.score_components?.map(
+                    {product?.technical_score_descriptions?.score_components &&
+                      product?.technical_score_descriptions?.score_components?.map(
                         (data, index) => {
                           return (
                             <div className="scroe_section" key={index}>
@@ -510,13 +511,13 @@ function ProductPage({
                     </span>
                   </p>
                   <div className="tooltip-display-content bottom-tooltip-display">
-                    {product?.users_rating_descriptions.description && (
+                    {product?.users_rating_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
                         {product?.users_rating_descriptions?.description}
                       </p>
                     )}
-                    {product?.technical_score_descriptions.when_matters && (
+                    {product?.technical_score_descriptions?.when_matters && (
                       <p className="mb-2">
                         <b>
                           {product && product?.page_phases?.when_it_matters}:{" "}
@@ -529,8 +530,8 @@ function ProductPage({
                         {product && product?.page_phases?.score_components}:
                       </b>
                     </p>
-                    {product.users_rating_descriptions.score_components &&
-                      product.users_rating_descriptions.score_components?.map(
+                    {product.users_rating_descriptions?.score_components &&
+                      product.users_rating_descriptions?.score_components?.map(
                         (data, index) => {
                           return (
                             <div className="scroe_section" key={index}>
@@ -725,7 +726,7 @@ function ProductPage({
                     )}
                   {product &&
                     product?.price_websites
-                      .slice(0, showFullPrice ? 8 : 4)
+                      ?.slice(0, showFullPrice ? 8 : 4)
                       .map((item, index) => {
                         return (
                           <li key={index}>
@@ -759,7 +760,7 @@ function ProductPage({
                         );
                       })}
                 </ul>
-                {product?.price_websites.length > 5 && (
+                {product?.price_websites?.length > 5 && (
                   <Button className="see_all_btn">
                     See All <i className="ri-arrow-down-s-line"></i>
                   </Button>
@@ -775,7 +776,7 @@ function ProductPage({
                 <ul className="best-list-item">
                   {product &&
                     product?.guide_ratings
-                      .slice(0, showFullRanking ? 8 : 4)
+                      ?.slice(0, showFullRanking ? 8 : 4)
                       .map((item, index) => {
                         return (
                           <li key={index} className="d-flex align-items-start">
@@ -800,7 +801,7 @@ function ProductPage({
                         );
                       })}
                 </ul>
-                {product?.guide_ratings.length > 5 && (
+                {product?.guide_ratings?.length > 5 && (
                   <Button
                     className="see_all_btn"
                     // onClick={() => {
@@ -1100,7 +1101,7 @@ function ProductPage({
                 <div className="pros-header">
                   {product && product?.page_phases?.should_buy}
                 </div>
-                {product?.should_buy.length === 0 && (
+                {product?.should_buy?.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
                 )}
                 {/* {console.log(product?.should_not_buy)} */}
@@ -1126,7 +1127,7 @@ function ProductPage({
                 <div className="pros-header">
                   {product && product?.page_phases?.should_not_buy}
                 </div>
-                {product?.should_not_buy.length === 0 && (
+                {product?.should_not_buy?.length === 0 && (
                   <h3 className="no-data text-center mt-2">No data Found</h3>
                 )}
                 <ul className="cross">
@@ -1818,6 +1819,15 @@ function ProductPage({
               />
             </Col>
             <Col md={12}></Col>
+          </Row>
+        </Container>
+      </section>
+      <section className="mobile-table-section">
+        <Container>
+          <Row className="table-section-desktop p-0">
+            <Col md={12} className="p-0">
+              <MobileCompareTable />
+            </Col>
           </Row>
         </Container>
       </section>

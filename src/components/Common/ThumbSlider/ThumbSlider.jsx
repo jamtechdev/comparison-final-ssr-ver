@@ -31,7 +31,7 @@ export default function ThumbSlider({ productData, is_tested,slug }) {
   };
   // console.log(activeThumb);
   const handleThumbClick = (index) => {
-    if (index === productData?.all_images.length - 1) {
+    if (index === productData?.all_images?.length - 1) {
       setActiveThumb(0); // Reset activeThumb to 0
     } else {
       setActiveThumb(index);
@@ -50,7 +50,7 @@ export default function ThumbSlider({ productData, is_tested,slug }) {
 
   const handleNext = () => {
     // console.log(activeThumb);
-    if (activeThumb === productData?.all_images.length - 1) {
+    if (activeThumb === productData?.all_images?.length - 1) {
       setActiveThumb(0); // Reset activeThumb to 0
     } else {
       setActiveThumb(activeThumb + 1);
@@ -64,7 +64,7 @@ export default function ThumbSlider({ productData, is_tested,slug }) {
       {productData?.main_image === null ? (
         <>
           <ul className="thumb-images">
-            {product.slice(0, 1).map((item, index) => (
+            {product.slice(0, 1)?.map((item, index) => (
               <li
                 key={index}
                 onClick={() => handleThumbClick(index)}
@@ -167,7 +167,7 @@ export default function ThumbSlider({ productData, is_tested,slug }) {
               },
             }}
           >
-            {productData?.all_images.map((item, index) => (
+            {productData?.all_images?.map((item, index) => (
               <SwiperSlide key={index}>
                 <img
                   src={item.image}

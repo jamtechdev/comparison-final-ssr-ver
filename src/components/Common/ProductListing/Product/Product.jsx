@@ -471,7 +471,7 @@ export default function Product({
                           </p>
                           {product?.technical_score_descriptions
                             .score_components &&
-                            product?.technical_score_descriptions.score_components?.map(
+                            product?.technical_score_descriptions?.score_components?.map(
                               (data, index) => {
                                 return (
                                   <div className="scroe_section" key={index}>
@@ -528,7 +528,7 @@ export default function Product({
                       <div className="score-detail tooltip-title">
                         <span>User’s Rating</span>
                         <div className="tooltip-display-content">
-                          {product?.users_rating_descriptions.description && (
+                          {product?.users_rating_descriptions?.description && (
                             <p className="mb-2">
                               <b>
                                 {guidePhraseData && guidePhraseData?.what_it_is}
@@ -1263,7 +1263,7 @@ export default function Product({
                                         </p>
                                         {product?.technical_score_descriptions
                                           .score_components &&
-                                          product?.technical_score_descriptions.score_components?.map(
+                                          product?.technical_score_descriptions?.score_components?.map(
                                             (data, index) => {
                                               return (
                                                 <React.Fragment key={index}>

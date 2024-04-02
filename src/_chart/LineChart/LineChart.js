@@ -24,8 +24,8 @@ function lineChart(svgRef, lineChartData) {
   const data = lineChartData?.lineChartData.map((chartData) => ({
     name: chartData.name,
     values: chartData.values?.map((value) => ({
-      date: parseDate(value.date),
-      price: value.price,
+      date: parseDate(value?.date),
+      price: value?.price,
     })),
   }));
 
