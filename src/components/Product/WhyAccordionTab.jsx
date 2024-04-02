@@ -25,7 +25,7 @@ const WhyAccordionTab = React.memo(
     const [activetab, setActiveTab] = useState("tab-1");
 
     const [apiData, setApiData] = useState(null);
-    // console.log(slug);
+    // console.log(apiData);
 
     useEffect(() => {
       const headers = {
@@ -131,8 +131,9 @@ const WhyAccordionTab = React.memo(
             <Tab eventKey="tab-1" title={product && product?.name}>
               {activetab === "tab-1" && (
                 <div className="graph-tab-content" id="productGraph">
+                  {console.log(apiData?.sets, "checking")}
                   {apiData && (
-                    <ProductPageGraph data={apiData?.sets} activeTab={0} />
+                    <ProductPageGraph data={apiData?.sets[0]} activeTab={0} />
                   )}
                 </div>
               )}
@@ -142,7 +143,7 @@ const WhyAccordionTab = React.memo(
               {activetab === "tab-2" && (
                 <div className="graph-tab-content" id="productGraph">
                   {apiData && (
-                    <ProductPageGraph data={apiData?.sets} activeTab={1} />
+                    <ProductPageGraph data={apiData?.sets[1]} activeTab={1} />
                   )}
                 </div>
               )}

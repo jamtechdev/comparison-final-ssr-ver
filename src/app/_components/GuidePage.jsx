@@ -789,7 +789,7 @@ export default function GuidePage({
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              <MobileCompareTable />
+              {/* <MobileCompareTable /> */}
             </Col>
           </Row>
         </Container>

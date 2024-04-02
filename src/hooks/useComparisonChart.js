@@ -11,7 +11,7 @@ import ComparisonVerticalChart from "../_chart/ComparisonVerticalChart/index.js"
 // import { ChartName } from "../_chart/data/enums/ChartName.js";
 
 const useComparisonChart = (chartData, pageType, slug) => {
-  console.log(chartData);
+  // console.log(chartData);
 
   const shortCodepatternsRE = chartData;
   // console.log(shortCodepatternsRE?.type);
@@ -85,7 +85,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
           const numberOfChartAppends = chartAppendElements.length;
           // console.log(chartData?.type);
           if (numberOfChartAppends == 1) {
-            console.log(chartData?.type);
+            // console.log(chartData?.type);
             if (chartData?.type === "pie-chart") {
               root.render(
                 <ComparisonPieChart

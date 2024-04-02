@@ -5,7 +5,7 @@ import "./index.css";
 
 function ProductPageGraph({ data, activeTab }) {
   // console.log(props, "neet");
-  // console.log(data)
+  console.log(JSON.stringify(data), "neet");
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 490 - margin.left - margin.right;
@@ -13,20 +13,21 @@ function ProductPageGraph({ data, activeTab }) {
 
   // const data = [
   //   {
-  //     Total: 5.758,
-  //     Battery: 3.805,
-  //     Cleaning: 5.0252,
-  //     Mopping: 8.2058,
-  //     Navigation: 1.25,
-  //     Design: 4.0481,
+  //     "Total": 5.71,
+  //     "Battery": 3.81,
+  //     "Cleaning": 5.03,
+  //     "Mopping": 1.21,
+  //     "Navigation": 1.25,
+  //     "Design": 4.05,
+  //     "control&Mooping": 1.21,
   //   },
   //   {
-  //     Total: 4.479,
-  //     Battery: 3.052,
-  //     Cleaning: 5.0252,
-  //     Mopping: 7,
-  //     Navigation: 6,
-  //     Design: 6.1378,
+  //     "Total": 3.12,
+  //     "Battery": 3.23,
+  //     "Cleaning": 4.15,
+  //     "Mopping": 1.5,
+  //     "Navigation": 1.15,
+  //     "Design": 4.77,
   //   },
   // ];
 
@@ -58,7 +59,8 @@ function ProductPageGraph({ data, activeTab }) {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .attr("fill", "gray");
 
-    const attributes = Object?.keys(data[0]);
+    const attributes = Object?.keys(data);
+    // console.log(attributes)
 
     const radius = 150;
 
