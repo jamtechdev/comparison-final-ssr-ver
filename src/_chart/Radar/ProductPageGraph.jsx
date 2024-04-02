@@ -5,7 +5,7 @@ import "./index.css";
 
 function ProductPageGraph({ data, activeTab }) {
   // console.log(props, "neet");
-  console.log(JSON.stringify(data), "neet");
+  // console.log(JSON.stringify(data), "neet");
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 490 - margin.left - margin.right;
@@ -240,7 +240,7 @@ function ProductPageGraph({ data, activeTab }) {
             } else {
               backgroundColor = "#28A28C";
             }
-            console.log(i, "check");
+            // console.log(i, "check");
             const attribute = select(this).attr("data-attribute");
             tooltip
               // .style("display", "block")
