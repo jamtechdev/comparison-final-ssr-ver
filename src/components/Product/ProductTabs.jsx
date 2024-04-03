@@ -6,6 +6,7 @@ import ExperReviwes from "../Common/ExpertReviews/ExperReviwes";
 import Rating from "../Common/Rating/Rating";
 import ProductReviewTab from "./ProductReviewTab";
 import VideoReviews from "../Common/VideoReviews/VideoReviews";
+import MobileAccordion from "../Common/MobileAccordion/MobileAccordion";
 
 function ProductTabs({
   productReview,
@@ -50,9 +51,9 @@ function ProductTabs({
                   )}
                 </Tabs>
               </Col>
-              {/* <Col md={12} className="">
+              <Col md={12} className="">
               <MobileAccordion />
-            </Col> */}
+            </Col>
             </Row>
           </Container>
         </section>

@@ -599,14 +599,14 @@ function ProductPage({
             </div>
             <Row className="w-100 m-0 alternatives-border-top">
               <Col md={12}>
-                <div className="inline-power-section w-100">
-                  <img
+                <div className="inline-power-section w-100 pb-0">
+                  {/* <img
                     src="/images/double-arrow.png"
                     width={0}
                     height={0}
                     sizes="100%"
                     alt="double-arrow"
-                  />
+                  /> */}
                   {/* {console.log(filteredTech_data[0]?.data)} */}
 
                   <ul className="badge-list-section">
