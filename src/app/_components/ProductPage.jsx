@@ -937,7 +937,7 @@ function ProductPage({
                                     }
                                   >
                                     {/* <span>{data.short_name}</span> */}
-                                    {/* {data?.short_name} */}
+                                    {data?.short_name}
                                   </li>
                                 ) : (
                                   <li
