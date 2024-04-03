@@ -345,6 +345,7 @@ export default function MobileCompareTable({
                               ) && (
                                 <div className="not-availabel n-lable p-1">
                                   {/* <span className="txt">NOT AVAILABLE</span> */}
+                                  <i>N/A</i>
                                   <span className="price">
                                     ~ {product?.price} €
                                   </span>
@@ -506,6 +507,7 @@ export default function MobileCompareTable({
                                 ) && (
                                   <div className="not-availabel">
                                     {/* <span className="txt">NOT AVAILABLE</span> */}
+                                    <i>N/A</i>
                                     <span className="price">
                                       ~ {data?.price} €
                                     </span>

@@ -328,6 +328,7 @@ const ProductCompareTable = React.memo(
                                 ) && (
                                   <div className="not-availabel n-lable p-1">
                                     {/* <span className="txt">NOT AVAILABLE</span> */}
+                                    <i>N/A</i>
                                     <span className="price">
                                       ~ {product?.price} €
                                     </span>
@@ -421,6 +422,7 @@ const ProductCompareTable = React.memo(
                         ) && (
                           <div className="not-availabel">
                             {/* <span className="txt">NOT AVAILABLE</span> */}
+                            <i>N/A</i>
                             <span className="price">~ {product?.price} €</span>
                           </div>
                         )}

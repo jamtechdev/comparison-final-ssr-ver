@@ -1188,9 +1188,10 @@ button.searchBarInner.btn.btn-primary {
 }
 
 table.compare-container.table.comparison-table .best-list-item li img {
-  width: 100%;
-  height: auto;
-  max-width: 28%;
+  margin: auto;
+  width: 100% !important;
+  height: 30px !important;
+  object-fit: contain !important;
 }
 
 .breadcrumb-group .breadcrumb-items.fristWord::first-letter {
