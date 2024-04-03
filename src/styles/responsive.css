@@ -458,10 +458,6 @@
   .sec-mobile_accordion
     .mobile_accordion
     .accordion-item
-    .accordion-button:focus,
-  .sec-mobile_accordion
-    .mobile_accordion
-    .accordion-item
     .accordion-button:focus-visible,
   .sec-mobile_accordion
     .mobile_accordion
@@ -831,10 +827,6 @@
     background-color: var(--secondary-color);
   }
 
-  .sec-mobile_accordion
-    .mobile_accordion
-    .accordion-item
-    .accordion-button:focus,
   .sec-mobile_accordion
     .mobile_accordion
     .accordion-item
@@ -1237,13 +1229,9 @@
     width: 70%;
   }
 
-  .thumb-section-container {
-    flex-direction: column;
-  }
-
   .thumb-section-container .thumb-slider {
     order: 1;
-    width: 100% !important;
+    /* width: 100% !important; */
   }
 
   .thumb-section-container .alternatives {
@@ -1292,7 +1280,7 @@
     flex-wrap: nowrap;
     gap: 12px;
     overflow-x: auto;
-    padding: 0 0 20px;
+    padding: 0 50px 20px 0;
     position: relative;
   }
 
@@ -1424,14 +1412,28 @@
   .similar-guides {
     margin: 20px 0 !important;
   }
-  .outline-section > p{
+  .outline-section > p {
     font-size: 17px !important;
   }
-  .outline-section ol li{
+  .outline-section ol li {
     font-size: 17px !important;
   }
-  .shortcode_table_wrapper{
+  .shortcode_table_wrapper {
     padding: 0 !important;
+  }
+  .inline-power-section {
+    align-items: baseline;
+  }
+  .table-accordion .accordion-button{
+    justify-content: flex-start !important;
+    gap: 10px !important;
+  }
+  .table-accordion .table-accordion-header{
+    flex: 1 !important;
+  }
+  .table-accordion .accordion-button div{
+    font-size: 15px !important;
+    line-height: 26px !important;
   }
 }
 
@@ -2004,7 +2006,7 @@
     /* border-right: none; */
   }
   .best-price-section {
-    margin-bottom: 0px;
+    margin-bottom: 30px;
   }
   .mobile-table-section .table-section-desktop .compare-container thead tr th {
     padding: 12px !important;
@@ -2025,6 +2027,12 @@
     width: 40px !important;
     height: 40px !important;
     display: block !important;
+  }
+  .dividers::before{
+    display: none !important;
+  }
+  .compare-tab-content ul{
+    padding: 0 0px 0 30px !important;
   }
 }
 @media screen and (min-width: 992px) {

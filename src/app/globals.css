@@ -1165,6 +1165,10 @@ button.searchBarInner.btn.btn-primary {
   display: block;
 }
 
+.catchy_titles_section.row span.catchy_titles_section_product_name a:hover{
+  color: #3363a4;
+}
+
 .catchy_titles_section.row span.catchy_titles_section_title:before {
   content: "";
   width: 5px;
@@ -1384,7 +1388,7 @@ li.color-item.selected {
   justify-content: end;
   margin-bottom: 13px;
   margin-right: -9px;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .sidebar_filter div {
