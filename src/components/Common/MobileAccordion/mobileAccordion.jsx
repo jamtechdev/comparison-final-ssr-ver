@@ -1,7 +1,7 @@
 "use client";
 import { Button, Col, Container, Row, Accordion } from "react-bootstrap";
 import MobileProductSlider from "../MobileProductSlider/mobileProductSlider";
-export default function mobileAccordion() {
+export default function MobileAccordion() {
   return (
     <>
       <section className="sec-mobile_accordion">
