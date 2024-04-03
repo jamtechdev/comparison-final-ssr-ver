@@ -870,7 +870,7 @@ const ProductCompareTable = React.memo(
                     <tr className="tr-bg-color">
                       <th>
                         <div className="tooltip-title">
-                          {console.log(category)}
+                          {/* {console.log(category)} */}
                           {category.name}
                           {(category.description || category.when_matters) && (
                             <div className="tooltip-display-content">

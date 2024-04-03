@@ -182,12 +182,13 @@ export default function MobileCompareTable({
       });
     }
 
+    // const chunkArrayOfObjects = chunk(arrayOfObjects, 2);
     // Adjust this function according to your context as I don't have the complete code
     // It would be good to ensure that you have the required variables (finalProducts) in scope.
     const value__data = [];
     return (
       <>
-        {arrayOfObjects.map((item, attrIndex) => (
+        {arrayOfObjects.slice(0, 2).map((item, attrIndex) => (
           <td key={attrIndex}>
             {item?.attribute_value.includes("⭐") ? (
               <>
@@ -799,126 +800,101 @@ export default function MobileCompareTable({
                         </>
                       );
                     })}
-                    {categoryChunkedData
+                    {removeLastObjectFromCategory
                       ?.slice(0, fullTable || 2)
                       .map((category, categoryIndex) => {
-                        return category?.map((product, ratioIndex) => {
-                          return (
-                            <Fragment key={ratioIndex}>
-                              <tr className="tr-bg-color">
-                                <td colSpan="2">
-                                  <p className="table-main-heading">
-                                    {product?.name}
-                                    <span className="question-marker-icon">
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                      </svg>
-                                    </span>
-                                  </p>
-                                </td>
-                              </tr>
-                              <tr className="tr-bg-color">
-                                {chunkedData?.map(
-                                  (slider_data, Sliderindex) => {
-                                    return slider_data?.map((data, idx) => {
-                                      return (
-                                        <td key={idx}>
-                                          <span className="count">
-                                            {" "}
-                                            {data.attributes[
-                                              product.name
-                                            ]?.[0].final_points?.toFixed(1)}
+                        return (
+                          <Fragment key={categoryIndex}>
+                            <tr className="tr-bg-color">
+                              <td colSpan="2">
+                                <p className="table-main-heading">
+                                  {category?.name}
+                                  <span className="question-marker-icon">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                    </svg>
+                                  </span>
+                                </p>
+                              </td>
+                            </tr>
+                            <tr className="tr-bg-color">
+                              {finalProducts
+                                ?.slice(0, 2)
+                                .map((slider_data, Sliderindex) => {
+                                  return (
+                                    <td key={Sliderindex}>
+                                      <span className="count">
+                                        {" "}
+                                        {slider_data.attributes[
+                                          category.name
+                                        ]?.[0].final_points?.toFixed(1)}{" "}
+                                      </span>
+                                    </td>
+                                  );
+                                })}
+                            </tr>
+                            {category.attributes
+                              .slice(
+                                0,
+                                pagination[category.name] ||
+                                  initialNoOfCategories
+                              )
+                              .map((catAttribute, catAttributeIndex) => {
+                                return (
+                                  <>
+                                    <tr>
+                                      <td colSpan="2">
+                                        <p className="table-inner-heading">
+                                          {catAttribute.name}
+                                          <span className="question-marker-icon">
+                                            <svg
+                                              xmlns="http://www.w3.org/2000/svg"
+                                              viewBox="0 0 24 24"
+                                            >
+                                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                            </svg>
                                           </span>
-                                        </td>
-                                      );
-                                    });
-                                  }
-                                )}
-                              </tr>
-                            </Fragment>
-                          );
-                        });
+                                        </p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      {addAsterisksToTopValue(
+                                        defaultNo,
+                                        category,
+                                        catAttribute
+                                      )}
+                                    </tr>
+                                  </>
+                                );
+                              })}
+                          </Fragment>
+                        );
                       })}
-                    <tr>
-                      <td colSpan="2">
-                        <p className="table-inner-heading">
-                          Power{" "}
-                          <span className="question-marker-icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                            </svg>
-                          </span>
-                        </p>
-                      </td>
-                    </tr>
 
-                    <tr>
-                      <td>electric</td>
-                      <td>electric</td>
-                    </tr>
-                    <tr className="tr-bg-color">
-                      <td colSpan="2">
-                        <p className="table-inner-heading">
-                          Autonomy{" "}
-                          <span className="question-marker-icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                            </svg>
-                          </span>
-                        </p>
-                      </td>
-                    </tr>
-                    <tr className="tr-bg-color">
-                      <td>
-                        <div className="hover_container">
-                          <i className="ri-star-fill"></i>
-                          <p className="display-content">
-                            Samsung Galaxy S22 has the best power
-                          </p>
-                        </div>
-                        9.7
-                      </td>
-                      <td>9.7</td>
-                    </tr>
-                    <tr>
-                      <td colSpan="2">
-                        <p className="table-main-heading">
-                          Technology{" "}
-                          <span className="question-marker-icon">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                            >
-                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                            </svg>
-                          </span>
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>electric</td>
-                      <td>electric</td>
-                    </tr>
+                   
                   </tbody>
                 </Table>
               </SwiperSlide>
             );
           })}
         </Swiper>
-        <div className="text-center">
+        {fullTable == 2 && (
+          <div className="text-center">
+            <Button className="see_all_btn_outline" onClick={handleTableShow}>
+              {/* {console.log(productPhaseData)} */}
+              See Full Table
+              <i className="ri-arrow-down-s-line"></i>
+            </Button>
+          </div>
+        )}
+        {/* <div className="text-center">
           <Button className="see_all_btn_outline">
             See Full Table <i className="ri-arrow-down-s-line"></i>
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
