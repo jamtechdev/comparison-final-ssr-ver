@@ -306,7 +306,12 @@ function CompareDiv({
               </div>
             </Col>
             <Col md={12} className="table-section-desktop">
-              <MobileComparisonTool />
+              <MobileComparisonTool
+                compareProduct={comparisonTableProductData}
+                handelRemoveProductFormComparison={
+                  handelRemoveProductFormComparison
+                }
+              />
             </Col>
           </Row>
           {/* {console.log(bestAlternative?.verdict_text)} */}

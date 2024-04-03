@@ -8,7 +8,6 @@ import ProductReviewTab from "./ProductReviewTab";
 import VideoReviews from "../Common/VideoReviews/VideoReviews";
 import MobileAccordion from "../Common/MobileAccordion/mobileAccordion";
 
-
 function ProductTabs({
   productReview,
   productPhaseData,
@@ -19,8 +18,8 @@ function ProductTabs({
   return (
     <>
       {" "}
-      {productReview && productReview.length > 0 && (
-        <section className="ptb-80 bg-color">
+      <section className="ptb-80 bg-color">
+        {productReview && productReview.length > 0 && (
           <Container>
             <Row>
               <Col md={12}>
@@ -53,12 +52,12 @@ function ProductTabs({
                 </Tabs>
               </Col>
               <Col md={12} className="">
-              <MobileAccordion />
-            </Col>
+                <MobileAccordion />
+              </Col>
             </Row>
           </Container>
-        </section>
-      )}
+        )}
+      </section>
     </>
   );
 }

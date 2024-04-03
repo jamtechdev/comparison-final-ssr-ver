@@ -368,7 +368,7 @@ export default function Product({
                               }
                             </p>
                           )}
-                           {/* {product?.overall_score_descriptions.good_value && (
+                          {/* {product?.overall_score_descriptions.good_value && (
                             <p className="mb-2">
                               <b>
                                 {guidePhraseData &&
@@ -954,9 +954,8 @@ export default function Product({
               </Row>
             )}
 
-            
-              {product?.available_colors?.length !== 0 && (
-                <Row className="w-100 m-0 alternatives-border-top">
+            {product?.available_colors?.length !== 0 && (
+              <Row className="w-100 m-0 alternatives-border-top">
                 <Col lg={12} md={12} xl={12}>
                   <div className="alternatives mt-2">
                     <span>Colors available:</span>
@@ -1033,13 +1032,12 @@ export default function Product({
                     </div>
                   </div>
                 </Col>
-                </Row>
-              )}
-            
-           
-              {product?.available_versions &&
-                product?.available_versions?.length !== 0 && (
-                  <Row className="w-100 m-0 alternatives-border-top">
+              </Row>
+            )}
+
+            {product?.available_versions &&
+              product?.available_versions?.length !== 0 && (
+                <Row className="w-100 m-0 alternatives-border-top">
                   <Col lg={12} md={12} xl={12}>
                     <div className="alternatives mt-2">
                       <span>Available versions:</span>
@@ -1115,9 +1113,9 @@ export default function Product({
                       </div>
                     </div>
                   </Col>
-                  </Row>
-                )}
-            
+                </Row>
+              )}
+
             {product?.summary && product?.summary.length !== 0 && (
               <>
                 <div className="w-100">

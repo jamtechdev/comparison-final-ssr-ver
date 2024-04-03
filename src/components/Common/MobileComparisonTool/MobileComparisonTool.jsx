@@ -7,8 +7,10 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import Modal from "../Comparison/CompareModal";
 import CompareModal from "../Comparison/CompareModal";
+import formatValue from "@/_helpers/formatValue";
+import { deleteCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 
-export default function MobileComparisonTool() {
+export default function MobileComparisonTool({ compareProduct,handelRemoveProductFormComparison }) {
   const [swiperRef, setSwiperRef] = useState();
 
   const handlePrevious = useCallback(() => {
@@ -27,6 +29,36 @@ export default function MobileComparisonTool() {
       document.body.style.overflow = "unset";
     }
   }, [isOpen]);
+  // This funcation rmeove undefined and empty object
+  let comparisonProductData = compareProduct.filter(
+    (item) =>
+      item !== "" &&
+      typeof item !== "undefined" &&
+      Object.keys(item).length !== 0
+  );
+  // console.log(comparisonProductData?.length);
+  const highestScore = Math.max(
+    ...comparisonProductData.map((item) => item.overall_score)
+  );
+
+  const handelRemoveProduct = (index) => {
+    handelRemoveProductFormComparison(index);
+  };
+
+  const urlChange = (i) => {
+    let x = window.location.pathname.split("/")[2].split("-vs-");
+    // Create a new array without the element at the specified index
+    const newArray = [...x.slice(0, i), ...x.slice(i + 1)];
+    if (newArray.length > 1) {
+      let newUrl = newArray.join("-vs-");
+      let path = `${window.location.origin}/${
+        window.location.pathname.split("/")[1]
+      }/${newUrl}`;
+      window.location.href = path;
+    }
+
+    newArray.length <= 1 && handelRemoveProduct(i);
+  };
   return (
     <>
       <div className="comparison-tool mobile-comparison-tool">
@@ -58,133 +90,104 @@ export default function MobileComparisonTool() {
             },
           }}
         >
-          <SwiperSlide>
-            <div className="comparison-wrapper">
-              <div className="comparison-tag">Winner</div>
-              <div className="comparison-card">
-                <Image
-                  src="/images/compare.png"
-                  width={0}
-                  height={0}
-                  alt=""
-                  sizes="100%"
-                />
-                <div className="comparison-card-footer">
-                  <p>Samsung Galaxy S23 Ultra </p>
-                </div>
-                <span className="count">8.5</span>
-                <span className="mobile-close_icon">
-                  <i className="ri-close-line"></i> Remove
-                </span>
-              </div>
-              <div className="comparison-product-spec">
-                <div className="comparison-product-item">
-                  <Image
-                    src="/images/amazon.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  <span>155.87 €</span>
-                </div>
-                <div className="comparison-product-item">
-                  <Image
-                    src="/images/amazon.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  <span>155.87 €</span>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="comparison-wrapper">
-              <div className="comparison-card">
-                <Image
-                  src="/images/compare.png"
-                  width={0}
-                  height={0}
-                  alt=""
-                  sizes="100%"
-                />
-                <div className="comparison-card-footer">
-                  <p>Samsung Galaxy S23 Ultra </p>
-                </div>
-                <span className="count">8.5</span>
-                <span className="mobile-close_icon">
-                  <i className="ri-close-line"></i> Remove
-                </span>
-              </div>
-              <div className="comparison-product-spec">
-                <div className="comparison-product-item">
-                  <Image
-                    src="/images/amazon.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  <span>155.87 €</span>
-                </div>
-                <div className="comparison-product-item">
-                  <Image
-                    src="/images/amazon.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  <span>155.87 €</span>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="comparison-wrapper">
-              <div className="comparison-card">
-                <Image
-                  src="/images/compare.png"
-                  width={0}
-                  height={0}
-                  alt=""
-                  sizes="100%"
-                />
-                <div className="comparison-card-footer">
-                  <p>Samsung Galaxy S23 Ultra </p>
-                </div>
-                <span className="count">8.5</span>
-                <span className="mobile-close_icon">
-                  <i className="ri-close-line"></i> Remove
-                </span>
-              </div>
-              <div className="comparison-product-spec">
-                <div className="comparison-product-item">
-                  <Image
-                    src="/images/amazon.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  <span>155.87 €</span>
-                </div>
-                <div className="comparison-product-item">
-                  <Image
-                    src="/images/amazon.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  <span>155.87 €</span>
-                </div>
-              </div>
-            </div>
-          </SwiperSlide>
+          {comparisonProductData &&
+            comparisonProductData?.map((item, index) => {
+              const isWinner = item.overall_score === highestScore;
+
+              return (
+                <SwiperSlide key={index}>
+                  <div className="comparison-wrapper">
+                    {isWinner && <div className="comparison-tag">Winner</div>}
+                    {/* {console.log(item)} */}
+                    <div className="comparison-card">
+                      <img
+                        src={
+                          item?.main_image
+                            ? item?.main_image
+                            : "/images/nofound.png"
+                        }
+                        width={0}
+                        height={0}
+                        alt=""
+                        sizes="100%"
+                      />
+                      <div className="comparison-card-footer">
+                        <p>{item?.name}</p>
+                      </div>
+                      <span
+                        className="count"
+                        style={{
+                          background:
+                            item.overall_score >= 7.5
+                              ? "#093673"
+                              : item.overall_score >= 5 &&
+                                item.overall_score < 7.5
+                              ? "#437ECE"
+                              : "#85B2F1",
+                        }}
+                      >
+                        {formatValue(item?.overall_score)}
+                      </span>
+                      <span
+                        className="mobile-close_icon"
+                        style={{ cursor: "pointer" }}
+                        onClick={
+                          () => urlChange(index)
+                          //
+                        }
+                      >
+                        <i className="ri-close-line"></i> Remove
+                      </span>
+                    </div>
+                    {item?.price_websites?.length > 0 ? (
+                      <>
+                        <div className="comparison-product-item">
+                          <img
+                            src={
+                              item?.price_websites[0]?.price != null &&
+                              item?.price_websites[0]?.logo === null
+                                ? "/images/No-Image.png"
+                                : item?.price_websites[0]?.logo
+                            }
+                            width={0}
+                            height={0}
+                            sizes="100%"
+                            alt="price"
+                          />
+                          {item?.price_websites[0]?.price != null && (
+                            <span>{item?.price_websites[0]?.price} €</span>
+                          )}
+                        </div>
+                        <div className="comparison-product-item">
+                          <img
+                            src={
+                              item?.price_websites[1]?.logo === null
+                                ? "/images/No-Image.png"
+                                : item?.price_websites[1]?.logo
+                            }
+                            width={0}
+                            height={0}
+                            sizes="100%"
+                            alt="price"
+                          />
+                          {item?.price_websites[1]?.price != null && (
+                            <span>{item?.price_websites[1]?.price} €</span>
+                          )}
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="not-availabel">
+                          {/* <span className="txt">NOT AVAILABLE</span> */}
+                          <i>N/A</i>
+                          <span className="price">~ {item?.price} €</span>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </SwiperSlide>
+              );
+            })}
         </Swiper>
         <span className="swiper-prev" onClick={handlePrevious}>
           <i className="ri-arrow-left-s-line"></i>
