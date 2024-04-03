@@ -6,9 +6,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
-export default function MobileCompareTable() {
+export default function MobileCompareTable({
+  products,
+  categoryAttributes,
+  slug,
+  productPhaseData,
+}) {
   const [swiperRef, setSwiperRef] = useState();
   const [winPos, setWinPos] = useState(false);
+
+  // For table no of category show
+  let initialNoOfCategories = 2;
+  const [pagination, setPagination] = useState({});
+  const defaultNo = 2;
+
+  const [fullTable, setFullTable] = useState(2);
 
   if (typeof window !== "undefined") {
     // Access the window object here
@@ -25,6 +37,26 @@ export default function MobileCompareTable() {
         : setWinPos(true);
     };
   }
+
+  // here Products restructures them into an object with the category name as the key
+
+  const productsWithAttributeGroup = {};
+  products?.forEach((product) => {
+    const productCopy = { ...product };
+    const productAttributes = {};
+    product?.attributes?.forEach((attribute) => {
+      const categoryName = attribute.attribute_category.name;
+      if (!productAttributes[categoryName]) {
+        productAttributes[categoryName] = [];
+      }
+      productAttributes[categoryName].push(attribute);
+    });
+    productCopy.attributes = productAttributes;
+    productsWithAttributeGroup[product.name] = productCopy;
+  });
+  const finalProducts = Object.values(productsWithAttributeGroup);
+  const removeLastObjectFromCategory = [...categoryAttributes]; // Clone the finalProducts array
+  removeLastObjectFromCategory.pop();
 
   // if (typeof window !== 'undefined') {
   //   // Access the window object here
@@ -69,6 +101,166 @@ export default function MobileCompareTable() {
     return [isSticky, ref, setIsSticky];
   };
   const [isSticky, ref] = useDetectSticky();
+
+  const handlePagination = (categoryName) => {
+    let updatedPage =
+      pagination[categoryName] + initialNoOfCategories ||
+      initialNoOfCategories * 2;
+    setPagination({ ...pagination, [categoryName]: updatedPage });
+  };
+
+  const handleTableShow = () => {
+    setFullTable(categoryAttributes?.length);
+  };
+
+  const addAsterisksToTopValue = (defaultNo, category, catAttribute) => {
+    const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
+    const filterData = copiedFinalProducts
+      .slice(0, defaultNo)
+      .flatMap((product) =>
+        product.attributes[category.name]?.filter(
+          (obj) => obj?.attribute === catAttribute.name
+        )
+      );
+
+    const arrayOfObjects = [...filterData];
+    let numericValues = [];
+
+    numericValues = arrayOfObjects
+      .map((obj) => {
+        if (!isNaN(parseFloat(obj?.attribute_value))) {
+          return parseFloat(obj?.attribute_value);
+        } else {
+          return obj?.attribute_value;
+        }
+      })
+      .filter((value) => !isNaN(value));
+
+    if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
+      numericValues.sort((a, b) => b - a);
+    } else {
+      numericValues.sort((a, b) => a - b);
+    }
+
+    // Adding logic for String case
+    if (numericValues.length === 0) {
+      const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
+
+      if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
+        const targetString =
+          stringArray[0] === "yes"
+            ? "yes"
+            : "no" || stringArray[0] === "no"
+            ? "yes"
+            : "yes";
+        numericValues = stringArray.filter((value) => value === targetString);
+      }
+    }
+
+    const topValue = numericValues[0];
+    const occurrences = numericValues?.filter(
+      (value) => value === topValue
+    ).length;
+
+    if (occurrences === 1) {
+      arrayOfObjects.forEach((obj) => {
+        const numericValue =
+          typeof topValue === "string"
+            ? obj.attribute_value
+            : parseFloat(obj.attribute_value);
+        if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
+          obj.attribute_value += "⭐";
+        }
+      });
+    }
+
+    // Adjust this function according to your context as I don't have the complete code
+    // It would be good to ensure that you have the required variables (finalProducts) in scope.
+    const value__data = [];
+    return (
+      <>
+        {arrayOfObjects.map((item, attrIndex) => (
+          <td key={attrIndex}>
+            {item?.attribute_value.includes("⭐") ? (
+              <>
+                <div>
+                  {item?.attribute_value.split("⭐")[0]}{" "}
+                  {item?.unit?.split("-")[0] && item?.unit?.split("-")[0]}
+                  <span className="tooltip-title-2">
+                    <img
+                      style={{ float: "right", paddingRight: "5px" }}
+                      src="/icons/star.png"
+                      alt="star"
+                    />
+                    <ProsConsToolTip hover_phrase={item.start_phase} />
+                  </span>
+                </div>
+              </>
+            ) : (
+              <>
+                {item?.attribute_value === "-" ||
+                item?.attribute_value === null ||
+                item?.attribute_value === "?" ? (
+                  "-"
+                ) : (
+                  <>
+                    {item?.attribute_value === "-" ||
+                    item?.attribute_value === null ||
+                    item?.attribute_value === "?" ? (
+                      item?.attribute_value
+                    ) : (
+                      <>
+                        {" "}
+                        {item?.attribute_value} {item?.unit ? item?.unit : ""}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </td>
+        ))}
+      </>
+    );
+  };
+  // add startONTable
+  const addStarOnTable = (defaultNo, type, values, starPhase) => {
+    if (
+      type === "overall_score" ||
+      type === "expert_reviews" ||
+      type === "technical_score" ||
+      type === "user_rating" ||
+      type === "ratio" ||
+      type === "popularity"
+    ) {
+      const uniqueValues = [...new Set(values)];
+      const maxValue = Math.max(...uniqueValues);
+      return values.map((value) =>
+        value === maxValue &&
+        values.indexOf(value) === values.lastIndexOf(value) ? (
+          <div>
+            {value}
+            <span key={value} className="tooltip-title-2">
+              <img
+                style={{ float: "right", paddingRight: "5px" }}
+                src="/icons/star.png"
+                alt="star"
+              />
+              {/* {console.log(values, "neet")} */}
+              <ProsConsToolTip hover_phrase={starPhase} />
+            </span>
+          </div>
+        ) : value === 0 ? (
+          "?"
+        ) : (
+          value
+        )
+      );
+    }
+    return values;
+  };
+  // **End**
+
   return (
     <section className="comparisons-slider">
       <Table
@@ -81,56 +273,40 @@ export default function MobileCompareTable() {
       >
         <thead>
           <tr>
-            <th>
-              <p className="device-name">
-                <span>{!tabData ? 1 : 3}</span>Samsung Galaxy S23 Ultra
-                <Image
-                  className="compare_image"
-                  src="/images/compare.png"
-                  width={0}
-                  height={0}
-                  alt=""
-                  sizes="100%"
-                />
-              </p>
-              <ul className="best-list-item ">
-                <li>
-                  <Image
-                    src="/images/amazon.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  <span>155.87 €</span>
-                </li>
-              </ul>
-            </th>
-            <th>
-              <p className="device-name">
-                <span>{!tabData ? 2 : 4}</span>Samsung Galaxy S23 Ultra
-                <Image
-                  className="compare_image"
-                  src="/images/compare.png"
-                  width={0}
-                  height={0}
-                  alt=""
-                  sizes="100%"
-                />
-              </p>
-              <ul className="best-list-item ">
-                <li>
-                  <Image
-                    src="/images/amazon.png"
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt=""
-                  />
-                  <span>155.87 €</span>
-                </li>
-              </ul>
-            </th>
+            {finalProducts.slice(0, defaultNo).map((product, index) => {
+              return (
+                <th>
+                  <p className="device-name">
+                    <span>{!tabData ? index + 1 : index + 3}</span>
+                    {product?.name}
+                    <img
+                      className="compare_image"
+                      src={
+                        product?.main_image
+                          ? product?.main_image
+                          : "/images/nofound.png"
+                      }
+                      width={0}
+                      height={0}
+                      alt={`${product?.permalink}`}
+                      sizes="100%"
+                    />
+                  </p>
+                  <ul className="best-list-item ">
+                    <li>
+                      <Image
+                        src="/images/amazon.png"
+                        width={0}
+                        height={0}
+                        sizes="100%"
+                        alt=""
+                      />
+                      <span>155.87 €</span>
+                    </li>
+                  </ul>
+                </th>
+              );
+            })}
           </tr>
         </thead>
       </Table>

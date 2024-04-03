@@ -130,10 +130,12 @@ const WhyAccordionTab = React.memo(
           >
             <Tab eventKey="tab-1" title={product && product?.name}>
               {activetab === "tab-1" && (
-                <div className="graph-tab-content" id="productGraph"> 
+                <div className="graph-tab-content" id="productGraph">
                   {/* {console.log(apiData?.sets, "checking")} */}
                   {apiData && (
-                    <ProductPageGraph data={apiData?.sets} activeTab={0} />
+                    <div class="shortcode_table_scroll">
+                      <ProductPageGraph data={apiData?.sets} activeTab={0} />
+                    </div>
                   )}
                 </div>
               )}
@@ -143,7 +145,9 @@ const WhyAccordionTab = React.memo(
               {activetab === "tab-2" && (
                 <div className="graph-tab-content" id="productGraph">
                   {apiData && (
-                    <ProductPageGraph data={apiData?.sets} activeTab={1} />
+                    <div class="shortcode_table_scroll">
+                      <ProductPageGraph data={apiData?.sets} activeTab={1} />
+                    </div>
                   )}
                 </div>
               )}

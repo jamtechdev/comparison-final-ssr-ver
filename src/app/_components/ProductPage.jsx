@@ -1826,7 +1826,12 @@ function ProductPage({
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              <MobileCompareTable />
+              <MobileCompareTable
+                productPhaseData={product?.page_phases}
+                products={compareByCatID?.data}
+                categoryAttributes={productCatAttributes?.data}
+                slug={slug}
+              />
             </Col>
           </Row>
         </Container>

@@ -2021,9 +2021,15 @@
   .mobite-mb-20 {
     margin-bottom: 20px;
   }
-  .compare-container thead tr th .device-name .compare_image {
+  /* previous css  */
+  /* .compare-container thead tr th .device-name .compare_image {
     width: 40px !important;
     height: 40px !important;
+    display: block !important;
+  } */
+  .compare-container thead tr th .device-name .compare_image {
+    width: 60px !important;
+    height: 60px !important;
     display: block !important;
   }
 }

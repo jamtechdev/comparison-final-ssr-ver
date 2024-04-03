@@ -368,6 +368,19 @@ export default function Product({
                               }
                             </p>
                           )}
+                           {/* {product?.overall_score_descriptions.good_value && (
+                            <p className="mb-2">
+                              <b>
+                                {guidePhraseData &&
+                                  guidePhraseData?.when_it_matters}
+                                :{" "}
+                              </b>
+                              {
+                                product?.overall_score_descriptions
+                                  ?.when_matters
+                              }
+                            </p>
+                          )} */}
                           <p>
                             <b>
                               {guidePhraseData &&

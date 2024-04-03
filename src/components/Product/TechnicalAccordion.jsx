@@ -90,7 +90,8 @@ const TechnicalAccordion = React.memo(
                             {product?.technical_score_descriptions?.description}
                           </p>
                         )}
-                        {product?.technical_score_descriptions?.when_matters && (
+                        {product?.technical_score_descriptions
+                          ?.when_matters && (
                           <p className="mb-2">
                             <b>When it matters: </b>
                             {

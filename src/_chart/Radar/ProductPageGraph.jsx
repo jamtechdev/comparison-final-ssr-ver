@@ -53,6 +53,7 @@ function ProductPageGraph({ data, activeTab }) {
   useEffect(() => {
     const svg = select("#productGraph")
       .append("svg")
+      .attr("viewBox", `0 0 700 600`)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")

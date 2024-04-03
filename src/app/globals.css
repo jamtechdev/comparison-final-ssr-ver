@@ -1944,10 +1944,12 @@ h4.attribute__title {
   margin: auto;
 }
 
-.best-price-section:not(.ranking) .best-list-item li:not(.d-flex) > span,
+/* hide is for messup mobile view table */
+
+/* .best-price-section:not(.ranking) .best-list-item li:not(.d-flex) > span,
 .isSticky .best-list-item li:not(.d-flex) > span {
   all: unset !important;
-}
+} */
 
 .best-price-section:not(.ranking) .best-list-item li:not(.d-flex) > span a,
 .isSticky .best-list-item li:not(.d-flex) > span a {
