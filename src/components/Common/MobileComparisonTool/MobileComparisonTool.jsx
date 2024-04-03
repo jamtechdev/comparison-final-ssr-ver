@@ -9,7 +9,7 @@ import { Navigation } from "swiper";
 import Modal from "../Comparison/CompareModal";
 import CompareModal from "../Comparison/CompareModal";
 
-export default function MobileCompareTable() {
+export default function MobileComparisonTool() {
   const [swiperRef, setSwiperRef] = useState();
 
   const handlePrevious = useCallback(() => {

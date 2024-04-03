@@ -35,6 +35,7 @@ import { searchForPatternAndReplace } from "@/hooks/useChart";
 import OutlineGenerator from "../OutlineGenerator/OutlineGenerator";
 import ProductSliderBlog from "../ProductSliderBlog/ProductSliderBlog";
 import ComparisionOutlineGenerator from "../OutlineGenerator/ComparisionOutlineGenerator";
+import MobileComparisonTool from "../MobileComparisonTool/MobileComparisonTool";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -305,7 +306,7 @@ function CompareDiv({
               </div>
             </Col>
             <Col md={12} className="table-section-desktop">
-              {/* <MobileComparisonTool /> */}
+              <MobileComparisonTool />
             </Col>
           </Row>
           {/* {console.log(bestAlternative?.verdict_text)} */}

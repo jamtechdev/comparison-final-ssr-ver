@@ -1,11 +1,19 @@
 "use client";
-import { useCallback, useRef, useState, useEffect } from "react";
+import React, {
+  useCallback,
+  useRef,
+  useState,
+  useEffect,
+  Fragment,
+} from "react";
 import Image from "next/image";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
+import formatValue from "@/_helpers/formatValue";
+import ProsConsToolTip from "@/components/Svg/ProsConsToolTip";
 export default function MobileCompareTable({
   products,
   categoryAttributes,
@@ -16,9 +24,9 @@ export default function MobileCompareTable({
   const [winPos, setWinPos] = useState(false);
 
   // For table no of category show
-  let initialNoOfCategories = 2;
+  let initialNoOfCategories = 5;
   const [pagination, setPagination] = useState({});
-  const defaultNo = 2;
+  const defaultNo = 5;
 
   const [fullTable, setFullTable] = useState(2);
 
@@ -261,6 +269,35 @@ export default function MobileCompareTable({
   };
   // **End**
 
+  // console.log(finalProducts, "neet");
+  // Make chunks Array
+  function chunkArray(array, chunkSize) {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      chunks.push(array.slice(i, i + chunkSize));
+    }
+    return chunks;
+  }
+
+  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const chunkedData = chunkArray(finalProducts, 2);
+
+  // make categoryAttribute chunk Array
+
+  function categoryChunkArray(array, chunkSize) {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      chunks.push(array.slice(i, i + chunkSize));
+    }
+    return chunks;
+  }
+  const categoryChunkedData = categoryChunkArray(
+    removeLastObjectFromCategory,
+    2
+  );
+
+  // console.log(categoryArray, "neetxy");
+
   return (
     <section className="comparisons-slider">
       <Table
@@ -273,7 +310,7 @@ export default function MobileCompareTable({
       >
         <thead>
           <tr>
-            {finalProducts.slice(0, defaultNo).map((product, index) => {
+            {chunkedData?.map((product, index) => {
               return (
                 <th>
                   <p className="device-name">
@@ -292,7 +329,71 @@ export default function MobileCompareTable({
                       sizes="100%"
                     />
                   </p>
-                  <ul className="best-list-item ">
+                  {product.price_websites &&
+                    product?.price_websites?.every(
+                      (data) => data.price !== null
+                    ) && (
+                      <>
+                        {" "}
+                        <>
+                          <ul className="best-list-item">
+                            {" "}
+                            {product.price_websites &&
+                              product?.price_websites?.every(
+                                (data) => data.price === null
+                              ) && (
+                                <div className="not-availabel n-lable p-1">
+                                  {/* <span className="txt">NOT AVAILABLE</span> */}
+                                  <span className="price">
+                                    ~ {product?.price} €
+                                  </span>
+                                </div>
+                              )}
+                            {product.price_websites &&
+                              product.price_websites
+                                .slice(0, 1)
+                                ?.map((data, dIndex) => {
+                                  return (
+                                    <div key={dIndex}>
+                                      {data.price !== null && (
+                                        <li>
+                                          <>
+                                            <a
+                                              rel="noopener noreferrer"
+                                              target="_blank"
+                                              href={`/link?p=${btoa(data.url)}`}
+                                            >
+                                              <img
+                                                src={data?.logo}
+                                                width={0}
+                                                height={0}
+                                                sizes="100vw"
+                                                alt={data?.alt}
+                                              />
+                                            </a>
+                                            <span>
+                                              <a
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                                href={`/link?p=${btoa(
+                                                  data.url
+                                                )}`}
+                                              >
+                                                {data?.price} €
+                                              </a>
+                                            </span>
+                                          </>
+                                        </li>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                          </ul>
+                        </>
+                      </>
+                    )}
+
+                  {/* <ul className="best-list-item ">
                     <li>
                       <Image
                         src="/images/amazon.png"
@@ -303,7 +404,7 @@ export default function MobileCompareTable({
                       />
                       <span>155.87 €</span>
                     </li>
-                  </ul>
+                  </ul> */}
                 </th>
               );
             })}
@@ -354,630 +455,464 @@ export default function MobileCompareTable({
           }}
           className="product-slider"
         >
-          <SwiperSlide>
-            <Table className="compare-container">
-              <thead data-sticky-header-offset-y ref={ref}>
-                <tr>
-                  <th>
-                    <p className="device-name">
-                      <span>1</span>Samsung Galaxy S23 Ultra
-                    </p>
-                  </th>
-                  <th>
-                    <p className="device-name">
-                      <span>2</span>Samsung Galaxy S23 Ultra
-                    </p>
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="mobile-compare-tablerBody">
-                <tr>
-                  <td>
-                    <Image
-                      className="compare_image"
-                      src="/images/compare.png"
-                      width={0}
-                      height={0}
-                      alt=""
-                      sizes="100%"
-                    />
-                  </td>
-                  <td>
-                    <Image
-                      className="compare_image"
-                      src="/images/compare.png"
-                      width={0}
-                      height={0}
-                      alt=""
-                      sizes="100%"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="best-price-section">
-                      <ul className="best-list-item">
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="best-price-section">
-                      <ul className="best-list-item">
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td colSpan="2">
-                    <p className="table-main-heading">
-                      Overall Score{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td>
-                    <span className="count dark-color">8.5</span>
-                  </td>
-                  <td>
-                    <span className="count dark-color">8.5</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      Technical Score{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>electric</td>
-                  <td>electric</td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      User’s Ratings{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td>9.7</td>
-                  <td>9.7</td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      Ratio Qlt/Price{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>electric</td>
-                  <td>electric</td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td colSpan="2">
-                    <p className="table-main-heading">
-                      General{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td>
-                    <span className="count">8.5</span>
-                  </td>
-                  <td>
-                    <span className="count">8.5</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      Power{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>electric</td>
-                  <td>electric</td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      Autonomy{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td>
-                    <div className="hover_container">
-                      <i className="ri-star-fill"></i>
-                      <p className="display-content">
-                        Samsung Galaxy S22 has the best power
-                      </p>
-                    </div>
-                    9.7
-                  </td>
-                  <td>9.7</td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="table-main-heading">
-                      Technology{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>electric</td>
-                  <td>electric</td>
-                </tr>
-              </tbody>
-            </Table>
-          </SwiperSlide>
-          <SwiperSlide>
-            {/* <Table className="compare-container">
-            <thead   id='mobile-compare-tabler-1' className={winPos == true ? "isSticky" : "nonSticky"} ref={ref} >
-            <tr>
-                  <th>
-                    <p className="device-name">
-                      <span>3</span>Samsung Galaxy S23 Ultra
-                    </p>
-                  </th>
-                  <th>
-                    <p className="device-name">
-                      <span>4</span>Samsung Galaxy S23 Ultra
-                    </p>
-                  </th>
-                </tr>
-              </thead>
-            </Table> */}
-            <Table className="compare-container">
-              <thead ref={ref}>
-                <tr>
-                  <th>
-                    <p className="device-name">
-                      <span>3</span>Samsung Galaxy S23 Ultra
-                    </p>
-                  </th>
-                  <th>
-                    <p className="device-name">
-                      <span>4</span>Samsung Galaxy S23 Ultra
-                    </p>
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="mobile-compare-tablerBody-1">
-                <tr>
-                  <td>
-                    <Image
-                      className="compare_image"
-                      src="/images/compare.png"
-                      width={0}
-                      height={0}
-                      alt=""
-                      sizes="100%"
-                    />
-                  </td>
-                  <td>
-                    <Image
-                      className="compare_image"
-                      src="/images/compare.png"
-                      width={0}
-                      height={0}
-                      alt=""
-                      sizes="100%"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="best-price-section">
-                      <ul className="best-list-item">
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="best-price-section">
-                      <ul className="best-list-item">
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                        <li>
-                          <Image
-                            src="/images/amazon.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt=""
-                          />
-                          <span>155.87 €</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td colSpan="2">
-                    <p className="table-main-heading">
-                      Overall Score{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td>
-                    <span className="count dark-color">8.5</span>
-                  </td>
-                  <td>
-                    <span className="count dark-color">8.5</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      Technical Score{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>electric</td>
-                  <td>electric</td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      User’s Ratings{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td>9.7</td>
-                  <td>9.7</td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      Ratio Qlt/Price{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>electric</td>
-                  <td>electric</td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td colSpan="2">
-                    <p className="table-main-heading">
-                      General{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td>
-                    <span className="count">8.5</span>
-                  </td>
-                  <td>
-                    <span className="count">8.5</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      Power{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>electric</td>
-                  <td>electric</td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td colSpan="2">
-                    <p className="table-inner-heading">
-                      Autonomy{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr className="tr-bg-color">
-                  <td>
-                    <div className="hover_container">
-                      <i className="ri-star-fill"></i>
-                      <p className="display-content">
-                        Samsung Galaxy S22 has the best power
-                      </p>
-                    </div>
-                    9.7
-                  </td>
-                  <td>9.7</td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="table-main-heading">
-                      Technology{" "}
-                      <span className="question-marker-icon">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                        </svg>
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>electric</td>
-                  <td>electric</td>
-                </tr>
-              </tbody>
-            </Table>
-          </SwiperSlide>
+          {chunkedData?.map((slider_data, index) => {
+            return (
+              <SwiperSlide>
+                <Table className="compare-container">
+                  <thead data-sticky-header-offset-y ref={ref}>
+                    <tr>
+                      {slider_data?.map((data, dIndex) => {
+                        return (
+                          <th>
+                            <p className="device-name">
+                              <span>{dIndex + 1}</span>
+                              {data?.name}
+                            </p>
+                          </th>
+                        );
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody id="mobile-compare-tablerBody">
+                    <tr>
+                      {slider_data?.map((data, dIndex) => {
+                        return (
+                          <td>
+                            <Image
+                              className="compare_image"
+                              src={
+                                data?.main_image
+                                  ? data?.main_image
+                                  : "/images/nofound.png"
+                              }
+                              width={0}
+                              height={0}
+                              alt={`${data?.permalink}`}
+                              sizes="100%"
+                            />
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      {slider_data?.map((data, dIndex) => {
+                        return (
+                          <td>
+                            <div className="best-price-section">
+                              {data?.price_websites &&
+                                data?.price_websites?.every(
+                                  (data) => data.price === null
+                                ) && (
+                                  <div className="not-availabel">
+                                    {/* <span className="txt">NOT AVAILABLE</span> */}
+                                    <span className="price">
+                                      ~ {data?.price} €
+                                    </span>
+                                  </div>
+                                )}
+                              {data?.price_websites &&
+                                data?.price_websites?.every(
+                                  (data) => data.price !== null
+                                ) && (
+                                  <ul className="best-list-item">
+                                    {data?.price_websites?.map(
+                                      (priceData, dIndex) => {
+                                        return (
+                                          <li>
+                                            <>
+                                              <a
+                                                rel="noopener noreferrer"
+                                                target="_blank"
+                                                href={`/link?p=${btoa(
+                                                  priceData.url
+                                                )}`}
+                                              >
+                                                <img
+                                                  src={priceData?.logo}
+                                                  width={0}
+                                                  height={0}
+                                                  sizes="100vw"
+                                                  alt={priceData?.alt}
+                                                />
+                                              </a>
+                                              <span>
+                                                <a
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                                  href={`/link?p=${btoa(
+                                                    priceData.url
+                                                  )}`}
+                                                >
+                                                  {priceData?.price} €
+                                                </a>
+                                              </span>
+                                            </>
+                                          </li>
+                                        );
+                                      }
+                                    )}
+                                  </ul>
+                                )}
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr className="tr-bg-color">
+                      <td colSpan="2">
+                        <div className="table-main-heading">
+                          Overall Score{" "}
+                          {/* {products &&
+                            products.length > 0 &&
+                            products[0]?.overall_score_descriptions && (
+                              <div className="tooltip-display-content">
+                                {products[0]?.overall_score_descriptions
+                                  ?.description && (
+                                  <p className="mb-2">
+                                    <b>What it is: </b>{" "}
+                                    {
+                                      products[0]?.overall_score_descriptions
+                                        ?.description
+                                    }
+                                  </p>
+                                )}
+                                {products[0]?.overall_score_descriptions
+                                  ?.when_matters && (
+                                  <p className="mb-2">
+                                    <b>When it matters: </b>{" "}
+                                    {
+                                      products[0]?.overall_score_descriptions
+                                        ?.when_matters
+                                    }
+                                  </p>
+                                )}
+                              </div>
+                            )} */}
+                          <span className="question-marker-icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                            </svg>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr className="tr-bg-color">
+                      {slider_data.map((product, overAllIndex) => {
+                        return (
+                          <td key={overAllIndex}>
+                            <span
+                              className="count dark-color"
+                              style={{
+                                background:
+                                  product.overall_score >= 7.5
+                                    ? "#093673"
+                                    : product.overall_score >= 5 &&
+                                      product.overall_score < 7.5
+                                    ? "#437ECE"
+                                    : " #85B2F1",
+                              }}
+                            >
+                              {formatValue(product?.overall_score)}
+                            </span>
+                          </td>
+                        );
+                      })}
+
+                      {/* <td>
+                        <span className="count dark-color">8.5</span>
+                      </td>
+                      <td>
+                        <span className="count dark-color">8.5</span>
+                      </td> */}
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <p className="table-inner-heading">
+                          Technical Score{" "}
+                          <span className="question-marker-icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                            </svg>
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      {slider_data.map((product, technicalIndex) => {
+                        const values = slider_data.map(
+                          (p) => p.technical_score
+                        );
+                        return (
+                          <td key={technicalIndex}>
+                            {
+                              addStarOnTable(
+                                defaultNo,
+                                "technical_score",
+                                values,
+                                product?.technical_score_star_phrase
+                              )[technicalIndex]
+                            }
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr className="tr-bg-color">
+                      <td colSpan="2">
+                        <p className="table-inner-heading">
+                          User’s Ratings{" "}
+                          <span className="question-marker-icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                            </svg>
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr className="tr-bg-color">
+                      {slider_data.map((product, userIndex) => {
+                        const values = slider_data.map((p) => p.reviews);
+                        return (
+                          <td key={userIndex}>
+                            {
+                              addStarOnTable(
+                                defaultNo,
+                                "user_rating",
+                                values,
+                                product?.reviews_star_phase
+                              )[userIndex]
+                            }
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <p className="table-inner-heading">
+                          Ratio Qlt/Price{" "}
+                          <span className="question-marker-icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                            </svg>
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      {slider_data.map((product, ratioIndex) => {
+                        const values = slider_data.map(
+                          (p) => p.ratio_quality_price_points
+                        );
+                        return (
+                          <td key={ratioIndex}>
+                            {/* {console.log(values, "neetxy")} */}
+                            {
+                              addStarOnTable(
+                                defaultNo,
+                                "ratio",
+                                values,
+                                product?.ratio_quality_price_points_star_phase
+                              )[ratioIndex]
+                            }
+                          </td>
+                        );
+                      })}
+                    </tr>
+                    {products[0]?.area_evaluation?.map((data, index) => {
+                      const maxValues = slider_data.map(
+                        (product) =>
+                          product?.area_evaluation?.[index]?.value ?? null
+                      );
+                      const max = Math.max(
+                        ...maxValues.filter((value) => value !== null)
+                      );
+
+                      // Count occurrences of each value
+                      const valueCounts = slider_data.reduce((acc, product) => {
+                        const value = product?.area_evaluation?.[index]?.value;
+                        if (value !== null) {
+                          acc[value] = (acc[value] || 0) + 1;
+                        }
+                        return acc;
+                      }, {});
+
+                      return (
+                        <>
+                          <tr>
+                            <td colSpan="2">
+                              <p className="table-inner-heading">
+                                {data?.title}
+                                <span className="question-marker-icon">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                  </svg>
+                                </span>
+                              </p>
+                            </td>
+                          </tr>
+
+                          <tr className="" key={index}>
+                            {" "}
+                            {/* Ensure to set a unique key for each <tr> */}
+                            {slider_data.map((product, idx) => {
+                              const value =
+                                product?.area_evaluation?.[index]?.value ??
+                                null;
+                              return (
+                                <td key={idx}>
+                                  {value}
+                                  {value === max && valueCounts[value] <= 1 && (
+                                    <span
+                                      key={value}
+                                      className="tooltip-title-2"
+                                    >
+                                      <img
+                                        style={{
+                                          float: "right",
+                                          paddingRight: "5px",
+                                        }}
+                                        src="/icons/star.png"
+                                        alt="star"
+                                      />
+                                      {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
+                                    </span>
+                                  )}
+                                  {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        </>
+                      );
+                    })}
+                    {categoryChunkedData
+                      ?.slice(0, fullTable || 2)
+                      .map((category, categoryIndex) => {
+                        return category?.map((product, ratioIndex) => {
+                          return (
+                            <Fragment key={ratioIndex}>
+                              <tr className="tr-bg-color">
+                                <td colSpan="2">
+                                  <p className="table-main-heading">
+                                    {product?.name}
+                                    <span className="question-marker-icon">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                      </svg>
+                                    </span>
+                                  </p>
+                                </td>
+                              </tr>
+                              <tr className="tr-bg-color">
+                                {chunkedData?.map(
+                                  (slider_data, Sliderindex) => {
+                                    return slider_data?.map((data, idx) => {
+                                      return (
+                                        <td key={idx}>
+                                          <span className="count">
+                                            {" "}
+                                            {data.attributes[
+                                              product.name
+                                            ]?.[0].final_points?.toFixed(1)}
+                                          </span>
+                                        </td>
+                                      );
+                                    });
+                                  }
+                                )}
+                              </tr>
+                            </Fragment>
+                          );
+                        });
+                      })}
+                    <tr>
+                      <td colSpan="2">
+                        <p className="table-inner-heading">
+                          Power{" "}
+                          <span className="question-marker-icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                            </svg>
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>electric</td>
+                      <td>electric</td>
+                    </tr>
+                    <tr className="tr-bg-color">
+                      <td colSpan="2">
+                        <p className="table-inner-heading">
+                          Autonomy{" "}
+                          <span className="question-marker-icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                            </svg>
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr className="tr-bg-color">
+                      <td>
+                        <div className="hover_container">
+                          <i className="ri-star-fill"></i>
+                          <p className="display-content">
+                            Samsung Galaxy S22 has the best power
+                          </p>
+                        </div>
+                        9.7
+                      </td>
+                      <td>9.7</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <p className="table-main-heading">
+                          Technology{" "}
+                          <span className="question-marker-icon">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                            </svg>
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>electric</td>
+                      <td>electric</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
         <div className="text-center">
           <Button className="see_all_btn_outline">

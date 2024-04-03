@@ -781,12 +781,12 @@ const ProductCompareTable = React.memo(
                           }
                         </p>
                       )}
-                      {products[0]?.technical_score_descriptions
+                      {products[0]?.ratio_qulitiy_score_descriptions
                         ?.when_it_matters && (
                         <p className="mb-2">
                           <b>When it matters: </b>{" "}
                           {
-                            products[0]?.technical_score_descriptions
+                            products[0]?.ratio_qulitiy_score_descriptions
                               ?.when_it_matters
                           }
                         </p>
@@ -870,6 +870,7 @@ const ProductCompareTable = React.memo(
                     <tr className="tr-bg-color">
                       <th>
                         <div className="tooltip-title">
+                          {console.log(category)}
                           {category.name}
                           {(category.description || category.when_matters) && (
                             <div className="tooltip-display-content">
