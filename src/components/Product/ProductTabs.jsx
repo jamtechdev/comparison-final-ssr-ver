@@ -6,7 +6,8 @@ import ExperReviwes from "../Common/ExpertReviews/ExperReviwes";
 import Rating from "../Common/Rating/Rating";
 import ProductReviewTab from "./ProductReviewTab";
 import VideoReviews from "../Common/VideoReviews/VideoReviews";
-import MobileAccordion from "../Common/MobileAccordion/MobileAccordion";
+import MobileAccordion from "../Common/MobileAccordion/mobileAccordion";
+
 
 function ProductTabs({
   productReview,
