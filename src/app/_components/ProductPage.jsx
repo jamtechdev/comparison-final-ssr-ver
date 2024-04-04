@@ -718,7 +718,7 @@ function ProductPage({
                       (data) => data.price === null
                     ) && (
                       <div className="not-availabel">
-                        <span className="txt">NOT AVAILABLE</span>
+                        <span className="txt">N/A</span>
                         <span className="guide">
                           ~ {product?.price} {product?.currency}
                         </span>
@@ -1091,62 +1091,75 @@ function ProductPage({
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                {product && product?.page_phases?.who_is_it_for}
-              </h2>
-            </Col>
-            <Col md={6}>
-              <div className="pros-corns-section pros">
-                <div className="pros-header">
-                  {product && product?.page_phases?.should_buy}
-                </div>
-                {product?.should_buy?.length === 0 && (
-                  <h3 className="no-data text-center mt-2">No data Found</h3>
-                )}
-                {/* {console.log(product?.should_not_buy)} */}
-                <ul>
-                  {product &&
-                    product?.should_buy?.map((item, index) => {
-                      return (
-                        <>
-                          <li
-                            key={index}
-                            style={{ color: "rgba(39, 48, 78, 0.7)" }}
-                          >
-                            {item}
-                          </li>
-                        </>
-                      );
-                    })}
-                </ul>
-              </div>
-            </Col>
-            <Col md={6}>
-              <div className="pros-corns-section corns">
-                <div className="pros-header">
-                  {product && product?.page_phases?.should_not_buy}
-                </div>
-                {product?.should_not_buy?.length === 0 && (
-                  <h3 className="no-data text-center mt-2">No data Found</h3>
-                )}
-                <ul className="cross">
-                  {product &&
-                    product?.should_not_buy?.map((item, index) => {
-                      return (
-                        <>
-                          <li
-                            key={index}
-                            style={{ color: "rgba(39, 48, 78, 0.7)" }}
-                          >
-                            {item}
-                          </li>
-                        </>
-                      );
-                    })}
-                </ul>
-              </div>
-            </Col>
+            {product?.should_buy?.length !== 0 && (
+              <>
+                <Col md={12}>
+                  <h2 className="site-main-heading">
+                    {product && product?.page_phases?.who_is_it_for}
+                  </h2>
+                </Col>
+                <Col md={6}>
+                  <div className="pros-corns-section pros">
+                    <div className="pros-header">
+                      {product && product?.page_phases?.should_buy}
+                    </div>
+                    {product?.should_buy?.length === 0 && (
+                      <h3 className="no-data text-center mt-2">
+                        No data Found
+                      </h3>
+                    )}
+                    {/* {console.log(product?.should_not_buy)} */}
+                    <ul>
+                      {product &&
+                        product?.should_buy?.map((item, index) => {
+                          return (
+                            <>
+                              <li
+                                key={index}
+                                style={{ color: "rgba(39, 48, 78, 0.7)" }}
+                              >
+                                {item}
+                              </li>
+                            </>
+                          );
+                        })}
+                    </ul>
+                  </div>
+                </Col>
+              </>
+            )}
+            {product?.should_not_buy?.length !== 0 && (
+              <>
+                {" "}
+                <Col md={6}>
+                  <div className="pros-corns-section corns">
+                    <div className="pros-header">
+                      {product && product?.page_phases?.should_not_buy}
+                    </div>
+                    {product?.should_not_buy?.length === 0 && (
+                      <h3 className="no-data text-center mt-2">
+                        No data Found
+                      </h3>
+                    )}
+                    <ul className="cross">
+                      {product &&
+                        product?.should_not_buy?.map((item, index) => {
+                          return (
+                            <>
+                              <li
+                                key={index}
+                                style={{ color: "rgba(39, 48, 78, 0.7)" }}
+                              >
+                                {item}
+                              </li>
+                            </>
+                          );
+                        })}
+                    </ul>
+                  </div>
+                </Col>
+              </>
+            )}
           </Row>
         </Container>
       </section>

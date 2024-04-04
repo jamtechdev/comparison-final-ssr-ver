@@ -682,7 +682,7 @@ export default function Product({
                       (data) => data.price === null
                     ) && (
                       <div className="not-availabel">
-                        <span className="txt">NOT AVAILABLE</span>
+                        <span className="txt">N/A</span>
                         <span className="guide">
                           ~ {product?.price} {product?.currency}
                         </span>
