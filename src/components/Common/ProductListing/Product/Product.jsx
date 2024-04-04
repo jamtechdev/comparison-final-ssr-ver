@@ -313,8 +313,8 @@ export default function Product({
             <img
               className="compare_image"
               src={
-                product?.main_image
-                  ? product?.main_image
+                product?.mini_image
+                  ? product?.mini_image
                   : "/images/nofound.png"
               }
               width={0}
@@ -341,7 +341,10 @@ export default function Product({
                     </span>
                     {product?.overall_score_descriptions && (
                       <div className="score-detail tooltip-title">
-                        <span className="overall" style={{ color: "#27304E" }}>
+                        <span
+                          className="overall"
+                          style={{ color: "rgb(39 48 78 / 90%)" }}
+                        >
                           {/* {console.log(guidePhraseData)} */}
                           {guidePhraseData && guidePhraseData?.overall_score}
                         </span>
@@ -857,7 +860,13 @@ export default function Product({
                           </span>
                           <div className="tooltip-title">
                             {" "}
-                            <div className="" style={{ fontWeight: "400" }}>
+                            <div
+                              className=""
+                              style={{
+                                fontWeight: "400",
+                                color: "rgb(39 48 78 / 90%)",
+                              }}
+                            >
                               {data?.title}
                             </div>
                             <div className="tooltip-display-content">
@@ -1323,7 +1332,11 @@ export default function Product({
                                   </div>
                                   <div className="spec-col">
                                     <span
-                                      className="tooltip-title"
+                                      className={`${
+                                        product.technical_score_phase !== ""
+                                          ? "tooltip-title"
+                                          : ""
+                                      }`}
                                       style={{
                                         color:
                                           product.technical_score_is_better_than *
@@ -1336,8 +1349,14 @@ export default function Product({
                                             ? "#ce434b"
                                             : "#27304e",
                                         fontSize: "15px",
-                                        textDecoration: "underline",
-                                        textDecorationStyle: "dotted",
+                                        textDecoration:
+                                          product.technical_score_phase !== ""
+                                            ? "underline"
+                                            : "",
+                                        textDecorationStyle:
+                                          product.technical_score_phase !== ""
+                                            ? "dotted"
+                                            : "",
                                         textDecorationThickness: "1.5px",
                                         textDecorationColor:
                                           product.technical_score_is_better_than *
@@ -1458,7 +1477,11 @@ export default function Product({
                                   </div>
                                   <div className="spec-col">
                                     <span
-                                      className="tooltip-title"
+                                      className={`${
+                                        product?.reviews_phase !== ""
+                                          ? "tooltip-title"
+                                          : ""
+                                      }`}
                                       style={{
                                         color:
                                           product.reviews_is_better_than *
@@ -1471,8 +1494,14 @@ export default function Product({
                                             ? "#ce434b"
                                             : "#27304e",
                                         fontSize: "15px",
-                                        textDecoration: "underline",
-                                        textDecorationStyle: "dotted",
+                                        textDecoration:
+                                          product.reviews_phase !== ""
+                                            ? "underline"
+                                            : "",
+                                        textDecorationStyle:
+                                          product.reviews_phase !== ""
+                                            ? "dotted"
+                                            : "",
                                         textDecorationThickness: "1.5px",
                                         textDecorationColor:
                                           product.reviews_is_better_than *
@@ -1510,7 +1539,12 @@ export default function Product({
                                     </div>
                                     <div className="spec-col">
                                       <div
-                                        className="tooltip-title"
+                                        className={`${
+                                          product?.expert_reviews_rating_phase !==
+                                          ""
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
                                         style={{
                                           color:
                                             product.expert_reviews_is_better_than *
@@ -1523,8 +1557,17 @@ export default function Product({
                                               ? "#ce434b"
                                               : "#27304e",
                                           fontSize: "15px",
-                                          textDecoration: "underline",
-                                          textDecorationStyle: "dotted",
+
+                                          textDecoration:
+                                            product?.expert_reviews_rating_phase !==
+                                            ""
+                                              ? "underline"
+                                              : "",
+                                          textDecorationStyle:
+                                            product?.expert_reviews_rating_phase !==
+                                            ""
+                                              ? "dotted"
+                                              : "",
                                           textDecorationThickness: "1.5px",
                                           textDecorationColor:
                                             product.expert_reviews_is_better_than *
@@ -1564,7 +1607,11 @@ export default function Product({
                                   </div>
                                   <div className="spec-col">
                                     <div
-                                      className="tooltip-title"
+                                      className={`${
+                                        product?.popularity_points_phase !== ""
+                                          ? "tooltip-title"
+                                          : ""
+                                      }`}
                                       style={{
                                         color:
                                           product.popularity_points_better_then *
@@ -1577,8 +1624,14 @@ export default function Product({
                                             ? "#ce434b"
                                             : "#27304e",
                                         fontSize: "15px",
-                                        textDecoration: "underline",
-                                        textDecorationStyle: "dotted",
+                                        textDecoration:
+                                          product.popularity_points_phase !== ""
+                                            ? "underline"
+                                            : "",
+                                        textDecorationStyle:
+                                          product.popularity_points_phase !== ""
+                                            ? "dotted"
+                                            : "",
                                         textDecorationThickness: "1.5px",
                                         textDecorationColor:
                                           product.popularity_points_better_then *
@@ -1617,7 +1670,12 @@ export default function Product({
                                   </div>
                                   <div className="spec-col ">
                                     <div
-                                      className="tooltip-title"
+                                      className={`${
+                                        product?.ratio_quality_price_points_phase !==
+                                        ""
+                                          ? "tooltip-title"
+                                          : ""
+                                      }`}
                                       style={{
                                         color:
                                           product.ratio_quality_price_points_better_then *
@@ -1630,8 +1688,16 @@ export default function Product({
                                             ? "#ce434b"
                                             : "#27304e",
                                         fontSize: "15px",
-                                        textDecoration: "underline",
-                                        textDecorationStyle: "dotted",
+                                        textDecoration:
+                                          product.ratio_quality_price_points_phase !==
+                                          ""
+                                            ? "underline"
+                                            : "",
+                                        textDecorationStyle:
+                                          product.ratio_quality_price_points_phase !==
+                                          ""
+                                            ? "dotted"
+                                            : "",
                                         textDecorationThickness: "1.5px",
                                         textDecorationColor:
                                           product.ratio_quality_price_points_better_then *
@@ -1776,12 +1842,12 @@ export default function Product({
                                                                   fontSize:
                                                                     "15px",
                                                                   textDecoration:
-                                                                    attributeValues.hover_phase !==
+                                                                    attributeValues?.hover_phase !==
                                                                     ""
                                                                       ? "underline"
                                                                       : "",
                                                                   textDecorationStyle:
-                                                                    attributeValues.hover_phase !==
+                                                                    attributeValues?.hover_phase !==
                                                                     ""
                                                                       ? "dotted"
                                                                       : "",

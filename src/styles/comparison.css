@@ -15,7 +15,7 @@
   .comparison-wrapper
   .comparison-product-spec
   .comparison-product-item:nth-child(even) {
-  background: #f4f7fb;
+  /* background: #f4f7fb; */
   height: 46px;
 }
 

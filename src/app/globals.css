@@ -80,17 +80,19 @@ p {
   padding: 0 0 12px !important;
   font-weight: 400 !important;
   font-size: 18px !important;
-  color: var(--heading-color) !important;
-  opacity: 80% !important;
+  color: rgb(39 48 78 / 85%) !important;
   text-align: left !important;
   line-height: 30px !important;
+}
+
+.content-para a{
+  color: rgb(39 48 78 / 85%) !important;
 }
 
 .content-para ul {
   font-weight: 400 !important;
   font-size: 18px !important;
-  color: var(--heading-color) !important;
-  opacity: 80% !important;
+  color: rgb(39 48 78 / 85%) !important;
   text-align: left !important;
   line-height: 30px !important;
   padding: 0 0 12px !important;
@@ -183,9 +185,12 @@ select {
 .para_content_text {
   font-weight: 400;
   font-size: 18px;
-  color: var(--heading-color);
-  opacity: 80%;
+  color: rgb(39 48 78 / 80%);
   line-height: 30px;
+}
+
+.para_content_text ul{
+  all: unset !important;
 }
 
 .site-main-heading {
@@ -529,11 +534,16 @@ input[type="checkbox"]:checked {
     gap: 5px;
     align-items: center;
     text-align: center;
-    padding: 6px;
+    padding: 6px 0;
+    font-size: 17px;
+}
+
+.not-availabel.p-1 b {
+  font-style: italic;
 }
 
 .not-availabel .txt {
-  font-size: 14px;
+  font-size: 17px;
   font-style: italic;
   font-weight: 400;
 }
@@ -542,7 +552,7 @@ input[type="checkbox"]:checked {
   padding: 0px 18px;
   border-radius: 100px;
   text-align: center;
-  font-size: 16px;
+  font-size: 17px;
   background-color: #d90808;
   color: #fff;
   font-weight: 400;
@@ -554,7 +564,7 @@ input[type="checkbox"]:checked {
   padding: 5px 10px;
   border-radius: 100px;
   text-align: center;
-  font-size: 14px;
+  font-size: 17px;
   background-color: #d90808;
   color: #fff;
   font-weight: 600;
@@ -1181,9 +1191,7 @@ button.searchBarInner.btn.btn-primary {
 
 .comparison-tool .not-availabel {
   flex-direction: row;
-  padding: 0 20px;
-  height: 100%;
-  min-height: 104px;
+  padding: 8px 20px;
 }
 
 table.compare-container.table.comparison-table .best-list-item li img {
@@ -1335,7 +1343,7 @@ div#productGraph {
 .isSticky p.device-name:hover {
   /* background-color: var(--heading-color);
   color: var(--white-color); */
-  background-color: #f4f7fb;
+  background-color: #fff;
   color: #437ece;
   border: 1px solid #437ece !important;
 }
@@ -1349,9 +1357,9 @@ div#productGraph {
   color: var(--white-color) !important;
 }
 
-.compare-container .isSticky tr th:not(:first-child):hover {
+/* .compare-container .isSticky tr th:not(:first-child):hover {
   background: #f4f7fb !important;
-}
+} */
 
 .compare-container .isSticky tr th:not(:first-child):hover .device-name a {
   /* color: var(--heading-color) !important; */
@@ -1486,8 +1494,9 @@ li.color-item.selected {
   object-fit: cover;
 }
 
-.review__card-header .review__name h6 {
-  font-weight: 600;
+.review__card-header .review__name h3 {
+  font-size: 16px !important;
+  font-weight: 600 !important;
 }
 
 .review__rating span {
@@ -1593,7 +1602,7 @@ li.color-item.selected {
   height: 10px;
 }
 .inline-power-section ul {
-  color: rgb(39 48 78 / 70%);
+  color: rgb(39 48 78 / 90%);
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
@@ -1777,9 +1786,13 @@ h4.attribute__title {
 }
 
 .attribute__card__body p {
-  font-size: 14px !important;
-  line-height: 20px !important;
-  color: rgb(39 48 78 / 80%);
+  font-size: 17px !important;
+  line-height: 26px !important;
+  color: rgb(39 48 78 / 85%);
+}
+
+.attribute__card__body img {
+  padding: 12px 0;
 }
 
 .attribute__questionmark__icon {
@@ -1812,14 +1825,14 @@ h4.attribute__title {
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  margin: 10px 0;
+  margin: 0 0 30px;
   padding: 20px;
 }
 
 .box__content__section__textarea {
-  font-size: 14px !important;
+  font-size: 17px !important;
   line-height: 20px !important;
-  color: rgb(39 48 78 / 80%);
+  color: rgb(39 48 78 / 85%);
 }
 
 .testing__text {

@@ -861,14 +861,16 @@ const CompareTable = React.memo(
                                   background:
                                     product.attributes[
                                       category.name
-                                    ][0].final_points?.toFixed(1) >= 7.5
+                                    ][0].attribute_evaluation?.toFixed(1) >= 7.5
                                       ? "#093673"
                                       : product.attributes[
                                           category.name
-                                        ][0].final_points?.toFixed(1) >= 5 &&
+                                        ][0].attribute_evaluation?.toFixed(1) >=
+                                          5 &&
                                         product.attributes[
                                           category.name
-                                        ][0].final_points?.toFixed(1) < 7.5
+                                        ][0].attribute_evaluation?.toFixed(1) <
+                                          7.5
                                       ? "#437ECE"
                                       : " #85B2F1",
                                 }}
@@ -876,7 +878,7 @@ const CompareTable = React.memo(
                                 {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
                                 {product.attributes[
                                   category.name
-                                ][0].final_points?.toFixed(1)}{" "}
+                                ][0]?.attribute_evaluation?.toFixed(1)}{" "}
                               </span>
                             </td>
                           );

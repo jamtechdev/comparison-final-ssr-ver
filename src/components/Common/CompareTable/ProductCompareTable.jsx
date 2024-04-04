@@ -848,7 +848,7 @@ const ProductCompareTable = React.memo(
                       product?.area_evaluation?.[index]?.value ?? null;
                     return (
                       <td key={idx}>
-                        {value}
+                        {formatValue(value)}
                         {value === max && valueCounts[value] <= 1 && (
                           <span key={value} className="tooltip-title-2">
                             <img
@@ -913,14 +913,19 @@ const ProductCompareTable = React.memo(
                                   background:
                                     product.attributes[
                                       category?.name
-                                    ]?.[0]?.final_points?.toFixed(1) >= 7.5
+                                    ]?.[0]?.attribute_evaluation?.toFixed(1) >=
+                                    7.5
                                       ? "#093673"
                                       : product.attributes[
                                           category?.name
-                                        ]?.[0]?.final_points?.toFixed(1) >= 5 &&
+                                        ]?.[0]?.attribute_evaluation?.toFixed(
+                                          1
+                                        ) >= 5 &&
                                         product.attributes[
                                           category?.name
-                                        ]?.[0]?.final_points?.toFixed(1) < 7.5
+                                        ]?.[0]?.attribute_evaluation?.toFixed(
+                                          1
+                                        ) < 7.5
                                       ? "#437ECE"
                                       : "#85B2F1",
                                 }}
@@ -928,7 +933,7 @@ const ProductCompareTable = React.memo(
                                 {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
                                 {product.attributes[
                                   category.name
-                                ]?.[0].final_points?.toFixed(1)}{" "}
+                                ]?.[0].attribute_evaluation?.toFixed(1)}{" "}
                               </span>
                             </td>
                           );

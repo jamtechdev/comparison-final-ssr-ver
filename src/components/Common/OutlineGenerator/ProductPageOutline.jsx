@@ -4,7 +4,7 @@ import debounce from "lodash.debounce";
 
 function ProductPageOutline({ product, currentIndexId }) {
   const [outline, setOutline] = useState([]);
-  const [activeParentIndex, setActiveParentIndex] = useState("Battery");
+  const [activeParentIndex, setActiveParentIndex] = useState(null);
   const debouncedScrollHandler = useRef(null);
 
   useEffect(() => {
@@ -121,7 +121,7 @@ function ProductPageOutline({ product, currentIndexId }) {
                       )}
                     >
                       {" "}
-                      {`${mainNumber}. ${attribute}`}
+                      {`${attribute}`}
                     </a>
 
                     {product.attributes[attribute].map(
@@ -164,7 +164,7 @@ function ProductPageOutline({ product, currentIndexId }) {
                                     )}
                                   >
                                     {" "}
-                                    {`${subMainNumber}. ${attributeValues.attribute}`}
+                                    {`${attributeValues.attribute}`}
                                   </a>
                                 </li>
                               </ol>
@@ -207,7 +207,7 @@ function ProductPageOutline({ product, currentIndexId }) {
                       )}
                     >
                       {" "}
-                      {`${mainNumber}. ${attribute}`}
+                      {` ${attribute}`}
                     </a>
 
                     {product.attributes[attribute].map(
@@ -250,7 +250,7 @@ function ProductPageOutline({ product, currentIndexId }) {
                                     )}
                                   >
                                     {" "}
-                                    {`${subMainNumber}. ${attributeValues.attribute}`}
+                                    {` ${attributeValues.attribute}`}
                                   </a>
                                 </li>
                               </ol>

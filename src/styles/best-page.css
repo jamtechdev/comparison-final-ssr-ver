@@ -706,7 +706,7 @@ thead.isSticky {
 
 .filtered-data-select span {
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 34px;
   color: var(--heading-color);
   width: 100%;
@@ -1616,8 +1616,8 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   text-align: left;
   bottom: 100%;
   left: 5px;
-  /* color: rgb(39 48 78 / 70%); */
-  color: var(--primary-color);
+  color: rgb(39 48 78 / 85%);
+  /* color: var(--primary-color); */
   line-height: 20px;
   z-index: 10000;
   border: 1px solid #d4d6dc;
@@ -1660,6 +1660,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
 
 .prosconsColor {
   font-size: 14px !important;
+  color: rgb(39 48 78 / 80%);
 }
 
 .prosconsColor > span {

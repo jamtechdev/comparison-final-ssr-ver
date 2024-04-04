@@ -144,7 +144,7 @@ function ExperReviwes({ expertReview }) {
                       </a>
                     )}
 
-                    <h3 style={{ fontSize: "1rem", fontWeight: "600" }}>
+                    <h3>
                       {data?.name !== null ? (
                         <a
                           href={`/link?p=${btoa(data?.website_name)}`}

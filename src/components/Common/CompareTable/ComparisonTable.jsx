@@ -804,7 +804,7 @@ export default function ComparisonTable({
                               {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
                               {product.attributes[
                                 category.name
-                              ]?.[0].final_points?.toFixed(1)}{" "}
+                              ]?.[0].attribute_evaluation?.toFixed(1)}{" "}
                             </span>
                           </td>
                         );
