@@ -883,7 +883,7 @@ export default function ComparisonTable({
           </Button>
         </div>
       )}
-      <h2 id="h2"></h2>
+      <span id="h2"></span>
     </div>
   );
 }
