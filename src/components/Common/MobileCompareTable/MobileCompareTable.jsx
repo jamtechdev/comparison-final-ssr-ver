@@ -165,7 +165,7 @@ export default function MobileCompareTable({
       }
     }
 
-    const topValue = numericValues[0];
+    const topValue = numericValues[0]
     const occurrences = numericValues?.filter(
       (value) => value === topValue
     ).length;
@@ -186,51 +186,16 @@ export default function MobileCompareTable({
     // Adjust this function according to your context as I don't have the complete code
     // It would be good to ensure that you have the required variables (finalProducts) in scope.
     const value__data = [];
-    return (
-      <>
-        {arrayOfObjects.slice(0, 2).map((item, attrIndex) => (
-          <td key={attrIndex}>
-            {item?.attribute_value.includes("⭐") ? (
-              <>
-                <div>
-                  {item?.attribute_value.split("⭐")[0]}{" "}
-                  {item?.unit?.split("-")[0] && item?.unit?.split("-")[0]}
-                  <span className="tooltip-title-2">
-                    <img
-                      style={{ float: "right", paddingRight: "5px" }}
-                      src="/icons/star.png"
-                      alt="star"
-                    />
-                    <ProsConsToolTip hover_phrase={item.start_phase} />
-                  </span>
-                </div>
-              </>
-            ) : (
-              <>
-                {item?.attribute_value === "-" ||
-                item?.attribute_value === null ||
-                item?.attribute_value === "?" ? (
-                  "-"
-                ) : (
-                  <>
-                    {item?.attribute_value === "-" ||
-                    item?.attribute_value === null ||
-                    item?.attribute_value === "?" ? (
-                      item?.attribute_value
-                    ) : (
-                      <>
-                        {" "}
-                        {item?.attribute_value} {item?.unit ? item?.unit : ""}
-                      </>
-                    )}
-                  </>
-                )}
-              </>
-            )}
-          </td>
-        ))}
-      </>
-    );
+    function chunkArray(array, chunkSize) {
+      const chunks = [];
+      for (let i = 0; i < array.length; i += chunkSize) {
+        chunks.push(array.slice(i, i + chunkSize));
+      }
+      return chunks;
+    }
+    const chunkArrayOfObjects = chunkArray(arrayOfObjects, 2);
+    console.log(chunkArrayOfObjects, "chunk");
+    return chunkArrayOfObjects;
   };
   // add startONTable
   const addStarOnTable = (defaultNo, type, values, starPhase) => {
@@ -297,7 +262,7 @@ export default function MobileCompareTable({
     2
   );
 
-  // console.log(categoryArray, "neetxy");
+  // console.log(categoryChunkedData, "neetxy");
 
   return (
     <section className="comparisons-slider">
@@ -396,17 +361,17 @@ export default function MobileCompareTable({
                     )}
 
                   {/* <ul className="best-list-item ">
-                    <li>
-                      <Image
-                        src="/images/amazon.png"
-                        width={0}
-                        height={0}
-                        sizes="100%"
-                        alt=""
-                      />
-                      <span>155.87 €</span>
-                    </li>
-                  </ul> */}
+                      <li>
+                        <Image
+                          src="/images/amazon.png"
+                          width={0}
+                          height={0}
+                          sizes="100%"
+                          alt=""
+                        />
+                        <span>155.87 €</span>
+                      </li>
+                    </ul> */}
                 </th>
               );
             })}
@@ -457,7 +422,7 @@ export default function MobileCompareTable({
           }}
           className="product-slider"
         >
-          {chunkedData?.map((slider_data, index) => {
+          {chunkedData?.map((slider_data, swiperIndex) => {
             return (
               <SwiperSlide>
                 <Table className="compare-container">
@@ -566,31 +531,31 @@ export default function MobileCompareTable({
                         <div className="table-main-heading">
                           Overall Score{" "}
                           {/* {products &&
-                            products.length > 0 &&
-                            products[0]?.overall_score_descriptions && (
-                              <div className="tooltip-display-content">
-                                {products[0]?.overall_score_descriptions
-                                  ?.description && (
-                                  <p className="mb-2">
-                                    <b>What it is: </b>{" "}
-                                    {
-                                      products[0]?.overall_score_descriptions
-                                        ?.description
-                                    }
-                                  </p>
-                                )}
-                                {products[0]?.overall_score_descriptions
-                                  ?.when_matters && (
-                                  <p className="mb-2">
-                                    <b>When it matters: </b>{" "}
-                                    {
-                                      products[0]?.overall_score_descriptions
-                                        ?.when_matters
-                                    }
-                                  </p>
-                                )}
-                              </div>
-                            )} */}
+                              products.length > 0 &&
+                              products[0]?.overall_score_descriptions && (
+                                <div className="tooltip-display-content">
+                                  {products[0]?.overall_score_descriptions
+                                    ?.description && (
+                                    <p className="mb-2">
+                                      <b>What it is: </b>{" "}
+                                      {
+                                        products[0]?.overall_score_descriptions
+                                          ?.description
+                                      }
+                                    </p>
+                                  )}
+                                  {products[0]?.overall_score_descriptions
+                                    ?.when_matters && (
+                                    <p className="mb-2">
+                                      <b>When it matters: </b>{" "}
+                                      {
+                                        products[0]?.overall_score_descriptions
+                                          ?.when_matters
+                                      }
+                                    </p>
+                                  )}
+                                </div>
+                              )} */}
                           <span className="question-marker-icon">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -625,11 +590,11 @@ export default function MobileCompareTable({
                       })}
 
                       {/* <td>
-                        <span className="count dark-color">8.5</span>
-                      </td>
-                      <td>
-                        <span className="count dark-color">8.5</span>
-                      </td> */}
+                          <span className="count dark-color">8.5</span>
+                        </td>
+                        <td>
+                          <span className="count dark-color">8.5</span>
+                        </td> */}
                     </tr>
                     <tr>
                       <td colSpan="2">
@@ -802,81 +767,102 @@ export default function MobileCompareTable({
                         </>
                       );
                     })}
-                    {removeLastObjectFromCategory
+                    {categoryChunkedData
                       ?.slice(0, fullTable || 2)
                       .map((category, categoryIndex) => {
-                        return (
-                          <Fragment key={categoryIndex}>
-                            <tr className="tr-bg-color">
-                              <td colSpan="2">
-                                <p className="table-main-heading">
-                                  {category?.name}
-                                  <span className="question-marker-icon">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 24 24"
-                                    >
-                                      <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                    </svg>
-                                  </span>
-                                </p>
-                              </td>
-                            </tr>
-                            <tr className="tr-bg-color">
-                              {finalProducts
-                                ?.slice(0, 2)
-                                .map((slider_data, Sliderindex) => {
+                        return category.map((product, ratioIndex) => {
+                          return (
+                            <>
+                              <tr className="tr-bg-color">
+                                <td colSpan="2">
+                                  <p className="table-main-heading">
+                                    {product?.name}
+                                    <span className="question-marker-icon">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                      </svg>
+                                    </span>
+                                  </p>
+                                </td>
+                              </tr>
+                              <tr className="tr-bg-color">
+                                {slider_data.map((data, Sliderindex) => {
                                   return (
                                     <td key={Sliderindex}>
                                       <span className="count">
                                         {" "}
-                                        {slider_data.attributes[
-                                          category.name
+                                        {data.attributes[
+                                          product.name
                                         ]?.[0].final_points?.toFixed(1)}{" "}
                                       </span>
                                     </td>
                                   );
                                 })}
-                            </tr>
-                            {category.attributes
-                              .slice(
-                                0,
-                                pagination[category.name] ||
-                                  initialNoOfCategories
-                              )
-                              .map((catAttribute, catAttributeIndex) => {
-                                return (
-                                  <>
-                                    <tr>
-                                      <td colSpan="2">
-                                        <p className="table-inner-heading">
-                                          {catAttribute.name}
-                                          <span className="question-marker-icon">
-                                            <svg
-                                              xmlns="http://www.w3.org/2000/svg"
-                                              viewBox="0 0 24 24"
-                                            >
-                                              <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                            </svg>
-                                          </span>
-                                        </p>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      {addAsterisksToTopValue(
-                                        defaultNo,
-                                        category,
-                                        catAttribute
-                                      )}
-                                    </tr>
-                                  </>
-                                );
-                              })}
-                          </Fragment>
-                        );
-                      })}
+                              </tr>
 
-                   
+                              {product?.attributes
+                                ?.slice(
+                                  0,
+                                  pagination[product.name] ||
+                                    initialNoOfCategories
+                                )
+                                .map((data, index) => {
+                                  return (
+                                    <>
+                                      <tr key={index}>
+                                        <td colSpan="2">
+                                          <p className="table-inner-heading">
+                                            {data.name}
+                                            <span className="question-marker-icon">
+                                              <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                              >
+                                                <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                              </svg>
+                                            </span>
+                                          </p>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        {addAsterisksToTopValue(
+                                          defaultNo,
+                                          product,
+                                          data
+                                        )
+                                          ?.slice(0, defaultNo)
+                                          ?.map((chunk, chunkIndex) => {
+                                              return chunk?.slice(swiperIndex,swiperIndex+1).map(
+                                                (item, itemIndex) => {
+                                                  return (
+                                                    <td key={itemIndex}>
+                                                      {item?.attribute_value} 
+                                                    </td>
+                                                  );
+                                                }
+                                              );
+                                            
+                                           
+                                          })}
+                                      </tr>
+
+                                      {/* <tr>
+                                        {addAsterisksToTopValue(
+                                          defaultNo,
+                                          product,
+                                          data
+                                        )}
+                                      </tr> */}
+                                    </>
+                                  );
+                                })}
+                            </>
+                          );
+                        });
+                      })}
                   </tbody>
                 </Table>
               </SwiperSlide>
@@ -893,10 +879,10 @@ export default function MobileCompareTable({
           </div>
         )}
         {/* <div className="text-center">
-          <Button className="see_all_btn_outline">
-            See Full Table <i className="ri-arrow-down-s-line"></i>
-          </Button>
-        </div> */}
+            <Button className="see_all_btn_outline">
+              See Full Table <i className="ri-arrow-down-s-line"></i>
+            </Button>
+          </div> */}
       </div>
     </section>
   );
