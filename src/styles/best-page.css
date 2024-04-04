@@ -880,7 +880,7 @@ thead.isSticky {
   .best-list-item
   li
   span {
-  /* min-width: 80px !important; */
+  min-width: 50px !important;
   font-size: 15px !important;
   line-height: 30px !important;
 }
