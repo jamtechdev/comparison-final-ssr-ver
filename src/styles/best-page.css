@@ -126,14 +126,14 @@
 }
 
 .compare-container .best-list-item li span.price-wider {
-  max-width: 80px !important;
-  min-width: 120px !important;
+  /* max-width: 80px !important;
+  min-width: 120px !important; */
   font-size: 15px;
   line-height: 28px !important;
   padding: 3px 10px !important;
 }
 .compare-container tbody tr:nth-child(2) td {
-  vertical-align: text-top !important;
+  vertical-align: top !important;
 }
 .compare-container thead tr th {
   background: #f4f7fb;

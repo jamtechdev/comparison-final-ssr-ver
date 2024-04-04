@@ -528,6 +528,7 @@ input[type="checkbox"]:checked {
   justify-content: space-evenly;
   width: 100%;
   gap: 10px;
+  padding: 6px;
 }
 
 .not-availabel .txt {
