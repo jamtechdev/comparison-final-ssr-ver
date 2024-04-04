@@ -430,11 +430,11 @@ const WhyAccordionTab = React.memo(
 
             <Accordion.Item eventKey="2">
               <Accordion.Header as="div">
-                <h2 className="font-20">
+                <h3 className="font-20">
                   {product && product?.page_phases?.worst_then}
                   {/* Why is {product && product?.name} WORSE than{" "}
                   {product && product?.average_title}? */}
-                </h2>
+                </h3>
 
                 <div className="show-btn">
                   {product && product?.page_phases?.show_all}{" "}
