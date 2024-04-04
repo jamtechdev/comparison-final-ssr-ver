@@ -331,7 +331,7 @@ export default function ComparisonTable({
                                 (data) => data.price === null
                               ) && (
                                 <div className="not-availabel p-3">
-                                 <i>N/A</i>
+                                  <i>N/A</i>
                                   <span className="price">
                                     ~ {product?.price} €
                                   </span>

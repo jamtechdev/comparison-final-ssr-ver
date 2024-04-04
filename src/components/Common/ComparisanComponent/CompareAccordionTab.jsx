@@ -272,11 +272,14 @@ const CompareAccordionTab = React.memo(
             <Accordion defaultActiveKey="1" className="compare-accordion p-0">
               <Accordion.Item eventKey="1">
                 <Accordion.Header as="div">
-                  {sendProductProps?.length > 2
-                    ? comparePhaseData &&
-                      comparePhaseData?.three_products_better_then
-                    : comparePhaseData &&
-                      comparePhaseData?.two_products_better_then}
+                  <h3>
+                    {" "}
+                    {sendProductProps?.length > 2
+                      ? comparePhaseData &&
+                        comparePhaseData?.three_products_better_then
+                      : comparePhaseData &&
+                        comparePhaseData?.two_products_better_then}
+                  </h3>
 
                   <div className="show-btn">
                     {comparePhaseData && comparePhaseData?.show_all}{" "}
@@ -553,11 +556,15 @@ const CompareAccordionTab = React.memo(
               <Accordion.Item eventKey="2">
                 <Accordion.Header as="div">
                   {/* worse than */}
-                  {sendProductProps?.length > 2
-                    ? comparePhaseData &&
-                      comparePhaseData?.three_products_worse_then
-                    : comparePhaseData &&
-                      comparePhaseData?.two_products_worse_then}
+                  <h3>
+                    {" "}
+                    {sendProductProps?.length > 2
+                      ? comparePhaseData &&
+                        comparePhaseData?.three_products_worse_then
+                      : comparePhaseData &&
+                        comparePhaseData?.two_products_worse_then}
+                  </h3>
+
                   <div className="show-btn">
                     {comparePhaseData && comparePhaseData?.show_all}{" "}
                     <i className="ri-arrow-down-s-line"></i>

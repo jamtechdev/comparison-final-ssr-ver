@@ -43,10 +43,10 @@ const ProductCompareTable = React.memo(
         }, observerSettings);
 
         observer.observe(cachedRef);
-         console.log(observerSettings);
+        console.log(observerSettings);
         return () => {
           observer.unobserve(cachedRef);
-           // console.log(observerSettings);
+          // console.log(observerSettings);
         };
       }, []);
 
@@ -820,38 +820,52 @@ const ProductCompareTable = React.memo(
               })}
             </tr>
             {products[0]?.area_evaluation?.map((data, index) => {
-              const max = Math.max(
-                ...finalProducts.flatMap(
-                  (product) =>
-                    product?.area_evaluation?.map((p) => p.value) ?? []
-                )
+              const maxValues = finalProducts.map(
+                (product) => product?.area_evaluation?.[index]?.value ?? null
               );
-              // console.log(max);
+              const max = Math.max(
+                ...maxValues.filter((value) => value !== null)
+              );
+
+              // Count occurrences of each value
+              const valueCounts = finalProducts.reduce((acc, product) => {
+                const value = product?.area_evaluation?.[index]?.value;
+                if (value !== null) {
+                  acc[value] = (acc[value] || 0) + 1;
+                }
+                return acc;
+              }, {});
+
               return (
-                <tr className="">
+                <tr className="" key={index}>
+                  {" "}
+                  {/* Ensure to set a unique key for each <tr> */}
                   <th className="sub-inner-padding">
                     <div className="tooltip-title">{data?.title}</div>
                   </th>
-
                   {finalProducts.slice(0, defaultNo).map((product, idx) => {
-                    const values = product?.area_evaluation?.map(
-                      (p) => p.value
-                    );
-
-                    const value = values ? values[index] : null;
-                    // console.log(values);
+                    const value =
+                      product?.area_evaluation?.[index]?.value ?? null;
                     return (
                       <td key={idx}>
-                        {/* {console.log(value , value === max , "neetxy")} */}
                         {value}
-                        {value === max ? "⭐️" : ""}
+                        {value === max && valueCounts[value] <= 1 && (
+                          <span key={value} className="tooltip-title-2">
+                            <img
+                              style={{ float: "right", paddingRight: "5px" }}
+                              src="/icons/star.png"
+                              alt="star"
+                            />
+                            {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
+                          </span>
+                        )}
+                        {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
                       </td>
                     );
                   })}
                 </tr>
               );
             })}
-
             {removeLastObjectFromCategory
               ?.slice(0, fullTable || 2)
               .map((category, categoryIndex) => {
@@ -996,7 +1010,7 @@ const ProductCompareTable = React.memo(
           </div>
         )}
 
-        <h2 id="h2"></h2>
+        <span id="h2"></span>
       </div>
     );
   }
