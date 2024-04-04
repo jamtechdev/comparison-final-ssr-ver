@@ -144,7 +144,7 @@ function ExperReviwes({ expertReview }) {
                       </a>
                     )}
 
-                    <h6>
+                    <h3>
                       {data?.name !== null ? (
                         <a
                           href={`/link?p=${btoa(data?.website_name)}`}
@@ -162,7 +162,7 @@ function ExperReviwes({ expertReview }) {
                           {extractDomainName(data?.website_name)}
                         </a>
                       )}
-                    </h6>
+                    </h3>
                   </div>
                   <div className="review__rating">
                     {typeof data?.evaluation === "string" ? (
