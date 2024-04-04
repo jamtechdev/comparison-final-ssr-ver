@@ -43,8 +43,10 @@ const ProductCompareTable = React.memo(
         }, observerSettings);
 
         observer.observe(cachedRef);
+         console.log(observerSettings);
         return () => {
           observer.unobserve(cachedRef);
+           // console.log(observerSettings);
         };
       }, []);
 
@@ -328,7 +330,6 @@ const ProductCompareTable = React.memo(
                                 ) && (
                                   <div className="not-availabel n-lable p-1">
                                     {/* <span className="txt">NOT AVAILABLE</span> */}
-                                    <i>N/A</i>
                                     <span className="price">
                                       ~ {product?.price} €
                                     </span>
@@ -422,7 +423,6 @@ const ProductCompareTable = React.memo(
                         ) && (
                           <div className="not-availabel">
                             {/* <span className="txt">NOT AVAILABLE</span> */}
-                            <i>N/A</i>
                             <span className="price">~ {product?.price} €</span>
                           </div>
                         )}
@@ -783,12 +783,12 @@ const ProductCompareTable = React.memo(
                           }
                         </p>
                       )}
-                      {products[0]?.ratio_qulitiy_score_descriptions
+                      {products[0]?.technical_score_descriptions
                         ?.when_it_matters && (
                         <p className="mb-2">
                           <b>When it matters: </b>{" "}
                           {
-                            products[0]?.ratio_qulitiy_score_descriptions
+                            products[0]?.technical_score_descriptions
                               ?.when_it_matters
                           }
                         </p>
@@ -817,46 +817,31 @@ const ProductCompareTable = React.memo(
               })}
             </tr>
             {products[0]?.area_evaluation?.map((data, index) => {
-              const maxValues = finalProducts.map(
-                (product) => product?.area_evaluation?.[index]?.value ?? null
-              );
               const max = Math.max(
-                ...maxValues.filter((value) => value !== null)
+                ...finalProducts.flatMap(
+                  (product) =>
+                    product?.area_evaluation?.map((p) => p.value) ?? []
+                )
               );
-
-              // Count occurrences of each value
-              const valueCounts = finalProducts.reduce((acc, product) => {
-                const value = product?.area_evaluation?.[index]?.value;
-                if (value !== null) {
-                  acc[value] = (acc[value] || 0) + 1;
-                }
-                return acc;
-              }, {});
-
+              // console.log(max);
               return (
-                <tr className="" key={index}>
-                  {" "}
-                  {/* Ensure to set a unique key for each <tr> */}
+                <tr className="">
                   <th className="sub-inner-padding">
                     <div className="tooltip-title">{data?.title}</div>
                   </th>
+
                   {finalProducts.slice(0, defaultNo).map((product, idx) => {
-                    const value =
-                      product?.area_evaluation?.[index]?.value ?? null;
+                    const values = product?.area_evaluation?.map(
+                      (p) => p.value
+                    );
+
+                    const value = values ? values[index] : null;
+                    // console.log(values);
                     return (
                       <td key={idx}>
+                        {/* {console.log(value , value === max , "neetxy")} */}
                         {value}
-                        {value === max && valueCounts[value] <= 1 && (
-                          <span key={value} className="tooltip-title-2">
-                            <img
-                              style={{ float: "right", paddingRight: "5px" }}
-                              src="/icons/star.png"
-                              alt="star"
-                            />
-                            {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
-                          </span>
-                        )}
-                        {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
+                        {value === max ? "⭐️" : ""}
                       </td>
                     );
                   })}
@@ -872,7 +857,6 @@ const ProductCompareTable = React.memo(
                     <tr className="tr-bg-color">
                       <th>
                         <div className="tooltip-title">
-                          {/* {console.log(category)} */}
                           {category.name}
                           {(category.description || category.when_matters) && (
                             <div className="tooltip-display-content">

@@ -100,7 +100,7 @@ export default function MobileCompareTable({
           observerSettings
         );
       observer.observe(cachedRef);
-      console.log(observerSettings);
+      // console.log(observerSettings);
       return () => {
         observer.unobserve(cachedRef);
       };
@@ -194,7 +194,7 @@ export default function MobileCompareTable({
       return chunks;
     }
     const chunkArrayOfObjects = chunkArray(arrayOfObjects, 2);
-    console.log(chunkArrayOfObjects, "chunk");
+    // console.log(chunkArrayOfObjects, "chunk");
     return chunkArrayOfObjects;
   };
   // add startONTable
