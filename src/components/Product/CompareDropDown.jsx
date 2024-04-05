@@ -125,7 +125,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
                 {""} {selectedAttribute.description}
                 <br />
                 {selectedAttribute && (
-                  <span style={{ fontWeight: 800, fontSize: 17 }}>
+                  <span style={{ fontWeight: 600, fontSize: 17 }}>
                     {product && product?.page_phases?.when_it_matters} :
                   </span>
                 )}

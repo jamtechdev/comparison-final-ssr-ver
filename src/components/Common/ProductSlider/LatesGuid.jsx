@@ -51,7 +51,9 @@ export default function LatesGuid({ favSlider }) {
                 </a>
               </SwiperSlide>
             ))}
-          {isMobile
+         
+        </Swiper>
+        {isMobile
             ? favSlider?.length > 2 && (
                 <>
                   <span className="swiper-prev">
@@ -72,7 +74,6 @@ export default function LatesGuid({ favSlider }) {
                   </span>
                 </>
               )}
-        </Swiper>
       </div>
     </>
   );

@@ -645,7 +645,7 @@ export default function Product({
                       {product.popularity_points != null
                         ? product.popularity_points >= 10
                           ? Math.trunc(product.popularity_points)
-                          : product.popularity_points.toFixed(1)
+                          : formatValue(product.popularity_points)
                         : "0.0"}
                     </span>
                     {product?.popularity_descriptions && (
@@ -952,7 +952,7 @@ export default function Product({
                         return (
                           <li key={key}>
                             {/* {console.log(data[0])} */}
-                            <b>{data && data?.name}:</b> {data && data?.value}{" "}
+                            {data && data?.name}: <i>{data && data?.value}{" "}</i>
                             {data && data?.unit}
                           </li>
                         );
@@ -1371,7 +1371,7 @@ export default function Product({
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
-                                      {product.technical_score}
+                                      {formatValue(product.technical_score)}
                                       <ProsConsToolTip
                                         hover_phrase={
                                           product.technical_score_phase
@@ -1516,7 +1516,7 @@ export default function Product({
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
-                                      {product.reviews}
+                                      {formatValue(product.reviews)}
                                       <ProsConsToolTip
                                         hover_phrase={product.reviews_phase}
                                       />
@@ -1582,7 +1582,7 @@ export default function Product({
                                           textUnderlineOffset: "5px",
                                         }}
                                       >
-                                        {product.expert_reviews_rating}
+                                        {formatValue(product.expert_reviews_rating)}
                                         <ProsConsToolTip
                                           hover_phrase={
                                             product.expert_reviews_rating_phase
@@ -1646,7 +1646,7 @@ export default function Product({
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
-                                      {product.popularity_points}
+                                      {formatValue(product.popularity_points)}
                                       <ProsConsToolTip
                                         hover_phrase={
                                           product.popularity_points_phase
@@ -1712,7 +1712,7 @@ export default function Product({
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
-                                      {product.ratio_quality_price_points}
+                                      {formatValue(product.ratio_quality_price_points)}
                                       <ProsConsToolTip
                                         hover_phrase={
                                           product.ratio_quality_price_points_phase

@@ -47,7 +47,10 @@
   margin: 20px 0 0 !important;
   font-size: 18px;
   line-height: 20px;
-  color: rgb(39 48 78 / 85%);
+  color: rgb(39 48 78 / 90%);
+}
+.product-header .product-inner-content li {
+  list-style: disc !important;
 }
 
 .product-score-container {
@@ -298,7 +301,7 @@
 .best-price-section:not(.ranking) .best-list-item li:not(.d-flex) > span a {
   color: var(--white-color);
   /* min-width: 80px !important; */
-  font-size: 17px !important;
+  font-size: 16px !important;
   line-height: 30px !important;
   font-weight: 400;
 }
@@ -367,7 +370,7 @@
   justify-content: flex-start;
   padding: 8px 24px;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 22px;
 }
 
@@ -1034,7 +1037,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  color: var(--heading-color);
+  color: rgb(39 48 78 / 90%);
   font-family: "Lato", sans-serif !important;
 }
 .product-listing-inner-content .score-section .score-detail span {

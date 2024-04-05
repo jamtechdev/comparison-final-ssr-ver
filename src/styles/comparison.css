@@ -118,15 +118,19 @@
 }
 
 .comparison-product-item {
-  display: flex;
+  display: grid !important;
+  grid-template-columns: calc(50% - 2px) calc(50% - 2px) !important;
+  grid-gap: 5px;
+  gap: 5px;
   align-items: center;
-  justify-content: space-around;
-  padding: 8px 0;
+  padding: 8px;
 }
 
 .comparison-product-item img {
-  width: 80px;
-  height: auto;
+  margin: auto;
+  width: 100% !important;
+  height: 30px !important;
+  object-fit: contain !important;
 }
 
 .comparison-product-item span {

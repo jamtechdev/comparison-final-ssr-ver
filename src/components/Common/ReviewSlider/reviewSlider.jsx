@@ -90,7 +90,8 @@ export default function ReviewSlider({ favSlider }) {
             </SwiperSlide>
           );
         })}
-        {isMobile
+      </Swiper>
+      {isMobile
           ? favSlider?.length > 2 && (
               <>
                 <span className="swiper-prev">
@@ -111,7 +112,6 @@ export default function ReviewSlider({ favSlider }) {
                 </span>
               </>
             )}
-      </Swiper>
     </section>
   );
 }

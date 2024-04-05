@@ -131,16 +131,19 @@ export default function Header({ headerData, headerPhase }) {
                   </Accordion>
                   <Navbar className="nav-links-mobile">
                     <Navbar.Brand href="#how-we-rank">How we rank</Navbar.Brand>
-                    <Navbar.Brand href="#comparison-tool">
+                    <Navbar.Brand
+                      href=""
+                      onClick={() => setIsOpen(true)}
+                    >
                       Comparison Tool
                     </Navbar.Brand>
-                    <Navbar.Brand href="#blog">Blog</Navbar.Brand>
+                    <Navbar.Brand href="/about-us">About us</Navbar.Brand>
                   </Navbar>
                 </Modal.Body>
               </Modal>
             </div>
           </Col>
-          <Col lg={2} md={4} xs={4}>
+          <Col lg={2} md={8} xs={8}>
             <a href="/">
               <img
                 src={`https://panel.mondopedia.it/logos/app_logo.png`}
@@ -151,7 +154,7 @@ export default function Header({ headerData, headerPhase }) {
               />
             </a>
           </Col>
-          <Col lg={5} md={4} xs={4} className="form-search">
+          <Col lg={5} md={12} xs={12} className="form-search">
             {pathname !== "/" && (
               <>
                 <Form className={"d-flex " + styles.searchbar}>

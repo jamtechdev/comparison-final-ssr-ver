@@ -245,7 +245,7 @@ export default function ComparisonTable({
         value === maxValue &&
         values.indexOf(value) === values.lastIndexOf(value) ? (
           <div>
-            {value}
+            {formatValue(value)}
             <span key={value} className="tooltip-title-2">
               <img
                 style={{ float: "right", paddingRight: "5px" }}
@@ -259,13 +259,12 @@ export default function ComparisonTable({
         ) : value === 0 ? (
           "?"
         ) : (
-          value
+          formatValue(value)
         )
       );
     }
     return values;
   };
-
   const conditionClassName = winPos
     ? stickyWith
       ? "isSticky widthFull" // Both winPos and stickyWith are true

@@ -293,7 +293,7 @@ function ProductPage({
                       return (
                         <React.Fragment key={key}>
                           <li>
-                            <b>{data?.name}:</b> {data?.value}
+                            {data?.name}: <i>{data?.value}</i>
                           </li>
                         </React.Fragment>
                       );
@@ -1000,6 +1000,54 @@ function ProductPage({
               </div>
             </Row>
           )}
+
+          {product?.area_evaluation?.length !== 0 && (
+            <Row className="attribute__card__wrapper" id="attribute__card">
+              {product?.area_evaluation?.map((data, index) => {
+                return (
+                  data?.text_part_output !== "" && (
+                    <Col lg={6} md={12}>
+                      <div className="attribute__card">
+                        <div className="attribute__card__header">
+                          <span
+                            className="attribute__rating"
+                            style={{
+                              background:
+                                data?.value >= 7.5
+                                  ? "#093673"
+                                  : data?.value >= 5 && data?.value < 7.5
+                                  ? "#437ECE"
+                                  : "#85B2F1",
+                            }}
+                          >
+                            {data?.value >= 10
+                              ? data?.value.toFixed(0)
+                              : data?.value.toFixed(1)}
+                            {/* {formatValue(8.125)} */}
+                            {/* {attributeValues?.final_points?.toFixed(
+                       1
+                     )} */}
+                          </span>
+                          <h4 className="attribute__title">
+                            <b>{data?.title} </b>
+                          </h4>
+                        </div>
+                        <div className="attribute__card__body">
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: searchForPatternAndReplace(
+                                data?.text_part_output
+                              ),
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    </Col>
+                  )
+                );
+              })}
+            </Row>
+          )}
         </Container>
       </section>
       <section className="my-4">
@@ -1059,8 +1107,39 @@ function ProductPage({
         product={product}
         slug={slug}
       />
-      {product?.line_chart_data[0]?.values?.length !== 0 && (
-        <section className="ptb-80 bg-color">
+
+      {product?.line_chart_data[0]?.value?.length !== 0 && (
+        <section className="mt-3 mobile-popular-comparison">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <h2 className="site-main-heading">
+                  Price trend in the past 6 months
+                </h2>
+                <div className="draw-chart-container">
+                  <Container className="position-relative  line-chart-parent">
+                    <div className="chart__data">
+                      <span></span>
+                      <p
+                        style={{
+                          color: "var(--heading-color)",
+                          fontSize: "17px",
+                        }}
+                      >
+                        Lowest price
+                      </p>
+                    </div>
+                    <DrawChart lineChartData={product?.line_chart_data} />
+                  </Container>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
+
+      <section className="ptb-80 bg-color">
+        {product?.should_buy?.length !== 0 && (
           <Container>
             <Row>
               {product?.should_buy?.length !== 0 && (
@@ -1134,8 +1213,8 @@ function ProductPage({
               )}
             </Row>
           </Container>
-        </section>
-      )}
+        )}
+      </section>
 
       {/* {console.log(product?.text_part !== "")} */}
 
@@ -1771,7 +1850,17 @@ function ProductPage({
               {product?.alternative_products?.map((data, index) => {
                 return (
                   <React.Fragment key={index}>
-                    <h2 className="site-main-heading">{data?.heading}</h2>
+                    {index === 0 ? (
+                      <h2 className="site-main-heading">{data?.heading}</h2>
+                    ) : (
+                      <h3
+                        className="site-main-heading"
+                        style={{ paddingTop: "20px" }}
+                      >
+                        {data?.heading}
+                      </h3>
+                    )}
+
                     {data?.alternative_products.length != 0 ? (
                       <ReviewSlider
                         favSlider={

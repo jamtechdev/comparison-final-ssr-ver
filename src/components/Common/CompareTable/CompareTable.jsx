@@ -217,15 +217,13 @@ const CompareTable = React.memo(
 
     // add start on Table
     const addStarOnTable = (defaultNo, type, values, starPhase) => {
-      // console.log(type === "evaluation", values, "neet");
       if (
         type === "overall_score" ||
         type === "expert_reviews" ||
         type === "technical_score" ||
         type === "user_rating" ||
         type === "ratio" ||
-        type === "popularity" ||
-        type === "evaluation"
+        type === "popularity"
       ) {
         const uniqueValues = [...new Set(values)];
         const maxValue = Math.max(...uniqueValues);
@@ -233,7 +231,7 @@ const CompareTable = React.memo(
           value === maxValue &&
           values.indexOf(value) === values.lastIndexOf(value) ? (
             <div>
-              {parseFloat(value).toFixed(1)}
+              {formatValue(value)}
               <span key={value} className="tooltip-title-2">
                 <img
                   style={{ float: "right", paddingRight: "5px" }}
@@ -247,7 +245,7 @@ const CompareTable = React.memo(
           ) : value === 0 ? (
             "?"
           ) : (
-            value
+            formatValue(value)
           )
         );
       }
@@ -730,9 +728,9 @@ const CompareTable = React.memo(
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
                   Ratio Qlt/Price
-                  {products[0]?.ratio_qulitiy_points_descriptions && (
+                  {products?.[0]?.ratio_qulitiy_points_descriptions && (
                     <div className="tooltip-display-content">
-                      {products[0]?.ratio_qulitiy_points_descriptions
+                      {products?.[0]?.ratio_qulitiy_points_descriptions
                         ?.description && (
                         <p className="mb-2">
                           <b>What it is: </b>{" "}
@@ -774,7 +772,7 @@ const CompareTable = React.memo(
                 );
               })}
             </tr>
-            {products[0]?.area_evaluation?.map((data, index) => {
+            {products?.[0]?.area_evaluation?.map((data, index) => {
               const maxValues = finalProducts.map(
                 (product) => product?.area_evaluation?.[index]?.value ?? null
               );
@@ -811,7 +809,7 @@ const CompareTable = React.memo(
                               src="/icons/star.png"
                               alt="star"
                             />
-                            {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
+                            <ProsConsToolTip hover_phrase={data?.star_text} />
                           </span>
                         )}
                         {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}

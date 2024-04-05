@@ -644,6 +644,7 @@
     font-size: 17px;
     padding: 0 20px 0px !important;
     line-height: 20px;
+    height: auto !important;
   }
   .best-product-listing
     .product-listing-inner-content
@@ -653,6 +654,14 @@
   .hero-card-content .card-subheading {
     font-size: 14px;
     line-height: 20px;
+    height: 130px;
+    align-items: baseline;
+  }
+  .hero-card-content .card-heading {
+    height: 100px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
   }
   body
     .best-product-listing
@@ -892,7 +901,7 @@
   }
 
   .form-search form input[placeholder="Search Shofy.com"] {
-    width: 0px;
+    width: 100%;
   }
 
   .footer-container .footer-content p {
@@ -1052,7 +1061,7 @@
 
   .blog-slider img,
   .cardsGrid .blog-card .card-img {
-    height: 180px;
+    height: 135px;
   }
 
   .blog-card .dates {
@@ -1141,6 +1150,7 @@
 
   .category-section {
     height: 180px;
+    margin: 10px 0 !important;
   }
 
   .about-category-Sec {
@@ -1278,7 +1288,7 @@
   .flex-column.compare-nav.nav {
     flex-direction: row !important;
     flex-wrap: nowrap;
-    gap: 12px;
+    gap: 8px;
     overflow-x: auto;
     padding: 0 50px 20px 0;
     position: relative;
@@ -1291,7 +1301,7 @@
   .overlay:before {
     content: " ";
     position: absolute;
-    width: 20%;
+    width: 15%;
     height: 70%;
     right: -5px;
     background: linear-gradient(270deg, #fafbfd 50%, transparent);
@@ -1304,7 +1314,8 @@
 
   .compare-nav .nav-item a {
     line-height: 22px !important;
-    padding: 5px 15px !important;
+    padding: 5px !important;
+    white-space: nowrap;
   }
 
   .compare-nav .nav-item a.active {
@@ -1424,16 +1435,25 @@
   .inline-power-section {
     align-items: baseline;
   }
-  .table-accordion .accordion-button{
+  .table-accordion .accordion-button {
     justify-content: flex-start !important;
     gap: 10px !important;
   }
-  .table-accordion .table-accordion-header{
+  .table-accordion .table-accordion-header {
     flex: 1 !important;
   }
-  .table-accordion .accordion-button div{
+  .table-accordion .accordion-button div {
     font-size: 15px !important;
     line-height: 26px !important;
+  }
+  .compare-section {
+    align-items: baseline;
+  }
+  .compare-section .compare-section-form > * {
+    width: 100% !important;
+  }
+  .catchy_titles_section.row span.catchy_titles_section_product_name a {
+    line-height: 1.2 !important;
   }
 }
 
@@ -1956,7 +1976,7 @@
   }
 
   .breadcrumb-group .breadcrumb-items {
-    line-height: 1;
+    line-height: 1.3;
   }
 
   .compare-container .best-list-item li span {
@@ -2034,10 +2054,10 @@
     height: 60px !important;
     display: block !important;
   }
-  .dividers::before{
+  .dividers::before {
     display: none !important;
   }
-  .compare-tab-content ul{
+  .compare-tab-content ul {
     padding: 0 0px 0 30px !important;
   }
 }
@@ -2058,4 +2078,33 @@
     float: none !important;
     margin: 0 auto 20px;
   }
+}
+
+@media screen and (max-width: 768px) {
+  :root{
+    --SLICE-WIDTH:100% !important;
+  }
+  body .sidebar-width {
+    position: fixed;
+    z-index: 1000;
+    background: #fff;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px !important;
+  }
+  .filter-container {
+    height: calc(100vh - 50px) !important;
+    top: 0 !important;
+  }
+  .mobile__filter{
+    padding: 10px 12px !important;
+  }
+  tbody#mobile-compare-tablerBody ul.best-list-item li span {
+    min-width: auto !important;
+}
+#mobile-compare-tablerBody .tooltip-title-2 > img{
+  all: unset !important;
+}
 }

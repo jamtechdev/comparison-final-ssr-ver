@@ -84,28 +84,28 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
                 </React.Fragment>
               );
             })}
-          {isMobile
-            ? favSlider?.length > 2 && (
-                <>
-                  <span className={`swiper-prev prev-${indexSlider}`}>
-                    <i className="ri-arrow-left-s-line"></i>
-                  </span>
-                  <span className={`swiper-next next-${indexSlider}`}>
-                    <i className="ri-arrow-right-s-line"></i>
-                  </span>
-                </>
-              )
-            : favSlider?.length > 6 && (
-                <>
-                  <span className={`swiper-prev prev-${indexSlider}`}>
-                    <i className="ri-arrow-left-s-line"></i>
-                  </span>
-                  <span className={`swiper-next next-${indexSlider}`}>
-                    <i className="ri-arrow-right-s-line"></i>
-                  </span>
-                </>
-              )}
         </Swiper>
+        {isMobile
+          ? favSlider?.length > 2 && (
+              <>
+                <span className={`swiper-prev prev-${indexSlider}`}>
+                  <i className="ri-arrow-left-s-line"></i>
+                </span>
+                <span className={`swiper-next next-${indexSlider}`}>
+                  <i className="ri-arrow-right-s-line"></i>
+                </span>
+              </>
+            )
+          : favSlider?.length > 6 && (
+              <>
+                <span className={`swiper-prev prev-${indexSlider}`}>
+                  <i className="ri-arrow-left-s-line"></i>
+                </span>
+                <span className={`swiper-next next-${indexSlider}`}>
+                  <i className="ri-arrow-right-s-line"></i>
+                </span>
+              </>
+            )}
       </div>
     </>
   );

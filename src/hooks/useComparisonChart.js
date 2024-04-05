@@ -52,6 +52,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
     } else {
       const parentDiv = document.createElement("div");
       parentDiv.classList.add("container-divs");
+      parentDiv.classList.add("shortcode_table_scroll");
       element.insertAdjacentElement("afterend", parentDiv);
 
       if (chartData) {

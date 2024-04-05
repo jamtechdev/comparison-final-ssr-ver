@@ -85,7 +85,7 @@ p {
   line-height: 30px !important;
 }
 
-.content-para a{
+.content-para a {
   color: rgb(39 48 78 / 85%) !important;
 }
 
@@ -184,12 +184,12 @@ select {
 
 .para_content_text {
   font-weight: 400;
-  font-size: 18px;
-  color: rgb(39 48 78 / 80%);
+  font-size: 17px;
+  color: rgb(39 48 78 / 90%);
   line-height: 30px;
 }
 
-.para_content_text ul{
+.para_content_text ul {
   all: unset !important;
 }
 
@@ -529,13 +529,13 @@ input[type="checkbox"]:checked {
 
 .not-availabel {
   display: grid !important;
-    grid-template-columns: calc(50% - 2px) calc(50% - 2px) !important;
-    grid-gap: 5px;
-    gap: 5px;
-    align-items: center;
-    text-align: center;
-    padding: 6px 0;
-    font-size: 17px;
+  grid-template-columns: calc(50% - 2px) calc(50% - 2px) !important;
+  grid-gap: 5px;
+  gap: 5px;
+  align-items: center;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 17px;
 }
 
 .not-availabel.p-1 b {
@@ -958,6 +958,13 @@ body
 
 button.searchBarInner.btn.btn-primary {
   cursor: auto;
+  background: var(--light-background);
+  /* border: none; */
+  width: 46px;
+  height: 44px;
+  position: absolute;
+  right: 1px;
+  top: 1px;
 }
 
 /* Bottom-bar-start */
@@ -1175,7 +1182,7 @@ button.searchBarInner.btn.btn-primary {
   display: block;
 }
 
-.catchy_titles_section.row span.catchy_titles_section_product_name a:hover{
+.catchy_titles_section.row span.catchy_titles_section_product_name a:hover {
   color: #3363a4;
 }
 
@@ -1191,7 +1198,7 @@ button.searchBarInner.btn.btn-primary {
 
 .comparison-tool .not-availabel {
   flex-direction: row;
-  padding: 8px 20px;
+  padding: 8px;
 }
 
 table.compare-container.table.comparison-table .best-list-item li img {
@@ -1211,6 +1218,7 @@ table.compare-container.table.comparison-table .best-list-item li img {
   margin: 0 auto 10px;
   text-align: center;
   padding: 10px 20px;
+  color: rgb(39 48 78 / 95%);
 }
 
 .shortcode_table_wrapper td p {
@@ -1789,10 +1797,13 @@ h4.attribute__title {
   font-size: 17px !important;
   line-height: 26px !important;
   color: rgb(39 48 78 / 85%);
+  padding-bottom: 12px;
 }
 
 .attribute__card__body img {
   padding: 12px 0;
+  max-width: 100%;
+  width: auto;
 }
 
 .attribute__questionmark__icon {
@@ -2045,4 +2056,20 @@ h4.attribute__title {
   display: flex;
   align-items: center;
   padding: 10px 0;
+}
+
+.p-top-20 {
+  padding-top: 20px;
+}
+
+.shortcode_table_wrapper .not-availabel .price, .short_code_product_table_price_td_value {
+  font-size: 16px !important;
+}
+
+table.compare-container.table .best-price-section .not-availabel {
+  padding: 6px;
+}
+
+div#shortCodeText li{
+  list-style: disc !important;
 }

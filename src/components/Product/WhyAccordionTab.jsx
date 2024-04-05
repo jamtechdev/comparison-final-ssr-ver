@@ -190,7 +190,19 @@ const WhyAccordionTab = React.memo(
                                   ?.map((item, index) => {
                                     return (
                                       <li key={index}>
-                                        <span className="tooltip-title">
+                                        <span
+                                          className={`${
+                                            item?.hover_phase !== ""
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            textDecoration:
+                                              item?.hover_phase !== ""
+                                                ? "underline"
+                                                : "",
+                                          }}
+                                        >
                                           {typeof item?.difference_value ==
                                           "number"
                                             ? item?.difference
@@ -211,7 +223,13 @@ const WhyAccordionTab = React.memo(
                                           attributes={item?.when_matters}
                                         />
 
-                                        <small className="d-block tooltip-title">
+                                        <small
+                                          className={`${
+                                            item?.hover_phase !== ""
+                                              ? "d-block tooltip-title"
+                                              : "d-block"
+                                          }`}
+                                        >
                                           {item?.hover_phase && (
                                             <>
                                               <span className="tooltip-display-content">

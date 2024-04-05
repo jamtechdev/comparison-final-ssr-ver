@@ -71,8 +71,9 @@ function ProductPageOutline({ product, currentIndexId }) {
   }, [currentIndexId]);
 
   const scrollToSection = (sectionId) => (e) => {
-    // console.log(sectionId, "sectionId");
+    console.log(sectionId, "sectionId");
     e.preventDefault();
+
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({
@@ -81,6 +82,12 @@ function ProductPageOutline({ product, currentIndexId }) {
         inline: "start",
       });
     }
+  };
+  const handleClick = (attribute) => {
+    setActiveParentIndex(attribute);
+    setTimeout(() => {
+      setActiveParentIndex(null);
+    }, 1000);
   };
 
   // console.log(activeParentIndex);
@@ -106,9 +113,7 @@ function ProductPageOutline({ product, currentIndexId }) {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-
-                      setActiveParentIndex(attribute, index);
-                      // debouncedScrollHandler.current(attribute);
+                      handleClick(attribute);
                     }}
                   >
                     <a
@@ -144,9 +149,7 @@ function ProductPageOutline({ product, currentIndexId }) {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    setActiveParentIndex(
-                                      attributeValues.attribute
-                                    );
+                                    handleClick(attributeValues.attribute);
                                   }}
                                 >
                                   <a
@@ -192,9 +195,7 @@ function ProductPageOutline({ product, currentIndexId }) {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-
-                      setActiveParentIndex(attribute, index);
-                      // debouncedScrollHandler.current(attribute);
+                      handleClick(attribute);
                     }}
                   >
                     <a
@@ -230,9 +231,7 @@ function ProductPageOutline({ product, currentIndexId }) {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    setActiveParentIndex(
-                                      attributeValues.attribute
-                                    );
+                                    handleClick(attributeValues.attribute);
                                   }}
                                 >
                                   <a

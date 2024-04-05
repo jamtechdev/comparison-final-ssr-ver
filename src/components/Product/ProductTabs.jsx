@@ -52,7 +52,7 @@ function ProductTabs({
                 </Tabs>
               </Col>
               <Col md={12} className="">
-                <MobileAccordion />
+                <MobileAccordion productReview={productReview} expertReview={expertReview} videoReview={videoReview}  />
               </Col>
             </Row>
           </Container>

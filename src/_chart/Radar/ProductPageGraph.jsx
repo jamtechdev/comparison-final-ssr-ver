@@ -264,7 +264,7 @@ function ProductPageGraph({ data, activeTab }) {
     }
   }, [activeTab]);
 
-  return <svg viewBox={`0 0 ${width} ${height}`}></svg>;
+  return <svg viewBox={`0 0 100`}></svg>;
 }
 
 export default ProductPageGraph;

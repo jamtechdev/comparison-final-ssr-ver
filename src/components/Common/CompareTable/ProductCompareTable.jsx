@@ -250,7 +250,7 @@ const ProductCompareTable = React.memo(
           value === maxValue &&
           values.indexOf(value) === values.lastIndexOf(value) ? (
             <div>
-              {value}
+               {formatValue(value)}
               <span key={value} className="tooltip-title-2">
                 <img
                   style={{ float: "right", paddingRight: "5px" }}
@@ -264,7 +264,7 @@ const ProductCompareTable = React.memo(
           ) : value === 0 ? (
             "?"
           ) : (
-            value
+            formatValue(value)
           )
         );
       }
@@ -856,7 +856,7 @@ const ProductCompareTable = React.memo(
                               src="/icons/star.png"
                               alt="star"
                             />
-                            {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
+                            <ProsConsToolTip hover_phrase={data?.star_text} />
                           </span>
                         )}
                         {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
