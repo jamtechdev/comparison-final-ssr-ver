@@ -820,6 +820,7 @@
 
 .pros-corns-section.pros ul li {
   position: relative;
+  list-style: none !important;
 }
 
 .pros-corns-section.pros ul li:before {
@@ -838,6 +839,7 @@
 
 .pros-corns-section.corns ul li {
   position: relative;
+  list-style: none !important;
 }
 
 .pros-corns-section.corns ul.cross li:before {
