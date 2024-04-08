@@ -1221,302 +1221,278 @@ function ProductPage({
 
       <section className="ptb-80">
         <Container>
-          {product?.text_part !== "" && (
+          {product?.display_product_review === true && (
             <>
-              {product?.display_product_review === true && (
-                <>
-                  <Row className="mt-3">
-                    <Col md={4} lg={2}>
-                      {product?.display_product_review === false ? (
-                        <div className="outline-section">
-                          <p>{product && product?.page_phases?.outline}</p>
-                          <OutlineGenerator
-                            blogData={product?.text_part}
-                            currentIndexId={activeOutlineId}
-                          />
-                        </div>
-                      ) : (
-                        <div className="outline-section  attribute_card_outline-section">
-                          <p>{product && product?.page_phases?.outline}</p>
-                          <ProductPageOutline product={product} />
-                        </div>
-                      )}
-                    </Col>
-                    <Col md={8} lg={10}>
-                      {product?.display_product_review === false ? (
-                        <div
-                          id="shortCodeText"
-                          ref={contentRef}
-                          className="content-para review-content"
-                          dangerouslySetInnerHTML={{
-                            __html: searchForPatternAndReplace(contentWithIds),
-                          }}
-                        />
-                      ) : (
-                        <>
-                          <Row>
-                            <Col md={12}>
-                              <h2 className="site-main-heading">
-                                {product &&
-                                  product?.page_phases?.main_text_title}
-                                {/* Review of {product?.name} */}
-                              </h2>
-                            </Col>
-                          </Row>
-                          {product &&
-                            getAttributeProductHalf(product, "first") &&
-                            Object.keys(
-                              getAttributeProductHalf(product, "first")
-                            ).map((attribute, index) => {
-                              return (
-                                <>
-                                  <Row
-                                    className="attribute__card__wrapper"
-                                    id="attribute__card"
-                                  >
-                                    <Col
-                                      lg={12}
-                                      md={12}
-                                      id={attribute.trim().replace(/\s+/g, "-")}
-                                    >
-                                      <div className="attribute__card">
-                                        <div className="attribute__card__header">
-                                          {product?.attributes[attribute]
-                                            ?.attribute_evaluation !== 0 && (
-                                            <span
-                                              className="attribute__rating"
-                                              style={{
-                                                background:
-                                                  product?.attributes[
+              <Row className="mt-3">
+                <Col md={4} lg={2}>
+                  {product?.display_product_review === false ? (
+                    <div className="outline-section">
+                      <p>{product && product?.page_phases?.outline}</p>
+                      <OutlineGenerator
+                        blogData={product?.text_part}
+                        currentIndexId={activeOutlineId}
+                      />
+                    </div>
+                  ) : (
+                    <div className="outline-section  attribute_card_outline-section">
+                      <p>{product && product?.page_phases?.outline}</p>
+                      <ProductPageOutline product={product} />
+                    </div>
+                  )}
+                </Col>  
+                <Col md={8} lg={10}>
+                  {product?.display_product_review === false ? (
+                    <div
+                      id="shortCodeText"
+                      ref={contentRef}
+                      className="content-para review-content"
+                      dangerouslySetInnerHTML={{
+                        __html: searchForPatternAndReplace(contentWithIds),
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <Row>
+                        <Col md={12}>
+                          <h2 className="site-main-heading">
+                            {product && product?.page_phases?.main_text_title}
+                            {/* Review of {product?.name} */}
+                          </h2>
+                        </Col>
+                      </Row>
+                      {product &&
+                        getAttributeProductHalf(product, "first") &&
+                        Object.keys(
+                          getAttributeProductHalf(product, "first")
+                        ).map((attribute, index) => {
+                          return (
+                            <>
+                              <Row
+                                className="attribute__card__wrapper"
+                                id="attribute__card"
+                              >
+                                <Col
+                                  lg={12}
+                                  md={12}
+                                  id={attribute.trim().replace(/\s+/g, "-")}
+                                >
+                                  <div className="attribute__card">
+                                    <div className="attribute__card__header">
+                                      {product?.attributes[attribute]
+                                        ?.attribute_evaluation !== 0 && (
+                                        <span
+                                          className="attribute__rating"
+                                          style={{
+                                            background:
+                                              product?.attributes[attribute][0]
+                                                .attribute_evaluation >= 7.5
+                                                ? "#093673"
+                                                : product?.attributes[
                                                     attribute
                                                   ][0].attribute_evaluation >=
-                                                  7.5
-                                                    ? "#093673"
-                                                    : product?.attributes[
-                                                        attribute
-                                                      ][0]
-                                                        .attribute_evaluation >=
-                                                        5 &&
-                                                      product?.attributes[
-                                                        attribute
-                                                      ][0]
-                                                        .attribute_evaluation <
-                                                        7.5
-                                                    ? "#437ECE"
-                                                    : "#85B2F1",
-                                              }}
-                                            >
-                                              {product?.attributes[
-                                                attribute
-                                              ][0].attribute_evaluation.toFixed(
-                                                1
-                                              )}
-                                            </span>
-                                          )}
-
-                                          <h3 className="attribute__title">
-                                            {attribute}
-                                          </h3>
-                                          <Questiontool
-                                            attributes={
-                                              product.attributes[attribute][0]
-                                                ?.attribute_category
-                                            }
-                                          />
-                                        </div>
-                                        <div className="attribute__card__body">
-                                          <Row className="mb-3">
-                                            {product.attributes[attribute].map(
-                                              (attributeValues, valueIndex) => (
-                                                <React.Fragment
-                                                  key={valueIndex}
-                                                >
-                                                  <Col lg={6} md={12}>
-                                                    <p>
-                                                      <b>
-                                                        {" "}
-                                                        {
-                                                          attributeValues?.attribute
-                                                        }
-                                                        :
-                                                      </b>{" "}
-                                                      {(attributeValues.attribute_value !=
-                                                      null
-                                                        ? attributeValues.attribute_value
-                                                        : "") +
-                                                        " " +
-                                                        (attributeValues.attribute_value ===
-                                                          "?" ||
-                                                        attributeValues.attribute_value ===
-                                                          "-"
-                                                          ? ""
-                                                          : attributeValues.unit !=
-                                                            null
-                                                          ? attributeValues.unit
-                                                          : "")}
-                                                    </p>
-                                                  </Col>
-                                                </React.Fragment>
-                                              )
-                                            )}
-                                          </Row>
-
-                                          <div
-                                            dangerouslySetInnerHTML={{
-                                              __html:
-                                                searchForPatternAndReplace(
+                                                    5 &&
                                                   product?.attributes[
                                                     attribute
-                                                  ][0]?.attribute_category
-                                                    ?.text_part
-                                                ),
-                                            }}
-                                          ></div>
-                                        </div>
-                                      </div>
-                                    </Col>
-                                    {product.attributes[attribute].map(
-                                      (attributeValues, valueIndex) => (
-                                        <React.Fragment key={valueIndex}>
-                                          {attributeValues?.text_part === "" ||
-                                          attributeValues?.text_part ===
-                                            null ? (
-                                            ""
-                                          ) : (
-                                            <Col
-                                              lg={6}
-                                              md={12}
-                                              id={attributeValues?.attribute
-                                                .trim()
-                                                .replace(/\s+/g, "-")}
-                                            >
-                                              <div className="attribute__card">
-                                                <div className="attribute__card__header">
-                                                  <span
-                                                    className="attribute__rating"
-                                                    style={{
-                                                      background:
-                                                        attributeValues?.final_points >=
-                                                        7.5
-                                                          ? "#093673"
-                                                          : attributeValues?.final_points >=
-                                                              5 &&
-                                                            attributeValues?.final_points <
-                                                              7.5
-                                                          ? "#437ECE"
-                                                          : "#85B2F1",
-                                                    }}
-                                                  >
-                                                    {attributeValues?.final_points >=
-                                                    10
-                                                      ? attributeValues?.final_points.toFixed(
-                                                          0
-                                                        )
-                                                      : attributeValues?.final_points.toFixed(
-                                                          1
-                                                        )}
-                                                    {/* {formatValue(8.125)} */}
-                                                    {/* {attributeValues?.final_points?.toFixed(
+                                                  ][0].attribute_evaluation <
+                                                    7.5
+                                                ? "#437ECE"
+                                                : "#85B2F1",
+                                          }}
+                                        >
+                                          {product?.attributes[
+                                            attribute
+                                          ][0].attribute_evaluation.toFixed(1)}
+                                        </span>
+                                      )}
+
+                                      <h3 className="attribute__title">
+                                        {attribute}
+                                      </h3>
+                                      <Questiontool
+                                        attributes={
+                                          product.attributes[attribute][0]
+                                            ?.attribute_category
+                                        }
+                                      />
+                                    </div>
+                                    <div className="attribute__card__body">
+                                      <Row className="mb-3">
+                                        {product.attributes[attribute].map(
+                                          (attributeValues, valueIndex) => (
+                                            <React.Fragment key={valueIndex}>
+                                              <Col lg={6} md={12}>
+                                                <p>
+                                                  <b>
+                                                    {" "}
+                                                    {attributeValues?.attribute}
+                                                    :
+                                                  </b>{" "}
+                                                  {(attributeValues.attribute_value !=
+                                                  null
+                                                    ? attributeValues.attribute_value
+                                                    : "") +
+                                                    " " +
+                                                    (attributeValues.attribute_value ===
+                                                      "?" ||
+                                                    attributeValues.attribute_value ===
+                                                      "-"
+                                                      ? ""
+                                                      : attributeValues.unit !=
+                                                        null
+                                                      ? attributeValues.unit
+                                                      : "")}
+                                                </p>
+                                              </Col>
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </Row>
+
+                                      <div
+                                        dangerouslySetInnerHTML={{
+                                          __html: searchForPatternAndReplace(
+                                            product?.attributes[attribute][0]
+                                              ?.attribute_category?.text_part
+                                          ),
+                                        }}
+                                      ></div>
+                                    </div>
+                                  </div>
+                                </Col>
+                                {product.attributes[attribute].map(
+                                  (attributeValues, valueIndex) => (
+                                    <React.Fragment key={valueIndex}>
+                                      {attributeValues?.text_part === "" ||
+                                      attributeValues?.text_part === null ? (
+                                        ""
+                                      ) : (
+                                        <Col
+                                          lg={6}
+                                          md={12}
+                                          id={attributeValues?.attribute
+                                            .trim()
+                                            .replace(/\s+/g, "-")}
+                                        >
+                                          <div className="attribute__card">
+                                            <div className="attribute__card__header">
+                                              <span
+                                                className="attribute__rating"
+                                                style={{
+                                                  background:
+                                                    attributeValues?.final_points >=
+                                                    7.5
+                                                      ? "#093673"
+                                                      : attributeValues?.final_points >=
+                                                          5 &&
+                                                        attributeValues?.final_points <
+                                                          7.5
+                                                      ? "#437ECE"
+                                                      : "#85B2F1",
+                                                }}
+                                              >
+                                                {attributeValues?.final_points >=
+                                                10
+                                                  ? attributeValues?.final_points.toFixed(
+                                                      0
+                                                    )
+                                                  : attributeValues?.final_points.toFixed(
+                                                      1
+                                                    )}
+                                                {/* {formatValue(8.125)} */}
+                                                {/* {attributeValues?.final_points?.toFixed(
                                                       1
                                                     )} */}
-                                                  </span>
-                                                  <h4 className="attribute__title">
-                                                    <b>
-                                                      {
-                                                        attributeValues?.attribute
-                                                      }
-                                                      :{" "}
-                                                    </b>
-                                                    {(attributeValues.attribute_value !=
-                                                    null
-                                                      ? attributeValues.attribute_value
-                                                      : "") +
-                                                      " " +
-                                                      (attributeValues.attribute_value ===
-                                                        "?" ||
-                                                      attributeValues.attribute_value ===
-                                                        "-"
-                                                        ? ""
-                                                        : attributeValues.unit !=
-                                                          null
-                                                        ? attributeValues.unit
-                                                        : "")}
-                                                  </h4>
-                                                </div>
-                                                <div className="attribute__card__body">
-                                                  <div
-                                                    dangerouslySetInnerHTML={{
-                                                      __html:
-                                                        searchForPatternAndReplace(
-                                                          attributeValues?.text_part
-                                                        ),
-                                                    }}
-                                                  ></div>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                          )}
-                                        </React.Fragment>
-                                      )
-                                    )}
-                                  </Row>
-                                </>
-                              );
-                            })}
-                          {product &&
-                            getAttributeProductHalf(product, "second") &&
-                            Object.keys(
-                              getAttributeProductHalf(product, "second")
-                            ).map((attribute, index) => {
-                              return (
-                                <>
-                                  {/* {console.log(
+                                              </span>
+                                              <h4 className="attribute__title">
+                                                <b>
+                                                  {attributeValues?.attribute}:{" "}
+                                                </b>
+                                                {(attributeValues.attribute_value !=
+                                                null
+                                                  ? attributeValues.attribute_value
+                                                  : "") +
+                                                  " " +
+                                                  (attributeValues.attribute_value ===
+                                                    "?" ||
+                                                  attributeValues.attribute_value ===
+                                                    "-"
+                                                    ? ""
+                                                    : attributeValues.unit !=
+                                                      null
+                                                    ? attributeValues.unit
+                                                    : "")}
+                                              </h4>
+                                            </div>
+                                            <div className="attribute__card__body">
+                                              <div
+                                                dangerouslySetInnerHTML={{
+                                                  __html:
+                                                    searchForPatternAndReplace(
+                                                      attributeValues?.text_part
+                                                    ),
+                                                }}
+                                              ></div>
+                                            </div>
+                                          </div>
+                                        </Col>
+                                      )}
+                                    </React.Fragment>
+                                  )
+                                )}
+                              </Row>
+                            </>
+                          );
+                        })}
+                      {product &&
+                        getAttributeProductHalf(product, "second") &&
+                        Object.keys(
+                          getAttributeProductHalf(product, "second")
+                        ).map((attribute, index) => {
+                          return (
+                            <>
+                              {/* {console.log(
                             product?.attributes[attribute][0]
                           )} */}
-                                  <Row className="attribute__card__wrapper">
-                                    <Col
-                                      lg={12}
-                                      md={12}
-                                      id={attribute.trim().replace(/\s+/g, "-")}
-                                    >
-                                      <div className="attribute__card">
-                                        <div className="attribute__card__header">
-                                          <span
-                                            className="attribute__rating"
-                                            style={{
-                                              background:
+                              <Row className="attribute__card__wrapper">
+                                <Col
+                                  lg={12}
+                                  md={12}
+                                  id={attribute.trim().replace(/\s+/g, "-")}
+                                >
+                                  <div className="attribute__card">
+                                    <div className="attribute__card__header">
+                                      <span
+                                        className="attribute__rating"
+                                        style={{
+                                          background:
+                                            product?.attributes[attribute][0]
+                                              .attribute_evaluation >= 7.5
+                                              ? "#093673"
+                                              : product?.attributes[
+                                                  attribute
+                                                ][0].attribute_evaluation >=
+                                                  5 &&
                                                 product?.attributes[
                                                   attribute
-                                                ][0].attribute_evaluation >= 7.5
-                                                  ? "#093673"
-                                                  : product?.attributes[
-                                                      attribute
-                                                    ][0].attribute_evaluation >=
-                                                      5 &&
-                                                    product?.attributes[
-                                                      attribute
-                                                    ][0].attribute_evaluation <
-                                                      7.5
-                                                  ? "#437ECE"
-                                                  : "#85B2F1",
-                                            }}
-                                          >
-                                            {product?.attributes[
-                                              attribute
-                                            ][0].attribute_evaluation.toFixed(
-                                              1
-                                            )}
-                                          </span>
-                                          <h3 className="attribute__title">
-                                            {attribute}
-                                          </h3>
-                                          <Questiontool
-                                            attributes={
-                                              product.attributes[attribute][0]
-                                                ?.attribute_category
-                                            }
-                                          />
-                                          {/* <div className="attribute__questionmark__icon">
+                                                ][0].attribute_evaluation < 7.5
+                                              ? "#437ECE"
+                                              : "#85B2F1",
+                                        }}
+                                      >
+                                        {product?.attributes[
+                                          attribute
+                                        ][0].attribute_evaluation.toFixed(1)}
+                                      </span>
+                                      <h3 className="attribute__title">
+                                        {attribute}
+                                      </h3>
+                                      <Questiontool
+                                        attributes={
+                                          product.attributes[attribute][0]
+                                            ?.attribute_category
+                                        }
+                                      />
+                                      {/* <div className="attribute__questionmark__icon">
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
                                           viewBox="0 0 24 24"
@@ -1524,249 +1500,236 @@ function ProductPage({
                                           <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526                         11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
                                         </svg>
                                       </div> */}
-                                        </div>
-                                        <div className="attribute__card__body">
-                                          <Row className="mb-3">
-                                            {product.attributes[attribute].map(
-                                              (attributeValues, valueIndex) => (
-                                                <React.Fragment
-                                                  key={valueIndex}
-                                                >
-                                                  <Col lg={6} md={12}>
-                                                    <p>
-                                                      <b>
-                                                        {" "}
-                                                        {
-                                                          attributeValues?.attribute
-                                                        }
-                                                        :
-                                                      </b>{" "}
-                                                      {(attributeValues.attribute_value !=
-                                                      null
-                                                        ? attributeValues.attribute_value
-                                                        : "") +
-                                                        " " +
-                                                        (attributeValues.attribute_value ===
-                                                          "?" ||
-                                                        attributeValues.attribute_value ===
-                                                          "-"
-                                                          ? ""
-                                                          : attributeValues.unit !=
-                                                            null
-                                                          ? attributeValues.unit
-                                                          : "")}
-                                                    </p>
-                                                  </Col>
-                                                </React.Fragment>
-                                              )
-                                            )}
-                                          </Row>
-                                          <div
-                                            dangerouslySetInnerHTML={{
-                                              __html:
-                                                searchForPatternAndReplace(
-                                                  product?.attributes[
-                                                    attribute
-                                                  ][0]?.attribute_category
-                                                    ?.text_part
-                                                ),
-                                            }}
-                                          ></div>
-                                        </div>
-                                      </div>
-                                    </Col>
-                                    {product.attributes[attribute].map(
-                                      (attributeValues, valueIndex) => (
-                                        <React.Fragment key={valueIndex}>
-                                          {attributeValues?.text_part === "" ||
-                                          attributeValues?.text_part ===
-                                            null ? (
-                                            ""
-                                          ) : (
-                                            <Col
-                                              lg={6}
-                                              md={12}
-                                              id={attributeValues?.attribute
-                                                .trim()
-                                                .replace(/\s+/g, "-")}
-                                            >
-                                              <div className="attribute__card">
-                                                <div className="attribute__card__header">
-                                                  <span
-                                                    className="attribute__rating"
-                                                    style={{
-                                                      background:
-                                                        attributeValues?.final_points >=
-                                                        7.5
-                                                          ? "#093673"
-                                                          : attributeValues?.final_points >=
-                                                              5 &&
-                                                            attributeValues?.final_points <
-                                                              7.5
-                                                          ? "#437ECE"
-                                                          : "#85B2F1",
-                                                    }}
-                                                  >
-                                                    {attributeValues?.final_points >=
-                                                    10
-                                                      ? attributeValues?.final_points.toFixed(
-                                                          0
-                                                        )
-                                                      : attributeValues?.final_points.toFixed(
-                                                          1
-                                                        )}
-                                                    {/* {formatValue(8.125)} */}
-                                                    {/* {attributeValues?.final_points?.toFixed(
+                                    </div>
+                                    <div className="attribute__card__body">
+                                      <Row className="mb-3">
+                                        {product.attributes[attribute].map(
+                                          (attributeValues, valueIndex) => (
+                                            <React.Fragment key={valueIndex}>
+                                              <Col lg={6} md={12}>
+                                                <p>
+                                                  <b>
+                                                    {" "}
+                                                    {attributeValues?.attribute}
+                                                    :
+                                                  </b>{" "}
+                                                  {(attributeValues.attribute_value !=
+                                                  null
+                                                    ? attributeValues.attribute_value
+                                                    : "") +
+                                                    " " +
+                                                    (attributeValues.attribute_value ===
+                                                      "?" ||
+                                                    attributeValues.attribute_value ===
+                                                      "-"
+                                                      ? ""
+                                                      : attributeValues.unit !=
+                                                        null
+                                                      ? attributeValues.unit
+                                                      : "")}
+                                                </p>
+                                              </Col>
+                                            </React.Fragment>
+                                          )
+                                        )}
+                                      </Row>
+                                      <div
+                                        dangerouslySetInnerHTML={{
+                                          __html: searchForPatternAndReplace(
+                                            product?.attributes[attribute][0]
+                                              ?.attribute_category?.text_part
+                                          ),
+                                        }}
+                                      ></div>
+                                    </div>
+                                  </div>
+                                </Col>
+                                {product.attributes[attribute].map(
+                                  (attributeValues, valueIndex) => (
+                                    <React.Fragment key={valueIndex}>
+                                      {attributeValues?.text_part === "" ||
+                                      attributeValues?.text_part === null ? (
+                                        ""
+                                      ) : (
+                                        <Col
+                                          lg={6}
+                                          md={12}
+                                          id={attributeValues?.attribute
+                                            .trim()
+                                            .replace(/\s+/g, "-")}
+                                        >
+                                          <div className="attribute__card">
+                                            <div className="attribute__card__header">
+                                              <span
+                                                className="attribute__rating"
+                                                style={{
+                                                  background:
+                                                    attributeValues?.final_points >=
+                                                    7.5
+                                                      ? "#093673"
+                                                      : attributeValues?.final_points >=
+                                                          5 &&
+                                                        attributeValues?.final_points <
+                                                          7.5
+                                                      ? "#437ECE"
+                                                      : "#85B2F1",
+                                                }}
+                                              >
+                                                {attributeValues?.final_points >=
+                                                10
+                                                  ? attributeValues?.final_points.toFixed(
+                                                      0
+                                                    )
+                                                  : attributeValues?.final_points.toFixed(
+                                                      1
+                                                    )}
+                                                {/* {formatValue(8.125)} */}
+                                                {/* {attributeValues?.final_points?.toFixed(
                                                       1
                                                     )} */}
-                                                  </span>
-                                                  <h4 className="attribute__title">
-                                                    <b>
-                                                      {
-                                                        attributeValues?.attribute
-                                                      }
-                                                      :{" "}
-                                                    </b>
-                                                    {(attributeValues.attribute_value !=
-                                                    null
-                                                      ? attributeValues.attribute_value
-                                                      : "") +
-                                                      " " +
-                                                      (attributeValues.attribute_value ===
-                                                        "?" ||
-                                                      attributeValues.attribute_value ===
-                                                        "-"
-                                                        ? ""
-                                                        : attributeValues.unit !=
-                                                          null
-                                                        ? attributeValues.unit
-                                                        : "")}
-                                                  </h4>
-                                                </div>
-                                                <div className="attribute__card__body">
-                                                  <div
-                                                    dangerouslySetInnerHTML={{
-                                                      __html:
-                                                        searchForPatternAndReplace(
-                                                          attributeValues?.text_part
-                                                        ),
-                                                    }}
-                                                  ></div>
-                                                </div>
-                                              </div>
-                                            </Col>
-                                          )}
-                                        </React.Fragment>
-                                      )
-                                    )}
-                                  </Row>
-                                </>
-                              );
-                            })}
-                        </>
-                      )}
+                                              </span>
+                                              <h4 className="attribute__title">
+                                                <b>
+                                                  {attributeValues?.attribute}:{" "}
+                                                </b>
+                                                {(attributeValues.attribute_value !=
+                                                null
+                                                  ? attributeValues.attribute_value
+                                                  : "") +
+                                                  " " +
+                                                  (attributeValues.attribute_value ===
+                                                    "?" ||
+                                                  attributeValues.attribute_value ===
+                                                    "-"
+                                                    ? ""
+                                                    : attributeValues.unit !=
+                                                      null
+                                                    ? attributeValues.unit
+                                                    : "")}
+                                              </h4>
+                                            </div>
+                                            <div className="attribute__card__body">
+                                              <div
+                                                dangerouslySetInnerHTML={{
+                                                  __html:
+                                                    searchForPatternAndReplace(
+                                                      attributeValues?.text_part
+                                                    ),
+                                                }}
+                                              ></div>
+                                            </div>
+                                          </div>
+                                        </Col>
+                                      )}
+                                    </React.Fragment>
+                                  )
+                                )}
+                              </Row>
+                            </>
+                          );
+                        })}
+                    </>
+                  )}
 
-                      <Row className="mt-3">
-                        <Col md={12} lg={6}>
-                          <div className="best-price-section mobile-best-price-section">
-                            <h3 className="site-main-heading">
-                              {" "}
-                              {product && product?.page_phases?.best_prices}
-                            </h3>
-                            <ul className="best-list-item">
-                              {product &&
-                                product?.price_websites
-                                  .slice(0, showFullPrice ? 8 : 4)
-                                  .map((item, index) => {
-                                    return (
-                                      <li
-                                        key={index}
-                                        className="product_page_best_price"
+                  <Row className="mt-3">
+                    <Col md={12} lg={6}>
+                      <div className="best-price-section mobile-best-price-section">
+                        <h3 className="site-main-heading">
+                          {" "}
+                          {product && product?.page_phases?.best_prices}
+                        </h3>
+                        <ul className="best-list-item">
+                          {product &&
+                            product?.price_websites
+                              .slice(0, showFullPrice ? 8 : 4)
+                              .map((item, index) => {
+                                return (
+                                  <li
+                                    key={index}
+                                    className="product_page_best_price"
+                                  >
+                                    <a
+                                      rel="noopener noreferrer"
+                                      target="_blank"
+                                      href={`/link?p=${btoa(item.url)}`}
+                                    >
+                                      <img
+                                        src={item?.logo}
+                                        width={0}
+                                        height={0}
+                                        sizes="100%"
+                                        alt={item?.alt}
+                                      />
+                                    </a>
+                                    <span>
+                                      <a
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                        href={`/link?p=${btoa(item.url)}`}
                                       >
+                                        {item?.price} {product?.currency}
+                                      </a>
+                                    </span>
+                                  </li>
+                                );
+                              })}
+                        </ul>
+                        {product?.price_websites.length > 5 && (
+                          <Button className="see_all_btn">
+                            See All <i className="ri-arrow-down-s-line"></i>
+                          </Button>
+                        )}
+                      </div>
+                    </Col>
+                    <Col md={12} lg={6}>
+                      <div className="best-price-section mobile-best-price-section ranking">
+                        <h3 className="site-main-heading">
+                          {product && product?.page_phases?.best_rankings}
+                        </h3>
+                        <ul className="best-list-item">
+                          {product &&
+                            product?.guide_ratings
+                              .slice(0, showFullRanking ? 8 : 4)
+                              .map((item, index) => {
+                                return (
+                                  <li key={index}>
+                                    <div className="d-flex align-items-start gap-1">
+                                      <img
+                                        src="/images/double-arrow.png"
+                                        width={0}
+                                        height={0}
+                                        sizes="100%"
+                                        alt="double-arrow"
+                                      />
+                                      {/* {console.log(item)} */}
+                                      <p>
+                                        N.{item.position} in{" "}
                                         <a
-                                          rel="noopener noreferrer"
-                                          target="_blank"
-                                          href={`/link?p=${btoa(item.url)}`}
+                                          href={`/${item?.category_url}/${item?.permalink}`}
                                         >
-                                          <img
-                                            src={item?.logo}
-                                            width={0}
-                                            height={0}
-                                            sizes="100%"
-                                            alt={item?.alt}
-                                          />
+                                          <small>{item.guide_name}</small>
                                         </a>
-                                        <span>
-                                          <a
-                                            rel="noopener noreferrer"
-                                            target="_blank"
-                                            href={`/link?p=${btoa(item.url)}`}
-                                          >
-                                            {item?.price} {product?.currency}
-                                          </a>
-                                        </span>
-                                      </li>
-                                    );
-                                  })}
-                            </ul>
-                            {product?.price_websites.length > 5 && (
-                              <Button className="see_all_btn">
-                                See All <i className="ri-arrow-down-s-line"></i>
-                              </Button>
-                            )}
-                          </div>
-                        </Col>
-                        <Col md={12} lg={6}>
-                          <div className="best-price-section mobile-best-price-section ranking">
-                            <h3 className="site-main-heading">
-                              {product && product?.page_phases?.best_rankings}
-                            </h3>
-                            <ul className="best-list-item">
-                              {product &&
-                                product?.guide_ratings
-                                  .slice(0, showFullRanking ? 8 : 4)
-                                  .map((item, index) => {
-                                    return (
-                                      <li key={index}>
-                                        <div className="d-flex align-items-start gap-1">
-                                          <img
-                                            src="/images/double-arrow.png"
-                                            width={0}
-                                            height={0}
-                                            sizes="100%"
-                                            alt="double-arrow"
-                                          />
-                                          {/* {console.log(item)} */}
-                                          <p>
-                                            N.{item.position} in{" "}
-                                            <a
-                                              href={`/${item?.category_url}/${item?.permalink}`}
-                                            >
-                                              <small>{item.guide_name}</small>
-                                            </a>
-                                          </p>
-                                        </div>
-                                      </li>
-                                    );
-                                  })}
-                            </ul>
-                            {product?.guide_ratings.length > 5 && (
-                              <Button
-                                className="see_all_btn"
-                                // onClick={() => {
-                                //   showFullRanking = !showFullRanking;
-                                // }}
-                              >
-                                See All <i className="ri-arrow-down-s-line"></i>
-                              </Button>
-                            )}
-                          </div>
-                        </Col>
-                      </Row>
+                                      </p>
+                                    </div>
+                                  </li>
+                                );
+                              })}
+                        </ul>
+                        {product?.guide_ratings.length > 5 && (
+                          <Button
+                            className="see_all_btn"
+                            // onClick={() => {
+                            //   showFullRanking = !showFullRanking;
+                            // }}
+                          >
+                            See All <i className="ri-arrow-down-s-line"></i>
+                          </Button>
+                        )}
+                      </div>
                     </Col>
                   </Row>
-                </>
-              )}
+                </Col>
+              </Row>
             </>
           )}
 
