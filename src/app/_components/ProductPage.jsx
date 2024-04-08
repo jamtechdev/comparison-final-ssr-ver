@@ -279,7 +279,7 @@ function ProductPage({
 
             <Row className="w-100 m-0 ">
               <Col md={12}>
-                <div className="inline-power-section w-100">
+                <div className="inline-power-section w-100 font__17__inline">
                   <img
                     src="/images/double-arrow.png"
                     width={0}

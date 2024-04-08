@@ -60,6 +60,10 @@ export default function Header({ headerData, headerPhase }) {
     }, 200);
   };
   // console.log(headerPhase);
+  const openCompareModel = () => {
+    setIsOpen(true);
+    setShow(false);
+  };
   return (
     <header
       className={`sticky ${
@@ -130,14 +134,22 @@ export default function Header({ headerData, headerPhase }) {
                       ))}
                   </Accordion>
                   <Navbar className="nav-links-mobile">
-                    <Navbar.Brand href="#how-we-rank">How we rank</Navbar.Brand>
                     <Navbar.Brand
                       href=""
-                      onClick={() => setIsOpen(true)}
+                      role="button"
+                      onClick={openCompareModel}
                     >
-                      Comparison Tool
+                      {headerPhase && headerPhase?.compare}
                     </Navbar.Brand>
-                    <Navbar.Brand href="/about-us">About us</Navbar.Brand>
+                    <Navbar.Brand href="">
+                      {headerPhase && headerPhase?.how_we_rank}
+                    </Navbar.Brand>
+                    <Navbar.Brand href="/about-us">
+                      {headerPhase && headerPhase?.about_us}
+                    </Navbar.Brand>
+                    <Navbar.Brand href="#">
+                      {headerData && headerData?.contact}
+                    </Navbar.Brand>
                   </Navbar>
                 </Modal.Body>
               </Modal>

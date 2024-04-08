@@ -301,9 +301,13 @@
 .best-price-section:not(.ranking) .best-list-item li:not(.d-flex) > span a {
   color: var(--white-color);
   /* min-width: 80px !important; */
-  font-size: 16px !important;
+  font-size: 15px !important;
   line-height: 30px !important;
   font-weight: 400;
+}
+
+.best-product-listing .product-listing-inner-content .not-availabel .guide {
+  font-size: 15px;
 }
 
 .best-list-item .product_page_best_price span > a {

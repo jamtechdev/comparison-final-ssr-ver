@@ -550,7 +550,7 @@ input[type="checkbox"]:checked {
 }
 
 .not-availabel .price {
-  padding: 0px 18px;
+  padding: 0px 10px;
   border-radius: 100px;
   text-align: center;
   font-size: 17px;
@@ -558,7 +558,7 @@ input[type="checkbox"]:checked {
   color: #fff;
   font-weight: 400;
   line-height: 30px !important;
-  min-width: 100px !important;
+  min-width: max-content;
 }
 
 .not-availabel .guide {
@@ -568,7 +568,7 @@ input[type="checkbox"]:checked {
   font-size: 17px;
   background-color: #d90808;
   color: #fff;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /* .color-section{
@@ -2118,4 +2118,11 @@ div#shortCodeText ul {
   line-height: 17px;
   color: rgba(39, 48, 78, 0.7);
   font-family: Lato, sans-serif !important;
+}
+
+.font__17__inline {
+  font-size: 17px;
+}
+.text_editor_pros {
+  color: rgba(39, 48, 78, 0.8) !important;
 }
