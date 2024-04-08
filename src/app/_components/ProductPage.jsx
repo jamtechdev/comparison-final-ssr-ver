@@ -1107,8 +1107,9 @@ function ProductPage({
         product={product}
         slug={slug}
       />
+      {/* {console.log(product?.line_chart_data[0])} */}
 
-      {product?.line_chart_data[0]?.value?.length !== 0 && (
+      {product?.line_chart_data[0]?.values?.length !== 0 && (
         <section className="mt-3 mobile-popular-comparison">
           <Container>
             <Row>
