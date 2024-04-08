@@ -308,7 +308,19 @@ const CompareAccordionTab = React.memo(
                                       return (
                                         <li key={index}>
                                           {/* {console.log(item?.difference)} */}
-                                          <span className="tooltip-title">
+                                          <span
+                                            className={`${
+                                              item?.hover_phase !== null
+                                                ? "tooltip-title"
+                                                : ""
+                                            }`}
+                                            style={{
+                                              textDecoration:
+                                                item?.hover_phase !== null
+                                                  ? ""
+                                                  : "dotted",
+                                            }}
+                                          >
                                             {extractedUrls.length > 2
                                               ? typeof item?.difference_value ==
                                                 "number"
@@ -376,7 +388,19 @@ const CompareAccordionTab = React.memo(
                                   (item, index) => {
                                     return (
                                       <li key={index}>
-                                        <span className="tooltip-title">
+                                        <span
+                                          className={`${
+                                            item?.hover_phase !== null
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            textDecoration:
+                                              item?.hover_phase !== null
+                                                ? ""
+                                                : "dotted",
+                                          }}
+                                        >
                                           {apiData?.general.pros[item][2]}
 
                                           {apiData?.general.pros[item][2] && (
@@ -439,7 +463,19 @@ const CompareAccordionTab = React.memo(
                                   ?.map((item, index) => {
                                     return (
                                       <li key={index}>
-                                        <span className="tooltip-title">
+                                        <span
+                                          className={`${
+                                            item?.hover_phase !== null
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            textDecoration:
+                                              item?.hover_phase !== null
+                                                ? ""
+                                                : "dotted",
+                                          }}
+                                        >
                                           {extractedUrls.length > 2
                                             ? typeof item?.difference_value ==
                                               "number"
@@ -596,7 +632,19 @@ const CompareAccordionTab = React.memo(
                                     ) {
                                       return (
                                         <li key={index}>
-                                          <span className="tooltip-title">
+                                          <span
+                                            className={`${
+                                              item?.hover_phase !== null
+                                                ? "tooltip-title"
+                                                : ""
+                                            }`}
+                                            style={{
+                                              textDecoration:
+                                                item?.hover_phase !== null
+                                                  ? ""
+                                                  : "dotted",
+                                            }}
+                                          >
                                             {JSON.stringify(
                                               apiData?.general.cons[item]
                                             )}
@@ -674,7 +722,19 @@ const CompareAccordionTab = React.memo(
                                     (item, index) => {
                                       return (
                                         <li key={index}>
-                                          <span className="tooltip-title">
+                                          <span
+                                            className={`${
+                                              item?.hover_phase !== null
+                                                ? "tooltip-title"
+                                                : ""
+                                            }`}
+                                            style={{
+                                              textDecoration:
+                                                item?.hover_phase !== null
+                                                  ? ""
+                                                  : "dotted",
+                                            }}
+                                          >
                                             {extractedUrls.length > 2
                                               ? typeof item?.difference_value ==
                                                 "number"
@@ -740,7 +800,19 @@ const CompareAccordionTab = React.memo(
                                     ?.map((item, index) => {
                                       return (
                                         <li key={index}>
-                                          <span className="tooltip-title">
+                                          <span
+                                            className={`${
+                                              item?.hover_phase !== null
+                                                ? "tooltip-title"
+                                                : ""
+                                            }`}
+                                            style={{
+                                              textDecoration:
+                                                item?.hover_phase !== null
+                                                  ? ""
+                                                  : "dotted",
+                                            }}
+                                          >
                                             {extractedUrls.length > 2
                                               ? typeof item?.difference_value ==
                                                 "number"

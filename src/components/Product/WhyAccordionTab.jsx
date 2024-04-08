@@ -190,17 +190,18 @@ const WhyAccordionTab = React.memo(
                                   ?.map((item, index) => {
                                     return (
                                       <li key={index}>
+                                        {/* {console.log(item?.hover_phase)} */}
                                         <span
                                           className={`${
-                                            item?.hover_phase !== ""
+                                            item?.hover_phase !== null
                                               ? "tooltip-title"
                                               : ""
                                           }`}
                                           style={{
                                             textDecoration:
-                                              item?.hover_phase !== ""
-                                                ? "underline"
-                                                : "",
+                                              item?.hover_phase !== null
+                                                ? ""
+                                                : "dotted",
                                           }}
                                         >
                                           {typeof item?.difference_value ==
@@ -321,7 +322,19 @@ const WhyAccordionTab = React.memo(
                                 ?.map((item, index) => {
                                   return (
                                     <li key={index}>
-                                      <span className="tooltip-title">
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
                                         {typeof item?.difference_value ==
                                         "number"
                                           ? item?.difference
@@ -484,7 +497,19 @@ const WhyAccordionTab = React.memo(
                                   ) {
                                     return (
                                       <li key={index}>
-                                        <span className="tooltip-title">
+                                        <span
+                                          className={`${
+                                            item?.hover_phase !== null
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            textDecoration:
+                                              item?.hover_phase !== null
+                                                ? ""
+                                                : "dotted",
+                                          }}
+                                        >
                                           {JSON.stringify(
                                             product?.general.cons[item]
                                           )}
@@ -562,7 +587,19 @@ const WhyAccordionTab = React.memo(
                                   (item, index) => {
                                     return (
                                       <li key={index}>
-                                        <span className="tooltip-title">
+                                        <span
+                                          className={`${
+                                            item?.hover_phase !== null
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            textDecoration:
+                                              item?.hover_phase !== null
+                                                ? ""
+                                                : "dotted",
+                                          }}
+                                        >
                                           {typeof item?.difference_value ==
                                           "number"
                                             ? item?.difference
@@ -618,7 +655,19 @@ const WhyAccordionTab = React.memo(
                                   ?.map((item, index) => {
                                     return (
                                       <li key={index}>
-                                        <span className="tooltip-title">
+                                        <span
+                                          className={`${
+                                            item?.hover_phase !== null
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            textDecoration:
+                                              item?.hover_phase !== null
+                                                ? ""
+                                                : "dotted",
+                                          }}
+                                        >
                                           {typeof item?.difference_value ==
                                           "number"
                                             ? item?.difference

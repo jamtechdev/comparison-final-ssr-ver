@@ -29,22 +29,23 @@ export default function MobileCompareTable({
   const defaultNo = 5;
 
   const [fullTable, setFullTable] = useState(2);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Access the window object here
+      window.onscroll = function () {
+        var testDiv = document.getElementById("mobile-compare-tabler");
+        testDiv.getBoundingClientRect().top < 100
+          ? setWinPos(true)
+          : setWinPos(false);
+        testDiv.getBoundingClientRect().top, "top";
 
-  if (typeof window !== "undefined") {
-    // Access the window object here
-    window.onscroll = function () {
-      var testDiv = document.getElementById("mobile-compare-tabler");
-      testDiv.getBoundingClientRect().top < 100
-        ? setWinPos(true)
-        : setWinPos(false);
-      testDiv.getBoundingClientRect().top, "top";
-
-      var tbodyDiv = document.getElementById("mobile-compare-tablerBody");
-      tbodyDiv.getBoundingClientRect().top > 100
-        ? setWinPos(false)
-        : setWinPos(true);
-    };
-  }
+        var tbodyDiv = document.getElementById("mobile-compare-tablerBody");
+        tbodyDiv.getBoundingClientRect().top > 100
+          ? setWinPos(false)
+          : setWinPos(true);
+      };
+    }
+  }, []);
 
   // here Products restructures them into an object with the category name as the key
 
@@ -165,7 +166,7 @@ export default function MobileCompareTable({
       }
     }
 
-    const topValue = numericValues[0]
+    const topValue = numericValues[0];
     const occurrences = numericValues?.filter(
       (value) => value === topValue
     ).length;
@@ -835,17 +836,18 @@ export default function MobileCompareTable({
                                         )
                                           ?.slice(0, defaultNo)
                                           ?.map((chunk, chunkIndex) => {
-                                              return chunk?.slice(swiperIndex,swiperIndex+1).map(
-                                                (item, itemIndex) => {
-                                                  return (
-                                                    <td key={itemIndex}>
-                                                      {item?.attribute_value} 
-                                                    </td>
-                                                  );
-                                                }
-                                              );
-                                            
-                                           
+                                            return chunk
+                                              ?.slice(
+                                                swiperIndex,
+                                                swiperIndex + 1
+                                              )
+                                              .map((item, itemIndex) => {
+                                                return (
+                                                  <td key={itemIndex}>
+                                                    {item?.attribute_value}
+                                                  </td>
+                                                );
+                                              });
                                           })}
                                       </tr>
 
