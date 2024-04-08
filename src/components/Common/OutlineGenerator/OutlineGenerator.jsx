@@ -11,7 +11,15 @@ function OutlineGenerator({ blogData, currentIndexId }) {
   useEffect(() => {
     // Define a debounced version of the scroll event handler
     debouncedScrollHandler.current = debounce((id) => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      const section = document.getElementById(id);
+      if (section) {
+        const header = document.getElementById("testone");
+        if (header) {
+          const headerHeight = header.offsetHeight;
+          section.scrollIntoView({ behavior: "smooth", block: "center" });
+          // section.style.marginTop = `${headerHeight}px`;
+        }
+      }
     }, 100); // Adjust the debounce delay as needed
 
     return () => {
@@ -98,7 +106,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
                 href={`#${section?.id}`}
                 className={`outlineLink ${
                   activeParentIndex === section?.id ? "outline-active" : ""
-                }`} 
+                }`}
               >
                 {`${mainNumber}. ${section.text}`}
               </Link>

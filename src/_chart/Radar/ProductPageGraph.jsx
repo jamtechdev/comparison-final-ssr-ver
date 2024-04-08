@@ -53,7 +53,7 @@ function ProductPageGraph({ data, activeTab }) {
   useEffect(() => {
     const svg = select("#productGraph")
       .append("svg")
-
+      .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -171,11 +171,13 @@ function ProductPageGraph({ data, activeTab }) {
       const d = data[i];
       // console.log(i);
       const cord = getCoordPath(d);
+      // console.log(activeTab, i , "neetxy")
 
       svg
         .append("path")
         .datum(cord)
         .attr("class", `areapath${i}`)
+
         .attr("d", lineGen)
         .attr("stroke-width", "1.5px")
         .attr("stroke", () =>
@@ -202,7 +204,7 @@ function ProductPageGraph({ data, activeTab }) {
         )
         .attr("opacity", activeTab == i ? 0.9 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`)
-        .style("z-index", activeTab == i ? 99999 : 2);
+        .style("z-index", activeTab === i ? 1000 : 1);
       // .style("display", activeTab == i ? "block" : "none");
       cord.forEach((point, index) => {
         svg
@@ -225,7 +227,7 @@ function ProductPageGraph({ data, activeTab }) {
               : "#FF8F0B"
           )
           .style("fill", "white")
-          .attr("opacity", activeTab == i ? 0.9 : 0.1)
+          .attr("opacity", activeTab === i ? 0.9 : 0.1)
           .attr("class", `data-point${i}`)
           .attr("data-value", point.value)
           .attr("data-attribute", point.attribute)
@@ -264,7 +266,7 @@ function ProductPageGraph({ data, activeTab }) {
     }
   }, [activeTab]);
 
-  return <svg viewBox={`0 0 100`}></svg>;
+  return <svg></svg>;
 }
 
 export default ProductPageGraph;

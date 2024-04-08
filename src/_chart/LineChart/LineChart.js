@@ -119,6 +119,7 @@ function lineChart(svgRef, lineChartData) {
 
   svg
     .attr("width", width + margin + "px")
+    .attr("viewBox", `0 0 1000 ${height + margin}`)
     .attr("height", height + margin + "px")
     .append("g")
     .attr("transform", `translate(${margin}, ${margin})`);

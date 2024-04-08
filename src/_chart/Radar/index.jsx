@@ -157,6 +157,7 @@ function Radar({ data, activeTab }) {
       const d = data[i];
       // console.log(i);
       const cord = getCoordPath(d);
+      console.log(activeTab, i, "neetxy");
 
       svg
         .append("path")
@@ -187,6 +188,7 @@ function Radar({ data, activeTab }) {
             : "#FF8F0B"
         )
         .attr("opacity", activeTab == i ? 0.9 : 0.1)
+        .style("z-index", activeTab === 0 ? 999 : -1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
       cord.forEach((point, index) => {
         svg
@@ -207,7 +209,8 @@ function Radar({ data, activeTab }) {
               : "#FF8F0B"
           )
           .style("fill", "white")
-          .attr("opacity", activeTab == i ? 0.9 : 0.1)
+          .attr("opacity", activeTab === i ? 0.9 : 0.1)
+          .style("display", activeTab === i ? "block" : "none")
           .attr("class", `data-point${i}`)
           .attr("data-value", point.value)
           .attr("data-attribute", point.attribute)

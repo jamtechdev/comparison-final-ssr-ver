@@ -29,7 +29,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
 
     const xMinValue = d3.min(data, (d) => d.label);
     const xMaxValue = d3.max(data, (d) => d.label);
-    console.log(data)
+    console.log(data);
 
     let xScale = d3
       .scaleLinear()
@@ -107,6 +107,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
         </span>
         <div className="base__container">
           <svg
+            viewBox={`0 0 ${width} ${height}`}
             ref={svgRef}
             className={classnames("base__svg-container", svgContainerClass)}
           />

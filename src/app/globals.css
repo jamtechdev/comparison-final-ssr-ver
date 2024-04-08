@@ -95,7 +95,7 @@ p {
   color: rgb(39 48 78 / 85%) !important;
   text-align: left !important;
   line-height: 30px !important;
-  padding: 0 0 12px !important;
+  padding: 0 40px 12px !important;
 }
 
 .content-para p * {
@@ -1755,6 +1755,7 @@ li.color-item.selected {
   position: relative;
   margin: 10px 0;
   padding: 20px;
+  /* margin-top: 35px; */
 }
 
 .attribute__card__header {
@@ -2062,7 +2063,8 @@ h4.attribute__title {
   padding-top: 20px;
 }
 
-.shortcode_table_wrapper .not-availabel .price, .short_code_product_table_price_td_value {
+.shortcode_table_wrapper .not-availabel .price,
+.short_code_product_table_price_td_value {
   font-size: 16px !important;
 }
 
@@ -2070,6 +2072,38 @@ table.compare-container.table .best-price-section .not-availabel {
   padding: 6px;
 }
 
-div#shortCodeText li{
+/* div#shortCodeText li{
+  all: unset !important;
+} */
+
+/* div#shortCodeText ul li {
+  list-style: disc !important;
+} */
+
+#productGraph svg {
+  width: 100%;
+}
+
+svg.base__svg-container {
+  width: 100%;
+}
+.line-chart-parent svg {
+  width: 100%;
+}
+
+.graph-tab-content svg {
+  width: 100%;
+}
+.content-para ol {
+  list-style: auto !important;
+}
+.content-para ul {
   list-style: disc !important;
 }
+/* div#shortCodeText ol {
+  list-style: none !important;
+}
+
+div#shortCodeText ul {
+  list-style: none !important;
+} */
