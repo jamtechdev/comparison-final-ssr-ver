@@ -1221,49 +1221,28 @@ function ProductPage({
 
       <section className="ptb-80">
         <Container>
-          <>
-            <Row className="mt-3">
-              <Col md={4} lg={2}>
-                {product?.display_product_review === false ? (
-                  <div className="outline-section">
-                    <p>{product && product?.page_phases?.outline}</p>
-                    <OutlineGenerator
-                      blogData={product?.text_part}
-                      currentIndexId={activeOutlineId}
-                    />
-                  </div>
-                ) : (
+          {product?.display_product_review === true && (
+            <>
+              <Row className="mt-3">
+                <Col md={4} lg={2}>
                   <div className="outline-section  attribute_card_outline-section">
                     <p>{product && product?.page_phases?.outline}</p>
                     <ProductPageOutline product={product} />
                   </div>
-                )}
-              </Col>
-              <Col md={8} lg={10}>
-                {product?.display_product_review === false ? (
-                  <div
-                    id="shortCodeText"
-                    ref={contentRef}
-                    className="content-para review-content"
-                    dangerouslySetInnerHTML={{
-                      __html: searchForPatternAndReplace(contentWithIds),
-                    }}
-                  />
-                ) : (
-                  <>
-                    <Row>
-                      <Col md={12}>
-                        <h2 className="site-main-heading">
-                          {product && product?.page_phases?.main_text_title}
-                          {/* Review of {product?.name} */}
-                        </h2>
-                      </Col>
-                    </Row>
-                    {product &&
-                      getAttributeProductHalf(product, "first") &&
-                      Object.keys(
-                        getAttributeProductHalf(product, "first")
-                      ).map((attribute, index) => {
+                </Col>
+                <Col md={8} lg={10}>
+                  <Row>
+                    <Col md={12}>
+                      <h2 className="site-main-heading">
+                        {product && product?.page_phases?.main_text_title}
+                        {/* Review of {product?.name} */}
+                      </h2>
+                    </Col>
+                  </Row>
+                  {product &&
+                    getAttributeProductHalf(product, "first") &&
+                    Object.keys(getAttributeProductHalf(product, "first")).map(
+                      (attribute, index) => {
                         return (
                           <>
                             <Row
@@ -1438,12 +1417,12 @@ function ProductPage({
                             </Row>
                           </>
                         );
-                      })}
-                    {product &&
-                      getAttributeProductHalf(product, "second") &&
-                      Object.keys(
-                        getAttributeProductHalf(product, "second")
-                      ).map((attribute, index) => {
+                      }
+                    )}
+                  {product &&
+                    getAttributeProductHalf(product, "second") &&
+                    Object.keys(getAttributeProductHalf(product, "second")).map(
+                      (attribute, index) => {
                         return (
                           <>
                             {/* {console.log(
@@ -1618,8 +1597,35 @@ function ProductPage({
                             </Row>
                           </>
                         );
-                      })}
-                  </>
+                      }
+                    )}
+
+                
+                </Col>
+              </Row>
+            </>
+          )}
+          {product?.display_product_review === false && (
+            <Row className="mt-3">
+              <Col md={4} lg={2}>
+                <div className="outline-section">
+                  <p>{product && product?.page_phases?.outline}</p>
+                  <OutlineGenerator
+                    blogData={product?.text_part}
+                    currentIndexId={activeOutlineId}
+                  />
+                </div>
+              </Col>
+              <Col md={8} lg={10}>
+                {product?.display_product_review === false && (
+                  <div
+                    id="shortCodeText"
+                    ref={contentRef}
+                    className="content-para review-content"
+                    dangerouslySetInnerHTML={{
+                      __html: searchForPatternAndReplace(contentWithIds),
+                    }}
+                  />
                 )}
 
                 <Row className="mt-3">
@@ -1721,7 +1727,7 @@ function ProductPage({
                 </Row>
               </Col>
             </Row>
-          </>
+          )}
 
           <Row className="mt-5">
             <Col md={6}>
