@@ -89,9 +89,10 @@ p {
   color: rgb(39 48 78 / 85%) !important;
 }
 
-.content-para ul, .content-para ol {
+.content-para ul,
+.content-para ol {
   font-weight: 400 !important;
-    font-size: 18px !important;
+  font-size: 18px !important;
   color: rgb(39 48 78 / 85%) !important;
   text-align: left !important;
   line-height: 30px !important;
@@ -2110,3 +2111,11 @@ svg.base__svg-container {
 div#shortCodeText ul {
   list-style: none !important;
 } */
+#shortCodeText .pros-corns-section ul li {
+  padding: 12px 0 5px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 17px;
+  color: rgba(39, 48, 78, 0.7);
+  font-family: Lato, sans-serif !important;
+}
