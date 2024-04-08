@@ -1221,7 +1221,7 @@ function ProductPage({
 
       <section className="ptb-80">
         <Container>
-          {product?.display_product_review === true && (
+          {product?.display_product_review === false && (
             <>
               <Row className="mt-3">
                 <Col md={4} lg={2}>
@@ -1605,7 +1605,7 @@ function ProductPage({
               </Row>
             </>
           )}
-          {product?.display_product_review === false && (
+          {product?.display_product_review === true && (
             <Row className="mt-3">
               <Col md={4} lg={2}>
                 <div className="outline-section">
@@ -1617,7 +1617,7 @@ function ProductPage({
                 </div>
               </Col>
               <Col md={8} lg={10}>
-                {product?.display_product_review === false && (
+                {product?.display_product_review === true && (
                   <div
                     id="shortCodeText"
                     ref={contentRef}
