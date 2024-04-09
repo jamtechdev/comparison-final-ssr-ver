@@ -352,6 +352,7 @@ const CompareTable = React.memo(
                                                 href={`/link?p=${btoa(
                                                   data.url
                                                 )}`}
+                                                className="font__17__inline"
                                               >
                                                 {data?.price}{" "}
                                                 {product?.currency}
@@ -454,6 +455,7 @@ const CompareTable = React.memo(
                                               rel="noopener noreferrer"
                                               target="_blank"
                                               href={`/link?p=${btoa(data.url)}`}
+                                              className="font__17__inline"
                                             >
                                               {data?.price} {product?.currency}
                                             </Link>

@@ -250,7 +250,7 @@ const ProductCompareTable = React.memo(
           value === maxValue &&
           values.indexOf(value) === values.lastIndexOf(value) ? (
             <div>
-               {formatValue(value)}
+              {formatValue(value)}
               <span key={value} className="tooltip-title-2">
                 <img
                   style={{ float: "right", paddingRight: "5px" }}
@@ -367,6 +367,7 @@ const ProductCompareTable = React.memo(
                                                   href={`/link?p=${btoa(
                                                     data.url
                                                   )}`}
+                                                  className="font__17__inline"
                                                 >
                                                   {data?.price} €
                                                 </a>
@@ -462,6 +463,7 @@ const ProductCompareTable = React.memo(
                                                 href={`/link?p=${btoa(
                                                   data.url
                                                 )}`}
+                                                className="font__17__inline"
                                               >
                                                 {data?.price} €
                                               </a>

@@ -275,6 +275,7 @@ function CompareDiv({
                   <Image src="/images/vs.svg" width={118} height={40} alt="" />
                 </div>
                 {/* second  Card*/}
+                {/* {console.log(bestAlternative,"hello")} */}
                 <CompareCard
                   productPhaseData={
                     bestAlternative && bestAlternative?.page_phases

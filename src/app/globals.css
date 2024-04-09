@@ -2121,7 +2121,19 @@ div#shortCodeText ul {
 }
 
 .font__17__inline {
-  font-size: 17px;
+  font-size: 17px !important; 
+}
+.font__16__inline {
+  font-size: 16px !important;
+}
+.font__15__inline {
+  font-size: 15px !important;
+}
+.font-w__400__inline {
+  font-size: 400 !important;
+}
+.best-price-section:not(.ranking) .best-list-item li:not(.d-flex) > span a.font__17__inline {
+  font-size: 17px !important;
 }
 .text_editor_pros {
   color: rgba(39, 48, 78, 0.8) !important;

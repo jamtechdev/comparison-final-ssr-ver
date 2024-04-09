@@ -288,12 +288,17 @@ function ProductPage({
                     alt="double-arrow"
                   />
                   <ul>
-                    {/* {console.log(product?.tech_data)} */}
+                   
                     {product?.tech_data?.map((data, key) => {
                       return (
                         <React.Fragment key={key}>
+                          {}
                           <li>
-                            {data?.name}: <i>{data?.value}</i>
+                            {data?.name}:{" "}
+                            <i>
+                              {data?.value}{" "}
+                              {data?.unit !== null ? data?.unit : ""}
+                            </i>
                           </li>
                         </React.Fragment>
                       );
@@ -898,7 +903,7 @@ function ProductPage({
               </Col>
             )}
             {/* {console.log(product,"neet")} */}
-            {/* {console.log(product?.available_versions, "hllo")} */}
+            {console.log(product?.available_versions, "hllo")}
 
             {product?.available_versions &&
               product?.available_versions?.length !== 0 && (
@@ -967,7 +972,7 @@ function ProductPage({
                                       }`}
                                       onClick={(e) => handleItemClick(key)}
                                     >
-                                      {/* {data.short_name} */}
+                                      {data.short_name}
                                     </a>
                                   </li>
                                 )}

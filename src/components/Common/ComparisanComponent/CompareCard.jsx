@@ -112,6 +112,7 @@ const CompareCard = ({
             ></i>
           </div>
           <div className="comparison-product-spec">
+            {/* {console.log(compareProduct?.price_websites)} */}
             {compareProduct?.price_websites?.length > 0 ? (
               <>
                 <div className="comparison-product-item">
@@ -131,22 +132,24 @@ const CompareCard = ({
                     <span>{compareProduct?.price_websites[0]?.price} €</span>
                   )}
                 </div>
-                <div className="comparison-product-item">
-                  <img
-                    src={
-                      compareProduct?.price_websites[1]?.logo === null
-                        ? "/images/No-Image.png"
-                        : compareProduct?.price_websites[1]?.logo
-                    }
-                    width={0}
-                    height={0}
-                    sizes="100%"
-                    alt="price"
-                  />
-                  {compareProduct?.price_websites[1]?.price != null && (
-                    <span>{compareProduct?.price_websites[1]?.price} €</span>
-                  )}
-                </div>
+                {compareProduct?.price_websites[1] && (
+                  <div className="comparison-product-item">
+                    <img
+                      src={
+                        compareProduct?.price_websites[1]?.logo === null
+                          ? "/images/No-Image.png"
+                          : compareProduct?.price_websites[1]?.logo
+                      }
+                      width={0}
+                      height={0}
+                      sizes="100%"
+                      alt="price"
+                    />
+                    {compareProduct?.price_websites[1]?.price != null && (
+                      <span>{compareProduct?.price_websites[1]?.price} €</span>
+                    )}
+                  </div>
+                )}
               </>
             ) : (
               <>

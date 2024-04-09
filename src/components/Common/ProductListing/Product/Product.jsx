@@ -952,8 +952,8 @@ export default function Product({
                         return (
                           <li key={key}>
                             {/* {console.log(data[0])} */}
-                            {data && data?.name}: <i>{data && data?.value}{" "}</i>
-                            {data && data?.unit}
+                            {data && data?.name}: <i>{data && data?.value} </i>
+                            {data?.unit !== null ? data?.unit : ""}
                           </li>
                         );
                       })}
@@ -1093,7 +1093,7 @@ export default function Product({
                                         className={`color-item `}
                                         // onClick={(e) => handleItemClick(key)}
                                       >
-                                        {data.short_name}
+                                        {data?.short_name}
                                       </span>
                                     ) : (
                                       <a
@@ -1111,7 +1111,7 @@ export default function Product({
                                         className={`color-item `}
                                         // onClick={(e) => handleItemClick(key)}
                                       >
-                                        {data.short_name}
+                                        {data?.short_name}
                                       </a>
                                     )}
                                   </li>
@@ -1582,7 +1582,9 @@ export default function Product({
                                           textUnderlineOffset: "5px",
                                         }}
                                       >
-                                        {formatValue(product.expert_reviews_rating)}
+                                        {formatValue(
+                                          product.expert_reviews_rating
+                                        )}
                                         <ProsConsToolTip
                                           hover_phrase={
                                             product.expert_reviews_rating_phase
@@ -1712,7 +1714,9 @@ export default function Product({
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
-                                      {formatValue(product.ratio_quality_price_points)}
+                                      {formatValue(
+                                        product.ratio_quality_price_points
+                                      )}
                                       <ProsConsToolTip
                                         hover_phrase={
                                           product.ratio_quality_price_points_phase
