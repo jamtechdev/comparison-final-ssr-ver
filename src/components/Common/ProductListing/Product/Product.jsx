@@ -955,11 +955,13 @@ export default function Product({
                           <li key={key}>
                             {/* {console.log(data[0])} */}
                             {data && data?.name}: <i>{data && data?.value} </i>
-                            {data?.unit !== null ||
-                            data?.value !== "-" ||
-                            data?.value !== "?"
-                              ? data?.unit
-                              : ""}
+                            {data?.value !== "-" &&
+                                data?.value !== "?" &&
+                                data?.unit !== null && (
+                                  <>
+                                    {data.value} {data.unit}
+                                  </>
+                                )}
                           </li>
                         );
                       })}
