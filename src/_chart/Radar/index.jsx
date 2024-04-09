@@ -9,7 +9,7 @@ function Radar({ data, activeTab }) {
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 490 - margin.left - margin.right;
-  const height = 450 - margin.top - margin.bottom;
+  const height = 350;
 
   // const data = [
   //   {
@@ -41,7 +41,7 @@ function Radar({ data, activeTab }) {
   useEffect(() => {
     const svg = select("svg")
       .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("height", height)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .attr("fill", "gray");
@@ -157,7 +157,7 @@ function Radar({ data, activeTab }) {
       const d = data[i];
       // console.log(i);
       const cord = getCoordPath(d);
-      console.log(activeTab, i, "neetxy");
+      // console.log(activeTab, i, "neetxy");
 
       svg
         .append("path")
@@ -246,7 +246,7 @@ function Radar({ data, activeTab }) {
     }
   }, [activeTab]);
 
-  return <svg viewBox={`0 0 ${width} ${height}`}></svg>;
+  return <svg viewBox={`-60 100 590 270`}></svg>;
 }
 
 export default Radar;

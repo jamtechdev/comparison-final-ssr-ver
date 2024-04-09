@@ -1399,7 +1399,7 @@
     line-height: 34px !important;
   }
   .user-info-section {
-    align-items: flex-start !important;
+    /* align-items: flex-start !important; */
   }
   body .best-page-card .hero-card-content {
     padding: 10px 0 !important;
@@ -1408,7 +1408,7 @@
     padding: 0 10px !important;
   }
   .catchy_titles_section.row span.catchy_titles_section_title {
-    line-height: 20px !important;
+    line-height: 30px !important;
   }
   .sidebar_filter {
     margin: 15px 0;
@@ -1753,11 +1753,14 @@
 
   .mobile-comparison-tool .comparison-product-item {
     flex-direction: column !important;
+    grid-template-columns: 1fr !important;
   }
 
   .mobile-comparison-tool .comparison-product-item span {
-    width: 90%;
-    margin: 10px 0 0;
+    width: 100%;
+    padding: 0;
+    min-width: max-content !important;
+    margin: auto;
   }
 
   .mobile-comparison-tool .comparison-card:before {
@@ -1971,7 +1974,7 @@
   .table-accordion .spec-section .spec-item .spec-col span {
     width: 20px;
     height: 20px;
-    margin-left: 6px;
+    /* margin-left: 6px; */
   }
   .table-accordion .spec-section .spec-item .spec-col span svg {
     width: 13px;
@@ -2106,8 +2109,11 @@
 
 @media screen and (max-width: 768px) {
   :root {
-    --SLICE-WIDTH: 100% !important;
+    --SLICE-WIDTH: 95% !important;
   }
+  .guide-page-tested {
+    left: auto !important;
+}
   body .sidebar-width {
     position: fixed;
     z-index: 1000;

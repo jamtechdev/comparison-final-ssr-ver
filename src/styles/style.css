@@ -960,7 +960,7 @@ footer .search-icon {
 
 .flex-box {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   position: absolute;
   bottom: 100%;

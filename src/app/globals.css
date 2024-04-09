@@ -201,6 +201,7 @@ select {
   line-height: 34px;
   color: var(--heading-color);
   margin: 0 0 15px !important;
+  word-wrap: break-word;
 }
 
 .site-main-heading::after {
@@ -978,7 +979,7 @@ button.searchBarInner.btn.btn-primary {
 
 .bottom_bar {
   position: fixed;
-  bottom: 0;
+  bottom: -2px;
   right: 20px;
   width: fit-content;
   z-index: 10000;
@@ -2145,7 +2146,11 @@ div#shortCodeText ul {
   a.font__17__inline {
   font-size: 17px !important;
 }
-.best-price-section:not(.ranking) .best-list-item li:not(.d-flex)>span a.font__16__inline {
+.best-price-section:not(.ranking)
+  .best-list-item
+  li:not(.d-flex)
+  > span
+  a.font__16__inline {
   font-size: 16px !important;
 }
 .isSticky .best-list-item li:not(.d-flex) > span a.font__16__inline {
@@ -2156,6 +2161,25 @@ div#shortCodeText ul {
   color: rgba(39, 48, 78, 0.8) !important;
 }
 
-.container-div svg{
+.container-div svg {
   width: 100%;
+}
+@media (max-width: 768px) {
+  .pieChart{
+    flex-direction: column;
+    width: 100%;
+  }
+  .container-divs .parentBarDiv .legendBoxBarChart{
+    margin: 0 !important;
+  }
+  .container-divs .parentBarDiv .legendBoxBarChart table tr td{
+    padding: 2px 0 !important;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: auto;
+    max-width: 170px;
+  }
+  .container-divs .parentBarDiv{
+    padding: 0 !important;
+  }
 }

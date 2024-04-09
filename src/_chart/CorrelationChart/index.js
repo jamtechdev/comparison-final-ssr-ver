@@ -64,7 +64,7 @@ function CorrelationChart(props) {
     let tickValNeedToBeAppend = noOfTicks - tempTick.length;
     let tickValNeedToBeAppendFront = 0;
     let tickValNeedToBeAppendEnd = 0;
-
+    
     if (tickValNeedToBeAppend > 0) {
       tickValNeedToBeAppendFront = Math.ceil(tickValNeedToBeAppend / 2);
       tickValNeedToBeAppendEnd =
@@ -83,7 +83,7 @@ function CorrelationChart(props) {
 
     let tempStartTick = tempTick[0];
     let tempEndTick = tempTick[tempTick.length - 1];
-
+    
     for (let i = 0; i < noOfTicks; i++) {
       if (i <= frontTick.length - 1) {
         ticks[i] = Number(Math.abs(frontTick[i] - tempStartTick).toFixed(2));
@@ -101,27 +101,30 @@ function CorrelationChart(props) {
     return { ticks };
   }
 
-  // here Update x and y axios label based on xLabel and yLabel value
+// here Update x and y axios label based on xLabel and yLabel value 
 
-  let yLabelValue = {};
+  let yLabelValue = {  }
   if (yLabel) {
     yLabelValue = {
-      ticks: yLabel,
-    };
-  } else {
-    let yLabelValue = tickValuesAdujst(minY, maxY, y_tick, yStep);
+      ticks
+        : yLabel
+    }
+  } else { 
+    let yLabelValue =  tickValuesAdujst(minY, maxY, y_tick, yStep)
   }
 
-  let xLabelValue = {};
+  let xLabelValue = {}
   if (xLabel) {
     xLabelValue = {
-      ticks: xLabel,
-    };
+      ticks
+        : xLabel
+    }
   } else {
-    let xLabelValue = tickValuesAdujst(minX, maxX, x_tick, xStep);
+    let xLabelValue = tickValuesAdujst(minX, maxX, x_tick, xStep)
   }
-  // end Update x and y axios label
+  // end Update x and y axios label 
 
+  
   const margin = { top: 40, right: 35, bottom: 40, left: 35 };
   const { nextStepVal: yStep } = calculateNextStep(maxY, minY, y_tick);
   const { ticks: yTickValues } = yLabelValue;
@@ -131,7 +134,7 @@ function CorrelationChart(props) {
   useEffect(() => {
     drawChart();
   }, [correlationChartData]);
-
+  
   function drawChart() {
     d3.select(svgContainer.current).select("svg").remove();
     // Remove the old tooltip
@@ -172,7 +175,7 @@ function CorrelationChart(props) {
       y: height - margin.top - margin.bottom,
       x: -margin.left,
     };
-
+  
     const xAxisGroups = svg
       .append("g")
       .attr("transform", `translate(${translateXaxis.x},${translateXaxis.y})`)
@@ -217,7 +220,7 @@ function CorrelationChart(props) {
     svg.selectAll(".tick line").attr("stroke", "rgba(39, 48, 78, 0.1)");
     svg.selectAll("path").attr("display", "none");
 
-    //x axis label
+//x axis label
     svg
       .append("text")
       .attr("class", "axis-label")
@@ -232,7 +235,7 @@ function CorrelationChart(props) {
       .append("text")
       .attr("class", "axis-label")
       .attr("text-anchor", "middle")
-      .attr("x", -height / 2 + 30)
+      .attr("x", -height/2 +30)
       .attr("y", -50)
       .attr("transform", "rotate(-90)")
       .text(yTitle);
