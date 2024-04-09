@@ -835,7 +835,7 @@ export default function GuidePage({
                     )
                   ) : (
                     <>
-                      <ConfirmationModal
+                      {/* <ConfirmationModal
                         showModal={showModal}
                         handleClose={handleModalClose}
                         handleConfirm={handleConfirm}
@@ -846,18 +846,21 @@ export default function GuidePage({
                         </div>
                       ) : (
                         ""
-                      )}
+                      )} */}
                     </>
                   )}
                 </>
               )}
-              {products?.length <= 0 && (
-                <ConfirmationModal
-                  showModal={showModal}
-                  handleClose={handleModalClose}
-                  handleConfirm={handleConfirm}
-                />
-              )}
+              {/* {products?.length <= 0 && (
+                <div>
+                  {" "}
+                  <ConfirmationModal
+                    showModal={showModal}
+                    handleClose={handleModalClose}
+                    handleConfirm={handleConfirm}
+                  />
+                </div>
+              )} */}
               {productPagination?.total_pages > 1 && (
                 <GuidePagination pagination={productPagination} />
               )}
@@ -865,6 +868,7 @@ export default function GuidePage({
           </Col>
         </Row>
       </Container>
+      
       <section className="ptb-25">
         <Container>
           <Row>
