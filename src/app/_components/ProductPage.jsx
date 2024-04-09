@@ -298,11 +298,7 @@ function ProductPage({
                               {data?.value}{" "}
                               {data?.value !== "-" &&
                                 data?.value !== "?" &&
-                                data?.unit !== null && (
-                                  <>
-                                    {data.value} {data.unit}
-                                  </>
-                                )}
+                                data?.unit !== null && <>{data.unit}</>}
                             </i>
                           </li>
                         </React.Fragment>

@@ -959,7 +959,7 @@ export default function Product({
                                 data?.value !== "?" &&
                                 data?.unit !== null && (
                                   <>
-                                    {data.value} {data.unit}
+                                    {data.unit}
                                   </>
                                 )}
                           </li>
