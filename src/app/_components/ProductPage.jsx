@@ -918,65 +918,67 @@ function ProductPage({
                           const isCurrentVersion = data.permalink === slug;
                           return (
                             <>
-                              <div className="color-item" key={key}>
-                                {isCurrentVersion ? (
-                                  <li
-                                    style={{
-                                      listStyleType: "none",
-                                      width: "auto",
-                                      padding: "0px 5px",
-                                      border: isCurrentVersion
-                                        ? "1px solid #437ece"
-                                        : "none", // Added closing parenthesis here
-                                      cursor: isCurrentVersion
-                                        ? "default"
-                                        : "pointer", // Check if isCurrentVersion is truthy
-                                    }}
-                                    className={`color-item ${
-                                      selectedItem === key ? "selected" : ""
-                                    }`}
-                                    key={key}
-                                    onClick={() =>
-                                      !isCurrentVersion && handleItemClick(key)
-                                    }
-                                  >
-                                    {/* <span>{data.short_name}</span> */}
-                                    {data?.short_name}
-                                  </li>
-                                ) : (
-                                  <li
-                                    style={{
-                                      listStyleType: "none",
-                                      width: "auto",
-                                      padding: "0px 5px",
-
-                                      border: isCurrentVersion
-                                        ? "1px solid red"
-                                        : "none",
-                                      cursor: isCurrentVersion
-                                        ? "default"
-                                        : "pointer",
-                                    }}
-                                    className="current_version_not_found"
-                                  >
-                                    <a
-                                      href={`/${data?.category_url}/${data?.permalink}`}
+                              {data?.short_name !== null && (
+                                <div className="color-item" key={key}>
+                                  {isCurrentVersion ? (
+                                    <li
                                       style={{
-                                        color: "#437ed0",
+                                        listStyleType: "none",
+                                        width: "auto",
                                         padding: "0px 5px",
-                                        cursor: "pointer",
+                                        border: isCurrentVersion
+                                          ? "1px solid #437ece"
+                                          : "none", // Added closing parenthesis here
+                                        cursor: isCurrentVersion
+                                          ? "default"
+                                          : "pointer", // Check if isCurrentVersion is truthy
                                       }}
                                       className={`color-item ${
                                         selectedItem === key ? "selected" : ""
                                       }`}
-                                      onClick={(e) => handleItemClick(key)}
+                                      key={key}
+                                      onClick={() =>
+                                        !isCurrentVersion &&
+                                        handleItemClick(key)
+                                      }
                                     >
-                                      {data.short_name}
-                                    </a>
-                                  </li>
-                                )}
+                                      {/* <span>{data.short_name}</span> */}
+                                      {data?.short_name}
+                                    </li>
+                                  ) : (
+                                    <li
+                                      style={{
+                                        listStyleType: "none",
+                                        width: "auto",
+                                        padding: "0px 5px",
 
-                                {/* <Form.Check
+                                        border: isCurrentVersion
+                                          ? "1px solid red"
+                                          : "none",
+                                        cursor: isCurrentVersion
+                                          ? "default"
+                                          : "pointer",
+                                      }}
+                                      className="current_version_not_found"
+                                    >
+                                      <a
+                                        href={`/${data?.category_url}/${data?.permalink}`}
+                                        style={{
+                                          color: "#437ed0",
+                                          padding: "0px 5px",
+                                          cursor: "pointer",
+                                        }}
+                                        className={`color-item ${
+                                          selectedItem === key ? "selected" : ""
+                                        }`}
+                                        onClick={(e) => handleItemClick(key)}
+                                      >
+                                        {data.short_name}
+                                      </a>
+                                    </li>
+                                  )}
+
+                                  {/* <Form.Check
                                 inline
                                 label={data?.short_name}
                                 name="color"
@@ -984,7 +986,8 @@ function ProductPage({
                                 defaultChecked={key === 0}
                                 id={`inline-${data?.color}-${key}`}
                               /> */}
-                              </div>
+                                </div>
+                              )}
                             </>
                           );
                         })}
