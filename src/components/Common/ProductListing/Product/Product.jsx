@@ -956,6 +956,7 @@ export default function Product({
                             {/* {console.log(data[0])} */}
                             {data && data?.name}:
                             <i>
+                              {" "}
                               {data?.value}{" "}
                               {data?.value !== "-" &&
                                 data?.value !== "?" &&
