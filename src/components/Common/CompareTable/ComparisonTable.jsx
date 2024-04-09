@@ -365,6 +365,7 @@ export default function ComparisonTable({
                                                 href={`/link?p=${btoa(
                                                   data.url
                                                 )}`}
+                                                className="font__16__inline"
                                               >
                                                 {data?.price} €
                                               </a>
@@ -464,6 +465,7 @@ export default function ComparisonTable({
                                           rel="noopener noreferrer"
                                           target="_blank"
                                           href={`/link?p=${btoa(data.url)}`}
+                                          className="font__16__inline"
                                         >
                                           {data?.price} €
                                         </Link>

@@ -756,6 +756,7 @@ function ProductPage({
                                 rel="noopener noreferrer"
                                 target="_blank"
                                 href={`/link?p=${btoa(item.url)}`}
+                                className="font__17__inline"
                               >
                                 {item?.price} {product?.currency}
                               </a>

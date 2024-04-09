@@ -529,6 +529,10 @@ input[type="checkbox"]:checked {
   background-color: transparent !important;
 }
 
+.not-availabel-wrapper {
+  padding: 5px 0;
+}
+
 .not-availabel {
   display: grid !important;
   grid-template-columns: calc(50% - 2px) calc(50% - 2px) !important;
@@ -563,13 +567,14 @@ input[type="checkbox"]:checked {
 }
 
 .not-availabel .guide {
-  padding: 5px 10px;
+  padding: 0px 10px;
   border-radius: 100px;
   text-align: center;
   font-size: 17px;
   background-color: #d90808;
   color: #fff;
   font-weight: 400;
+  line-height: 30px;
 }
 
 /* .color-section{

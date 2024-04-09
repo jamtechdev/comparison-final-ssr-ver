@@ -684,11 +684,13 @@ export default function Product({
                     product?.price_websites?.every(
                       (data) => data.price === null
                     ) && (
-                      <div className="not-availabel">
+                      <div className="not-availabel-wrapper">
+                         <div className="not-availabel">
                         <span className="txt">N/A</span>
                         <span className="guide">
                           ~ {product?.price} {product?.currency}
                         </span>
+                      </div>
                       </div>
                     )}
                   {product?.price_websites &&
