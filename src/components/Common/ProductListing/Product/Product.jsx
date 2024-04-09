@@ -954,14 +954,13 @@ export default function Product({
                         return (
                           <li key={key}>
                             {/* {console.log(data[0])} */}
-                            {data && data?.name}: <i>{data && data?.value} </i>
-                            {data?.value !== "-" &&
+                            {data && data?.name}:
+                            <i>
+                              {data?.value}{" "}
+                              {data?.value !== "-" &&
                                 data?.value !== "?" &&
-                                data?.unit !== null && (
-                                  <>
-                                    {data.unit}
-                                  </>
-                                )}
+                                data?.unit !== null && <>{data.unit}</>}
+                            </i>
                           </li>
                         );
                       })}
