@@ -960,7 +960,6 @@ export default function GuidePage({
         manageCollapsedDiv={manageCollapsedDiv}
         handleManageCollapsedDiv={handleManageCollapsedDiv}
       />
-      )
     </>
   );
 }

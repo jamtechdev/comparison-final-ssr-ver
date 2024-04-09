@@ -519,6 +519,8 @@
   .product-score-section .product-score-container {
     flex-flow: column;
     align-items: center;
+    margin: 30px 0 20px;
+    padding-bottom: 8px !important;
   }
   .product-score-section .product-score-container .score-section {
     width: 100%;
@@ -531,6 +533,8 @@
   }
   .thumb-section-container {
     margin-bottom: 25px;
+    gap: 8px;
+    flex-wrap: nowrap;
   }
   .ranking-section .card-mobile {
     display: none;
@@ -549,6 +553,16 @@
 
 /* Mobile Responsive Start */
 @media screen and (max-width: 767px) {
+  .thumb-slider .swiper-slide img{
+    width: 90% !important;
+    height: 90% !important;
+  }
+  .best-price-section.ranking {
+    margin-bottom: 0px;
+}
+.pros-corns-section.pros ul li:before, .pros-corns-section.corns ul.cross li:before{
+  top: 5px !important;
+}
   .footer-container > .row {
     row-gap: 20px;
   }
@@ -1242,6 +1256,7 @@
   .thumb-section-container .thumb-slider {
     order: 1;
     /* width: 100% !important; */
+    flex:1;
   }
 
   .thumb-section-container .alternatives {
@@ -2031,7 +2046,7 @@
   }
   .mobile-table-section .table-section-desktop .compare-container tbody tr td,
   .mobile-table-section .table-section-desktop .compare-container thead tr th {
-    border-left: none;
+    /* border-left: none; */
     /* border-right: none; */
   }
   .best-price-section {

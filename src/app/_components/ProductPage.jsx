@@ -288,7 +288,6 @@ function ProductPage({
                     alt="double-arrow"
                   />
                   <ul>
-                   
                     {product?.tech_data?.map((data, key) => {
                       return (
                         <React.Fragment key={key}>
@@ -701,7 +700,7 @@ function ProductPage({
           </div>
         </Container>
       </section>
-      <section className="mb-3">
+      <section>
         <Container>
           <Row>
             <Col md={12} lg={12} xl={4}>
@@ -1055,7 +1054,7 @@ function ProductPage({
           )}
         </Container>
       </section>
-      <section className="my-4">
+      <section className="mb-4">
         <Container>
           <Row className="mb-3">
             {/* <span className="testing__text">
@@ -1143,6 +1142,7 @@ function ProductPage({
           </Container>
         </section>
       )}
+      {console.log(product?.should_buy?.length)}
 
       <section className="ptb-80 bg-color">
         {product?.should_buy?.length !== 0 && (
@@ -1719,53 +1719,55 @@ function ProductPage({
               </Row>
             </>
           )}
-
-          <Row className="mt-5">
-            <Col md={6}>
-              <div className="pros-corns-section pros light-background">
-                <h3 className="pros-header">
-                  {product && product?.page_phases?.pros}
-                </h3>
-                <ul>
-                  {product &&
-                    product?.top_pros?.map((data, key) => {
-                      return (
-                        <>
-                          <li
-                            key={key}
-                            style={{ color: "rgba(39, 48, 78, 0.80)" }}
-                          >
-                            {data?.name} {renderValue(data)}
-                          </li>
-                        </>
-                      );
-                    })}
-                </ul>
-              </div>
-            </Col>
-            <Col md={6}>
-              <div className="pros-corns-section corns light-background">
-                <h3 className="pros-header">
-                  {product && product?.page_phases?.cons}
-                </h3>
-                <ul className="cross">
-                  {product &&
-                    product?.top_cons?.map((data, key) => {
-                      return (
-                        <>
-                          <li
-                            key={key}
-                            style={{ color: "rgba(39, 48, 78, 0.80)" }}
-                          >
-                            {data?.name} {renderValue(data)}
-                          </li>
-                        </>
-                      );
-                    })}
-                </ul>
-              </div>
-            </Col>
-          </Row>
+          {console.log(product?.top_pros)}
+          {product?.top_pros !== null && (
+            <Row className="mt-5">
+              <Col md={6}>
+                <div className="pros-corns-section pros light-background">
+                  <h3 className="pros-header">
+                    {product && product?.page_phases?.pros}
+                  </h3>
+                  <ul>
+                    {product &&
+                      product?.top_pros?.map((data, key) => {
+                        return (
+                          <>
+                            <li
+                              key={key}
+                              style={{ color: "rgba(39, 48, 78, 0.80)" }}
+                            >
+                              {data?.name} {renderValue(data)}
+                            </li>
+                          </>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </Col>
+              <Col md={6}>
+                <div className="pros-corns-section corns light-background">
+                  <h3 className="pros-header">
+                    {product && product?.page_phases?.cons}
+                  </h3>
+                  <ul className="cross">
+                    {product &&
+                      product?.top_cons?.map((data, key) => {
+                        return (
+                          <>
+                            <li
+                              key={key}
+                              style={{ color: "rgba(39, 48, 78, 0.80)" }}
+                            >
+                              {data?.name} {renderValue(data)}
+                            </li>
+                          </>
+                        );
+                      })}
+                  </ul>
+                </div>
+              </Col>
+            </Row>
+          )}
         </Container>
       </section>
 
