@@ -169,7 +169,8 @@ select {
 }
 
 .ptb-80 {
-  padding: 40px 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .ptb-25 {
@@ -2121,7 +2122,7 @@ div#shortCodeText ul {
 }
 
 .font__17__inline {
-  font-size: 17px !important; 
+  font-size: 17px !important;
 }
 .font__16__inline {
   font-size: 16px !important;
@@ -2132,7 +2133,11 @@ div#shortCodeText ul {
 .font-w__400__inline {
   font-size: 400 !important;
 }
-.best-price-section:not(.ranking) .best-list-item li:not(.d-flex) > span a.font__17__inline {
+.best-price-section:not(.ranking)
+  .best-list-item
+  li:not(.d-flex)
+  > span
+  a.font__17__inline {
   font-size: 17px !important;
 }
 .text_editor_pros {
