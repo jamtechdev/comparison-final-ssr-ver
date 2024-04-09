@@ -685,12 +685,12 @@ export default function Product({
                       (data) => data.price === null
                     ) && (
                       <div className="not-availabel-wrapper">
-                         <div className="not-availabel">
-                        <span className="txt">N/A</span>
-                        <span className="guide">
-                          ~ {product?.price} {product?.currency}
-                        </span>
-                      </div>
+                        <div className="not-availabel">
+                          <span className="txt">N/A</span>
+                          <span className="guide">
+                            ~ {product?.price} {product?.currency}
+                          </span>
+                        </div>
                       </div>
                     )}
                   {product?.price_websites &&
@@ -955,7 +955,11 @@ export default function Product({
                           <li key={key}>
                             {/* {console.log(data[0])} */}
                             {data && data?.name}: <i>{data && data?.value} </i>
-                            {data?.unit !== null ? data?.unit : ""}
+                            {data?.unit !== null ||
+                            data?.value !== "-" ||
+                            data?.value !== "?"
+                              ? data?.unit
+                              : ""}
                           </li>
                         );
                       })}
