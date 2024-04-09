@@ -64,6 +64,10 @@ export default function Header({ headerData, headerPhase }) {
     setIsOpen(true);
     setShow(false);
   };
+  const handleClear = () => {
+    setSearch("");
+    setIsFocused(false); // Close the search results
+  };
   return (
     <header
       className={`sticky ${

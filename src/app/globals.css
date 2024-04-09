@@ -2155,3 +2155,7 @@ div#shortCodeText ul {
 .text_editor_pros {
   color: rgba(39, 48, 78, 0.8) !important;
 }
+
+.container-div svg{
+  width: 100%;
+}

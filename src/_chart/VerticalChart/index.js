@@ -18,6 +18,7 @@ function drawBarChart(props) {
   svg
     .selectAll("bar")
     .data(updatedData)
+    .attr("viewBox", `0 0 ${xScale.bandwidth()} ${height}`)
     .enter()
     .append("rect")
     .attr("class", classnames(["bar-chart__bar rect-hover", barClass]))

@@ -36,21 +36,21 @@ function HorizontalChart(props) {
   const minValue = d3.min(data, (d) => d.value);
   const maxValue = d3.max(data, (d) => d.value);
   const opacities = uniformallyDistributeBaropacity(data);
-  
+
   useEffect(() => {
     drawChart();
   }, [data]);
-  
+
   function drawChart() {
     d3.select(svgContainer.current).select("svg").remove();
 
     const svg = d3
       .select(svgContainer.current)
       .append("svg")
-      
+      .attr("viewBox", `0 0 ${width} ${height}`)
 
       .attr("width", newWidth + margin.left + margin.right)
-      
+
       .attr("height", newHeight + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -118,7 +118,7 @@ function HorizontalChart(props) {
 
     svg.select("path").style("display", "none");
   }
-  
+
   function formateYaxisLabel(d, i) {
     return `${i + 1}. ${d}`;
   }
@@ -129,30 +129,32 @@ function HorizontalChart(props) {
 
     // if all values are same, set opacity to 100 and return the array
     const firstBarValue = data[0].value;
-    const similarMatchesCount = data.filter(data => data.value === firstBarValue)?.length;
-    
+    const similarMatchesCount = data.filter(
+      (data) => data.value === firstBarValue
+    )?.length;
+
     if (similarMatchesCount == totalBars) {
-      return [...Array(totalBars) ].fill(100);
+      return [...Array(totalBars)].fill(100);
     }
-  
+
     opacities.push(100);
-  
+
     for (let i = 1; i < totalBars - 1; i++) {
       if (data[i].value == data[i - 1].value) {
         opacities.push(opacities[i - 1]);
       } else {
-        const opacity = 100 - ((i / (totalBars - 1)) * 80);
+        const opacity = 100 - (i / (totalBars - 1)) * 80;
         opacities.push(Math.round(opacity));
       }
     }
-  
+
     if (data[totalBars - 1]?.value == data[totalBars - 2]?.value) {
       opacities[totalBars - 2] = 20;
       opacities.push(20);
     } else {
       opacities.push(20);
     }
-  
+
     return opacities;
   }
 

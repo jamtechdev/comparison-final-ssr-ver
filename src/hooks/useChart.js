@@ -58,7 +58,7 @@ const useChart = () => {
   ) {
     const parentDiv = document.createElement("div");
     parentDiv.classList.add("container-div");
-    parentDiv.classList.add("shortcode_table_scroll");
+    // parentDiv.classList.add("shortcode_table_scroll");
     element.insertAdjacentElement("afterend", parentDiv);
     for (let indx = 0; indx < shortCodesMatched.length; indx++) {
       if (
