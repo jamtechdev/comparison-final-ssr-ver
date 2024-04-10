@@ -145,7 +145,7 @@ function CorrelationChart(props) {
       .append("svg")
       .attr("width", width)
       .attr("height", height)
-      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("viewBox", `0 0 478 300`)
       .append("g")
       .style("background-color", "#fff")
       .attr("transform", "translate(" + translateX + "," + margin.top + ")");

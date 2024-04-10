@@ -104,9 +104,7 @@ const BaseChart = (drawChart, extraProps) => {
         <div className="base__container">
           <svg
             ref={svgRef}
-            viewBox={`0 0 ${width + margin.left + margin.right} ${
-              height + margin.top + margin.bottom
-            }`}
+            viewBox={`30 0 500 340`}
             className={classnames("base__svg-container", svgContainerClass)}
           />
           <div

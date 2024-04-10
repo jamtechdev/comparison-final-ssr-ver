@@ -47,7 +47,7 @@ function HorizontalChart(props) {
     const svg = d3
       .select(svgContainer.current)
       .append("svg")
-      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("viewBox", `60 0 560 100`)
 
       .attr("width", newWidth + margin.left + margin.right)
 
