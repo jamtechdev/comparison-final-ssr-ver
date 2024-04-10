@@ -2166,21 +2166,21 @@ div#shortCodeText ul {
   width: 100%;
 }
 @media (max-width: 768px) {
-  .pieChart{
+  .pieChart {
     flex-direction: column;
     width: 100%;
   }
-  .container-divs .parentBarDiv .legendBoxBarChart{
+  .container-divs .parentBarDiv .legendBoxBarChart {
     margin: 0 !important;
   }
-  .container-divs .parentBarDiv .legendBoxBarChart table tr td{
+  .container-divs .parentBarDiv .legendBoxBarChart table tr td {
     padding: 2px 0 !important;
     justify-content: space-between;
     width: 100%;
     margin-left: auto;
     max-width: 170px;
   }
-  .container-divs .parentBarDiv{
+  .container-divs .parentBarDiv {
     padding: 0 !important;
   }
 }
@@ -2193,4 +2193,8 @@ div#shortCodeText ul {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+.base_class_chart {
+  margin-top: 5%;
+  margin-bottom: 7%;
 }
