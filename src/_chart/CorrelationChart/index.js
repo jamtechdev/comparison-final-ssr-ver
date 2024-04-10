@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import "./index.css";
 import { calculateNextStep } from "../utils/calculateTickStepCorrelation";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 function CorrelationChart(props) {
   const {
@@ -127,6 +128,8 @@ function CorrelationChart(props) {
   const { ticks: yTickValues } = yLabelValue;
   const { nextStepVal: xStep } = calculateNextStep(maxX, minX, x_tick);
   const { ticks: xTickValues } = xLabelValue;
+  const { isMobile } = useScreenSize();
+  alert(isMobile);
 
   useEffect(() => {
     drawChart();
@@ -142,7 +145,7 @@ function CorrelationChart(props) {
       .append("svg")
       .attr("width", width)
       .attr("height", height)
-      .attr("viewBox", `0 0 420 210`)
+      .attr("viewBox", isMobile ? "15 0 410 400" : "0 0 400  210")
       .append("g")
       .style("background-color", "#fff")
       .attr("transform", "translate(" + translateX + "," + margin.top + ")");

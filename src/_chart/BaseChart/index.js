@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import classnames from "classnames";
 import drawAxis from "./axis";
 import "./index.scss";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 const BaseChart = (drawChart, extraProps) => {
   function Chart(props) {
@@ -88,6 +89,7 @@ const BaseChart = (drawChart, extraProps) => {
         ...restProps,
       });
     }
+    const { isMobile } = useScreenSize();
 
     return (
       <div
@@ -104,7 +106,7 @@ const BaseChart = (drawChart, extraProps) => {
         <div className="base__container">
           <svg
             ref={svgRef}
-            viewBox={`30 0 500 340`}
+            viewBox={isMobile ? `50 0 490 100` : `30 0 500 340`}
             className={classnames("base__svg-container", svgContainerClass)}
           />
           <div
