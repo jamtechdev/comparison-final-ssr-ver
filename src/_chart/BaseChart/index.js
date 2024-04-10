@@ -64,8 +64,10 @@ const BaseChart = (drawChart, extraProps) => {
     function draw() {
       const svg = d3
         .select(svgRef.current)
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        // .attr("width", width + margin.left + margin.right)
+        .attr("width", 500)
+        // .attr("height", height + margin.top + margin.bottom)
+        .attr("height", 180)
         .append("g")
         .attr("transform", `translate(${margin.left + 20},${margin.top - 60})`);
 
@@ -106,7 +108,8 @@ const BaseChart = (drawChart, extraProps) => {
         <div className="base__container">
           <svg
             ref={svgRef}
-            viewBox={isMobile ? `55 0 490 100` : `30 0 500 340`}
+            // viewBox={isMobile ? `55 0 490 100` : `30 0 500 340`}
+            viewBox={`60 90 500 100`}
             className={classnames("base__svg-container", svgContainerClass)}
           />
           <div

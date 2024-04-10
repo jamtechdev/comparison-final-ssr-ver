@@ -142,9 +142,10 @@ function CorrelationChart(props) {
     const svg = d3
       .select(svgContainer.current)
       .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("viewBox", isMobileScreen ? "15 0 410 400" : "0 150 400  210")
+      .attr("width", 520)
+      .attr("height", 220)
+      // .attr("viewBox", isMobileScreen ? "15 0 410 400" : "0 150 400  210")
+      .attr("viewBox", isMobileScreen ? "-20 150 500 100" : "-20 150 500 100")
       .append("g")
       .style("background-color", "#fff")
       .attr("transform", "translate(" + translateX + "," + margin.top + ")");
@@ -300,6 +301,9 @@ function CorrelationChart(props) {
         "align-items": "center",
         "flex-direction": "column",
         display: "flex",
+        padding: " 0px",
+        marginTop: "8%",
+        marginRight: "3%",
       }}
     >
       <span
@@ -308,10 +312,7 @@ function CorrelationChart(props) {
       >
         {chartTitle}
       </span>
-      <div
-        ref={svgContainer}
-        style={{ "background-color": "#fff", "padding-right": "20px" }}
-      ></div>
+      <div ref={svgContainer} style={{ "background-color": "#fff" }}></div>
     </div>
   );
 }
