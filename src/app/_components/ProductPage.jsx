@@ -821,7 +821,7 @@ function ProductPage({
               </div>
             </Col>
             {/* {console.log(product?.text_under_ranking,"neety")} */}
-            <span className="testing__text text-end pt-3">
+            <span className="testing__text text-end py-3">
               <i>{product?.page_phases?.text_under_ranking}</i>
             </span>
 

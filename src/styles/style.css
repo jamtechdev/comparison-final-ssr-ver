@@ -299,6 +299,14 @@ footer .search-icon {
   justify-content: space-between;
 }
 
+@media screen and (max-width:768px) {
+  .search-dropdown-list .search-data-list .search-data-heading{
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
+}
+
 .search-dropdown-list .search-data-list .search-data-heading span {
   font-size: 16px;
   color: #888;

@@ -2183,3 +2183,13 @@ div#shortCodeText ul {
     padding: 0 !important;
   }
 }
+
+.search__close__btn {
+  position: absolute;
+  right: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

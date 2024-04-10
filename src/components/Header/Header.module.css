@@ -10,8 +10,12 @@
   background: none;
   font-weight: 400;
   font-size: 16px;
-  padding-right: 50px;
+  padding-right: 75px;
   color: var(--nav-link);
+}
+
+.searchbar input::-webkit-search-cancel-button {
+  display: none !important;
 }
 
 .searchbar input::placeholder {

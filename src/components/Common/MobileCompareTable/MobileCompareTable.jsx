@@ -397,6 +397,14 @@ export default function MobileCompareTable({
         </Col>
       </Row>
       <div className="compare-container-wrapper">
+        <div className="slider-controls table__arrow">
+          <span className="swiper-prev" onClick={handlePrevious}>
+            <i className="ri-arrow-left-s-line"></i>
+          </span>
+          <span className="swiper-next" onClick={handleNext}>
+            <i className="ri-arrow-right-s-line"></i>
+          </span>
+        </div>
         <Swiper
           id="mobile-compare-table"
           modules={[Navigation, Pagination]}
