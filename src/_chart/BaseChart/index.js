@@ -99,6 +99,8 @@ const BaseChart = (drawChart, extraProps) => {
           "align-items": "center",
           "flex-direction": "column",
           display: "flex",
+          "margin-top": "5%",
+          "margin-bottom": "7%",
         }}
       >
         {" "}
@@ -110,8 +112,10 @@ const BaseChart = (drawChart, extraProps) => {
             ref={svgRef}
             // viewBox={isMobile ? `55 0 490 100` : `30 0 500 340`}
             viewBox={`60 90 500 100`}
-            className={classnames("base__svg-container base_class_chart", svgContainerClass)}
-            
+            className={classnames(
+              "base__svg-container base_class_chart",
+              svgContainerClass
+            )}
           />
           <div
             className={classnames("base__tooltip", tooltipClass)}
