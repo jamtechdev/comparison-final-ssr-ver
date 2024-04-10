@@ -106,7 +106,7 @@ const BaseChart = (drawChart, extraProps) => {
         <div className="base__container">
           <svg
             ref={svgRef}
-            viewBox={isMobile ? `50 0 490 100` : `30 0 500 340`}
+            viewBox={isMobile ? `55 0 490 100` : `30 0 500 340`}
             className={classnames("base__svg-container", svgContainerClass)}
           />
           <div
