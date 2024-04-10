@@ -90,10 +90,10 @@ const useChart = () => {
 
           if (plotData && plotData.length > 0) {
             const container = document.createElement("div");
+            container.style.padding = "0px";
             // container.style.padding = "10px";
-            container.style.padding = "10px";
-            container.style.marginLeft = "-15px";
-            container.style.marginRight = "-15px";
+            // container.style.marginLeft = "-15px";
+            // container.style.marginRight = "-15px";
             container.setAttribute("class", "chart_Append" + index);
             parentDiv.insertAdjacentElement("beforeend", container);
             const root = createRoot(container);
