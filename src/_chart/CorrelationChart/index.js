@@ -302,8 +302,8 @@ function CorrelationChart(props) {
         "flex-direction": "column",
         display: "flex",
         padding: " 0px",
-        marginTop: "8%",
-        marginRight: "3%",
+        "margin-top": "8%",
+        "margin-bottom": "3%",
       }}
     >
       <span
