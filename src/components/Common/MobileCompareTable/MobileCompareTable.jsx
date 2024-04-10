@@ -29,23 +29,22 @@ export default function MobileCompareTable({
   const defaultNo = 5;
 
   const [fullTable, setFullTable] = useState(2);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Access the window object here
-      window.onscroll = function () {
-        var testDiv = document.getElementById("mobile-compare-tabler");
-        testDiv.getBoundingClientRect().top < 100
-          ? setWinPos(true)
-          : setWinPos(false);
-        testDiv.getBoundingClientRect().top, "top";
 
-        var tbodyDiv = document.getElementById("mobile-compare-tablerBody");
-        tbodyDiv.getBoundingClientRect().top > 100
-          ? setWinPos(false)
-          : setWinPos(true);
-      };
-    }
-  }, []);
+  if (typeof window !== "undefined") {
+    // Access the window object here
+    window.onscroll = function () {
+      var testDiv = document.getElementById("mobile-compare-tabler");
+      testDiv?.getBoundingClientRect().top < 100
+        ? setWinPos(true)
+        : setWinPos(false);
+      testDiv?.getBoundingClientRect().top, "top";
+
+      var tbodyDiv = document.getElementById("mobile-compare-tablerBody");
+      tbodyDiv?.getBoundingClientRect().top > 100
+        ? setWinPos(false)
+        : setWinPos(true);
+    };
+  }
 
   // here Products restructures them into an object with the category name as the key
 
@@ -264,6 +263,8 @@ export default function MobileCompareTable({
   );
 
   // console.log(categoryChunkedData, "neetxy");
+  // let storeSwiperIndex = 0; // Declare a variable outside the map function
+  // console.log(storeSwiperIndex,"neetxy")
 
   return (
     <section className="comparisons-slider">
@@ -278,90 +279,94 @@ export default function MobileCompareTable({
         <thead>
           <tr>
             {chunkedData?.map((product, index) => {
-              return (
-                <th>
-                  <p className="device-name">
-                    <span>{!tabData ? index + 1 : index + 3}</span>
-                    {product?.name}
-                    <img
-                      className="compare_image"
-                      src={
-                        product?.main_image
-                          ? product?.main_image
-                          : "/images/nofound.png"
-                      }
-                      width={0}
-                      height={0}
-                      alt={`${product?.permalink}`}
-                      sizes="100%"
-                    />
-                  </p>
-                  {product.price_websites &&
-                    product?.price_websites?.every(
-                      (data) => data.price !== null
-                    ) && (
-                      <>
-                        {" "}
+              // console.log(product?.length);
+              return product?.slice(0, 1)?.map((data, productIndex) => {
+                return (
+                  <th>
+                    <p className="device-name">
+                      <span>{productIndex + 1}</span>
+                      {data?.name}
+                      <img
+                        className="compare_image"
+                        src={
+                          data?.main_image
+                            ? data?.main_image
+                            : "/images/nofound.png"
+                        }
+                        width={0}
+                        height={0}
+                        alt={`${data?.permalink}`}
+                        sizes="100%"
+                      />
+                    </p>
+                    {data.price_websites &&
+                      data?.price_websites?.every(
+                        (data) => data.price !== null
+                      ) && (
                         <>
-                          <ul className="best-list-item">
-                            {" "}
-                            {product.price_websites &&
-                              product?.price_websites?.every(
-                                (data) => data.price === null
-                              ) && (
-                                <div className="not-availabel n-lable p-1">
-                                  {/* <span className="txt">NOT AVAILABLE</span> */}
-                                  <i>N/A</i>
-                                  <span className="price">
-                                    ~ {product?.price} €
-                                  </span>
-                                </div>
-                              )}
-                            {product.price_websites &&
-                              product.price_websites
-                                .slice(0, 1)
-                                ?.map((data, dIndex) => {
-                                  return (
-                                    <div key={dIndex}>
-                                      {data.price !== null && (
-                                        <li>
-                                          <>
-                                            <a
-                                              rel="noopener noreferrer"
-                                              target="_blank"
-                                              href={`/link?p=${btoa(data.url)}`}
-                                            >
-                                              <img
-                                                src={data?.logo}
-                                                width={0}
-                                                height={0}
-                                                sizes="100vw"
-                                                alt={data?.alt}
-                                              />
-                                            </a>
-                                            <span>
+                          {" "}
+                          <>
+                            <ul className="best-list-item">
+                              {" "}
+                              {data.price_websites &&
+                                data?.price_websites?.every(
+                                  (data) => data.price === null
+                                ) && (
+                                  <div className="not-availabel n-lable p-1">
+                                    {/* <span className="txt">NOT AVAILABLE</span> */}
+                                    <i>N/A</i>
+                                    <span className="price">
+                                      ~ {data?.price} €
+                                    </span>
+                                  </div>
+                                )}
+                              {data.price_websites &&
+                                data.price_websites
+                                  .slice(0, 1)
+                                  ?.map((price_data, dIndex) => {
+                                    return (
+                                      <div key={dIndex}>
+                                        {price_data.price !== null && (
+                                          <li>
+                                            <>
                                               <a
                                                 rel="noopener noreferrer"
                                                 target="_blank"
                                                 href={`/link?p=${btoa(
-                                                  data.url
+                                                  price_data.url
                                                 )}`}
                                               >
-                                                {data?.price} €
+                                                <img
+                                                  src={price_data?.logo}
+                                                  width={0}
+                                                  height={0}
+                                                  sizes="100vw"
+                                                  alt={price_data?.alt}
+                                                />
                                               </a>
-                                            </span>
-                                          </>
-                                        </li>
-                                      )}
-                                    </div>
-                                  );
-                                })}
-                          </ul>
+                                              <span>
+                                                <a
+                                                  rel="noopener noreferrer"
+                                                  target="_blank"
+                                                  href={`/link?p=${btoa(
+                                                    price_data.url
+                                                  )}`}
+                                                >
+                                                  {price_data?.price} €
+                                                </a>
+                                              </span>
+                                            </>
+                                          </li>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
+                            </ul>
+                          </>
                         </>
-                      </>
-                    )}
+                      )}
 
-                  {/* <ul className="best-list-item ">
+                    {/* <ul className="best-list-item ">
                       <li>
                         <Image
                           src="/images/amazon.png"
@@ -373,8 +378,9 @@ export default function MobileCompareTable({
                         <span>155.87 €</span>
                       </li>
                     </ul> */}
-                </th>
-              );
+                  </th>
+                );
+              });
             })}
           </tr>
         </thead>
@@ -384,7 +390,7 @@ export default function MobileCompareTable({
           <p>
             Showing products: <b>1-2</b>
           </p>
-        </Col>
+        </Col>  
         <Col sm="6" xs="3" className="p-0">
           <div className="slider-controls">
             <span className="swiper-prev" onClick={handlePrevious}>

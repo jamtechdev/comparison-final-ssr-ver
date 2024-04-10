@@ -427,15 +427,20 @@ export default function GuidePage({
             md={12}
             lg={3}
             xl={3}
-            className={isShown ? "sidebar-width sidebar--open" : "sidebar-width"}
+            className={
+              isShown ? "sidebar-width sidebar--open" : "sidebar-width"
+            }
             // style={{ display: isShown ? "block" : "none" }}
           >
-             <div className="desktop-hide">
+            <div className="desktop-hide">
               <div className="header--section">
-                <h6> <i className="ri-equalizer-line"></i> Filter</h6>
-                <i class="ri-close-circle-line"></i>
+                <h6>
+                  {" "}
+                  <i className="ri-equalizer-line"></i> Filter
+                </h6>
+                <i class="ri-close-circle-line" onClick={closeClick}></i>
               </div>
-             </div>
+            </div>
             <Filter
               guidePhraseData={guide && guide?.page_phrases}
               categoryAttributes={filters}
@@ -449,8 +454,8 @@ export default function GuidePage({
                 className="site_main_btn w-100 d-block btn-icon mb-4"
                 onClick={closeClick}
               >
-                <i className="ri-close-fill"></i>
-                Close Filter
+                {/* <i className="ri-close-fill"></i> */}
+               Apply Filter
               </Button>
             </div>
           </Col>
@@ -876,7 +881,7 @@ export default function GuidePage({
           </Col>
         </Row>
       </Container>
-      
+
       <section className="ptb-25">
         <Container>
           <Row>

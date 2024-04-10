@@ -36,6 +36,7 @@ import Questiontool from "@/components/Svg/Questiontool";
 import ProductPageOutline from "@/components/Common/OutlineGenerator/ProductPageOutline";
 import MainComparision from "@/components/Common/MainComparision/MainComparision";
 import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 // import Link from "next/link";
 
@@ -223,6 +224,7 @@ function ProductPage({
   );
   // console.log(is_found?.length);
   // console.log(slug)
+  const { isMobile } = useScreenSize();
   return (
     <>
       {/* {console.log(product?.text_under_ranking)} */}
@@ -1855,12 +1857,16 @@ function ProductPage({
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              <MobileCompareTable
-                productPhaseData={product?.page_phases}
-                products={compareByCatID?.data}
-                categoryAttributes={productCatAttributes?.data}
-                slug={slug}
-              />
+              {isMobile ? (
+                <MobileCompareTable
+                  productPhaseData={product?.page_phases}
+                  products={compareByCatID?.data}
+                  categoryAttributes={productCatAttributes?.data}
+                  slug={slug}
+                />
+              ) : (
+                ""
+              )}
             </Col>
           </Row>
         </Container>
