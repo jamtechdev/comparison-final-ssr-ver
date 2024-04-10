@@ -107,7 +107,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
         </span>
         <div className="base__container">
           <svg
-            viewBox={`0 0 290 100`}
+            // viewBox={`0 0 290 100`}
             ref={svgRef}
             className={classnames("base__svg-container", svgContainerClass)}
           />

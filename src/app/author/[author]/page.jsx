@@ -11,3 +11,25 @@ export default async function Page(props) {
     </React.Suspense>
   );
 }
+
+export async function generateMetadata(props) {
+  const { params } = props;
+  // console.log(params)
+  const authorData = await aboutUsService.getAuthorById(params?.author);
+  // console.log(authorData)
+
+  const siteURL = "https://mondopedia.it";
+  return {
+    title: authorData?.name,
+    generator: "Comparison web",
+    applicationName: "Comparison web",
+    referrer: "origin-when-cross-origin",
+    keywords: ["compare", "product"],
+    description: "Comparison web",
+    alternates: {
+      canonical: `${siteURL}/${params?.author}`,
+    },
+    ogType: "FRONTUM",
+    language: "en", // Language meta tag
+  };
+}

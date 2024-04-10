@@ -455,7 +455,7 @@ export default function GuidePage({
                 onClick={closeClick}
               >
                 {/* <i className="ri-close-fill"></i> */}
-               Apply Filter
+                Apply Filter
               </Button>
             </div>
           </Col>
@@ -923,7 +923,8 @@ export default function GuidePage({
                   ? guideData[0]?.data?.big_table_subtitle
                   : "No title found"}
               </h2>
-              {guide && products && (
+              {/* {console.log(productForTable?.products?.length)} */}
+              {guide && productForTable?.products?.length > 1 && (
                 <CompareTable
                   guidePhraseData={guide?.page_phrases}
                   products={productForTable?.products}

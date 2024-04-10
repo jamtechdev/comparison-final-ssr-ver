@@ -1835,24 +1835,28 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      <section>
-        <Container>
-          <Row className="table-section-mobile">
-            <Col md={12}>
-              <h2 className="site-main-heading pt-5">
-                {product?.page_phases?.table_compare_title}
-              </h2>
-              <ProductCompareTable
-                productPhaseData={product?.page_phases}
-                products={compareByCatID?.data}
-                categoryAttributes={productCatAttributes?.data}
-                slug={slug}
-              />
-            </Col>
-            <Col md={12}></Col>
-          </Row>
-        </Container>
-      </section>
+      {console.log(compareByCatID?.data?.length)}
+      {compareByCatID?.data?.length > 1 && (
+        <section>
+          <Container>
+            <Row className="table-section-mobile">
+              <Col md={12}>
+                <h2 className="site-main-heading pt-5">
+                  {product?.page_phases?.table_compare_title}
+                </h2>
+                <ProductCompareTable
+                  productPhaseData={product?.page_phases}
+                  products={compareByCatID?.data}
+                  categoryAttributes={productCatAttributes?.data}
+                  slug={slug}
+                />
+              </Col>
+              <Col md={12}></Col>
+            </Row>
+          </Container>
+        </section>
+      )}
+
       <section className="mobile-table-section">
         <Container>
           <Row className="table-section-desktop p-0">

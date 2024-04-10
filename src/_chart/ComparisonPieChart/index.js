@@ -189,7 +189,7 @@ function ComparisonPieChart(props) {
               .style("border-radius", "3px")
               .style("background-color", "#fff")
               .style("color", color)
-              .text(`${item}` + indexId);
+              .text(`${item}`);
           });
         }
       });

@@ -15,7 +15,7 @@ function AuthorPage({ slug, authorData }) {
             <Col md={12}>
               <BreadCrumb
                 firstPageName="author"
-                secondPageName={{name:authorData?.name}}
+                secondPageName={""}
               />
             </Col>
             <Col md={12}>
