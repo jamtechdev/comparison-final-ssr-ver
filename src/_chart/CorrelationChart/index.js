@@ -128,15 +128,14 @@ function CorrelationChart(props) {
   const { ticks: yTickValues } = yLabelValue;
   const { nextStepVal: xStep } = calculateNextStep(maxX, minX, x_tick);
   const { ticks: xTickValues } = xLabelValue;
-  const { isMobile } = useScreenSize();
-  alert(isMobile);
-
   useEffect(() => {
     drawChart();
   }, [correlationChartData]);
 
   function drawChart() {
     d3.select(svgContainer.current).select("svg").remove();
+    const isMobileScreen = window.innerWidth <= 768;
+    // alert(isMobileScreen)
     // Remove the old tooltip
     d3.select(svgContainer.current).select(".tooltip").remove();
     const translateX = margin.left + 15;
@@ -145,7 +144,7 @@ function CorrelationChart(props) {
       .append("svg")
       .attr("width", width)
       .attr("height", height)
-      .attr("viewBox", isMobile ? "15 0 410 400" : "0 0 400  210")
+      .attr("viewBox", isMobileScreen ? "15 0 410 400" : "0 0 400  210")
       .append("g")
       .style("background-color", "#fff")
       .attr("transform", "translate(" + translateX + "," + margin.top + ")");
