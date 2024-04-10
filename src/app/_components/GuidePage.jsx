@@ -294,9 +294,11 @@ export default function GuidePage({
   // toggle mobile filter
   const openClick = (event) => {
     setIsShown(true);
+    document.body.classList.add("filter--sidebar--open");
   };
   const closeClick = (event) => {
     setIsShown(false);
+    document.body.classList.remove("filter--sidebar--open");
   };
 
   return (
@@ -425,9 +427,15 @@ export default function GuidePage({
             md={12}
             lg={3}
             xl={3}
-            className="sidebar-width"
-            style={{ display: isShown ? "block" : "none" }}
+            className={isShown ? "sidebar-width sidebar--open" : "sidebar-width"}
+            // style={{ display: isShown ? "block" : "none" }}
           >
+             <div className="desktop-hide">
+              <div className="header--section">
+                <h6> <i className="ri-equalizer-line"></i> Filter</h6>
+                <i class="ri-close-circle-line"></i>
+              </div>
+             </div>
             <Filter
               guidePhraseData={guide && guide?.page_phrases}
               categoryAttributes={filters}

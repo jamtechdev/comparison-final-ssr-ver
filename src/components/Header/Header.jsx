@@ -183,7 +183,12 @@ export default function Header({ headerData, headerPhase }) {
                     value={search}
                     onChange={handleSearch}
                   />
-                  <span className="search__close__btn"><i className="ri-close-line"></i></span>
+                  {search !== "" && (
+                    <span className="search__close__btn">
+                      <i className="ri-close-line"></i>
+                    </span>
+                  )}
+
                   <Button className="searchBarInner">
                     <i className="ri-search-line"></i>
                   </Button>

@@ -459,10 +459,10 @@
     .mobile_accordion
     .accordion-item
     .accordion-button:focus-visible,
-    .sec-mobile_accordion
-      .mobile_accordion
-      .accordion-item
-      .accordion-button:focus-within {
+  .sec-mobile_accordion
+    .mobile_accordion
+    .accordion-item
+    .accordion-button:focus-within {
     box-shadow: none;
   }
   .accordion-item .accordion-button {
@@ -552,16 +552,17 @@
 
 /* Mobile Responsive Start */
 @media screen and (max-width: 767px) {
-  .thumb-slider .swiper-slide img{
+  .thumb-slider .swiper-slide img {
     width: 90% !important;
     height: 90% !important;
   }
   .best-price-section.ranking {
     margin-bottom: 0px;
-}
-.pros-corns-section.pros ul li:before, .pros-corns-section.corns ul.cross li:before{
-  top: 5px !important;
-}
+  }
+  .pros-corns-section.pros ul li:before,
+  .pros-corns-section.corns ul.cross li:before {
+    top: 5px !important;
+  }
   .footer-container > .row {
     row-gap: 20px;
   }
@@ -1254,7 +1255,7 @@
   .thumb-section-container .thumb-slider {
     order: 1;
     /* width: 100% !important; */
-    flex:1;
+    flex: 1;
   }
 
   .thumb-section-container .alternatives {
@@ -1406,7 +1407,7 @@
     padding: 0 10px !important;
   }
   .catchy_titles_section.row span.catchy_titles_section_title {
-    line-height: 30px !important;
+    line-height: 20px !important;
   }
   .sidebar_filter {
     margin: 15px 0;
@@ -1647,7 +1648,7 @@
     width: 100%;
     top: 0;
     bottom: 0;
-}
+  }
 
   .table-section-desktop .product-slider {
     margin: 0 0 20px !important;
@@ -2119,19 +2120,57 @@
   }
   .guide-page-tested {
     left: auto !important;
-}
+  }
   body .sidebar-width {
     position: fixed;
     z-index: 1000;
     background: #fff;
-    width: 100%;
+    width: 90%;
     top: 0;
     left: 0;
     right: 0;
     padding: 0 10px !important;
+    transform: translateX(-100%);
+    transition: 0.5s;
   }
+
+  body .sidebar--open {
+    transform: translateX(0%);
+    transition: 0.5s;
+  }
+
+  .filter--sidebar--open {
+    overflow: hidden;
+  }
+
+  .filter--sidebar--open::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #0000007a;
+    z-index: 1000;
+  }
+
+  .header--section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .header--section i {
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  .header--section h6 i {
+    font-size: 22px !important;
+  }
+
   .filter-container {
-    height: calc(100vh - 50px) !important;
+    height: calc(100vh - 100px) !important;
     top: 0 !important;
   }
   .mobile__filter {
