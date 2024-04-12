@@ -48,16 +48,7 @@ function HorizontalChart(props) {
     const svg = d3
       .select(svgContainer.current)
       .append("svg")
-      .attr(
-        "viewBox",
-        `${
-          isMobileScreen
-            ? "20 0 650 150"
-            : `0 0 ${newWidth + margin.left + margin.right} ${
-                newHeight + margin.top + margin.bottom
-              }`
-        }`
-      )
+      .attr("viewBox", `${isMobileScreen ? "20 0 650 150" : `215 0 480 151`}`)
 
       .attr("width", newWidth + margin.left + margin.right)
 
@@ -187,7 +178,7 @@ function HorizontalChart(props) {
         style={{
           "max-width": width,
           "text-align": "center",
-          "margin-bottom": "-10px",
+          "margin-bottom": "-30px",
         }}
         className="chartTitle"
       >
