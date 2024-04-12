@@ -22,7 +22,7 @@ function HorizontalChart(props) {
     "#abcdf6",
     "#c9e0fa",
   ];
-  const margin = { top: 20, right: 30, bottom: 20, left: 120 };
+  const margin = { top: 20, right: 30, bottom: 20, left: 350 };
 
   const newWidth = width - margin.left - margin.right;
   const newHeight = calculateHeight(
