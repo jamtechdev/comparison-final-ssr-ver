@@ -57,7 +57,7 @@ function HorizontalChart(props) {
         }`
       )
 
-      .attr("width", newWidth + margin.left + margin.right)
+      .attr("width", `${newWidth + margin.left + margin.right}`+"px")
 
       .attr("height", newHeight + margin.top + margin.bottom)
       .append("g")
