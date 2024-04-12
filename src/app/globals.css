@@ -2179,7 +2179,7 @@ div#shortCodeText ul {
     justify-content: space-between;
     width: 100%;
     margin-left: auto;
-    max-width: 200px;
+    max-width: 300px;
   }
   .container-divs .parentBarDiv {
     padding: 0 !important;
@@ -2210,5 +2210,6 @@ div#shortCodeText ul {
   float: right;
 }
 .container-divs .parentBarDiv .legendBoxBarChart table {
-  width: 80px !important;
+  width: 300px !important;
+  margin-top: 15px;
 }

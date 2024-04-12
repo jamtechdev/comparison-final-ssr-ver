@@ -99,7 +99,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
       <div
         style={{
           "align-items": "center",
-          "flex-direction": "column",
+          // "flex-direction": "column",
           display: "flex",
         }}
       >
