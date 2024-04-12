@@ -65,9 +65,10 @@ const BaseChart = (drawChart, extraProps) => {
       const svg = d3
         .select(svgRef.current)
         // .attr("width", width + margin.left + margin.right)
-        .attr("width", "500px !important")
+        // .attr("width", "500px !important")
         // .attr("height", height + margin.top + margin.bottom)
         .attr("height", 180)
+        .style("width", "500px !important")
         .append("g")
         .attr("transform", `translate(${margin.left + 20},${margin.top - 60})`);
 
