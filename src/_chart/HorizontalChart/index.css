@@ -5,7 +5,7 @@
  font-size: 16px;
  fill: rgba(39, 49, 75, 0.8);
  color: rgba(39, 49, 75, 0.8);
- white-space: pre-wrap;
+ /* white-space: pre-wrap; */
 }
 
 .rect-size {
@@ -19,7 +19,7 @@
  font-size: 15px;
  fill: rgba(39, 49, 75, 0.7);
  color: rgba(39, 49, 75, 0.7);
- white-space: pre-wrap;
+ /* white-space: pre-wrap; */
 }
 
 svg {
