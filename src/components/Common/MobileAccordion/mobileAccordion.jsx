@@ -28,7 +28,7 @@ export default function MobileAccordion({
 
           {expertReview && expertReview.length > 0 && (
             <Accordion.Item eventKey="1">
-              <Accordion.Header as="div">Video Reviews</Accordion.Header>
+              <Accordion.Header as="div">Expert Reviews </Accordion.Header>
               <Accordion.Body className="px-2">
                 <Row>
                   <Col md={12} xs={12} className="px-0">
@@ -41,11 +41,11 @@ export default function MobileAccordion({
 
           {videoReview && videoReview.length > 0 && (
             <Accordion.Item eventKey="2">
-              <Accordion.Header as="div">Expert Reviews</Accordion.Header>
+              <Accordion.Header as="div">Video Reviews</Accordion.Header>
               <Accordion.Body className="px-2">
                 <Row>
                   <Col md={12} xs={12} className="px-0">
-                    <MobileVideoReview  videoReview={videoReview} />
+                    <MobileVideoReview videoReview={videoReview} />
                   </Col>
                 </Row>
               </Accordion.Body>

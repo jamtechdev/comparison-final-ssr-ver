@@ -2187,9 +2187,10 @@
 @media screen and (max-width: 768px) {
   .legendBoxBarChart td {
     justify-content: flex-start !important;
-}
-.arrow__fixed .swiper-prev, .arrow__fixed .swiper-next{
-  position: sticky !important;
-  top: 150px;
-}
+  }
+  .arrow__fixed .swiper-prev,
+  .arrow__fixed .swiper-next {
+    position: sticky !important;
+    top: 150px;
+  }
 }

@@ -280,7 +280,7 @@ export default function MobileCompareTable({
           <tr>
             {chunkedData?.map((product, index) => {
               // console.log(product?.length);
-              return product?.slice(0, 1)?.map((data, productIndex) => {
+              return product?.map((data, productIndex) => {
                 return (
                   <th>
                     <p className="device-name">
@@ -390,7 +390,7 @@ export default function MobileCompareTable({
           <p>
             Showing products: <b>1-2</b>
           </p>
-        </Col>  
+        </Col>
         <Col sm="6" xs="3" className="p-0">
           <div className="slider-controls">
             <span className="swiper-prev" onClick={handlePrevious}>
@@ -403,7 +403,13 @@ export default function MobileCompareTable({
         </Col>
       </Row>
       <div className="compare-container-wrapper">
-        <div className={winPos == true ?"slider-controls table__arrow arrow__fixed":"slider-controls table__arrow"}>
+        <div
+          className={
+            winPos == true
+              ? "slider-controls table__arrow arrow__fixed"
+              : "slider-controls table__arrow"
+          }
+        >
           <span className="swiper-prev" onClick={handlePrevious}>
             <i className="ri-arrow-left-s-line"></i>
           </span>
