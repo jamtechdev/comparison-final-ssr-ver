@@ -190,7 +190,7 @@ export default function Header({ headerData, headerPhase }) {
                   )}
 
                   <Button className="searchBarInner">
-                    <i className="ri-search-line"></i>
+                    <i className="ri-search-line" onClick={handleClear}></i>
                   </Button>
                   <SearchList
                     setsearch={setSearch}

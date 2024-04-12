@@ -135,7 +135,7 @@ function lineChart(svgRef, lineChartData) {
 
   const yAxis = d3
     .axisLeft(yScale)
-    .tickSize(margin - 800) // Keep ticks for labels (optional)
+    .tickSize(margin - 700) // Keep ticks for labels (optional)
     .tickSizeOuter(0)
     .tickValues(yIntervalsInt)
     .tickPadding(20)
