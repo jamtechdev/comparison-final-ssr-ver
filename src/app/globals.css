@@ -2216,3 +2216,7 @@ div#shortCodeText ul {
 .base_chart_graph {
   width: 500px !important;
 }
+
+.correlation_svg_width{
+  width: 520px !important;
+}

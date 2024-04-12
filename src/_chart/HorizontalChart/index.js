@@ -57,7 +57,7 @@ function HorizontalChart(props) {
         }`
       )
 
-      .attr("width", `${newWidth + margin.left + margin.right}`+"px !important")
+      // .attr("width", `${newWidth + margin.left + margin.right}`+"px !important")
 
       .attr("height", newHeight + margin.top + margin.bottom)
       .append("g")
@@ -191,7 +191,10 @@ function HorizontalChart(props) {
       >
         {chartTitle}
       </span>
-      <div ref={svgContainer}></div>
+      <div
+        ref={svgContainer}
+        style={{ width: `${newWidth + margin.left + margin.right}` }}
+      ></div>
     </div>
   );
 }
