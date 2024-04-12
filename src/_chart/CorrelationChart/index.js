@@ -142,7 +142,7 @@ function CorrelationChart(props) {
     const svg = d3
       .select(svgContainer.current)
       .append("svg")
-      .attr("width", "520px")
+      .attr("width", "520px !important")
       .attr("height", 220)
       // .attr("viewBox", isMobileScreen ? "15 0 410 400" : "0 150 400  210")
       .attr("viewBox", isMobileScreen ? "-20 150 500 100" : "-20 150 500 100")

@@ -65,7 +65,7 @@ const BaseChart = (drawChart, extraProps) => {
       const svg = d3
         .select(svgRef.current)
         // .attr("width", width + margin.left + margin.right)
-        .attr("width", "500px")
+        .attr("width", "500px !important")
         // .attr("height", height + margin.top + margin.bottom)
         .attr("height", 180)
         .append("g")
