@@ -90,7 +90,7 @@ function lineChart(svgRef, lineChartData) {
   const xScale = d3
     .scaleTime()
     .domain([d3.timeWeek.offset(maxX, -24), maxX]) // Show data for the last 24 weeks
-    .range([0, 1000 - margin]);
+    .range([0, 700 - margin]);
 
   const [minY, maxY] = d3.extent(data[0].values, (d) => d.price);
   const maxDifference = maxY / 15;
@@ -118,28 +118,27 @@ function lineChart(svgRef, lineChartData) {
     .range([height - margin, 0]);
 
   svg
-    .attr("width", 1000)
-    .attr("viewBox", `${isMobileScreen ? `0 0 1000 450` : "0 0 1700 550"}`)
-    .attr("height", 500)
+    .attr("width", 800)
+    .attr("viewBox", `${isMobileScreen ? `0 0 1000 450` : "0 0 900 550"}`)
+    .attr("height", 450)
     .append("g")
     .attr("transform", `translate(${margin}, ${margin})`);
 
-    const xAxis = d3
+  const xAxis = d3
     .axisBottom(xScale)
     .tickSize(height - margin)
     .tickFormat(d3.timeFormat(europeanDateFormat))
-    .tickPadding(10)
+    .tickPadding(10);
 
-    
-    // .ticks(d3.timeWeek.every(1)) // Set the interval between ticks to 1 week
-    // .tickValues([firstSunday, middleSunday2, middleSunday1, lastSunday]); // Optionally, set specific tick values
+  // .ticks(d3.timeWeek.every(1)) // Set the interval between ticks to 1 week
+  // .tickValues([firstSunday, middleSunday2, middleSunday1, lastSunday]); // Optionally, set specific tick values
 
   const yAxis = d3
     .axisLeft(yScale)
-    .tickSize(margin - 1000) // Keep ticks for labels (optional)
+    .tickSize(margin - 800) // Keep ticks for labels (optional)
     .tickSizeOuter(0)
     .tickValues(yIntervalsInt)
-    .tickPadding(40)
+    .tickPadding(20)
     .tickFormat((d) => `${d} ${lineChartData?.lineChartData[0]?.currency}`);
 
   svg
