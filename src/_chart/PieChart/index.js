@@ -166,6 +166,7 @@ function PieChart(props) {
         "align-items": "center",
         "flex-direction": "column",
         display: "flex",
+        "margin-boottom": "2%",
       }}
     >
       <span className="chartTitle" style={{ "margin-bottom": "-15px" }}>

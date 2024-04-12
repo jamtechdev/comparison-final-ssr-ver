@@ -51,11 +51,14 @@ function ProductPageGraph({ data, activeTab }) {
   }, []);
 
   useEffect(() => {
+    const isMobileScreen = window.innerWidth <= 768;
     const svg = select("#productGraph")
       .append("svg")
-      .attr("viewBox", `0 0 ${width} ${height}`)
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr("viewBox", `0 0 470 450`)
+      // .attr("width", width + margin.left + margin.right)
+      .attr("width", 490)
+      .attr("height", 420)
+      // .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .attr("fill", "gray");

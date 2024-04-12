@@ -403,7 +403,7 @@ export default function MobileCompareTable({
         </Col>
       </Row>
       <div className="compare-container-wrapper">
-        <div className="slider-controls table__arrow">
+        <div className={winPos == true ?"slider-controls table__arrow arrow__fixed":"slider-controls table__arrow"}>
           <span className="swiper-prev" onClick={handlePrevious}>
             <i className="ri-arrow-left-s-line"></i>
           </span>

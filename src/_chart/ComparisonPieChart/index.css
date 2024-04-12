@@ -41,6 +41,7 @@
    font-weight: 400;
   color: rgba(39, 48, 78, 0.80);
    margin-right: 10px;
+   white-space: nowrap;
 }
 
 .tooltip {

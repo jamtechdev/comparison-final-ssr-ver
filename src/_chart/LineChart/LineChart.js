@@ -110,7 +110,7 @@ function lineChart(svgRef, lineChartData) {
   // [0, 200, 400, 600, 800, 980];
   // console.log(yIntervals);
   // console.log(yIntervalsInt);
-
+  const isMobileScreen = window.innerWidth <= 768;
   // Day
   const yScale = d3
     .scaleLinear()
@@ -118,9 +118,9 @@ function lineChart(svgRef, lineChartData) {
     .range([height - margin, 0]);
 
   svg
-    .attr("width", width + margin + "px")
-    .attr("viewBox", `0 0 1000 ${height + margin}`)
-    .attr("height", height + margin + "px")
+    .attr("width", 500)
+    .attr("viewBox", `${isMobileScreen ? `0 0 1000 450` : "0 0 1200 450"}`)
+    .attr("height", 450)
     .append("g")
     .attr("transform", `translate(${margin}, ${margin})`);
 

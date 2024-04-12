@@ -43,11 +43,21 @@ function HorizontalChart(props) {
 
   function drawChart() {
     d3.select(svgContainer.current).select("svg").remove();
+    const isMobileScreen = window.innerWidth <= 768;
 
     const svg = d3
       .select(svgContainer.current)
       .append("svg")
-      .attr("viewBox", `60 0 560 100`)
+      .attr(
+        "viewBox",
+        `${
+          isMobileScreen
+            ? "20 0 650 150"
+            : `0 0 ${newWidth + margin.left + margin.right} ${
+                newHeight + margin.top + margin.bottom
+              }`
+        }`
+      )
 
       .attr("width", newWidth + margin.left + margin.right)
 

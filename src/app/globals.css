@@ -1903,6 +1903,7 @@ h4.attribute__title {
   top: 5px;
   right: -15px;
   transform: rotate(18deg);
+  z-index: 1000;
 }
 
 .guide-page-tested .tested__ok__section {

@@ -304,6 +304,8 @@ function CorrelationChart(props) {
         padding: " 0px",
         "margin-top": "8%",
         "margin-bottom": "3%",
+        "margin-left": " -15px",
+        "margin-right": "-15px",
       }}
     >
       <span

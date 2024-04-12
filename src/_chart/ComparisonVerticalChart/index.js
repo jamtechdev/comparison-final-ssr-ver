@@ -60,6 +60,7 @@ function ComparisonVerticalChart(props) {
     .data(updatedData)
     .enter()
     .append("rect")
+    // .attr("viewBox", `40 90 280 100`)
     .attr("class", classnames(["bar-chart__bar rect-hover", barClass]))
     .attr("x", (d) => xScale(d.label))
     .attr("width", xScale.bandwidth())

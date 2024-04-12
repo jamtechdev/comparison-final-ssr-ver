@@ -66,8 +66,10 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
     function draw() {
       const svg = d3
         .select(svgRef.current)
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        // .attr("width", width + margin.left + margin.right)
+        .attr("width", 300)
+        .attr("height", 220)
+        // .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", `translate(${margin.left + 20},${margin.top - 60})`);
 
@@ -107,7 +109,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
         </span>
         <div className="base__container">
           <svg
-            // viewBox={`0 0 290 100`}
+            viewBox={`40 90 280 100`}
             ref={svgRef}
             className={classnames("base__svg-container", svgContainerClass)}
           />
