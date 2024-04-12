@@ -193,7 +193,7 @@ function HorizontalChart(props) {
       </span>
       <div
         ref={svgContainer}
-        style={{ width: `${newWidth + margin.left + margin.right}` }}
+        style={{ width: `${newWidth + margin.left + margin.right} px` }}
       ></div>
     </div>
   );
