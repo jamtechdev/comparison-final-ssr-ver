@@ -12,9 +12,9 @@ function AuthorPage({ slug, authorData }) {
       <section className="breadcrumb-section">
         <Container>
           <Row>
-            <Col md={12}>
+            {/* <Col md={12}>
               <BreadCrumb firstPageName="author" secondPageName={""} />
-            </Col>
+            </Col> */}
             <Col md={12}>
               <h1 className="heading-primary">{authorData.name}</h1>
             </Col>

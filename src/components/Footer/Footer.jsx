@@ -29,7 +29,7 @@ export default function Footer({ footerData }) {
   };
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(true); 
   return (
     <footer>
       <div className={styles.signupContainer}>

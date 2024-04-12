@@ -122,7 +122,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
         <Container>
           <div className="custom-row">
             <div className="left-side-bar">
-              <div className="outline-section">
+              <div className="outline-section top-sticky-0">
                 <p>{blogData[0]?.data?.page_phases?.outline}</p>
                 <OutlineGenerator
                   currentIndexId={activeOutlineId}

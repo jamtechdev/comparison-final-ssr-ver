@@ -455,7 +455,7 @@ export default function GuidePage({
                 onClick={closeClick}
               >
                 {/* <i className="ri-close-fill"></i> */}
-                Apply Filter
+                See Product
               </Button>
             </div>
           </Col>

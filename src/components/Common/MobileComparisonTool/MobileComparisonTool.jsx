@@ -10,7 +10,10 @@ import CompareModal from "../Comparison/CompareModal";
 import formatValue from "@/_helpers/formatValue";
 import { deleteCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 
-export default function MobileComparisonTool({ compareProduct,handelRemoveProductFormComparison }) {
+export default function MobileComparisonTool({
+  compareProduct,
+  handelRemoveProductFormComparison,
+}) {
   const [swiperRef, setSwiperRef] = useState();
 
   const handlePrevious = useCallback(() => {

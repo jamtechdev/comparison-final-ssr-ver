@@ -417,7 +417,7 @@ function ProductPage({
                 className="count"
                 style={{ backgroundColor: technicalScoreColor }}
               >
-                {product?.technical_score}
+                {formatValue(product?.technical_score)}
               </span>
               <div className="score-detail">
                 <div className="tooltip-title removeUnderlineFrom ">

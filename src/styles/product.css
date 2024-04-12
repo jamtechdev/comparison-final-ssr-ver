@@ -381,6 +381,8 @@
 .ranking .best-list-item li img {
   width: 15px;
   margin-right: 10px;
+  position: relative;
+  top: 5px;
 }
 
 .alternatives {

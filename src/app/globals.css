@@ -1162,7 +1162,7 @@ button.searchBarInner.btn.btn-primary {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin: 10px 0;
+  margin: 3px 0;
 }
 
 .catchy_titles_section.row ul li > span {
@@ -1306,7 +1306,9 @@ a.outlineLink.outline-active {
   font-size: 13px;
   /* line-height: 1.8; */
 }
-
+.top-sticky-0{
+  top: 0 !important;
+}
 .outline-section ol li.outline-active,
 .outline-section ol li a:hover {
   color: var(--secondary-color);

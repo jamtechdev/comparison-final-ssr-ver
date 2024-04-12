@@ -280,7 +280,7 @@ export default function MobileCompareTable({
           <tr>
             {chunkedData?.map((product, index) => {
               // console.log(product?.length);
-              return product?.map((data, productIndex) => {
+              return product?.slice(0, 1)?.map((data, productIndex) => {
                 return (
                   <th>
                     <p className="device-name">
@@ -385,7 +385,7 @@ export default function MobileCompareTable({
           </tr>
         </thead>
       </Table>
-      <Row className="mt-3 align-items-center">
+      {/* <Row className="mt-3 align-items-center">
         <Col sm="6" xs="9" className="p-0">
           <p>
             Showing products: <b>1-2</b>
@@ -401,7 +401,7 @@ export default function MobileCompareTable({
             </span>
           </div>
         </Col>
-      </Row>
+      </Row> */}
       <div className="compare-container-wrapper">
         <div
           className={
@@ -763,7 +763,7 @@ export default function MobileCompareTable({
                                 null;
                               return (
                                 <td key={idx}>
-                                  {value}
+                                  {formatValue(value)}
                                   {value === max && valueCounts[value] <= 1 && (
                                     <span
                                       key={value}
@@ -777,7 +777,9 @@ export default function MobileCompareTable({
                                         src="/icons/star.png"
                                         alt="star"
                                       />
-                                      {/* <ProsConsToolTip hover_phrase={starPhase} /> */}
+                                      <ProsConsToolTip
+                                        hover_phrase={data?.star_text}
+                                      />
                                     </span>
                                   )}
                                   {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
@@ -861,10 +863,76 @@ export default function MobileCompareTable({
                                                 swiperIndex,
                                                 swiperIndex + 1
                                               )
-                                              .map((item, itemIndex) => {
+                                              .map((item, attrIndex) => {
                                                 return (
-                                                  <td key={itemIndex}>
-                                                    {item?.attribute_value}
+                                                  <td key={attrIndex}>
+                                                    {item?.attribute_value.includes(
+                                                      "⭐"
+                                                    ) ? (
+                                                      <>
+                                                        <div>
+                                                          {
+                                                            item?.attribute_value.split(
+                                                              "⭐"
+                                                            )[0]
+                                                          }{" "}
+                                                          {item?.unit?.split(
+                                                            "-"
+                                                          )[0] &&
+                                                            item?.unit?.split(
+                                                              "-"
+                                                            )[0]}
+                                                          <span className="tooltip-title-2">
+                                                            <img
+                                                              style={{
+                                                                float: "right",
+                                                                paddingRight:
+                                                                  "5px",
+                                                              }}
+                                                              src="/icons/star.png"
+                                                              alt="star"
+                                                            />
+                                                            <ProsConsToolTip
+                                                              hover_phrase={
+                                                                item.start_phase
+                                                              }
+                                                            />
+                                                          </span>
+                                                        </div>
+                                                      </>
+                                                    ) : (
+                                                      <>
+                                                        {item?.attribute_value ===
+                                                          "-" ||
+                                                        item?.attribute_value ===
+                                                          null ||
+                                                        item?.attribute_value ===
+                                                          "?" ? (
+                                                          "-"
+                                                        ) : (
+                                                          <>
+                                                            {item?.attribute_value ===
+                                                              "-" ||
+                                                            item?.attribute_value ===
+                                                              null ||
+                                                            item?.attribute_value ===
+                                                              "?" ? (
+                                                              item?.attribute_value
+                                                            ) : (
+                                                              <>
+                                                                {" "}
+                                                                {
+                                                                  item?.attribute_value
+                                                                }{" "}
+                                                                {item?.unit
+                                                                  ? item?.unit
+                                                                  : ""}
+                                                              </>
+                                                            )}
+                                                          </>
+                                                        )}
+                                                      </>
+                                                    )}
                                                   </td>
                                                 );
                                               });
