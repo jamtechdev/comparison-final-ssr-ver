@@ -184,13 +184,13 @@ export default function Header({ headerData, headerPhase }) {
                     onChange={handleSearch}
                   />
                   {search !== "" && (
-                    <span className="search__close__btn">
+                    <span className="search__close__btn" onClick={handleClear}>
                       <i className="ri-close-line"></i>
                     </span>
                   )}
 
                   <Button className="searchBarInner">
-                    <i className="ri-search-line" onClick={handleClear}></i>
+                    <i className="ri-search-line"></i>
                   </Button>
                   <SearchList
                     setsearch={setSearch}
