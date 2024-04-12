@@ -68,7 +68,7 @@ const BaseChart = (drawChart, extraProps) => {
         // .attr("width", "500px !important")
         // .attr("height", height + margin.top + margin.bottom)
         .attr("height", 180)
-        .style("width", "500px !important")
+        // .style("width", "500px !important")
         .append("g")
         .attr("transform", `translate(${margin.left + 20},${margin.top - 60})`);
 
@@ -113,7 +113,7 @@ const BaseChart = (drawChart, extraProps) => {
             ref={svgRef}
             // viewBox={isMobile ? `55 0 490 100` : `30 0 500 340`}
             viewBox={`60 90 500 100`}
-            className={classnames("base__svg-container", svgContainerClass)}
+            className={classnames("base__svg-container  base_chart_graph", svgContainerClass)}
           />
           <div
             className={classnames("base__tooltip", tooltipClass)}

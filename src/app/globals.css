@@ -2213,3 +2213,6 @@ div#shortCodeText ul {
   width: 300px !important;
   margin-top: 15px;
 }
+.base_chart_graph {
+  width: 500px !important;
+}
