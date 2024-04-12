@@ -138,6 +138,7 @@ function ProductPageGraph({ data, activeTab }) {
         .append("text")
         .attr("x", width / 2)
         .attr("y", height / 2 - radAxis(el) - 0.85)
+
         .attr("fill", "black")
         .attr("stroke", "none")
         .attr("opacity", "0.5")
