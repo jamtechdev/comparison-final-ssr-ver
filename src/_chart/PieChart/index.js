@@ -56,7 +56,12 @@ function PieChart(props) {
     const svg = d3
       .select(`#${containerId}`)
       .append("svg")
-      .attr("viewBox", `0 0 ${svgSize + margin.left + margin.right} ${svgSize + margin.top + margin.bottom}`)
+      .attr(
+        "viewBox",
+        `0 0 ${svgSize + margin.left + margin.right} ${
+          svgSize + margin.top + margin.bottom
+        }`
+      )
       .attr("width", svgSize + margin.left + margin.right)
       .attr("height", svgSize + margin.top + margin.bottom);
 
@@ -166,7 +171,7 @@ function PieChart(props) {
         "align-items": "center",
         "flex-direction": "column",
         display: "flex",
-        "margin-boottom": "2%",
+        "margin-bottom": "2%",
       }}
     >
       <span className="chartTitle" style={{ "margin-bottom": "-15px" }}>
