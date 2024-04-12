@@ -35,7 +35,7 @@
 }
 .container-divs .parentBarDiv {
   display: flex;
-  align-items: flex-start !important;
+  flex-direction: column;
   // gap: 10px;
 
   .legendBoxBarChart {

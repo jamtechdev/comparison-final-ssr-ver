@@ -119,8 +119,8 @@ function lineChart(svgRef, lineChartData) {
 
   svg
     .attr("width", 800)
-    .attr("viewBox", `${isMobileScreen ? `0 0 1000 450` : "0 0 900 550"}`)
-    .attr("height", 450)
+    .attr("viewBox", `${isMobileScreen ? `80 0 600 300` : "80 0 600 300"}`)
+    .attr("height", 300)
     .append("g")
     .attr("transform", `translate(${margin}, ${margin})`);
 

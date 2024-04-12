@@ -2066,7 +2066,7 @@ h4.attribute__title {
 .legendBoxBarChart table tr td {
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .p-top-20 {
@@ -2179,7 +2179,7 @@ div#shortCodeText ul {
     justify-content: space-between;
     width: 100%;
     margin-left: auto;
-    max-width: 170px;
+    max-width: 200px;
   }
   .container-divs .parentBarDiv {
     padding: 0 !important;
@@ -2198,4 +2198,17 @@ div#shortCodeText ul {
 .base_class_chart {
   margin-top: 5%;
   margin-bottom: 7%;
+}
+
+.container-divs .parentBarDiv .legendBoxBarChart {
+  margin: 0 !important;
+}
+
+.container-divs .parentBarDiv .legendBoxBarChart table {
+  margin: auto;
+  display: block !important ;
+  float: right;
+}
+.container-divs .parentBarDiv .legendBoxBarChart table {
+  width: 80px !important;
 }

@@ -1129,7 +1129,10 @@ function ProductPage({
                 <h2 className="site-main-heading">
                   Price trend in the past 6 months
                 </h2>
-                <div className="draw-chart-container">
+                <div
+                  className="draw-chart-container"
+                  style={{ marginBottom: "10%" }}
+                >
                   <Container className="position-relative  line-chart-parent">
                     <div className="chart__data">
                       <span></span>
