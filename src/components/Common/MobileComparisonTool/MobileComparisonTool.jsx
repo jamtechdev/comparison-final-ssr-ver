@@ -161,7 +161,7 @@ export default function MobileComparisonTool({
                             <span>{item?.price_websites[0]?.price} €</span>
                           )}
                         </div>
-                        <div className="comparison-product-item">
+                        {/* <div className="comparison-product-item">
                           <img
                             src={
                               item?.price_websites[1]?.logo === null
@@ -176,7 +176,7 @@ export default function MobileComparisonTool({
                           {item?.price_websites[1]?.price != null && (
                             <span>{item?.price_websites[1]?.price} €</span>
                           )}
-                        </div>
+                        </div> */}
                       </>
                     ) : (
                       <>
