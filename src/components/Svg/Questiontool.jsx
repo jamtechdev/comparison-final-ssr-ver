@@ -15,7 +15,7 @@ const Questiontool = ({ attributes }) => {
     const viewportWidth = document.documentElement.clientWidth;
 
     const tooltipWidth = tooltipRect.width;
-    console.log(viewportWidth - tooltipWidth / 2 - viewportWidth + 50);
+    console.log(viewportWidth - tooltipWidth / 2 - viewportWidth + 120);
 
     // Calculate ideal left position for centered alignment
     const idealLeft = (viewportWidth - tooltipWidth) / 2;
