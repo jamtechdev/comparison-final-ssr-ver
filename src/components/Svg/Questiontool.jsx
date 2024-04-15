@@ -15,7 +15,7 @@ const Questiontool = ({ attributes }) => {
     const viewportWidth = document.documentElement.clientWidth;
 
     const tooltipWidth = tooltipRect.width;
-    console.log(viewportWidth - tooltipWidth / 2 - viewportWidth);
+    console.log(viewportWidth - tooltipWidth / 2 - viewportWidth + 50);
 
     // Calculate ideal left position for centered alignment
     const idealLeft = (viewportWidth - tooltipWidth) / 2;
@@ -23,7 +23,7 @@ const Questiontool = ({ attributes }) => {
     // Calculate the final left position to ensure the tooltip stays within the screen boundaries
     const left = Math.min(
       Math.max(0, idealLeft),
-      viewportWidth - tooltipWidth / 2 - viewportWidth
+      viewportWidth - tooltipWidth / 2 - viewportWidth + 50
     );
 
     setTooltipPosition({ ...tooltipPosition, left });
