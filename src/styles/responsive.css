@@ -2193,4 +2193,7 @@
     position: sticky !important;
     top: 150px;
   }
+  .tooltip-display-content {
+    /* width: 160px !important; */
+  }
 }

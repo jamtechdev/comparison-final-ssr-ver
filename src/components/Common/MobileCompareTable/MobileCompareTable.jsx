@@ -280,11 +280,11 @@ export default function MobileCompareTable({
           <tr>
             {chunkedData?.map((product, index) => {
               // console.log(product?.length);
-              return product?.slice(0, 1)?.map((data, productIndex) => {
+              return product?.map((data, productIndex) => {
                 return (
                   <th>
                     <p className="device-name">
-                      <span>{productIndex + 1}</span>
+                      <span>{!tabData ? index + 1 : tabData+1}</span>
                       {data?.name}
                       <img
                         className="compare_image"
