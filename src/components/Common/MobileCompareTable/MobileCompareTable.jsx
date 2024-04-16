@@ -307,7 +307,7 @@ export default function MobileCompareTable({
                         <span>
                           {currentIndex * product.length + tIndex + 1}
                         </span>
-                        {data?.name}
+                        <b>{data?.name}</b>
                         <img
                           className="compare_image"
                           src={
@@ -442,19 +442,19 @@ export default function MobileCompareTable({
           breakpoints={{
             640: {
               slidesPerView: 1,
-              spaceBetween: 10,
+              spaceBetween: 0,
             },
             768: {
               slidesPerView: 1,
-              spaceBetween: 10,
+              spaceBetween: 0,
             },
             1024: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
             1200: {
               slidesPerView: 3,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
           }}
           className="product-slider"

@@ -225,6 +225,22 @@ function ProductPage({
   // console.log(is_found?.length);
   // console.log(slug)
   const { isMobile } = useScreenSize();
+  const [position, setPosition] = useState({ left: 0, right: 'auto' });
+
+  useEffect(() => {
+    const updatePosition = () => {
+      const container = document.querySelector('.question_hover_container');
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        const left = rect.left < window.innerWidth / 2 ? 'auto' : window.innerWidth - rect.right;
+        setPosition({ left, right: left === 'auto' ? window.innerWidth - rect.right : 'auto' });
+      }
+    };
+
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    return () => window.removeEventListener('resize', updatePosition);
+  }, []);
   return (
     <>
       {/* {console.log(product?.text_under_ranking)} */}
@@ -637,7 +653,7 @@ function ProductPage({
                             <div className="" style={{ fontWeight: 400 }}>
                               {data?.title}
                             </div>
-                            <div className="tooltip-display-content">
+                            <div className="tooltip-display-content" style={{left: position.left,right: position.right,}}>
                               {
                                 <p className="mb-2">
                                   <b>What it is : </b>
