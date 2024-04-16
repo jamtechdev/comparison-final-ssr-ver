@@ -22,6 +22,8 @@ export default function MobileCompareTable({
 }) {
   const [swiperRef, setSwiperRef] = useState();
   const [winPos, setWinPos] = useState(false);
+ const[currentIndex,setCurrentIndex]=useState(0)
+ const [tableIndex, setTableIndex] = useState();
 
   // For table no of category show
   let initialNoOfCategories = 5;
@@ -81,11 +83,17 @@ export default function MobileCompareTable({
   const [tabData, setTabData] = useState(false);
   const handlePrevious = useCallback(() => {
     setTabData(false);
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
     swiperRef?.slidePrev();
   }, [swiperRef]);
 
   const handleNext = useCallback(() => {
     setTabData(true);
+    if (currentIndex < chunkedData.length - 2) {
+      setCurrentIndex(currentIndex + 1);
+    }
     swiperRef?.slideNext();
   }, [swiperRef]);
 
@@ -134,6 +142,7 @@ export default function MobileCompareTable({
     const arrayOfObjects = [...filterData];
     let numericValues = [];
 
+  
     numericValues = arrayOfObjects
       .map((obj) => {
         if (!isNaN(parseFloat(obj?.attribute_value))) {
@@ -266,25 +275,39 @@ export default function MobileCompareTable({
   // let storeSwiperIndex = 0; // Declare a variable outside the map function
   // console.log(storeSwiperIndex,"neetxy")
 
+  const handleSlideChange = (swiper) => {
+    setCurrentIndex(swiper.activeIndex);
+    console.log(currentIndex,"ckeking current index")
+  };
+
+
   return (
     <section className="comparisons-slider">
+
       <Table
         id="mobile-compare-tabler"
         className={
           winPos == true
             ? "isSticky compare-container"
             : "nonSticky compare-container"
-        }
+        } 
       >
         <thead>
           <tr>
-            {chunkedData?.map((product, index) => {
-              // console.log(product?.length);
-              return product?.slice(0, 1)?.map((data, productIndex) => {
+            
+            {chunkedData?.slice(currentIndex,currentIndex + 2).map((product, index) => {
+               console.log(index,"sticky index");
+              // const productIndex=index+1
+              // console.log(productIndex,"checking product index for images")
+              // return product?.slice( currentIndex).map((data,tIndex) => {
+                return product?.map((data,tIndex) => {
+                console.log(currentIndex,"check currentIndex")
+                console.log(product,"check products")
                 return (
-                  <th>
+                  <th key={tIndex}>
                     <p className="device-name">
-                      <span>{productIndex + 1}</span>
+                      {/* <span>{productIndex}</span> */}
+                      <span>{ currentIndex * product.length + tIndex + 1}</span>
                       {data?.name}
                       <img
                         className="compare_image"
@@ -355,7 +378,7 @@ export default function MobileCompareTable({
                                                   {price_data?.price} €
                                                 </a>
                                               </span>
-                                            </>
+                                            </>   
                                           </li>
                                         )}
                                       </div>
@@ -366,18 +389,6 @@ export default function MobileCompareTable({
                         </>
                       )}
 
-                    {/* <ul className="best-list-item ">
-                      <li>
-                        <Image
-                          src="/images/amazon.png"
-                          width={0}
-                          height={0}
-                          sizes="100%"
-                          alt=""
-                        />
-                        <span>155.87 €</span>
-                      </li>
-                    </ul> */}
                   </th>
                 );
               });
@@ -385,11 +396,18 @@ export default function MobileCompareTable({
           </tr>
         </thead>
       </Table>
+ 
+      {/* / copying below table */}
+
+
+
+{/* ending below table */}
+
       {/* <Row className="mt-3 align-items-center">
         <Col sm="6" xs="9" className="p-0">
           <p>
             Showing products: <b>1-2</b>
-          </p>
+          </p>                                                     
         </Col>
         <Col sm="6" xs="3" className="p-0">
           <div className="slider-controls">
@@ -417,9 +435,10 @@ export default function MobileCompareTable({
             <i className="ri-arrow-right-s-line"></i>
           </span>
         </div>
-        <Swiper
+        {/* <Swiper onSlideChange={(swiper) => setTableIndex(swiper.activeIndex)} */}
+        <Swiper onSlideChange={handleSlideChange}
           id="mobile-compare-table"
-          modules={[Navigation, Pagination]}
+          modules={[Navigation, Pagination]}                                       
           spaceBetween={30}
           // loop={true}
           onSwiper={setSwiperRef}
@@ -444,16 +463,20 @@ export default function MobileCompareTable({
           className="product-slider"
         >
           {chunkedData?.map((slider_data, swiperIndex) => {
+            console.log(swiperIndex,"check swiper index")
             return (
-              <SwiperSlide>
+              <SwiperSlide key={swiperIndex}>
+               
                 <Table className="compare-container">
+
                   <thead data-sticky-header-offset-y ref={ref}>
                     <tr>
-                      {slider_data?.map((data, dIndex) => {
+                      {slider_data?.map((data,dIndex) => {
+                        console.log(dIndex,"table index")
                         return (
-                          <th>
+                          <th key={dIndex}>
                             <p className="device-name">
-                              <span>{dIndex + 1}</span>
+                              <span>{ currentIndex * slider_data.length + dIndex + 1}</span>
                               {data?.name}
                             </p>
                           </th>
@@ -466,7 +489,7 @@ export default function MobileCompareTable({
                       {slider_data?.map((data, dIndex) => {
                         return (
                           <td>
-                            <Image
+                            <Image 
                               className="compare_image"
                               src={
                                 data?.main_image
