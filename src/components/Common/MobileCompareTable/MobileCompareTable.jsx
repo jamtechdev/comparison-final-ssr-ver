@@ -291,7 +291,7 @@ export default function MobileCompareTable({
         <thead>
           <tr>
             {chunkedData
-              ?.slice(currentIndex, currentIndex + 2)
+              ?.slice(currentIndex, currentIndex + 1)
               .map((product, index) => {
                 // console.log(index, "sticky index");
                 // const productIndex=index+1
@@ -423,6 +423,16 @@ export default function MobileCompareTable({
               ? "slider-controls table__arrow arrow__fixed"
               : "slider-controls table__arrow"
           }
+        >
+          <span className="swiper-prev" onClick={handlePrevious}>
+            <i className="ri-arrow-left-s-line"></i>
+          </span>
+          <span className="swiper-next" onClick={handleNext}>
+            <i className="ri-arrow-right-s-line"></i>
+          </span>
+        </div>
+        <div
+          className="slider-controls table__image__arrow"
         >
           <span className="swiper-prev" onClick={handlePrevious}>
             <i className="ri-arrow-left-s-line"></i>

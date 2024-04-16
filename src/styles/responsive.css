@@ -2073,8 +2073,9 @@
     margin-bottom: 30px;
   }
   .mobile-table-section .table-section-desktop .compare-container thead tr th {
-    padding: 0 12px !important;
+    padding: 12px !important;
     background: #fff;
+    border-bottom: 2px solid #ddd !important;
   }
   .mobile-table-section
     .table-section-desktop
@@ -2254,5 +2255,20 @@
   .compare-container thead tr th:last-child,
   .compare-container tbody tr td:last-child {
     border-left: 2px solid #ddd !important;
+  }
+
+  .table__image__arrow {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .table__image__arrow > * {
+    display: flex !important;
+  }
+
+  #mobile-compare-tabler thead tr th {
+    padding: 0 12px !important;
   }
 }
