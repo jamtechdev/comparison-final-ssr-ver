@@ -1248,6 +1248,12 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   .base_chart_graph {
     width: 100% !important;
   }
+  .best-tag-product{
+    margin-left: 10px;
+    line-height: 18px;
+    padding: 4px 10px;
+    text-align: right;
+  }
 }
 @media screen and (max-width: 410px) {
   .best-tag-product,

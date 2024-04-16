@@ -62,6 +62,9 @@ export default function MobileComparisonTool({
 
     newArray.length <= 1 && handelRemoveProduct(i);
   };
+
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
   return (
     <>
       <div className="comparison-tool mobile-comparison-tool">
@@ -191,13 +194,17 @@ export default function MobileComparisonTool({
                 </SwiperSlide>
               );
             })}
+          {comparisonProductData && comparisonProductData?.length > 0 && (
+            <>
+              <span className="swiper-prev" onClick={handlePrevious}>
+                <i className="ri-arrow-left-s-line"></i>
+              </span>
+              <span className="swiper-next" onClick={handleNext}>
+                <i className="ri-arrow-right-s-line"></i>
+              </span>
+            </>
+          )}
         </Swiper>
-        <span className="swiper-prev" onClick={handlePrevious}>
-          <i className="ri-arrow-left-s-line"></i>
-        </span>
-        <span className="swiper-next" onClick={handleNext}>
-          <i className="ri-arrow-right-s-line"></i>
-        </span>
       </div>
       <Row>
         <Col md={12} className="text-center mb-3">

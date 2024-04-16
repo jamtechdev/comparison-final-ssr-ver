@@ -1570,6 +1570,7 @@
 
   body .best-product-listing {
     max-width: 100% !important;
+    margin-top: 60px !important;
   }
 
   .best-product-listing .product-listing-inner-content .col {
