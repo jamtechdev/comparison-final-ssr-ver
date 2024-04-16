@@ -22,8 +22,8 @@ export default function MobileCompareTable({
 }) {
   const [swiperRef, setSwiperRef] = useState();
   const [winPos, setWinPos] = useState(false);
- const[currentIndex,setCurrentIndex]=useState(0)
- const [tableIndex, setTableIndex] = useState();
+  const [currentIndex, setCurrentIndex] = useState(0)
+
 
   // For table no of category show
   let initialNoOfCategories = 5;
@@ -142,7 +142,7 @@ export default function MobileCompareTable({
     const arrayOfObjects = [...filterData];
     let numericValues = [];
 
-  
+
     numericValues = arrayOfObjects
       .map((obj) => {
         if (!isNaN(parseFloat(obj?.attribute_value))) {
@@ -168,8 +168,8 @@ export default function MobileCompareTable({
           stringArray[0] === "yes"
             ? "yes"
             : "no" || stringArray[0] === "no"
-            ? "yes"
-            : "yes";
+              ? "yes"
+              : "yes";
         numericValues = stringArray.filter((value) => value === targetString);
       }
     }
@@ -220,7 +220,7 @@ export default function MobileCompareTable({
       const maxValue = Math.max(...uniqueValues);
       return values.map((value) =>
         value === maxValue &&
-        values.indexOf(value) === values.lastIndexOf(value) ? (
+          values.indexOf(value) === values.lastIndexOf(value) ? (
           <div>
             {value}
             <span key={value} className="tooltip-title-2">
@@ -277,7 +277,7 @@ export default function MobileCompareTable({
 
   const handleSlideChange = (swiper) => {
     setCurrentIndex(swiper.activeIndex);
-    console.log(currentIndex,"ckeking current index")
+    console.log(currentIndex, "ckeking current index")
   };
 
 
@@ -290,24 +290,24 @@ export default function MobileCompareTable({
           winPos == true
             ? "isSticky compare-container"
             : "nonSticky compare-container"
-        } 
+        }
       >
         <thead>
           <tr>
-            
-            {chunkedData?.slice(currentIndex,currentIndex + 2).map((product, index) => {
-               console.log(index,"sticky index");
+
+            {chunkedData?.slice(currentIndex, currentIndex + 2).map((product, index) => {
+              console.log(index, "sticky index");
               // const productIndex=index+1
               // console.log(productIndex,"checking product index for images")
               // return product?.slice( currentIndex).map((data,tIndex) => {
-                return product?.map((data,tIndex) => {
-                console.log(currentIndex,"check currentIndex")
-                console.log(product,"check products")
+              return product?.map((data, tIndex) => {
+                console.log(currentIndex, "check currentIndex")
+                console.log(product, "check products")
                 return (
                   <th key={tIndex}>
                     <p className="device-name">
                       {/* <span>{productIndex}</span> */}
-                      <span>{ currentIndex * product.length + tIndex + 1}</span>
+                      <span>{currentIndex * product.length + tIndex + 1}</span>
                       {data?.name}
                       <img
                         className="compare_image"
@@ -378,7 +378,7 @@ export default function MobileCompareTable({
                                                   {price_data?.price} €
                                                 </a>
                                               </span>
-                                            </>   
+                                            </>
                                           </li>
                                         )}
                                       </div>
@@ -396,12 +396,12 @@ export default function MobileCompareTable({
           </tr>
         </thead>
       </Table>
- 
+
       {/* / copying below table */}
 
 
 
-{/* ending below table */}
+      {/* ending below table */}
 
       {/* <Row className="mt-3 align-items-center">
         <Col sm="6" xs="9" className="p-0">
@@ -438,7 +438,7 @@ export default function MobileCompareTable({
         {/* <Swiper onSlideChange={(swiper) => setTableIndex(swiper.activeIndex)} */}
         <Swiper onSlideChange={handleSlideChange}
           id="mobile-compare-table"
-          modules={[Navigation, Pagination]}                                       
+          modules={[Navigation, Pagination]}
           spaceBetween={30}
           // loop={true}
           onSwiper={setSwiperRef}
@@ -463,20 +463,20 @@ export default function MobileCompareTable({
           className="product-slider"
         >
           {chunkedData?.map((slider_data, swiperIndex) => {
-            console.log(swiperIndex,"check swiper index")
+            console.log(swiperIndex, "check swiper index")
             return (
               <SwiperSlide key={swiperIndex}>
-               
+
                 <Table className="compare-container">
 
                   <thead data-sticky-header-offset-y ref={ref}>
                     <tr>
-                      {slider_data?.map((data,dIndex) => {
-                        console.log(dIndex,"table index")
+                      {slider_data?.map((data, dIndex) => {
+                        console.log(dIndex, "table index")
                         return (
                           <th key={dIndex}>
                             <p className="device-name">
-                              <span>{ currentIndex * slider_data.length + dIndex + 1}</span>
+                              <span>{currentIndex * slider_data.length + dIndex + 1}</span>
                               {data?.name}
                             </p>
                           </th>
@@ -489,7 +489,7 @@ export default function MobileCompareTable({
                       {slider_data?.map((data, dIndex) => {
                         return (
                           <td>
-                            <Image 
+                            <Image
                               className="compare_image"
                               src={
                                 data?.main_image
@@ -623,8 +623,8 @@ export default function MobileCompareTable({
                                     ? "#093673"
                                     : product.overall_score >= 5 &&
                                       product.overall_score < 7.5
-                                    ? "#437ECE"
-                                    : " #85B2F1",
+                                      ? "#437ECE"
+                                      : " #85B2F1",
                               }}
                             >
                               {formatValue(product?.overall_score)}
@@ -853,7 +853,7 @@ export default function MobileCompareTable({
                                 ?.slice(
                                   0,
                                   pagination[product.name] ||
-                                    initialNoOfCategories
+                                  initialNoOfCategories
                                 )
                                 .map((data, index) => {
                                   return (
@@ -927,18 +927,18 @@ export default function MobileCompareTable({
                                                       <>
                                                         {item?.attribute_value ===
                                                           "-" ||
-                                                        item?.attribute_value ===
+                                                          item?.attribute_value ===
                                                           null ||
-                                                        item?.attribute_value ===
+                                                          item?.attribute_value ===
                                                           "?" ? (
                                                           "-"
                                                         ) : (
                                                           <>
                                                             {item?.attribute_value ===
                                                               "-" ||
-                                                            item?.attribute_value ===
+                                                              item?.attribute_value ===
                                                               null ||
-                                                            item?.attribute_value ===
+                                                              item?.attribute_value ===
                                                               "?" ? (
                                                               item?.attribute_value
                                                             ) : (
