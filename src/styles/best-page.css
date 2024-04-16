@@ -563,9 +563,19 @@ thead.isSticky {
   display: none;
 }
 
-.filter-accordion .accordion-header:hover i,
+/* .filter-accordion .accordion-header:hover i,
 .filter-accordion .accordion-header:hover .custom-switch {
   display: inline;
+} */
+.filter-accordion .accordion-header .custom-switch,
+.filter-accordion .accordion-header i {
+  display: inline !important;
+}
+@media screen and (max-width: 600px) {
+  .filter-accordion .accordion-header .custom-switch,
+  .filter-accordion .accordion-header i {
+    display: inline !important;
+  }
 }
 
 .filter-accordion .accordion-item {
@@ -1230,29 +1240,27 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   font-family: "Lato", sans-serif !important;
 }
 @media screen and (max-width: 600px) {
-  .best-tag-product, .flex-box .left_box .box_content {
-
+  .best-tag-product,
+  .flex-box .left_box .box_content {
     font-size: 14px;
-    
-}
-.correlation_svg_width, .base_chart_graph {
-  width: 100% !important;
-}
+  }
+  .correlation_svg_width,
+  .base_chart_graph {
+    width: 100% !important;
+  }
 }
 @media screen and (max-width: 410px) {
-  .best-tag-product, .flex-box .left_box .box_content {
+  .best-tag-product,
+  .flex-box .left_box .box_content {
     padding: 0px 7px;
-    font-size: 11px;
-    
-}
-.site_tabs.graph-tab.compare-graph-tabs .nav-item button {
-
-  font-size: 9px !important;
-}
-}
-@media screen and (min-width:411px) and (max-width:600px){
+    font-size: 14px;
+  }
   .site_tabs.graph-tab.compare-graph-tabs .nav-item button {
-
+    font-size: 9px !important;
+  }
+}
+@media screen and (min-width: 411px) and (max-width: 600px) {
+  .site_tabs.graph-tab.compare-graph-tabs .nav-item button {
     font-size: 12px !important;
   }
 }

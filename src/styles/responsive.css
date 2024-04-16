@@ -2124,6 +2124,7 @@
   body .sidebar-width {
     position: fixed;
     z-index: 1000;
+    height: 100%;
     background: #fff;
     width: 90%;
     top: 0;
