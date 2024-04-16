@@ -939,16 +939,6 @@ body
   align-items: center;
 }
 
-.compare-container tbody tr td:nth-child(even) .tooltip-title-2{
-  left: 0 !important;
-  right: auto !important;
-}
-
-.compare-container tbody tr td .tooltip-title-2 .tooltip-display-content {
-  right: 0 !important;
-  left: auto;
-}
-
 .best-list-item li img {
   padding: 0px;
 }
