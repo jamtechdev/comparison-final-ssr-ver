@@ -1677,6 +1677,13 @@ li.color-item.selected {
   right: 100px;
 }
 
+@media screen and (max-width: 768px) {
+  .chart__data {
+    right: 5% !important;
+    bottom: 220px  !important;
+  }
+}
+
 .chart__data span {
   width: 20px;
   height: 20px;
@@ -2222,8 +2229,7 @@ div#shortCodeText ul {
 }
 
 @media (max-width: 768px) {
-  .center_tooltips{
+  .center_tooltips {
     left: -100px !important;
   }
 }
-
