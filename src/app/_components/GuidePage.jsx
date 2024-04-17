@@ -38,6 +38,7 @@ export default function GuidePage({
   // console.log(guideData[1]);
 
   const products = guideData[1]?.data?.products || [];
+  const sidebarRef = useRef(null);
 
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data?.product_names || [];
@@ -301,6 +302,20 @@ export default function GuidePage({
     document.body.classList.remove("filter--sidebar--open");
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setIsShown(false);
+        document.body.classList.remove("filter--sidebar--open");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <section className="product-header">
@@ -430,6 +445,7 @@ export default function GuidePage({
             className={
               isShown ? "sidebar-width sidebar--open" : "sidebar-width"
             }
+            ref={sidebarRef}
             // style={{ display: isShown ? "block" : "none" }}
           >
             <div className="desktop-hide">
@@ -450,13 +466,16 @@ export default function GuidePage({
               setremovedParam={setremovedParam}
             />
             <div className="desktop-hide">
-              <Button
-                className="site_main_btn w-100 d-block btn-icon mb-4"
-                onClick={closeClick}
-              >
-                {/* <i className="ri-close-fill"></i> */}
-                See Product
-              </Button>
+              {/* {console.log(Object.keys(searchParams).length)} */}
+              {Object.keys(searchParams).length > 0 && (
+                <Button
+                  className="site_main_btn w-100 d-block btn-icon mb-4"
+                  onClick={closeClick}
+                >
+                  {/* <i className="ri-close-fill"></i> */}
+                  See Product
+                </Button>
+              )}
             </div>
           </Col>
           <Col md={12} lg={9} xl={9} className="main-content">

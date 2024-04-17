@@ -1570,6 +1570,7 @@
 
   body .best-product-listing {
     max-width: 100% !important;
+    margin-top: 60px !important;
   }
 
   .best-product-listing .product-listing-inner-content .col {
@@ -1642,12 +1643,22 @@
     font-size: 25px;
   }
 
-  .table__arrow {
+  .slider-controls.table__arrow {
+    display: none !important;
+  }
+
+  .slider-controls.table__arrow.arrow__fixed {
     justify-content: space-between;
-    position: absolute;
+    position: sticky;
     width: 100%;
-    top: 0;
+    top: 50%;
+    z-index: 1000;
     bottom: 0;
+    display: flex !important;
+  }
+
+  .table__arrow > * {
+    display: flex !important;
   }
 
   .table-section-desktop .product-slider {
@@ -2064,6 +2075,31 @@
   }
   .mobile-table-section .table-section-desktop .compare-container thead tr th {
     padding: 12px !important;
+    background: #fff;
+    border-bottom: 2px solid #ddd !important;
+  }
+  .mobile-table-section
+    .table-section-desktop
+    .compare-container
+    thead
+    tr
+    th
+    .best-list-item
+    li {
+    background: transparent !important;
+  }
+  .mobile-table-section
+    .table-section-desktop
+    .compare-container
+    thead
+    tr
+    th
+    .device-name
+    b {
+    font-weight: 600 !important;
+  }
+  .isSticky p.device-name:hover {
+    border: none !important;
   }
   .mobile-table-section
     .table-section-desktop
@@ -2124,6 +2160,7 @@
   body .sidebar-width {
     position: fixed;
     z-index: 1000;
+    height: 100%;
     background: #fff;
     width: 90%;
     top: 0;
@@ -2195,5 +2232,44 @@
   }
   .tooltip-display-content {
     /* width: 160px !important; */
+  }
+  .compare-container tbody tr td:nth-child(even) .tooltip-title-2 {
+    left: 5px !important;
+    right: auto !important;
+  }
+
+  .compare-container tbody tr td .tooltip-title-2 .tooltip-display-content {
+    right: 5px !important;
+    left: auto;
+  }
+
+  .compare-container thead tr th,
+  .compare-container tbody tr td {
+    border: none !important;
+  }
+
+  .compare-container thead tr th:first-child,
+  .compare-container tbody tr td:first-child {
+    border-right: 2px solid #ddd !important;
+  }
+
+  .compare-container thead tr th:last-child,
+  .compare-container tbody tr td:last-child {
+    border-left: 2px solid #ddd !important;
+  }
+
+  .table__image__arrow {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .table__image__arrow > * {
+    display: flex !important;
+  }
+
+  #mobile-compare-tabler thead tr th {
+    padding: 0 12px !important;
   }
 }

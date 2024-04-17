@@ -22,8 +22,7 @@ export default function MobileCompareTable({
 }) {
   const [swiperRef, setSwiperRef] = useState();
   const [winPos, setWinPos] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0)
-
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // For table no of category show
   let initialNoOfCategories = 5;
@@ -142,7 +141,6 @@ export default function MobileCompareTable({
     const arrayOfObjects = [...filterData];
     let numericValues = [];
 
-
     numericValues = arrayOfObjects
       .map((obj) => {
         if (!isNaN(parseFloat(obj?.attribute_value))) {
@@ -168,8 +166,8 @@ export default function MobileCompareTable({
           stringArray[0] === "yes"
             ? "yes"
             : "no" || stringArray[0] === "no"
-              ? "yes"
-              : "yes";
+            ? "yes"
+            : "yes";
         numericValues = stringArray.filter((value) => value === targetString);
       }
     }
@@ -220,7 +218,7 @@ export default function MobileCompareTable({
       const maxValue = Math.max(...uniqueValues);
       return values.map((value) =>
         value === maxValue &&
-          values.indexOf(value) === values.lastIndexOf(value) ? (
+        values.indexOf(value) === values.lastIndexOf(value) ? (
           <div>
             {value}
             <span key={value} className="tooltip-title-2">
@@ -277,13 +275,11 @@ export default function MobileCompareTable({
 
   const handleSlideChange = (swiper) => {
     setCurrentIndex(swiper.activeIndex);
-    console.log(currentIndex, "ckeking current index")
+    console.log(currentIndex, "ckeking current index");
   };
-
 
   return (
     <section className="comparisons-slider">
-
       <Table
         id="mobile-compare-tabler"
         className={
@@ -294,80 +290,67 @@ export default function MobileCompareTable({
       >
         <thead>
           <tr>
-
-            {chunkedData?.slice(currentIndex, currentIndex + 2).map((product, index) => {
-              console.log(index, "sticky index");
-              // const productIndex=index+1
-              // console.log(productIndex,"checking product index for images")
-              // return product?.slice( currentIndex).map((data,tIndex) => {
-              return product?.map((data, tIndex) => {
-                console.log(currentIndex, "check currentIndex")
-                console.log(product, "check products")
-                return (
-                  <th key={tIndex}>
-                    <p className="device-name">
-                      {/* <span>{productIndex}</span> */}
-                      <span>{currentIndex * product.length + tIndex + 1}</span>
-                      {data?.name}
-                      <img
-                        className="compare_image"
-                        src={
-                          data?.main_image
-                            ? data?.main_image
-                            : "/images/nofound.png"
-                        }
-                        width={0}
-                        height={0}
-                        alt={`${data?.permalink}`}
-                        sizes="100%"
-                      />
-                    </p>
-                    {data.price_websites &&
-                      data?.price_websites?.every(
-                        (data) => data.price !== null
-                      ) && (
-                        <>
-                          {" "}
+            {chunkedData
+              ?.slice(currentIndex, currentIndex + 1)
+              .map((product, index) => {
+                // console.log(index, "sticky index");
+                // const productIndex=index+1
+                // console.log(productIndex,"checking product index for images")
+                // return product?.slice( currentIndex).map((data,tIndex) => {
+                return product?.map((data, tIndex) => {
+                  // console.log(currentIndex, "check currentIndex");
+                  // console.log(product, "check products");
+                  return (
+                    <th key={tIndex}>
+                      <p className="device-name">
+                        {/* <span>{productIndex}</span> */}
+                        <span>
+                          {currentIndex * product.length + tIndex + 1}
+                        </span>
+                        <b>{data?.name}</b>
+                        <img
+                          className="compare_image"
+                          src={
+                            data?.main_image
+                              ? data?.main_image
+                              : "/images/nofound.png"
+                          }
+                          width={0}
+                          height={0}
+                          alt={`${data?.permalink}`}
+                          sizes="100%"
+                        />
+                      </p>
+                      {data.price_websites &&
+                        data?.price_websites?.every(
+                          (data) => data.price !== null
+                        ) && (
                           <>
-                            <ul className="best-list-item">
-                              {" "}
-                              {data.price_websites &&
-                                data?.price_websites?.every(
-                                  (data) => data.price === null
-                                ) && (
-                                  <div className="not-availabel n-lable p-1">
-                                    {/* <span className="txt">NOT AVAILABLE</span> */}
-                                    <i>N/A</i>
-                                    <span className="price">
-                                      ~ {data?.price} €
-                                    </span>
-                                  </div>
-                                )}
-                              {data.price_websites &&
-                                data.price_websites
-                                  .slice(0, 1)
-                                  ?.map((price_data, dIndex) => {
-                                    return (
-                                      <div key={dIndex}>
-                                        {price_data.price !== null && (
-                                          <li>
-                                            <>
-                                              <a
-                                                rel="noopener noreferrer"
-                                                target="_blank"
-                                                href={`/link?p=${btoa(
-                                                  price_data.url
-                                                )}`}
-                                              >
-                                                <img
-                                                  src={price_data?.logo}
-                                                  width={0}
-                                                  height={0}
-                                                  sizes="100vw"
-                                                  alt={price_data?.alt}
-                                                />
-                                              </a>
-                                              <span>
+                            {" "}
+                            <>
+                              <ul className="best-list-item">
+                                {" "}
+                                {data.price_websites &&
+                                  data?.price_websites?.every(
+                                    (data) => data.price === null
+                                  ) && (
+                                    <div className="not-availabel n-lable p-1">
+                                      {/* <span className="txt">NOT AVAILABLE</span> */}
+                                      <i>N/A</i>
+                                      <span className="price">
+                                        ~ {data?.price} €
+                                      </span>
+                                    </div>
+                                  )}
+                                {data.price_websites &&
+                                  data.price_websites
+                                    .slice(0, 1)
+                                    ?.map((price_data, dIndex) => {
+                                      return (
+                                        <div key={dIndex}>
+                                          {price_data.price !== null && (
+                                            <li>
+                                              <>
                                                 <a
                                                   rel="noopener noreferrer"
                                                   target="_blank"
@@ -375,31 +358,44 @@ export default function MobileCompareTable({
                                                     price_data.url
                                                   )}`}
                                                 >
-                                                  {price_data?.price} €
+                                                  <img
+                                                    src={price_data?.logo}
+                                                    width={0}
+                                                    height={0}
+                                                    sizes="100vw"
+                                                    alt={price_data?.alt}
+                                                  />
                                                 </a>
-                                              </span>
-                                            </>
-                                          </li>
-                                        )}
-                                      </div>
-                                    );
-                                  })}
-                            </ul>
+                                                <span>
+                                                  <a
+                                                    rel="noopener noreferrer"
+                                                    target="_blank"
+                                                    href={`/link?p=${btoa(
+                                                      price_data.url
+                                                    )}`}
+                                                  >
+                                                    {price_data?.price} €
+                                                  </a>
+                                                </span>
+                                              </>
+                                            </li>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                              </ul>
+                            </>
                           </>
-                        </>
-                      )}
-
-                  </th>
-                );
-              });
-            })}
+                        )}
+                    </th>
+                  );
+                });
+              })}
           </tr>
         </thead>
       </Table>
 
       {/* / copying below table */}
-
-
 
       {/* ending below table */}
 
@@ -435,8 +431,19 @@ export default function MobileCompareTable({
             <i className="ri-arrow-right-s-line"></i>
           </span>
         </div>
+        <div
+          className="slider-controls table__image__arrow"
+        >
+          <span className="swiper-prev" onClick={handlePrevious}>
+            <i className="ri-arrow-left-s-line"></i>
+          </span>
+          <span className="swiper-next" onClick={handleNext}>
+            <i className="ri-arrow-right-s-line"></i>
+          </span>
+        </div>
         {/* <Swiper onSlideChange={(swiper) => setTableIndex(swiper.activeIndex)} */}
-        <Swiper onSlideChange={handleSlideChange}
+        <Swiper
+          onSlideChange={handleSlideChange}
           id="mobile-compare-table"
           modules={[Navigation, Pagination]}
           spaceBetween={30}
@@ -445,38 +452,38 @@ export default function MobileCompareTable({
           breakpoints={{
             640: {
               slidesPerView: 1,
-              spaceBetween: 10,
+              spaceBetween: 0,
             },
             768: {
               slidesPerView: 1,
-              spaceBetween: 10,
+              spaceBetween: 0,
             },
             1024: {
               slidesPerView: 2,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
             1200: {
               slidesPerView: 3,
-              spaceBetween: 20,
+              spaceBetween: 0,
             },
           }}
           className="product-slider"
         >
           {chunkedData?.map((slider_data, swiperIndex) => {
-            console.log(swiperIndex, "check swiper index")
+            console.log(swiperIndex, "check swiper index");
             return (
               <SwiperSlide key={swiperIndex}>
-
                 <Table className="compare-container">
-
                   <thead data-sticky-header-offset-y ref={ref}>
                     <tr>
                       {slider_data?.map((data, dIndex) => {
-                        console.log(dIndex, "table index")
+                        console.log(dIndex, "table index");
                         return (
                           <th key={dIndex}>
                             <p className="device-name">
-                              <span>{currentIndex * slider_data.length + dIndex + 1}</span>
+                              <span>
+                                {currentIndex * slider_data.length + dIndex + 1}
+                              </span>
                               {data?.name}
                             </p>
                           </th>
@@ -623,8 +630,8 @@ export default function MobileCompareTable({
                                     ? "#093673"
                                     : product.overall_score >= 5 &&
                                       product.overall_score < 7.5
-                                      ? "#437ECE"
-                                      : " #85B2F1",
+                                    ? "#437ECE"
+                                    : " #85B2F1",
                               }}
                             >
                               {formatValue(product?.overall_score)}
@@ -853,7 +860,7 @@ export default function MobileCompareTable({
                                 ?.slice(
                                   0,
                                   pagination[product.name] ||
-                                  initialNoOfCategories
+                                    initialNoOfCategories
                                 )
                                 .map((data, index) => {
                                   return (
@@ -927,18 +934,18 @@ export default function MobileCompareTable({
                                                       <>
                                                         {item?.attribute_value ===
                                                           "-" ||
-                                                          item?.attribute_value ===
+                                                        item?.attribute_value ===
                                                           null ||
-                                                          item?.attribute_value ===
+                                                        item?.attribute_value ===
                                                           "?" ? (
                                                           "-"
                                                         ) : (
                                                           <>
                                                             {item?.attribute_value ===
                                                               "-" ||
-                                                              item?.attribute_value ===
+                                                            item?.attribute_value ===
                                                               null ||
-                                                              item?.attribute_value ===
+                                                            item?.attribute_value ===
                                                               "?" ? (
                                                               item?.attribute_value
                                                             ) : (
