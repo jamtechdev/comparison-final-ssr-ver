@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useRef } from "react";
 import { Accordion, Col, Row, Button, Form, Container } from "react-bootstrap";
 import QuestionIcon from "../../../Svg/QuestionIcon";
 import Questiontool from "../../../Svg/Questiontool";
@@ -268,7 +268,7 @@ export default function Product({
               {/* {console.log(product?.price_websites?.length)} */}
               {/* {product?.price_websites?.length > 0 ? <p>{KeyIndex + 1}</p> : ""} */}
               {splitData?.[0] === "available" ||
-              (product?.price_websites?.length > 0 && KeyIndex !== null) ? (
+                (product?.price_websites?.length > 0 && KeyIndex !== null) ? (
                 <p>{KeyIndex + 1}</p>
               ) : null}
 
@@ -410,18 +410,18 @@ export default function Product({
                                             ? "#093673"
                                             : data?.attribute_evaluation >= 5 &&
                                               data?.attribute_evaluation < 7.5
-                                            ? "#437ECE"
-                                            : "#85B2F1",
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                              data?.attribute_evaluation
-                                            )
+                                            data?.attribute_evaluation
+                                          )
                                           : data?.attribute_evaluation.toFixed(
-                                              1
-                                            )
+                                            1
+                                          )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
@@ -453,31 +453,31 @@ export default function Product({
                         <div className="tooltip-display-content">
                           {product?.technical_score_descriptions
                             .description && (
-                            <p className="mb-2">
-                              <b>
-                                {guidePhraseData && guidePhraseData?.what_it_is}
-                                :{" "}
-                              </b>
-                              {
-                                product?.technical_score_descriptions
-                                  ?.description
-                              }
-                            </p>
-                          )}
+                              <p className="mb-2">
+                                <b>
+                                  {guidePhraseData && guidePhraseData?.what_it_is}
+                                  :{" "}
+                                </b>
+                                {
+                                  product?.technical_score_descriptions
+                                    ?.description
+                                }
+                              </p>
+                            )}
                           {product?.technical_score_descriptions
                             .when_matters && (
-                            <p className="mb-2">
-                              <b>
-                                {guidePhraseData &&
-                                  guidePhraseData?.when_it_matters}
-                                :{" "}
-                              </b>
-                              {
-                                product?.technical_score_descriptions
-                                  ?.when_matters
-                              }
-                            </p>
-                          )}
+                              <p className="mb-2">
+                                <b>
+                                  {guidePhraseData &&
+                                    guidePhraseData?.when_it_matters}
+                                  :{" "}
+                                </b>
+                                {
+                                  product?.technical_score_descriptions
+                                    ?.when_matters
+                                }
+                              </p>
+                            )}
                           <p>
                             <b>
                               {guidePhraseData &&
@@ -504,18 +504,18 @@ export default function Product({
                                             ? "#093673"
                                             : data?.attribute_evaluation >= 5 &&
                                               data?.attribute_evaluation < 7.5
-                                            ? "#437ECE"
-                                            : "#85B2F1",
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                              data?.attribute_evaluation
-                                            )
+                                            data?.attribute_evaluation
+                                          )
                                           : data?.attribute_evaluation.toFixed(
-                                              1
-                                            )
+                                            1
+                                          )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
@@ -589,18 +589,18 @@ export default function Product({
                                             ? "#093673"
                                             : data?.attribute_evaluation >= 5 &&
                                               data?.attribute_evaluation < 7.5
-                                            ? "#437ECE"
-                                            : "#85B2F1",
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                       }}
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
                                           ? Math.trunc(
-                                              data?.attribute_evaluation
-                                            )
+                                            data?.attribute_evaluation
+                                          )
                                           : data?.attribute_evaluation.toFixed(
-                                              1
-                                            )
+                                            1
+                                          )
                                         : "0.0"}
                                     </div>
                                     <p>{data?.attribute_category}</p>
@@ -755,12 +755,12 @@ export default function Product({
                           )
 
                           ?.map((data, index) => {
+                            console.log(data, "show data")
                             return (
                               <React.Fragment key={index}>
                                 <li
-                                  className={`${
-                                    data?.hover_phrase !== "" && "tooltip-title"
-                                  }`}
+                                  className={`${data?.hover_phrase !== "" && "tooltip-title"
+                                    }`}
                                 >
                                   <span className="pros-crons-text">
                                     {data?.name} {renderValue(data)}
@@ -770,6 +770,7 @@ export default function Product({
                                     info_not_verified={data.info_not_verified}
                                     hover_phrase={data.hover_phrase}
                                     data={data}
+
                                   />
                                 </li>
                               </React.Fragment>
@@ -797,9 +798,8 @@ export default function Product({
                             return (
                               <React.Fragment key={index}>
                                 <li
-                                  className={`${
-                                    data?.hover_phrase !== "" && "tooltip-title"
-                                  }`}
+                                  className={`${data?.hover_phrase !== "" && "tooltip-title"
+                                    }`}
                                 >
                                   <span className="pros-crons-text">
                                     {data?.name} {renderValue(data).trim()}
@@ -809,6 +809,7 @@ export default function Product({
                                     data={data}
                                     info_not_verified={data.info_not_verified}
                                     hover_phrase={data.hover_phrase}
+                                  
                                   />
                                 </li>
                               </React.Fragment>
@@ -854,8 +855,8 @@ export default function Product({
                                 data?.value >= 7.5
                                   ? "#093673"
                                   : data?.value >= 5 && data?.value < 7.5
-                                  ? "#437ECE"
-                                  : "#85B2F1",
+                                    ? "#437ECE"
+                                    : "#85B2F1",
                             }}
                           >
                             {parseFloat(data?.value).toFixed(1)}
@@ -896,22 +897,22 @@ export default function Product({
                                         style={{
                                           background:
                                             hoverPhaseData?.attribute_value >=
-                                            7.5
+                                              7.5
                                               ? "#093673"
                                               : hoverPhaseData?.attribute_value >=
-                                                  5 &&
+                                                5 &&
                                                 hoverPhaseData?.attribute_value <
-                                                  7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                                7.5
+                                                ? "#437ECE"
+                                                : "#85B2F1",
                                         }}
                                       >
                                         {hoverPhaseData?.attribute_value != null
                                           ? hoverPhaseData?.attribute_value >=
                                             10
                                             ? Math.trunc(
-                                                hoverPhaseData?.attribute_value
-                                              )
+                                              hoverPhaseData?.attribute_value
+                                            )
                                             : hoverPhaseData?.attribute_value
                                           : "0.0"}
                                       </div>
@@ -1027,7 +1028,7 @@ export default function Product({
                                           : "pointer",
                                     }}
                                     className={`color-item `}
-                                    // onClick={(e) => handleItemClick(key)}
+                                  // onClick={(e) => handleItemClick(key)}
                                   >
                                     {data.color}
                                   </a>
@@ -1095,12 +1096,12 @@ export default function Product({
                                             borderRadius: "5px",
                                             cursor:
                                               data.permalink ===
-                                              product?.permalink
+                                                product?.permalink
                                                 ? "default"
                                                 : "pointer",
                                           }}
                                           className={`color-item `}
-                                          // onClick={(e) => handleItemClick(key)}
+                                        // onClick={(e) => handleItemClick(key)}
                                         >
                                           {data?.short_name}
                                         </span>
@@ -1113,12 +1114,12 @@ export default function Product({
                                             borderRadius: "5px",
                                             cursor:
                                               data.permalink ===
-                                              product?.permalink
+                                                product?.permalink
                                                 ? "default"
                                                 : "pointer",
                                           }}
                                           className={`color-item `}
-                                          // onClick={(e) => handleItemClick(key)}
+                                        // onClick={(e) => handleItemClick(key)}
                                         >
                                           {data?.short_name}
                                         </a>
@@ -1260,34 +1261,34 @@ export default function Product({
                                       <div className="tooltip-display-content">
                                         {product?.technical_score_descriptions
                                           .description && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {guidePhraseData &&
-                                                guidePhraseData?.what_it_is}
-                                              :{" "}
-                                            </b>
-                                            {
-                                              product
-                                                ?.technical_score_descriptions
-                                                ?.description
-                                            }
-                                          </p>
-                                        )}
+                                            <p className="mb-2">
+                                              <b>
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.what_it_is}
+                                                :{" "}
+                                              </b>
+                                              {
+                                                product
+                                                  ?.technical_score_descriptions
+                                                  ?.description
+                                              }
+                                            </p>
+                                          )}
                                         {product?.technical_score_descriptions
                                           .when_matters && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {guidePhraseData &&
-                                                guidePhraseData?.when_it_matters}
-                                              :{" "}
-                                            </b>
-                                            {
-                                              product
-                                                ?.technical_score_descriptions
-                                                ?.when_matters
-                                            }
-                                          </p>
-                                        )}
+                                            <p className="mb-2">
+                                              <b>
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.when_it_matters}
+                                                :{" "}
+                                              </b>
+                                              {
+                                                product
+                                                  ?.technical_score_descriptions
+                                                  ?.when_matters
+                                              }
+                                            </p>
+                                          )}
                                         <p>
                                           <b>
                                             {guidePhraseData &&
@@ -1315,14 +1316,14 @@ export default function Product({
                                                       style={{
                                                         background:
                                                           data?.attribute_evaluation >=
-                                                          7.5
+                                                            7.5
                                                             ? "#093673"
                                                             : data?.attribute_evaluation >=
-                                                                5 &&
+                                                              5 &&
                                                               data?.attribute_evaluation <
-                                                                7.5
-                                                            ? "#437ECE"
-                                                            : "#85B2F1",
+                                                              7.5
+                                                              ? "#437ECE"
+                                                              : "#85B2F1",
                                                       }}
                                                     >
                                                       {`${parseFloat(
@@ -1342,22 +1343,21 @@ export default function Product({
                                   </div>
                                   <div className="spec-col">
                                     <span
-                                      className={`${
-                                        product.technical_score_phase !== ""
+                                      className={`${product.technical_score_phase !== ""
                                           ? "tooltip-title"
                                           : ""
-                                      }`}
+                                        }`}
                                       style={{
                                         color:
                                           product.technical_score_is_better_than *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.technical_score_is_worse_than *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         fontSize: "15px",
                                         textDecoration:
                                           product.technical_score_phase !== ""
@@ -1371,13 +1371,13 @@ export default function Product({
                                         textDecorationColor:
                                           product.technical_score_is_better_than *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.technical_score_is_worse_than *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1407,32 +1407,32 @@ export default function Product({
                                       <div className="tooltip-display-content">
                                         {product?.users_rating_descriptions
                                           .description && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {guidePhraseData &&
-                                                guidePhraseData?.what_it_is}
-                                              :{" "}
-                                            </b>
-                                            {
-                                              product?.users_rating_descriptions
-                                                ?.description
-                                            }
-                                          </p>
-                                        )}
+                                            <p className="mb-2">
+                                              <b>
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.what_it_is}
+                                                :{" "}
+                                              </b>
+                                              {
+                                                product?.users_rating_descriptions
+                                                  ?.description
+                                              }
+                                            </p>
+                                          )}
                                         {product?.users_rating_descriptions
                                           .when_matters && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {guidePhraseData &&
-                                                guidePhraseData?.when_it_matters}
-                                              :{" "}
-                                            </b>
-                                            {
-                                              product?.users_rating_descriptions
-                                                ?.when_matters
-                                            }
-                                          </p>
-                                        )}
+                                            <p className="mb-2">
+                                              <b>
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.when_it_matters}
+                                                :{" "}
+                                              </b>
+                                              {
+                                                product?.users_rating_descriptions
+                                                  ?.when_matters
+                                              }
+                                            </p>
+                                          )}
                                         <p>
                                           <b>
                                             {guidePhraseData &&
@@ -1460,14 +1460,14 @@ export default function Product({
                                                       style={{
                                                         background:
                                                           data?.attribute_evaluation >=
-                                                          7.5
+                                                            7.5
                                                             ? "#093673"
                                                             : data?.attribute_evaluation >=
-                                                                5 &&
+                                                              5 &&
                                                               data?.attribute_evaluation <
-                                                                7.5
-                                                            ? "#437ECE"
-                                                            : "#85B2F1",
+                                                              7.5
+                                                              ? "#437ECE"
+                                                              : "#85B2F1",
                                                       }}
                                                     >
                                                       {`${parseFloat(
@@ -1487,22 +1487,21 @@ export default function Product({
                                   </div>
                                   <div className="spec-col">
                                     <span
-                                      className={`${
-                                        product?.reviews_phase !== ""
+                                      className={`${product?.reviews_phase !== ""
                                           ? "tooltip-title"
                                           : ""
-                                      }`}
+                                        }`}
                                       style={{
                                         color:
                                           product.reviews_is_better_than *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.reviews_is_worse_than *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         fontSize: "15px",
                                         textDecoration:
                                           product.reviews_phase !== ""
@@ -1516,13 +1515,13 @@ export default function Product({
                                         textDecorationColor:
                                           product.reviews_is_better_than *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.reviews_is_worse_than *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1549,46 +1548,45 @@ export default function Product({
                                     </div>
                                     <div className="spec-col">
                                       <div
-                                        className={`${
-                                          product?.expert_reviews_rating_phase !==
-                                          ""
+                                        className={`${product?.expert_reviews_rating_phase !==
+                                            ""
                                             ? "tooltip-title"
                                             : ""
-                                        }`}
+                                          }`}
                                         style={{
                                           color:
                                             product.expert_reviews_is_better_than *
                                               100 >=
-                                            70
+                                              70
                                               ? "#437ece"
                                               : product.expert_reviews_is_worse_than *
-                                                  100 >
+                                                100 >
                                                 70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                                ? "#ce434b"
+                                                : "#27304e",
                                           fontSize: "15px",
 
                                           textDecoration:
                                             product?.expert_reviews_rating_phase !==
-                                            ""
+                                              ""
                                               ? "underline"
                                               : "",
                                           textDecorationStyle:
                                             product?.expert_reviews_rating_phase !==
-                                            ""
+                                              ""
                                               ? "dotted"
                                               : "",
                                           textDecorationThickness: "1.5px",
                                           textDecorationColor:
                                             product.expert_reviews_is_better_than *
                                               100 >=
-                                            70
+                                              70
                                               ? "#437ece"
                                               : product.expert_reviews_is_worse_than *
-                                                  100 >
+                                                100 >
                                                 70
-                                              ? "#ce434b"
-                                              : "#27304e",
+                                                ? "#ce434b"
+                                                : "#27304e",
                                           textUnderlineOffset: "5px",
                                         }}
                                       >
@@ -1619,22 +1617,21 @@ export default function Product({
                                   </div>
                                   <div className="spec-col">
                                     <div
-                                      className={`${
-                                        product?.popularity_points_phase !== ""
+                                      className={`${product?.popularity_points_phase !== ""
                                           ? "tooltip-title"
                                           : ""
-                                      }`}
+                                        }`}
                                       style={{
                                         color:
                                           product.popularity_points_better_then *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.popularity_points_worse_then *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         fontSize: "15px",
                                         textDecoration:
                                           product.popularity_points_phase !== ""
@@ -1648,13 +1645,13 @@ export default function Product({
                                         textDecorationColor:
                                           product.popularity_points_better_then *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.popularity_points_worse_then *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1682,45 +1679,44 @@ export default function Product({
                                   </div>
                                   <div className="spec-col ">
                                     <div
-                                      className={`${
-                                        product?.ratio_quality_price_points_phase !==
-                                        ""
+                                      className={`${product?.ratio_quality_price_points_phase !==
+                                          ""
                                           ? "tooltip-title"
                                           : ""
-                                      }`}
+                                        }`}
                                       style={{
                                         color:
                                           product.ratio_quality_price_points_better_then *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.ratio_quality_price_points_worse_then *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         fontSize: "15px",
                                         textDecoration:
                                           product.ratio_quality_price_points_phase !==
-                                          ""
+                                            ""
                                             ? "underline"
                                             : "",
                                         textDecorationStyle:
                                           product.ratio_quality_price_points_phase !==
-                                          ""
+                                            ""
                                             ? "dotted"
                                             : "",
                                         textDecorationThickness: "1.5px",
                                         textDecorationColor:
                                           product.ratio_quality_price_points_better_then *
                                             100 >=
-                                          70
+                                            70
                                             ? "#437ece"
                                             : product.ratio_quality_price_points_worse_then *
-                                                100 >
+                                              100 >
                                               70
-                                            ? "#ce434b"
-                                            : "#27304e",
+                                              ? "#ce434b"
+                                              : "#27304e",
                                         textUnderlineOffset: "5px",
                                       }}
                                     >
@@ -1767,14 +1763,14 @@ export default function Product({
                                               .attribute_evaluation >= 7.5
                                               ? "#093673"
                                               : product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation >=
-                                                  5 &&
+                                                attribute
+                                              ][0].attribute_evaluation >=
+                                                5 &&
                                                 product.attributes_new[
                                                   attribute
                                                 ][0].attribute_evaluation < 7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                                ? "#437ECE"
+                                                : "#85B2F1",
                                         }}
                                       >
                                         {formatValue(
@@ -1800,11 +1796,11 @@ export default function Product({
                                               product.name
                                             ] &&
                                               displayedAttributesCount[
-                                                product.name
+                                              product.name
                                               ][attribute]
                                               ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
+                                              product.name
+                                              ][attribute]
                                               : initialDisplay
                                           )
                                           .map(
@@ -1833,36 +1829,35 @@ export default function Product({
                                                         {attributeValues.attribute_value !=
                                                           "yes" &&
                                                           attributeValues.attribute_value !=
-                                                            "no" && (
+                                                          "no" && (
                                                             <>
                                                               {/* {console.log(attributeValues.hover_phase,"neets")} */}
                                                               <div
-                                                                className={`${
-                                                                  attributeValues.hover_phase !==
-                                                                    "" &&
+                                                                className={`${attributeValues.hover_phase !==
+                                                                  "" &&
                                                                   "tooltip-title"
-                                                                }`}
+                                                                  }`}
                                                                 style={{
                                                                   color:
                                                                     attributeValues.is_better_than *
                                                                       100 >=
-                                                                    70
+                                                                      70
                                                                       ? "#437ece"
                                                                       : attributeValues.is_worse_than *
-                                                                          100 >
+                                                                        100 >
                                                                         70
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
+                                                                        ? "#ce434b"
+                                                                        : "#27304e",
                                                                   fontSize:
                                                                     "15px",
                                                                   textDecoration:
                                                                     attributeValues?.hover_phase !==
-                                                                    ""
+                                                                      ""
                                                                       ? "underline"
                                                                       : "",
                                                                   textDecorationStyle:
                                                                     attributeValues?.hover_phase !==
-                                                                    ""
+                                                                      ""
                                                                       ? "dotted"
                                                                       : "",
                                                                   textDecorationThickness:
@@ -1870,13 +1865,13 @@ export default function Product({
                                                                   textDecorationColor:
                                                                     attributeValues.is_better_than *
                                                                       100 >=
-                                                                    70
+                                                                      70
                                                                       ? "#437ece"
                                                                       : attributeValues.is_worse_than *
-                                                                          100 >
+                                                                        100 >
                                                                         70
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
+                                                                        ? "#ce434b"
+                                                                        : "#27304e",
                                                                   textUnderlineOffset:
                                                                     "5px",
                                                                 }}
@@ -1887,46 +1882,46 @@ export default function Product({
                                                                       color:
                                                                         attributeValues.is_better_than *
                                                                           100 >=
-                                                                        70
+                                                                          70
                                                                           ? "#437ece"
                                                                           : attributeValues.is_worse_than *
-                                                                              100 >
+                                                                            100 >
                                                                             70
-                                                                          ? "#ce434b"
-                                                                          : "#27304e",
+                                                                            ? "#ce434b"
+                                                                            : "#27304e",
                                                                       fontSize:
                                                                         "15px",
                                                                     }}
                                                                   >
                                                                     {(attributeValues.attribute_value !=
-                                                                    null
+                                                                      null
                                                                       ? attributeValues.attribute_value
                                                                       : "") +
                                                                       " " +
                                                                       (attributeValues.attribute_value ===
                                                                         "?" ||
-                                                                      attributeValues.attribute_value ===
+                                                                        attributeValues.attribute_value ===
                                                                         "-"
                                                                         ? ""
                                                                         : attributeValues.unit !=
                                                                           null
-                                                                        ? attributeValues.unit
-                                                                        : "")}
+                                                                          ? attributeValues.unit
+                                                                          : "")}
                                                                   </span>
                                                                 }
 
                                                                 {attributeValues.attribute_value !==
                                                                   "?" && (
-                                                                  <ProsConsToolTip
-                                                                    comment={
-                                                                      attributeValues?.commnet
-                                                                    }
-                                                                    hover_phrase={
-                                                                      attributeValues &&
-                                                                      attributeValues.hover_phase
-                                                                    }
-                                                                  />
-                                                                )}
+                                                                    <ProsConsToolTip
+                                                                      comment={
+                                                                        attributeValues?.commnet
+                                                                      }
+                                                                      hover_phrase={
+                                                                        attributeValues &&
+                                                                        attributeValues.hover_phase
+                                                                      }
+                                                                    />
+                                                                  )}
                                                               </div>{" "}
                                                               {attributeValues?.info_not_verified && (
                                                                 <div
@@ -1975,90 +1970,89 @@ export default function Product({
                                                         {(attributeValues.attribute_value ==
                                                           "yes" ||
                                                           attributeValues.attribute_value ==
-                                                            "no") && (
-                                                          <div
-                                                            className={`${
-                                                              attributeValues?.hover_phase !==
-                                                              ""
-                                                                ? "tooltip-title"
-                                                                : ""
-                                                            }`}
-                                                            style={{
-                                                              color:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_better_than *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
+                                                          "no") && (
+                                                            <div
+                                                              className={`${attributeValues?.hover_phase !==
+                                                                  ""
+                                                                  ? "tooltip-title"
+                                                                  : ""
+                                                                }`}
+                                                              style={{
+                                                                color:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
+                                                                    attributeValues.attribute_is_better_than *
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
                                                                       "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
+                                                                      attributeValues.attribute_is_worse_than *
                                                                       100 >
                                                                       60
-                                                                  ? "red"
-                                                                  : "#27304e",
-                                                              fontSize: "15px",
-                                                              textDecoration:
-                                                                attributeValues?.hover_phase !==
-                                                                ""
-                                                                  ? "underline"
-                                                                  : "",
-                                                              textDecorationStyle:
-                                                                attributeValues?.hover_phase !==
-                                                                ""
-                                                                  ? "dotted"
-                                                                  : "",
-                                                              textDecorationThickness:
-                                                                "1.5px",
-                                                              textDecorationColor:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_better_than *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
+                                                                      ? "red"
+                                                                      : "#27304e",
+                                                                fontSize: "15px",
+                                                                textDecoration:
+                                                                  attributeValues?.hover_phase !==
+                                                                    ""
+                                                                    ? "underline"
+                                                                    : "",
+                                                                textDecorationStyle:
+                                                                  attributeValues?.hover_phase !==
+                                                                    ""
+                                                                    ? "dotted"
+                                                                    : "",
+                                                                textDecorationThickness:
+                                                                  "1.5px",
+                                                                textDecorationColor:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
+                                                                    attributeValues.attribute_is_better_than *
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
                                                                       "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
+                                                                      attributeValues.attribute_is_worse_than *
                                                                       100 >
                                                                       60
-                                                                  ? "red"
-                                                                  : "#27304e",
-                                                              textUnderlineOffset:
-                                                                "5px",
-                                                            }}
-                                                          >
-                                                            {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
-                                                            {
-                                                              <span
-                                                                style={{
-                                                                  color:
-                                                                    getColorAttr(
-                                                                      attributeValues
-                                                                    ),
-                                                                }}
-                                                              >
-                                                                {(attributeValues.attribute_value !=
-                                                                null
-                                                                  ? attributeValues.attribute_value
-                                                                  : "") +
-                                                                  " " +
-                                                                  (attributeValues.unit !=
-                                                                  null
-                                                                    ? attributeValues.unit
-                                                                    : "")}
-                                                              </span>
-                                                            }
-                                                            {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
-                                                            <ProsConsToolTip
-                                                              hover_phrase={
-                                                                attributeValues &&
-                                                                attributeValues.hover_phase
+                                                                      ? "red"
+                                                                      : "#27304e",
+                                                                textUnderlineOffset:
+                                                                  "5px",
+                                                              }}
+                                                            >
+                                                              {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                                              {
+                                                                <span
+                                                                  style={{
+                                                                    color:
+                                                                      getColorAttr(
+                                                                        attributeValues
+                                                                      ),
+                                                                  }}
+                                                                >
+                                                                  {(attributeValues.attribute_value !=
+                                                                    null
+                                                                    ? attributeValues.attribute_value
+                                                                    : "") +
+                                                                    " " +
+                                                                    (attributeValues.unit !=
+                                                                      null
+                                                                      ? attributeValues.unit
+                                                                      : "")}
+                                                                </span>
                                                               }
-                                                            />
-                                                          </div>
-                                                        )}
+                                                              {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
+                                                              <ProsConsToolTip
+                                                                hover_phrase={
+                                                                  attributeValues &&
+                                                                  attributeValues.hover_phase
+                                                                }
+                                                              />
+                                                            </div>
+                                                          )}
                                                       </div>
                                                     </div>
                                                   </div>
@@ -2073,12 +2067,12 @@ export default function Product({
                                             displayedAttributesCount[
                                               product.name
                                             ] &&
-                                            displayedAttributesCount[
+                                              displayedAttributesCount[
                                               product.name
-                                            ][attribute]
+                                              ][attribute]
                                               ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
+                                              product.name
+                                              ][attribute]
                                               : initialDisplay
                                           }
                                         />
@@ -2086,43 +2080,42 @@ export default function Product({
 
                                       {loading == false
                                         ? product.attributes_new[attribute]
-                                            .length >
-                                            (displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                            displayedAttributesCount[
-                                              product.name
-                                            ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay) && (
-                                            <span
-                                              className="show_more"
-                                              onClick={() => {
-                                                setloading(true),
-                                                  handleDisplayedAttributesCount(
-                                                    product.name,
-                                                    attribute
-                                                  );
-                                                setTimeout(() => {
-                                                  setloading(false);
-                                                }, 600);
-                                              }}
-                                            >
-                                              {"SHOW MORE "}
-                                              <i
-                                                className={`ri-${
-                                                  initialDisplay <
+                                          .length >
+                                        (displayedAttributesCount[
+                                          product.name
+                                        ] &&
+                                          displayedAttributesCount[
+                                          product.name
+                                          ][attribute]
+                                          ? displayedAttributesCount[
+                                          product.name
+                                          ][attribute]
+                                          : initialDisplay) && (
+                                          <span
+                                            className="show_more"
+                                            onClick={() => {
+                                              setloading(true),
+                                                handleDisplayedAttributesCount(
+                                                  product.name,
+                                                  attribute
+                                                );
+                                              setTimeout(() => {
+                                                setloading(false);
+                                              }, 600);
+                                            }}
+                                          >
+                                            {"SHOW MORE "}
+                                            <i
+                                              className={`ri-${initialDisplay <
                                                   product.attributes_new[
                                                     attribute
                                                   ].length
-                                                    ? "add"
-                                                    : "subtract"
+                                                  ? "add"
+                                                  : "subtract"
                                                 }-line`}
-                                              ></i>
-                                            </span>
-                                          )
+                                            ></i>
+                                          </span>
+                                        )
                                         : ""}
                                     </Accordion.Body>
                                   </Accordion.Item>
@@ -2157,14 +2150,14 @@ export default function Product({
                                               .attribute_evaluation >= 7.5
                                               ? "#093673"
                                               : product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation >=
-                                                  5 &&
+                                                attribute
+                                              ][0].attribute_evaluation >=
+                                                5 &&
                                                 product.attributes_new[
                                                   attribute
                                                 ][0].attribute_evaluation < 7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                                ? "#437ECE"
+                                                : "#85B2F1",
                                         }}
                                       >
                                         {formatValue(
@@ -2190,11 +2183,11 @@ export default function Product({
                                               product.name
                                             ] &&
                                               displayedAttributesCount[
-                                                product.name
+                                              product.name
                                               ][attribute]
                                               ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
+                                              product.name
+                                              ][attribute]
                                               : initialDisplay
                                           )
                                           .map(
@@ -2223,35 +2216,34 @@ export default function Product({
                                                         {attributeValues.attribute_value !=
                                                           "yes" &&
                                                           attributeValues.attribute_value !=
-                                                            "no" && (
+                                                          "no" && (
                                                             <>
                                                               <div
-                                                                className={`${
-                                                                  attributeValues.hover_phase !==
-                                                                    "" &&
+                                                                className={`${attributeValues.hover_phase !==
+                                                                  "" &&
                                                                   "tooltip-title"
-                                                                }`}
+                                                                  }`}
                                                                 style={{
                                                                   color:
                                                                     attributeValues.is_better_than *
                                                                       100 >=
-                                                                    70
+                                                                      70
                                                                       ? "#437ece"
                                                                       : attributeValues.is_worse_than *
-                                                                          100 >
+                                                                        100 >
                                                                         70
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
+                                                                        ? "#ce434b"
+                                                                        : "#27304e",
                                                                   fontSize:
                                                                     "15px",
                                                                   textDecoration:
                                                                     attributeValues?.hover_phase !==
-                                                                    ""
+                                                                      ""
                                                                       ? "underline"
                                                                       : "",
                                                                   textDecorationStyle:
                                                                     attributeValues?.hover_phase !==
-                                                                    ""
+                                                                      ""
                                                                       ? "dotted"
                                                                       : "",
                                                                   textDecorationThickness:
@@ -2259,13 +2251,13 @@ export default function Product({
                                                                   textDecorationColor:
                                                                     attributeValues.is_better_than *
                                                                       100 >=
-                                                                    70
+                                                                      70
                                                                       ? "#437ece"
                                                                       : attributeValues.is_worse_than *
-                                                                          100 >
+                                                                        100 >
                                                                         70
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
+                                                                        ? "#ce434b"
+                                                                        : "#27304e",
                                                                   textUnderlineOffset:
                                                                     "5px",
                                                                 }}
@@ -2276,46 +2268,46 @@ export default function Product({
                                                                       color:
                                                                         attributeValues.is_better_than *
                                                                           100 >=
-                                                                        70
+                                                                          70
                                                                           ? "#437ece"
                                                                           : attributeValues.is_worse_than *
-                                                                              100 >
+                                                                            100 >
                                                                             70
-                                                                          ? "#ce434b"
-                                                                          : "#27304e",
+                                                                            ? "#ce434b"
+                                                                            : "#27304e",
                                                                       fontSize:
                                                                         "15px",
                                                                     }}
                                                                   >
                                                                     {(attributeValues.attribute_value !=
-                                                                    null
+                                                                      null
                                                                       ? attributeValues.attribute_value
                                                                       : "") +
                                                                       " " +
                                                                       (attributeValues.attribute_value ===
                                                                         "?" ||
-                                                                      attributeValues.attribute_value ===
+                                                                        attributeValues.attribute_value ===
                                                                         "-"
                                                                         ? ""
                                                                         : attributeValues.unit !=
                                                                           null
-                                                                        ? attributeValues.unit
-                                                                        : "")}
+                                                                          ? attributeValues.unit
+                                                                          : "")}
                                                                   </span>
                                                                 }
 
                                                                 {attributeValues.attribute_value !==
                                                                   "?" && (
-                                                                  <ProsConsToolTip
-                                                                    comment={
-                                                                      attributeValues?.commnet
-                                                                    }
-                                                                    hover_phrase={
-                                                                      attributeValues &&
-                                                                      attributeValues.hover_phase
-                                                                    }
-                                                                  />
-                                                                )}
+                                                                    <ProsConsToolTip
+                                                                      comment={
+                                                                        attributeValues?.commnet
+                                                                      }
+                                                                      hover_phrase={
+                                                                        attributeValues &&
+                                                                        attributeValues.hover_phase
+                                                                      }
+                                                                    />
+                                                                  )}
                                                               </div>{" "}
                                                               {attributeValues?.info_not_verified && (
                                                                 <div
@@ -2365,101 +2357,100 @@ export default function Product({
                                                         {(attributeValues.attribute_value ==
                                                           "yes" ||
                                                           attributeValues.attribute_value ==
-                                                            "no") && (
-                                                          <div
-                                                            className={`${
-                                                              attributeValues?.hover_phase !==
-                                                              ""
-                                                                ? "tooltip-title"
-                                                                : ""
-                                                            }`}
-                                                            style={{
-                                                              color:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_same_as *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
-                                                                      100 >
-                                                                      60
-                                                                  ? "red"
-                                                                  : "#27304e",
-                                                              fontSize: "15px",
-                                                              textDecoration:
-                                                                attributeValues?.hover_phase !==
-                                                                ""
-                                                                  ? "underline"
-                                                                  : "",
-                                                              textDecorationStyle:
-                                                                attributeValues?.hover_phase !==
-                                                                ""
-                                                                  ? "dotted"
-                                                                  : "",
-                                                              textDecorationThickness:
-                                                                "1.5px",
-                                                              textDecorationColor:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                // here I change attribute_is_better_than to attribute_is_same_as
-                                                                attributeValues.attribute_is_same_as *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
-                                                                      100 >
-                                                                      60
-                                                                  ? "red"
-                                                                  : "#27304e",
-                                                              textUnderlineOffset:
-                                                                "5px",
-                                                            }}
-                                                          >
-                                                            {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
-                                                            {
-                                                              <span
-                                                                style={{
-                                                                  color:
-                                                                    attributeValues.attribute_value ==
-                                                                      "yes" &&
+                                                          "no") && (
+                                                            <div
+                                                              className={`${attributeValues?.hover_phase !==
+                                                                  ""
+                                                                  ? "tooltip-title"
+                                                                  : ""
+                                                                }`}
+                                                              style={{
+                                                                color:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
                                                                     attributeValues.attribute_is_same_as *
-                                                                      100 <
-                                                                      40
-                                                                      ? "#0066b2"
-                                                                      : attributeValues.attribute_value ==
-                                                                          "no" &&
-                                                                        attributeValues.attribute_is_worse_than *
-                                                                          100 >
-                                                                          60
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
+                                                                      "no" &&
+                                                                      attributeValues.attribute_is_worse_than *
+                                                                      100 >
+                                                                      60
                                                                       ? "red"
                                                                       : "#27304e",
-                                                                }}
-                                                              >
-                                                                {(attributeValues.attribute_value !=
-                                                                null
-                                                                  ? attributeValues.attribute_value
-                                                                  : "") +
-                                                                  " " +
-                                                                  (attributeValues.unit !=
-                                                                  null
-                                                                    ? attributeValues.unit
-                                                                    : "")}
-                                                              </span>
-                                                            }
-                                                            {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
-                                                            <ProsConsToolTip
-                                                              hover_phrase={
-                                                                attributeValues &&
-                                                                attributeValues.hover_phase
+                                                                fontSize: "15px",
+                                                                textDecoration:
+                                                                  attributeValues?.hover_phase !==
+                                                                    ""
+                                                                    ? "underline"
+                                                                    : "",
+                                                                textDecorationStyle:
+                                                                  attributeValues?.hover_phase !==
+                                                                    ""
+                                                                    ? "dotted"
+                                                                    : "",
+                                                                textDecorationThickness:
+                                                                  "1.5px",
+                                                                textDecorationColor:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
+                                                                    // here I change attribute_is_better_than to attribute_is_same_as
+                                                                    attributeValues.attribute_is_same_as *
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
+                                                                      "no" &&
+                                                                      attributeValues.attribute_is_worse_than *
+                                                                      100 >
+                                                                      60
+                                                                      ? "red"
+                                                                      : "#27304e",
+                                                                textUnderlineOffset:
+                                                                  "5px",
+                                                              }}
+                                                            >
+                                                              {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                                              {
+                                                                <span
+                                                                  style={{
+                                                                    color:
+                                                                      attributeValues.attribute_value ==
+                                                                        "yes" &&
+                                                                        attributeValues.attribute_is_same_as *
+                                                                        100 <
+                                                                        40
+                                                                        ? "#0066b2"
+                                                                        : attributeValues.attribute_value ==
+                                                                          "no" &&
+                                                                          attributeValues.attribute_is_worse_than *
+                                                                          100 >
+                                                                          60
+                                                                          ? "red"
+                                                                          : "#27304e",
+                                                                  }}
+                                                                >
+                                                                  {(attributeValues.attribute_value !=
+                                                                    null
+                                                                    ? attributeValues.attribute_value
+                                                                    : "") +
+                                                                    " " +
+                                                                    (attributeValues.unit !=
+                                                                      null
+                                                                      ? attributeValues.unit
+                                                                      : "")}
+                                                                </span>
                                                               }
-                                                            />
-                                                          </div>
-                                                        )}
+                                                              {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
+                                                              <ProsConsToolTip
+                                                                hover_phrase={
+                                                                  attributeValues &&
+                                                                  attributeValues.hover_phase
+                                                                }
+                                                              />
+                                                            </div>
+                                                          )}
                                                       </div>
                                                     </div>
                                                   </div>
@@ -2474,55 +2465,54 @@ export default function Product({
                                             displayedAttributesCount[
                                               product.name
                                             ] &&
-                                            displayedAttributesCount[
+                                              displayedAttributesCount[
                                               product.name
-                                            ][attribute]
+                                              ][attribute]
                                               ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
+                                              product.name
+                                              ][attribute]
                                               : initialDisplay
                                           }
                                         />
                                       )}
                                       {loading == false
                                         ? product.attributes_new[attribute]
-                                            .length >
-                                            (displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                            displayedAttributesCount[
-                                              product.name
-                                            ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay) && (
-                                            <span
-                                              className="show_more"
-                                              onClick={() => {
-                                                setloading(true),
-                                                  handleDisplayedAttributesCount(
-                                                    product.name,
-                                                    attribute
-                                                  );
-                                                setTimeout(() => {
-                                                  setloading(false);
-                                                }, 600);
-                                              }}
-                                            >
-                                              {"SHOW MORE "}
-                                              <i
-                                                className={`ri-${
-                                                  initialDisplay <
+                                          .length >
+                                        (displayedAttributesCount[
+                                          product.name
+                                        ] &&
+                                          displayedAttributesCount[
+                                          product.name
+                                          ][attribute]
+                                          ? displayedAttributesCount[
+                                          product.name
+                                          ][attribute]
+                                          : initialDisplay) && (
+                                          <span
+                                            className="show_more"
+                                            onClick={() => {
+                                              setloading(true),
+                                                handleDisplayedAttributesCount(
+                                                  product.name,
+                                                  attribute
+                                                );
+                                              setTimeout(() => {
+                                                setloading(false);
+                                              }, 600);
+                                            }}
+                                          >
+                                            {"SHOW MORE "}
+                                            <i
+                                              className={`ri-${initialDisplay <
                                                   product.attributes_new[
                                                     attribute
                                                   ].length
-                                                    ? "add"
-                                                    : "subtract"
+                                                  ? "add"
+                                                  : "subtract"
                                                 }-line`}
-                                              ></i>
-                                            </span>
-                                          )
+                                            ></i>
+                                          </span>
+                                        )
                                         : ""}
                                     </Accordion.Body>
                                   </Accordion.Item>
