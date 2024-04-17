@@ -24,7 +24,7 @@ const ProsConsToolTip = (props) => {
 
   let result = width - 250
   let finalvalue = result / 2 -250
-  console.log(finalvalue, "test")
+  // console.log(finalvalue, "test")
  
 
   // if (typeComp === "cons") {

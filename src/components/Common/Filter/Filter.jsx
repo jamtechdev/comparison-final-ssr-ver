@@ -5,6 +5,8 @@ import { Accordion, Form } from "react-bootstrap";
 import { getFilteredAttributeValues } from "../../../_helpers";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider.js";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import useScreenSize from "@/_helpers/useScreenSize";
+import MultiRangeMobileSlider from "../MultiRangeSlider/MultiRangeMobileSlider";
 
 export default function Filter({
   categoryAttributes,
@@ -35,8 +37,10 @@ export default function Filter({
     setPagination({ ...pagination, [categoryName]: updatedPage });
   };
 
+  const { isMobile } = useScreenSize();
+
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    // console.log(filterName, key, value, "neet")
+    // console.log(filterName, key, value, "neet");
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -345,17 +349,40 @@ export default function Filter({
         <div className="tech-features-price">
           {guidePhraseData && guidePhraseData?.price}
           {/* {console.log(guidePhraseData?.price, "price")} */}
-          {price?.min_price != null && (
-            <MultiRangeSlider
-              rangeVal={sliderValues}
-              min={price?.min_price}
-              max={price?.max_price}
-              unit="€"
-              onChange={({ min, max }) => {
-                handelFilterActions("price", "price", `${min},${max}`, true);
-              }}
-            />
-          )}
+          {isMobile
+            ? price?.min_price != null && (
+                <MultiRangeMobileSlider
+                  rangeVal={sliderValues}
+                  min={price?.min_price}
+                  max={price?.max_price}
+                  unit="€"
+                  onChange={({ min, max }) => {
+                    handelFilterActions(
+                      "price",
+                      "price",
+                      `${min},${max}`,
+                      true
+                    );
+                  }}
+                />
+              )
+            : price?.min_price != null && (
+                <MultiRangeSlider
+                  rangeVal={sliderValues}
+                  min={price?.min_price}
+                  max={price?.max_price}
+                  unit="€"
+                  onChange={({ min, max }) => {
+                    // console.log(min,max)
+                    handelFilterActions(
+                      "price",
+                      "price",
+                      `${min},${max}`,
+                      true
+                    );
+                  }}
+                />
+              )}
         </div>
       </div>
       <Accordion className="filter-accordion">
@@ -568,7 +595,8 @@ export default function Filter({
                           <i className="ri-arrow-down-s-fill"></i>
                         </Accordion.Header>
                         <Accordion.Body>
-                          <MultiRangeSlider
+                          {isMobile ? (
+                            <MultiRangeMobileSlider
                             rangeVal={sliderValues}
                             classForSlider={attribute.name}
                             min={
@@ -594,7 +622,38 @@ export default function Filter({
                                 true
                               );
                             }}
-                          />
+                            />
+                          ) : (
+                            <MultiRangeSlider
+                            rangeVal={sliderValues}
+                            classForSlider={attribute.name}
+                            min={
+                              filteredArrayOfAttributeValues.maxValue -
+                                filteredArrayOfAttributeValues.minValue >=
+                              1
+                                ? filteredArrayOfAttributeValues.minValue
+                                : 0
+                            }
+                            max={
+                              filteredArrayOfAttributeValues.maxValue -
+                                filteredArrayOfAttributeValues.minValue >=
+                              1
+                                ? filteredArrayOfAttributeValues.maxValue
+                                : 100
+                            }
+                            unit={filteredArrayOfAttributeValues.unit}
+                            onChange={({ min, max }) => {
+                              handelFilterActions(
+                                "range",
+                                attribute.name,
+                                `${min},${max}`,
+                                true
+                              );
+                            }}
+                            />
+                          )}
+
+                          
                         </Accordion.Body>
                       </Accordion.Item>
                     );
