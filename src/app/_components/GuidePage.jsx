@@ -139,10 +139,11 @@ export default function GuidePage({
     router.replace(newUrl, { scroll: false });
     // You can also use window.location.href = newUrl; if you want to trigger a page reload
     // Optionally, you can perform additional actions
+    location.reload();
     return newUrl;
     // if (paramToRemove === "variant") {
     //   window.history.replaceState(null, "", window.location.pathname);
-    //   location.reload();
+      location.reload();
     // } else {
 
     // }
