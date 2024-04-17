@@ -16,12 +16,18 @@ export default function MobileComparisonTool({
 }) {
   const [swiperRef, setSwiperRef] = useState();
 
+  const[currentIndex,setCurrentIndex]=useState(0)
+
   const handlePrevious = useCallback(() => {
     swiperRef?.slidePrev();
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+    // setCurrentIndex
   }, [swiperRef]);
 
   const handleNext = useCallback(() => {
-    swiperRef?.slideNext();
+    swiperRef?.slideNext(); 
   }, [swiperRef]);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -196,12 +202,23 @@ export default function MobileComparisonTool({
             })}
           {comparisonProductData && comparisonProductData?.length > 0 && (
             <>
+ {currentIndex === 0? (
+        <span className="swiper-next" onClick={handleNext} style={{marginLeft:"88vw"}}>
+          <i className="ri-arrow-right-s-line" ></i>
+        </span>
+      ) : (
+        <span className="swiper-prev" onClick={handlePrevious}>
+          <i className="ri-arrow-left-s-line"></i>
+        </span>
+      )}
+
+{/* 
               <span className="swiper-prev" onClick={handlePrevious}>
                 <i className="ri-arrow-left-s-line"></i>
               </span>
               <span className="swiper-next" onClick={handleNext}>
                 <i className="ri-arrow-right-s-line"></i>
-              </span>
+              </span> */}
             </>
           )}
         </Swiper>

@@ -88,6 +88,7 @@ export default function MobileCompareTable({
     swiperRef?.slidePrev();
   }, [swiperRef]);
 
+
   const handleNext = useCallback(() => {
     setTabData(true);
     if (currentIndex < chunkedData.length - 2) {
@@ -424,6 +425,7 @@ export default function MobileCompareTable({
               : "slider-controls table__arrow"
           }
         >
+        
           <span className="swiper-prev" onClick={handlePrevious}>
             <i className="ri-arrow-left-s-line"></i>
           </span>
@@ -434,13 +436,18 @@ export default function MobileCompareTable({
         <div
           className="slider-controls table__image__arrow"
         >
-          <span className="swiper-prev" onClick={handlePrevious}>
-            <i className="ri-arrow-left-s-line"></i>
-          </span>
-          <span className="swiper-next" onClick={handleNext}>
-            <i className="ri-arrow-right-s-line"></i>
-          </span>
+           {currentIndex === 0? (
+        <span className="swiper-next" onClick={handleNext} style={{marginLeft:"88vw"}}>
+          <i className="ri-arrow-right-s-line" ></i>
+        </span>
+      ) : (
+        <span className="swiper-prev" onClick={handlePrevious}>
+          <i className="ri-arrow-left-s-line"></i>
+        </span>
+      )}
         </div>
+
+       
         {/* <Swiper onSlideChange={(swiper) => setTableIndex(swiper.activeIndex)} */}
         <Swiper
           onSlideChange={handleSlideChange}

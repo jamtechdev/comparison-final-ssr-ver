@@ -40,11 +40,7 @@ const ProsConsToolTip = (props) => {
   return (
     <>
       {hover_phrase && (
-<<<<<<< HEAD
         <div className="tooltip-display-content" style={{left:finalvalue}} >
-=======
-        <div className="tooltip-display-content center_tooltips">
->>>>>>> 15e51dcb15ab9f1785076497e306f23d3f5983fb
           <div
             className="mb-2 prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}
