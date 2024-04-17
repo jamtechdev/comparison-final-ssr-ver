@@ -141,12 +141,6 @@ export default function GuidePage({
     // Optionally, you can perform additional actions
     location.reload();
     return newUrl;
-    // if (paramToRemove === "variant") {
-    //   window.history.replaceState(null, "", window.location.pathname);
-      location.reload();
-    // } else {
-
-    // }
   }
 
   useEffect(() => {
