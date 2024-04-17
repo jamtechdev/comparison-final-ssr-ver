@@ -16,19 +16,23 @@ export default function MobileComparisonTool({
 }) {
   const [swiperRef, setSwiperRef] = useState();
 
-  const[currentIndex,setCurrentIndex]=useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   const handlePrevious = useCallback(() => {
-    swiperRef?.slidePrev();
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
+      swiperRef?.slidePrev();
     }
-    // setCurrentIndex
-  }, [swiperRef]);
+  }, [swiperRef, currentIndex]);
+
+
 
   const handleNext = useCallback(() => {
-    swiperRef?.slideNext(); 
-  }, [swiperRef]);
+    if (currentIndex < comparisonProductData.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      swiperRef?.slideNext();
+    }
+  }, [swiperRef, currentIndex]);
 
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -60,9 +64,8 @@ export default function MobileComparisonTool({
     const newArray = [...x.slice(0, i), ...x.slice(i + 1)];
     if (newArray.length > 1) {
       let newUrl = newArray.join("-vs-");
-      let path = `${window.location.origin}/${
-        window.location.pathname.split("/")[1]
-      }/${newUrl}`;
+      let path = `${window.location.origin}/${window.location.pathname.split("/")[1]
+        }/${newUrl}`;
       window.location.href = path;
     }
 
@@ -134,8 +137,8 @@ export default function MobileComparisonTool({
                               ? "#093673"
                               : item.overall_score >= 5 &&
                                 item.overall_score < 7.5
-                              ? "#437ECE"
-                              : "#85B2F1",
+                                ? "#437ECE"
+                                : "#85B2F1",
                         }}
                       >
                         {formatValue(item?.overall_score)}
@@ -145,7 +148,7 @@ export default function MobileComparisonTool({
                         style={{ cursor: "pointer" }}
                         onClick={
                           () => urlChange(index)
-                          //
+                          
                         }
                       >
                         <i className="ri-close-line"></i> Remove
@@ -157,7 +160,7 @@ export default function MobileComparisonTool({
                           <img
                             src={
                               item?.price_websites[0]?.price != null &&
-                              item?.price_websites[0]?.logo === null
+                                item?.price_websites[0]?.logo === null
                                 ? "/images/No-Image.png"
                                 : item?.price_websites[0]?.logo
                             }
@@ -202,23 +205,16 @@ export default function MobileComparisonTool({
             })}
           {comparisonProductData && comparisonProductData?.length > 0 && (
             <>
- {currentIndex === 0? (
-        <span className="swiper-next" onClick={handleNext} style={{marginLeft:"88vw"}}>
-          <i className="ri-arrow-right-s-line" ></i>
-        </span>
-      ) : (
-        <span className="swiper-prev" onClick={handlePrevious}>
-          <i className="ri-arrow-left-s-line"></i>
-        </span>
-      )}
+              {currentIndex === 0 ? (
+                <span className="swiper-next" onClick={handleNext} style={{ marginLeft: "88vw" }}>
+                  <i className="ri-arrow-right-s-line"></i>
+                </span>
+              ) : (
+                <span className="swiper-prev" onClick={handlePrevious}>
+                  <i className="ri-arrow-left-s-line"></i>
+                </span>
+              )}
 
-{/* 
-              <span className="swiper-prev" onClick={handlePrevious}>
-                <i className="ri-arrow-left-s-line"></i>
-              </span>
-              <span className="swiper-next" onClick={handleNext}>
-                <i className="ri-arrow-right-s-line"></i>
-              </span> */}
             </>
           )}
         </Swiper>
