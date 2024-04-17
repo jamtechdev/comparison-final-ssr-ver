@@ -420,18 +420,22 @@ export default function MobileCompareTable({
         <div
           className={
             winPos == true
-              ? "slider-controls table__arrow arrow__fixed"
+              ?  currentIndex === 0 ?"slider-controls table__arrow arrow__fixed justify-content-end":"slider-controls table__arrow arrow__fixed justify-content-start"
               : "slider-controls table__arrow"
           }
         >
-          <span className="swiper-prev" onClick={handlePrevious}>
-            <i className="ri-arrow-left-s-line"></i>
-          </span>
-          <span className="swiper-next" onClick={handleNext}>
+          {currentIndex ===0 ? (
+              <span className="swiper-next" onClick={handleNext}>
             <i className="ri-arrow-right-s-line"></i>
           </span>
+            
+          ):(<span className="swiper-prev" onClick={handlePrevious}>
+          <i className="ri-arrow-left-s-line"></i>
+        </span>)}
+          
+        
         </div>
-        <div
+        {/* <div
           className={
             winPos == true
               ? "slider-controls table__image__arrow d-none"
@@ -455,7 +459,7 @@ export default function MobileCompareTable({
               <i className="ri-arrow-left-s-line"></i>
             </span>
           )}
-        </div>
+        </div> */}
 
         {/* <Swiper onSlideChange={(swiper) => setTableIndex(swiper.activeIndex)} */}
         <Swiper
