@@ -344,7 +344,7 @@ export default function Filter({
       <div className="filter-section">
         <div className="tech-features-price">
           {guidePhraseData && guidePhraseData?.price}
-          {/* {console.log(guidePhraseData?.price, "price")} */}
+          {console.log(guidePhraseData?.price, "price")}
           {price?.min_price != null && (
             <MultiRangeSlider
               rangeVal={sliderValues}

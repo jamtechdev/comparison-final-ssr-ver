@@ -9,7 +9,7 @@ function Radar({ data, activeTab }) {
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 490 - margin.left - margin.right;
-  const height = 350;
+  const height = 420;
 
   // const data = [
   //   {
@@ -246,7 +246,7 @@ function Radar({ data, activeTab }) {
     }
   }, [activeTab]);
 
-  return <svg viewBox={`-60 100 590 270`}></svg>;
+  return <svg viewBox={`0 0 470 450`}></svg>;
 }
 
 export default Radar;

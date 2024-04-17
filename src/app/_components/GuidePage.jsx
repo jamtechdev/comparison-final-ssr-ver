@@ -113,6 +113,7 @@ export default function GuidePage({
 
   function removeQueryParamAndNavigate(url, paramToRemove) {
     // delete searchParams[`${paramToRemove}`];
+    console.log(paramToRemove);
     if (paramToRemove != "sort") {
       setparams(() => {
         return {
@@ -648,6 +649,7 @@ export default function GuidePage({
                 <>
                   <Col md={6}>
                     <div className="filtered-data">
+                      {/* {console.log(Object.keys(params)?.length)} */}
                       <ul>
                         {Object.keys(params)
                           .filter((key) => key !== "direct" && key !== "sort")

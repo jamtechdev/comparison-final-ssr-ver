@@ -50,7 +50,7 @@ const useChart = () => {
       });
     };
     searchForPattern();
-  });
+  },[]);
   async function renderGraphForMatchedShortCodePattern(
     element,
     shortCodesMatched,

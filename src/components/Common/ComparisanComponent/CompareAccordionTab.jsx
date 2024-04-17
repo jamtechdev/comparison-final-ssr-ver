@@ -255,7 +255,7 @@ const CompareAccordionTab = React.memo(
                     d3.select(".tooltip").remove(); // Remove existing tooltip
                   }}
                 >
-                  <div className="graph-tab-content">
+                  <div className="graph-tab-content compare_radar_chart" >
                     {activatab === `tab-${index + 1}` && graphData && (
                       <Radar
                         data={graphData}
