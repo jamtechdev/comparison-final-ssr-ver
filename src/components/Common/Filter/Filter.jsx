@@ -482,7 +482,7 @@ export default function Filter({
                             {filteredArrayOfAttributeValues.values?.map(
                               (value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
-                                console.log(groupName)
+                                // console.log(groupName)
                                 return (
                                   <div
                                     key={valIndex}
