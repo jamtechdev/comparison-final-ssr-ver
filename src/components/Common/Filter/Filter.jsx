@@ -472,6 +472,7 @@ export default function Filter({
       {/* Dynaimc Value Accordians */}
       {attributeCategories?.map((category, index) => {
         let countAttribute = 1;
+        // console.log(category)
         return (
           <div className="filter-section" key={index}>
             <div className="tech-features">{category.name}</div>
@@ -532,9 +533,15 @@ export default function Filter({
                           </Accordion.Header>
 
                           <Accordion.Body>
-                            {filteredArrayOfAttributeValues.values?.map(
-                              (value, valIndex) => {
+                            {filteredArrayOfAttributeValues.values
+                              ?.slice(0, 1)
+                              ?.map((value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
+                                const uniqueValues = Array.isArray(value)
+                                  ? [...new Set(value.flat())]
+                                  : [value];
+                                console.log(uniqueValues, "next");
+
                                 return (
                                   <div
                                     key={valIndex}
@@ -606,8 +613,7 @@ export default function Filter({
                                     />
                                   </div>
                                 );
-                              }
-                            )}
+                              })}
                           </Accordion.Body>
                         </Accordion.Item>
                       );

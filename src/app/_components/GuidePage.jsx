@@ -75,6 +75,8 @@ export default function GuidePage({
     setPrevSearcParam(searchParams);
   }, []);
   useEffect(() => {
+    handelSetFilterActive(true);
+
     if (isAreObjectsEqual(searchParams, prevSearcParam)) {
       handelSetFilterActive(true);
     }
@@ -83,7 +85,6 @@ export default function GuidePage({
     }, 1000);
   }, [searchParams]);
   // console.log(searchParams);
-
 
   // const removeFilters = () => {
   //   window.history.replaceState(null, "", window.location.pathname);
