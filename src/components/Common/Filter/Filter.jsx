@@ -19,10 +19,7 @@ export default function Filter({
   // console.log(guidePhraseData);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [sliderValues, setSliderValues] = useState({
-    minVal: 0,
-    maxVal: 0,
-  });
+  const [sliderValues, setSliderValues] = useState({ minVal: 0, maxVal: 0 });
   const [sliderPriceValues, setSliderPriceValues] = useState({
     minVal: 0,
     maxVal: 0,
@@ -307,13 +304,11 @@ export default function Filter({
               : 100;
           // alert(min)
 
-          setSliderValues((prevVal) => {
-            return {
-              ...prevVal,
-              minVal: min,
-              maxVal: max,
-            };
-          });
+          setSliderValues((prevValues) => ({
+            ...prevValues,
+            min,
+            max,
+          }));
           // thumb thumb--left ${classForSlider}
 
           handelFilterActions("range", removedParam, `${min},${max}`, false);
@@ -599,6 +594,7 @@ export default function Filter({
                     }
                   } else if (filteredArrayOfAttributeValues?.type === "range") {
                     countAttribute++;
+
                     return (
                       <Accordion.Item eventKey={attrIndex} key={attrIndex}>
                         <Accordion.Header as="div" className="accordion-header">
