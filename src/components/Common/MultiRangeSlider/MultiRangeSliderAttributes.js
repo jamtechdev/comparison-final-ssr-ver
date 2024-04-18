@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import "./multiRangeSlider.css";
 
-const MultiRangeSlider = ({
+const MultiRangeSliderAttributes = ({
   min,
   max,
   onChange,
@@ -18,6 +18,7 @@ const MultiRangeSlider = ({
 
   const step = 0.01; // Adjust the step value for better precision
 
+  console.log(min,max , "neetx")
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getPercent = useCallback((value) =>
     Math.round(((value - min) / (max - min)) * 100)
@@ -106,10 +107,10 @@ const MultiRangeSlider = ({
   );
 };
 
-MultiRangeSlider.propTypes = {
+MultiRangeSliderAttributes.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-export default MultiRangeSlider;
+export default MultiRangeSliderAttributes;

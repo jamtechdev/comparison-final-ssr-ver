@@ -783,7 +783,7 @@ export default function Product({
                           )
 
                           ?.map((data, index) => {
-                            console.log(data, "show data")
+                            // console.log(data, "show data")
                             return (
                               <React.Fragment key={index}>
                               
