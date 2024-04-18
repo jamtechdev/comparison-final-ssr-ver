@@ -1,9 +1,8 @@
-// Import the TouchEvent type from React
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import "./multiRangeSlider.css";
 
-const MultiRangeMobileSlider = ({
+const MultiRangeSliderAttributes = ({
   min,
   max,
   onChange,
@@ -19,6 +18,8 @@ const MultiRangeMobileSlider = ({
 
   const step = 0.01; // Adjust the step value for better precision
 
+  console.log(min,max , "neetx")
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getPercent = useCallback((value) =>
     Math.round(((value - min) / (max - min)) * 100)
   );
@@ -35,7 +36,6 @@ const MultiRangeMobileSlider = ({
       }
     }
   }, [rangeVal]);
-
   useEffect(() => {
     const minPercent = getPercent(minVal);
     const maxPercent = getPercent(maxValRef.current);
@@ -50,36 +50,10 @@ const MultiRangeMobileSlider = ({
     const minPercent = getPercent(minValRef.current);
     const maxPercent = getPercent(maxVal);
     if (range.current) {
+      //  range.current.style.left = `${maxPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
   }, [maxVal, getPercent]);
-  const handleTouchMove = (event) => {
-    const rect = range.current.getBoundingClientRect();
-    const touch = event.touches[0];
-    const sliderWidth = rect.width / (max - min);
-    const clientX = touch.clientX - rect.left;
-
-    if (event.target.id.includes("thumb--left")) {
-      let newValue = clientX / sliderWidth + min;
-      newValue = Math.min(Math.max(newValue, min), max);
-
-      // Check if thumb--left is beyond thumb--right, adjust thumb--right if necessary
-      if (newValue >= maxValRef.current) {
-        setMaxVal(parseFloat(newValue).toFixed(2));
-        maxValRef.current = parseFloat(newValue).toFixed(2);
-      }
-
-      setMinVal(parseFloat(newValue).toFixed(2));
-      minValRef.current = parseFloat(newValue).toFixed(2);
-    } else if (event.target.id.includes("thumb--right")) {
-      let newValue = clientX / sliderWidth + min;
-      newValue = Math.min(Math.max(newValue, min), max);
-      setMaxVal(parseFloat(newValue).toFixed(2));
-      maxValRef.current = parseFloat(newValue).toFixed(2);
-    }
-
-    onChange({ min: minValRef.current, max: maxValRef.current });
-  };
 
   return (
     <div className="multi-range-slider-container">
@@ -89,9 +63,12 @@ const MultiRangeMobileSlider = ({
         max={max}
         value={minVal}
         step={step}
-        onTouchStart={handleTouchMove}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={() => onChange({ min: minVal, max: maxVal })}
+        onChange={(event) => {
+          const value = Math.min(Number(event.target.value), maxVal);
+          setMinVal(Number(value.toFixed(1)));
+          minValRef.current = Number(value.toFixed(1));
+        }}
+        onMouseUp={() => onChange({ min: minVal, max: maxVal })}
         id={`thumb thumb--left ${classForSlider}`}
         className={`thumb thumb--left ${classForSlider}`}
         style={{ zIndex: minVal > max - step && "5" }}
@@ -108,19 +85,6 @@ const MultiRangeMobileSlider = ({
           maxValRef.current = Number(value.toFixed(1));
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
-        onTouchStart={(event) => {
-          const rect = range.current.getBoundingClientRect();
-          const touch = event.touches[0];
-          let newValue =
-            ((touch.clientX - rect.left) / rect.width) * (max - min) + min;
-          newValue = Math.min(Math.max(newValue, min), max);
-          setMaxVal(newValue);
-          maxValRef.current = newValue;
-        }}
-        onTouchMove={(event) => {
-          handleTouchMove(event);
-        }}
-        onTouchEnd={() => onChange({ min: minVal, max: maxVal })}
         id={`thumb thumb--right ${classForSlider}`}
         className={`thumb thumb--right ${classForSlider}`}
       />
@@ -131,19 +95,11 @@ const MultiRangeMobileSlider = ({
       </div>
       <div className="values">
         <label>
-          {typeof minVal === "number"
-            ? Number.isInteger(minVal)
-              ? minVal.toFixed(0)
-              : minVal.toFixed(1)
-            : minVal}
+          {Number.isInteger(minVal) ? minVal?.toFixed(0) : minVal?.toFixed(1)}{" "}
           {unit}
         </label>
         <label>
-          {typeof maxVal === "number"
-            ? Number.isInteger(maxVal)
-              ? maxVal.toFixed(0)
-              : maxVal.toFixed(1)
-            : ""}
+          {Number.isInteger(maxVal) ? maxVal?.toFixed(0) : maxVal?.toFixed(1)}{" "}
           {unit}
         </label>
       </div>
@@ -151,10 +107,10 @@ const MultiRangeMobileSlider = ({
   );
 };
 
-MultiRangeMobileSlider.propTypes = {
+MultiRangeSliderAttributes.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-export default MultiRangeMobileSlider;
+export default MultiRangeSliderAttributes;
