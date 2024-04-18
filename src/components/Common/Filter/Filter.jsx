@@ -19,7 +19,11 @@ export default function Filter({
   // console.log(guidePhraseData);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [sliderValues, setSliderValues] = useState({ minVal: 0, maxVal: 0 });
+  const [sliderValues, setSliderValues] = useState({});
+  // const [sliderValues, setSliderValues] = useState({
+  //   minVal: 0,
+  //   maxVal: 0,
+  // });
   const [sliderPriceValues, setSliderPriceValues] = useState({
     minVal: 0,
     maxVal: 0,
@@ -160,7 +164,7 @@ export default function Filter({
     //call the next router for srr
     router.push(`?${currentParams.toString()}`, { scroll: false });
   };
-
+  // console.log(sliderValues);
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
     delete updatedParams[key];
     currentParams.delete([key]);
@@ -304,12 +308,28 @@ export default function Filter({
               : 100;
           // alert(min)
 
-          setSliderValues((prevValues) => ({
-            ...prevValues,
-            min,
-            max,
-          }));
+          // setSliderValues((prevVal) => {
+          //   return {
+          //     ...prevVal,
+          //     minVal: min,
+          //     maxVal: max,
+          //   };
+          // });
+          if (min === null && max === null) {
+            // Reset all sliders
+            setSliderValues((prevValues) => ({
+              ...prevValues,
+              [removedParam]: { min: 0, max: 0 },
+            }));
+          } else {
+            // Update the slider for the specific attribute
+            setSliderValues((prevValues) => ({
+              ...prevValues,
+              [removedParam]: { min, max },
+            }));
+          }
           // thumb thumb--left ${classForSlider}
+          console.log(sliderValues, min, max);
 
           handelFilterActions("range", removedParam, `${min},${max}`, false);
           const leftThumb = document.getElementById(
@@ -594,7 +614,6 @@ export default function Filter({
                     }
                   } else if (filteredArrayOfAttributeValues?.type === "range") {
                     countAttribute++;
-
                     return (
                       <Accordion.Item eventKey={attrIndex} key={attrIndex}>
                         <Accordion.Header as="div" className="accordion-header">
@@ -633,7 +652,14 @@ export default function Filter({
                             />
                           ) : (
                             <MultiRangeSliderAttributes
-                              rangeVal={sliderValues}
+                              rangeVal={
+                                sliderValues[attribute.name] || {
+                                  minVal:
+                                    filteredArrayOfAttributeValues.minValue,
+                                  maxVal:
+                                    filteredArrayOfAttributeValues.maxValue,
+                                }
+                              }
                               classForSlider={attribute.name}
                               min={
                                 filteredArrayOfAttributeValues.maxValue -

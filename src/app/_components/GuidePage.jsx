@@ -83,10 +83,7 @@ export default function GuidePage({
     }, 1000);
   }, [searchParams]);
   // console.log(searchParams);
-  useEffect(() => {
-    // handelFilterActions("variant", "variant", true);
-    // handelFilterActions("available", "available", false);
-  }, []);
+
 
   // const removeFilters = () => {
   //   window.history.replaceState(null, "", window.location.pathname);
@@ -311,6 +308,7 @@ export default function GuidePage({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  // console.log(isFilterActive)
 
   return (
     <>
@@ -639,6 +637,7 @@ export default function GuidePage({
             </Row>
             <Row className="m-0">
               {isFilterActive ? (
+                // <h1>hello</h1>
                 <ProductSkeleton />
               ) : (
                 <>
