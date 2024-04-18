@@ -1,30 +1,35 @@
 
 import React,{useState,useEffect} from "react";
 import { renderToString } from "react-dom/server";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 const ProsConsToolTip = (props) => {
-  const { hover_phrase, info_not_verified, data, comment, typeComp } = props;
-  // console.log(final,"mahima")
+  const { hover_phrase, info_not_verified, data, comment, typeComp ,finalvalue} = props;
+
+
+
+const {isMobile}=useScreenSize();
+
   let tooltipStyles = {};
 
-  const [width, setWidth] = useState(0);
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
+  // const [width, setWidth] = useState(0);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setWidth(window.innerWidth);
+  //   };
 
-    handleResize();
+  //   handleResize();
 
-    window.addEventListener('resize', handleResize);
+  //   window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
 
-  let result = width - 250
-  let finalvalue = result / 2 -250
-  console.log(finalvalue, "test")
+  // let result = width - 250
+  // let finalvalue = result / 2 -250
+  // console.log(finalvalue, "test")
  
 
   // if (typeComp === "cons") {
@@ -40,12 +45,12 @@ const ProsConsToolTip = (props) => {
   return (
     <>
       {hover_phrase && (
-        <div className="tooltip-display-content" style={{left:finalvalue}} >
+        <div className="tooltip-display-content" style={{ left: isMobile ? finalvalue : 0 ,width:"200px"}} >
           <div
             className="mb-2 prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}
           ></div>
-          {/* {   console.log(comment)} */}
+          
           {comment && <div className="test__phrase__content " >{comment}</div>}
 
           {info_not_verified && (

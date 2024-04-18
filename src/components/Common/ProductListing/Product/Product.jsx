@@ -7,6 +7,7 @@ import ProsConsToolTip from "../../../Svg/ProsConsToolTip";
 import RightPointingArrow from "../../../Svg/RightPointingArrow";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 import {
   removeDecimalAboveNine,
@@ -35,6 +36,8 @@ export default function Product({
   order,
 }) {
   const dispatch = useDispatch();
+  const { isMobile }=useScreenSize()
+
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
     incomingProduct.attributes.forEach((attribute) => {
@@ -247,6 +250,25 @@ export default function Product({
 
     setSplitData(sortValue?.split(","));
   }, [order]);
+
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  let result = width - 250
+  let finalvalue = result / 2 -250
+  // console.log(finalvalue, "test")
 
   // useEffect(() => {
   //   const currentUrl = new URL(window.location.href);
@@ -746,6 +768,12 @@ export default function Product({
                     <p className="buy-avoid">
                       {guidePhraseData && guidePhraseData?.why_to_buy}
                     </p>
+                    {/* {isMobile === ? (
+
+                    ):
+                    (
+
+                    )} */}
                     <ul>
                       {product &&
                         product?.top_pros
@@ -758,7 +786,8 @@ export default function Product({
                             console.log(data, "show data")
                             return (
                               <React.Fragment key={index}>
-                                <li
+                              
+                                <li 
                                   className={`${data?.hover_phrase !== "" && "tooltip-title"
                                     }`}
                                 >
@@ -809,7 +838,7 @@ export default function Product({
                                     data={data}
                                     info_not_verified={data.info_not_verified}
                                     hover_phrase={data.hover_phrase}
-                                  
+                                  finalvalue={finalvalue}
                                   />
                                 </li>
                               </React.Fragment>
