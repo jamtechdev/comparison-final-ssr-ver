@@ -1680,7 +1680,7 @@ li.color-item.selected {
 @media screen and (max-width: 768px) {
   .chart__data {
     right: 5% !important;
-    bottom: 220px  !important;
+    bottom: 220px !important;
   }
 }
 
@@ -2233,15 +2233,15 @@ div#shortCodeText ul {
     left: -100px !important;
   }
 }
-.compare_radar_chart{
+.compare_radar_chart {
   margin-top: 50px;
 }
-.line-chart-parent .tick text{
+.line-chart-parent .tick text {
   font-size: 16px !important;
 }
-.correlation_svg_width  .tick text{
+.correlation_svg_width .tick text {
   font-size: 16px !important;
 }
-.base__container .tick text{
+.base__container .tick text {
   font-size: 16px !important;
 }
