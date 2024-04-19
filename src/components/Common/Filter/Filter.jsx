@@ -540,7 +540,7 @@ export default function Filter({
                                 const uniqueValues = Array.isArray(value)
                                   ? [...new Set(value.flat())]
                                   : [value];
-                                console.log(uniqueValues, "next");
+                                // console.log(uniqueValues, "next");
 
                                 return (
                                   <div
