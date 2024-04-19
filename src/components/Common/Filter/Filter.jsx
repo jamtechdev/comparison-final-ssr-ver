@@ -478,18 +478,18 @@ export default function Filter({
           <div className="filter-section" key={index}>
             <div className="tech-features">{category.name}</div>
             <Accordion className="filter-accordion">
-            {  console.log(category?.attributes,"checking attributes") }
+              {console.log(category?.attributes, "checking attributes")}
               {category?.attributes?.map((attribute, attrIndex) => {
                 if (
                   countAttribute <=
-                  (pagination[category.name] || initialNoOfCategories)  
+                  (pagination[category.name] || initialNoOfCategories)
                 ) {
                   let filteredArrayOfAttributeValues =
                     getFilteredAttributeValues(attribute);
-                    console.log(filteredArrayOfAttributeValues,"Checking")
-                    // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
-                    // const uniqueValues = Array.from(uniqueValuesSet);
-                    // console.log(uniqueValues,"uniqueValues")
+                  console.log(filteredArrayOfAttributeValues, "Checking");
+                  // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
+                  // const uniqueValues = Array.from(uniqueValuesSet);
+                  // console.log(uniqueValues,"uniqueValues")
 
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
@@ -539,9 +539,8 @@ export default function Filter({
                           </Accordion.Header>
 
                           <Accordion.Body>
-                            {filteredArrayOfAttributeValues.values
-                              ?.slice(0, 1)
-                              ?.map((value, valIndex) => {
+                            {filteredArrayOfAttributeValues.values?.map(
+                              (value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
                                 const uniqueValues = Array.isArray(value)
                                   ? [...new Set(value.flat())]
@@ -619,7 +618,8 @@ export default function Filter({
                                     />
                                   </div>
                                 );
-                              })}
+                              }
+                            )}
                           </Accordion.Body>
                         </Accordion.Item>
                       );
