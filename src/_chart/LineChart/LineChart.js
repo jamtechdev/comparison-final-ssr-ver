@@ -220,6 +220,8 @@ function lineChart(svgRef, lineChartData) {
     .enter()
     .append("g")
     .style("fill", "#437ECE")
+    .style("stroke-width", 5.5)
+
     .selectAll("circle")
     .data((d) => d.values)
     .enter()
