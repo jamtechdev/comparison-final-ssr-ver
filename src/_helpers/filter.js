@@ -1,6 +1,7 @@
 //Updated
 export const getFilteredAttributeValues = (obj) => {
   let uniq = [];
+  // console.log(obj)
   let product = [];
   const uniqueValues = obj.values.reduce((acc, currentValue) => {
     if (!acc.includes(currentValue.name)) {

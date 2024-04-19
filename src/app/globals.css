@@ -2236,3 +2236,6 @@ div#shortCodeText ul {
 .compare_radar_chart{
   margin-top: 50px;
 }
+.line-chart-parent .tick text{
+  font-size: 17px !important;
+}

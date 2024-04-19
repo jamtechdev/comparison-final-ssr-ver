@@ -20,7 +20,7 @@ export default function Filter({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({});
-  console.log(searchParams)
+  // console.log(searchParams)
   // const [sliderValues, setSliderValues] = useState({
   //   minVal: 0,
   //   maxVal: 0,
@@ -478,13 +478,18 @@ export default function Filter({
           <div className="filter-section" key={index}>
             <div className="tech-features">{category.name}</div>
             <Accordion className="filter-accordion">
+            {  console.log(category?.attributes,"checking attributes") }
               {category?.attributes?.map((attribute, attrIndex) => {
                 if (
                   countAttribute <=
-                  (pagination[category.name] || initialNoOfCategories)
+                  (pagination[category.name] || initialNoOfCategories)  
                 ) {
                   let filteredArrayOfAttributeValues =
                     getFilteredAttributeValues(attribute);
+                    console.log(filteredArrayOfAttributeValues,"Checking")
+                    // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
+                    // const uniqueValues = Array.from(uniqueValuesSet);
+                    // console.log(uniqueValues,"uniqueValues")
 
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;

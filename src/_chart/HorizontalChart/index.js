@@ -22,7 +22,7 @@ function HorizontalChart(props) {
     "#abcdf6",
     "#c9e0fa",
   ];
-  const margin = { top: 20, right: 30, bottom: 20, left: 400 };
+  const margin = {  top: 20, right: 30, bottom: 20, left: 450  };
 
   const newWidth = width - margin.left - margin.right;
   const newHeight = calculateHeight(
@@ -52,8 +52,8 @@ function HorizontalChart(props) {
         "viewBox",
         `${
           isMobileScreen
-            ? `100 0 640 ${newHeight + margin.top + margin.bottom}`
-            : `100 0 640 ${newHeight + margin.top + margin.bottom}`
+            ? `290 0 340 ${newHeight + margin.top + margin.bottom}`
+            : `290 0 340 ${newHeight + margin.top + margin.bottom}`
         }`
       )
 
@@ -191,7 +191,7 @@ function HorizontalChart(props) {
       >
         {chartTitle}
       </span>
-      <div ref={svgContainer} style={{ width: `600px` }}></div>
+      <div ref={svgContainer} style={{ width: `305px` }}></div>
     </div>
   );
 }

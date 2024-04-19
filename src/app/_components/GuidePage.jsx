@@ -74,6 +74,7 @@ export default function GuidePage({
   useEffect(() => {
     setPrevSearcParam(searchParams);
   }, []);
+  // console.log(searchParams)
 
   useEffect(() => {
     if (Object.keys(searchParams).length > 0) {
