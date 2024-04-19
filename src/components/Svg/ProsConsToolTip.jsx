@@ -65,6 +65,15 @@ const {isMobile}=useScreenSize();
               </span>
             </>
           )}
+          <div className="user__rating__popup">
+              <div className="user__rating__popup__list">
+                <span className="user__rating__popup__rating">4.5</span>
+                <div className="user__rating__popup__content">
+                  <img src="https://frontum.online/expert-review-logo/NationalPost_1709634578.png"/>
+                  <p>Nationalpost.com</p>
+                </div>
+              </div>
+          </div>
         </div>
       )}
     </>

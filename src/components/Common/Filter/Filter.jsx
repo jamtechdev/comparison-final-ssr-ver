@@ -47,7 +47,7 @@ export default function Filter({
   const { isMobile } = useScreenSize();
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    // console.log(filterName, key, value, "neet");
+    console.log(filterName, key, value, "neet");
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -316,21 +316,14 @@ export default function Filter({
           //     maxVal: max,
           //   };
           // });
-          if (min === null && max === null) {
-            // Reset all sliders
-            setSliderValues((prevValues) => ({
-              ...prevValues,
-              [removedParam]: { min: 0, max: 0 },
-            }));
-          } else {
-            // Update the slider for the specific attribute
-            setSliderValues((prevValues) => ({
-              ...prevValues,
-              [removedParam]: { min, max },
-            }));
-          }
+
+          setSliderValues((prevValues) => ({
+            ...prevValues,
+            sliderValues,
+          }));
+
           // thumb thumb--left ${classForSlider}
-          console.log(sliderValues, min, max);
+          console.log(sliderValues, filteredArrayOfAttributeValues?.type,min, max);
 
           handelFilterActions("range", removedParam, `${min},${max}`, false);
           const leftThumb = document.getElementById(
@@ -478,7 +471,7 @@ export default function Filter({
           <div className="filter-section" key={index}>
             <div className="tech-features">{category.name}</div>
             <Accordion className="filter-accordion">
-              {console.log(category?.attributes, "checking attributes")}
+              {/* {console.log(category?.attributes, "checking attributes")} */}
               {category?.attributes?.map((attribute, attrIndex) => {
                 if (
                   countAttribute <=
@@ -486,7 +479,7 @@ export default function Filter({
                 ) {
                   let filteredArrayOfAttributeValues =
                     getFilteredAttributeValues(attribute);
-                  console.log(filteredArrayOfAttributeValues, "Checking");
+                  // console.log(filteredArrayOfAttributeValues, "Checking");
                   // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
                   // const uniqueValues = Array.from(uniqueValuesSet);
                   // console.log(uniqueValues,"uniqueValues")
@@ -663,40 +656,43 @@ export default function Filter({
                               }}
                             />
                           ) : (
-                            <MultiRangeSliderAttributes
-                              rangeVal={
-                                sliderValues[attribute.name] || {
-                                  minVal:
-                                    filteredArrayOfAttributeValues.minValue,
-                                  maxVal:
-                                    filteredArrayOfAttributeValues.maxValue,
+                            <>
+                              {console.log(sliderValues)}
+                              <MultiRangeSliderAttributes
+                                rangeVal={
+                                  sliderValues || {
+                                    minVal:
+                                      filteredArrayOfAttributeValues.minValue,
+                                    maxVal:
+                                      filteredArrayOfAttributeValues.maxValue,
+                                  }
                                 }
-                              }
-                              classForSlider={attribute.name}
-                              min={
-                                filteredArrayOfAttributeValues.maxValue -
-                                  filteredArrayOfAttributeValues.minValue >=
-                                1
-                                  ? filteredArrayOfAttributeValues.minValue
-                                  : 0
-                              }
-                              max={
-                                filteredArrayOfAttributeValues.maxValue -
-                                  filteredArrayOfAttributeValues.minValue >=
-                                1
-                                  ? filteredArrayOfAttributeValues.maxValue
-                                  : 100
-                              }
-                              unit={filteredArrayOfAttributeValues.unit}
-                              onChange={({ min, max }) => {
-                                handelFilterActions(
-                                  "range",
-                                  attribute.name,
-                                  `${min},${max}`,
-                                  true
-                                );
-                              }}
-                            />
+                                classForSlider={attribute.name}
+                                min={
+                                  filteredArrayOfAttributeValues.maxValue -
+                                    filteredArrayOfAttributeValues.minValue >=
+                                  1
+                                    ? filteredArrayOfAttributeValues.minValue
+                                    : 0
+                                }
+                                max={
+                                  filteredArrayOfAttributeValues.maxValue -
+                                    filteredArrayOfAttributeValues.minValue >=
+                                  1
+                                    ? filteredArrayOfAttributeValues.maxValue
+                                    : 100
+                                }
+                                unit={filteredArrayOfAttributeValues.unit}
+                                onChange={({ min, max }) => {
+                                  handelFilterActions(
+                                    "range",
+                                    attribute.name,
+                                    `${min},${max}`,
+                                    true
+                                  );
+                                }}
+                              />
+                            </>
                           )}
                         </Accordion.Body>
                       </Accordion.Item>

@@ -48,6 +48,7 @@ export default function GuidePage({
   //   (a, b) => b.overall_score - a.overall_score
   // );
 
+
   const productPagination = guideData[1]?.data?.pagination;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
@@ -673,7 +674,7 @@ export default function GuidePage({
                       .filter((key) => key !== "direct" && key !== "sort")
                       .map((categoryName, index) =>
                         categoryName === "variant" ||
-                        categoryName === "available" ? (
+                        categoryName === "available"  || categoryName === "page" ? (
                           ""
                         ) : (
                           <li key={index}>
