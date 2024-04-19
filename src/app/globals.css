@@ -2242,3 +2242,6 @@ div#shortCodeText ul {
 .correlation_svg_width  .tick text{
   font-size: 16px !important;
 }
+.base__container .tick text{
+  font-size: 16px !important;
+}
