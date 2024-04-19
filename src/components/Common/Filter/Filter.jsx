@@ -20,6 +20,7 @@ export default function Filter({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({});
+  console.log(searchParams)
   // const [sliderValues, setSliderValues] = useState({
   //   minVal: 0,
   //   maxVal: 0,
