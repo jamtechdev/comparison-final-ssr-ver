@@ -25,7 +25,7 @@ const GuidePagination = ({ pagination }) => {
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
     router.push(`?${currentParams.toString()}`, { scroll: false });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Generate an array of page numbers
@@ -36,6 +36,14 @@ const GuidePagination = ({ pagination }) => {
       <Row className="mt-4">
         <Col className="d-flex justify-content-center text-center">
           <ul className="custom-pagination">
+            {currentPage === 1 ? null : (
+              <li
+                className="page_previous"
+                onClick={() => handlePageClick(currentPage - 1)}
+              >
+                Previous
+              </li>
+            )}
             {pagesArray.map((item, index) => (
               <li
                 onClick={() => handlePageClick(item)}
