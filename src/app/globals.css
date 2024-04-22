@@ -2284,3 +2284,9 @@ div#shortCodeText ul {
   height: 20px;
   object-fit: contain;
 }
+.areapath0{
+  /* z-index: 9999 !important; */
+}
+.areapath1{
+pointer-events: none;
+}
