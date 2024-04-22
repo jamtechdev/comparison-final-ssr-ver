@@ -225,21 +225,27 @@ function ProductPage({
   // console.log(is_found?.length);
   // console.log(slug)
   const { isMobile } = useScreenSize();
-  const [position, setPosition] = useState({ left: 0, right: 'auto' });
+  const [position, setPosition] = useState({ left: 0, right: "auto" });
 
   useEffect(() => {
     const updatePosition = () => {
-      const container = document.querySelector('.question_hover_container');
+      const container = document.querySelector(".question_hover_container");
       if (container) {
         const rect = container.getBoundingClientRect();
-        const left = rect.left < window.innerWidth / 2 ? 'auto' : window.innerWidth - rect.right;
-        setPosition({ left, right: left === 'auto' ? window.innerWidth - rect.right : 'auto' });
+        const left =
+          rect.left < window.innerWidth / 2
+            ? "auto"
+            : window.innerWidth - rect.right;
+        setPosition({
+          left,
+          right: left === "auto" ? window.innerWidth - rect.right : "auto",
+        });
       }
     };
 
     updatePosition();
-    window.addEventListener('resize', updatePosition);
-    return () => window.removeEventListener('resize', updatePosition);
+    window.addEventListener("resize", updatePosition);
+    return () => window.removeEventListener("resize", updatePosition);
   }, []);
   return (
     <>
@@ -346,7 +352,7 @@ function ProductPage({
                 {formatValue(product?.overall_score)}
               </span>
               <div className="score-detail ">
-                <div className="tooltip-title removeUnderlineFrom" >
+                <div className="tooltip-title removeUnderlineFrom">
                   <p>
                     {product && product?.page_phases?.overall_score}
                     <span className="">
@@ -358,11 +364,16 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
-        width: isMobile ? "230px" : "250px"
-      }}>
+                  <div
+                    className="tooltip-display-content"
+                    style={{
+                      left: isMobile ? "50%" : 0,
+                      transform: isMobile
+                        ? "translateX(-65%)"
+                        : "translateX(-10%)",
+                      width: isMobile ? "230px" : "250px",
+                    }}
+                  >
                     {product?.overall_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -452,12 +463,16 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
-        width: isMobile ? "230px" : "250px"
-      }}>
-                 
+                  <div
+                    className="tooltip-display-content"
+                    style={{
+                      left: isMobile ? "50%" : 0,
+                      transform: isMobile
+                        ? "translateX(-65%)"
+                        : "translateX(-10%)",
+                      width: isMobile ? "230px" : "250px",
+                    }}
+                  >
                     {product?.technical_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -543,11 +558,16 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
-        width: isMobile ? "240px" : "250px"
-      }}>
+                  <div
+                    className="tooltip-display-content"
+                    style={{
+                      left: isMobile ? "50%" : 0,
+                      transform: isMobile
+                        ? "translateX(-65%)"
+                        : "translateX(-10%)",
+                      width: isMobile ? "240px" : "250px",
+                    }}
+                  >
                     {product?.users_rating_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -666,7 +686,13 @@ function ProductPage({
                             <div className="" style={{ fontWeight: 400 }}>
                               {data?.title}
                             </div>
-                            <div className="tooltip-display-content" style={{left: position.left,right: position.right,}}>
+                            <div
+                              className="tooltip-display-content"
+                              style={{
+                                left: position.left,
+                                right: position.right,
+                              }}
+                            >
                               {
                                 <p className="mb-2">
                                   <b>What it is : </b>

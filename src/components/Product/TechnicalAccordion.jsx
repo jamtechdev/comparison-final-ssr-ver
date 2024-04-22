@@ -119,7 +119,7 @@ const TechnicalAccordion = React.memo(
                       <div
                         className="tooltip-display-content"
                         ref={tooltipRef}
-                        style={{ left: tooltipPosition.left }}
+                        // style={{ left: tooltipPosition.left }}
                       >
                         {product?.technical_score_descriptions.description && (
                           <p className="mb-2">
@@ -234,7 +234,7 @@ const TechnicalAccordion = React.memo(
                       <div
                         className="tooltip-display-content"
                         ref={tooltipRef}
-                        style={{ left: tooltipPosition.left }}
+                        // style={{ left: tooltipPosition.left }}
                       >
                         {product?.users_rating_descriptions.description && (
                           <p className="mb-2">

@@ -6,7 +6,7 @@ const QuestionIcon = ({ attributes }) => {
     left: 0,
   });
   const tooltipRef = useRef(null);
-  // console.log(tooltipPosition);
+
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
     if (!tooltip) return;
@@ -29,6 +29,7 @@ const QuestionIcon = ({ attributes }) => {
 
     setTooltipPosition({ ...tooltipPosition, left });
   }
+  const {isMobile}=useScreenSize();
   return (
     <div
       className="question_hover_container question-marker-icon"
@@ -43,9 +44,9 @@ const QuestionIcon = ({ attributes }) => {
           className="display-content"
           ref={tooltipRef}
           style={{
-            left: tooltipPosition ? "50%" : "calc(50% - 128px)",
-            transform: tooltipPosition ? "translateX(-50%)" : "none",
-            width: "200px",
+            left: isMobile ? "50%" : 0,
+            transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
+            width: isMobile ? "200px" : "250px",
           }}
         >
           {attributes?.description && (
