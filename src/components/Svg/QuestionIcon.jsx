@@ -6,7 +6,7 @@ const QuestionIcon = ({ attributes }) => {
     left: 0,
   });
   const tooltipRef = useRef(null);
- 
+  console.log(tooltipPosition);
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
     if (!tooltip) return;
@@ -42,7 +42,11 @@ const QuestionIcon = ({ attributes }) => {
         <div
           className="display-content"
           ref={tooltipRef}
-          style={{ left: tooltipPosition.left ,left: `calc(50% - 85px)` ,backgroundColor:"red",border:""}}
+          style={{
+            left: tooltipPosition ? "50%" : "calc(50% - 128px)",
+            transform: tooltipPosition ? "translateX(-50%)" : "none",
+            width: "150px",
+          }}
         >
           {attributes?.description && (
             <p className="mb-2">
