@@ -208,7 +208,7 @@ function ProductPageGraph({ data, activeTab }) {
         )
         .attr("opacity", activeTab == i ? 0.9 : 0.1)
         .attr("transform", `translate(${width / 2}, ${height / 2})`)
-        .style("z-index", activeTab === i ? 1000 : 1);
+        .style("pointer-events", activeTab === 0 ? "none" : "all");
       // .style("display", activeTab == i ? "block" : "none");
       cord.forEach((point, index) => {
         svg
@@ -250,9 +250,8 @@ function ProductPageGraph({ data, activeTab }) {
             // console.log(i, "check");
             const attribute = select(this).attr("data-attribute");
             tooltip
-              // .style("display", "block")
-              .style("display", activeTab == i ? "block" : "none")
-              .style("z-index", activeTab == i ? 99999 : 2)
+              .style("display", "block")
+              .style("z-index", 99999)
               .style("opacity", 0.9)
               .html(`${attribute}: ${parseFloat(value).toFixed(1)}`)
               .style("background-color", backgroundColor)
@@ -260,6 +259,7 @@ function ProductPageGraph({ data, activeTab }) {
               .style("top", event.clientY + "px")
               .style("color", "#fff");
           })
+
           .on("mouseout", function () {
             // Remove the tooltip and the value label on mouse leave
             // svg.selectAll(".data-point-label").remove();

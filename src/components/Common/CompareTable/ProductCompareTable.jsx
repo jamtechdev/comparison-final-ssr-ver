@@ -427,7 +427,9 @@ const ProductCompareTable = React.memo(
                             {/* <span className="txt">NOT AVAILABLE</span> */}
                             <i>N/A</i>
 
-                            <span className="price font__16__inline">~ {product?.price} €</span>
+                            <span className="price font__16__inline">
+                              ~ {product?.price} €
+                            </span>
                           </div>
                         )}
                       {product.price_websites &&

@@ -165,6 +165,7 @@ function Radar({ data, activeTab }) {
         .attr("class", `areapath${i}`)
         .attr("d", lineGen)
         .attr("stroke-width", "1.5px")
+
         .attr("stroke", () =>
           data?.length > 2
             ? i === 0
@@ -188,7 +189,7 @@ function Radar({ data, activeTab }) {
             : "#FF8F0B"
         )
         .attr("opacity", activeTab == i ? 0.9 : 0.1)
-        .style("z-index", activeTab === 0 ? 999 : -1)
+        .style("pointer-events", activeTab === 0 ? "none" : "all")
         .attr("transform", `translate(${width / 2}, ${height / 2})`);
       cord.forEach((point, index) => {
         svg
