@@ -41,7 +41,7 @@ const QuestionIcon = ({ attributes }) => {
         <div
           className="display-content"
           ref={tooltipRef}
-          style={{ left: tooltipPosition.left }}
+          style={{ left: tooltipPosition.left ,left: `calc(50% - 85px)` }}
         >
           {attributes?.description && (
             <p className="mb-2">

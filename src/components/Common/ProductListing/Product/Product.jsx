@@ -9,6 +9,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useScreenSize from "@/_helpers/useScreenSize";
 
+
 import {
   removeDecimalAboveNine,
   capitalize,
@@ -54,6 +55,7 @@ export default function Product({
 
     return incomingProduct;
   };
+  
   const product = generateProductsWithAttributes();
   let initialDisplay = 5;
   const [displayedAttributesCount, setDisplayedAttributesCount] = useState({});
@@ -118,6 +120,7 @@ export default function Product({
         : `(${item?.value})`;
     }
   };
+
 
   const getColorAttr = (attributeValues) => {
     if (
@@ -268,7 +271,7 @@ export default function Product({
 
   let result = width - 250
   let finalvalue = result / 2 -250
-  // console.log(finalvalue, "test")
+  console.log(width,"screenwidth")
 
   // useEffect(() => {
   //   const currentUrl = new URL(window.location.href);
@@ -370,7 +373,7 @@ export default function Product({
                           {/* {console.log(guidePhraseData)} */}
                           {guidePhraseData && guidePhraseData?.overall_score}
                         </span>
-                        <div className="tooltip-display-content">
+                        <div className="tooltip-display-content" style={{width:"200px"}}>
                           {product?.overall_score_descriptions.description && (
                             <p className="mb-2">
                               <b>
@@ -472,7 +475,7 @@ export default function Product({
                         <span>
                           {guidePhraseData && guidePhraseData?.technical_score}
                         </span>
-                        <div className="tooltip-display-content">
+                        <div className="tooltip-display-content" style={{width:"200px"}}>
                           {product?.technical_score_descriptions
                             .description && (
                               <p className="mb-2">
@@ -565,7 +568,7 @@ export default function Product({
                     {product?.users_rating_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span>User’s Rating</span>
-                        <div className="tooltip-display-content">
+                        <div className="tooltip-display-content" style={{width:"200px"}}>
                           {product?.users_rating_descriptions?.description && (
                             <p className="mb-2">
                               <b>
@@ -673,7 +676,7 @@ export default function Product({
                     {product?.popularity_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span>Popularity</span>
-                        <div className="tooltip-display-content">
+                        <div className="tooltip-display-content" style={{width:"200px"}}>
                           {product?.popularity_descriptions.description && (
                             <p className="mb-2">
                               <b>
@@ -768,12 +771,7 @@ export default function Product({
                     <p className="buy-avoid">
                       {guidePhraseData && guidePhraseData?.why_to_buy}
                     </p>
-                    {/* {isMobile === ? (
-
-                    ):
-                    (
-
-                    )} */}
+                  
                     <ul>
                       {product &&
                         product?.top_pros
@@ -799,7 +797,6 @@ export default function Product({
                                     info_not_verified={data.info_not_verified}
                                     hover_phrase={data.hover_phrase}
                                     data={data}
-
                                   />
                                 </li>
                               </React.Fragment>
@@ -830,7 +827,7 @@ export default function Product({
                                   className={`${data?.hover_phrase !== "" && "tooltip-title"
                                     }`}
                                 >
-                                  <span className="pros-crons-text">
+                                  <span className="pros-crons-text" >
                                     {data?.name} {renderValue(data).trim()}
                                   </span>
                                   <ProsConsToolTip
@@ -901,13 +898,16 @@ export default function Product({
                             >
                               {data?.title}
                             </div>
-                            <div className="tooltip-display-content">
-                              {
-                                <p className="mb-2">
-                                  <b>What it is : </b>
-                                  {data?.hover_phase?.what_is_it}
-                                </p>
-                              }
+                            <div className="tooltip-display-content" style={{ left: `calc(50% - 85px)` }}>
+  {/* Tooltip content */}
+  {
+    <p className="mb-2">
+      <b>What it is : </b>
+      {data?.hover_phase?.what_is_it}
+    </p>
+  }
+
+
 
                               <p>
                                 <b>Score components :</b>
@@ -915,8 +915,8 @@ export default function Product({
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {
                                   return (
-                                    <div className="scroe_section" key={index}>
-                                      <p className="text-end">
+                                    <div className="scroe_section" key={index} style={{ left: isMobile ? finalvalue : 0 ,width:"150px",marginLeft:"50px"}} >
+                                      <p className="text-end" style={{ left: isMobile ? finalvalue : 0 ,width:"150px",marginLeft:"50px"}}>
                                         {`${parseFloat(
                                           hoverPhaseData?.percentage
                                         ).toFixed(1)}%`}

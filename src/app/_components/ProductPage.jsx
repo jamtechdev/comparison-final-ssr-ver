@@ -346,7 +346,7 @@ function ProductPage({
                 {formatValue(product?.overall_score)}
               </span>
               <div className="score-detail ">
-                <div className="tooltip-title removeUnderlineFrom">
+                <div className="tooltip-title removeUnderlineFrom" >
                   <p>
                     {product && product?.page_phases?.overall_score}
                     <span className="">
@@ -358,7 +358,7 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content bottom-tooltip-display">
+                  <div className="tooltip-display-content bottom-tooltip-display" style={{marginRight:"20px",width:"190px"}} >
                     {product?.overall_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -448,7 +448,8 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content bottom-tooltip-display">
+                  <div className="tooltip-display-content bottom-tooltip-display"  style={{marginRight:"20px",width:"190px"}}>
+                 
                     {product?.technical_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -534,7 +535,7 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content bottom-tooltip-display">
+                  <div className="tooltip-display-content bottom-tooltip-display" style={{width:"190px",marginRight:"20px"}}>
                     {product?.users_rating_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
