@@ -6,6 +6,7 @@ const QuestionIcon = ({ attributes }) => {
     left: 0,
   });
   const tooltipRef = useRef(null);
+  const {isMobile} =useScreenSize()
  
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
@@ -39,10 +40,15 @@ const QuestionIcon = ({ attributes }) => {
       </svg>
       {/* { console.log(attributes)} */}
       {attributes !== undefined && (
-        <div
+        // <div
+        //   className="display-content"
+        //   ref={tooltipRef}
+        //   style={{ left: tooltipPosition.left ,left: `calc(50% - 85px)` ,backgroundColor:"red",border:""}}
+        // >
+           <div
           className="display-content"
           ref={tooltipRef}
-          style={{ left: tooltipPosition.left ,left: `calc(50% - 85px)` ,backgroundColor:"red",border:""}}
+          style={{ left: tooltipPosition ? "50%" : "calc(50% - 128px)", transform: tooltipPosition ? "translateX(-50%)" : "none",width:"150px"}}
         >
           {attributes?.description && (
             <p className="mb-2">
