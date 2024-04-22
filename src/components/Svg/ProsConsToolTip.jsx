@@ -43,7 +43,15 @@ const {isMobile}=useScreenSize();
   return (
     <>
       {hover_phrase && (
-        <div className="tooltip-display-content" style={{ left: isMobile ? finalvalue : 0 ,width:"150px",marginLeft:"50px"}} >
+        // <div className="tooltip-display-content" style={{ left: isMobile ? finalvalue : 0 ,width:"150px",marginLeft:"50px"}} >
+        <div
+      className="tooltip-display-content why-tooltip"
+      style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
+        width: isMobile ? "180px" : "250px"
+      }}
+    >
           <div
             className="mb-2 prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}

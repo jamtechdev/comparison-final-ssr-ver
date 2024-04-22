@@ -366,13 +366,17 @@ export default function Product({
                     {product?.overall_score_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span
-                          className="overall"
+                          className="overall"    
                           style={{ color: "rgb(39 48 78 / 90%)" }}
                         >
                           {/* {console.log(guidePhraseData)} */}
                           {guidePhraseData && guidePhraseData?.overall_score}
                         </span>
-                        <div className="tooltip-display-content" style={{width:"200px"}}>
+                        <div className="tooltip-display-content" style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
+        width: isMobile ? "250px" : "250px"
+      }}>
                           {product?.overall_score_descriptions.description && (
                             <p className="mb-2">
                               <b>
@@ -474,7 +478,11 @@ export default function Product({
                         <span>
                           {guidePhraseData && guidePhraseData?.technical_score}
                         </span>
-                        <div className="tooltip-display-content" style={{width:"200px"}}>
+                        <div className="tooltip-display-content" style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
+        width: isMobile ? "250px" : "250px"
+      }}>
                           {product?.technical_score_descriptions
                             .description && (
                             <p className="mb-2">
@@ -567,7 +575,12 @@ export default function Product({
                     {product?.users_rating_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span>User’s Rating</span>
-                        <div className="tooltip-display-content" style={{width:"200px"}}>
+                        
+                        <div className="tooltip-display-content" style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
+        width: isMobile ? "250px" : "250px"
+      }}>
                           {product?.users_rating_descriptions?.description && (
                             <p className="mb-2">
                               <b>
@@ -675,7 +688,11 @@ export default function Product({
                     {product?.popularity_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span>Popularity</span>
-                        <div className="tooltip-display-content" style={{width:"200px"}}>
+                        <div className="tooltip-display-content" style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
+        width: isMobile ? "250px" : "250px"
+      }}>
                           {product?.popularity_descriptions.description && (
                             <p className="mb-2">
                               <b>
@@ -898,12 +915,20 @@ export default function Product({
                             >
                               {data?.title}
                             </div>
-                            
+{/*                             
                             <div
       className="tooltip-display-content why-tooltip"
-      style={{ left: isMobile ? "50%" : "calc(50% - 128px)", transform: isMobile ? "translateX(-50%)" : "none" ,width:"190px"}}
+      style={{ left: isMobile ? "50%" : "calc(50% - 128px)", transform: isMobile ? "translateX(-60%)" : "none" ,width:"190px"}}
+    > */}
+      <div
+      className="tooltip-display-content why-tooltip"
+      style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
+        width: isMobile ? "190px" : "250px"
+      }}
     >
-                              
+                           
       {/* Tooltip content */}
   {/* Tooltip content */}
   {

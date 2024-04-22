@@ -18,12 +18,13 @@ import ProsConsToolTip from "../Svg/ProsConsToolTip";
 import Radar from "@/_chart/Radar";
 import ProductPageGraph from "@/_chart/Radar/ProductPageGraph";
 import formatValue from "@/_helpers/formatValue";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 const WhyAccordionTab = React.memo(
   ({ categorySlug, product, pageType, slug }) => {
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
     const [activetab, setActiveTab] = useState("tab-1");
-
+const {isMobile}=useScreenSize()
     const [apiData, setApiData] = useState(null);
     // console.log(apiData);
 
@@ -211,7 +212,12 @@ const WhyAccordionTab = React.memo(
 
                                           {item?.hover_phase && (
                                             <>
-                                              <div className="tooltip-display-content" style={{width:"180px"}}>
+  
+                                              <div className="tooltip-display-content"  style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
+        width: isMobile ? "190px" : "250px"
+      }}>
                                                 <span className="mb-2 prosconsColor">
                                                   {item?.hover_phase}
                                                 </span>

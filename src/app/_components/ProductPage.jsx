@@ -358,7 +358,11 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content bottom-tooltip-display" style={{marginRight:"20px",width:"190px"}} >
+                  <div className="tooltip-display-content" style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
+        width: isMobile ? "230px" : "250px"
+      }}>
                     {product?.overall_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -448,7 +452,11 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content bottom-tooltip-display"  style={{marginRight:"20px",width:"190px"}}>
+                  <div className="tooltip-display-content" style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
+        width: isMobile ? "230px" : "250px"
+      }}>
                  
                     {product?.technical_score_descriptions?.description && (
                       <p className="mb-2">
@@ -535,7 +543,11 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content bottom-tooltip-display" style={{width:"190px",marginRight:"20px"}}>
+                  <div className="tooltip-display-content" style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
+        width: isMobile ? "240px" : "250px"
+      }}>
                     {product?.users_rating_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>

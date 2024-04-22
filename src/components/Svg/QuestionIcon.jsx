@@ -45,11 +45,20 @@ const QuestionIcon = ({ attributes }) => {
         //   ref={tooltipRef}
         //   style={{ left: tooltipPosition.left ,left: `calc(50% - 85px)` ,backgroundColor:"red",border:""}}
         // >
+        //    <div
+        //   className="display-content"
+        //   ref={tooltipRef}
+        //   style={{ left: tooltipPosition ? "50%" : "calc(50% - 128px)", transform: tooltipPosition ? "translateX(-55%)" : "none",width:"150px"}}
+        // >
            <div
-          className="display-content"
-          ref={tooltipRef}
-          style={{ left: tooltipPosition ? "50%" : "calc(50% - 128px)", transform: tooltipPosition ? "translateX(-50%)" : "none",width:"150px"}}
-        >
+      className="display-content"
+      ref={tooltipRef}
+      style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
+        width: isMobile ? "150px" : "250px"
+      }}
+    >
           {attributes?.description && (
             <p className="mb-2">
               <b>What it is: </b>
