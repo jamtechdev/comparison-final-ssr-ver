@@ -6,8 +6,6 @@ import useScreenSize from "@/_helpers/useScreenSize";
 const ProsConsToolTip = (props) => {
   const { hover_phrase, info_not_verified, data, comment, typeComp ,finalvalue} = props;
 
-
-
 const {isMobile}=useScreenSize();
 
   let tooltipStyles = {};
@@ -45,7 +43,7 @@ const {isMobile}=useScreenSize();
   return (
     <>
       {hover_phrase && (
-        <div className="tooltip-display-content" style={{ left: isMobile ? finalvalue : 0 ,width:"200px"}} >
+        <div className="tooltip-display-content" style={{ left: isMobile ? finalvalue : 0 ,width:"150px",marginLeft:"50px"}} >
           <div
             className="mb-2 prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}

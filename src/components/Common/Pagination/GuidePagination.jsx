@@ -17,11 +17,12 @@ const GuidePagination = ({ pagination }) => {
   }, []);
 
   const handlePageClick = (page) => {
+    const newPage = typeof page === 'number' ? page : currentPage + 1;
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
-    setCurrentPage(page);
-    currentParams.set("page", page);
-    url.searchParams.set("page", page);
+    setCurrentPage(newPage);
+    currentParams.set("page", newPage);
+    url.searchParams.set("page", newPage);
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
     router.push(`?${currentParams.toString()}`, { scroll: false });
@@ -59,7 +60,7 @@ const GuidePagination = ({ pagination }) => {
                 {item}
               </li>
             ))}
-            {currentPage === total_pages ? null : (
+            {currentPage < total_pages && (
               <li
                 className="page_next"
                 onClick={() => handlePageClick(currentPage + 1)}

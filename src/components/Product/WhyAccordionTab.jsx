@@ -211,7 +211,7 @@ const WhyAccordionTab = React.memo(
 
                                           {item?.hover_phase && (
                                             <>
-                                              <div className="tooltip-display-content">
+                                              <div className="tooltip-display-content" style={{width:"180px"}}>
                                                 <span className="mb-2 prosconsColor">
                                                   {item?.hover_phase}
                                                 </span>
@@ -233,7 +233,7 @@ const WhyAccordionTab = React.memo(
                                         >
                                           {item?.hover_phase && (
                                             <>
-                                              <span className="tooltip-display-content">
+                                              <span className="tooltip-display-content" style={{backgroundColor:"red"}}>
                                                 <span className="mb-2 prosconsColor">
                                                   {item?.hover_phase}
                                                 </span>
@@ -546,10 +546,10 @@ const WhyAccordionTab = React.memo(
                                           }
                                         />
 
-                                        <small className="d-block tooltip-title">
+                                        <small className="d-block tooltip-title" >
                                           {product?.general.cons[item][1] && (
                                             <>
-                                              <span className="tooltip-display-content">
+                                              <span className="tooltip-display-content" >
                                                 <span className="mb-2 prosconsColor">
                                                   {
                                                     product?.general.cons[

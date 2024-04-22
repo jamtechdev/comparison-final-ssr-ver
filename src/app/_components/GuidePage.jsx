@@ -54,6 +54,7 @@ export default function GuidePage({
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [prevSearcParam, setPrevSearcParam] = useState({});
   const [removedParam, setremovedParam] = useState();
+  
   const [order, setorder] = useState({
     value: "",
     ischecked: false,
@@ -71,6 +72,7 @@ export default function GuidePage({
   };
   const handelSetFilterActive = (status) => {
     setIsFilterActive(status);
+    console.log(status,"check status")
   };
   useEffect(() => {
     setPrevSearcParam(searchParams);
@@ -113,6 +115,7 @@ export default function GuidePage({
   //   window.history.replaceState(null, "", window.location.pathname);
   //   location.reload();
   // };
+
   const removeFilters = () => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
@@ -141,6 +144,7 @@ export default function GuidePage({
           ...searchParams,
         };
       });
+
     } else {
       delete params.sort;
       let removeSortParam = params;
@@ -151,7 +155,11 @@ export default function GuidePage({
         };
       });
     }
-
+ handelSetFilterActive(true);
+    
+      setTimeout(() => {
+        handelSetFilterActive(false);
+      }, 1000);
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
     const newUrl = urlObject.toString();
@@ -196,6 +204,7 @@ export default function GuidePage({
     } else {
       removeQueryParamAndNavigate(window.location.href, "sort");
       delete searchParams.sort;
+      
     }
   };
   const [showModal, setShowModal] = useState(true);
