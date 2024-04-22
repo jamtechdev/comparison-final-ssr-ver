@@ -113,7 +113,7 @@ export default function MobileComparisonTool({
                 <SwiperSlide key={index}>
                   <div className="comparison-wrapper">
                     {isWinner && <div className="comparison-tag">Winner</div>}
-                    {/* {console.log(item)} */}
+                    {/* {console.log(item)} */} 
                     <div className="comparison-card">
                       <img
                         src={

@@ -1680,7 +1680,7 @@ li.color-item.selected {
 @media screen and (max-width: 768px) {
   .chart__data {
     right: 5% !important;
-    bottom: 220px  !important;
+    bottom: 220px !important;
   }
 }
 
@@ -2233,6 +2233,54 @@ div#shortCodeText ul {
     left: -100px !important;
   }
 }
-.compare_radar_chart{
+.compare_radar_chart {
   margin-top: 50px;
+}
+.line-chart-parent .tick text {
+  font-size: 16px !important;
+}
+.correlation_svg_width .tick text {
+  font-size: 16px !important;
+}
+.base__container .tick text {
+  font-size: 16px !important;
+}
+
+.user__rating__popup__list {
+  display: flex;
+  align-items: center;
+  margin: 0 0 5px;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.user__rating__popup__rating {
+  background: var(--secondary-color);
+  padding: 4px;
+  border-radius: 5px;
+  font-weight: 400;
+  min-width: 30px;
+  text-align: center;
+  color: #fff !important;
+  font-size: 12px !important;
+}
+
+.user__rating__popup__list .user__rating__popup__content {
+  display: flex;
+  gap: 5px;
+  flex: 1;
+  width: calc(100% - 70px);
+  border-left: 1px solid #ddd;
+  padding-left: 5px;
+}
+
+.user__rating__popup__list .user__rating__popup__content p {
+  margin: 0 !important;
+  font-size: 12px !important;
+}
+
+.user__rating__popup__list .user__rating__popup__content img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }

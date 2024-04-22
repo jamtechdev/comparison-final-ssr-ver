@@ -121,29 +121,44 @@ const CompareTable = React.memo(
 
       if (arrayOfObjects?.[0]?.algorithm == "highest_to_lowest") {
         numericValues.sort((a, b) => b - a);
+      } else if (arrayOfObjects?.[0]?.algorithm == "absolute_value") {
+        numericValues.sort((a, b) => b - a);
       } else {
         numericValues.sort((a, b) => a - b);
       }
-      // console.log(arrayOfObjects, "numericValues");
+
+      // console.log(numericValues, arrayOfObjects[0]?.attribute, "numericValues");
 
       // Adding logic for String case
       if (numericValues.length === 0) {
         const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
+        // console.log(
+        //   stringArray,
+        //   arrayOfObjects,
+        //   arrayOfObjects[0]?.attribute,
+        //   "neetx"
+        // );
 
         if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
+          // console.log(stringArray[0], "neetx", "");
           const targetString =
             stringArray[0] === "yes"
               ? "yes"
               : "no" || stringArray[0] === "no"
-              ? "yes"
-              : "yes";
-          numericValues = stringArray.filter((value) => value === targetString);
+              ? " "
+              : stringArray[0];
+          // console.log(targetString, "neet");
+          numericValues = stringArray.filter(
+            (value) => value === targetString
+          );
+          // numericValues = stringArray.filter((value, index) => index === 0);
+
+          // console.log(numericValues, arrayOfObjects[0]?.attribute, "neet");
         }
       }
 
       const topValue = numericValues[0];
-      // console.log(topValue, "neet ")
-
+      // console.log(topValue, typeof topValue === "string", arrayOfObjects[0]?.attribute,"neet");
       const occurrences = numericValues?.filter(
         (value) => value === topValue
       ).length;
@@ -155,6 +170,7 @@ const CompareTable = React.memo(
             typeof topValue === "string"
               ? obj.attribute_value
               : parseFloat(obj.attribute_value);
+          // console.log(numericValue, "neet");
           if (
             numericValue === topValue &&
             !obj.attribute_value?.includes("⭐")

@@ -18,18 +18,18 @@ export default async function RootLayout({ children }) {
         href={`https://panel.mondopedia.it/logos/app_favicon.ico`}
         sizes="any"
       />
-      <head
+      {/* <head
         dangerouslySetInnerHTML={{ __html: footerData?.head_tag_code }}
-      ></head>
+      ></head> */}
       <body>
         <Layout footerData={footerData} headerData={headerData}>
           {children}
           <div
             dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }}
           ></div>
-          <div
+          {/* <div
             dangerouslySetInnerHTML={{ __html: footerData?.footer_tag_code }}
-          ></div>
+          ></div> */}
         </Layout>
       </body>
     </html>

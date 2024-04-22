@@ -146,6 +146,8 @@ function lineChart(svgRef, lineChartData) {
     .attr("class", "x axis")
     .attr("transform", `translate(${margin}, ${margin})`) // Move the x-axis to the bottom of the chart
     .style("opacity", 1)
+    .style("font-size", "17px")
+
     .style("font-weight", "800")
     .call(xAxis)
     .append("text");
@@ -158,6 +160,7 @@ function lineChart(svgRef, lineChartData) {
     .attr("font-weight", "100")
     // .style("stroke", "#27314BB2") // Set the stroke color of the axis lines to grey
     .style("opacity", 1)
+    .style("font-size", "17px")
     .style("stroke", "none")
 
     // .attr("font-family", '"Roboto", "sans-serif"')
@@ -188,7 +191,7 @@ function lineChart(svgRef, lineChartData) {
     .attr("class", "line")
     .attr("d", (d) => line(d.values))
     .style("stroke", "#437ECE")
-    .style("stroke-width", 2.5)
+    .style("stroke-width", 3.5)
     .style("fill", "none")
     // .style("opacity", 5)
     .on("mouseover", function () {
@@ -202,7 +205,7 @@ function lineChart(svgRef, lineChartData) {
     .on("mouseout", function () {
       // d3.selectAll(".line").style("opacity", lineOpacity);
       d3.selectAll(".circle");
-      d3.select(this).style("stroke-width", lineStroke).style("cursor", "none");
+      d3.select(this).style("stroke-width", 4.5).style("cursor", "none");
     });
 
   const tooltip = d3
@@ -217,6 +220,8 @@ function lineChart(svgRef, lineChartData) {
     .enter()
     .append("g")
     .style("fill", "#437ECE")
+    .style("stroke-width", 5.5)
+
     .selectAll("circle")
     .data((d) => d.values)
     .enter()

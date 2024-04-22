@@ -1,6 +1,7 @@
 //Updated
 export const getFilteredAttributeValues = (obj) => {
   let uniq = [];
+  // console.log(obj)
   let product = [];
   const uniqueValues = obj.values.reduce((acc, currentValue) => {
     if (!acc.includes(currentValue.name)) {
@@ -119,8 +120,8 @@ export const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 export const isAreObjectsEqual = (obj1, obj2) => {
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
+  const keys1 = Object?.keys(obj1);
+  const keys2 = Object?.keys(obj2);
   if (keys1.length !== keys2.length) {
     return false;
   }
@@ -129,7 +130,7 @@ export const isAreObjectsEqual = (obj1, obj2) => {
       return false;
     }
   }
-  return true;
+  return false;
 };
 
 export const getAttributeHalf = (product, half) => {

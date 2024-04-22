@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-
+import useScreenSize from "@/_helpers/useScreenSize";
 const QuestionIcon = ({ attributes }) => {
   const [tooltipPosition, setTooltipPosition] = useState({
     top: 0,
     left: 0,
   });
   const tooltipRef = useRef(null);
+ 
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
     if (!tooltip) return;
@@ -41,7 +42,7 @@ const QuestionIcon = ({ attributes }) => {
         <div
           className="display-content"
           ref={tooltipRef}
-          style={{ left: tooltipPosition.left ,left: `calc(50% - 85px)` }}
+          style={{ left: tooltipPosition.left ,left: `calc(50% - 85px)` ,backgroundColor:"red",border:""}}
         >
           {attributes?.description && (
             <p className="mb-2">

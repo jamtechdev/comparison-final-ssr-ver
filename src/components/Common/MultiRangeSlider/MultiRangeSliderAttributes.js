@@ -18,7 +18,7 @@ const MultiRangeSliderAttributes = ({
 
   const step = 0.01; // Adjust the step value for better precision
 
-  console.log(min,max , "neetx")
+//   console.log(min,max , "neetx")
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getPercent = useCallback((value) =>
     Math.round(((value - min) / (max - min)) * 100)

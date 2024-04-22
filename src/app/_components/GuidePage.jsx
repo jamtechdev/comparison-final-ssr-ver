@@ -48,6 +48,7 @@ export default function GuidePage({
   //   (a, b) => b.overall_score - a.overall_score
   // );
 
+
   const productPagination = guideData[1]?.data?.pagination;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
@@ -76,21 +77,39 @@ export default function GuidePage({
   useEffect(() => {
     setPrevSearcParam(searchParams);
   }, []);
-  useEffect(() => {
-    if (!isAreObjectsEqual(searchParams, prevSearcParam)) {
+  // console.log(searchParams)
 
-      handelSetFilterActive(true);
-    
-    setTimeout(() => {
-      handelSetFilterActive(false);
-    }, 1000);
-  }
-  }, [searchParams,prevSearcParam]);
-  // console.log(searchParams);
   useEffect(() => {
-    // handelFilterActions("variant", "variant", true);
-    // handelFilterActions("available", "available", false);
-  }, []);
+    if (Object.keys(searchParams).length > 0) {
+      // Show loader when filter is applied
+      handelSetFilterActive(true);
+  
+      setTimeout(() => {
+        handelSetFilterActive(false);
+      }, 1000);
+    } else {
+      // Show loader when filter is removed
+      // handelSetFilterActive(true);
+  
+      setTimeout(() => {
+        handelSetFilterActive(false);
+      }, 1000);
+    }
+  }, [searchParams]);
+  
+
+  // old code for skeleton
+  // useEffect(() => {
+  //   // console.log(searchParams, prevSearcParam,"neetx")
+
+  //   if (isAreObjectsEqual(searchParams, prevSearcParam)) {
+  //     handelSetFilterActive(true);
+  //   }
+  //   setTimeout(() => {
+  //     handelSetFilterActive(false);
+  //   }, 1000);
+  // }, [searchParams]);
+  // console.log(searchParams);
 
   // const removeFilters = () => {
   //   window.history.replaceState(null, "", window.location.pathname);
@@ -118,7 +137,7 @@ export default function GuidePage({
 
   function removeQueryParamAndNavigate(url, paramToRemove) {
     // delete searchParams[`${paramToRemove}`];
-    console.log(paramToRemove);
+    // console.log(paramToRemove);
     if (paramToRemove != "sort") {
       setparams(() => {
         return {
@@ -150,6 +169,11 @@ export default function GuidePage({
     // You can also use window.location.href = newUrl; if you want to trigger a page reload
     // Optionally, you can perform additional actions
     // location.reload();
+    handelSetFilterActive(true);
+  
+    setTimeout(() => {
+      handelSetFilterActive(false);
+    }, 1000);
     return newUrl;
   }
 
@@ -322,6 +346,8 @@ export default function GuidePage({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  // console.log(isFilterActive)
+  // console.log(isFilterActive, "neetx");
 
   return (
     <>
@@ -649,55 +675,48 @@ export default function GuidePage({
               </Col>
             </Row>
             <Row className="m-0">
-              {isFilterActive ? (
-                <ProductSkeleton />
-              ) : (
-                <>
-                  <Col md={6}>
-                    <div className="filtered-data">
-                      {/* {console.log(Object.keys(params)?.length)} */}
-                      <ul>
-                        {Object.keys(params)
-                          .filter((key) => key !== "direct" && key !== "sort")
-                          .map((categoryName, index) =>
-                            categoryName === "variant" ||
-                            categoryName === "available" ? (
-                              ""
-                            ) : (
-                              <li key={index}>
-                                {categoryName === "variant"
-                                  ? `Show all variants: Yes`
-                                  : categoryName === "available"
-                                  ? `Available: Yes`
-                                  : `${
-                                      categoryName.charAt(0).toUpperCase() +
-                                      categoryName.slice(1)
-                                    }: ${
-                                      params[categoryName].includes(",")
-                                        ? params[categoryName].replace(
-                                            /,/g,
-                                            " - "
-                                          )
-                                        : params[categoryName]
-                                    }`}
-                                <span
-                                  className="text0danger"
-                                  onClick={() => {
-                                    setremovedParam(categoryName);
-                                    removeQueryParamAndNavigate(
-                                      window.location.href,
-                                      categoryName
-                                    );
-                                  }}
-                                >
-                                  {" "}
-                                  <i className="ri-close-fill"></i>{" "}
-                                </span>
-                              </li>
-                            )
-                          )}
-                      </ul>
-                      {/* {Object.keys(params).filter((key) => key !== "direct" && key !== "sort" ).length > 0 && (
+              <Col md={6}>
+                <div className="filtered-data">
+                  {/* {console.log(Object.keys(params)?.length)} */}
+                  <ul>
+                    {Object.keys(params)
+                      .filter((key) => key !== "direct" && key !== "sort")
+                      .map((categoryName, index) =>
+                        categoryName === "variant" ||
+                        categoryName === "available"  || categoryName === "page" ? (
+                          ""
+                        ) : (
+                          <li key={index}>
+                            {categoryName === "variant"
+                              ? `Show all variants: Yes`
+                              : categoryName === "available"
+                              ? `Available: Yes`
+                              : `${
+                                  categoryName.charAt(0).toUpperCase() +
+                                  categoryName.slice(1)
+                                }: ${
+                                  params[categoryName].includes(",")
+                                    ? params[categoryName].replace(/,/g, " - ")
+                                    : params[categoryName]
+                                }`}
+                            <span
+                              className="text0danger"
+                              onClick={() => {
+                                setremovedParam(categoryName);
+                                removeQueryParamAndNavigate(
+                                  window.location.href,
+                                  categoryName
+                                );
+                              }}
+                            >
+                              {" "}
+                              <i className="ri-close-fill"></i>{" "}
+                            </span>
+                          </li>
+                        )
+                      )}
+                  </ul>
+                  {/* {Object.keys(params).filter((key) => key !== "direct" && key !== "sort" ).length > 0 && (
                         <span
                           onClick={() => {
                             removeFilters();
@@ -706,11 +725,11 @@ export default function GuidePage({
                           Remove all filters
                         </span>
                       )} */}
-                    </div>
-                  </Col>
-                  <Col md={6} className="mobile-hide">
-                    <div className="sidebar_filter">
-                      {/* <div>
+                </div>
+              </Col>
+              <Col md={6} className="mobile-hide">
+                <div className="sidebar_filter">
+                  {/* <div>
                         {guide && guide?.page_phrases?.hide_non_available}
                         <div class="custom-switch form-switch">
                           <input
@@ -725,48 +744,48 @@ export default function GuidePage({
                         </div>
                       </div> */}
 
-                      <div>
-                        {" "}
-                        {guide && guide?.page_phrases?.hide_similar}
-                        <div className="custom-switch form-switch">
-                          <input
-                            required=""
-                            className="form-check-input"
-                            type="checkbox"
-                            id={`variant`}
-                            onChange={handleHideSmiliar}
-                            checked={hideSmiliar}
-                          />
-                        </div>
-                      </div>
+                  <div>
+                    {" "}
+                    {guide && guide?.page_phrases?.hide_similar}
+                    <div className="custom-switch form-switch">
+                      <input
+                        required=""
+                        className="form-check-input"
+                        type="checkbox"
+                        id={`variant`}
+                        onChange={handleHideSmiliar}
+                        checked={hideSmiliar}
+                      />
                     </div>
+                  </div>
+                </div>
 
-                    <div className="filtered-data-select">
-                      <span>{guide && guide?.page_phrases?.order_by} :</span>
-                      <Form.Select
-                        aria-label="Default select example"
-                        onChange={(e) => handleSort(e.target.value)}
-                      >
-                        {/* <option>Autonomy</option> */}
-                        <option
-                          value={JSON.stringify({
-                            algo: "remove",
-                            rangeAttributes: "Overall",
-                          })}
-                        >
-                          {/* {guide && guide?.page_phrases?.overall} */}
-                          Overall (Available)
-                        </option>
-                        <option
-                          value={JSON.stringify({
-                            algo: "available",
-                            rangeAttributes: "false",
-                          })}
-                        >
-                          {/* {guide && guide?.page_phrases?.overall} */}
-                          Overall (All)
-                        </option>
-                        {/* <option
+                <div className="filtered-data-select">
+                  <span>{guide && guide?.page_phrases?.order_by} :</span>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={(e) => handleSort(e.target.value)}
+                  >
+                    {/* <option>Autonomy</option> */}
+                    <option
+                      value={JSON.stringify({
+                        algo: "remove",
+                        rangeAttributes: "Overall",
+                      })}
+                    >
+                      {/* {guide && guide?.page_phrases?.overall} */}
+                      Overall (Available)
+                    </option>
+                    <option
+                      value={JSON.stringify({
+                        algo: "available",
+                        rangeAttributes: "false",
+                      })}
+                    >
+                      {/* {guide && guide?.page_phrases?.overall} */}
+                      Overall (All)
+                    </option>
+                    {/* <option
                           value={JSON.stringify({
                             algo: "",
                             rangeAttributes: "Overall all",
@@ -775,107 +794,104 @@ export default function GuidePage({
                           Overall (All)
                         </option> */}
 
-                        <option
-                          value={JSON.stringify({
-                            algo: "high-low",
-                            rangeAttributes: "technical_score",
-                          })}
-                        >
-                          {guide && guide?.page_phrases?.technical_score}
-                        </option>
-                        <option
-                          value={JSON.stringify({
-                            algo: "low-high",
-                            rangeAttributes: "price",
-                          })}
-                        >
-                          {guide &&
-                            guide?.page_phrases?.price_lowest_to_highest}
-                        </option>
-                        <option
-                          value={JSON.stringify({
-                            algo: "high-low",
-                            rangeAttributes: "price",
-                          })}
-                        >
-                          {guide &&
-                            guide?.page_phrases?.price_highest_to_lowest}
-                        </option>
-                        <option
-                          value={JSON.stringify({
-                            algo: "high-low",
-                            rangeAttributes: "rating",
-                          })}
-                        >
-                          {" "}
-                          {guide && guide?.page_phrases?.users_ratings}
-                        </option>
-                        <option
-                          value={JSON.stringify({
-                            algo: "high-low",
-                            rangeAttributes: "ratio_quality_price_points",
-                          })}
-                        >
-                          {guide &&
-                            guide?.page_phrases?.ratio_quality_price_points}
-                        </option>
-                        <option
-                          value={JSON.stringify({
-                            algo: "high-low",
-                            rangeAttributes: "popularity_points",
-                          })}
-                        >
-                          {guide && guide?.page_phrases?.popularity}
-                        </option>
+                    <option
+                      value={JSON.stringify({
+                        algo: "high-low",
+                        rangeAttributes: "technical_score",
+                      })}
+                    >
+                      {guide && guide?.page_phrases?.technical_score}
+                    </option>
+                    <option
+                      value={JSON.stringify({
+                        algo: "low-high",
+                        rangeAttributes: "price",
+                      })}
+                    >
+                      {guide && guide?.page_phrases?.price_lowest_to_highest}
+                    </option>
+                    <option
+                      value={JSON.stringify({
+                        algo: "high-low",
+                        rangeAttributes: "price",
+                      })}
+                    >
+                      {guide && guide?.page_phrases?.price_highest_to_lowest}
+                    </option>
+                    <option
+                      value={JSON.stringify({
+                        algo: "high-low",
+                        rangeAttributes: "rating",
+                      })}
+                    >
+                      {" "}
+                      {guide && guide?.page_phrases?.users_ratings}
+                    </option>
+                    <option
+                      value={JSON.stringify({
+                        algo: "high-low",
+                        rangeAttributes: "ratio_quality_price_points",
+                      })}
+                    >
+                      {guide && guide?.page_phrases?.ratio_quality_price_points}
+                    </option>
+                    <option
+                      value={JSON.stringify({
+                        algo: "high-low",
+                        rangeAttributes: "popularity_points",
+                      })}
+                    >
+                      {guide && guide?.page_phrases?.popularity}
+                    </option>
 
-                        {
-                          // Technical score --- will be ordered from highest to lowest, based on numbers in "Technical Score Points CONVERTED"
-                          // Price (Lowest to Highest) --- will be ordered from lowest to highest price, based on numbers in "Lowest Price"
-                          // Price (Highest to Lowest) --- will be ordered from highest to lowest price, based on numbers in "Highest Price"
-                          // User's rating --- will be ordered from highest to lowest price, based on numbers in "User's Rating"
-                          // Ratio quality-price ---- will be ordered from highest to lowest, based on numbers in "Ratio Quality Price Points"
-                          // Popularity --- will be ordered from highest to lowest, based on numbers in "Popularity points"
+                    {
+                      // Technical score --- will be ordered from highest to lowest, based on numbers in "Technical Score Points CONVERTED"
+                      // Price (Lowest to Highest) --- will be ordered from lowest to highest price, based on numbers in "Lowest Price"
+                      // Price (Highest to Lowest) --- will be ordered from highest to lowest price, based on numbers in "Highest Price"
+                      // User's rating --- will be ordered from highest to lowest price, based on numbers in "User's Rating"
+                      // Ratio quality-price ---- will be ordered from highest to lowest, based on numbers in "Ratio Quality Price Points"
+                      // Popularity --- will be ordered from highest to lowest, based on numbers in "Popularity points"
 
-                          sortRangeAttributeArray?.current.map(
-                            (algoAttribute, attrIndex) => {
-                              if (algoAttribute?.rangeAttributes != "Overall")
-                                return (
-                                  <option
-                                    value={JSON.stringify(algoAttribute)}
-                                    key={attrIndex}
-                                  >
-                                    {algoAttribute?.rangeAttributes}
-                                    {algoAttribute?.algo ==
-                                      "lowest_to_highest" &&
-                                      " (Lowest to Highest)" &&
-                                      "available"}
-                                  </option>
-                                );
-                            }
-                          )
+                      sortRangeAttributeArray?.current.map(
+                        (algoAttribute, attrIndex) => {
+                          if (algoAttribute?.rangeAttributes != "Overall")
+                            return (
+                              <option
+                                value={JSON.stringify(algoAttribute)}
+                                key={attrIndex}
+                              >
+                                {algoAttribute?.rangeAttributes}
+                                {algoAttribute?.algo == "lowest_to_highest" &&
+                                  " (Lowest to Highest)" &&
+                                  "available"}
+                              </option>
+                            );
                         }
-                      </Form.Select>
-                    </div>
-                  </Col>
-                  {products?.length > 0 ? (
-                    products ? (
-                      <ProductListing
-                        guidePhraseData={guide?.page_phrases}
-                        text_before_listing={guide?.text_before_listing}
-                        text_after_listing={guide?.text_after_listing}
-                        productPositionArray={productPosition}
-                        products={sortedData && sortedData}
-                        handleToggleCollapse={handleToggleCollapse}
-                        handleManageCollapsedDiv={handleManageCollapsedDiv}
-                        slug={slug}
-                        order={order}
-                      />
-                    ) : (
-                      <ProductSkeleton />
-                    )
-                  ) : (
-                    <>
-                      {/* <ConfirmationModal
+                      )
+                    }
+                  </Form.Select>
+                </div>
+              </Col>
+              {isFilterActive && <ProductSkeleton />}
+              {products?.length > 0 ? (
+                products ? (
+                  <ProductListing
+                    guidePhraseData={guide?.page_phrases}
+                    text_before_listing={guide?.text_before_listing}
+                    text_after_listing={guide?.text_after_listing}
+                    productPositionArray={productPosition}
+                    products={sortedData && sortedData}
+                    handleToggleCollapse={handleToggleCollapse}
+                    handleManageCollapsedDiv={handleManageCollapsedDiv}
+                    slug={slug}
+                    order={order}
+                  />
+                ) : (
+                  <ProductSkeleton />
+                )
+              ) : (
+                <>
+                  {/* <ConfirmationModal
                         showModal={showModal}
                         handleClose={handleModalClose}
                         handleConfirm={handleConfirm}
@@ -887,20 +903,9 @@ export default function GuidePage({
                       ) : (
                         ""
                       )} */}
-                    </>
-                  )}
                 </>
               )}
-              {/* {products?.length <= 0 && (
-                <div>
-                  {" "}
-                  <ConfirmationModal
-                    showModal={showModal}
-                    handleClose={handleModalClose}
-                    handleConfirm={handleConfirm}
-                  />
-                </div>
-              )} */}
+
               {productPagination?.total_pages > 1 && (
                 <GuidePagination pagination={productPagination} />
               )}

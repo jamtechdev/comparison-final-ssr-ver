@@ -19,7 +19,12 @@ export default function Filter({
   // console.log(guidePhraseData);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [sliderValues, setSliderValues] = useState({ minVal: 0, maxVal: 0 });
+  const [sliderValues, setSliderValues] = useState({});
+  // console.log(searchParams)
+  // const [sliderValues, setSliderValues] = useState({
+  //   minVal: 0,
+  //   maxVal: 0,
+  // });
   const [sliderPriceValues, setSliderPriceValues] = useState({
     minVal: 0,
     maxVal: 0,
@@ -42,7 +47,7 @@ export default function Filter({
   const { isMobile } = useScreenSize();
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    // console.log(filterName, key, value, "neet");
+    console.log(filterName, key, value, "neet");
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -160,7 +165,7 @@ export default function Filter({
     //call the next router for srr
     router.push(`?${currentParams.toString()}`, { scroll: false });
   };
-
+  // console.log(sliderValues);
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
     delete updatedParams[key];
     currentParams.delete([key]);
@@ -304,12 +309,21 @@ export default function Filter({
               : 100;
           // alert(min)
 
+          // setSliderValues((prevVal) => {
+          //   return {
+          //     ...prevVal,
+          //     minVal: min,
+          //     maxVal: max,
+          //   };
+          // });
+
           setSliderValues((prevValues) => ({
             ...prevValues,
-            min,
-            max,
+            sliderValues,
           }));
+
           // thumb thumb--left ${classForSlider}
+          console.log(sliderValues, filteredArrayOfAttributeValues?.type,min, max);
 
           handelFilterActions("range", removedParam, `${min},${max}`, false);
           const leftThumb = document.getElementById(
@@ -452,10 +466,12 @@ export default function Filter({
       {/* Dynaimc Value Accordians */}
       {attributeCategories?.map((category, index) => {
         let countAttribute = 1;
+        // console.log(category)
         return (
           <div className="filter-section" key={index}>
             <div className="tech-features">{category.name}</div>
             <Accordion className="filter-accordion">
+              {/* {console.log(category?.attributes, "checking attributes")} */}
               {category?.attributes?.map((attribute, attrIndex) => {
                 if (
                   countAttribute <=
@@ -463,6 +479,10 @@ export default function Filter({
                 ) {
                   let filteredArrayOfAttributeValues =
                     getFilteredAttributeValues(attribute);
+                  // console.log(filteredArrayOfAttributeValues, "Checking");
+                  // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
+                  // const uniqueValues = Array.from(uniqueValuesSet);
+                  // console.log(uniqueValues,"uniqueValues")
 
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
@@ -515,6 +535,11 @@ export default function Filter({
                             {filteredArrayOfAttributeValues.values?.map(
                               (value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
+                                const uniqueValues = Array.isArray(value)
+                                  ? [...new Set(value.flat())]
+                                  : [value];
+                                // console.log(uniqueValues, "next");
+
                                 return (
                                   <div
                                     key={valIndex}
@@ -594,7 +619,6 @@ export default function Filter({
                     }
                   } else if (filteredArrayOfAttributeValues?.type === "range") {
                     countAttribute++;
-
                     return (
                       <Accordion.Item eventKey={attrIndex} key={attrIndex}>
                         <Accordion.Header as="div" className="accordion-header">
@@ -632,33 +656,43 @@ export default function Filter({
                               }}
                             />
                           ) : (
-                            <MultiRangeSliderAttributes
-                              rangeVal={sliderValues}
-                              classForSlider={attribute.name}
-                              min={
-                                filteredArrayOfAttributeValues.maxValue -
-                                  filteredArrayOfAttributeValues.minValue >=
-                                1
-                                  ? filteredArrayOfAttributeValues.minValue
-                                  : 0
-                              }
-                              max={
-                                filteredArrayOfAttributeValues.maxValue -
-                                  filteredArrayOfAttributeValues.minValue >=
-                                1
-                                  ? filteredArrayOfAttributeValues.maxValue
-                                  : 100
-                              }
-                              unit={filteredArrayOfAttributeValues.unit}
-                              onChange={({ min, max }) => {
-                                handelFilterActions(
-                                  "range",
-                                  attribute.name,
-                                  `${min},${max}`,
-                                  true
-                                );
-                              }}
-                            />
+                            <>
+                              {console.log(sliderValues)}
+                              <MultiRangeSliderAttributes
+                                rangeVal={
+                                  sliderValues || {
+                                    minVal:
+                                      filteredArrayOfAttributeValues.minValue,
+                                    maxVal:
+                                      filteredArrayOfAttributeValues.maxValue,
+                                  }
+                                }
+                                classForSlider={attribute.name}
+                                min={
+                                  filteredArrayOfAttributeValues.maxValue -
+                                    filteredArrayOfAttributeValues.minValue >=
+                                  1
+                                    ? filteredArrayOfAttributeValues.minValue
+                                    : 0
+                                }
+                                max={
+                                  filteredArrayOfAttributeValues.maxValue -
+                                    filteredArrayOfAttributeValues.minValue >=
+                                  1
+                                    ? filteredArrayOfAttributeValues.maxValue
+                                    : 100
+                                }
+                                unit={filteredArrayOfAttributeValues.unit}
+                                onChange={({ min, max }) => {
+                                  handelFilterActions(
+                                    "range",
+                                    attribute.name,
+                                    `${min},${max}`,
+                                    true
+                                  );
+                                }}
+                              />
+                            </>
                           )}
                         </Accordion.Body>
                       </Accordion.Item>

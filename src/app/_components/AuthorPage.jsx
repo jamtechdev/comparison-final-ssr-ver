@@ -44,7 +44,7 @@ function AuthorPage({ slug, authorData }) {
                 </div>
 
                 <br />
-                {authorData?.name}
+                {authorData?.summary}
                 <br />
                 <br />
               </div>
