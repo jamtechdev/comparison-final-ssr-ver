@@ -24,7 +24,7 @@ const WhyAccordionTab = React.memo(
   ({ categorySlug, product, pageType, slug }) => {
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
     const [activetab, setActiveTab] = useState("tab-1");
-const {isMobile}=useScreenSize()
+    const { isMobile } = useScreenSize();
     const [apiData, setApiData] = useState(null);
     // console.log(apiData);
 
@@ -212,14 +212,20 @@ const {isMobile}=useScreenSize()
 
                                           {item?.hover_phase && (
                                             <>
-  
-                                              <div className="tooltip-display-content"  style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
-        width: isMobile ? "190px" : "250px"
-      }}>
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
+                                              <div
+                                                className="tooltip-display-content"
+                                                style={{
+                                                  left: isMobile ? "50%" : 0,
+                                                  transform: isMobile
+                                                    ? "translateX(-60%)"
+                                                    : "translateX(-10%)",
+                                                  width: isMobile
+                                                    ? "190px"
+                                                    : "250px",
+                                                }}
+                                              >
+                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                  {/* {item?.hover_phase} */}
                                                 </span>
                                               </div>
                                             </>
@@ -239,9 +245,14 @@ const {isMobile}=useScreenSize()
                                         >
                                           {item?.hover_phase && (
                                             <>
-                                              <span className="tooltip-display-content" style={{backgroundColor:"red"}}>
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
+                                              <span
+                                                className="tooltip-display-content"
+                                                style={{
+                                                  backgroundColor: "red",
+                                                }}
+                                              >
+                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                  {/* {item?.hover_phase} */}
                                                 </span>
                                               </span>
                                             </>
@@ -349,8 +360,8 @@ const {isMobile}=useScreenSize()
                                         {item?.hover_phase && (
                                           <>
                                             <div className="tooltip-display-content">
-                                              <span className="mb-2 prosconsColor">
-                                                {item?.hover_phase}
+                                              <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }} >
+                                                {/* {item?.hover_phase} */}
                                               </span>
                                             </div>
                                           </>
@@ -552,10 +563,10 @@ const {isMobile}=useScreenSize()
                                           }
                                         />
 
-                                        <small className="d-block tooltip-title" >
+                                        <small className="d-block tooltip-title">
                                           {product?.general.cons[item][1] && (
                                             <>
-                                              <span className="tooltip-display-content" >
+                                              <span className="tooltip-display-content">
                                                 <span className="mb-2 prosconsColor">
                                                   {
                                                     product?.general.cons[
@@ -629,8 +640,8 @@ const {isMobile}=useScreenSize()
                                           {item?.hover_phase && (
                                             <>
                                               <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
+                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                  {/* {item?.hover_phase} */}
                                                 </span>
                                               </span>
                                             </>
@@ -682,8 +693,8 @@ const {isMobile}=useScreenSize()
                                           {item?.hover_phase && (
                                             <>
                                               <div className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
+                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                  {/* {item?.hover_phase} */}
                                                 </span>
                                               </div>
                                             </>
@@ -696,8 +707,8 @@ const {isMobile}=useScreenSize()
                                           {item?.hover_phase && (
                                             <>
                                               <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
+                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                  {/* {item?.hover_phase} */}
                                                 </span>
                                               </span>
                                             </>

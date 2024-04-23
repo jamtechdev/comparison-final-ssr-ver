@@ -337,8 +337,8 @@ const CompareAccordionTab = React.memo(
                                             {item?.hover_phase && (
                                               <>
                                                 <div className="tooltip-display-content">
-                                                  <span className="mb-2 prosconsColor">
-                                                    {item?.hover_phase}
+                                                  <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                    {/* {item?.hover_phase} */}
                                                   </span>
                                                 </div>
                                               </>
@@ -353,8 +353,8 @@ const CompareAccordionTab = React.memo(
                                             {item?.hover_phase && (
                                               <>
                                                 <span className="tooltip-display-content">
-                                                  <span className="mb-2 prosconsColor">
-                                                    {item?.hover_phase}
+                                                  <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                    {/* {item?.hover_phase} */}
                                                   </span>
                                                 </span>
                                               </>
@@ -492,8 +492,8 @@ const CompareAccordionTab = React.memo(
                                           {item?.hover_phase && (
                                             <>
                                               <div className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
+                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                  {/* {item?.hover_phase} */}
                                                 </span>
                                               </div>
                                             </>
@@ -751,8 +751,8 @@ const CompareAccordionTab = React.memo(
                                             {item?.hover_phase && (
                                               <>
                                                 <div className="tooltip-display-content">
-                                                  <span className="mb-2 prosconsColor">
-                                                    {item?.hover_phase}
+                                                  <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                    {/* {item?.hover_phase} */}
                                                   </span>
                                                 </div>
                                               </>
@@ -766,8 +766,8 @@ const CompareAccordionTab = React.memo(
                                             {item?.hover_phase && (
                                               <>
                                                 <span className="tooltip-display-content">
-                                                  <span className="mb-2 prosconsColor">
-                                                    {item?.hover_phase}
+                                                  <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                    {/* {item?.hover_phase} */}
                                                   </span>
                                                 </span>
                                               </>
@@ -829,8 +829,8 @@ const CompareAccordionTab = React.memo(
                                             {item?.hover_phase && (
                                               <>
                                                 <div className="tooltip-display-content">
-                                                  <span className="mb-2 prosconsColor">
-                                                    {item?.hover_phase}
+                                                  <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                    {/* {item?.hover_phase} */}
                                                   </span>
                                                 </div>
                                               </>
@@ -844,7 +844,7 @@ const CompareAccordionTab = React.memo(
                                             {item?.hover_phase && (
                                               <>
                                                 <span className="tooltip-display-content">
-                                                  <span className="mb-2 prosconsColor">
+                                                  <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
                                                     {item?.hover_phase}
                                                   </span>
                                                 </span>

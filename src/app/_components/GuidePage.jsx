@@ -28,7 +28,7 @@ export default function GuidePage({
   searchParams,
 }) {
   useChart("guide");
-  // console.log(productForTable?.products, "Abhay");
+  // console.log(guideData, "Abhay");
   const router = useRouter();
   const currentParams = new URLSearchParams(searchParams.toString());
   const [isShown, setIsShown] = useState(false);
@@ -72,7 +72,7 @@ export default function GuidePage({
   };
   const handelSetFilterActive = (status) => {
     setIsFilterActive(status);
-    console.log(status,"check status")
+    // console.log(status,"check status")
   };
   useEffect(() => {
     setPrevSearcParam(searchParams);
@@ -410,8 +410,8 @@ export default function GuidePage({
           </Row>
 
           <Row className="pt-3 best-page-card">
-            {/* {console.log(guide.top_guide_counts)} */}
-            {Object.values(guide.top_guide_counts).map(function (item, index) {
+            {/* {console.log(guide)} */}
+            {Object?.values(guide?.top_guide_counts).map(function (item, index) {
               return (
                 <Col className="p-2" md={6} lg={3} sm={6} xs={6} key={index}>
                   <div className="hero-card-content">
