@@ -71,7 +71,8 @@ const {isMobile}=useScreenSize();
               </span>
             </>
           )}
-          <div className="user__rating__popup">
+          {/* for expert review  now I comment this code */}
+          {/* <div className="user__rating__popup">
               <div className="user__rating__popup__list">
                 <span className="user__rating__popup__rating">4.5</span>
                 <div className="user__rating__popup__content">
@@ -79,7 +80,7 @@ const {isMobile}=useScreenSize();
                   <p>Nationalpost.com</p>
                 </div>
               </div>
-          </div>
+          </div> */}
         </div>
       )}
     </>
