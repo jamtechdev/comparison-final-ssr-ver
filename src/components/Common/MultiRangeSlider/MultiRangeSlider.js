@@ -56,6 +56,7 @@ const MultiRangeSlider = ({
 
   return (
     <div className="multi-range-slider-container">
+      {console.log(minVal)}
       <input
         type="range"
         min={min}

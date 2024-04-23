@@ -224,7 +224,12 @@ const WhyAccordionTab = React.memo(
                                                     : "250px",
                                                 }}
                                               >
-                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                <span
+                                                  className="mb-2 prosconsColor"
+                                                  dangerouslySetInnerHTML={{
+                                                    __html: item?.hover_phase,
+                                                  }}
+                                                >
                                                   {/* {item?.hover_phase} */}
                                                 </span>
                                               </div>
@@ -251,7 +256,12 @@ const WhyAccordionTab = React.memo(
                                                   backgroundColor: "red",
                                                 }}
                                               >
-                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                <span
+                                                  className="mb-2 prosconsColor"
+                                                  dangerouslySetInnerHTML={{
+                                                    __html: item?.hover_phase,
+                                                  }}
+                                                >
                                                   {/* {item?.hover_phase} */}
                                                 </span>
                                               </span>
@@ -360,7 +370,12 @@ const WhyAccordionTab = React.memo(
                                         {item?.hover_phase && (
                                           <>
                                             <div className="tooltip-display-content">
-                                              <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }} >
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
                                                 {/* {item?.hover_phase} */}
                                               </span>
                                             </div>
@@ -625,8 +640,10 @@ const WhyAccordionTab = React.memo(
                                           {item?.hover_phase && (
                                             <>
                                               <div className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor">
-                                                  {item?.hover_phase}
+                                                <span className="mb-2 prosconsColor"  dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}>
+                                                 
                                                 </span>
                                               </div>
                                             </>
@@ -640,7 +657,12 @@ const WhyAccordionTab = React.memo(
                                           {item?.hover_phase && (
                                             <>
                                               <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                <span
+                                                  className="mb-2 prosconsColor"
+                                                  dangerouslySetInnerHTML={{
+                                                    __html: item?.hover_phase,
+                                                  }}
+                                                >
                                                   {/* {item?.hover_phase} */}
                                                 </span>
                                               </span>
@@ -693,7 +715,12 @@ const WhyAccordionTab = React.memo(
                                           {item?.hover_phase && (
                                             <>
                                               <div className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                <span
+                                                  className="mb-2 prosconsColor"
+                                                  dangerouslySetInnerHTML={{
+                                                    __html: item?.hover_phase,
+                                                  }}
+                                                >
                                                   {/* {item?.hover_phase} */}
                                                 </span>
                                               </div>
@@ -707,7 +734,12 @@ const WhyAccordionTab = React.memo(
                                           {item?.hover_phase && (
                                             <>
                                               <span className="tooltip-display-content">
-                                                <span className="mb-2 prosconsColor" dangerouslySetInnerHTML={{ __html: item?.hover_phase }}>
+                                                <span
+                                                  className="mb-2 prosconsColor"
+                                                  dangerouslySetInnerHTML={{
+                                                    __html: item?.hover_phase,
+                                                  }}
+                                                >
                                                   {/* {item?.hover_phase} */}
                                                 </span>
                                               </span>

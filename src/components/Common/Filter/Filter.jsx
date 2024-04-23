@@ -328,17 +328,24 @@ export default function Filter({
             //   [removedParam]: { minVal: min, maxVal: max },
             // };
             // setSliderValues(newRangerfilter);
+            const value = `${min},${max}`;
             const newFilters = {
-              [removedParam]: { minVal: min, maxVal: max },
+              [removedParam]: value,
             };
             setSliderValues(newFilters);
             // setSliderValues(newFilters);
+            
             console.log(newFilters);
 
             // thumb thumb--left ${classForSlider}
             // console.log(sliderValues);
 
-            handelFilterActions("range", removedParam, `${min},${max}`, false);
+            handelFilterActions(
+              "range",
+              removedParam,
+              { min: min, max: max },
+              false
+            );
             const leftThumb = document.getElementById(
               `thumb thumb--left ${removedParam}`
             );
@@ -346,14 +353,14 @@ export default function Filter({
               `thumb thumb--right ${removedParam}`
             );
 
-            console.log(min,max)
+            console.log(min, max, "ssss");
 
             if (leftThumb) {
               leftThumb.value = min;
             }
 
             if (rightThumb) {
-              rightThumb.value = max;
+              rightThumb.value = min;
             }
           }
         }
