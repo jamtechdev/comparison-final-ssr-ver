@@ -23,7 +23,7 @@ export default function ProductListing({
   }
   // console.log(text_before_listing,"kakashi")
   return (
-    <div className="best-product-wrapper">
+    <div className="best-product-wrapper" id="scroll__top">
       <span className="testing__text">
         <i>{text_before_listing}</i>
       </span>

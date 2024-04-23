@@ -285,7 +285,7 @@ export default function Product({
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="best-product-listing">
+      <div className="best-product-listing" >
         <div className="flex-box">
           <div className="left_box">
             <span className="ribbon-number">

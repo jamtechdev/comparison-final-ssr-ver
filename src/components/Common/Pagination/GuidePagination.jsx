@@ -17,7 +17,7 @@ const GuidePagination = ({ pagination }) => {
   }, []);
 
   const handlePageClick = (page) => {
-    const newPage = typeof page === 'number' ? page : currentPage + 1;
+    const newPage = typeof page === "number" ? page : currentPage + 1;
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     setCurrentPage(newPage);
@@ -26,9 +26,13 @@ const GuidePagination = ({ pagination }) => {
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
     router.push(`?${currentParams.toString()}`, { scroll: false });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
+    // Scroll to the top of the product list
+    const productListElement = document.getElementById("scroll__top");
+    if (productListElement) {
+      productListElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   // Generate an array of page numbers
   const pagesArray = Array.from({ length: total_pages }, (_, i) => i + 1);
 
@@ -38,12 +42,17 @@ const GuidePagination = ({ pagination }) => {
         <Col className="d-flex justify-content-center text-center">
           <ul className="custom-pagination">
             {currentPage === 1 ? null : (
-              <li
-                className="page_previous"
-                onClick={() => handlePageClick(currentPage - 1)}
-              >
-                Previous
-              </li>
+              <>
+                <li onClick={() => handlePageClick(1)} className="page_first">
+                  First
+                </li>
+                <li
+                  onClick={() => handlePageClick(currentPage - 1)}
+                  className="page_previous"
+                >
+                  Previous
+                </li>
+              </>
             )}
             {pagesArray.map((item, index) => (
               <li
@@ -62,16 +71,16 @@ const GuidePagination = ({ pagination }) => {
             ))}
             {currentPage < total_pages && (
               <li
-                className="page_next"
                 onClick={() => handlePageClick(currentPage + 1)}
+                className="page_next"
               >
                 Next
               </li>
             )}
             {currentPage === total_pages ? null : (
               <li
-                className="page_last"
                 onClick={() => handlePageClick(total_pages)}
+                className="page_last"
               >
                 Last
               </li>

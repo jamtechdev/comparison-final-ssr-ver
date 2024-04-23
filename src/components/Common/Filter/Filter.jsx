@@ -172,7 +172,7 @@ export default function Filter({
   };
 
   useEffect(() => {
-    if (removedParam !== undefined) {
+    if (removedParam) {
       if (searchParam?.direct) {
         const filteredKeys = Object.keys(searchParam).filter(
           (key) => key !== "direct"
@@ -334,12 +334,13 @@ export default function Filter({
             };
             setSliderValues(newFilters);
             // setSliderValues(newFilters);
-            
-            console.log(newFilters);
 
             // thumb thumb--left ${classForSlider}
             // console.log(sliderValues);
-
+            // const { [removedParam]: omit, ...OldFilters } = sliderValues;
+            // console.log(OldFilters, "OldFilters");
+            // setSliderValues(OldFilters);
+            console.log(sliderValues, min, max, removedParam);
             handelFilterActions(
               "range",
               removedParam,
@@ -360,7 +361,7 @@ export default function Filter({
             }
 
             if (rightThumb) {
-              rightThumb.value = min;
+              rightThumb.value = max;
             }
           }
         }
@@ -370,6 +371,7 @@ export default function Filter({
         }
       }
     }
+
     // I remove  searchParam   from dependency to stop infinite loop of useEffect
   }, [removedParam]);
 
