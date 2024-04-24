@@ -83,6 +83,41 @@ const TechnicalAccordion = React.memo(
       setTooltipPosition({ ...tooltipPosition, left });
     }
 
+    const getColorBasedOnScore = (score) => {
+      if (score >= 7.5) {
+        return "#093673";
+      } else if (score >= 5 && score < 7.5) {
+        return "#437ECE";
+      } else {
+        return "#85B2F1";
+      }
+    };
+    // rating texr
+    const getEvaluation = (score) => {
+      if (score >= 9) {
+        return "Outstanding";
+      } else if (score >= 8) {
+        return "Excellent";
+      } else if (score >= 7) {
+        return "Very good";
+      } else if (score >= 5) {
+        return "Good";
+      } else if (score >= 3) {
+        return "Fair";
+      } else if (score >= 1) {
+        return "Poor";
+      }
+      return "Poor"; // Handle other cases as needed
+    };
+
+    const extractDomainName = (url) => {
+      const domain = url
+        .replace("https://", "")
+        .replace("http://", "")
+        .replace("www.", "")
+        .split(/[/?#]/)[0];
+      return domain;
+    };
     return (
       <>
         <Accordion className="table-accordion w-50 p-0 left-accordion">
@@ -366,9 +401,86 @@ const TechnicalAccordion = React.memo(
                         }}
                       >
                         {formatValue(product.expert_reviews_rating)}
-                        <ProsConsToolTip
-                          hover_phrase={product.expert_reviews_rating_phase}
-                        />
+
+                        <div className="tooltip-display-content why-tooltip">
+                          <div
+                            className="mb-2 prosconsColor"
+                            dangerouslySetInnerHTML={{
+                              __html: product.expert_reviews_rating_phase,
+                            }}
+                          ></div>
+                          {console.log(product?.expert_reviews_websites)}
+
+                          {/* for expert review  now I comment this code */}
+                          {product?.expert_reviews_websites &&
+                            product?.expert_reviews_websites?.map(
+                              (data, index) => {
+                                return (
+                                  <div
+                                    className="user__rating__popup"
+                                    key={index}
+                                  >
+                                    <div className="user__rating__popup__list">
+                                      <span
+                                        className="user__rating__popup__rating"
+                                        style={{
+                                          background: getColorBasedOnScore(
+                                            data?.evaluation
+                                          ),
+                                        }}
+                                      >
+                                        {formatValue(data?.evaluation)}
+                                      </span>
+                                      <div className="user__rating__popup__content">
+                                        {data?.image !== null && (
+                                          <a
+                                            href={`/link?p=${btoa(
+                                              data?.website_name
+                                            )}`}
+                                          >
+                                            <img src={`${data?.image}`} />
+                                          </a>
+                                        )}
+
+                                        <p>
+                                          {" "}
+                                          {data?.name !== null ? (
+                                            <a
+                                              href={`/link?p=${btoa(
+                                                data?.website_name
+                                              )}`}
+                                              style={{ color: "inherit" }}
+                                            >
+                                              {" "}
+                                              {data?.name}
+                                            </a>
+                                          ) : (
+                                            <a
+                                              href={`/link?p=${btoa(
+                                                data?.website_name
+                                              )}`}
+                                              style={{ color: "inherit" }}
+                                            >
+                                              {" "}
+                                              {extractDomainName(
+                                                data?.website_name
+                                              )}
+                                            </a>
+                                          )}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              }
+                            )}
+                        </div>
+                        {/* {product?.expert_reviews_websites && (
+                          <ProsConsToolTip
+                            hover_phrase={product.expert_reviews_rating_phase}
+                            expert_reviews={product?.expert_reviews_websites}
+                          />
+                        )} */}
                       </div>
                     </div>
                   </div>

@@ -10,12 +10,13 @@ const ProsConsToolTip = (props) => {
     comment,
     typeComp,
     finalvalue,
+    expert_reviews,
   } = props;
 
   const { isMobile } = useScreenSize();
 
   let tooltipStyles = {};
-
+  console.log(expert_reviews&&expert_reviews);
   // const [width, setWidth] = useState(0);
   // useEffect(() => {
   //   const handleResize = () => {
