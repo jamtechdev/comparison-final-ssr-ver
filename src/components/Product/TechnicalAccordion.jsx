@@ -69,7 +69,7 @@ const TechnicalAccordion = React.memo(
       const viewportWidth = document.documentElement.clientWidth;
 
       const tooltipWidth = tooltipRect.width;
-      console.log(viewportWidth - tooltipWidth / 2 - tooltipWidth);
+      // console.log(viewportWidth - tooltipWidth / 2 - tooltipWidth);
 
       // Calculate ideal left position for centered alignment
       const idealLeft = (viewportWidth - tooltipWidth) / 2;
@@ -409,7 +409,7 @@ const TechnicalAccordion = React.memo(
                               __html: product.expert_reviews_rating_phase,
                             }}
                           ></div>
-                          {console.log(product?.expert_reviews_websites)}
+                          {/* {console.log(product?.expert_reviews_websites)} */}
 
                           {/* for expert review  now I comment this code */}
                           {product?.expert_reviews_websites &&
@@ -963,7 +963,7 @@ const TechnicalAccordion = React.memo(
                   <Accordion.Item eventKey={index} key={index}>
                     <Accordion.Header as="div">
                       <div className="table-accordion-header">
-                        console.log(attribute  ,"attru")
+                        {/* {console.log(product,"test")} */}
                         {attribute}
                         <Questiontool
                           attributes={

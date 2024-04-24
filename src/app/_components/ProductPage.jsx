@@ -730,8 +730,10 @@ function ProductPage({
                                         {hoverPhaseData?.attribute_value != null
                                           ? hoverPhaseData?.attribute_value >=
                                             10
-                                            ? Math.trunc(
-                                                hoverPhaseData?.attribute_value
+                                            ? formatValue(
+                                                Math.trunc(
+                                                  hoverPhaseData?.attribute_value
+                                                )
                                               )
                                             : hoverPhaseData?.attribute_value
                                           : "0.0"}

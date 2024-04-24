@@ -576,7 +576,7 @@ export default function ComparisonTable({
                 return (
                   <td key={technicalIndex}>
                     {
-                      addStarOnTable(defaultNo, "technical_score", values)[
+                      addStarOnTable(defaultNo, "technical_score", values, product?.technical_score_star_phrase)[
                         technicalIndex
                       ]
                     }
@@ -613,7 +613,7 @@ export default function ComparisonTable({
                 return (
                   <td key={popularityIndex}>
                     {
-                      addStarOnTable(defaultNo, "popularity", values)[
+                      addStarOnTable(defaultNo, "popularity", values ,  product?.popularity_points_star_phase)[
                         popularityIndex
                       ]
                     }
@@ -658,7 +658,7 @@ export default function ComparisonTable({
               const values = finalProducts.map((p) => p.reviews);
               return (
                 <td key={userIndex}>
-                  {addStarOnTable(defaultNo, "user_rating", values)[userIndex]}
+                  {addStarOnTable(defaultNo, "user_rating", values,product?.reviews_star_phase)[userIndex]}
                 </td>
               );
             })}

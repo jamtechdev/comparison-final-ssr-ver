@@ -357,7 +357,7 @@ export default function Filter({
             alert("hello");
             leftThumb.value = min;
 
-            console.log(leftThumb.value, min, "neetx");
+            // console.log(leftThumb.value, min, "neetx");
 
             if (leftThumb) {
               leftThumb.value = min;

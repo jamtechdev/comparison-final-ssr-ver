@@ -441,13 +441,15 @@ export default function GuidePage({
                         </span>
                         <span className="catchy_titles_section_product_name">
                           {/* {console.log(item)} */}
-                          <a
-                            rel="noopener noreferrer"
-                            target="_blank"
-                            href={`/link?p=${btoa(item?.product.url)}`}
-                          >
-                            {item.product.name}
-                          </a>
+                          {item?.product?.url !== null ? (
+                            <a
+                              rel="noopener noreferrer"
+                              target="_blank"
+                              href={`/link?p=${btoa(item?.product.url)}`}
+                            >
+                              {item.product.name}
+                            </a>
+                          ) : <span>{item?.product?.name}</span>}
                         </span>
                       </li>
                     ))}

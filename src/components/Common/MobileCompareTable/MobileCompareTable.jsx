@@ -275,7 +275,7 @@ export default function MobileCompareTable({
 
   const handleSlideChange = (swiper) => {
     setCurrentIndex(swiper.activeIndex);
-    console.log(currentIndex, "ckeking current index");
+    // console.log(currentIndex, "ckeking current index");
   };
 
   return (
@@ -490,14 +490,14 @@ export default function MobileCompareTable({
           className="product-slider"
         >
           {chunkedData?.map((slider_data, swiperIndex) => {
-            console.log(swiperIndex, "check swiper index");
+            // console.log(swiperIndex, "check swiper index");
             return (
               <SwiperSlide key={swiperIndex}>
                 <Table className="compare-container">
                   <thead data-sticky-header-offset-y ref={ref}>
                     <tr>
                       {slider_data?.map((data, dIndex) => {
-                        console.log(dIndex, "table index");
+                        // console.log(dIndex, "table index");
                         return (
                           <th key={dIndex}>
                             <p className="device-name">

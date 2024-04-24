@@ -71,7 +71,7 @@ function ProductPageOutline({ product, currentIndexId }) {
   }, [currentIndexId]);
 
   const scrollToSection = (sectionId) => (e) => {
-    console.log(sectionId, "sectionId");
+    // console.log(sectionId, "sectionId");
     e.preventDefault();
 
     const section = document.getElementById(sectionId);

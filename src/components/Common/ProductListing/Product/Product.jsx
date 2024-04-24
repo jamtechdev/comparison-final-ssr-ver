@@ -456,8 +456,10 @@ export default function Product({
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
-                                          ? Math.trunc(
-                                              data?.attribute_evaluation
+                                          ? formatValue(
+                                              Math.trunc(
+                                                data?.attribute_evaluation
+                                              )
                                             )
                                           : data?.attribute_evaluation.toFixed(
                                               1
@@ -559,8 +561,10 @@ export default function Product({
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
-                                          ? Math.trunc(
-                                              data?.attribute_evaluation
+                                          ? formatValue(
+                                              Math.trunc(
+                                                data?.attribute_evaluation
+                                              )
                                             )
                                           : data?.attribute_evaluation.toFixed(
                                               1
@@ -654,7 +658,7 @@ export default function Product({
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
-                                          ? Math.trunc(
+                                          ? formatValue(
                                               data?.attribute_evaluation
                                             )
                                           : data?.attribute_evaluation.toFixed(
@@ -996,8 +1000,10 @@ export default function Product({
                                         {hoverPhaseData?.attribute_value != null
                                           ? hoverPhaseData?.attribute_value >=
                                             10
-                                            ? Math.trunc(
-                                                hoverPhaseData?.attribute_value
+                                            ? formatValue(
+                                                Math.trunc(
+                                                  hoverPhaseData?.attribute_value
+                                                )
                                               )
                                             : hoverPhaseData?.attribute_value
                                           : "0.0"}
@@ -1412,9 +1418,12 @@ export default function Product({
                                                             : "#85B2F1",
                                                       }}
                                                     >
-                                                      {`${parseFloat(
+                                                      {formatValue(
                                                         data?.attribute_evaluation
-                                                      ).toFixed(1)}`}
+                                                      )}
+                                                      {/* {`${parseFloat(
+                                                        data?.attribute_evaluation
+                                                      ).toFixed(1)}`} */}
                                                     </div>
                                                     <p>
                                                       {data?.attribute_category}
@@ -1557,9 +1566,13 @@ export default function Product({
                                                             : "#85B2F1",
                                                       }}
                                                     >
-                                                      {`${parseFloat(
+                                                      {formatValue(
                                                         data?.attribute_evaluation
-                                                      ).toFixed(1)}`}
+                                                      )}
+
+                                                      {/* {`${parseFloat(
+                                                        data?.attribute_evaluation
+                                                      ).toFixed(1)}`} */}
                                                     </div>
                                                     <p>
                                                       {data?.attribute_category}
@@ -1918,6 +1931,7 @@ export default function Product({
                                     <Accordion.Header as="div">
                                       <div className="table-accordion-header">
                                         {attribute}
+                                        {/* {console.log(attribute,"hellow")} */}
                                         {/* {console.log(
                                           product.attributes_new[attribute][0]
                                             ?.attribute_evaluation,
