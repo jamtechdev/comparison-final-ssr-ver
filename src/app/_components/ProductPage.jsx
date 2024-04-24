@@ -543,7 +543,7 @@ function ProductPage({
             </div>
             <div className="score-section color-change score-section-2 last-border-none">
               <span className="count" style={{ backgroundColor: RatingColor }}>
-                {product?.reviews}
+                {formatValue(product?.reviews)}
               </span>
               <div className="score-detail">
                 <div className="tooltip-title removeUnderlineFrom">
