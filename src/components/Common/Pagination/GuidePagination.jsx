@@ -28,10 +28,6 @@ const GuidePagination = ({ pagination }) => {
     router.push(`?${currentParams.toString()}`, { scroll: false });
 
     // Scroll to the top of the product list
-    const productListElement = document.getElementById("scroll__top");
-    if (productListElement) {
-      productListElement.scrollIntoView({ behavior: "smooth" });
-    }
   };
   // Generate an array of page numbers
   const pagesArray = Array.from({ length: total_pages }, (_, i) => i + 1);
@@ -43,9 +39,6 @@ const GuidePagination = ({ pagination }) => {
           <ul className="custom-pagination">
             {currentPage === 1 ? null : (
               <>
-                <li onClick={() => handlePageClick(1)} className="page_first">
-                  First
-                </li>
                 <li
                   onClick={() => handlePageClick(currentPage - 1)}
                   className="page_previous"
