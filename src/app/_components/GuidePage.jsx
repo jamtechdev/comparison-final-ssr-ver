@@ -48,13 +48,12 @@ export default function GuidePage({
   //   (a, b) => b.overall_score - a.overall_score
   // );
 
-
   const productPagination = guideData[1]?.data?.pagination;
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [prevSearcParam, setPrevSearcParam] = useState({});
   const [removedParam, setremovedParam] = useState();
-  
+
   const [order, setorder] = useState({
     value: "",
     ischecked: false,
@@ -83,20 +82,19 @@ export default function GuidePage({
     if (Object.keys(searchParams).length > 0) {
       // Show loader when filter is applied
       handelSetFilterActive(true);
-  
+
       setTimeout(() => {
         handelSetFilterActive(false);
       }, 1000);
     } else {
       // Show loader when filter is removed
       // handelSetFilterActive(true);
-  
+
       setTimeout(() => {
         handelSetFilterActive(false);
       }, 1000);
     }
   }, [searchParams]);
-  
 
   // old code for skeleton
   // useEffect(() => {
@@ -144,7 +142,6 @@ export default function GuidePage({
           ...searchParams,
         };
       });
-
     } else {
       delete params.sort;
       let removeSortParam = params;
@@ -155,11 +152,11 @@ export default function GuidePage({
         };
       });
     }
- handelSetFilterActive(true);
-    
-      setTimeout(() => {
-        handelSetFilterActive(false);
-      }, 1000);
+    handelSetFilterActive(true);
+
+    setTimeout(() => {
+      handelSetFilterActive(false);
+    }, 1000);
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
     const newUrl = urlObject.toString();
@@ -170,7 +167,7 @@ export default function GuidePage({
     // Optionally, you can perform additional actions
     // location.reload();
     handelSetFilterActive(true);
-  
+
     setTimeout(() => {
       handelSetFilterActive(false);
     }, 1000);
@@ -204,7 +201,6 @@ export default function GuidePage({
     } else {
       removeQueryParamAndNavigate(window.location.href, "sort");
       delete searchParams.sort;
-      
     }
   };
   const [showModal, setShowModal] = useState(true);
@@ -411,7 +407,10 @@ export default function GuidePage({
 
           <Row className="pt-3 best-page-card">
             {/* {console.log(guide)} */}
-            {Object?.values(guide?.top_guide_counts).map(function (item, index) {
+            {Object?.values(guide?.top_guide_counts).map(function (
+              item,
+              index
+            ) {
               return (
                 <Col className="p-2" md={6} lg={3} sm={6} xs={6} key={index}>
                   <div className="hero-card-content">
@@ -500,15 +499,14 @@ export default function GuidePage({
             />
             <div className="desktop-hide">
               {/* {console.log(Object.keys(searchParams).length)} */}
-              {Object.keys(searchParams).length > 0 && (
-                <Button
-                  className="site_main_btn w-100 d-block btn-icon mb-4"
-                  onClick={closeClick}
-                >
-                  {/* <i className="ri-close-fill"></i> */}
-                  See Product
-                </Button>
-              )}
+
+              <Button
+                className="site_main_btn w-100 d-block btn-icon mb-4"
+                onClick={closeClick}
+              >
+                {/* <i className="ri-close-fill"></i> */}
+                See Product
+              </Button>
             </div>
           </Col>
           <Col md={12} lg={9} xl={9} className="main-content">
@@ -683,7 +681,8 @@ export default function GuidePage({
                       .filter((key) => key !== "direct" && key !== "sort")
                       .map((categoryName, index) =>
                         categoryName === "variant" ||
-                        categoryName === "available"  || categoryName === "page" ? (
+                        categoryName === "available" ||
+                        categoryName === "page" ? (
                           ""
                         ) : (
                           <li key={index}>

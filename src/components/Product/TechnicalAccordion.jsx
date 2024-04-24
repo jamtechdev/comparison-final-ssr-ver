@@ -963,6 +963,7 @@ const TechnicalAccordion = React.memo(
                   <Accordion.Item eventKey={index} key={index}>
                     <Accordion.Header as="div">
                       <div className="table-accordion-header">
+                        console.log(attribute  ,"attru")
                         {attribute}
                         <Questiontool
                           attributes={

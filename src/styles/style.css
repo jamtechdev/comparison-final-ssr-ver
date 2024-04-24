@@ -1096,7 +1096,7 @@ footer .search-icon {
 .custom-switch > input {
   border-radius: 50px !important;
   padding: 8px;
-  margin: 8px 0 0;
+  margin: 8px 0 0 !important;
 }
 
 .product-categories-container {

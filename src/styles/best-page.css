@@ -1240,9 +1240,9 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   font-family: "Lato", sans-serif !important;
 }
 @media screen and (max-width: 600px) {
-  .best-tag-product,
   .flex-box .left_box .box_content {
     font-size: 14px;
+    max-width: 250px;
   }
   .correlation_svg_width,
   .base_chart_graph {
@@ -1251,15 +1251,20 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   .best-tag-product{
     margin-left: 10px;
     line-height: 18px;
-    padding: 4px 10px;
-    text-align: right;
+    padding: 6px 10px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .comparison-tool .not-availabel{
+    grid-template-columns: 1fr !important;
   }
 }
 @media screen and (max-width: 410px) {
-  .best-tag-product,
   .flex-box .left_box .box_content {
     padding: 0px 7px;
     font-size: 14px;
+    max-width: 180px;
   }
   .site_tabs.graph-tab.compare-graph-tabs .nav-item button {
     font-size: 9px !important;

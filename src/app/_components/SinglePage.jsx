@@ -5,6 +5,13 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 
 function SinglePage({ singlePageData }) {
   // console.log(singlePageData?.page_phases);
+
+  useEffect(() => {
+    const stickyElements = document.querySelectorAll(".sticky");
+    stickyElements.forEach((element) => {
+      element.style.top = "0";
+    });
+  }, []);
   return (
     <>
       <section className="breadcrumb-section">
@@ -14,7 +21,7 @@ function SinglePage({ singlePageData }) {
               <BreadCrumb
                 productPhaseData={singlePageData?.page_phases}
                 firstPageName={""}
-                secondPageName={{name:singlePageData?.title}}
+                secondPageName={{ name: singlePageData?.title }}
               />
             </Col>
             <Col md={12}>

@@ -126,7 +126,7 @@ export default function Product({
       attributeValues.attribute_value == "no"
     ) {
       if (attributeValues?.is_worse_than?.toFixed(1) >= 0.6) {
-        return "red";
+        return "#ce434b";
       } else if (attributeValues?.is_better_than?.toFixed(1) >= 0.6) {
         return "#0066b2";
       } else {
@@ -1690,9 +1690,9 @@ export default function Product({
                                                 product.expert_reviews_rating_phase,
                                             }}
                                           ></div>
-                                          {console.log(
+                                          {/* {console.log(
                                             product?.expert_reviews_websites
-                                          )}
+                                          )} */}
 
                                           {/* for expert review  now I comment this code */}
                                           {product?.expert_reviews_websites &&
@@ -2167,7 +2167,7 @@ export default function Product({
                                                                     attributeValues.attribute_is_worse_than *
                                                                       100 >
                                                                       60
-                                                                  ? "red"
+                                                                  ? "#ce434b"
                                                                   : "#27304e",
                                                               fontSize: "15px",
                                                               textDecoration:
@@ -2183,23 +2183,16 @@ export default function Product({
                                                               textDecorationThickness:
                                                                 "1.5px",
                                                               textDecorationColor:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_better_than *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
-                                                                      100 >
-                                                                      60
-                                                                  ? "red"
-                                                                  : "#27304e",
+                                                                getColorAttr(
+                                                                  attributeValues
+                                                                ),
                                                               textUnderlineOffset:
                                                                 "5px",
                                                             }}
                                                           >
+                                                            {console.log(
+                                                              attributeValues
+                                                            )}
                                                             {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
                                                             {
                                                               <span
@@ -2557,7 +2550,7 @@ export default function Product({
                                                                     attributeValues.attribute_is_worse_than *
                                                                       100 >
                                                                       60
-                                                                  ? "red"
+                                                                  ? "#ce434b"
                                                                   : "#27304e",
                                                               fontSize: "15px",
                                                               textDecoration:
@@ -2573,19 +2566,14 @@ export default function Product({
                                                               textDecorationThickness:
                                                                 "1.5px",
                                                               textDecorationColor:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                // here I change attribute_is_better_than to attribute_is_same_as
-                                                                attributeValues.attribute_is_same_as *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
+                                                                attributeValues.is_better_than *
+                                                                  100 >=
+                                                                70
+                                                                  ? "#437ece"
+                                                                  : attributeValues.is_worse_than *
                                                                       100 >
-                                                                      60
-                                                                  ? "red"
+                                                                    70
+                                                                  ? "#ce434b"
                                                                   : "#27304e",
                                                               textUnderlineOffset:
                                                                 "5px",
@@ -2607,7 +2595,7 @@ export default function Product({
                                                                         attributeValues.attribute_is_worse_than *
                                                                           100 >
                                                                           60
-                                                                      ? "red"
+                                                                      ? "#ce434b"
                                                                       : "#27304e",
                                                                 }}
                                                               >

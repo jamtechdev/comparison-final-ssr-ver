@@ -1208,7 +1208,7 @@ function ProductPage({
           </Container>
         </section>
       )}
-      {console.log(product?.should_buy?.length)}
+      {/* {console.log(product?.should_buy?.length)} */}
 
       <section className="ptb-80 bg-color">
         {product?.should_buy?.length !== 0 && (
@@ -1692,22 +1692,34 @@ function ProductPage({
                           {product && product?.page_phases?.best_prices}
                         </h3>
                         <ul className="best-list-item">
+                          {product.price_websites &&
+                            product?.price_websites?.every(
+                              (data) => data.price === null
+                            ) && (
+                              <div className="not-availabel">
+                                <span className="txt">N/A</span>
+                                <span className="guide">
+                                  ~ {product?.price} {product?.currency}
+                                </span>
+                              </div>
+                            )}
                           {product &&
                             product?.price_websites
-                              .slice(0, showFullPrice ? 8 : 4)
+                              ?.slice(0, showFullPrice ? 8 : 4)
                               .map((item, index) => {
                                 return (
-                                  <li
-                                    key={index}
-                                    className="product_page_best_price"
-                                  >
+                                  <li key={index}>
                                     <a
                                       rel="noopener noreferrer"
                                       target="_blank"
                                       href={`/link?p=${btoa(item.url)}`}
                                     >
                                       <img
-                                        src={item?.logo}
+                                        src={
+                                          item?.logo === null
+                                            ? "/images/No-Image.png"
+                                            : item?.logo
+                                        }
                                         width={0}
                                         height={0}
                                         sizes="100%"
@@ -1719,6 +1731,7 @@ function ProductPage({
                                         rel="noopener noreferrer"
                                         target="_blank"
                                         href={`/link?p=${btoa(item.url)}`}
+                                        className="font__17__inline"
                                       >
                                         {item?.price} {product?.currency}
                                       </a>

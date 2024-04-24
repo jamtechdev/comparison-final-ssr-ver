@@ -340,7 +340,8 @@ export default function Filter({
             // const { [removedParam]: omit, ...OldFilters } = sliderValues;
             // console.log(OldFilters, "OldFilters");
             // setSliderValues(OldFilters);
-            console.log(sliderValues, min, max, removedParam);
+            // console.log(sliderValues, min, max, removedParam);
+
             handelFilterActions(
               "range",
               removedParam,
@@ -348,13 +349,15 @@ export default function Filter({
               false
             );
             const leftThumb = document.getElementById(
-              `thumb thumb--left ${removedParam}`
+              `thumb thumb--left--${removedParam}`
             );
             const rightThumb = document.getElementById(
-              `thumb thumb--right ${removedParam}`
+              `thumb thumb--right--${removedParam}`
             );
+            alert("hello");
+            leftThumb.value = min;
 
-            console.log(min, max, "ssss");
+            console.log(leftThumb.value, min, "neetx");
 
             if (leftThumb) {
               leftThumb.value = min;

@@ -168,6 +168,13 @@ select {
   color: var(--heading-color) !important;
 }
 
+.text-wrapper {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .ptb-80 {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -1548,6 +1555,10 @@ li.color-item.selected {
   display: inline-block;
 }
 
+.rating i {
+  border-bottom: none !important;
+}
+
 .rating__section .rating__content .rating i {
   color: #fec100 !important;
   font-size: 1.2em !important;
@@ -2284,9 +2295,12 @@ div#shortCodeText ul {
   height: 20px;
   object-fit: contain;
 }
-.areapath0{
+.areapath0 {
   /* z-index: 9999 !important; */
 }
-.areapath1{
-pointer-events: none;
+.areapath1 {
+  pointer-events: none;
+}
+span.isBetter {
+  color: #437ece !important;
 }
