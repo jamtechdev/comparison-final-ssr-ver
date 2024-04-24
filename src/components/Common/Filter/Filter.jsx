@@ -354,7 +354,7 @@ export default function Filter({
             const rightThumb = document.getElementById(
               `thumb thumb--right--${removedParam}`
             );
-            alert("hello");
+            // alert("hello");
             leftThumb.value = min;
 
             // console.log(leftThumb.value, min, "neetx");
