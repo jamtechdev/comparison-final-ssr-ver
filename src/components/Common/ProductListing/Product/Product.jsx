@@ -36,7 +36,7 @@ export default function Product({
 }) {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
-  const {isMobile} = useScreenSize()
+  const { isMobile } = useScreenSize();
 
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
@@ -54,7 +54,7 @@ export default function Product({
 
     return incomingProduct;
   };
-  
+
   const product = generateProductsWithAttributes();
   let initialDisplay = 5;
   const [displayedAttributesCount, setDisplayedAttributesCount] = useState({});
@@ -119,7 +119,6 @@ export default function Product({
         : `(${item?.value})`;
     }
   };
-
 
   const getColorAttr = (attributeValues) => {
     if (
@@ -282,10 +281,18 @@ export default function Product({
   // });
   // console.log(splitData);
   // console.log(text_before_listing, "neet");
+  const extractDomainName = (url) => {
+    const domain = url
+      .replace("https://", "")
+      .replace("http://", "")
+      .replace("www.", "")
+      .split(/[/?#]/)[0];
+    return domain;
+  };
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="best-product-listing" >
+      <div className="best-product-listing">
         <div className="flex-box">
           <div className="left_box">
             <span className="ribbon-number">
@@ -366,17 +373,22 @@ export default function Product({
                     {product?.overall_score_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span
-                          className="overall"    
+                          className="overall"
                           style={{ color: "rgb(39 48 78 / 90%)" }}
                         >
                           {/* {console.log(guidePhraseData)} */}
                           {guidePhraseData && guidePhraseData?.overall_score}
                         </span>
-                        <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
-        width: isMobile ? "250px" : "250px"
-      }}>
+                        <div
+                          className="tooltip-display-content"
+                          style={{
+                            left: isMobile ? "50%" : 0,
+                            transform: isMobile
+                              ? "translateX(-40%)"
+                              : "translateX(-10%)",
+                            width: isMobile ? "250px" : "250px",
+                          }}
+                        >
                           {product?.overall_score_descriptions.description && (
                             <p className="mb-2">
                               <b>
@@ -478,11 +490,16 @@ export default function Product({
                         <span>
                           {guidePhraseData && guidePhraseData?.technical_score}
                         </span>
-                        <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
-        width: isMobile ? "250px" : "250px"
-      }}>
+                        <div
+                          className="tooltip-display-content"
+                          style={{
+                            left: isMobile ? "50%" : 0,
+                            transform: isMobile
+                              ? "translateX(-40%)"
+                              : "translateX(-10%)",
+                            width: isMobile ? "250px" : "250px",
+                          }}
+                        >
                           {product?.technical_score_descriptions
                             .description && (
                             <p className="mb-2">
@@ -575,12 +592,17 @@ export default function Product({
                     {product?.users_rating_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span>User’s Rating</span>
-                        
-                        <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
-        width: isMobile ? "250px" : "250px"
-      }}>
+
+                        <div
+                          className="tooltip-display-content"
+                          style={{
+                            left: isMobile ? "50%" : 0,
+                            transform: isMobile
+                              ? "translateX(-40%)"
+                              : "translateX(-10%)",
+                            width: isMobile ? "250px" : "250px",
+                          }}
+                        >
                           {product?.users_rating_descriptions?.description && (
                             <p className="mb-2">
                               <b>
@@ -688,11 +710,16 @@ export default function Product({
                     {product?.popularity_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span>Popularity</span>
-                        <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
-        width: isMobile ? "250px" : "250px"
-      }}>
+                        <div
+                          className="tooltip-display-content"
+                          style={{
+                            left: isMobile ? "50%" : 0,
+                            transform: isMobile
+                              ? "translateX(-40%)"
+                              : "translateX(-10%)",
+                            width: isMobile ? "250px" : "250px",
+                          }}
+                        >
                           {product?.popularity_descriptions.description && (
                             <p className="mb-2">
                               <b>
@@ -787,7 +814,7 @@ export default function Product({
                     <p className="buy-avoid">
                       {guidePhraseData && guidePhraseData?.why_to_buy}
                     </p>
-                  
+
                     <ul>
                       {product &&
                         product?.top_pros
@@ -844,7 +871,7 @@ export default function Product({
                                     data?.hover_phrase !== "" && "tooltip-title"
                                   }`}
                                 >
-                                  <span className="pros-crons-text" >
+                                  <span className="pros-crons-text">
                                     {data?.name} {renderValue(data).trim()}
                                   </span>
                                   <ProsConsToolTip
@@ -915,28 +942,29 @@ export default function Product({
                             >
                               {data?.title}
                             </div>
-{/*                             
+                            {/*                             
                             <div
       className="tooltip-display-content why-tooltip"
       style={{ left: isMobile ? "50%" : "calc(50% - 128px)", transform: isMobile ? "translateX(-60%)" : "none" ,width:"190px"}}
     > */}
-      <div
-      className="tooltip-display-content why-tooltip"
-      style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
-        width: isMobile ? "190px" : "250px"
-      }}
-    >
-                           
-      {/* Tooltip content */}
-  {/* Tooltip content */}
-  {
-    <p className="mb-2">
-      <b>What it is : </b>
-      {data?.hover_phase?.what_is_it}
-    </p>
-  }
+                            <div
+                              className="tooltip-display-content why-tooltip"
+                              style={{
+                                left: isMobile ? "50%" : 0,
+                                transform: isMobile
+                                  ? "translateX(-60%)"
+                                  : "translateX(-10%)",
+                                width: isMobile ? "190px" : "250px",
+                              }}
+                            >
+                              {/* Tooltip content */}
+                              {/* Tooltip content */}
+                              {
+                                <p className="mb-2">
+                                  <b>What it is : </b>
+                                  {data?.hover_phase?.what_is_it}
+                                </p>
+                              }
 
                               <p>
                                 <b>Score components :</b>
@@ -944,8 +972,8 @@ export default function Product({
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {
                                   return (
-                                    <div className="scroe_section" key={index}  >
-                                      <p className="text-end" >
+                                    <div className="scroe_section" key={index}>
+                                      <p className="text-end">
                                         {`${parseFloat(
                                           hoverPhaseData?.percentage
                                         ).toFixed(1)}%`}
@@ -1654,11 +1682,95 @@ export default function Product({
                                         {formatValue(
                                           product.expert_reviews_rating
                                         )}
-                                        <ProsConsToolTip
-                                          hover_phrase={
-                                            product.expert_reviews_rating_phase
-                                          }
-                                        />
+                                        <div className="tooltip-display-content why-tooltip">
+                                          <div
+                                            className="mb-2 prosconsColor"
+                                            dangerouslySetInnerHTML={{
+                                              __html:
+                                                product.expert_reviews_rating_phase,
+                                            }}
+                                          ></div>
+                                          {console.log(
+                                            product?.expert_reviews_websites
+                                          )}
+
+                                          {/* for expert review  now I comment this code */}
+                                          {product?.expert_reviews_websites &&
+                                            product?.expert_reviews_websites?.map(
+                                              (data, index) => {
+                                                return (
+                                                  <div
+                                                    className="user__rating__popup"
+                                                    key={index}
+                                                  >
+                                                    <div className="user__rating__popup__list">
+                                                      <span
+                                                        className="user__rating__popup__rating"
+                                                        style={{
+                                                          background:
+                                                            getColorBasedOnScore(
+                                                              data?.evaluation
+                                                            ),
+                                                        }}
+                                                      >
+                                                        {formatValue(
+                                                          data?.evaluation
+                                                        )}
+                                                      </span>
+                                                      <div className="user__rating__popup__content">
+                                                        {data?.image !==
+                                                          null && (
+                                                          <a
+                                                            href={`/link?p=${btoa(
+                                                              data?.website_name
+                                                            )}`}
+                                                          >
+                                                            <img
+                                                              src={`${data?.image}`}
+                                                            />
+                                                          </a>
+                                                        )}
+
+                                                        <p>
+                                                          {" "}
+                                                          {data?.name !==
+                                                          null ? (
+                                                            <a
+                                                              href={`/link?p=${btoa(
+                                                                data?.website_name
+                                                              )}`}
+                                                              style={{
+                                                                color:
+                                                                  "inherit",
+                                                              }}
+                                                            >
+                                                              {" "}
+                                                              {data?.name}
+                                                            </a>
+                                                          ) : (
+                                                            <a
+                                                              href={`/link?p=${btoa(
+                                                                data?.website_name
+                                                              )}`}
+                                                              style={{
+                                                                color:
+                                                                  "inherit",
+                                                              }}
+                                                            >
+                                                              {" "}
+                                                              {extractDomainName(
+                                                                data?.website_name
+                                                              )}
+                                                            </a>
+                                                          )}
+                                                        </p>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                );
+                                              }
+                                            )}
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
