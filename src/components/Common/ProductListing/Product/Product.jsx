@@ -103,7 +103,9 @@ export default function Product({
   );
   const technicalScoreColor = getColorBasedOnScore(product?.technical_score);
   const userRatingColor = getColorBasedOnScore(product?.reviews);
-  const popularityColor = getColorBasedOnScore(product?.popularity_points);
+  const popularityColor = getColorBasedOnScore(
+    product?.ratio_quality_price_points
+  );
 
   // filter a value which numeric or string
   const renderValue = (item) => {
@@ -687,12 +689,7 @@ export default function Product({
                                         <b>{formatValue(data?.rating)}</b>
                                         <Rating value={data?.rating} />
 
-                                        <small>
-                                          {" "}
-                                          <a href={`/link?p=${btoa(data.url)}`}>
-                                            ({data?.reviews})
-                                          </a>{" "}
-                                        </small>
+                                        <small>({data?.reviews})</small>
                                       </div>
                                     </div>
                                   </Fragment>
@@ -710,15 +707,15 @@ export default function Product({
                       className="count"
                       style={{ background: popularityColor }}
                     >
-                      {product.popularity_points != null
-                        ? product.popularity_points >= 10
-                          ? Math.trunc(product.popularity_points)
-                          : formatValue(product.popularity_points)
+                      {product?.ratio_quality_price_points != null
+                        ? product?.ratio_quality_price_points >= 10
+                          ? Math.trunc(product?.ratio_quality_price_points)
+                          : formatValue(product?.ratio_quality_price_points)
                         : "0.0"}
                     </span>
-                    {product?.popularity_descriptions && (
+                    {product?.ratio_qulitiy_points_descriptions && (
                       <div className="score-detail tooltip-title">
-                        <span>Popularity</span>
+                        <span>Ratio Quality-Price</span>
                         <div
                           className="tooltip-display-content"
                           style={{
@@ -729,23 +726,31 @@ export default function Product({
                             width: isMobile ? "250px" : "250px",
                           }}
                         >
-                          {product?.popularity_descriptions.description && (
+                          {product?.ratio_qulitiy_points_descriptions
+                            .description && (
                             <p className="mb-2">
                               <b>
                                 {guidePhraseData && guidePhraseData?.what_it_is}
                                 :{" "}
                               </b>
-                              {product?.popularity_descriptions?.description}
+                              {
+                                product?.ratio_qulitiy_points_descriptions
+                                  ?.description
+                              }
                             </p>
                           )}
-                          {product?.popularity_descriptions.when_matters && (
+                          {product?.ratio_qulitiy_points_descriptions
+                            .when_matters && (
                             <p className="mb-2">
                               <b>
                                 {guidePhraseData &&
                                   guidePhraseData?.when_it_matters}
                                 :{" "}
                               </b>
-                              {product?.popularity_descriptions?.when_matters}
+                              {
+                                product?.ratio_qulitiy_points_descriptions
+                                  ?.when_matters
+                              }
                             </p>
                           )}
                         </div>

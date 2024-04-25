@@ -898,7 +898,7 @@ const CompareAccordionTab = React.memo(
                             {apiData &&
                               Object?.values(apiData?.general.cons).some(
                                 (category) =>
-                                  category.cons.length > 0 ? (
+                                  category?.cons?.length > 0 ? (
                                     <Nav.Item>
                                       <Nav.Link
                                         eventKey="general"
