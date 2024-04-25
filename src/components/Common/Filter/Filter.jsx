@@ -349,15 +349,15 @@ export default function Filter({
               false
             );
             const leftThumb = document.getElementById(
-              `thumb thumb--left--${removedParam}`
+              `thumb thumb--left ${removedParam}`
             );
             const rightThumb = document.getElementById(
-              `thumb thumb--right--${removedParam}`
+              `thumb thumb--right ${removedParam}`
             );
             // alert("hello");
-            leftThumb.value = min;
+            // leftThumb.value = min;
 
-            // console.log(leftThumb.value, min, "neetx");
+            console.log(leftThumb.value, min, "neetx");
 
             if (leftThumb) {
               leftThumb.value = min;

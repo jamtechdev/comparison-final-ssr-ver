@@ -69,8 +69,8 @@ const MultiRangeSliderAttributes = ({
           minValRef.current = Number(value.toFixed(1));
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
-        id={`thumb thumb--left ${classForSlider}`}
-        className={`thumb thumb--left ${classForSlider}`}
+        id={`thumb thumb--left--${classForSlider}`}
+        className={`thumb thumb--left--${classForSlider}`}
         style={{ zIndex: minVal > max - step && "5" }}
       />
       <input
