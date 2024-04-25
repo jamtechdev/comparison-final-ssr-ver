@@ -371,7 +371,6 @@ const CompareAccordionTab = React.memo(
                                           <small>
                                             {item?.difference_value === "yes" ||
                                             item?.difference_value === "no" ||
-                                            item?.difference_value === 0 ||
                                             item?.difference_value === null ? (
                                               ""
                                             ) : (
@@ -459,7 +458,6 @@ const CompareAccordionTab = React.memo(
                                       <small>
                                         {item?.difference_value === "yes" ||
                                         item?.difference_value === "no" ||
-                                        item?.difference_value === 0 ||
                                         item?.difference_value === null ? (
                                           ""
                                         ) : (
@@ -543,7 +541,6 @@ const CompareAccordionTab = React.memo(
                                         <small>
                                           {item?.difference_value === "yes" ||
                                           item?.difference_value === "no" ||
-                                          item?.difference_value === 0 ||
                                           item?.difference_value === null ? (
                                             ""
                                           ) : (
@@ -716,7 +713,6 @@ const CompareAccordionTab = React.memo(
                                       <small>
                                         {item?.difference_value === "yes" ||
                                         item?.difference_value === "no" ||
-                                        item?.difference_value === 0 ||
                                         item?.difference_value === null ? (
                                           ""
                                         ) : (
@@ -756,11 +752,11 @@ const CompareAccordionTab = React.memo(
                                                     /\d+\.\d+%/,
                                                     ""
                                                   )
-                                                : item?.phrase.toFixed(2)
+                                                : item?.phrase
                                               : typeof item?.difference_value ==
                                                 "number"
                                               ? item?.difference
-                                              : item?.phrase.toFixed(2)}
+                                              : item?.phrase}
 
                                             {item?.hover_phase && (
                                               <>
@@ -798,7 +794,6 @@ const CompareAccordionTab = React.memo(
                                           <small>
                                             {item?.difference_value === "yes" ||
                                             item?.difference_value === "no" ||
-                                            item?.difference_value === 0 ||
                                             item?.difference_value === null ? (
                                               ""
                                             ) : (
@@ -842,11 +837,11 @@ const CompareAccordionTab = React.memo(
                                                     /\d+\.?\d*%/,
                                                     ""
                                                   )
-                                                : item?.phrase.toFixed(2)
+                                                : item?.phrase
                                               : typeof item?.difference_value ==
                                                 "number"
                                               ? item?.difference
-                                              : item?.phrase.toFixed(2)}
+                                              : item?.phrase}
 
                                             {item?.hover_phase && (
                                               <>
