@@ -325,7 +325,7 @@ const CompareAccordionTab = React.memo(
                                               ? typeof item?.difference_value ==
                                                 "number"
                                                 ? item?.difference.replace(
-                                                    /\d+\.\d+%/,
+                                                    /\d+\.?\d*%/,
                                                     ""
                                                   )
                                                 : item?.phrase.toFixed(2)
@@ -371,7 +371,6 @@ const CompareAccordionTab = React.memo(
                                           <small>
                                             {item?.difference_value === "yes" ||
                                             item?.difference_value === "no" ||
-                                            item?.difference_value === 0 ||
                                             item?.difference_value === null ? (
                                               ""
                                             ) : (
@@ -413,7 +412,7 @@ const CompareAccordionTab = React.memo(
                                           ? typeof item?.difference_value ==
                                             "number"
                                             ? item?.difference.replace(
-                                                /\d+\.\d+%/,
+                                                /\d+\.?\d*%/,
                                                 ""
                                               )
                                             : item?.phrase.toFixed(2)
@@ -459,7 +458,6 @@ const CompareAccordionTab = React.memo(
                                       <small>
                                         {item?.difference_value === "yes" ||
                                         item?.difference_value === "no" ||
-                                        item?.difference_value === 0 ||
                                         item?.difference_value === null ? (
                                           ""
                                         ) : (
@@ -839,7 +837,7 @@ const CompareAccordionTab = React.memo(
                                               ? typeof item?.difference_value ==
                                                 "number"
                                                 ? item?.difference.replace(
-                                                    /\d+\.\d+%/,
+                                                    /\d+\.?\d*%/,
                                                     ""
                                                   )
                                                 : item?.phrase.toFixed(2)
@@ -883,7 +881,6 @@ const CompareAccordionTab = React.memo(
                                           <small>
                                             {item?.difference_value === "yes" ||
                                             item?.difference_value === "no" ||
-                                            item?.difference_value === 0 ||
                                             item?.difference_value === null ? (
                                               ""
                                             ) : (
