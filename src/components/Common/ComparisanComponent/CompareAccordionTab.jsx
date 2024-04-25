@@ -541,7 +541,6 @@ const CompareAccordionTab = React.memo(
                                         <small>
                                           {item?.difference_value === "yes" ||
                                           item?.difference_value === "no" ||
-                                          item?.difference_value === 0 ||
                                           item?.difference_value === null ? (
                                             ""
                                           ) : (
@@ -714,7 +713,6 @@ const CompareAccordionTab = React.memo(
                                       <small>
                                         {item?.difference_value === "yes" ||
                                         item?.difference_value === "no" ||
-                                        item?.difference_value === 0 ||
                                         item?.difference_value === null ? (
                                           ""
                                         ) : (
@@ -796,7 +794,6 @@ const CompareAccordionTab = React.memo(
                                           <small>
                                             {item?.difference_value === "yes" ||
                                             item?.difference_value === "no" ||
-                                            item?.difference_value === 0 ||
                                             item?.difference_value === null ? (
                                               ""
                                             ) : (
