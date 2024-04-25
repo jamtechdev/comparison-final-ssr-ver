@@ -1406,7 +1406,7 @@
   body .product-header .hero-card-content .card-heading {
     padding: 0 10px !important;
   }
-  .catchy_titles_section.row span.catchy_titles_section_title {
+  .catchy_titles_section.row span.catchy_titles_section_title, .catchy_titles_section.row span.catchy_titles_section_product_name span {
     line-height: 20px !important;
   }
   .sidebar_filter {
@@ -1473,6 +1473,10 @@
   .add-product-modal .close_icon {
     position: relative;
     z-index: 1000;
+  }
+
+  .filter-accordion .accordion-item button{
+    line-height: 24px !important;
   }
 }
 
