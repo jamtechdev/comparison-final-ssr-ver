@@ -1,3 +1,4 @@
+import formatValue from "@/_helpers/formatValue";
 import { useRef, useState } from "react";
 
 const Questiontool = ({ attributes }) => {
@@ -55,7 +56,7 @@ const Questiontool = ({ attributes }) => {
               {`${" "} ${attributes?.when_matters}`}
             </p>
           )}
-          
+
           <b>Score components: </b>
           {attributes.score_components &&
             attributes.score_components?.map((data, index) => {
@@ -83,7 +84,7 @@ const Questiontool = ({ attributes }) => {
                     }}
                   >
                     {formattedNumber != "NaN"
-                      ? formattedNumber
+                      ? formatValue(formattedNumber)
                       : data?.attribute_evaluation}
                   </span>
                   <p style={{ textTransform: "none" }}>

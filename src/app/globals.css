@@ -1194,16 +1194,17 @@ button.searchBarInner.btn.btn-primary {
 }
 .catchy_titles_section.row span.catchy_titles_section_product_name span {
   text-align: start;
-  color: var(--secondary-color);
+  color: #27304e;
+  opacity: 90%;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 180%;
   display: block;
 }
-.catchy_titles_section.row span.catchy_titles_section_product_name span:hover {
+/* .catchy_titles_section.row span.catchy_titles_section_product_name span:hover {
   color: #3363a4;
-}
+} */
 .catchy_titles_section.row span.catchy_titles_section_product_name a:hover {
   color: #3363a4;
 }

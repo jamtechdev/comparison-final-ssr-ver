@@ -16,9 +16,8 @@ const MultiRangeSlider = ({
   const maxValRef = useRef(max);
   const range = useRef(null);
 
-  const step = 0.01; // Adjust the step value for better precision
+  const step = 1; // Step value set to 1 for whole number intervals
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getPercent = useCallback((value) =>
     Math.round(((value - min) / (max - min)) * 100)
   );
@@ -35,6 +34,7 @@ const MultiRangeSlider = ({
       }
     }
   }, [rangeVal]);
+
   useEffect(() => {
     const minPercent = getPercent(minVal);
     const maxPercent = getPercent(maxValRef.current);
@@ -49,14 +49,12 @@ const MultiRangeSlider = ({
     const minPercent = getPercent(minValRef.current);
     const maxPercent = getPercent(maxVal);
     if (range.current) {
-      //  range.current.style.left = `${maxPercent}%`;
       range.current.style.width = `${maxPercent - minPercent}%`;
     }
   }, [maxVal, getPercent]);
 
   return (
     <div className="multi-range-slider-container">
-      {console.log(minVal)}
       <input
         type="range"
         min={min}
@@ -65,8 +63,8 @@ const MultiRangeSlider = ({
         step={step}
         onChange={(event) => {
           const value = Math.min(Number(event.target.value), maxVal);
-          setMinVal(Number(value.toFixed(1)));
-          minValRef.current = Number(value.toFixed(1));
+          setMinVal(Math.round(value)); // Round to nearest integer
+          minValRef.current = Math.round(value);
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
         id={`thumb thumb--left--${classForSlider}`}
@@ -81,8 +79,8 @@ const MultiRangeSlider = ({
         step={step}
         onChange={(event) => {
           const value = Math.max(Number(event.target.value), minVal);
-          setMaxVal(Number(value.toFixed(1)));
-          maxValRef.current = Number(value.toFixed(1));
+          setMaxVal(Math.round(value)); // Round to nearest integer
+          maxValRef.current = Math.round(value);
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
         id={`thumb thumb--right--${classForSlider}`}
@@ -95,12 +93,10 @@ const MultiRangeSlider = ({
       </div>
       <div className="values">
         <label>
-          {Number.isInteger(minVal) ? minVal?.toFixed(0) : minVal?.toFixed(1)}{" "}
-          {unit}
+          {minVal.toFixed(0)} {unit}
         </label>
         <label>
-          {Number.isInteger(maxVal) ? maxVal?.toFixed(0) : maxVal?.toFixed(1)}{" "}
-          {unit}
+          {maxVal.toFixed(0)} {unit}
         </label>
       </div>
     </div>

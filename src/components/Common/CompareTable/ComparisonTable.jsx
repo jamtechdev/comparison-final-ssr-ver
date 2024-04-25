@@ -426,7 +426,9 @@ export default function ComparisonTable({
                         <div className="not-availabel">
                           {/* <span className="txt">NOT AVAILABLE</span> */}
                           <i>N/A</i>
-                          <span className="price font__16__inline">~ {product?.price} €</span>
+                          <span className="price font__16__inline">
+                            ~ {product?.price} €
+                          </span>
                         </div>
                       )}
                     {product.price_websites &&
@@ -576,9 +578,12 @@ export default function ComparisonTable({
                 return (
                   <td key={technicalIndex}>
                     {
-                      addStarOnTable(defaultNo, "technical_score", values, product?.technical_score_star_phrase)[
-                        technicalIndex
-                      ]
+                      addStarOnTable(
+                        defaultNo,
+                        "technical_score",
+                        values,
+                        product?.technical_score_star_phrase
+                      )[technicalIndex]
                     }
                   </td>
                 );
@@ -613,9 +618,12 @@ export default function ComparisonTable({
                 return (
                   <td key={popularityIndex}>
                     {
-                      addStarOnTable(defaultNo, "popularity", values ,  product?.popularity_points_star_phase)[
-                        popularityIndex
-                      ]
+                      addStarOnTable(
+                        defaultNo,
+                        "popularity",
+                        values,
+                        product?.popularity_points_star_phase
+                      )[popularityIndex]
                     }
                   </td>
                 );
@@ -658,7 +666,14 @@ export default function ComparisonTable({
               const values = finalProducts.map((p) => p.reviews);
               return (
                 <td key={userIndex}>
-                  {addStarOnTable(defaultNo, "user_rating", values,product?.reviews_star_phase)[userIndex]}
+                  {
+                    addStarOnTable(
+                      defaultNo,
+                      "user_rating",
+                      values,
+                      product?.reviews_star_phase
+                    )[userIndex]
+                  }
                 </td>
               );
             })}
@@ -708,7 +723,14 @@ export default function ComparisonTable({
               );
               return (
                 <td key={ratioIndex}>
-                  {addStarOnTable(defaultNo, "ratio", values)[ratioIndex]}
+                  {
+                    addStarOnTable(
+                      defaultNo,
+                      "ratio",
+                      values,
+                      product?.ratio_quality_price_points_star_phase
+                    )[ratioIndex]
+                  }
                 </td>
               );
             })}
@@ -761,6 +783,53 @@ export default function ComparisonTable({
                 })}
             </tr>
           )}
+            {products[0]?.area_evaluation?.map((data, index) => {
+              const maxValues = finalProducts.map(
+                (product) => product?.area_evaluation?.[index]?.value ?? null
+              );
+              const max = Math.max(
+                ...maxValues.filter((value) => value !== null)
+              );
+
+              // Count occurrences of each value
+              const valueCounts = finalProducts.reduce((acc, product) => {
+                const value = product?.area_evaluation?.[index]?.value;
+                if (value !== null) {
+                  acc[value] = (acc[value] || 0) + 1;
+                }
+                return acc;
+              }, {});
+
+              return (
+                <tr className="" key={index}>
+                  {" "}
+                  {/* Ensure to set a unique key for each <tr> */}
+                  <th className="sub-inner-padding">
+                    <div className="tooltip-title">{data?.title}</div>
+                  </th>
+                  {finalProducts.slice(0, defaultNo).map((product, idx) => {
+                    const value =
+                      product?.area_evaluation?.[index]?.value ?? null;
+                    return (
+                      <td key={idx}>
+                        {formatValue(value)}
+                        {value === max && valueCounts[value] <= 1 && (
+                          <span key={value} className="tooltip-title-2">
+                            <img
+                              style={{ float: "right", paddingRight: "5px" }}
+                              src="/icons/star.png"
+                              alt="star"
+                            />
+                            <ProsConsToolTip hover_phrase={data?.star_text} />
+                          </span>
+                        )}
+                        {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           {removeLastObjectFromCategory
             ?.slice(0, fullTable || 2)
             .map((category, categoryIndex) => {

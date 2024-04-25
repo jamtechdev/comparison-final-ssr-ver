@@ -148,9 +148,7 @@ const CompareTable = React.memo(
               ? " "
               : stringArray[0];
           // console.log(targetString, "neet");
-          numericValues = stringArray.filter(
-            (value) => value === targetString
-          );
+          numericValues = stringArray.filter((value) => value === targetString);
           // numericValues = stringArray.filter((value, index) => index === 0);
 
           // console.log(numericValues, arrayOfObjects[0]?.attribute, "neet");
