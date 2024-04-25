@@ -408,19 +408,18 @@ const CompareAccordionTab = React.memo(
                                               : "dotted",
                                         }}
                                       >
-                                       {extractedUrls.length > 2
-                                              ? typeof item?.difference_value ==
-                                                "number"
-                                                ? item?.difference.replace(
-                                                    /\d+\.?\d*%/,
-                                                    ""
-                                                  )
-                                                : item?.phrase.toFixed(2)
-                                              : typeof item?.difference_value ==
-                                                "number"
-                                              ? item?.difference
-                                              : item?.phrase.toFixed(2)}
-
+                                        {extractedUrls.length > 2
+                                          ? typeof item?.difference_value ==
+                                            "number"
+                                            ? item?.difference.replace(
+                                                /\d+\.?\d*%/,
+                                                ""
+                                              )
+                                            : item?.phrase.toFixed(2)
+                                          : typeof item?.difference_value ==
+                                            "number"
+                                          ? item?.difference
+                                          : item?.phrase.toFixed(2)}
 
                                         {item?.hover_phase && (
                                           <>
