@@ -2214,9 +2214,9 @@ export default function Product({
                                                                 "5px",
                                                             }}
                                                           >
-                                                            {console.log(
+                                                            {/* {console.log(
                                                               attributeValues
-                                                            )}
+                                                            )} */}
                                                             {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
                                                             {
                                                               <span

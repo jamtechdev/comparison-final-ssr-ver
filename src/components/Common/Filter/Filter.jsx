@@ -46,7 +46,7 @@ export default function Filter({
   const { isMobile } = useScreenSize();
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    // console.log(filterName, key, value, "neet");
+    console.log(filterName, key, value, "neet");
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -114,7 +114,20 @@ export default function Filter({
       case "range":
         if (!isChecked) {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
-          // console.log("testing")
+          const leftThumb = document.getElementById(`thumb thumb--left ${key}`);
+          const rightThumb = document.getElementById(
+            `thumb thumb--right ${key}`
+          );
+          // alert("hello");
+          console.log(leftThumb, "left");
+          if (leftThumb) {
+            leftThumb.value = 50;
+            // console.log(leftThumb,"neetx");
+
+            // // If you want the slider's position to update immediately,
+            // // you may need to trigger a change event manually
+            leftThumb.dispatchEvent(new Event("change", { bubbles: true }));
+          }
         } else {
           updatedParams[key] = value;
         }
@@ -348,24 +361,28 @@ export default function Filter({
               { min: min, max: max },
               false
             );
-            const leftThumb = document.getElementById(
-              `thumb thumb--left ${removedParam}`
-            );
-            const rightThumb = document.getElementById(
-              `thumb thumb--right ${removedParam}`
-            );
-            // alert("hello");
-            // leftThumb.value = min;
+            // const leftThumb = document.getElementById(
+            //   `thumb thumb--left ${removedParam}`
+            // );
+            // const rightThumb = document.getElementById(
+            //   `thumb thumb--right ${removedParam}`
+            // );
+            // // alert("hello");
+            // // leftThumb.value = min;
 
-            console.log(leftThumb.value, min, "neetx");
+            // if (leftThumb) {
 
-            if (leftThumb) {
-              leftThumb.value = min;
-            }
+            //   leftThumb.value = min;
+            //   // console.log(leftThumb,"neetx");
 
-            if (rightThumb) {
-              rightThumb.value = max;
-            }
+            //   // // If you want the slider's position to update immediately,
+            //   // // you may need to trigger a change event manually
+            //   leftThumb.dispatchEvent(new Event("change", { bubbles: true }));
+            // }
+
+            // if (rightThumb) {
+            //   rightThumb.value = max;
+            // }
           }
         }
 
