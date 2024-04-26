@@ -100,7 +100,7 @@ const useChart = () => {
             // console.log(
             //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
             // );
-            console.log(shortCodesMatched[indx].pattern);
+            // console.log(shortCodesMatched[indx].pattern);
             if (numberOfChartAppends == 1) {
               if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
                 root.render(

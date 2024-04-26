@@ -6,7 +6,13 @@ import useChart from "@/hooks/useChart";
 import axios from "axios";
 import useComparisonChart from "@/hooks/useComparisonChart";
 
-function CompareDropDown({categorySlug, attributeDropDown, product, slug, pageType }) {
+function CompareDropDown({
+  categorySlug,
+  attributeDropDown,
+  product,
+  slug,
+  pageType,
+}) {
   // console.log(product);
 
   const [selectedItem, setSelectedItem] = useState(
@@ -68,7 +74,7 @@ function CompareDropDown({categorySlug, attributeDropDown, product, slug, pageTy
     setSelectedAttribute(selectedAttribute);
   };
   // testing
-// console.log(chart)
+  // console.log(chart)
   useComparisonChart(chart, pageType, slug);
   return (
     <>
@@ -116,21 +122,24 @@ function CompareDropDown({categorySlug, attributeDropDown, product, slug, pageTy
                   </Form.Select>
                 )}
               </div>
-              <p className="text-end para_content_text mt-3">
-                {selectedAttribute && (
-                  <span style={{ fontWeight: 600, fontSize: 17 }}>
-                    {product && product?.page_phases?.what_it_is} :
-                  </span>
-                )}
-                {""} {selectedAttribute.description}
-                <br />
-                {selectedAttribute && (
-                  <span style={{ fontWeight: 600, fontSize: 17 }}>
-                    {product && product?.page_phases?.when_it_matters} :
-                  </span>
-                )}
-                {""} {selectedAttribute.when_matters}
-              </p>
+              {/* {console.log(selectedAttribute)} */}
+              {selectedAttribute?.name !== "Price" && (
+                <p className="text-end para_content_text mt-3">
+                  {selectedAttribute && (
+                    <span style={{ fontWeight: 600, fontSize: 17 }}>
+                      {product && product?.page_phases?.what_it_is} :
+                    </span>
+                  )}
+                  {""} {selectedAttribute.description}
+                  <br />
+                  {selectedAttribute && (
+                    <span style={{ fontWeight: 600, fontSize: 17 }}>
+                      {product && product?.page_phases?.when_it_matters} :
+                    </span>
+                  )}
+                  {""} {selectedAttribute.when_matters}
+                </p>
+              )}
             </Col>
             <Col md={8} lg={8}>
               <span className="addClassData"></span>
