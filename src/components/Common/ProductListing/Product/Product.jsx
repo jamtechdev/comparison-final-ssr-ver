@@ -758,6 +758,44 @@ export default function Product({
                               }
                             </p>
                           )}
+                          {product?.ratio_qulitiy_points_descriptions
+                            .score_components &&
+                            product?.ratio_qulitiy_points_descriptions?.score_components?.map(
+                              (data, index) => {
+                                return (
+                                  <React.Fragment key={index}>
+                                    <div className="scroe_section" key={index}>
+                                      <p className="text-end">
+                                        {`${parseFloat(
+                                          data?.importance
+                                        ).toFixed(1)}%`}
+                                      </p>
+                                      <div
+                                        className="score-count"
+                                        style={{
+                                          background:
+                                            data?.attribute_evaluation >= 7.5
+                                              ? "#093673"
+                                              : data?.attribute_evaluation >=
+                                                  5 &&
+                                                data?.attribute_evaluation < 7.5
+                                              ? "#437ECE"
+                                              : "#85B2F1",
+                                        }}
+                                      >
+                                        {formatValue(
+                                          data?.attribute_evaluation
+                                        )}
+                                        {/* {`${parseFloat(
+                                                        data?.attribute_evaluation
+                                                      ).toFixed(1)}`} */}
+                                      </div>
+                                      <p>{data?.attribute_category}</p>
+                                    </div>
+                                  </React.Fragment>
+                                );
+                              }
+                            )}
                         </div>
                       </div>
                     )}
@@ -2360,7 +2398,6 @@ export default function Product({
                                               : "#85B2F1",
                                         }}
                                       >
-                                        
                                         {formatValue(
                                           product.attributes_new[attribute][0]
                                             ?.attribute_evaluation
