@@ -2360,6 +2360,7 @@ export default function Product({
                                               : "#85B2F1",
                                         }}
                                       >
+                                        
                                         {formatValue(
                                           product.attributes_new[attribute][0]
                                             ?.attribute_evaluation

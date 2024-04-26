@@ -83,9 +83,11 @@ const Questiontool = ({ attributes }) => {
                           : "#85B2F1",
                     }}
                   >
+                   {/* { console.log(data?.attribute_evaluation)} */}
                     {formattedNumber != "NaN"
-                      ? formatValue(formattedNumber)
+                      ? formattedNumber
                       : data?.attribute_evaluation}
+                      
                   </span>
                   <p style={{ textTransform: "none" }}>
                     {" "}
