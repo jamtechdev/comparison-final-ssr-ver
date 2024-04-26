@@ -181,7 +181,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
                         />
 
                         <div className="footer_content">
-                          <span>{item?.name || ""}</span>
+                          <span className="text-wrapper">{item?.name || ""}</span>
                           {/* <p dangerouslySetInnerHTML={{ __html: item?.text_part}}></p> */}
                           <p>{item?.category || ""}</p>
                         </div>

@@ -35,7 +35,7 @@ function SinglePage({ singlePageData }) {
           <Row>
             <Col xl={9} lg={9} md={12}>
               <div
-                className="contentPara"
+                className="content-para"
                 dangerouslySetInnerHTML={{
                   __html: singlePageData?.description,
                 }}

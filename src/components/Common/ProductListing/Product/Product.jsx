@@ -689,7 +689,12 @@ export default function Product({
                                         <b>{formatValue(data?.rating)}</b>
                                         <Rating value={data?.rating} />
 
-                                        <small>({data?.reviews})</small>
+                                        <small>
+                                          {" "}
+                                          <a href={`/link?p=${btoa(data.url)}`}>
+                                            ({data?.reviews})
+                                          </a>{" "}
+                                        </small>
                                       </div>
                                     </div>
                                   </Fragment>

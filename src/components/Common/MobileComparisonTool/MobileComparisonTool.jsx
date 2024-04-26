@@ -199,24 +199,24 @@ export default function MobileComparisonTool({
                 </SwiperSlide>
               );
             })}
-          {comparisonProductData && comparisonProductData?.length > 2 && (
-            <>
-              {currentIndex === 0 ? (
-                <span
-                  className="swiper-next"
-                  onClick={handleNext}
-                  style={{ marginLeft: "88vw" }}
-                >
-                  <i className="ri-arrow-right-s-line"></i>
-                </span>
-              ) : (
-                <span className="swiper-prev" onClick={handlePrevious}>
-                  <i className="ri-arrow-left-s-line"></i>
-                </span>
-              )}
-            </>
-          )}
         </Swiper>
+        {comparisonProductData && comparisonProductData?.length > 2 && (
+          <>
+            {currentIndex === 0 ? (
+              <span
+                className="swiper-next"
+                onClick={handleNext}
+                style={{ marginLeft: "88vw" }}
+              >
+                <i className="ri-arrow-right-s-line"></i>
+              </span>
+            ) : (
+              <span className="swiper-prev" onClick={handlePrevious}>
+                <i className="ri-arrow-left-s-line"></i>
+              </span>
+            )}
+          </>
+        )}
       </div>
       <Row>
         <Col md={12} className="text-center mb-3">

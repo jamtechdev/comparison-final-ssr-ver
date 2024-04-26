@@ -321,6 +321,7 @@ select {
   display: block;
   width: fit-content;
   margin: auto;
+  font-size: 16px;
 }
 
 .graph-tab-content {
@@ -1180,7 +1181,7 @@ button.searchBarInner.btn.btn-primary {
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 180%;
+  line-height: 24px;
 }
 
 .catchy_titles_section.row span.catchy_titles_section_product_name a {
@@ -1189,7 +1190,7 @@ button.searchBarInner.btn.btn-primary {
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 180%;
+  line-height: 24px;
   display: block;
 }
 .catchy_titles_section.row span.catchy_titles_section_product_name span {

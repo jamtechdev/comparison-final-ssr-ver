@@ -304,7 +304,7 @@ const CompareTable = React.memo(
                       <a
                         href={`/${product?.category_url}/${product?.permalink}`}
                       ></a>
-                      {product?.name}
+                      <small className="product-name-small">{product?.name}</small>
                       <img
                         className="compare_image"
                         src={
