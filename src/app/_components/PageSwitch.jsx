@@ -22,7 +22,7 @@ export default async function PageSwitch({
       // console.log(pageData[1]?.data,"neets");
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
       const productTable = await getProductForTable(slug);
-      console.log(categorySlug)
+      // console.log(categorySlug)
       PageToRender = (
         <GuidePage
           slug={slug}
@@ -72,11 +72,12 @@ export default async function PageSwitch({
       break;
     case "Comparison":
       const compareData = pageData[0]?.data;
-      console.log(compareData)
+
+      console.log(compareData?.category_url)
       
 
       const graphComparisonProsCons = await getGraphComparisonProsCons(
-        pageData
+        pageData,categorySlug
       );
 
       const compareDataCatAttribute = await getProductCategroyAttributes(
@@ -183,10 +184,10 @@ async function getCompareProductByCatID(category_id, slug) {
   return response.json();
 }
 
-async function getGraphComparisonProsCons(data) {
+async function getGraphComparisonProsCons(data,categorySlug) {
   if (data.length === 2) {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/product/average/${categorySlug}?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}`,
       {
         next: { revalidate: 10 },
         cache: "no-cache",
@@ -202,7 +203,7 @@ async function getGraphComparisonProsCons(data) {
     return response.json();
   } else {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/product/average?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}&permalink3=${data[2]?.data?.permalink}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/product/average/${categorySlug}?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}&permalink3=${data[2]?.data?.permalink}`,
       {
         next: { revalidate: 10 },
         cache: "no-cache",
