@@ -17,10 +17,12 @@ export default async function PageSwitch({
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
+      console.log(guide)
       // console.log(pageData[1],"neetx")
       // console.log(pageData[1]?.data,"neets");
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
       const productTable = await getProductForTable(slug);
+      console.log(categorySlug)
       PageToRender = (
         <GuidePage
           slug={slug}
@@ -70,6 +72,8 @@ export default async function PageSwitch({
       break;
     case "Comparison":
       const compareData = pageData[0]?.data;
+      console.log(compareData)
+      
 
       const graphComparisonProsCons = await getGraphComparisonProsCons(
         pageData

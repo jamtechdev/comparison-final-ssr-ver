@@ -27,13 +27,15 @@ const WhyAccordionTab = React.memo(
     const { isMobile } = useScreenSize();
     const [apiData, setApiData] = useState(null);
     // console.log(apiData);
+    // console.log(categorySlug)
 
     useEffect(() => {
       const headers = {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
       };
 
-      const secondApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?permalink2=${slug}&permalink1=average`;
+      const secondApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/generate-chart/${categorySlug}?permalink2=${slug}&permalink1=average`;
+
       fetch(secondApiUrl, {
         method: "GET",
         headers: headers,

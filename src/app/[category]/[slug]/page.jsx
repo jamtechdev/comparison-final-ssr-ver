@@ -7,12 +7,13 @@ export default async function Page({
 }) {
   try {
     const categoryslugType = await getSlugType(category);
+    // console.log(categoryslugType)
 
     if (categoryslugType.error) {
       return <NotFound />;
     }
     const slugType = await getSlugType(slug);
-
+    // console.log(slugType);
     // if (slugType.error === "Permalink not found") {
     //   return <NotFound />;
     // }
@@ -21,8 +22,10 @@ export default async function Page({
       const pageData = await fetchDataBasedOnPageType(
         slug,
         "Comparison",
+        category,
         searchParams
       );
+      // console.log(pageData);
       return (
         <PageSwitch
           PageType="Comparison"
@@ -37,6 +40,7 @@ export default async function Page({
       const pageData = await fetchDataBasedOnPageType(
         slug,
         slugType.type,
+        category,
         searchParams
       );
       if (pageData) {
@@ -144,6 +148,7 @@ export async function generateMetadata({ params: { slug, category } }) {
   }
 }
 async function getSlugType(slug) {
+  // console.log(slug)
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
     {
@@ -161,14 +166,21 @@ async function getSlugType(slug) {
   return response.json();
 }
 
-async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
-  // console.log("Abhay", JSON.stringify(searchParams));
+async function fetchDataBasedOnPageType(
+  slug,
+  pageType,
+  category,
+  searchParams
+) {
+  // console.log("Abhay", category);
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
       let productApiUrl = `${
         process.env.NEXT_PUBLIC_API_URL
-      }/guide/products/${slug}?query=${JSON.stringify(searchParams)}`;
+      }/guide/products/${category}/${slug}?query=${JSON.stringify(
+        searchParams
+      )}`;
       // console.log(productApiUrl);
 
       if (searchParams?.page) {
@@ -176,22 +188,30 @@ async function fetchDataBasedOnPageType(slug, pageType, searchParams) {
       }
 
       apiUrls = [
-        `${process.env.NEXT_PUBLIC_API_URL}/guide/${slug}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/guide/${category}/${slug}`,
         productApiUrl,
       ];
+      // console.log(apiUrls)
 
       break;
     case "Blog":
-      apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug}`];
+      apiUrls = [
+        `${process.env.NEXT_PUBLIC_API_URL}/blogs/${category}/${slug}`,
+      ];
       break;
     case "Product":
-      apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/product/${slug}`];
+      apiUrls = [
+        `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${slug}`,
+      ];
       break;
     case "Comparison":
       const permalinks = slug.split("-vs-");
+      console.log(permalinks);
       apiUrls = permalinks.map(
-        (permalink) => `${process.env.NEXT_PUBLIC_API_URL}/product/${permalink}`
+        (permalink) =>
+          `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${permalink}`
       );
+
       break;
     default:
       return null;

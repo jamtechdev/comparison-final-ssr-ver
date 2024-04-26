@@ -21,7 +21,7 @@ import { LoaderIcon } from "react-hot-toast";
 import Loader from "@/app/_components/Loader";
 import Radar from "@/_chart/Radar";
 const CompareAccordionTab = React.memo(
-  ({ sendProductProps, comparePhaseData }) => {
+  ({ sendProductProps, comparePhaseData ,categorySlug }) => {
     const [activatab, setActiveTab] = useState("tab-1");
     const [apiData, setApiData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -71,7 +71,7 @@ const CompareAccordionTab = React.memo(
 
       const apiUrl = `${
         process.env.NEXT_PUBLIC_API_URL
-      }/product/average?${apiUrlParams.join("&")}`;
+      }/product/average/${categorySlug}?${apiUrlParams.join("&")}`;
       // Now you can use apiUrl to make your API call or perform any other actions
       const headers = {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
@@ -91,7 +91,7 @@ const CompareAccordionTab = React.memo(
 
       const secondApiUrl = `${
         process.env.NEXT_PUBLIC_API_URL
-      }/generate-chart?${apiUrlParams.join("&")}`;
+      }/generate-chart/${categorySlug}?${apiUrlParams.join("&")}`;
       fetch(secondApiUrl, {
         method: "GET",
         headers: headers,

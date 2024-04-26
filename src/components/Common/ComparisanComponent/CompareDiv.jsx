@@ -349,6 +349,7 @@ function CompareDiv({
           <CompareAccordionTab
             comparePhaseData={bestAlternative?.page_phases}
             sendProductProps={comparisonProductData}
+            categorySlug={categorySlug}
             product={graphComparisonProsCons}
             pageType={"comparison"}
           />
@@ -549,6 +550,7 @@ function CompareDiv({
         </Container>
       </section>
       <CompareDropDown
+        categorySlug={categorySlug}
         product={bestAlternative && bestAlternative}
         slug={slug}
         attributeDropDown={[...categroyAttributes].reverse()}

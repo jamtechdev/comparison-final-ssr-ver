@@ -6,7 +6,7 @@ import useChart from "@/hooks/useChart";
 import axios from "axios";
 import useComparisonChart from "@/hooks/useComparisonChart";
 
-function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
+function CompareDropDown({categorySlug, attributeDropDown, product, slug, pageType }) {
   // console.log(product);
 
   const [selectedItem, setSelectedItem] = useState(
@@ -33,7 +33,7 @@ function CompareDropDown({ attributeDropDown, product, slug, pageType }) {
       };
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/generate-chart?attribute=${selectedAttribute?.name}&slug=${slug}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/generate-chart/${categorySlug}/?attribute=${selectedAttribute?.name}&slug=${slug}`,
           config
         )
         .then((res) => {

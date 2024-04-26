@@ -1171,11 +1171,16 @@ function ProductPage({
               </h2>
             </Col>
           </Row>
-          <WhyAccordionTab product={product} slug={slug} />
+          <WhyAccordionTab
+            categorySlug={categorySlug}
+            product={product}
+            slug={slug}
+          />
         </Container>
       </section>
 
       <CompareDropDown
+        categorySlug={categorySlug}
         attributeDropDown={[...productCatAttributes?.data].reverse()}
         pageType="product"
         product={product}
