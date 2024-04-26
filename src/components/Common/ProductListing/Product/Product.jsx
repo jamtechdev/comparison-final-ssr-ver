@@ -758,6 +758,13 @@ export default function Product({
                               }
                             </p>
                           )}
+                          <p>
+                            <b>
+                              {guidePhraseData &&
+                                guidePhraseData?.score_components}
+                              :
+                            </b>
+                          </p>
                           {product?.ratio_qulitiy_points_descriptions
                             .score_components &&
                             product?.ratio_qulitiy_points_descriptions?.score_components?.map(
