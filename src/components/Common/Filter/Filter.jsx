@@ -46,7 +46,7 @@ export default function Filter({
   const { isMobile } = useScreenSize();
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    console.log(filterName, key, value, "neet");
+    // console.log(filterName, key, value, "neet");
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -119,7 +119,7 @@ export default function Filter({
             `thumb thumb--right ${key}`
           );
           // alert("hello");
-          console.log(leftThumb, "left");
+          // console.log(leftThumb, "left");
           if (leftThumb) {
             leftThumb.value = 50;
             // console.log(leftThumb,"neetx");

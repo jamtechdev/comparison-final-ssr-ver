@@ -370,7 +370,7 @@ export default function Product({
                       className="count"
                       style={{ background: overallScoreColor }}
                     >
-                      {removeDecimalAboveNine(product.overall_score)}
+                      {formatValue(product.overall_score)}
                     </span>
                     {product?.overall_score_descriptions && (
                       <div className="score-detail tooltip-title">
