@@ -73,7 +73,7 @@ export default async function PageSwitch({
     case "Comparison":
       const compareData = pageData[0]?.data;
 
-      console.log(compareData?.category_url)
+      // console.log(compareData?.category_url)
       
 
       const graphComparisonProsCons = await getGraphComparisonProsCons(

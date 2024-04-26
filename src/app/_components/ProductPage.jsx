@@ -1810,7 +1810,7 @@ function ProductPage({
               </Row>
             </>
           )}
-          {console.log(product?.top_pros)}
+          {/* {console.log(product?.top_pros)} */}
           {product?.top_pros !== null && (
             <Row className="mt-5">
               <Col md={6}>
@@ -1918,7 +1918,7 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {console.log(compareByCatID?.data?.length)}
+      {/* {console.log(compareByCatID?.data?.length)} */}
       {compareByCatID?.data?.length > 1 && (
         <section>
           <Container>

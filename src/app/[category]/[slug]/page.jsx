@@ -62,9 +62,9 @@ export default async function Page({
   return <NotFound />;
 }
 
-async function getSlugMetaData(slug) {
+async function getSlugMetaData(slug, category) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/meta-data/${slug}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/meta-data/${slug}?category=${category}`,
     {
       next: { revalidate: 10 },
       cache: "no-cache",
@@ -121,7 +121,7 @@ export async function generateMetadata({ params: { slug, category } }) {
     if (slugType.error === "Permalink not found") {
       return "";
     } else {
-      const meta_data = await getSlugMetaData(slug);
+      const meta_data = await getSlugMetaData(slug, category);
       const siteURL = "https://mondopedia.it";
       if (meta_data && meta_data.data) {
         return {
