@@ -61,6 +61,13 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
     return content;
   };
   const contentWithIds = addIdsToHeadings(blogData[0]?.data?.text_part);
+  // useEffect(() => {
+  //   const stickyElements = document.querySelectorAll(".sticky");
+  //   stickyElements.forEach((element) => {
+  //     element.style.top = "0";
+  //   });
+  // }, []);
+
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}

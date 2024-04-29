@@ -1,15 +1,22 @@
-
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { renderToString } from "react-dom/server";
 import useScreenSize from "@/_helpers/useScreenSize";
 
 const ProsConsToolTip = (props) => {
-  const { hover_phrase, info_not_verified, data, comment, typeComp ,finalvalue} = props;
+  const {
+    hover_phrase,
+    info_not_verified,
+    data,
+    comment,
+    typeComp,
+    finalvalue,
+    expert_reviews,
+  } = props;
 
-const {isMobile}=useScreenSize();
+  const { isMobile } = useScreenSize();
 
   let tooltipStyles = {};
-
+  // console.log(expert_reviews&&expert_reviews);
   // const [width, setWidth] = useState(0);
   // useEffect(() => {
   //   const handleResize = () => {
@@ -28,7 +35,6 @@ const {isMobile}=useScreenSize();
   // let result = width - 250
   // let finalvalue = result / 2 -250
   // console.log(finalvalue, "test")
- 
 
   // if (typeComp === "cons") {
   //   tooltipStyles = {
@@ -36,7 +42,7 @@ const {isMobile}=useScreenSize();
   //   };
   // } else {
   //   tooltipStyles = {
-  //    right: finalvalue, 
+  //    right: finalvalue,
   //   };
   // }
 
@@ -45,19 +51,19 @@ const {isMobile}=useScreenSize();
       {hover_phrase && (
         // <div className="tooltip-display-content" style={{ left: isMobile ? finalvalue : 0 ,width:"150px",marginLeft:"50px"}} >
         <div
-      className="tooltip-display-content why-tooltip"
-      style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
-        width: isMobile ? "180px" : "250px"
-      }}
-    >
+          className="tooltip-display-content why-tooltip"
+          style={{
+            left: isMobile ? "50%" : 0,
+            transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
+            width: isMobile ? "180px" : "250px",
+          }}
+        >
           <div
             className="mb-2 prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}
           ></div>
-          
-          {comment && <div className="test__phrase__content " >{comment}</div>}
+
+          {comment && <div className="test__phrase__content ">{comment}</div>}
 
           {info_not_verified && (
             <>
@@ -71,7 +77,8 @@ const {isMobile}=useScreenSize();
               </span>
             </>
           )}
-          <div className="user__rating__popup">
+          {/* for expert review  now I comment this code */}
+          {/* <div className="user__rating__popup">
               <div className="user__rating__popup__list">
                 <span className="user__rating__popup__rating">4.5</span>
                 <div className="user__rating__popup__content">
@@ -79,7 +86,7 @@ const {isMobile}=useScreenSize();
                   <p>Nationalpost.com</p>
                 </div>
               </div>
-          </div>
+          </div> */}
         </div>
       )}
     </>

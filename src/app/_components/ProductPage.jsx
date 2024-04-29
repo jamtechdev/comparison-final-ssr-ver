@@ -225,21 +225,27 @@ function ProductPage({
   // console.log(is_found?.length);
   // console.log(slug)
   const { isMobile } = useScreenSize();
-  const [position, setPosition] = useState({ left: 0, right: 'auto' });
+  const [position, setPosition] = useState({ left: 0, right: "auto" });
 
   useEffect(() => {
     const updatePosition = () => {
-      const container = document.querySelector('.question_hover_container');
+      const container = document.querySelector(".question_hover_container");
       if (container) {
         const rect = container.getBoundingClientRect();
-        const left = rect.left < window.innerWidth / 2 ? 'auto' : window.innerWidth - rect.right;
-        setPosition({ left, right: left === 'auto' ? window.innerWidth - rect.right : 'auto' });
+        const left =
+          rect.left < window.innerWidth / 2
+            ? "auto"
+            : window.innerWidth - rect.right;
+        setPosition({
+          left,
+          right: left === "auto" ? window.innerWidth - rect.right : "auto",
+        });
       }
     };
 
     updatePosition();
-    window.addEventListener('resize', updatePosition);
-    return () => window.removeEventListener('resize', updatePosition);
+    window.addEventListener("resize", updatePosition);
+    return () => window.removeEventListener("resize", updatePosition);
   }, []);
   return (
     <>
@@ -346,7 +352,7 @@ function ProductPage({
                 {formatValue(product?.overall_score)}
               </span>
               <div className="score-detail ">
-                <div className="tooltip-title removeUnderlineFrom" >
+                <div className="tooltip-title removeUnderlineFrom">
                   <p>
                     {product && product?.page_phases?.overall_score}
                     <span className="">
@@ -358,11 +364,16 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
-        width: isMobile ? "230px" : "250px"
-      }}>
+                  <div
+                    className="tooltip-display-content"
+                    style={{
+                      left: isMobile ? "50%" : 0,
+                      transform: isMobile
+                        ? "translateX(-65%)"
+                        : "translateX(-10%)",
+                      width: isMobile ? "230px" : "250px",
+                    }}
+                  >
                     {product?.overall_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -452,12 +463,16 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
-        width: isMobile ? "230px" : "250px"
-      }}>
-                 
+                  <div
+                    className="tooltip-display-content"
+                    style={{
+                      left: isMobile ? "50%" : 0,
+                      transform: isMobile
+                        ? "translateX(-65%)"
+                        : "translateX(-10%)",
+                      width: isMobile ? "230px" : "250px",
+                    }}
+                  >
                     {product?.technical_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -528,7 +543,7 @@ function ProductPage({
             </div>
             <div className="score-section color-change score-section-2 last-border-none">
               <span className="count" style={{ backgroundColor: RatingColor }}>
-                {product?.reviews}
+                {formatValue(product?.reviews)}
               </span>
               <div className="score-detail">
                 <div className="tooltip-title removeUnderlineFrom">
@@ -543,11 +558,16 @@ function ProductPage({
                       </svg>
                     </span>
                   </p>
-                  <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-65%)" : "translateX(-10%)",
-        width: isMobile ? "240px" : "250px"
-      }}>
+                  <div
+                    className="tooltip-display-content"
+                    style={{
+                      left: isMobile ? "50%" : 0,
+                      transform: isMobile
+                        ? "translateX(-65%)"
+                        : "translateX(-10%)",
+                      width: isMobile ? "240px" : "250px",
+                    }}
+                  >
                     {product?.users_rating_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -609,7 +629,12 @@ function ProductPage({
                                 <div className="rating__content">
                                   <b>{formatValue(data?.rating)}</b>
                                   <Rating value={data?.rating} />
-                                  <small>({data?.reviews})</small>
+                                  <small>
+                                    {" "}
+                                    <a href={`/link?p=${btoa(data.url)}`}>
+                                      ({data?.reviews})
+                                    </a>{" "}
+                                  </small>
                                 </div>
                               </div>
                             </>
@@ -666,7 +691,13 @@ function ProductPage({
                             <div className="" style={{ fontWeight: 400 }}>
                               {data?.title}
                             </div>
-                            <div className="tooltip-display-content" style={{left: position.left,right: position.right,}}>
+                            <div
+                              className="tooltip-display-content"
+                              style={{
+                                left: position.left,
+                                right: position.right,
+                              }}
+                            >
                               {
                                 <p className="mb-2">
                                   <b>What it is : </b>
@@ -704,8 +735,10 @@ function ProductPage({
                                         {hoverPhaseData?.attribute_value != null
                                           ? hoverPhaseData?.attribute_value >=
                                             10
-                                            ? Math.trunc(
-                                                hoverPhaseData?.attribute_value
+                                            ? formatValue(
+                                                Math.trunc(
+                                                  hoverPhaseData?.attribute_value
+                                                )
                                               )
                                             : hoverPhaseData?.attribute_value
                                           : "0.0"}
@@ -1138,11 +1171,16 @@ function ProductPage({
               </h2>
             </Col>
           </Row>
-          <WhyAccordionTab product={product} slug={slug} />
+          <WhyAccordionTab
+            categorySlug={categorySlug}
+            product={product}
+            slug={slug}
+          />
         </Container>
       </section>
 
       <CompareDropDown
+        categorySlug={categorySlug}
         attributeDropDown={[...productCatAttributes?.data].reverse()}
         pageType="product"
         product={product}
@@ -1182,7 +1220,7 @@ function ProductPage({
           </Container>
         </section>
       )}
-      {console.log(product?.should_buy?.length)}
+      {/* {console.log(product?.should_buy?.length)} */}
 
       <section className="ptb-80 bg-color">
         {product?.should_buy?.length !== 0 && (
@@ -1666,22 +1704,34 @@ function ProductPage({
                           {product && product?.page_phases?.best_prices}
                         </h3>
                         <ul className="best-list-item">
+                          {product.price_websites &&
+                            product?.price_websites?.every(
+                              (data) => data.price === null
+                            ) && (
+                              <div className="not-availabel">
+                                <span className="txt">N/A</span>
+                                <span className="guide">
+                                  ~ {product?.price} {product?.currency}
+                                </span>
+                              </div>
+                            )}
                           {product &&
                             product?.price_websites
-                              .slice(0, showFullPrice ? 8 : 4)
+                              ?.slice(0, showFullPrice ? 8 : 4)
                               .map((item, index) => {
                                 return (
-                                  <li
-                                    key={index}
-                                    className="product_page_best_price"
-                                  >
+                                  <li key={index}>
                                     <a
                                       rel="noopener noreferrer"
                                       target="_blank"
                                       href={`/link?p=${btoa(item.url)}`}
                                     >
                                       <img
-                                        src={item?.logo}
+                                        src={
+                                          item?.logo === null
+                                            ? "/images/No-Image.png"
+                                            : item?.logo
+                                        }
                                         width={0}
                                         height={0}
                                         sizes="100%"
@@ -1693,6 +1743,7 @@ function ProductPage({
                                         rel="noopener noreferrer"
                                         target="_blank"
                                         href={`/link?p=${btoa(item.url)}`}
+                                        className="font__17__inline"
                                       >
                                         {item?.price} {product?.currency}
                                       </a>
@@ -1759,7 +1810,7 @@ function ProductPage({
               </Row>
             </>
           )}
-          {console.log(product?.top_pros)}
+          {/* {console.log(product?.top_pros)} */}
           {product?.top_pros !== null && (
             <Row className="mt-5">
               <Col md={6}>
@@ -1867,7 +1918,7 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {console.log(compareByCatID?.data?.length)}
+      {/* {console.log(compareByCatID?.data?.length)} */}
       {compareByCatID?.data?.length > 1 && (
         <section>
           <Container>

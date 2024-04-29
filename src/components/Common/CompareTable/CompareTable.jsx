@@ -148,9 +148,7 @@ const CompareTable = React.memo(
               ? " "
               : stringArray[0];
           // console.log(targetString, "neet");
-          numericValues = stringArray.filter(
-            (value) => value === targetString
-          );
+          numericValues = stringArray.filter((value) => value === targetString);
           // numericValues = stringArray.filter((value, index) => index === 0);
 
           // console.log(numericValues, arrayOfObjects[0]?.attribute, "neet");
@@ -306,7 +304,7 @@ const CompareTable = React.memo(
                       <a
                         href={`/${product?.category_url}/${product?.permalink}`}
                       ></a>
-                      {product?.name}
+                      <small className="product-name-small">{product?.name}</small>
                       <img
                         className="compare_image"
                         src={

@@ -164,6 +164,9 @@
   color: var(--heading-color);
   opacity: 90%;
 }
+.score-section .score-detail small a {
+  color:  var(--heading-color);
+}
 
 .color-change .count,
 .color-change .fill-bar {

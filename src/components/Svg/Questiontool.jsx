@@ -1,3 +1,4 @@
+import formatValue from "@/_helpers/formatValue";
 import { useRef, useState } from "react";
 
 const Questiontool = ({ attributes }) => {
@@ -15,7 +16,7 @@ const Questiontool = ({ attributes }) => {
     const viewportWidth = document.documentElement.clientWidth;
 
     const tooltipWidth = tooltipRect.width;
-    console.log(viewportWidth - tooltipWidth / 2 - viewportWidth + 120);
+    // console.log(viewportWidth - tooltipWidth / 2 - viewportWidth + 120);
 
     // Calculate ideal left position for centered alignment
     const idealLeft = (viewportWidth - tooltipWidth) / 2;
@@ -55,10 +56,12 @@ const Questiontool = ({ attributes }) => {
               {`${" "} ${attributes?.when_matters}`}
             </p>
           )}
+
           <b>Score components: </b>
           {attributes.score_components &&
             attributes.score_components?.map((data, index) => {
               const roundedNumber = parseFloat(data?.attribute_evaluation);
+              // {console.log(data?.attribute_evaluation)}
               const formattedNumber =
                 roundedNumber > 9
                   ? Math.floor(roundedNumber)
@@ -80,7 +83,11 @@ const Questiontool = ({ attributes }) => {
                           : "#85B2F1",
                     }}
                   >
-                    {formattedNumber != "NaN" ? formattedNumber : "0.0"}
+                   {/* { console.log(data?.attribute_evaluation)} */}
+                    {formattedNumber != "NaN"
+                      ? formattedNumber
+                      : data?.attribute_evaluation}
+                      
                   </span>
                   <p style={{ textTransform: "none" }}>
                     {" "}

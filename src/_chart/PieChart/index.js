@@ -16,7 +16,7 @@ function PieChart(props) {
 
   const outerRadius = pieSize / 2;
   const center = svgSize / 2;
-
+  console.log(data, chartTitle , xUnit);
   useEffect(() => {
     drawChart();
   }, [data]);
@@ -87,7 +87,7 @@ function PieChart(props) {
       .value((d) => d.value);
 
     const arc = g.selectAll("pie").data(pie(data)).enter().append("g");
-
+    // console.log(data);
     // Append tooltip
     const tooltip = d3
       .select(`#${containerId}`)
@@ -156,12 +156,12 @@ function PieChart(props) {
             .attr("class", "legend-text")
             .text((d) => `${d}%`);
         }
-        if (i == 2) {
-          d3.select(this)
-            .append("span")
-            .attr("class", "legend-text")
-            .text((d) => `${d} ${xUnit}`);
-        }
+        // if (i == 2) {
+        //   d3.select(this)
+        //     .append("span")
+        //     .attr("class", "legend-text")
+        //     .text((d) => `${d} ${xUnit}`);
+        // }
       });
   }
 

@@ -20,7 +20,6 @@ export default function Filter({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({});
-  // console.log(searchParams)
   // const [sliderValues, setSliderValues] = useState({
   //   minVal: 0,
   //   maxVal: 0,
@@ -47,7 +46,7 @@ export default function Filter({
   const { isMobile } = useScreenSize();
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    console.log(filterName, key, value, "neet");
+    // console.log(filterName, key, value, "neet");
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -115,7 +114,20 @@ export default function Filter({
       case "range":
         if (!isChecked) {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
-          // console.log("testing")
+          const leftThumb = document.getElementById(`thumb thumb--left ${key}`);
+          const rightThumb = document.getElementById(
+            `thumb thumb--right ${key}`
+          );
+          // alert("hello");
+          // console.log(leftThumb, "left");
+          if (leftThumb) {
+            leftThumb.value = 50;
+            // console.log(leftThumb,"neetx");
+
+            // // If you want the slider's position to update immediately,
+            // // you may need to trigger a change event manually
+            leftThumb.dispatchEvent(new Event("change", { bubbles: true }));
+          }
         } else {
           updatedParams[key] = value;
         }
@@ -173,180 +185,213 @@ export default function Filter({
   };
 
   useEffect(() => {
-    if (searchParam?.direct) {
-      const filteredKeys = Object.keys(searchParam).filter(
-        (key) => key !== "direct"
-      );
-      if (filteredKeys.includes("variant")) {
-        document.getElementById("variant").checked = true;
-      }
-      // if (filteredKeys.includes("available")) {
-      //   document.getElementById("available").checked = true;
-      // }
-      if (filteredKeys.includes("brand")) {
-        const brandValues = searchParam["brand"].split(",");
-        brandValues.map((item) => {
-          document.getElementById(`${item}`).checked = true;
-        });
-      }
-      if (filteredKeys.includes("price")) {
-        setSliderPriceValues((pre) => {
-          return {
-            ...pre,
-            maxVal: price?.max_price,
-            minVal: price?.min_price,
-          };
-        });
-      }
-    }
-
     if (removedParam) {
-      if (removedParam == "variant") {
-        handelFilterActions("variant", "variant", false);
-        document.getElementById("variant").checked = false;
-      }
-      //search param remove
-      // if (removedParam == "available") {
-      //   handelFilterActions("available", "available", false);
-      //   document.getElementById("available").checked = false;
-      // }
-      if (removedParam == "brand") {
-        const brandValues = searchParam["brand"]?.split(",");
-        if (brandValues) {
+      if (searchParam?.direct) {
+        const filteredKeys = Object.keys(searchParam).filter(
+          (key) => key !== "direct"
+        );
+        if (filteredKeys.includes("variant")) {
+          document.getElementById("variant").checked = true;
+        }
+        // if (filteredKeys.includes("available")) {
+        //   document.getElementById("available").checked = true;
+        // }
+        if (filteredKeys.includes("brand")) {
+          const brandValues = searchParam["brand"].split(",");
           brandValues.map((item) => {
-            handelFilterActions("brand", "brand", { brand: item }, false);
-            document.getElementById(`${item}`).checked = false;
+            document.getElementById(`${item}`).checked = true;
+          });
+        }
+        if (filteredKeys.includes("price")) {
+          setSliderPriceValues((pre) => {
+            return {
+              ...pre,
+              maxVal: price?.max_price,
+              minVal: price?.min_price,
+            };
           });
         }
       }
 
-      if (removedParam?.toLowerCase() == "price") {
-        handelFilterActions(
-          "price",
-          "price",
-          `${price?.min_price},${price?.max_price}`,
-          false
-        );
-        setSliderPriceValues((pre) => {
-          return {
-            ...pre,
-            maxVal: price?.max_price,
-            minVal: price?.min_price,
-          };
-        });
-      }
-      if (removedParam == "sort") {
-        handelFilterActions("sort", "sort", ``, false);
-      }
-      if (
-        removedParam !== "available" &&
-        removedParam != "brand" &&
-        removedParam.toLowerCase() != "price" &&
-        removedParam.toLowerCase() != "sort"
-      ) {
-        let arrayToGetFilteredObject = [];
-        attributeCategories.map((item, index) => {
-          let filteredArray = item.attributes.filter(
-            (attribute) => attribute.name === removedParam
-          );
-          if (filteredArray.length > 0) {
-            filteredArray && arrayToGetFilteredObject.push(filteredArray);
-            return filteredArray;
-          }
-        });
-        let filteredArrayOfAttributeValues;
-
-        if (arrayToGetFilteredObject[0] && arrayToGetFilteredObject[0][0]) {
-          filteredArrayOfAttributeValues = getFilteredAttributeValues(
-            arrayToGetFilteredObject[0][0]
-          );
-        } else {
-          filteredArrayOfAttributeValues = [];
+      if (removedParam) {
+        if (removedParam == "variant") {
+          handelFilterActions("variant", "variant", false);
+          document.getElementById("variant").checked = false;
         }
-        // console.log(arrayToGetFilteredObject, "checkNeet");
+        //search param remove
+        // if (removedParam == "available") {
+        //   handelFilterActions("available", "available", false);
+        //   document.getElementById("available").checked = false;
+        // }
+        if (removedParam == "brand") {
+          const brandValues = searchParam["brand"]?.split(",");
+          if (brandValues) {
+            brandValues.map((item) => {
+              handelFilterActions("brand", "brand", { brand: item }, false);
+              document.getElementById(`${item}`).checked = false;
+            });
+          }
+        }
 
-        let countAttribute = 1;
-        if (filteredArrayOfAttributeValues?.type == "dropdown") {
-          countAttribute++;
-          // check if values contain only yes then Toggle Switch
-          if (
-            filteredArrayOfAttributeValues?.values?.length == 1 &&
-            filteredArrayOfAttributeValues?.values[0] == "yes"
-          ) {
-            const value = filteredArrayOfAttributeValues?.values[0];
-            handelFilterActions("radioSwitch", removedParam, "no", false);
-            document.getElementById(`${removedParam}`).checked = false;
-            // console.log("Radio switch", removedParam)
-          } else {
-            {
-              filteredArrayOfAttributeValues?.values?.map((value, valIndex) => {
-                handelFilterActions(
-                  "dropdown",
-                  removedParam,
-                  { key: value },
-                  false
-                );
-
-                document.getElementById(
-                  `${removedParam}${value}`
-                ).checked = false;
-              });
+        if (removedParam?.toLowerCase() == "price") {
+          handelFilterActions(
+            "price",
+            "price",
+            `${price?.min_price},${price?.max_price}`,
+            false
+          );
+          setSliderPriceValues((pre) => {
+            return {
+              ...pre,
+              maxVal: price?.max_price,
+              minVal: price?.min_price,
+            };
+          });
+        }
+        if (removedParam == "sort") {
+          handelFilterActions("sort", "sort", ``, false);
+        }
+        if (
+          removedParam !== "available" &&
+          removedParam != "brand" &&
+          removedParam.toLowerCase() != "price" &&
+          removedParam.toLowerCase() != "sort"
+        ) {
+          let arrayToGetFilteredObject = [];
+          attributeCategories.map((item, index) => {
+            let filteredArray = item.attributes.filter(
+              (attribute) => attribute.name === removedParam
+            );
+            if (filteredArray.length > 0) {
+              filteredArray && arrayToGetFilteredObject.push(filteredArray);
+              return filteredArray;
             }
+          });
+          let filteredArrayOfAttributeValues;
+
+          if (arrayToGetFilteredObject[0] && arrayToGetFilteredObject[0][0]) {
+            filteredArrayOfAttributeValues = getFilteredAttributeValues(
+              arrayToGetFilteredObject[0][0]
+            );
+          } else {
+            filteredArrayOfAttributeValues = [];
           }
-        } else {
-          let min =
-            filteredArrayOfAttributeValues.maxValue -
-              filteredArrayOfAttributeValues.minValue >=
-            1
-              ? filteredArrayOfAttributeValues.minValue
-              : 0;
+          // console.log(arrayToGetFilteredObject, "checkNeet");
 
-          let max =
-            filteredArrayOfAttributeValues.maxValue -
-              filteredArrayOfAttributeValues.minValue >=
-            1
-              ? filteredArrayOfAttributeValues.maxValue
-              : 100;
-          // alert(min)
+          let countAttribute = 1;
+          if (filteredArrayOfAttributeValues?.type == "dropdown") {
+            countAttribute++;
+            // check if values contain only yes then Toggle Switch
+            if (
+              filteredArrayOfAttributeValues?.values?.length == 1 &&
+              filteredArrayOfAttributeValues?.values[0] == "yes"
+            ) {
+              const value = filteredArrayOfAttributeValues?.values[0];
+              handelFilterActions("radioSwitch", removedParam, "no", false);
+              document.getElementById(`${removedParam}`).checked = false;
+              // console.log("Radio switch", removedParam)
+            } else {
+              {
+                filteredArrayOfAttributeValues?.values?.map(
+                  (value, valIndex) => {
+                    handelFilterActions(
+                      "dropdown",
+                      removedParam,
+                      { key: value },
+                      false
+                    );
 
-          // setSliderValues((prevVal) => {
-          //   return {
-          //     ...prevVal,
-          //     minVal: min,
-          //     maxVal: max,
-          //   };
-          // });
+                    document.getElementById(
+                      `${removedParam}${value}`
+                    ).checked = false;
+                  }
+                );
+              }
+            }
+          } else {
+            let min =
+              filteredArrayOfAttributeValues.maxValue -
+                filteredArrayOfAttributeValues.minValue >=
+              1
+                ? filteredArrayOfAttributeValues.minValue
+                : 0;
 
-          setSliderValues((prevValues) => ({
-            ...prevValues,
-            sliderValues,
-          }));
+            let max =
+              filteredArrayOfAttributeValues.maxValue -
+                filteredArrayOfAttributeValues.minValue >=
+              1
+                ? filteredArrayOfAttributeValues.maxValue
+                : 100;
+            // alert(min)
 
-          // thumb thumb--left ${classForSlider}
-          console.log(sliderValues, filteredArrayOfAttributeValues?.type,min, max);
+            // setSliderValues((prevVal) => {
+            //   return {
+            //     ...prevVal,
+            //     minVal: min,
+            //     maxVal: max,
+            //   };
+            // });
 
-          handelFilterActions("range", removedParam, `${min},${max}`, false);
-          const leftThumb = document.getElementById(
-            `thumb thumb--left ${removedParam}`
-          );
-          const rightThumb = document.getElementById(
-            `thumb thumb--right ${removedParam}`
-          );
+            // setSliderValues((prevValues) => ({
+            //   ...prevValues,
+            //   [removedParam]: { minVal: min, maxVal: max },
+            // }));
+            // const newRangerfilter = {
+            //   ...sliderValues,
+            //   [removedParam]: { minVal: min, maxVal: max },
+            // };
+            // setSliderValues(newRangerfilter);
+            const value = `${min},${max}`;
+            const newFilters = {
+              [removedParam]: value,
+            };
+            setSliderValues(newFilters);
+            // setSliderValues(newFilters);
 
-          if (leftThumb) {
-            leftThumb.value = min;
-          }
+            // thumb thumb--left ${classForSlider}
+            // console.log(sliderValues);
+            // const { [removedParam]: omit, ...OldFilters } = sliderValues;
+            // console.log(OldFilters, "OldFilters");
+            // setSliderValues(OldFilters);
+            // console.log(sliderValues, min, max, removedParam);
 
-          if (rightThumb) {
-            rightThumb.value = max;
+            handelFilterActions(
+              "range",
+              removedParam,
+              { min: min, max: max },
+              false
+            );
+            // const leftThumb = document.getElementById(
+            //   `thumb thumb--left ${removedParam}`
+            // );
+            // const rightThumb = document.getElementById(
+            //   `thumb thumb--right ${removedParam}`
+            // );
+            // // alert("hello");
+            // // leftThumb.value = min;
+
+            // if (leftThumb) {
+
+            //   leftThumb.value = min;
+            //   // console.log(leftThumb,"neetx");
+
+            //   // // If you want the slider's position to update immediately,
+            //   // // you may need to trigger a change event manually
+            //   leftThumb.dispatchEvent(new Event("change", { bubbles: true }));
+            // }
+
+            // if (rightThumb) {
+            //   rightThumb.value = max;
+            // }
           }
         }
-      }
 
-      if (removedParam.toLowerCase() == "sort") {
-        delete searchParams.sort;
+        if (removedParam.toLowerCase() == "sort") {
+          delete searchParams.sort;
+        }
       }
     }
+
     // I remove  searchParam   from dependency to stop infinite loop of useEffect
   }, [removedParam]);
 
@@ -625,10 +670,12 @@ export default function Filter({
                           {attribute.name}{" "}
                           <i className="ri-arrow-down-s-fill"></i>
                         </Accordion.Header>
+
                         <Accordion.Body>
                           {/* {console.log(filteredArrayOfAttributeValues,"neext")} */}
                           {isMobile ? (
                             <MultiRangeMobileSlider
+                              // value={filters[filter.id] ? filters[filter.id].min : filter.min}
                               rangeVal={sliderValues}
                               classForSlider={attribute.name}
                               min={
@@ -657,15 +704,20 @@ export default function Filter({
                             />
                           ) : (
                             <>
-                              {console.log(sliderValues)}
+                              {/* {console.log(sliderValues[attribute.name].min)} */}
                               <MultiRangeSliderAttributes
                                 rangeVal={
-                                  sliderValues || {
-                                    minVal:
-                                      filteredArrayOfAttributeValues.minValue,
-                                    maxVal:
-                                      filteredArrayOfAttributeValues.maxValue,
-                                  }
+                                  sliderValues[attribute.name]
+                                    ? filteredArrayOfAttributeValues.maxValue -
+                                        filteredArrayOfAttributeValues.minValue >=
+                                      1
+                                      ? filteredArrayOfAttributeValues.minValue
+                                      : 0
+                                    : filteredArrayOfAttributeValues.maxValue -
+                                        filteredArrayOfAttributeValues.minValue >=
+                                      1
+                                    ? filteredArrayOfAttributeValues.maxValue
+                                    : 100
                                 }
                                 classForSlider={attribute.name}
                                 min={

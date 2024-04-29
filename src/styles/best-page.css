@@ -306,8 +306,26 @@ thead.isSticky {
   padding: 2px 12px !important;
 }
 
+.compare-container thead.isSticky tr th .device-name .product-name-small{
+  display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+}
+
 .compare-container thead.isSticky tr th .best-tag-product {
   position: static !important;
+}
+
+.compare-container thead tr th .device-name .product-name-small{
+  display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 600 !important;
+    font-size: 15px !important;
 }
 
 .compare-container thead tr th:not(:first-child),
@@ -1220,7 +1238,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
 
 .compare-container.table .best-tag-product {
   width: 95%;
-  padding: 0px 5px;
+  padding: 5px 5px;
   margin: auto;
   left: 0;
   right: 0;
@@ -1235,14 +1253,14 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   width: fit-content;
   padding: 0px 20px;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 30px;
+  font-size: 14px;
+  line-height: 20px;
   font-family: "Lato", sans-serif !important;
 }
 @media screen and (max-width: 600px) {
-  .best-tag-product,
   .flex-box .left_box .box_content {
     font-size: 14px;
+    max-width: 250px;
   }
   .correlation_svg_width,
   .base_chart_graph {
@@ -1251,23 +1269,31 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   .best-tag-product{
     margin-left: 10px;
     line-height: 18px;
-    padding: 4px 10px;
-    text-align: right;
+    padding: 6px 10px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .comparison-tool .not-availabel{
+    grid-template-columns: 1fr !important;
   }
 }
 @media screen and (max-width: 410px) {
-  .best-tag-product,
   .flex-box .left_box .box_content {
     padding: 0px 7px;
     font-size: 14px;
+    max-width: 180px;
+  }
+  .site_tabs.graph-tab{
+    flex-wrap: nowrap !important;
   }
   .site_tabs.graph-tab.compare-graph-tabs .nav-item button {
-    font-size: 9px !important;
+    font-size: 16px !important;
   }
 }
 @media screen and (min-width: 411px) and (max-width: 600px) {
   .site_tabs.graph-tab.compare-graph-tabs .nav-item button {
-    font-size: 12px !important;
+    font-size: 15px !important;
   }
 }
 .compare-container tbody tr th p {

@@ -36,7 +36,7 @@ export default function Product({
 }) {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
-  const {isMobile} = useScreenSize()
+  const { isMobile } = useScreenSize();
 
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
@@ -54,7 +54,7 @@ export default function Product({
 
     return incomingProduct;
   };
-  
+
   const product = generateProductsWithAttributes();
   let initialDisplay = 5;
   const [displayedAttributesCount, setDisplayedAttributesCount] = useState({});
@@ -103,7 +103,9 @@ export default function Product({
   );
   const technicalScoreColor = getColorBasedOnScore(product?.technical_score);
   const userRatingColor = getColorBasedOnScore(product?.reviews);
-  const popularityColor = getColorBasedOnScore(product?.popularity_points);
+  const popularityColor = getColorBasedOnScore(
+    product?.ratio_quality_price_points
+  );
 
   // filter a value which numeric or string
   const renderValue = (item) => {
@@ -120,14 +122,13 @@ export default function Product({
     }
   };
 
-
   const getColorAttr = (attributeValues) => {
     if (
       attributeValues.attribute_value == "yes" ||
       attributeValues.attribute_value == "no"
     ) {
       if (attributeValues?.is_worse_than?.toFixed(1) >= 0.6) {
-        return "red";
+        return "#ce434b";
       } else if (attributeValues?.is_better_than?.toFixed(1) >= 0.6) {
         return "#0066b2";
       } else {
@@ -282,6 +283,14 @@ export default function Product({
   // });
   // console.log(splitData);
   // console.log(text_before_listing, "neet");
+  const extractDomainName = (url) => {
+    const domain = url
+      .replace("https://", "")
+      .replace("http://", "")
+      .replace("www.", "")
+      .split(/[/?#]/)[0];
+    return domain;
+  };
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
@@ -361,22 +370,27 @@ export default function Product({
                       className="count"
                       style={{ background: overallScoreColor }}
                     >
-                      {removeDecimalAboveNine(product.overall_score)}
+                      {formatValue(product.overall_score)}
                     </span>
                     {product?.overall_score_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span
-                          className="overall"    
+                          className="overall"
                           style={{ color: "rgb(39 48 78 / 90%)" }}
                         >
                           {/* {console.log(guidePhraseData)} */}
                           {guidePhraseData && guidePhraseData?.overall_score}
                         </span>
-                        <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
-        width: isMobile ? "250px" : "250px"
-      }}>
+                        <div
+                          className="tooltip-display-content"
+                          style={{
+                            left: isMobile ? "50%" : 0,
+                            transform: isMobile
+                              ? "translateX(-40%)"
+                              : "translateX(-10%)",
+                            width: isMobile ? "250px" : "250px",
+                          }}
+                        >
                           {product?.overall_score_descriptions.description && (
                             <p className="mb-2">
                               <b>
@@ -444,8 +458,10 @@ export default function Product({
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
-                                          ? Math.trunc(
-                                              data?.attribute_evaluation
+                                          ? formatValue(
+                                              Math.trunc(
+                                                data?.attribute_evaluation
+                                              )
                                             )
                                           : data?.attribute_evaluation.toFixed(
                                               1
@@ -478,11 +494,16 @@ export default function Product({
                         <span>
                           {guidePhraseData && guidePhraseData?.technical_score}
                         </span>
-                        <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
-        width: isMobile ? "250px" : "250px"
-      }}>
+                        <div
+                          className="tooltip-display-content"
+                          style={{
+                            left: isMobile ? "50%" : 0,
+                            transform: isMobile
+                              ? "translateX(-40%)"
+                              : "translateX(-10%)",
+                            width: isMobile ? "250px" : "250px",
+                          }}
+                        >
                           {product?.technical_score_descriptions
                             .description && (
                             <p className="mb-2">
@@ -542,8 +563,10 @@ export default function Product({
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
-                                          ? Math.trunc(
-                                              data?.attribute_evaluation
+                                          ? formatValue(
+                                              Math.trunc(
+                                                data?.attribute_evaluation
+                                              )
                                             )
                                           : data?.attribute_evaluation.toFixed(
                                               1
@@ -575,12 +598,17 @@ export default function Product({
                     {product?.users_rating_descriptions && (
                       <div className="score-detail tooltip-title">
                         <span>User’s Rating</span>
-                        
-                        <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
-        width: isMobile ? "250px" : "250px"
-      }}>
+
+                        <div
+                          className="tooltip-display-content"
+                          style={{
+                            left: isMobile ? "50%" : 0,
+                            transform: isMobile
+                              ? "translateX(-40%)"
+                              : "translateX(-10%)",
+                            width: isMobile ? "250px" : "250px",
+                          }}
+                        >
                           {product?.users_rating_descriptions?.description && (
                             <p className="mb-2">
                               <b>
@@ -632,7 +660,7 @@ export default function Product({
                                     >
                                       {data?.attribute_evaluation != null
                                         ? data?.attribute_evaluation >= 10
-                                          ? Math.trunc(
+                                          ? formatValue(
                                               data?.attribute_evaluation
                                             )
                                           : data?.attribute_evaluation.toFixed(
@@ -661,7 +689,12 @@ export default function Product({
                                         <b>{formatValue(data?.rating)}</b>
                                         <Rating value={data?.rating} />
 
-                                        <small>({data?.reviews})</small>
+                                        <small>
+                                          {" "}
+                                          <a href={`/link?p=${btoa(data.url)}`}>
+                                            ({data?.reviews})
+                                          </a>{" "}
+                                        </small>
                                       </div>
                                     </div>
                                   </Fragment>
@@ -679,39 +712,97 @@ export default function Product({
                       className="count"
                       style={{ background: popularityColor }}
                     >
-                      {product.popularity_points != null
-                        ? product.popularity_points >= 10
-                          ? Math.trunc(product.popularity_points)
-                          : formatValue(product.popularity_points)
+                      {product?.ratio_quality_price_points != null
+                        ? product?.ratio_quality_price_points >= 10
+                          ? Math.trunc(product?.ratio_quality_price_points)
+                          : formatValue(product?.ratio_quality_price_points)
                         : "0.0"}
                     </span>
-                    {product?.popularity_descriptions && (
+                    {product?.ratio_qulitiy_points_descriptions && (
                       <div className="score-detail tooltip-title">
-                        <span>Popularity</span>
-                        <div className="tooltip-display-content" style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-40%)" : "translateX(-10%)",
-        width: isMobile ? "250px" : "250px"
-      }}>
-                          {product?.popularity_descriptions.description && (
+                        <span>Ratio Quality-Price</span>
+                        <div
+                          className="tooltip-display-content"
+                          style={{
+                            left: isMobile ? "50%" : 0,
+                            transform: isMobile
+                              ? "translateX(-40%)"
+                              : "translateX(-10%)",
+                            width: isMobile ? "250px" : "250px",
+                          }}
+                        >
+                          {product?.ratio_qulitiy_points_descriptions
+                            .description && (
                             <p className="mb-2">
                               <b>
                                 {guidePhraseData && guidePhraseData?.what_it_is}
                                 :{" "}
                               </b>
-                              {product?.popularity_descriptions?.description}
+                              {
+                                product?.ratio_qulitiy_points_descriptions
+                                  ?.description
+                              }
                             </p>
                           )}
-                          {product?.popularity_descriptions.when_matters && (
+                          {product?.ratio_qulitiy_points_descriptions
+                            .when_matters && (
                             <p className="mb-2">
                               <b>
                                 {guidePhraseData &&
                                   guidePhraseData?.when_it_matters}
                                 :{" "}
                               </b>
-                              {product?.popularity_descriptions?.when_matters}
+                              {
+                                product?.ratio_qulitiy_points_descriptions
+                                  ?.when_matters
+                              }
                             </p>
                           )}
+                          <p>
+                            <b>
+                              {guidePhraseData &&
+                                guidePhraseData?.score_components}
+                              :
+                            </b>
+                          </p>
+                          {product?.ratio_qulitiy_points_descriptions
+                            .score_components &&
+                            product?.ratio_qulitiy_points_descriptions?.score_components?.map(
+                              (data, index) => {
+                                return (
+                                  <React.Fragment key={index}>
+                                    <div className="scroe_section" key={index}>
+                                      <p className="text-end">
+                                        {`${parseFloat(
+                                          data?.importance
+                                        ).toFixed(1)}%`}
+                                      </p>
+                                      <div
+                                        className="score-count"
+                                        style={{
+                                          background:
+                                            data?.attribute_evaluation >= 7.5
+                                              ? "#093673"
+                                              : data?.attribute_evaluation >=
+                                                  5 &&
+                                                data?.attribute_evaluation < 7.5
+                                              ? "#437ECE"
+                                              : "#85B2F1",
+                                        }}
+                                      >
+                                        {formatValue(
+                                          data?.attribute_evaluation
+                                        )}
+                                        {/* {`${parseFloat(
+                                                        data?.attribute_evaluation
+                                                      ).toFixed(1)}`} */}
+                                      </div>
+                                      <p>{data?.attribute_category}</p>
+                                    </div>
+                                  </React.Fragment>
+                                );
+                              }
+                            )}
                         </div>
                       </div>
                     )}
@@ -787,7 +878,7 @@ export default function Product({
                     <p className="buy-avoid">
                       {guidePhraseData && guidePhraseData?.why_to_buy}
                     </p>
-                  
+
                     <ul>
                       {product &&
                         product?.top_pros
@@ -844,7 +935,7 @@ export default function Product({
                                     data?.hover_phrase !== "" && "tooltip-title"
                                   }`}
                                 >
-                                  <span className="pros-crons-text" >
+                                  <span className="pros-crons-text">
                                     {data?.name} {renderValue(data).trim()}
                                   </span>
                                   <ProsConsToolTip
@@ -915,28 +1006,29 @@ export default function Product({
                             >
                               {data?.title}
                             </div>
-{/*                             
+                            {/*                             
                             <div
       className="tooltip-display-content why-tooltip"
       style={{ left: isMobile ? "50%" : "calc(50% - 128px)", transform: isMobile ? "translateX(-60%)" : "none" ,width:"190px"}}
     > */}
-      <div
-      className="tooltip-display-content why-tooltip"
-      style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
-        width: isMobile ? "190px" : "250px"
-      }}
-    >
-                           
-      {/* Tooltip content */}
-  {/* Tooltip content */}
-  {
-    <p className="mb-2">
-      <b>What it is : </b>
-      {data?.hover_phase?.what_is_it}
-    </p>
-  }
+                            <div
+                              className="tooltip-display-content why-tooltip"
+                              style={{
+                                left: isMobile ? "50%" : 0,
+                                transform: isMobile
+                                  ? "translateX(-60%)"
+                                  : "translateX(-10%)",
+                                width: isMobile ? "190px" : "250px",
+                              }}
+                            >
+                              {/* Tooltip content */}
+                              {/* Tooltip content */}
+                              {
+                                <p className="mb-2">
+                                  <b>What it is : </b>
+                                  {data?.hover_phase?.what_is_it}
+                                </p>
+                              }
 
                               <p>
                                 <b>Score components :</b>
@@ -944,8 +1036,8 @@ export default function Product({
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {
                                   return (
-                                    <div className="scroe_section" key={index}  >
-                                      <p className="text-end" >
+                                    <div className="scroe_section" key={index}>
+                                      <p className="text-end">
                                         {`${parseFloat(
                                           hoverPhaseData?.percentage
                                         ).toFixed(1)}%`}
@@ -968,8 +1060,10 @@ export default function Product({
                                         {hoverPhaseData?.attribute_value != null
                                           ? hoverPhaseData?.attribute_value >=
                                             10
-                                            ? Math.trunc(
-                                                hoverPhaseData?.attribute_value
+                                            ? formatValue(
+                                                Math.trunc(
+                                                  hoverPhaseData?.attribute_value
+                                                )
                                               )
                                             : hoverPhaseData?.attribute_value
                                           : "0.0"}
@@ -1384,9 +1478,12 @@ export default function Product({
                                                             : "#85B2F1",
                                                       }}
                                                     >
-                                                      {`${parseFloat(
+                                                      {formatValue(
                                                         data?.attribute_evaluation
-                                                      ).toFixed(1)}`}
+                                                      )}
+                                                      {/* {`${parseFloat(
+                                                        data?.attribute_evaluation
+                                                      ).toFixed(1)}`} */}
                                                     </div>
                                                     <p>
                                                       {data?.attribute_category}
@@ -1529,9 +1626,13 @@ export default function Product({
                                                             : "#85B2F1",
                                                       }}
                                                     >
-                                                      {`${parseFloat(
+                                                      {formatValue(
                                                         data?.attribute_evaluation
-                                                      ).toFixed(1)}`}
+                                                      )}
+
+                                                      {/* {`${parseFloat(
+                                                        data?.attribute_evaluation
+                                                      ).toFixed(1)}`} */}
                                                     </div>
                                                     <p>
                                                       {data?.attribute_category}
@@ -1654,11 +1755,95 @@ export default function Product({
                                         {formatValue(
                                           product.expert_reviews_rating
                                         )}
-                                        <ProsConsToolTip
-                                          hover_phrase={
-                                            product.expert_reviews_rating_phase
-                                          }
-                                        />
+                                        <div className="tooltip-display-content why-tooltip">
+                                          <div
+                                            className="mb-2 prosconsColor"
+                                            dangerouslySetInnerHTML={{
+                                              __html:
+                                                product.expert_reviews_rating_phase,
+                                            }}
+                                          ></div>
+                                          {/* {console.log(
+                                            product?.expert_reviews_websites
+                                          )} */}
+
+                                          {/* for expert review  now I comment this code */}
+                                          {product?.expert_reviews_websites &&
+                                            product?.expert_reviews_websites?.map(
+                                              (data, index) => {
+                                                return (
+                                                  <div
+                                                    className="user__rating__popup"
+                                                    key={index}
+                                                  >
+                                                    <div className="user__rating__popup__list">
+                                                      <span
+                                                        className="user__rating__popup__rating"
+                                                        style={{
+                                                          background:
+                                                            getColorBasedOnScore(
+                                                              data?.evaluation
+                                                            ),
+                                                        }}
+                                                      >
+                                                        {formatValue(
+                                                          data?.evaluation
+                                                        )}
+                                                      </span>
+                                                      <div className="user__rating__popup__content">
+                                                        {data?.image !==
+                                                          null && (
+                                                          <a
+                                                            href={`/link?p=${btoa(
+                                                              data?.website_name
+                                                            )}`}
+                                                          >
+                                                            <img
+                                                              src={`${data?.image}`}
+                                                            />
+                                                          </a>
+                                                        )}
+
+                                                        <p>
+                                                          {" "}
+                                                          {data?.name !==
+                                                          null ? (
+                                                            <a
+                                                              href={`/link?p=${btoa(
+                                                                data?.website_name
+                                                              )}`}
+                                                              style={{
+                                                                color:
+                                                                  "inherit",
+                                                              }}
+                                                            >
+                                                              {" "}
+                                                              {data?.name}
+                                                            </a>
+                                                          ) : (
+                                                            <a
+                                                              href={`/link?p=${btoa(
+                                                                data?.website_name
+                                                              )}`}
+                                                              style={{
+                                                                color:
+                                                                  "inherit",
+                                                              }}
+                                                            >
+                                                              {" "}
+                                                              {extractDomainName(
+                                                                data?.website_name
+                                                              )}
+                                                            </a>
+                                                          )}
+                                                        </p>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                );
+                                              }
+                                            )}
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -1806,6 +1991,7 @@ export default function Product({
                                     <Accordion.Header as="div">
                                       <div className="table-accordion-header">
                                         {attribute}
+                                        {/* {console.log(attribute,"hellow")} */}
                                         {/* {console.log(
                                           product.attributes_new[attribute][0]
                                             ?.attribute_evaluation,
@@ -2055,7 +2241,7 @@ export default function Product({
                                                                     attributeValues.attribute_is_worse_than *
                                                                       100 >
                                                                       60
-                                                                  ? "red"
+                                                                  ? "#ce434b"
                                                                   : "#27304e",
                                                               fontSize: "15px",
                                                               textDecoration:
@@ -2071,23 +2257,16 @@ export default function Product({
                                                               textDecorationThickness:
                                                                 "1.5px",
                                                               textDecorationColor:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_better_than *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
-                                                                      100 >
-                                                                      60
-                                                                  ? "red"
-                                                                  : "#27304e",
+                                                                getColorAttr(
+                                                                  attributeValues
+                                                                ),
                                                               textUnderlineOffset:
                                                                 "5px",
                                                             }}
                                                           >
+                                                            {/* {console.log(
+                                                              attributeValues
+                                                            )} */}
                                                             {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
                                                             {
                                                               <span
@@ -2445,7 +2624,7 @@ export default function Product({
                                                                     attributeValues.attribute_is_worse_than *
                                                                       100 >
                                                                       60
-                                                                  ? "red"
+                                                                  ? "#ce434b"
                                                                   : "#27304e",
                                                               fontSize: "15px",
                                                               textDecoration:
@@ -2461,19 +2640,14 @@ export default function Product({
                                                               textDecorationThickness:
                                                                 "1.5px",
                                                               textDecorationColor:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                // here I change attribute_is_better_than to attribute_is_same_as
-                                                                attributeValues.attribute_is_same_as *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
+                                                                attributeValues.is_better_than *
+                                                                  100 >=
+                                                                70
+                                                                  ? "#437ece"
+                                                                  : attributeValues.is_worse_than *
                                                                       100 >
-                                                                      60
-                                                                  ? "red"
+                                                                    70
+                                                                  ? "#ce434b"
                                                                   : "#27304e",
                                                               textUnderlineOffset:
                                                                 "5px",
@@ -2495,7 +2669,7 @@ export default function Product({
                                                                         attributeValues.attribute_is_worse_than *
                                                                           100 >
                                                                           60
-                                                                      ? "red"
+                                                                      ? "#ce434b"
                                                                       : "#27304e",
                                                                 }}
                                                               >

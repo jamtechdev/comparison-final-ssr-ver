@@ -67,7 +67,7 @@ export default function ReviewSlider({ favSlider }) {
                       alt={`${item?.permalink}`}
                     />
                     <div className="footer_content">
-                      <span>{item?.name}</span>
+                      <span className="text-wrapper">{item?.name}</span>
                       <p>{item?.category}</p>
                     </div>
                     <span

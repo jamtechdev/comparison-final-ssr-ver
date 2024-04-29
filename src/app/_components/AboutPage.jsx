@@ -36,7 +36,7 @@ function AboutPage({ slug, aboutData }) {
               <Row>
                 <Col md={12}>
                   <div
-                    className="contentPara"
+                    className="content-para"
                     dangerouslySetInnerHTML={{ __html: aboutData?.content }}
                   ></div>
                 </Col>

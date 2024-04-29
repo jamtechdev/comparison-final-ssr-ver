@@ -19,7 +19,7 @@ const GuidePagination = ({ pagination }) => {
   }, []);
 
   const handlePageClick = (page) => {
-    const newPage = typeof page === 'number' ? page : currentPage + 1;
+    const newPage = typeof page === "number" ? page : currentPage + 1;
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     setCurrentPage(newPage);
@@ -28,22 +28,13 @@ const GuidePagination = ({ pagination }) => {
     window.history.pushState({}, "", url.toString());
     router.push(`?${currentParams.toString()}`, { scroll: false });
 
-    // Fetch data without async/await
-    fetch(`https://your-api-url.com/data?page=${newPage}`)
-      .then(response => response.json())
-      .then(data => {
-        // Handle the fetched data
-        console.log(data);
-        // Scroll to the top of the product list
-        if (productListRef.current) {
-          productListRef.current.scrollIntoView({ behavior: "smooth" });
-        }
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
+    // Scroll to the top of the product list
+    const productListElement = document.getElementById("scroll__top");
+    if (productListElement) {
+      productListElement.scrollIntoView({ behavior: "smooth" });
+    }
   };
-
+  // Generate an array of page numbers
   const pagesArray = Array.from({ length: total_pages }, (_, i) => i + 1);
 
   return (
@@ -53,15 +44,12 @@ const GuidePagination = ({ pagination }) => {
           <ul className="custom-pagination">
             {currentPage === 1 ? null : (
               <>
-                <li
-                  className="page_first"
-                  onClick={() => handlePageClick(1)}
-                >
+                <li onClick={() => handlePageClick(1)} className="page_first">
                   First
                 </li>
                 <li
-                  className="page_previous"
                   onClick={() => handlePageClick(currentPage - 1)}
+                  className="page_previous"
                 >
                   Previous
                 </li>
@@ -84,16 +72,16 @@ const GuidePagination = ({ pagination }) => {
             ))}
             {currentPage < total_pages && (
               <li
-                className="page_next"
                 onClick={() => handlePageClick(currentPage + 1)}
+                className="page_next"
               >
                 Next
               </li>
             )}
             {currentPage === total_pages ? null : (
               <li
-                className="page_last"
                 onClick={() => handlePageClick(total_pages)}
+                className="page_last"
               >
                 Last
               </li>

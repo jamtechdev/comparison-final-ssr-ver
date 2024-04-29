@@ -71,7 +71,7 @@ function ProductPageOutline({ product, currentIndexId }) {
   }, [currentIndexId]);
 
   const scrollToSection = (sectionId) => (e) => {
-    console.log(sectionId, "sectionId");
+    // console.log(sectionId, "sectionId");
     e.preventDefault();
 
     const section = document.getElementById(sectionId);
@@ -90,8 +90,6 @@ function ProductPageOutline({ product, currentIndexId }) {
     }, 1000);
   };
 
-  // console.log(activeParentIndex);
-
   return (
     <>
       <ol>
@@ -101,83 +99,78 @@ function ProductPageOutline({ product, currentIndexId }) {
             (attribute, index) => {
               const mainNumber = index + 1;
               return (
-                <>
-                  {/* {console.log(
-                            product?.attributes[attribute][0]
-                          )} */}
-
-                  <li
-                    className={`outlineList ${
+                <li
+                  key={index}
+                  className={`outlineList ${
+                    activeParentIndex === attribute ? "outline-active" : ""
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleClick(attribute);
+                  }}
+                >
+                  <a
+                    className={`outlineLink ${
                       activeParentIndex === attribute ? "outline-active" : ""
                     }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleClick(attribute);
-                    }}
+                    href=""
+                    onClick={scrollToSection(
+                      attribute.trim().replace(/\s+/g, "-")
+                    )}
                   >
-                    <a
-                      className={`outlineLink ${
-                        activeParentIndex === attribute ? "outline-active" : ""
-                      }`}
-                      href=""
-                      onClick={scrollToSection(
-                        attribute.trim().replace(/\s+/g, "-")
-                      )}
-                    >
-                      {" "}
-                      {`${attribute}`}
-                    </a>
+                    {" "}
+                    {`${attribute}`}
+                  </a>
 
-                    {product.attributes[attribute].map(
-                      (attributeValues, valueIndex) => {
-                        const subMainNumber = `${mainNumber}.${valueIndex + 1}`;
-                        return (
-                          <React.Fragment>
-                            {attributeValues?.text_part === "" ||
-                            attributeValues?.text_part === null ? (
-                              ""
-                            ) : (
-                              <ol key={valueIndex} className="ol-child">
-                                <li
+                  {product.attributes[attribute].map(
+                    (attributeValues, valueIndex) => {
+                      const subMainNumber = `${mainNumber}.${valueIndex + 1}`;
+                      return (
+                        <React.Fragment key={valueIndex}>
+                          {attributeValues?.text_part === "" ||
+                          attributeValues?.text_part === null ? (
+                            ""
+                          ) : (
+                            <ol className="ol-child">
+                              <li
+                                className={`outlineList ${
+                                  activeParentIndex ===
+                                  attributeValues.attribute
+                                    ? "outline-active"
+                                    : ""
+                                }`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  handleClick(attributeValues.attribute);
+                                }}
+                              >
+                                <a
                                   className={`outlineList ${
                                     activeParentIndex ===
                                     attributeValues.attribute
                                       ? "outline-active"
                                       : ""
                                   }`}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    handleClick(attributeValues.attribute);
-                                  }}
+                                  href="#"
+                                  onClick={scrollToSection(
+                                    attributeValues.attribute
+                                      .trim()
+                                      .replace(/\s+/g, "-")
+                                  )}
                                 >
-                                  <a
-                                    className={`outlineList ${
-                                      activeParentIndex ===
-                                      attributeValues.attribute
-                                        ? "outline-active"
-                                        : ""
-                                    }`}
-                                    href="#"
-                                    onClick={scrollToSection(
-                                      attributeValues.attribute
-                                        .trim()
-                                        .replace(/\s+/g, "-")
-                                    )}
-                                  >
-                                    {" "}
-                                    {`${attributeValues.attribute}`}
-                                  </a>
-                                </li>
-                              </ol>
-                            )}
-                          </React.Fragment>
-                        );
-                      }
-                    )}
-                  </li>
-                </>
+                                  {" "}
+                                  {`${attributeValues.attribute}`}
+                                </a>
+                              </li>
+                            </ol>
+                          )}
+                        </React.Fragment>
+                      );
+                    }
+                  )}
+                </li>
               );
             }
           )}
@@ -187,79 +180,78 @@ function ProductPageOutline({ product, currentIndexId }) {
             (attribute, index) => {
               const mainNumber = index + 4;
               return (
-                <>
-                  <li
+                <li
+                  key={index}
+                  className={`outlineList ${
+                    activeParentIndex === attribute ? "outline-active" : ""
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleClick(attribute);
+                  }}
+                >
+                  <a
                     className={`outlineList ${
                       activeParentIndex === attribute ? "outline-active" : ""
                     }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleClick(attribute);
-                    }}
+                    href=""
+                    onClick={scrollToSection(
+                      attribute.trim().replace(/\s+/g, "-")
+                    )}
                   >
-                    <a
-                      className={`outlineList ${
-                        activeParentIndex === attribute ? "outline-active" : ""
-                      }`}
-                      href=""
-                      onClick={scrollToSection(
-                        attribute.trim().replace(/\s+/g, "-")
-                      )}
-                    >
-                      {" "}
-                      {` ${attribute}`}
-                    </a>
+                    {" "}
+                    {` ${attribute}`}
+                  </a>
 
-                    {product.attributes[attribute].map(
-                      (attributeValues, valueIndex) => {
-                        const subMainNumber = `${mainNumber}.${valueIndex + 1}`;
-                        return (
-                          <React.Fragment>
-                            {attributeValues?.text_part === "" ||
-                            attributeValues?.text_part === null ? (
-                              ""
-                            ) : (
-                              <ol key={valueIndex} className="ol-child">
-                                <li
+                  {product.attributes[attribute].map(
+                    (attributeValues, valueIndex) => {
+                      const subMainNumber = `${mainNumber}.${valueIndex + 1}`;
+                      return (
+                        <React.Fragment key={valueIndex}>
+                          {attributeValues?.text_part === "" ||
+                          attributeValues?.text_part === null ? (
+                            ""
+                          ) : (
+                            <ol className="ol-child">
+                              <li
+                                className={`outlineList ${
+                                  activeParentIndex ===
+                                  attributeValues.attribute
+                                    ? "outline-active"
+                                    : ""
+                                }`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  handleClick(attributeValues.attribute);
+                                }}
+                              >
+                                <a
                                   className={`outlineList ${
                                     activeParentIndex ===
                                     attributeValues.attribute
                                       ? "outline-active"
                                       : ""
                                   }`}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    handleClick(attributeValues.attribute);
-                                  }}
+                                  href="#"
+                                  onClick={scrollToSection(
+                                    attributeValues.attribute
+                                      .trim()
+                                      .replace(/\s+/g, "-")
+                                  )}
                                 >
-                                  <a
-                                    className={`outlineList ${
-                                      activeParentIndex ===
-                                      attributeValues.attribute
-                                        ? "outline-active"
-                                        : ""
-                                    }`}
-                                    href="#"
-                                    onClick={scrollToSection(
-                                      attributeValues.attribute
-                                        .trim()
-                                        .replace(/\s+/g, "-")
-                                    )}
-                                  >
-                                    {" "}
-                                    {` ${attributeValues.attribute}`}
-                                  </a>
-                                </li>
-                              </ol>
-                            )}
-                          </React.Fragment>
-                        );
-                      }
-                    )}
-                  </li>
-                </>
+                                  {" "}
+                                  {` ${attributeValues.attribute}`}
+                                </a>
+                              </li>
+                            </ol>
+                          )}
+                        </React.Fragment>
+                      );
+                    }
+                  )}
+                </li>
               );
             }
           )}

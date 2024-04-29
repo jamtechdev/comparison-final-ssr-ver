@@ -34,7 +34,7 @@ export default React.forwardRef(function ProductListing({
   }
 
   return (
-    <div className="best-product-wrapper" ref={productListRef}>
+    <div className="best-product-wrapper" id="scroll__top">
       <span className="testing__text">
         <i>{text_before_listing}</i>
       </span>

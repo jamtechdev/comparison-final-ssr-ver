@@ -9,7 +9,6 @@ import CorrelationChart from "../_chart/CorrelationChart";
 import { ChartName } from "../_chart/data/enums/ChartName.ts";
 
 export const searchForPatternAndReplace = (data) => {
-  // console.log(data)
   const shortCodePatternsRE =
     /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)[^\]]*\]/g;
 
@@ -58,7 +57,6 @@ const useChart = () => {
   ) {
     const parentDiv = document.createElement("div");
     parentDiv.classList.add("container-div");
-    // parentDiv.classList.add("shortcode_table_scroll");
     element.insertAdjacentElement("afterend", parentDiv);
     for (let indx = 0; indx < shortCodesMatched.length; indx++) {
       if (
@@ -90,10 +88,7 @@ const useChart = () => {
 
           if (plotData && plotData.length > 0) {
             const container = document.createElement("div");
-            container.style.padding = "0px";
-            // container.style.padding = "10px";
-            // container.style.marginLeft = "-15px";
-            // container.style.marginRight = "-15px";
+            container.style.padding = "20px";
             container.setAttribute("class", "chart_Append" + index);
             parentDiv.insertAdjacentElement("beforeend", container);
             const root = createRoot(container);
@@ -105,7 +100,7 @@ const useChart = () => {
             // console.log(
             //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
             // );
-            // console.log(shortCodesMatched[indx].pattern)
+            // console.log(shortCodesMatched[indx].pattern);
             if (numberOfChartAppends == 1) {
               if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
                 root.render(
