@@ -142,7 +142,7 @@ function ComparisonPieChart(props) {
       .enter()
       .append("td")
       .each(function (d, i) {
-        // console.log(d);
+        console.log(d);
         if (i == 0) {
           d3.select(this)
             .append("div")
@@ -169,9 +169,9 @@ function ComparisonPieChart(props) {
 
           d?.forEach((item, index) => {
             let color;
-            if (indexId === 0) {
+            if (indexId === 1) {
               color = "#437ECE";
-            } else if (indexId === 1) {
+            } else if (indexId === 0) {
               color = "#FF8F0B";
             } else {
               color = "red";

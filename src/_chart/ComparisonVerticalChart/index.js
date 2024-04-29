@@ -21,15 +21,31 @@ function ComparisonVerticalChart(props) {
   const width = 500 - margin.left - margin.right;
   const heights = 450 - margin.top - margin.bottom;
   const svg = d3.select(svgRef.current).select("g");
-  // console.log(data, "data");
+  console.log(data, "data");
 
   // Remove zero after decimal point
-  let updatedData = data.map(({ label, ...rest }) => ({
-    ...rest,
-    label: label.split("-").map(Number).join("-"),
-  }));
+  // let updatedData = data.map(({ label, ...rest }) => ({
+  //   ...rest,
+  //   label: label.split("-").map(Number).join("-"),
+  // }));
 
-  // console.log(updatedData, "neet");
+
+  let updatedData = data.map(({ label, ...rest }, index) => {
+    if(label.split("-").map(Number).join("-") === "NaN"){
+     const value  = '10-'+ label.match(/\d+/)
+      return {
+        ...rest,
+        label: value,
+      }
+    }else{
+      return {
+        ...rest,
+        label: label.split("-").map(Number).join("-"),
+      }
+    }
+});
+
+  // console.log(updatedData,'updatedData',);
 
   // console.log(updatedData);
   const slugsExtract = slug.split("-vs-");
@@ -54,7 +70,7 @@ function ComparisonVerticalChart(props) {
     }
   });
 
-  // console.log(fristIndex, secondIndex, thirdIndex);
+  console.log(updatedData, "updatedData");
   svg
     .selectAll("bar")
     .data(updatedData)
