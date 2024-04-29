@@ -17,11 +17,10 @@ export default async function PageSwitch({
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
-      // console.log(guide)
       // console.log(pageData[1],"neetx")
       // console.log(pageData[1]?.data,"neets");
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
-      const productTable = await getProductForTable(slug);
+      const productTable = await getProductForTable(guide?.category_url,slug);
       // console.log(categorySlug)
       PageToRender = (
         <GuidePage
@@ -128,9 +127,9 @@ async function getCategoryAttributes(category_id, slug) {
   }
   return response.json();
 }
-async function getProductForTable(slug) {
+async function getProductForTable(category_url, slug) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/guide/products-table/${slug}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/guide/products-table/${category_url}/${slug}`,
     {
       next: { revalidate: 10 },
       cache: "no-cache",
