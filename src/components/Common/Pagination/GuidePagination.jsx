@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useRouter, useSearchParams } from "next/navigation";
+import ProductListing from "../ProductListing/ProductListing";
 
 const GuidePagination = ({ pagination }) => {
   const { current_page, total_pages } = pagination;
-  const [currentPage, setCurrentPage] = useState(current_page || 1); // Initialize currentPage to current_page or 1 if not provided
+  const [currentPage, setCurrentPage] = useState(current_page || 1);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const productListRef = useRef(null);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -23,13 +25,25 @@ const GuidePagination = ({ pagination }) => {
     setCurrentPage(newPage);
     currentParams.set("page", newPage);
     url.searchParams.set("page", newPage);
-    // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
     router.push(`?${currentParams.toString()}`, { scroll: false });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Fetch data without async/await
+    fetch(`https://your-api-url.com/data?page=${newPage}`)
+      .then(response => response.json())
+      .then(data => {
+        // Handle the fetched data
+        console.log(data);
+        // Scroll to the top of the product list
+        if (productListRef.current) {
+          productListRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
   };
 
-  // Generate an array of page numbers
   const pagesArray = Array.from({ length: total_pages }, (_, i) => i + 1);
 
   return (
@@ -38,12 +52,20 @@ const GuidePagination = ({ pagination }) => {
         <Col className="d-flex justify-content-center text-center">
           <ul className="custom-pagination">
             {currentPage === 1 ? null : (
-              <li
-                className="page_previous"
-                onClick={() => handlePageClick(currentPage - 1)}
-              >
-                Previous
-              </li>
+              <>
+                <li
+                  className="page_first"
+                  onClick={() => handlePageClick(1)}
+                >
+                  First
+                </li>
+                <li
+                  className="page_previous"
+                  onClick={() => handlePageClick(currentPage - 1)}
+                >
+                  Previous
+                </li>
+              </>
             )}
             {pagesArray.map((item, index) => (
               <li
@@ -79,6 +101,9 @@ const GuidePagination = ({ pagination }) => {
           </ul>
         </Col>
       </Row>
+      <div ref={productListRef}>
+        <ProductListing />
+      </div>
     </>
   );
 };

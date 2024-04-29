@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+// ProductListing.jsx
+
+import React, { useEffect, useRef } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import Product from "./Product/Product";
-export default function ProductListing({
+
+export default React.forwardRef(function ProductListing({
   products,
   productPositionArray,
   handleToggleCollapse,
@@ -11,7 +14,15 @@ export default function ProductListing({
   guidePhraseData,
   slug,
   order,
-}) {
+}, ref) {
+  const productListRef = ref || useRef(null);
+
+  useEffect(() => {
+    if (productListRef.current) {
+      productListRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [products]); // Scroll when products change
+
   function findProductPosition(name) {
     const index = Object.values(productPositionArray).indexOf(name);
 
@@ -21,13 +32,14 @@ export default function ProductListing({
       return null;
     }
   }
-  // console.log(text_before_listing,"kakashi")
+
   return (
-    <div className="best-product-wrapper">
+    <div className="best-product-wrapper" ref={productListRef}>
       <span className="testing__text">
         <i>{text_before_listing}</i>
       </span>
-      {products.map((product, index) => (
+     
+      {products?.map((product, index) => (
         <Product
           guidePhraseData={guidePhraseData}
           incomingProduct={product}
@@ -44,4 +56,4 @@ export default function ProductListing({
       </span>
     </div>
   );
-}
+});

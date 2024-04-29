@@ -12,6 +12,8 @@ import ProsConsToolTip from "../Svg/ProsConsToolTip";
 import Skeleton from "react-loading-skeleton";
 import Rating from "../Common/Rating/Rating";
 import formatValue from "@/_helpers/formatValue";
+import useScreenSize from "@/_helpers/useScreenSize";
+
 
 const TechnicalAccordion = React.memo(
   ({ product, overallScoreColor, initialDisplay }) => {
@@ -33,6 +35,7 @@ const TechnicalAccordion = React.memo(
         return "#000";
       }
     };
+    const {isMobile}=useScreenSize()
 
     const [loading, setloading] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({
@@ -119,7 +122,12 @@ const TechnicalAccordion = React.memo(
                       <div
                         className="tooltip-display-content"
                         ref={tooltipRef}
-                        style={{ left: tooltipPosition.left }}
+                        
+                        style={{
+                          left: isMobile ? "50%" : 0,
+                          transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+                          width: isMobile ? "200px" : "250px",
+                        }}
                       >
                         {product?.technical_score_descriptions.description && (
                           <p className="mb-2">
@@ -234,7 +242,11 @@ const TechnicalAccordion = React.memo(
                       <div
                         className="tooltip-display-content"
                         ref={tooltipRef}
-                        style={{ left: tooltipPosition.left }}
+                        style={{
+                          left: isMobile ? "50%" : 0,
+                          transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+                          width: isMobile ? "200px" : "250px"
+                        }}
                       >
                         {product?.users_rating_descriptions.description && (
                           <p className="mb-2">
@@ -257,7 +269,7 @@ const TechnicalAccordion = React.memo(
                               return (
                                 <React.Fragment key={index}>
                                   <div className="scroe_section" key={index}>
-                                    <p className="text-end">
+                                    <p className="text-end" >
                                       {`${parseFloat(data?.importance).toFixed(
                                         1
                                       )}%`}
@@ -324,10 +336,11 @@ const TechnicalAccordion = React.memo(
                 <div className="spec-section">
                   <div className="spec-item">
                     <div className="spec-col">
-                      <div className="query text-ellipse ranking-tooltip-title">
+                      <div className="query text-ellipse ranking-tooltip-title" >
                         Expert reviews
                         <QuestionIcon
                           attributes={product?.expert_reviews_descriptions}
+                         
                         />
                       </div>
                     </div>
@@ -428,14 +441,15 @@ const TechnicalAccordion = React.memo(
               <div className="spec-section">
                 <div className="spec-item">
                   <div className="spec-col">
-                    <div className="query">
+                    <div className="query ranking-tooltip-title"   onMouseOver={adjustTooltipPosition} >
                       Ratio Quality-Price
                       <QuestionIcon
                         attributes={product?.ratio_qulitiy_points_descriptions}
+  
                       />
                     </div>
                   </div>
-                  <div className="spec-col ">
+                  <div className="spec-col " >
                     <div
                       className={`${
                         product?.ratio_quality_price_points_phase !== ""
@@ -524,6 +538,7 @@ const TechnicalAccordion = React.memo(
                         </span>
                         <div className="show-btn" onClick={() => {}}>
                           Show All <i className="ri-arrow-down-s-line"></i>
+                          
                         </div>
                         <div className="hide-btn" onClick={() => {}}>
                           Hide All <i className="ri-arrow-up-s-line"></i>
@@ -670,7 +685,7 @@ const TechnicalAccordion = React.memo(
                                                   </i>
                                                   <div
                                                     className="tooltip-display-content"
-                                                    style={{ opacity: "100%" }}
+                                                    style={{backgroundColor:"blue"}}
                                                   >
                                                     Information is not verified.
                                                     If you believe this is a
@@ -904,6 +919,7 @@ const TechnicalAccordion = React.memo(
                                   <div className="spec-col">
                                     <div className="query">
                                       {attributeValues?.attribute}
+                                   
                                       <QuestionIcon
                                         attributes={
                                           attributeValues && attributeValues
@@ -911,7 +927,7 @@ const TechnicalAccordion = React.memo(
                                       />
                                     </div>
                                   </div>
-                                  <div className="spec-col">
+                                  <div className="spec-col ">
                                     <div className="spec-col">
                                       {attributeValues.attribute_value !=
                                         "yes" &&
@@ -1032,7 +1048,12 @@ const TechnicalAccordion = React.memo(
                                                 </i>
                                                 <div
                                                   className="tooltip-display-content"
-                                                  style={{ opacity: "100%" }}
+                                                  style={{
+                                                    left: isMobile ? "50%" : 0,
+                                                    transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+                                                    width: isMobile ? "200px" : "250px",
+                                                    opacity:"100%",
+                                                  }}
                                                 >
                                                   Information is not verified.
                                                   If you believe this is a
