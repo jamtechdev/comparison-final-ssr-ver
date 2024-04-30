@@ -72,7 +72,22 @@ const useComparisonChart = (chartData, pageType, slug) => {
         const correlation_maxX = Number(chartData.rang_max_x) ?? null;
         const correlation_minY = Number(chartData.rang_min_y) ?? null;
         const correlation_maxY = Number(chartData.rang_max_y) ?? null;
+        // console.log(chartData);
+        const chartDatas = {
+          data: [
+            { label: "no", value: 66.7 },
+            { label: "yes", value: 33.3 },
+          ],
+          products: [
+            { product_name: "Average Title test ", color: "#FF8F0B" },
+            { product_name: "DreameBot D9 Max", color: "#437ECE" },
+          ],
+          type: "pie-chart",
+          unitY: "%",
+        };
         const plotData = await regenerateData(chartData);
+
+        // console.log(chartDatas?.color, "plotData");
 
         if (plotData && plotData.length > 0) {
           const container = document.createElement("div");
@@ -90,14 +105,15 @@ const useComparisonChart = (chartData, pageType, slug) => {
             if (chartData?.type === "pie-chart") {
               root.render(
                 <ComparisonPieChart
-                  data={plotData}
+                  data={chartData?.data}
                   pieSize={150}
                   svgSize={180}
                   innerRadius={0}
                   containerId={`pie${uuidv4()}`}
                   chartTitle={chartTitle}
                   xUnit={xAxisUnit}
-                  pieProductBatch={pieProductBatch}
+                  pieProductBatch={chartData?.products}
+                  // color={chartDatas?.color}
                 />
               );
             }

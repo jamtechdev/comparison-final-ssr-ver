@@ -13,9 +13,20 @@ function ComparisonPieChart(props) {
     chartTitle,
     xUnit,
     pieProductBatch,
+    color,
   } = props;
   const outerRadius = pieSize / 2;
   const center = svgSize / 2;
+
+  console.log(color, "datas");
+
+  // const datas = {
+  //   label: ["no", "yes"],
+  //   data: [66.7, 33.3],
+  //   products: ["DreameBot D9 Max", "Average Title test"],
+  //   colors: ["red", "orange"],
+  //   batch: ["Batch 1", "Batch 2"],
+  // };
 
   useEffect(() => {
     drawChart();
@@ -129,6 +140,7 @@ function ComparisonPieChart(props) {
     const colors = ["#437ECE", "#FF8F0B", "#28A28C"];
     const rows = tbody.selectAll("tr").data(data).enter().append("tr");
     let indexId = 0;
+
     const cells = rows
       .selectAll("td")
       .data(function (d, i) {
@@ -142,7 +154,6 @@ function ComparisonPieChart(props) {
       .enter()
       .append("td")
       .each(function (d, i) {
-        console.log(d);
         if (i == 0) {
           d3.select(this)
             .append("div")
@@ -164,32 +175,25 @@ function ComparisonPieChart(props) {
             .text((d) => `${d} ${xUnit}`);
         }
 
-        if (i === 3) {
-          // console.log(indexId);
-
-          d?.forEach((item, index) => {
-            let color;
-            if (indexId === 1) {
-              color = "#437ECE";
-            } else if (indexId === 0) {
-              color = "#FF8F0B";
-            } else {
-              color = "red";
+        if (i === 3 && d) {
+          // console.log(d)
+        
+       
+          d.forEach((element) => {
+            if (element?.product_name) {
+              d3.select(this)
+                .append("span")
+                .attr("class", "graph-batch")
+                .style("display", "inline-block")
+                .style("padding", "5px 5px")
+                .style("margin", "2px")
+                .style("font-size", "12px")
+                .style("border", `1px solid ${element?.color}`)
+                .style("border-radius", "3px")
+                .style("background-color", "#fff")
+                .style("color", element?.color)
+                .text(`${element?.product_name}`);
             }
-            indexId = indexId + 1;
-
-            d3.select(this)
-              .append("span")
-              .attr("class", "graph-batch")
-              .style("display", "inline-block")
-              .style("padding", "5px 5px")
-              .style("margin", "2px")
-              .style("font-size", "12px")
-              .style("border", `1px solid ${color}`)
-              .style("border-radius", "3px")
-              .style("background-color", "#fff")
-              .style("color", color)
-              .text(`${item}`);
           });
         }
       });

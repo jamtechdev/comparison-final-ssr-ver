@@ -70,7 +70,7 @@ function ComparisonVerticalChart(props) {
     }
   });
 
-  console.log(updatedData, "updatedData");
+  // console.log(updatedData, "updatedData");
   svg
     .selectAll("bar")
     .data(updatedData)
