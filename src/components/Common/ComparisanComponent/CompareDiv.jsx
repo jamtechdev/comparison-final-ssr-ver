@@ -558,29 +558,18 @@ function CompareDiv({
         attributeDropDown={[...categroyAttributes].reverse()}
       />
       <section className="mt-3">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">Best Alternatives</h2>
-              {/* <p>No Data Found</p> */}
-              <ReviewSlider favSlider={bestAlternative?.alternative_products} index={index} />
-              {/* {product?.alternative_products?.map((data, index) => {
-                return (
-                  <React.Fragment key={index}>
-                    <h2 className="site-main-heading">{data?.heading}</h2>
-                    {data?.alternative_products.length != 0 ? (
-                      <ReviewSlider favSlider={data?.alternative_products} />
-                    ) : (
-                      <span className="text-center m-2">
-                        No Alternative Products Found
-                      </span>
-                    )}
-                  </React.Fragment>
-                );
-              })} */}
-            </Col>
-          </Row>
-        </Container>
+      <Container>
+      <Row>
+        <Col md={12}>
+          <h2 className="site-main-heading">Best Alternatives</h2>
+          {bestAlternative?.alternative_products ? (
+            <ReviewSlider favSlider={bestAlternative?.alternative_products} />
+          ) : (
+            <p>No Data Found</p>
+          )}
+        </Col>
+      </Row>
+    </Container>
       </section>
       <section>
         <Container>
