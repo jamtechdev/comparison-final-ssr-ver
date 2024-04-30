@@ -65,9 +65,10 @@ export default function BottomBar({
         const permalinks = sortedPermalinksArray.map((item) => item.permalink);
         const permalinkSlug = permalinks.join("-vs-");
         setTimeout(() => {
-          router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
-            scroll: false,
-          });
+          window.location.href = `/${categoryInURL}/${permalinkSlug}`;
+          // router.push(`/${categoryInURL}/${permalinkSlug}`, undefined, {
+          //   scroll: false,
+          // });
         }, 1000);
       }
     }

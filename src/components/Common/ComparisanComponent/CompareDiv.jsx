@@ -332,6 +332,7 @@ function CompareDiv({
             ))}
         </Container>
       </section>
+
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -355,6 +356,7 @@ function CompareDiv({
           />
         </Container>
       </section>
+
       {/* {console.log(bestAlternative?.text_part)} */}
       {bestAlternative && bestAlternative?.text_part !== null && (
         <section className="contentSec my-3">
@@ -590,7 +592,11 @@ function CompareDiv({
               </h2>
             </Col>
             <Col md={12}>
-              <ProductSlider favSlider={bestAlternative?.related_guides} />
+              <ProductSlider
+                favSlider={bestAlternative?.related_guides}
+                slug={slug}
+                indexSlider={0}
+              />
             </Col>
           </Row>
         </Container>
