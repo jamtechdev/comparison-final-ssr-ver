@@ -10,24 +10,23 @@ const QuestionIcon = ({ attributes }) => {
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
     if (!tooltip) return;
-
-    const tooltipRect = tooltip.getBoundingClientRect();
-
+  
     const viewportWidth = document.documentElement.clientWidth;
-
-    const tooltipWidth = tooltipRect.width;
-    console.log(viewportWidth - tooltipWidth / 2 - viewportWidth + 50);
-
+    const isMobile = viewportWidth <= 768; // Example breakpoint for mobile/desktop
+  
+    // Calculate the desired width based on screen size
+    const tooltipWidth = isMobile ? 140 : 250;
+  
     // Calculate ideal left position for centered alignment
     const idealLeft = (viewportWidth - tooltipWidth) / 2;
-
+  
     // Calculate the final left position to ensure the tooltip stays within the screen boundaries
     const left = Math.min(
       Math.max(0, idealLeft),
-      viewportWidth - tooltipWidth / 2 - viewportWidth + 50
+      viewportWidth - tooltipWidth
     );
-
-    setTooltipPosition({ ...tooltipPosition, left });
+  
+    setTooltipPosition({ ...tooltipPosition, left, width: tooltipWidth });
   }
   const {isMobile}=useScreenSize();
   return (
@@ -40,15 +39,15 @@ const QuestionIcon = ({ attributes }) => {
       </svg>
       {/* { console.log(attributes)} */}
       {attributes !== undefined && (
-        <div
-          className="display-content"
-          ref={tooltipRef}
-          style={{
-            left: isMobile ? "50%" : 0,
-            transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
-            width: isMobile ? "200px" : "250px",
-          }}
-        >
+           <div
+      className="display-content"
+      ref={tooltipRef}
+      style={{
+        left: isMobile ? "50%" : 0,
+        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
+        width: isMobile ? "200px" : "250px",   
+      }}
+    >
           {attributes?.description && (
             <p className="mb-2">
               <b>What it is: </b>

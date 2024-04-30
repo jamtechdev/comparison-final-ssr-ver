@@ -106,7 +106,7 @@ export default function ComparisonsSlider(products) {
         {products &&
           filteredComparisons?.map(function (item, index) {
             return (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} style={{backgroundColor:"red"}}>
                 <div
                   className="comparisons-wrapper"
                   onClick={() =>
@@ -192,3 +192,5 @@ export default function ComparisonsSlider(products) {
     </section>
   );
 }
+
+

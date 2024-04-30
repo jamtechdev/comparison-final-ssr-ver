@@ -305,9 +305,10 @@ select {
 
 .site_tabs.graph-tab .nav-item button.active:before {
   border-top: 0.3em solid var(--color-bg) !important;
+  
 }
 
-.site_tabs.graph-tab .nav-item button:after {
+/* .site_tabs.graph-tab .nav-item button:after {
   content: attr(data-count);
   position: absolute;
   top: calc(100% - (-13px));
@@ -321,6 +322,23 @@ select {
   display: block;
   width: fit-content;
   margin: auto;
+  font-size: 16px;
+} */
+
+
+/* new css for rating buttons */
+
+.site_tabs.graph-tab .nav-item button:after {
+  content: attr(data-count);
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg);
+  padding: 8px;
+  border-radius: 5px;
+  color: var(--white-color);
+  min-width: 38px;
   font-size: 16px;
 }
 
