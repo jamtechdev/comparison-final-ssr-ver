@@ -17,7 +17,7 @@ const MultiRangeMobileSlider = ({
   const maxValRef = useRef(max);
   const range = useRef(null);
 
-  const step = 0.01; // Adjust the step value for better precision
+  const step = 1; // Adjust the step value for better precision
 
   const getPercent = useCallback((value) =>
     Math.round(((value - min) / (max - min)) * 100)
@@ -83,6 +83,7 @@ const MultiRangeMobileSlider = ({
 
   return (
     <div className="multi-range-slider-container">
+
       <input
         type="range"
         min={min}
