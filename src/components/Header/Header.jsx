@@ -210,13 +210,14 @@ export default function Header({ headerData, headerPhase }) {
                 {headerPhase && headerPhase?.compare}
               </li>
               <li>
-                <a href="#"> {headerPhase && headerPhase?.how_we_rank}</a>
+                <a href={`/${headerPhase?.how_we_rank_url}`}>
+                  {" "}
+                  {headerPhase && headerPhase?.how_we_rank}
+                </a>
               </li>
               {/* {console.log(headerPhase)} */}
               <li>
-                <a
-                  href={`/${headerPhase?.about_us_url}`}
-                >
+                <a href={`/${headerPhase?.about_us_url}`}>
                   {headerPhase && headerPhase?.about_us}
                 </a>
               </li>
