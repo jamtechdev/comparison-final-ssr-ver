@@ -36,6 +36,7 @@ import OutlineGenerator from "../OutlineGenerator/OutlineGenerator";
 import ProductSliderBlog from "../ProductSliderBlog/ProductSliderBlog";
 import ComparisionOutlineGenerator from "../OutlineGenerator/ComparisionOutlineGenerator";
 import MobileComparisonTool from "../MobileComparisonTool/MobileComparisonTool";
+import ProductReviewSlider from "../ProductSlider/ProductReviewSlider";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -563,7 +564,9 @@ function CompareDiv({
             <Col md={12}>
               <h2 className="site-main-heading">Best Alternatives</h2>
               {/* <p>No Data Found</p> */}
-              <ReviewSlider favSlider={bestAlternative?.alternative_products} />
+              <ProductReviewSlider
+                favSlider={bestAlternative?.alternative_products}
+              />
               {/* {product?.alternative_products?.map((data, index) => {
                 return (
                   <React.Fragment key={index}>
@@ -592,11 +595,7 @@ function CompareDiv({
               </h2>
             </Col>
             <Col md={12}>
-              <ProductSlider
-                favSlider={bestAlternative?.related_guides}
-                slug={slug}
-                indexSlider={0}
-              />
+              <ProductSlider favSlider={bestAlternative?.related_guides} />
             </Col>
           </Row>
         </Container>

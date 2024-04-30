@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import useScreenSize from "@/_helpers/useScreenSize";
 
-export default function ReviewSlider({ favSlider ,index}) {
+export default function ReviewSlider({ favSlider, index }) {
   // console.log(favSlider);
   // if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
@@ -20,39 +20,38 @@ export default function ReviewSlider({ favSlider ,index}) {
   const { isMobile } = useScreenSize();
   return (
     <section className={`product-slider review-slider-${index}`}>
-    <Swiper
-  slidesPerView={6}
-  modules={[Navigation, Pagination]}
-  spaceBetween={30}
-  loop={true}
-  onSwiper={(swiper) => {}}
-  navigation={{
-    nextEl: `.review-slider-${index} .swiper-next`,
-    prevEl: `.review-slider-${index} .swiper-prev`,
-  }}
-  pagination={favSlider?.length > 1 ? true : false}
-  breakpoints={{
-    320: {
-      slidesPerView: 2,
-      spaceBetween: 10,
-    },
-    768: {
-      slidesPerView: 3,
-      spaceBetween: 10,
-    },
-    1024: {
-      slidesPerView: 3,
-      spaceBetween: 20,
-    },
-    1200: {
-      slidesPerView: 6,
-      spaceBetween: 20,
-    },
-  }}
-  className={`product-slider review-slider-${index}`}
->
-
-  {/* Slides */}   
+      <Swiper
+        slidesPerView={6}
+        modules={[Navigation, Pagination]}
+        spaceBetween={30}
+        loop={true}
+        onSwiper={(swiper) => {}}
+        navigation={{
+          nextEl: `.review-slider-${index} .swiper-next`,
+          prevEl: `.review-slider-${index} .swiper-prev`,
+        }}
+        pagination={favSlider?.length > 1 ? true : false}
+        breakpoints={{
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1200: {
+            slidesPerView: 6,
+            spaceBetween: 20,
+          },
+        }}
+        className={`product-slider review-slider-${index}`}
+      >
+        {/* Slides */}
         {favSlider?.map((item, index) => {
           const url = item?.category?.replace(/\s+/g, "-").toLowerCase();
           return (
@@ -93,26 +92,26 @@ export default function ReviewSlider({ favSlider ,index}) {
         })}
       </Swiper>
       {isMobile
-          ? favSlider?.length > 2 && (
-              <>
-                <span className="swiper-prev">
-                  <i className="ri-arrow-left-s-line"></i>
-                </span>
-                <span className="swiper-next">
-                  <i className="ri-arrow-right-s-line"></i>
-                </span>
-              </>
-            )
-          : favSlider?.length > 6 && (
-              <>
-                <span className="swiper-prev">
-                  <i className="ri-arrow-left-s-line"></i>
-                </span>
-                <span className="swiper-next">
-                  <i className="ri-arrow-right-s-line"></i>
-                </span>
-              </>
-            )}
+        ? favSlider?.length > 2 && (
+            <>
+              <span className="swiper-prev">
+                <i className="ri-arrow-left-s-line"></i>
+              </span>
+              <span className="swiper-next">
+                <i className="ri-arrow-right-s-line"></i>
+              </span>
+            </>
+          )
+        : favSlider?.length > 6 && (
+            <>
+              <span className="swiper-prev">
+                <i className="ri-arrow-left-s-line"></i>
+              </span>
+              <span className="swiper-next">
+                <i className="ri-arrow-right-s-line"></i>
+              </span>
+            </>
+          )}
     </section>
   );
 }
