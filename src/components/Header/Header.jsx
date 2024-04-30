@@ -148,7 +148,9 @@ export default function Header({ headerData, headerPhase }) {
                     <Navbar.Brand href="">
                       {headerPhase && headerPhase?.how_we_rank}
                     </Navbar.Brand>
-                    <Navbar.Brand href="/about-us">
+                    <Navbar.Brand
+                      href={`${headerPhase?.about_us_url}/${headerPhase?.about_us_permalink}`}
+                    >
                       {headerPhase && headerPhase?.about_us}
                     </Navbar.Brand>
                     <Navbar.Brand href="#">
@@ -212,7 +214,11 @@ export default function Header({ headerData, headerPhase }) {
               </li>
               {/* {console.log(headerPhase)} */}
               <li>
-                <a href="/about-us">{headerPhase && headerPhase?.about_us}</a>
+                <a
+                  href={`/${headerPhase?.about_us_url}`}
+                >
+                  {headerPhase && headerPhase?.about_us}
+                </a>
               </li>
               <li>
                 <a href="#">{headerData && headerData?.contact}</a>

@@ -5,6 +5,7 @@ import CategoryArchive from "./CategoryArchive";
 import ProductCategoryArchivePage from "./ProductCategoryArchivePage";
 import Comparison from "./Comparison";
 import SinglePage from "./SinglePage";
+import AboutPage from "./AboutPage";
 export default async function PageSwitch({
   PageType,
   slug,
@@ -20,7 +21,7 @@ export default async function PageSwitch({
       // console.log(pageData[1],"neetx")
       // console.log(pageData[1]?.data,"neets");
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
-      const productTable = await getProductForTable(guide?.category_url,slug);
+      const productTable = await getProductForTable(guide?.category_url, slug);
       // console.log(categorySlug)
       PageToRender = (
         <GuidePage
@@ -73,10 +74,10 @@ export default async function PageSwitch({
       const compareData = pageData[0]?.data;
 
       // console.log(compareData?.category_url)
-      
 
       const graphComparisonProsCons = await getGraphComparisonProsCons(
-        pageData,categorySlug
+        pageData,
+        categorySlug
       );
 
       const compareDataCatAttribute = await getProductCategroyAttributes(
@@ -101,6 +102,15 @@ export default async function PageSwitch({
         />
       );
 
+      break;
+    case "AboutUs":
+      PageToRender = (
+        <AboutPage
+          slug={slug}
+          categorySlug={categorySlug}
+          aboutData={pageData[0]?.data}
+        />
+      );
       break;
     default:
       PageToRender = () => <div>No Page Found</div>;
@@ -183,7 +193,7 @@ async function getCompareProductByCatID(category_id, slug) {
   return response.json();
 }
 
-async function getGraphComparisonProsCons(data,categorySlug) {
+async function getGraphComparisonProsCons(data, categorySlug) {
   if (data.length === 2) {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/product/average/${categorySlug}?permalink1=${data[0]?.data?.permalink}&permalink2=${data[1]?.data?.permalink}`,

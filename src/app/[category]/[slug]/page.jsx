@@ -206,13 +206,14 @@ async function fetchDataBasedOnPageType(
       break;
     case "Comparison":
       const permalinks = slug.split("-vs-");
-      console.log(permalinks);
+      // console.log(permalinks);
       apiUrls = permalinks.map(
         (permalink) =>
           `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${permalink}`
       );
 
       break;
+
     default:
       return null;
   }

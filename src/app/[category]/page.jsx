@@ -39,6 +39,7 @@ async function getSlugType(category) {
 }
 
 async function getSlugMetaData(category) {
+  // console.log(category)
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/meta-data/${category}`,
     {
@@ -78,7 +79,6 @@ export async function generateMetadata({ params: { category } }) {
     alternates: {
       canonical: `${siteURL}/${category}`,
     },
-    
   };
 }
 
@@ -97,6 +97,9 @@ async function fetchDataBasedOnPageType(slug, pageType) {
       break;
     case "SinglePage":
       apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/single-page/${slug}`];
+      break;
+    case "AboutUs":
+      apiUrls = [`${process.env.NEXT_PUBLIC_API_URL}/about-us`];
       break;
     default:
       return null;
