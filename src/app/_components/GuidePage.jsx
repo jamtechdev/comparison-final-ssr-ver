@@ -957,14 +957,14 @@ export default function GuidePage({
                   : "No title found"}
               </h2>
               {/* {console.log(productForTable?.products?.length)} */}
-              {guide && productForTable?.products?.length > 1 && (
+              {/* {guide && productForTable?.products?.length > 1 && (
                 <CompareTable
                   guidePhraseData={guide?.page_phrases}
                   products={productForTable?.products}
                   categoryAttributes={attributesForTable && attributesForTable}
                   slug={slug}
                 />
-              )}
+              )} */}
             </Col>
           </Row>
         </Container>

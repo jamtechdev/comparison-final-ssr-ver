@@ -23,6 +23,9 @@ import toast, { Toaster } from "react-hot-toast";
 import Rating from "../../Rating/Rating";
 import Tested from "../../Tested/Tested";
 import useScreenSize from "@/_helpers/useScreenSize";
+import axios from "axios";
+import Loader from "@/app/_components/Loader";
+import ProductSkeleton from "../ProductSkeleton";
 export default function Product({
   position,
   incomingProduct,
@@ -37,25 +40,7 @@ export default function Product({
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const { isMobile } = useScreenSize();
-
-  const generateProductsWithAttributes = () => {
-    const productAttributes = {};
-    incomingProduct.attributes.forEach((attribute) => {
-      const categoryName = attribute.attribute_category.name;
-
-      if (!productAttributes[categoryName]) {
-        productAttributes[categoryName] = [];
-      }
-
-      productAttributes[categoryName].push(attribute);
-    });
-    // Update the original product object
-    incomingProduct.attributes_new = productAttributes;
-
-    return incomingProduct;
-  };
-
-  const product = generateProductsWithAttributes();
+  const product = incomingProduct;
   let initialDisplay = 5;
   const [displayedAttributesCount, setDisplayedAttributesCount] = useState({});
   const [loading, setloading] = useState(false);
@@ -99,12 +84,14 @@ export default function Product({
     }
   };
   const overallScoreColor = getColorBasedOnScore(
-    removeDecimalAboveNine(product?.overall_score)
+    removeDecimalAboveNine(incomingProduct?.overall_score)
   );
-  const technicalScoreColor = getColorBasedOnScore(product?.technical_score);
-  const userRatingColor = getColorBasedOnScore(product?.reviews);
+  const technicalScoreColor = getColorBasedOnScore(
+    incomingProduct?.technical_score
+  );
+  const userRatingColor = getColorBasedOnScore(incomingProduct?.reviews);
   const popularityColor = getColorBasedOnScore(
-    product?.ratio_quality_price_points
+    incomingProduct?.ratio_quality_price_points
   );
 
   // filter a value which numeric or string
@@ -238,7 +225,7 @@ export default function Product({
     return value;
   };
   // console.log(product)
-  const filteredTech_data = product?.tech_data?.filter(
+  const filteredTech_data = incomingProduct?.tech_data?.filter(
     (item) => item?.permalink === slug
   );
 
@@ -290,6 +277,73 @@ export default function Product({
       .replace("www.", "")
       .split(/[/?#]/)[0];
     return domain;
+  };
+
+  // There I use show all button to show all product attributes and hide all button to hide all product attributes by hit API call
+
+  const [productData, setProductData] = useState({});
+  const [productID, setProductID] = useState(null);
+  const [categoryID, setCategoryID] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  // console.log(productData, "neet");
+
+  const generateProductsWithAttributes = () => {
+    const productAttributes = {};
+    if (productData && productData.attributes) {
+      productData.attributes.forEach((attribute) => {
+        const categoryName = attribute.attribute_category.name;
+
+        if (!productAttributes[categoryName]) {
+          productAttributes[categoryName] = [];
+        }
+
+        productAttributes[categoryName].push(attribute);
+      });
+      // Update the original product object
+      productData.attributes_new = productAttributes;
+
+      return productData;
+    }
+  };
+
+  const attributesClearly = generateProductsWithAttributes();
+  console.log(attributesClearly, "neet");
+  const fetchProductData = async (productId, productCategory) => {
+    // console.log(producnctId, productCategory);
+    setIsLoading(true);
+    try {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/guide/attributes-data/${productCategory}/${productId}`,
+        {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+          },
+        }
+      );
+
+      if (res.status === 200) {
+        const data = res.data?.data;
+        setProductData(data);
+      } else {
+        console.error("Failed to fetch product data");
+      }
+    } catch (error) {
+      console.error("Error fetching product data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchProductData(productID, categoryID);
+  }, [productID, categoryID]);
+
+  const handleShowAllClick = async (productId, productCategory) => {
+    // console.log(productId, productCategory, "dataID");
+    if (!productData[productId]) {
+      setProductID(productId);
+      setCategoryID(productCategory);
+    }
   };
   return (
     <Fragment>
@@ -1329,13 +1383,29 @@ export default function Product({
                     className="product-listing-inner-content-table-accordion-btn"
                     onClick={toggleHidden}
                   >
-                    <div className="show-btn">
+                    <div
+                      className="show-btn"
+                      onClick={() =>
+                        handleShowAllClick(product?.id, product?.category_id)
+                      }
+                    >
                       Show All <i className="ri-arrow-down-s-line"></i>
                     </div>
                     <div className="hide-btn">
                       Hide All <i className="ri-arrow-up-s-line"></i>
                     </div>
                   </Accordion.Header>
+                  {isLoading && (
+                    <Skeleton
+                      height={35}
+                      count={
+                        displayedAttributesCount[product.name] &&
+                        displayedAttributesCount[product.name][attribute]
+                          ? displayedAttributesCount[product.name][attribute]
+                          : initialDisplay
+                      }
+                    />
+                  )}
                   <Row className="m-0">
                     <Col md={12} className="p-0">
                       <Accordion.Body className="d-flex inner-accordion flex-wrap">
@@ -1349,7 +1419,7 @@ export default function Product({
                             alt="double-arrow"
                           />
                           <div className="ranking-item-list-sec">
-                            {product?.guide_ratings
+                            {attributesClearly?.guide_ratings
                               .slice(0, 5)
                               ?.map((data, key) => {
                                 return (
@@ -1983,8 +2053,10 @@ export default function Product({
                             </Accordion.Body>
                           </Accordion.Item>
                           {/* Dynaic accordian items of first accordin */}
-                          {Object.keys(getAttributeHalf(product, "first")).map(
-                            (attribute, index) => {
+                          {attributesClearly?.attributes_new &&
+                            Object.keys(
+                              getAttributeHalf(attributesClearly, "first")
+                            ).map((attribute, index) => {
                               return (
                                 <Fragment key={index}>
                                   <Accordion.Item eventKey={index} key={index}>
@@ -1999,8 +2071,9 @@ export default function Product({
                                         )} */}
                                         <Questiontool
                                           attributes={
-                                            product.attributes_new[attribute][0]
-                                              ?.attribute_category
+                                            attributesClearly.attributes_new[
+                                              attribute
+                                            ][0]?.attribute_category
                                           }
                                         />
                                       </div>
@@ -2008,23 +2081,24 @@ export default function Product({
                                         className="count dark-color"
                                         style={{
                                           background:
-                                            product.attributes_new[attribute][0]
-                                              .attribute_evaluation >= 7.5
+                                            attributesClearly.attributes_new[
+                                              attribute
+                                            ][0].attribute_evaluation >= 7.5
                                               ? "#093673"
-                                              : product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation >=
-                                                  5 &&
-                                                product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation < 7.5
+                                              : attributesClearly
+                                                  .attributes_new[attribute][0]
+                                                  .attribute_evaluation >= 5 &&
+                                                attributesClearly
+                                                  .attributes_new[attribute][0]
+                                                  .attribute_evaluation < 7.5
                                               ? "#437ECE"
                                               : "#85B2F1",
                                         }}
                                       >
                                         {formatValue(
-                                          product.attributes_new[attribute][0]
-                                            ?.attribute_evaluation
+                                          attributesClearly.attributes_new[
+                                            attribute
+                                          ][0]?.attribute_evaluation
                                         )}
                                       </span>
                                       <div className="show-btn">
@@ -2038,7 +2112,9 @@ export default function Product({
                                     </Accordion.Header>
                                     <Accordion.Body>
                                       {loading == false ? (
-                                        product.attributes_new[attribute]
+                                        attributesClearly.attributes_new[
+                                          attribute
+                                        ]
                                           .slice(
                                             0,
                                             displayedAttributesCount[
@@ -2323,8 +2399,9 @@ export default function Product({
                                       )}
 
                                       {loading == false
-                                        ? product.attributes_new[attribute]
-                                            .length >
+                                        ? attributesClearly.attributes_new[
+                                            attribute
+                                          ].length >
                                             (displayedAttributesCount[
                                               product.name
                                             ] &&
@@ -2352,9 +2429,9 @@ export default function Product({
                                               <i
                                                 className={`ri-${
                                                   initialDisplay <
-                                                  product.attributes_new[
-                                                    attribute
-                                                  ].length
+                                                  attributesClearly
+                                                    .attributes_new[attribute]
+                                                    .length
                                                     ? "add"
                                                     : "subtract"
                                                 }-line`}
@@ -2366,48 +2443,58 @@ export default function Product({
                                   </Accordion.Item>
                                 </Fragment>
                               );
-                            }
-                          )}
+                            })}
                         </Accordion>
                         {/* Left According end*/}
+
                         {/* Right */}
                         <Accordion className="table-accordion w-50 p-0 right-accordion">
-                          {Object.keys(getAttributeHalf(product, "second")).map(
-                            (attribute, index) => {
+                          {attributesClearly?.attributes_new &&
+                            Object.keys(
+                              getAttributeHalf(attributesClearly, "second")
+                            ).map((attribute, index) => {
                               return (
                                 <Fragment key={index}>
                                   <Accordion.Item eventKey={index} key={index}>
                                     <Accordion.Header as="div">
                                       <div className="table-accordion-header">
                                         {attribute}
+                                        {/* {console.log(attribute,"hellow")} */}
+                                        {/* {console.log(
+                                          product.attributes_new[attribute][0]
+                                            ?.attribute_evaluation,
+                                          product.attributes_new[attribute][0]
+                                        )} */}
                                         <Questiontool
                                           attributes={
-                                            product.attributes_new[attribute][0]
-                                              ?.attribute_category
+                                            attributesClearly.attributes_new[
+                                              attribute
+                                            ][0]?.attribute_category
                                           }
                                         />
                                       </div>
                                       <span
-                                        className="count"
+                                        className="count dark-color"
                                         style={{
                                           background:
-                                            product.attributes_new[attribute][0]
-                                              .attribute_evaluation >= 7.5
+                                            attributesClearly.attributes_new[
+                                              attribute
+                                            ][0].attribute_evaluation >= 7.5
                                               ? "#093673"
-                                              : product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation >=
-                                                  5 &&
-                                                product.attributes_new[
-                                                  attribute
-                                                ][0].attribute_evaluation < 7.5
+                                              : attributesClearly
+                                                  .attributes_new[attribute][0]
+                                                  .attribute_evaluation >= 5 &&
+                                                attributesClearly
+                                                  .attributes_new[attribute][0]
+                                                  .attribute_evaluation < 7.5
                                               ? "#437ECE"
                                               : "#85B2F1",
                                         }}
                                       >
                                         {formatValue(
-                                          product.attributes_new[attribute][0]
-                                            ?.attribute_evaluation
+                                          attributesClearly.attributes_new[
+                                            attribute
+                                          ][0]?.attribute_evaluation
                                         )}
                                       </span>
                                       <div className="show-btn">
@@ -2421,7 +2508,9 @@ export default function Product({
                                     </Accordion.Header>
                                     <Accordion.Body>
                                       {loading == false ? (
-                                        product.attributes_new[attribute]
+                                        attributesClearly.attributes_new[
+                                          attribute
+                                        ]
                                           .slice(
                                             0,
                                             displayedAttributesCount[
@@ -2436,33 +2525,34 @@ export default function Product({
                                               : initialDisplay
                                           )
                                           .map(
-                                            (attributeValues, valueIndex) => (
-                                              <Fragment key={valueIndex}>
-                                                <div
-                                                  className="spec-section"
-                                                  key={valueIndex}
-                                                >
-                                                  <div className="spec-item">
-                                                    <div className="spec-col">
-                                                      <div className="query">
-                                                        {
-                                                          attributeValues.attribute
-                                                        }
-                                                        <QuestionIcon
-                                                          attributes={
-                                                            attributeValues &&
-                                                            attributeValues
+                                            (attributeValues, valueIndex) => {
+                                              return (
+                                                <Fragment key={valueIndex}>
+                                                  <div
+                                                    className="spec-section"
+                                                    key={valueIndex}
+                                                  >
+                                                    <div className="spec-item">
+                                                      <div className="spec-col">
+                                                        <div className="query">
+                                                          {
+                                                            attributeValues.attribute
                                                           }
-                                                        />
+                                                          <QuestionIcon
+                                                            attributes={
+                                                              attributeValues &&
+                                                              attributeValues
+                                                            }
+                                                          />
+                                                        </div>
                                                       </div>
-                                                    </div>
-                                                    <div className="spec-col">
                                                       <div className="spec-col">
                                                         {attributeValues.attribute_value !=
                                                           "yes" &&
                                                           attributeValues.attribute_value !=
                                                             "no" && (
                                                             <>
+                                                              {/* {console.log(attributeValues.hover_phase,"neets")} */}
                                                               <div
                                                                 className={`${
                                                                   attributeValues.hover_phase !==
@@ -2598,7 +2688,6 @@ export default function Product({
                                                               )}
                                                             </>
                                                           )}
-
                                                         {/* newww */}
                                                         {(attributeValues.attribute_value ==
                                                           "yes" ||
@@ -2615,7 +2704,7 @@ export default function Product({
                                                               color:
                                                                 attributeValues.attribute_value ==
                                                                   "yes" &&
-                                                                attributeValues.attribute_is_same_as *
+                                                                attributeValues.attribute_is_better_than *
                                                                   100 <
                                                                   40
                                                                   ? "#0066b2"
@@ -2640,37 +2729,24 @@ export default function Product({
                                                               textDecorationThickness:
                                                                 "1.5px",
                                                               textDecorationColor:
-                                                                attributeValues.is_better_than *
-                                                                  100 >=
-                                                                70
-                                                                  ? "#437ece"
-                                                                  : attributeValues.is_worse_than *
-                                                                      100 >
-                                                                    70
-                                                                  ? "#ce434b"
-                                                                  : "#27304e",
+                                                                getColorAttr(
+                                                                  attributeValues
+                                                                ),
                                                               textUnderlineOffset:
                                                                 "5px",
                                                             }}
                                                           >
+                                                            {/* {console.log(
+                                                              attributeValues
+                                                            )} */}
                                                             {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
                                                             {
                                                               <span
                                                                 style={{
                                                                   color:
-                                                                    attributeValues.attribute_value ==
-                                                                      "yes" &&
-                                                                    attributeValues.attribute_is_same_as *
-                                                                      100 <
-                                                                      40
-                                                                      ? "#0066b2"
-                                                                      : attributeValues.attribute_value ==
-                                                                          "no" &&
-                                                                        attributeValues.attribute_is_worse_than *
-                                                                          100 >
-                                                                          60
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
+                                                                    getColorAttr(
+                                                                      attributeValues
+                                                                    ),
                                                                 }}
                                                               >
                                                                 {(attributeValues.attribute_value !=
@@ -2696,9 +2772,9 @@ export default function Product({
                                                       </div>
                                                     </div>
                                                   </div>
-                                                </div>
-                                              </Fragment>
-                                            )
+                                                </Fragment>
+                                              );
+                                            }
                                           )
                                       ) : (
                                         <Skeleton
@@ -2717,9 +2793,11 @@ export default function Product({
                                           }
                                         />
                                       )}
+
                                       {loading == false
-                                        ? product.attributes_new[attribute]
-                                            .length >
+                                        ? attributesClearly.attributes_new[
+                                            attribute
+                                          ].length >
                                             (displayedAttributesCount[
                                               product.name
                                             ] &&
@@ -2747,9 +2825,9 @@ export default function Product({
                                               <i
                                                 className={`ri-${
                                                   initialDisplay <
-                                                  product.attributes_new[
-                                                    attribute
-                                                  ].length
+                                                  attributesClearly
+                                                    .attributes_new[attribute]
+                                                    .length
                                                     ? "add"
                                                     : "subtract"
                                                 }-line`}
@@ -2761,8 +2839,7 @@ export default function Product({
                                   </Accordion.Item>
                                 </Fragment>
                               );
-                            }
-                          )}
+                            })}
                         </Accordion>
                       </Accordion.Body>
                     </Col>
