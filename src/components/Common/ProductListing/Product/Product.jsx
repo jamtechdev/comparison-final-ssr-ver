@@ -334,15 +334,14 @@ export default function Product({
       setIsLoading(false);
     }
   };
-  useEffect(() => {
-    fetchProductData(productID, categoryID);
-  }, [productID, categoryID]);
+  // useEffect(() => {
+  //   fetchProductData(productID, categoryID);
+  // }, [productID, categoryID]);
 
   const handleShowAllClick = async (productId, productCategory) => {
     // console.log(productId, productCategory, "dataID");
     if (!productData[productId]) {
-      setProductID(productId);
-      setCategoryID(productCategory);
+      await fetchProductData(productId, productCategory);
     }
   };
   return (
