@@ -307,7 +307,7 @@ export default function Product({
   };
 
   const attributesClearly = generateProductsWithAttributes();
-  // console.log(attributesClearly, "neet");
+  console.log(attributesClearly, "neet");
   const fetchProductData = async (productId, productCategory) => {
     // console.log(producnctId, productCategory);
     setIsLoading(true);
@@ -1406,373 +1406,535 @@ export default function Product({
                       }
                     />
                   )}
-                  <Row className="m-0">
-                    <Col md={12} className="p-0">
-                      <Accordion.Body className="d-flex inner-accordion flex-wrap">
-                        <div className="inline-ranking-section w-100">
-                          <span className="ranking-heading">RANKINGS</span>
-                          <img
-                            src="/images/double-arrow.png"
-                            width={0}
-                            height={0}
-                            sizes="100%"
-                            alt="double-arrow"
-                          />
-                          <div className="ranking-item-list-sec">
-                            {attributesClearly?.guide_ratings
-                              .slice(0, 5)
-                              ?.map((data, key) => {
-                                return (
-                                  <a
-                                    href={`/${data?.category_url}/${data.permalink}`}
-                                    key={key}
-                                  >
-                                    <p>
-                                      <span>
-                                        #{data?.position}{" "}
-                                        {guidePhraseData &&
-                                          guidePhraseData?.in_text}{" "}
-                                      </span>
-                                      {data?.guide_short_name};
-                                    </p>
-                                  </a>
-                                );
-                              })}
+                  {!isLoading && (
+                    <Row className="m-0">
+                      <Col md={12} className="p-0">
+                        <Accordion.Body className="d-flex inner-accordion flex-wrap">
+                          <div className="inline-ranking-section w-100">
+                            <span className="ranking-heading">RANKINGS</span>
+                            <img
+                              src="/images/double-arrow.png"
+                              width={0}
+                              height={0}
+                              sizes="100%"
+                              alt="double-arrow"
+                            />
+                            <div className="ranking-item-list-sec">
+                              {attributesClearly?.guide_ratings
+                                .slice(0, 5)
+                                ?.map((data, key) => {
+                                  return (
+                                    <a
+                                      href={`/${data?.category_url}/${data.permalink}`}
+                                      key={key}
+                                    >
+                                      <p>
+                                        <span>
+                                          #{data?.position}{" "}
+                                          {guidePhraseData &&
+                                            guidePhraseData?.in_text}{" "}
+                                        </span>
+                                        {data?.guide_short_name};
+                                      </p>
+                                    </a>
+                                  );
+                                })}
+                            </div>
                           </div>
-                        </div>
-                        {/* Left According start*/}
-                        <Accordion className="table-accordion w-50 p-0 left-accordion">
-                          <Accordion.Item eventKey="4">
-                            <Accordion.Header as="div">
-                              <div className="table-accordion-header">
-                                OVERALL
-                                <Questiontool
-                                  attributes={
-                                    product?.overall_score_descriptions
-                                  }
-                                />
-                              </div>
-                              <span
-                                className="count"
-                                style={{ background: overallScoreColor }}
-                              >
-                                {formatValue(product?.overall_score)}
-                              </span>
-                              <div className="show-btn">
-                                Show All{" "}
-                                <i className="ri-arrow-down-s-line"></i>
-                              </div>
-                              <div className="hide-btn">
-                                Hide All <i className="ri-arrow-up-s-line"></i>
-                              </div>
-                            </Accordion.Header>
-                            <Accordion.Body>
-                              <div className="spec-section">
-                                <div className="spec-item">
-                                  <div className="spec-col">
-                                    <div className="query ranking-tooltip-title">
-                                      Technical Score
-                                      <span className="">
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          viewBox="0 0 24 24"
-                                        >
-                                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                        </svg>
-                                      </span>
-                                      <div className="tooltip-display-content">
-                                        {product?.technical_score_descriptions
-                                          .description && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {guidePhraseData &&
-                                                guidePhraseData?.what_it_is}
-                                              :{" "}
-                                            </b>
-                                            {
-                                              product
-                                                ?.technical_score_descriptions
-                                                ?.description
-                                            }
-                                          </p>
-                                        )}
-                                        {product?.technical_score_descriptions
-                                          .when_matters && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {guidePhraseData &&
-                                                guidePhraseData?.when_it_matters}
-                                              :{" "}
-                                            </b>
-                                            {
-                                              product
-                                                ?.technical_score_descriptions
-                                                ?.when_matters
-                                            }
-                                          </p>
-                                        )}
-                                        <p>
-                                          <b>
-                                            {guidePhraseData &&
-                                              guidePhraseData?.score_components}
-                                            :
-                                          </b>
-                                        </p>
-                                        {product?.technical_score_descriptions
-                                          .score_components &&
-                                          product?.technical_score_descriptions?.score_components?.map(
-                                            (data, index) => {
-                                              return (
-                                                <React.Fragment key={index}>
-                                                  <div
-                                                    className="scroe_section"
-                                                    key={index}
-                                                  >
-                                                    <p className="text-end">
-                                                      {`${parseFloat(
-                                                        data?.importance
-                                                      ).toFixed(1)}%`}
-                                                    </p>
-                                                    <div
-                                                      className="score-count"
-                                                      style={{
-                                                        background:
-                                                          data?.attribute_evaluation >=
-                                                          7.5
-                                                            ? "#093673"
-                                                            : data?.attribute_evaluation >=
-                                                                5 &&
-                                                              data?.attribute_evaluation <
-                                                                7.5
-                                                            ? "#437ECE"
-                                                            : "#85B2F1",
-                                                      }}
-                                                    >
-                                                      {formatValue(
-                                                        data?.attribute_evaluation
-                                                      )}
-                                                      {/* {`${parseFloat(
-                                                        data?.attribute_evaluation
-                                                      ).toFixed(1)}`} */}
-                                                    </div>
-                                                    <p>
-                                                      {data?.attribute_category}
-                                                    </p>
-                                                  </div>
-                                                </React.Fragment>
-                                              );
-                                            }
-                                          )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="spec-col">
-                                    <span
-                                      className={`${
-                                        product.technical_score_phase !== ""
-                                          ? "tooltip-title"
-                                          : ""
-                                      }`}
-                                      style={{
-                                        color:
-                                          product.technical_score_is_better_than *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.technical_score_is_worse_than *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        fontSize: "15px",
-                                        textDecoration:
-                                          product.technical_score_phase !== ""
-                                            ? "underline"
-                                            : "",
-                                        textDecorationStyle:
-                                          product.technical_score_phase !== ""
-                                            ? "dotted"
-                                            : "",
-                                        textDecorationThickness: "1.5px",
-                                        textDecorationColor:
-                                          product.technical_score_is_better_than *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.technical_score_is_worse_than *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        textUnderlineOffset: "5px",
-                                      }}
-                                    >
-                                      {formatValue(product.technical_score)}
-                                      <ProsConsToolTip
-                                        hover_phrase={
-                                          product.technical_score_phase
-                                        }
-                                      />
-                                    </span>
-                                  </div>
+                          {/* Left According start*/}
+                          <Accordion className="table-accordion w-50 p-0 left-accordion">
+                            <Accordion.Item eventKey="4">
+                              <Accordion.Header as="div">
+                                <div className="table-accordion-header">
+                                  OVERALL
+                                  <Questiontool
+                                    attributes={
+                                      product?.overall_score_descriptions
+                                    }
+                                  />
                                 </div>
-                              </div>
-                              <div className="spec-section">
-                                <div className="spec-item">
-                                  <div className="spec-col">
-                                    <div className="query ranking-tooltip-title">
-                                      User&rsquo;s Rating
-                                      <span className="">
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          viewBox="0 0 24 24"
-                                        >
-                                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                        </svg>
-                                      </span>
-                                      <div className="tooltip-display-content">
-                                        {product?.users_rating_descriptions
-                                          .description && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {guidePhraseData &&
-                                                guidePhraseData?.what_it_is}
-                                              :{" "}
-                                            </b>
-                                            {
-                                              product?.users_rating_descriptions
-                                                ?.description
-                                            }
-                                          </p>
-                                        )}
-                                        {product?.users_rating_descriptions
-                                          .when_matters && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {guidePhraseData &&
-                                                guidePhraseData?.when_it_matters}
-                                              :{" "}
-                                            </b>
-                                            {
-                                              product?.users_rating_descriptions
-                                                ?.when_matters
-                                            }
-                                          </p>
-                                        )}
-                                        <p>
-                                          <b>
-                                            {guidePhraseData &&
-                                              guidePhraseData?.score_components}
-                                            :
-                                          </b>
-                                        </p>
-                                        {product?.users_rating_descriptions
-                                          .score_components &&
-                                          product?.users_rating_descriptions.score_components?.map(
-                                            (data, index) => {
-                                              return (
-                                                <React.Fragment key={index}>
-                                                  <div
-                                                    className="scroe_section"
-                                                    key={index}
-                                                  >
-                                                    <p className="text-end">
-                                                      {`${parseFloat(
-                                                        data?.importance
-                                                      ).toFixed(1)}%`}
-                                                    </p>
-                                                    <div
-                                                      className="score-count"
-                                                      style={{
-                                                        background:
-                                                          data?.attribute_evaluation >=
-                                                          7.5
-                                                            ? "#093673"
-                                                            : data?.attribute_evaluation >=
-                                                                5 &&
-                                                              data?.attribute_evaluation <
-                                                                7.5
-                                                            ? "#437ECE"
-                                                            : "#85B2F1",
-                                                      }}
-                                                    >
-                                                      {formatValue(
-                                                        data?.attribute_evaluation
-                                                      )}
-
-                                                      {/* {`${parseFloat(
-                                                        data?.attribute_evaluation
-                                                      ).toFixed(1)}`} */}
-                                                    </div>
-                                                    <p>
-                                                      {data?.attribute_category}
-                                                    </p>
-                                                  </div>
-                                                </React.Fragment>
-                                              );
-                                            }
-                                          )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="spec-col">
-                                    <span
-                                      className={`${
-                                        product?.reviews_phase !== ""
-                                          ? "tooltip-title"
-                                          : ""
-                                      }`}
-                                      style={{
-                                        color:
-                                          product.reviews_is_better_than *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.reviews_is_worse_than *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        fontSize: "15px",
-                                        textDecoration:
-                                          product.reviews_phase !== ""
-                                            ? "underline"
-                                            : "",
-                                        textDecorationStyle:
-                                          product.reviews_phase !== ""
-                                            ? "dotted"
-                                            : "",
-                                        textDecorationThickness: "1.5px",
-                                        textDecorationColor:
-                                          product.reviews_is_better_than *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.reviews_is_worse_than *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        textUnderlineOffset: "5px",
-                                      }}
-                                    >
-                                      {formatValue(product.reviews)}
-                                      <ProsConsToolTip
-                                        hover_phrase={product.reviews_phase}
-                                      />
-                                    </span>
-                                  </div>
+                                <span
+                                  className="count"
+                                  style={{ background: overallScoreColor }}
+                                >
+                                  {formatValue(product?.overall_score)}
+                                </span>
+                                <div className="show-btn">
+                                  Show All{" "}
+                                  <i className="ri-arrow-down-s-line"></i>
                                 </div>
-                              </div>
-                              {product.expert_reviews_rating > 0 && (
+                                <div className="hide-btn">
+                                  Hide All{" "}
+                                  <i className="ri-arrow-up-s-line"></i>
+                                </div>
+                              </Accordion.Header>
+                              <Accordion.Body>
                                 <div className="spec-section">
                                   <div className="spec-item">
                                     <div className="spec-col">
-                                      <div className="query text-ellipse ranking-tooltip-title">
-                                        Expert reviews
+                                      <div className="query ranking-tooltip-title">
+                                        Technical Score
+                                        <span className="">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                          >
+                                            <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                          </svg>
+                                        </span>
+                                        <div className="tooltip-display-content">
+                                          {product?.technical_score_descriptions
+                                            .description && (
+                                            <p className="mb-2">
+                                              <b>
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.what_it_is}
+                                                :{" "}
+                                              </b>
+                                              {
+                                                product
+                                                  ?.technical_score_descriptions
+                                                  ?.description
+                                              }
+                                            </p>
+                                          )}
+                                          {product?.technical_score_descriptions
+                                            .when_matters && (
+                                            <p className="mb-2">
+                                              <b>
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.when_it_matters}
+                                                :{" "}
+                                              </b>
+                                              {
+                                                product
+                                                  ?.technical_score_descriptions
+                                                  ?.when_matters
+                                              }
+                                            </p>
+                                          )}
+                                          <p>
+                                            <b>
+                                              {guidePhraseData &&
+                                                guidePhraseData?.score_components}
+                                              :
+                                            </b>
+                                          </p>
+                                          {product?.technical_score_descriptions
+                                            .score_components &&
+                                            product?.technical_score_descriptions?.score_components?.map(
+                                              (data, index) => {
+                                                return (
+                                                  <React.Fragment key={index}>
+                                                    <div
+                                                      className="scroe_section"
+                                                      key={index}
+                                                    >
+                                                      <p className="text-end">
+                                                        {`${parseFloat(
+                                                          data?.importance
+                                                        ).toFixed(1)}%`}
+                                                      </p>
+                                                      <div
+                                                        className="score-count"
+                                                        style={{
+                                                          background:
+                                                            data?.attribute_evaluation >=
+                                                            7.5
+                                                              ? "#093673"
+                                                              : data?.attribute_evaluation >=
+                                                                  5 &&
+                                                                data?.attribute_evaluation <
+                                                                  7.5
+                                                              ? "#437ECE"
+                                                              : "#85B2F1",
+                                                        }}
+                                                      >
+                                                        {formatValue(
+                                                          data?.attribute_evaluation
+                                                        )}
+                                                        {/* {`${parseFloat(
+                                                         data?.attribute_evaluation
+                                                       ).toFixed(1)}`} */}
+                                                      </div>
+                                                      <p>
+                                                        {
+                                                          data?.attribute_category
+                                                        }
+                                                      </p>
+                                                    </div>
+                                                  </React.Fragment>
+                                                );
+                                              }
+                                            )}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="spec-col">
+                                      <span
+                                        className={`${
+                                          product.technical_score_phase !== ""
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          color:
+                                            product.technical_score_is_better_than *
+                                              100 >=
+                                            70
+                                              ? "#437ece"
+                                              : product.technical_score_is_worse_than *
+                                                  100 >
+                                                70
+                                              ? "#ce434b"
+                                              : "#27304e",
+                                          fontSize: "15px",
+                                          textDecoration:
+                                            product.technical_score_phase !== ""
+                                              ? "underline"
+                                              : "",
+                                          textDecorationStyle:
+                                            product.technical_score_phase !== ""
+                                              ? "dotted"
+                                              : "",
+                                          textDecorationThickness: "1.5px",
+                                          textDecorationColor:
+                                            product.technical_score_is_better_than *
+                                              100 >=
+                                            70
+                                              ? "#437ece"
+                                              : product.technical_score_is_worse_than *
+                                                  100 >
+                                                70
+                                              ? "#ce434b"
+                                              : "#27304e",
+                                          textUnderlineOffset: "5px",
+                                        }}
+                                      >
+                                        {formatValue(product.technical_score)}
+                                        <ProsConsToolTip
+                                          hover_phrase={
+                                            product.technical_score_phase
+                                          }
+                                        />
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="spec-section">
+                                  <div className="spec-item">
+                                    <div className="spec-col">
+                                      <div className="query ranking-tooltip-title">
+                                        User&rsquo;s Rating
+                                        <span className="">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                          >
+                                            <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                          </svg>
+                                        </span>
+                                        <div className="tooltip-display-content">
+                                          {product?.users_rating_descriptions
+                                            .description && (
+                                            <p className="mb-2">
+                                              <b>
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.what_it_is}
+                                                :{" "}
+                                              </b>
+                                              {
+                                                product
+                                                  ?.users_rating_descriptions
+                                                  ?.description
+                                              }
+                                            </p>
+                                          )}
+                                          {product?.users_rating_descriptions
+                                            .when_matters && (
+                                            <p className="mb-2">
+                                              <b>
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.when_it_matters}
+                                                :{" "}
+                                              </b>
+                                              {
+                                                product
+                                                  ?.users_rating_descriptions
+                                                  ?.when_matters
+                                              }
+                                            </p>
+                                          )}
+                                          <p>
+                                            <b>
+                                              {guidePhraseData &&
+                                                guidePhraseData?.score_components}
+                                              :
+                                            </b>
+                                          </p>
+                                          {product?.users_rating_descriptions
+                                            .score_components &&
+                                            product?.users_rating_descriptions.score_components?.map(
+                                              (data, index) => {
+                                                return (
+                                                  <React.Fragment key={index}>
+                                                    <div
+                                                      className="scroe_section"
+                                                      key={index}
+                                                    >
+                                                      <p className="text-end">
+                                                        {`${parseFloat(
+                                                          data?.importance
+                                                        ).toFixed(1)}%`}
+                                                      </p>
+                                                      <div
+                                                        className="score-count"
+                                                        style={{
+                                                          background:
+                                                            data?.attribute_evaluation >=
+                                                            7.5
+                                                              ? "#093673"
+                                                              : data?.attribute_evaluation >=
+                                                                  5 &&
+                                                                data?.attribute_evaluation <
+                                                                  7.5
+                                                              ? "#437ECE"
+                                                              : "#85B2F1",
+                                                        }}
+                                                      >
+                                                        {formatValue(
+                                                          data?.attribute_evaluation
+                                                        )}
+
+                                                        {/* {`${parseFloat(
+                                                         data?.attribute_evaluation
+                                                       ).toFixed(1)}`} */}
+                                                      </div>
+                                                      <p>
+                                                        {
+                                                          data?.attribute_category
+                                                        }
+                                                      </p>
+                                                    </div>
+                                                  </React.Fragment>
+                                                );
+                                              }
+                                            )}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="spec-col">
+                                      <span
+                                        className={`${
+                                          product?.reviews_phase !== ""
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          color:
+                                            product.reviews_is_better_than *
+                                              100 >=
+                                            70
+                                              ? "#437ece"
+                                              : product.reviews_is_worse_than *
+                                                  100 >
+                                                70
+                                              ? "#ce434b"
+                                              : "#27304e",
+                                          fontSize: "15px",
+                                          textDecoration:
+                                            product.reviews_phase !== ""
+                                              ? "underline"
+                                              : "",
+                                          textDecorationStyle:
+                                            product.reviews_phase !== ""
+                                              ? "dotted"
+                                              : "",
+                                          textDecorationThickness: "1.5px",
+                                          textDecorationColor:
+                                            product.reviews_is_better_than *
+                                              100 >=
+                                            70
+                                              ? "#437ece"
+                                              : product.reviews_is_worse_than *
+                                                  100 >
+                                                70
+                                              ? "#ce434b"
+                                              : "#27304e",
+                                          textUnderlineOffset: "5px",
+                                        }}
+                                      >
+                                        {formatValue(product.reviews)}
+                                        <ProsConsToolTip
+                                          hover_phrase={product.reviews_phase}
+                                        />
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                {product.expert_reviews_rating > 0 && (
+                                  <div className="spec-section">
+                                    <div className="spec-item">
+                                      <div className="spec-col">
+                                        <div className="query text-ellipse ranking-tooltip-title">
+                                          Expert reviews
+                                          <QuestionIcon
+                                            attributes={
+                                              product?.expert_reviews_descriptions
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                      <div className="spec-col">
+                                        <div
+                                          className={`${
+                                            product?.expert_reviews_rating_phase !==
+                                            ""
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            color:
+                                              product.expert_reviews_is_better_than *
+                                                100 >=
+                                              70
+                                                ? "#437ece"
+                                                : product.expert_reviews_is_worse_than *
+                                                    100 >
+                                                  70
+                                                ? "#ce434b"
+                                                : "#27304e",
+                                            fontSize: "15px",
+
+                                            textDecoration:
+                                              product?.expert_reviews_rating_phase !==
+                                              ""
+                                                ? "underline"
+                                                : "",
+                                            textDecorationStyle:
+                                              product?.expert_reviews_rating_phase !==
+                                              ""
+                                                ? "dotted"
+                                                : "",
+                                            textDecorationThickness: "1.5px",
+                                            textDecorationColor:
+                                              product.expert_reviews_is_better_than *
+                                                100 >=
+                                              70
+                                                ? "#437ece"
+                                                : product.expert_reviews_is_worse_than *
+                                                    100 >
+                                                  70
+                                                ? "#ce434b"
+                                                : "#27304e",
+                                            textUnderlineOffset: "5px",
+                                          }}
+                                        >
+                                          {formatValue(
+                                            product.expert_reviews_rating
+                                          )}
+                                          <div className="tooltip-display-content why-tooltip">
+                                            <div
+                                              className="mb-2 prosconsColor"
+                                              dangerouslySetInnerHTML={{
+                                                __html:
+                                                  product.expert_reviews_rating_phase,
+                                              }}
+                                            ></div>
+                                            {/* {console.log(
+                                             product?.expert_reviews_websites
+                                           )} */}
+
+                                            {/* for expert review  now I comment this code */}
+                                            {product?.expert_reviews_websites &&
+                                              product?.expert_reviews_websites?.map(
+                                                (data, index) => {
+                                                  return (
+                                                    <div
+                                                      className="user__rating__popup"
+                                                      key={index}
+                                                    >
+                                                      <div className="user__rating__popup__list">
+                                                        <span
+                                                          className="user__rating__popup__rating"
+                                                          style={{
+                                                            background:
+                                                              getColorBasedOnScore(
+                                                                data?.evaluation
+                                                              ),
+                                                          }}
+                                                        >
+                                                          {formatValue(
+                                                            data?.evaluation
+                                                          )}
+                                                        </span>
+                                                        <div className="user__rating__popup__content">
+                                                          {data?.image !==
+                                                            null && (
+                                                            <a
+                                                              href={`/link?p=${btoa(
+                                                                data?.website_name
+                                                              )}`}
+                                                            >
+                                                              <img
+                                                                src={`${data?.image}`}
+                                                              />
+                                                            </a>
+                                                          )}
+
+                                                          <p>
+                                                            {" "}
+                                                            {data?.name !==
+                                                            null ? (
+                                                              <a
+                                                                href={`/link?p=${btoa(
+                                                                  data?.website_name
+                                                                )}`}
+                                                                style={{
+                                                                  color:
+                                                                    "inherit",
+                                                                }}
+                                                              >
+                                                                {" "}
+                                                                {data?.name}
+                                                              </a>
+                                                            ) : (
+                                                              <a
+                                                                href={`/link?p=${btoa(
+                                                                  data?.website_name
+                                                                )}`}
+                                                                style={{
+                                                                  color:
+                                                                    "inherit",
+                                                                }}
+                                                              >
+                                                                {" "}
+                                                                {extractDomainName(
+                                                                  data?.website_name
+                                                                )}
+                                                              </a>
+                                                            )}
+                                                          </p>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  );
+                                                }
+                                              )}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                                <div className="spec-section">
+                                  <div className="spec-item">
+                                    <div className="spec-col">
+                                      <div className="query text-ellipse">
+                                        Popularity
                                         <QuestionIcon
                                           attributes={
-                                            product?.expert_reviews_descriptions
+                                            product?.popularity_descriptions
                                           }
                                         />
                                       </div>
@@ -1780,41 +1942,106 @@ export default function Product({
                                     <div className="spec-col">
                                       <div
                                         className={`${
-                                          product?.expert_reviews_rating_phase !==
+                                          product?.popularity_points_phase !==
                                           ""
                                             ? "tooltip-title"
                                             : ""
                                         }`}
                                         style={{
                                           color:
-                                            product.expert_reviews_is_better_than *
+                                            product.popularity_points_better_then *
                                               100 >=
                                             70
                                               ? "#437ece"
-                                              : product.expert_reviews_is_worse_than *
+                                              : product.popularity_points_worse_then *
                                                   100 >
                                                 70
                                               ? "#ce434b"
                                               : "#27304e",
                                           fontSize: "15px",
-
                                           textDecoration:
-                                            product?.expert_reviews_rating_phase !==
+                                            product.popularity_points_phase !==
                                             ""
                                               ? "underline"
                                               : "",
                                           textDecorationStyle:
-                                            product?.expert_reviews_rating_phase !==
+                                            product.popularity_points_phase !==
                                             ""
                                               ? "dotted"
                                               : "",
                                           textDecorationThickness: "1.5px",
                                           textDecorationColor:
-                                            product.expert_reviews_is_better_than *
+                                            product.popularity_points_better_then *
                                               100 >=
                                             70
                                               ? "#437ece"
-                                              : product.expert_reviews_is_worse_than *
+                                              : product.popularity_points_worse_then *
+                                                  100 >
+                                                70
+                                              ? "#ce434b"
+                                              : "#27304e",
+                                          textUnderlineOffset: "5px",
+                                        }}
+                                      >
+                                        {formatValue(product.popularity_points)}
+                                        <ProsConsToolTip
+                                          hover_phrase={
+                                            product.popularity_points_phase
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="spec-section">
+                                  <div className="spec-item">
+                                    <div className="spec-col">
+                                      <div className="query">
+                                        Ratio Quality-Price
+                                        <QuestionIcon
+                                          attributes={
+                                            product?.ratio_qulitiy_points_descriptions
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="spec-col ">
+                                      <div
+                                        className={`${
+                                          product?.ratio_quality_price_points_phase !==
+                                          ""
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          color:
+                                            product.ratio_quality_price_points_better_then *
+                                              100 >=
+                                            70
+                                              ? "#437ece"
+                                              : product.ratio_quality_price_points_worse_then *
+                                                  100 >
+                                                70
+                                              ? "#ce434b"
+                                              : "#27304e",
+                                          fontSize: "15px",
+                                          textDecoration:
+                                            product.ratio_quality_price_points_phase !==
+                                            ""
+                                              ? "underline"
+                                              : "",
+                                          textDecorationStyle:
+                                            product.ratio_quality_price_points_phase !==
+                                            ""
+                                              ? "dotted"
+                                              : "",
+                                          textDecorationThickness: "1.5px",
+                                          textDecorationColor:
+                                            product.ratio_quality_price_points_better_then *
+                                              100 >=
+                                            70
+                                              ? "#437ece"
+                                              : product.ratio_quality_price_points_worse_then *
                                                   100 >
                                                 70
                                               ? "#ce434b"
@@ -1823,1027 +2050,830 @@ export default function Product({
                                         }}
                                       >
                                         {formatValue(
-                                          product.expert_reviews_rating
+                                          product.ratio_quality_price_points
                                         )}
-                                        <div className="tooltip-display-content why-tooltip">
-                                          <div
-                                            className="mb-2 prosconsColor"
-                                            dangerouslySetInnerHTML={{
-                                              __html:
-                                                product.expert_reviews_rating_phase,
-                                            }}
-                                          ></div>
+                                        <ProsConsToolTip
+                                          hover_phrase={
+                                            product.ratio_quality_price_points_phase
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Accordion.Body>
+                            </Accordion.Item>
+                            {/* Dynaic accordian items of first accordin */}
+                            {attributesClearly?.attributes_new &&
+                              Object.keys(
+                                getAttributeHalf(attributesClearly, "first")
+                              ).map((attribute, index) => {
+                                return (
+                                  <Fragment key={index}>
+                                    <Accordion.Item
+                                      eventKey={index}
+                                      key={index}
+                                    >
+                                      <Accordion.Header as="div">
+                                        <div className="table-accordion-header">
+                                          {attribute}
+                                          {/* {console.log(attribute,"hellow")} */}
                                           {/* {console.log(
-                                            product?.expert_reviews_websites
-                                          )} */}
-
-                                          {/* for expert review  now I comment this code */}
-                                          {product?.expert_reviews_websites &&
-                                            product?.expert_reviews_websites?.map(
-                                              (data, index) => {
+                                           product.attributes_new[attribute][0]
+                                             ?.attribute_evaluation,
+                                           product.attributes_new[attribute][0]
+                                         )} */}
+                                          <Questiontool
+                                            attributes={
+                                              attributesClearly.attributes_new[
+                                                attribute
+                                              ][0]?.attribute_category
+                                            }
+                                          />
+                                        </div>
+                                        <span
+                                          className="count dark-color"
+                                          style={{
+                                            background:
+                                              attributesClearly.attributes_new[
+                                                attribute
+                                              ][0].attribute_evaluation >= 7.5
+                                                ? "#093673"
+                                                : attributesClearly
+                                                    .attributes_new[
+                                                    attribute
+                                                  ][0].attribute_evaluation >=
+                                                    5 &&
+                                                  attributesClearly
+                                                    .attributes_new[
+                                                    attribute
+                                                  ][0].attribute_evaluation <
+                                                    7.5
+                                                ? "#437ECE"
+                                                : "#85B2F1",
+                                          }}
+                                        >
+                                          {formatValue(
+                                            attributesClearly.attributes_new[
+                                              attribute
+                                            ][0]?.attribute_evaluation
+                                          )}
+                                        </span>
+                                        <div className="show-btn">
+                                          Show All{" "}
+                                          <i className="ri-arrow-down-s-line"></i>
+                                        </div>
+                                        <div className="hide-btn">
+                                          Hide All{" "}
+                                          <i className="ri-arrow-up-s-line"></i>
+                                        </div>
+                                      </Accordion.Header>
+                                      <Accordion.Body>
+                                        {loading == false ? (
+                                          attributesClearly.attributes_new[
+                                            attribute
+                                          ]
+                                            .slice(
+                                              0,
+                                              displayedAttributesCount[
+                                                product.name
+                                              ] &&
+                                                displayedAttributesCount[
+                                                  product.name
+                                                ][attribute]
+                                                ? displayedAttributesCount[
+                                                    product.name
+                                                  ][attribute]
+                                                : initialDisplay
+                                            )
+                                            .map(
+                                              (attributeValues, valueIndex) => {
                                                 return (
-                                                  <div
-                                                    className="user__rating__popup"
-                                                    key={index}
-                                                  >
-                                                    <div className="user__rating__popup__list">
-                                                      <span
-                                                        className="user__rating__popup__rating"
-                                                        style={{
-                                                          background:
-                                                            getColorBasedOnScore(
-                                                              data?.evaluation
-                                                            ),
-                                                        }}
-                                                      >
-                                                        {formatValue(
-                                                          data?.evaluation
-                                                        )}
-                                                      </span>
-                                                      <div className="user__rating__popup__content">
-                                                        {data?.image !==
-                                                          null && (
-                                                          <a
-                                                            href={`/link?p=${btoa(
-                                                              data?.website_name
-                                                            )}`}
-                                                          >
-                                                            <img
-                                                              src={`${data?.image}`}
+                                                  <Fragment key={valueIndex}>
+                                                    <div
+                                                      className="spec-section"
+                                                      key={valueIndex}
+                                                    >
+                                                      <div className="spec-item">
+                                                        <div className="spec-col">
+                                                          <div className="query">
+                                                            {
+                                                              attributeValues.attribute
+                                                            }
+                                                            <QuestionIcon
+                                                              attributes={
+                                                                attributeValues &&
+                                                                attributeValues
+                                                              }
                                                             />
-                                                          </a>
-                                                        )}
+                                                          </div>
+                                                        </div>
+                                                        <div className="spec-col">
+                                                          {attributeValues.attribute_value !=
+                                                            "yes" &&
+                                                            attributeValues.attribute_value !=
+                                                              "no" && (
+                                                              <>
+                                                                {/* {console.log(attributeValues.hover_phase,"neets")} */}
+                                                                <div
+                                                                  className={`${
+                                                                    attributeValues.hover_phase !==
+                                                                      "" &&
+                                                                    "tooltip-title"
+                                                                  }`}
+                                                                  style={{
+                                                                    color:
+                                                                      attributeValues.is_better_than *
+                                                                        100 >=
+                                                                      70
+                                                                        ? "#437ece"
+                                                                        : attributeValues.is_worse_than *
+                                                                            100 >
+                                                                          70
+                                                                        ? "#ce434b"
+                                                                        : "#27304e",
+                                                                    fontSize:
+                                                                      "15px",
+                                                                    textDecoration:
+                                                                      attributeValues?.hover_phase !==
+                                                                      ""
+                                                                        ? "underline"
+                                                                        : "",
+                                                                    textDecorationStyle:
+                                                                      attributeValues?.hover_phase !==
+                                                                      ""
+                                                                        ? "dotted"
+                                                                        : "",
+                                                                    textDecorationThickness:
+                                                                      "1.5px",
+                                                                    textDecorationColor:
+                                                                      attributeValues.is_better_than *
+                                                                        100 >=
+                                                                      70
+                                                                        ? "#437ece"
+                                                                        : attributeValues.is_worse_than *
+                                                                            100 >
+                                                                          70
+                                                                        ? "#ce434b"
+                                                                        : "#27304e",
+                                                                    textUnderlineOffset:
+                                                                      "5px",
+                                                                  }}
+                                                                >
+                                                                  {
+                                                                    <span
+                                                                      style={{
+                                                                        color:
+                                                                          attributeValues.is_better_than *
+                                                                            100 >=
+                                                                          70
+                                                                            ? "#437ece"
+                                                                            : attributeValues.is_worse_than *
+                                                                                100 >
+                                                                              70
+                                                                            ? "#ce434b"
+                                                                            : "#27304e",
+                                                                        fontSize:
+                                                                          "15px",
+                                                                      }}
+                                                                    >
+                                                                      {(attributeValues.attribute_value !=
+                                                                      null
+                                                                        ? attributeValues.attribute_value
+                                                                        : "") +
+                                                                        " " +
+                                                                        (attributeValues.attribute_value ===
+                                                                          "?" ||
+                                                                        attributeValues.attribute_value ===
+                                                                          "-"
+                                                                          ? ""
+                                                                          : attributeValues.unit !=
+                                                                            null
+                                                                          ? attributeValues.unit
+                                                                          : "")}
+                                                                    </span>
+                                                                  }
 
-                                                        <p>
-                                                          {" "}
-                                                          {data?.name !==
-                                                          null ? (
-                                                            <a
-                                                              href={`/link?p=${btoa(
-                                                                data?.website_name
-                                                              )}`}
+                                                                  {attributeValues.attribute_value !==
+                                                                    "?" && (
+                                                                    <ProsConsToolTip
+                                                                      comment={
+                                                                        attributeValues?.commnet
+                                                                      }
+                                                                      hover_phrase={
+                                                                        attributeValues &&
+                                                                        attributeValues.hover_phase
+                                                                      }
+                                                                    />
+                                                                  )}
+                                                                </div>{" "}
+                                                                {attributeValues?.info_not_verified && (
+                                                                  <div
+                                                                    className="tooltip-title"
+                                                                    style={{
+                                                                      textDecoration:
+                                                                        "none",
+                                                                      textDecorationLine:
+                                                                        "none",
+                                                                      textDecorationStyle:
+                                                                        "none",
+                                                                    }}
+                                                                  >
+                                                                    {" "}
+                                                                    <i
+                                                                      style={{
+                                                                        opacity:
+                                                                          "70%",
+                                                                      }}
+                                                                    >
+                                                                      {" "}
+                                                                      (?){" "}
+                                                                    </i>
+                                                                    <div
+                                                                      className="tooltip-display-content"
+                                                                      style={{
+                                                                        opacity:
+                                                                          "100%",
+                                                                      }}
+                                                                    >
+                                                                      Information
+                                                                      is not
+                                                                      verified.
+                                                                      If you
+                                                                      believe
+                                                                      this is a
+                                                                      mistake,
+                                                                      please,
+                                                                      contact
+                                                                      our team
+                                                                    </div>
+                                                                  </div>
+                                                                )}
+                                                              </>
+                                                            )}
+                                                          {/* newww */}
+                                                          {(attributeValues.attribute_value ==
+                                                            "yes" ||
+                                                            attributeValues.attribute_value ==
+                                                              "no") && (
+                                                            <div
+                                                              className={`${
+                                                                attributeValues?.hover_phase !==
+                                                                ""
+                                                                  ? "tooltip-title"
+                                                                  : ""
+                                                              }`}
                                                               style={{
                                                                 color:
-                                                                  "inherit",
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
+                                                                  attributeValues.attribute_is_better_than *
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
+                                                                        "no" &&
+                                                                      attributeValues.attribute_is_worse_than *
+                                                                        100 >
+                                                                        60
+                                                                    ? "#ce434b"
+                                                                    : "#27304e",
+                                                                fontSize:
+                                                                  "15px",
+                                                                textDecoration:
+                                                                  attributeValues?.hover_phase !==
+                                                                  ""
+                                                                    ? "underline"
+                                                                    : "",
+                                                                textDecorationStyle:
+                                                                  attributeValues?.hover_phase !==
+                                                                  ""
+                                                                    ? "dotted"
+                                                                    : "",
+                                                                textDecorationThickness:
+                                                                  "1.5px",
+                                                                textDecorationColor:
+                                                                  getColorAttr(
+                                                                    attributeValues
+                                                                  ),
+                                                                textUnderlineOffset:
+                                                                  "5px",
                                                               }}
                                                             >
-                                                              {" "}
-                                                              {data?.name}
-                                                            </a>
-                                                          ) : (
-                                                            <a
-                                                              href={`/link?p=${btoa(
-                                                                data?.website_name
-                                                              )}`}
-                                                              style={{
-                                                                color:
-                                                                  "inherit",
-                                                              }}
-                                                            >
-                                                              {" "}
-                                                              {extractDomainName(
-                                                                data?.website_name
-                                                              )}
-                                                            </a>
+                                                              {/* {console.log(
+                                                               attributeValues
+                                                             )} */}
+                                                              {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                                              {
+                                                                <span
+                                                                  style={{
+                                                                    color:
+                                                                      getColorAttr(
+                                                                        attributeValues
+                                                                      ),
+                                                                  }}
+                                                                >
+                                                                  {(attributeValues.attribute_value !=
+                                                                  null
+                                                                    ? attributeValues.attribute_value
+                                                                    : "") +
+                                                                    " " +
+                                                                    (attributeValues.unit !=
+                                                                    null
+                                                                      ? attributeValues.unit
+                                                                      : "")}
+                                                                </span>
+                                                              }
+                                                              {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
+                                                              <ProsConsToolTip
+                                                                hover_phrase={
+                                                                  attributeValues &&
+                                                                  attributeValues.hover_phase
+                                                                }
+                                                              />
+                                                            </div>
                                                           )}
-                                                        </p>
+                                                        </div>
                                                       </div>
                                                     </div>
-                                                  </div>
+                                                  </Fragment>
                                                 );
                                               }
-                                            )}
+                                            )
+                                        ) : (
+                                          <Skeleton
+                                            height={35}
+                                            count={
+                                              displayedAttributesCount[
+                                                product.name
+                                              ] &&
+                                              displayedAttributesCount[
+                                                product.name
+                                              ][attribute]
+                                                ? displayedAttributesCount[
+                                                    product.name
+                                                  ][attribute]
+                                                : initialDisplay
+                                            }
+                                          />
+                                        )}
+
+                                        {loading == false
+                                          ? attributesClearly.attributes_new[
+                                              attribute
+                                            ].length >
+                                              (displayedAttributesCount[
+                                                product.name
+                                              ] &&
+                                              displayedAttributesCount[
+                                                product.name
+                                              ][attribute]
+                                                ? displayedAttributesCount[
+                                                    product.name
+                                                  ][attribute]
+                                                : initialDisplay) && (
+                                              <span
+                                                className="show_more"
+                                                onClick={() => {
+                                                  setloading(true),
+                                                    handleDisplayedAttributesCount(
+                                                      product.name,
+                                                      attribute
+                                                    );
+                                                  setTimeout(() => {
+                                                    setloading(false);
+                                                  }, 600);
+                                                }}
+                                              >
+                                                {"SHOW MORE "}
+                                                <i
+                                                  className={`ri-${
+                                                    initialDisplay <
+                                                    attributesClearly
+                                                      .attributes_new[attribute]
+                                                      .length
+                                                      ? "add"
+                                                      : "subtract"
+                                                  }-line`}
+                                                ></i>
+                                              </span>
+                                            )
+                                          : ""}
+                                      </Accordion.Body>
+                                    </Accordion.Item>
+                                  </Fragment>
+                                );
+                              })}
+                          </Accordion>
+                          {/* Left According end*/}
+
+                          {/* Right */}
+                          <Accordion className="table-accordion w-50 p-0 right-accordion">
+                            {attributesClearly?.attributes_new &&
+                              Object.keys(
+                                getAttributeHalf(attributesClearly, "second")
+                              ).map((attribute, index) => {
+                                return (
+                                  <Fragment key={index}>
+                                    <Accordion.Item
+                                      eventKey={index}
+                                      key={index}
+                                    >
+                                      <Accordion.Header as="div">
+                                        <div className="table-accordion-header">
+                                          {attribute}
+                                          {/* {console.log(attribute,"hellow")} */}
+                                          {/* {console.log(
+                                           product.attributes_new[attribute][0]
+                                             ?.attribute_evaluation,
+                                           product.attributes_new[attribute][0]
+                                         )} */}
+                                          <Questiontool
+                                            attributes={
+                                              attributesClearly.attributes_new[
+                                                attribute
+                                              ][0]?.attribute_category
+                                            }
+                                          />
                                         </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                              <div className="spec-section">
-                                <div className="spec-item">
-                                  <div className="spec-col">
-                                    <div className="query text-ellipse">
-                                      Popularity
-                                      <QuestionIcon
-                                        attributes={
-                                          product?.popularity_descriptions
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="spec-col">
-                                    <div
-                                      className={`${
-                                        product?.popularity_points_phase !== ""
-                                          ? "tooltip-title"
-                                          : ""
-                                      }`}
-                                      style={{
-                                        color:
-                                          product.popularity_points_better_then *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.popularity_points_worse_then *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        fontSize: "15px",
-                                        textDecoration:
-                                          product.popularity_points_phase !== ""
-                                            ? "underline"
-                                            : "",
-                                        textDecorationStyle:
-                                          product.popularity_points_phase !== ""
-                                            ? "dotted"
-                                            : "",
-                                        textDecorationThickness: "1.5px",
-                                        textDecorationColor:
-                                          product.popularity_points_better_then *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.popularity_points_worse_then *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        textUnderlineOffset: "5px",
-                                      }}
-                                    >
-                                      {formatValue(product.popularity_points)}
-                                      <ProsConsToolTip
-                                        hover_phrase={
-                                          product.popularity_points_phase
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="spec-section">
-                                <div className="spec-item">
-                                  <div className="spec-col">
-                                    <div className="query">
-                                      Ratio Quality-Price
-                                      <QuestionIcon
-                                        attributes={
-                                          product?.ratio_qulitiy_points_descriptions
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="spec-col ">
-                                    <div
-                                      className={`${
-                                        product?.ratio_quality_price_points_phase !==
-                                        ""
-                                          ? "tooltip-title"
-                                          : ""
-                                      }`}
-                                      style={{
-                                        color:
-                                          product.ratio_quality_price_points_better_then *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.ratio_quality_price_points_worse_then *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        fontSize: "15px",
-                                        textDecoration:
-                                          product.ratio_quality_price_points_phase !==
-                                          ""
-                                            ? "underline"
-                                            : "",
-                                        textDecorationStyle:
-                                          product.ratio_quality_price_points_phase !==
-                                          ""
-                                            ? "dotted"
-                                            : "",
-                                        textDecorationThickness: "1.5px",
-                                        textDecorationColor:
-                                          product.ratio_quality_price_points_better_then *
-                                            100 >=
-                                          70
-                                            ? "#437ece"
-                                            : product.ratio_quality_price_points_worse_then *
-                                                100 >
-                                              70
-                                            ? "#ce434b"
-                                            : "#27304e",
-                                        textUnderlineOffset: "5px",
-                                      }}
-                                    >
-                                      {formatValue(
-                                        product.ratio_quality_price_points
-                                      )}
-                                      <ProsConsToolTip
-                                        hover_phrase={
-                                          product.ratio_quality_price_points_phase
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </Accordion.Body>
-                          </Accordion.Item>
-                          {/* Dynaic accordian items of first accordin */}
-                          {attributesClearly?.attributes_new &&
-                            Object.keys(
-                              getAttributeHalf(attributesClearly, "first")
-                            ).map((attribute, index) => {
-                              return (
-                                <Fragment key={index}>
-                                  <Accordion.Item eventKey={index} key={index}>
-                                    <Accordion.Header as="div">
-                                      <div className="table-accordion-header">
-                                        {attribute}
-                                        {/* {console.log(attribute,"hellow")} */}
-                                        {/* {console.log(
-                                          product.attributes_new[attribute][0]
-                                            ?.attribute_evaluation,
-                                          product.attributes_new[attribute][0]
-                                        )} */}
-                                        <Questiontool
-                                          attributes={
+                                        <span
+                                          className="count dark-color"
+                                          style={{
+                                            background:
+                                              attributesClearly.attributes_new[
+                                                attribute
+                                              ][0].attribute_evaluation >= 7.5
+                                                ? "#093673"
+                                                : attributesClearly
+                                                    .attributes_new[
+                                                    attribute
+                                                  ][0].attribute_evaluation >=
+                                                    5 &&
+                                                  attributesClearly
+                                                    .attributes_new[
+                                                    attribute
+                                                  ][0].attribute_evaluation <
+                                                    7.5
+                                                ? "#437ECE"
+                                                : "#85B2F1",
+                                          }}
+                                        >
+                                          {formatValue(
                                             attributesClearly.attributes_new[
                                               attribute
-                                            ][0]?.attribute_category
-                                          }
-                                        />
-                                      </div>
-                                      <span
-                                        className="count dark-color"
-                                        style={{
-                                          background:
-                                            attributesClearly.attributes_new[
-                                              attribute
-                                            ][0].attribute_evaluation >= 7.5
-                                              ? "#093673"
-                                              : attributesClearly
-                                                  .attributes_new[attribute][0]
-                                                  .attribute_evaluation >= 5 &&
-                                                attributesClearly
-                                                  .attributes_new[attribute][0]
-                                                  .attribute_evaluation < 7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
-                                        }}
-                                      >
-                                        {formatValue(
+                                            ][0]?.attribute_evaluation
+                                          )}
+                                        </span>
+                                        <div className="show-btn">
+                                          Show All{" "}
+                                          <i className="ri-arrow-down-s-line"></i>
+                                        </div>
+                                        <div className="hide-btn">
+                                          Hide All{" "}
+                                          <i className="ri-arrow-up-s-line"></i>
+                                        </div>
+                                      </Accordion.Header>
+                                      <Accordion.Body>
+                                        {loading == false ? (
                                           attributesClearly.attributes_new[
                                             attribute
-                                          ][0]?.attribute_evaluation
-                                        )}
-                                      </span>
-                                      <div className="show-btn">
-                                        Show All{" "}
-                                        <i className="ri-arrow-down-s-line"></i>
-                                      </div>
-                                      <div className="hide-btn">
-                                        Hide All{" "}
-                                        <i className="ri-arrow-up-s-line"></i>
-                                      </div>
-                                    </Accordion.Header>
-                                    <Accordion.Body>
-                                      {loading == false ? (
-                                        attributesClearly.attributes_new[
-                                          attribute
-                                        ]
-                                          .slice(
-                                            0,
-                                            displayedAttributesCount[
-                                              product.name
-                                            ] &&
+                                          ]
+                                            .slice(
+                                              0,
                                               displayedAttributesCount[
                                                 product.name
-                                              ][attribute]
-                                              ? displayedAttributesCount[
+                                              ] &&
+                                                displayedAttributesCount[
                                                   product.name
                                                 ][attribute]
-                                              : initialDisplay
-                                          )
-                                          .map(
-                                            (attributeValues, valueIndex) => {
-                                              return (
-                                                <Fragment key={valueIndex}>
-                                                  <div
-                                                    className="spec-section"
-                                                    key={valueIndex}
-                                                  >
-                                                    <div className="spec-item">
-                                                      <div className="spec-col">
-                                                        <div className="query">
-                                                          {
-                                                            attributeValues.attribute
-                                                          }
-                                                          <QuestionIcon
-                                                            attributes={
-                                                              attributeValues &&
-                                                              attributeValues
-                                                            }
-                                                          />
-                                                        </div>
-                                                      </div>
-                                                      <div className="spec-col">
-                                                        {attributeValues.attribute_value !=
-                                                          "yes" &&
-                                                          attributeValues.attribute_value !=
-                                                            "no" && (
-                                                            <>
-                                                              {/* {console.log(attributeValues.hover_phase,"neets")} */}
-                                                              <div
-                                                                className={`${
-                                                                  attributeValues.hover_phase !==
-                                                                    "" &&
-                                                                  "tooltip-title"
-                                                                }`}
-                                                                style={{
-                                                                  color:
-                                                                    attributeValues.is_better_than *
-                                                                      100 >=
-                                                                    70
-                                                                      ? "#437ece"
-                                                                      : attributeValues.is_worse_than *
-                                                                          100 >
-                                                                        70
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
-                                                                  fontSize:
-                                                                    "15px",
-                                                                  textDecoration:
-                                                                    attributeValues?.hover_phase !==
-                                                                    ""
-                                                                      ? "underline"
-                                                                      : "",
-                                                                  textDecorationStyle:
-                                                                    attributeValues?.hover_phase !==
-                                                                    ""
-                                                                      ? "dotted"
-                                                                      : "",
-                                                                  textDecorationThickness:
-                                                                    "1.5px",
-                                                                  textDecorationColor:
-                                                                    attributeValues.is_better_than *
-                                                                      100 >=
-                                                                    70
-                                                                      ? "#437ece"
-                                                                      : attributeValues.is_worse_than *
-                                                                          100 >
-                                                                        70
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
-                                                                  textUnderlineOffset:
-                                                                    "5px",
-                                                                }}
-                                                              >
-                                                                {
-                                                                  <span
-                                                                    style={{
-                                                                      color:
-                                                                        attributeValues.is_better_than *
-                                                                          100 >=
-                                                                        70
-                                                                          ? "#437ece"
-                                                                          : attributeValues.is_worse_than *
-                                                                              100 >
-                                                                            70
-                                                                          ? "#ce434b"
-                                                                          : "#27304e",
-                                                                      fontSize:
-                                                                        "15px",
-                                                                    }}
-                                                                  >
-                                                                    {(attributeValues.attribute_value !=
-                                                                    null
-                                                                      ? attributeValues.attribute_value
-                                                                      : "") +
-                                                                      " " +
-                                                                      (attributeValues.attribute_value ===
-                                                                        "?" ||
-                                                                      attributeValues.attribute_value ===
-                                                                        "-"
-                                                                        ? ""
-                                                                        : attributeValues.unit !=
-                                                                          null
-                                                                        ? attributeValues.unit
-                                                                        : "")}
-                                                                  </span>
-                                                                }
-
-                                                                {attributeValues.attribute_value !==
-                                                                  "?" && (
-                                                                  <ProsConsToolTip
-                                                                    comment={
-                                                                      attributeValues?.commnet
-                                                                    }
-                                                                    hover_phrase={
-                                                                      attributeValues &&
-                                                                      attributeValues.hover_phase
-                                                                    }
-                                                                  />
-                                                                )}
-                                                              </div>{" "}
-                                                              {attributeValues?.info_not_verified && (
-                                                                <div
-                                                                  className="tooltip-title"
-                                                                  style={{
-                                                                    textDecoration:
-                                                                      "none",
-                                                                    textDecorationLine:
-                                                                      "none",
-                                                                    textDecorationStyle:
-                                                                      "none",
-                                                                  }}
-                                                                >
-                                                                  {" "}
-                                                                  <i
-                                                                    style={{
-                                                                      opacity:
-                                                                        "70%",
-                                                                    }}
-                                                                  >
-                                                                    {" "}
-                                                                    (?){" "}
-                                                                  </i>
-                                                                  <div
-                                                                    className="tooltip-display-content"
-                                                                    style={{
-                                                                      opacity:
-                                                                        "100%",
-                                                                    }}
-                                                                  >
-                                                                    Information
-                                                                    is not
-                                                                    verified. If
-                                                                    you believe
-                                                                    this is a
-                                                                    mistake,
-                                                                    please,
-                                                                    contact our
-                                                                    team
-                                                                  </div>
-                                                                </div>
-                                                              )}
-                                                            </>
-                                                          )}
-                                                        {/* newww */}
-                                                        {(attributeValues.attribute_value ==
-                                                          "yes" ||
-                                                          attributeValues.attribute_value ==
-                                                            "no") && (
-                                                          <div
-                                                            className={`${
-                                                              attributeValues?.hover_phase !==
-                                                              ""
-                                                                ? "tooltip-title"
-                                                                : ""
-                                                            }`}
-                                                            style={{
-                                                              color:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_better_than *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
-                                                                      100 >
-                                                                      60
-                                                                  ? "#ce434b"
-                                                                  : "#27304e",
-                                                              fontSize: "15px",
-                                                              textDecoration:
-                                                                attributeValues?.hover_phase !==
-                                                                ""
-                                                                  ? "underline"
-                                                                  : "",
-                                                              textDecorationStyle:
-                                                                attributeValues?.hover_phase !==
-                                                                ""
-                                                                  ? "dotted"
-                                                                  : "",
-                                                              textDecorationThickness:
-                                                                "1.5px",
-                                                              textDecorationColor:
-                                                                getColorAttr(
-                                                                  attributeValues
-                                                                ),
-                                                              textUnderlineOffset:
-                                                                "5px",
-                                                            }}
-                                                          >
-                                                            {/* {console.log(
-                                                              attributeValues
-                                                            )} */}
-                                                            {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                                ? displayedAttributesCount[
+                                                    product.name
+                                                  ][attribute]
+                                                : initialDisplay
+                                            )
+                                            .map(
+                                              (attributeValues, valueIndex) => {
+                                                return (
+                                                  <Fragment key={valueIndex}>
+                                                    <div
+                                                      className="spec-section"
+                                                      key={valueIndex}
+                                                    >
+                                                      <div className="spec-item">
+                                                        <div className="spec-col">
+                                                          <div className="query">
                                                             {
-                                                              <span
-                                                                style={{
-                                                                  color:
-                                                                    getColorAttr(
-                                                                      attributeValues
-                                                                    ),
-                                                                }}
-                                                              >
-                                                                {(attributeValues.attribute_value !=
-                                                                null
-                                                                  ? attributeValues.attribute_value
-                                                                  : "") +
-                                                                  " " +
-                                                                  (attributeValues.unit !=
-                                                                  null
-                                                                    ? attributeValues.unit
-                                                                    : "")}
-                                                              </span>
+                                                              attributeValues.attribute
                                                             }
-                                                            {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
-                                                            <ProsConsToolTip
-                                                              hover_phrase={
+                                                            <QuestionIcon
+                                                              attributes={
                                                                 attributeValues &&
-                                                                attributeValues.hover_phase
+                                                                attributeValues
                                                               }
                                                             />
                                                           </div>
-                                                        )}
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </Fragment>
-                                              );
-                                            }
-                                          )
-                                      ) : (
-                                        <Skeleton
-                                          height={35}
-                                          count={
-                                            displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                            displayedAttributesCount[
-                                              product.name
-                                            ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay
-                                          }
-                                        />
-                                      )}
-
-                                      {loading == false
-                                        ? attributesClearly.attributes_new[
-                                            attribute
-                                          ].length >
-                                            (displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                            displayedAttributesCount[
-                                              product.name
-                                            ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay) && (
-                                            <span
-                                              className="show_more"
-                                              onClick={() => {
-                                                setloading(true),
-                                                  handleDisplayedAttributesCount(
-                                                    product.name,
-                                                    attribute
-                                                  );
-                                                setTimeout(() => {
-                                                  setloading(false);
-                                                }, 600);
-                                              }}
-                                            >
-                                              {"SHOW MORE "}
-                                              <i
-                                                className={`ri-${
-                                                  initialDisplay <
-                                                  attributesClearly
-                                                    .attributes_new[attribute]
-                                                    .length
-                                                    ? "add"
-                                                    : "subtract"
-                                                }-line`}
-                                              ></i>
-                                            </span>
-                                          )
-                                        : ""}
-                                    </Accordion.Body>
-                                  </Accordion.Item>
-                                </Fragment>
-                              );
-                            })}
-                        </Accordion>
-                        {/* Left According end*/}
-
-                        {/* Right */}
-                        <Accordion className="table-accordion w-50 p-0 right-accordion">
-                          {attributesClearly?.attributes_new &&
-                            Object.keys(
-                              getAttributeHalf(attributesClearly, "second")
-                            ).map((attribute, index) => {
-                              return (
-                                <Fragment key={index}>
-                                  <Accordion.Item eventKey={index} key={index}>
-                                    <Accordion.Header as="div">
-                                      <div className="table-accordion-header">
-                                        {attribute}
-                                        {/* {console.log(attribute,"hellow")} */}
-                                        {/* {console.log(
-                                          product.attributes_new[attribute][0]
-                                            ?.attribute_evaluation,
-                                          product.attributes_new[attribute][0]
-                                        )} */}
-                                        <Questiontool
-                                          attributes={
-                                            attributesClearly.attributes_new[
-                                              attribute
-                                            ][0]?.attribute_category
-                                          }
-                                        />
-                                      </div>
-                                      <span
-                                        className="count dark-color"
-                                        style={{
-                                          background:
-                                            attributesClearly.attributes_new[
-                                              attribute
-                                            ][0].attribute_evaluation >= 7.5
-                                              ? "#093673"
-                                              : attributesClearly
-                                                  .attributes_new[attribute][0]
-                                                  .attribute_evaluation >= 5 &&
-                                                attributesClearly
-                                                  .attributes_new[attribute][0]
-                                                  .attribute_evaluation < 7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
-                                        }}
-                                      >
-                                        {formatValue(
-                                          attributesClearly.attributes_new[
-                                            attribute
-                                          ][0]?.attribute_evaluation
-                                        )}
-                                      </span>
-                                      <div className="show-btn">
-                                        Show All{" "}
-                                        <i className="ri-arrow-down-s-line"></i>
-                                      </div>
-                                      <div className="hide-btn">
-                                        Hide All{" "}
-                                        <i className="ri-arrow-up-s-line"></i>
-                                      </div>
-                                    </Accordion.Header>
-                                    <Accordion.Body>
-                                      {loading == false ? (
-                                        attributesClearly.attributes_new[
-                                          attribute
-                                        ]
-                                          .slice(
-                                            0,
-                                            displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                              displayedAttributesCount[
-                                                product.name
-                                              ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay
-                                          )
-                                          .map(
-                                            (attributeValues, valueIndex) => {
-                                              return (
-                                                <Fragment key={valueIndex}>
-                                                  <div
-                                                    className="spec-section"
-                                                    key={valueIndex}
-                                                  >
-                                                    <div className="spec-item">
-                                                      <div className="spec-col">
-                                                        <div className="query">
-                                                          {
-                                                            attributeValues.attribute
-                                                          }
-                                                          <QuestionIcon
-                                                            attributes={
-                                                              attributeValues &&
-                                                              attributeValues
-                                                            }
-                                                          />
                                                         </div>
-                                                      </div>
-                                                      <div className="spec-col">
-                                                        {attributeValues.attribute_value !=
-                                                          "yes" &&
-                                                          attributeValues.attribute_value !=
-                                                            "no" && (
-                                                            <>
-                                                              {/* {console.log(attributeValues.hover_phase,"neets")} */}
-                                                              <div
-                                                                className={`${
-                                                                  attributeValues.hover_phase !==
-                                                                    "" &&
-                                                                  "tooltip-title"
-                                                                }`}
-                                                                style={{
-                                                                  color:
-                                                                    attributeValues.is_better_than *
-                                                                      100 >=
-                                                                    70
-                                                                      ? "#437ece"
-                                                                      : attributeValues.is_worse_than *
-                                                                          100 >
-                                                                        70
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
-                                                                  fontSize:
-                                                                    "15px",
-                                                                  textDecoration:
-                                                                    attributeValues?.hover_phase !==
-                                                                    ""
-                                                                      ? "underline"
-                                                                      : "",
-                                                                  textDecorationStyle:
-                                                                    attributeValues?.hover_phase !==
-                                                                    ""
-                                                                      ? "dotted"
-                                                                      : "",
-                                                                  textDecorationThickness:
-                                                                    "1.5px",
-                                                                  textDecorationColor:
-                                                                    attributeValues.is_better_than *
-                                                                      100 >=
-                                                                    70
-                                                                      ? "#437ece"
-                                                                      : attributeValues.is_worse_than *
-                                                                          100 >
-                                                                        70
-                                                                      ? "#ce434b"
-                                                                      : "#27304e",
-                                                                  textUnderlineOffset:
-                                                                    "5px",
-                                                                }}
-                                                              >
-                                                                {
-                                                                  <span
-                                                                    style={{
-                                                                      color:
-                                                                        attributeValues.is_better_than *
-                                                                          100 >=
-                                                                        70
-                                                                          ? "#437ece"
-                                                                          : attributeValues.is_worse_than *
-                                                                              100 >
-                                                                            70
-                                                                          ? "#ce434b"
-                                                                          : "#27304e",
-                                                                      fontSize:
-                                                                        "15px",
-                                                                    }}
-                                                                  >
-                                                                    {(attributeValues.attribute_value !=
-                                                                    null
-                                                                      ? attributeValues.attribute_value
-                                                                      : "") +
-                                                                      " " +
-                                                                      (attributeValues.attribute_value ===
-                                                                        "?" ||
-                                                                      attributeValues.attribute_value ===
-                                                                        "-"
-                                                                        ? ""
-                                                                        : attributeValues.unit !=
-                                                                          null
-                                                                        ? attributeValues.unit
-                                                                        : "")}
-                                                                  </span>
-                                                                }
-
-                                                                {attributeValues.attribute_value !==
-                                                                  "?" && (
-                                                                  <ProsConsToolTip
-                                                                    comment={
-                                                                      attributeValues?.commnet
-                                                                    }
-                                                                    hover_phrase={
-                                                                      attributeValues &&
-                                                                      attributeValues.hover_phase
-                                                                    }
-                                                                  />
-                                                                )}
-                                                              </div>{" "}
-                                                              {attributeValues?.info_not_verified && (
+                                                        <div className="spec-col">
+                                                          {attributeValues.attribute_value !=
+                                                            "yes" &&
+                                                            attributeValues.attribute_value !=
+                                                              "no" && (
+                                                              <>
+                                                                {/* {console.log(attributeValues.hover_phase,"neets")} */}
                                                                 <div
-                                                                  className="tooltip-title"
+                                                                  className={`${
+                                                                    attributeValues.hover_phase !==
+                                                                      "" &&
+                                                                    "tooltip-title"
+                                                                  }`}
                                                                   style={{
+                                                                    color:
+                                                                      attributeValues.is_better_than *
+                                                                        100 >=
+                                                                      70
+                                                                        ? "#437ece"
+                                                                        : attributeValues.is_worse_than *
+                                                                            100 >
+                                                                          70
+                                                                        ? "#ce434b"
+                                                                        : "#27304e",
+                                                                    fontSize:
+                                                                      "15px",
                                                                     textDecoration:
-                                                                      "none",
-                                                                    textDecorationLine:
-                                                                      "none",
+                                                                      attributeValues?.hover_phase !==
+                                                                      ""
+                                                                        ? "underline"
+                                                                        : "",
                                                                     textDecorationStyle:
-                                                                      "none",
+                                                                      attributeValues?.hover_phase !==
+                                                                      ""
+                                                                        ? "dotted"
+                                                                        : "",
+                                                                    textDecorationThickness:
+                                                                      "1.5px",
+                                                                    textDecorationColor:
+                                                                      attributeValues.is_better_than *
+                                                                        100 >=
+                                                                      70
+                                                                        ? "#437ece"
+                                                                        : attributeValues.is_worse_than *
+                                                                            100 >
+                                                                          70
+                                                                        ? "#ce434b"
+                                                                        : "#27304e",
+                                                                    textUnderlineOffset:
+                                                                      "5px",
                                                                   }}
                                                                 >
-                                                                  {" "}
-                                                                  <i
+                                                                  {
+                                                                    <span
+                                                                      style={{
+                                                                        color:
+                                                                          attributeValues.is_better_than *
+                                                                            100 >=
+                                                                          70
+                                                                            ? "#437ece"
+                                                                            : attributeValues.is_worse_than *
+                                                                                100 >
+                                                                              70
+                                                                            ? "#ce434b"
+                                                                            : "#27304e",
+                                                                        fontSize:
+                                                                          "15px",
+                                                                      }}
+                                                                    >
+                                                                      {(attributeValues.attribute_value !=
+                                                                      null
+                                                                        ? attributeValues.attribute_value
+                                                                        : "") +
+                                                                        " " +
+                                                                        (attributeValues.attribute_value ===
+                                                                          "?" ||
+                                                                        attributeValues.attribute_value ===
+                                                                          "-"
+                                                                          ? ""
+                                                                          : attributeValues.unit !=
+                                                                            null
+                                                                          ? attributeValues.unit
+                                                                          : "")}
+                                                                    </span>
+                                                                  }
+
+                                                                  {attributeValues.attribute_value !==
+                                                                    "?" && (
+                                                                    <ProsConsToolTip
+                                                                      comment={
+                                                                        attributeValues?.commnet
+                                                                      }
+                                                                      hover_phrase={
+                                                                        attributeValues &&
+                                                                        attributeValues.hover_phase
+                                                                      }
+                                                                    />
+                                                                  )}
+                                                                </div>{" "}
+                                                                {attributeValues?.info_not_verified && (
+                                                                  <div
+                                                                    className="tooltip-title"
                                                                     style={{
-                                                                      opacity:
-                                                                        "70%",
+                                                                      textDecoration:
+                                                                        "none",
+                                                                      textDecorationLine:
+                                                                        "none",
+                                                                      textDecorationStyle:
+                                                                        "none",
                                                                     }}
                                                                   >
                                                                     {" "}
-                                                                    (?){" "}
-                                                                  </i>
-                                                                  <div
-                                                                    className="tooltip-display-content"
-                                                                    style={{
-                                                                      opacity:
-                                                                        "100%",
-                                                                    }}
-                                                                  >
-                                                                    Information
-                                                                    is not
-                                                                    verified. If
-                                                                    you believe
-                                                                    this is a
-                                                                    mistake,
-                                                                    please,
-                                                                    contact our
-                                                                    team
+                                                                    <i
+                                                                      style={{
+                                                                        opacity:
+                                                                          "70%",
+                                                                      }}
+                                                                    >
+                                                                      {" "}
+                                                                      (?){" "}
+                                                                    </i>
+                                                                    <div
+                                                                      className="tooltip-display-content"
+                                                                      style={{
+                                                                        opacity:
+                                                                          "100%",
+                                                                      }}
+                                                                    >
+                                                                      Information
+                                                                      is not
+                                                                      verified.
+                                                                      If you
+                                                                      believe
+                                                                      this is a
+                                                                      mistake,
+                                                                      please,
+                                                                      contact
+                                                                      our team
+                                                                    </div>
                                                                   </div>
-                                                                </div>
-                                                              )}
-                                                            </>
-                                                          )}
-                                                        {/* newww */}
-                                                        {(attributeValues.attribute_value ==
-                                                          "yes" ||
-                                                          attributeValues.attribute_value ==
-                                                            "no") && (
-                                                          <div
-                                                            className={`${
-                                                              attributeValues?.hover_phase !==
-                                                              ""
-                                                                ? "tooltip-title"
-                                                                : ""
-                                                            }`}
-                                                            style={{
-                                                              color:
-                                                                attributeValues.attribute_value ==
-                                                                  "yes" &&
-                                                                attributeValues.attribute_is_better_than *
-                                                                  100 <
-                                                                  40
-                                                                  ? "#0066b2"
-                                                                  : attributeValues.attribute_value ==
-                                                                      "no" &&
-                                                                    attributeValues.attribute_is_worse_than *
-                                                                      100 >
-                                                                      60
-                                                                  ? "#ce434b"
-                                                                  : "#27304e",
-                                                              fontSize: "15px",
-                                                              textDecoration:
+                                                                )}
+                                                              </>
+                                                            )}
+                                                          {/* newww */}
+                                                          {(attributeValues.attribute_value ==
+                                                            "yes" ||
+                                                            attributeValues.attribute_value ==
+                                                              "no") && (
+                                                            <div
+                                                              className={`${
                                                                 attributeValues?.hover_phase !==
                                                                 ""
-                                                                  ? "underline"
-                                                                  : "",
-                                                              textDecorationStyle:
-                                                                attributeValues?.hover_phase !==
-                                                                ""
-                                                                  ? "dotted"
-                                                                  : "",
-                                                              textDecorationThickness:
-                                                                "1.5px",
-                                                              textDecorationColor:
-                                                                getColorAttr(
-                                                                  attributeValues
-                                                                ),
-                                                              textUnderlineOffset:
-                                                                "5px",
-                                                            }}
-                                                          >
-                                                            {/* {console.log(
-                                                              attributeValues
-                                                            )} */}
-                                                            {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
-                                                            {
-                                                              <span
-                                                                style={{
-                                                                  color:
-                                                                    getColorAttr(
-                                                                      attributeValues
-                                                                    ),
-                                                                }}
-                                                              >
-                                                                {(attributeValues.attribute_value !=
-                                                                null
-                                                                  ? attributeValues.attribute_value
-                                                                  : "") +
-                                                                  " " +
-                                                                  (attributeValues.unit !=
+                                                                  ? "tooltip-title"
+                                                                  : ""
+                                                              }`}
+                                                              style={{
+                                                                color:
+                                                                  attributeValues.attribute_value ==
+                                                                    "yes" &&
+                                                                  attributeValues.attribute_is_better_than *
+                                                                    100 <
+                                                                    40
+                                                                    ? "#0066b2"
+                                                                    : attributeValues.attribute_value ==
+                                                                        "no" &&
+                                                                      attributeValues.attribute_is_worse_than *
+                                                                        100 >
+                                                                        60
+                                                                    ? "#ce434b"
+                                                                    : "#27304e",
+                                                                fontSize:
+                                                                  "15px",
+                                                                textDecoration:
+                                                                  attributeValues?.hover_phase !==
+                                                                  ""
+                                                                    ? "underline"
+                                                                    : "",
+                                                                textDecorationStyle:
+                                                                  attributeValues?.hover_phase !==
+                                                                  ""
+                                                                    ? "dotted"
+                                                                    : "",
+                                                                textDecorationThickness:
+                                                                  "1.5px",
+                                                                textDecorationColor:
+                                                                  getColorAttr(
+                                                                    attributeValues
+                                                                  ),
+                                                                textUnderlineOffset:
+                                                                  "5px",
+                                                              }}
+                                                            >
+                                                              {/* {console.log(
+                                                               attributeValues
+                                                             )} */}
+                                                              {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                                              {
+                                                                <span
+                                                                  style={{
+                                                                    color:
+                                                                      getColorAttr(
+                                                                        attributeValues
+                                                                      ),
+                                                                  }}
+                                                                >
+                                                                  {(attributeValues.attribute_value !=
                                                                   null
-                                                                    ? attributeValues.unit
-                                                                    : "")}
-                                                              </span>
-                                                            }
-                                                            {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
-                                                            <ProsConsToolTip
-                                                              hover_phrase={
-                                                                attributeValues &&
-                                                                attributeValues.hover_phase
+                                                                    ? attributeValues.attribute_value
+                                                                    : "") +
+                                                                    " " +
+                                                                    (attributeValues.unit !=
+                                                                    null
+                                                                      ? attributeValues.unit
+                                                                      : "")}
+                                                                </span>
                                                               }
-                                                            />
-                                                          </div>
-                                                        )}
+                                                              {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
+                                                              <ProsConsToolTip
+                                                                hover_phrase={
+                                                                  attributeValues &&
+                                                                  attributeValues.hover_phase
+                                                                }
+                                                              />
+                                                            </div>
+                                                          )}
+                                                        </div>
                                                       </div>
                                                     </div>
-                                                  </div>
-                                                </Fragment>
-                                              );
+                                                  </Fragment>
+                                                );
+                                              }
+                                            )
+                                        ) : (
+                                          <Skeleton
+                                            height={35}
+                                            count={
+                                              displayedAttributesCount[
+                                                product.name
+                                              ] &&
+                                              displayedAttributesCount[
+                                                product.name
+                                              ][attribute]
+                                                ? displayedAttributesCount[
+                                                    product.name
+                                                  ][attribute]
+                                                : initialDisplay
                                             }
-                                          )
-                                      ) : (
-                                        <Skeleton
-                                          height={35}
-                                          count={
-                                            displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                            displayedAttributesCount[
-                                              product.name
-                                            ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay
-                                          }
-                                        />
-                                      )}
+                                          />
+                                        )}
 
-                                      {loading == false
-                                        ? attributesClearly.attributes_new[
-                                            attribute
-                                          ].length >
-                                            (displayedAttributesCount[
-                                              product.name
-                                            ] &&
-                                            displayedAttributesCount[
-                                              product.name
-                                            ][attribute]
-                                              ? displayedAttributesCount[
-                                                  product.name
-                                                ][attribute]
-                                              : initialDisplay) && (
-                                            <span
-                                              className="show_more"
-                                              onClick={() => {
-                                                setloading(true),
-                                                  handleDisplayedAttributesCount(
-                                                    product.name,
-                                                    attribute
-                                                  );
-                                                setTimeout(() => {
-                                                  setloading(false);
-                                                }, 600);
-                                              }}
-                                            >
-                                              {"SHOW MORE "}
-                                              <i
-                                                className={`ri-${
-                                                  initialDisplay <
-                                                  attributesClearly
-                                                    .attributes_new[attribute]
-                                                    .length
-                                                    ? "add"
-                                                    : "subtract"
-                                                }-line`}
-                                              ></i>
-                                            </span>
-                                          )
-                                        : ""}
-                                    </Accordion.Body>
-                                  </Accordion.Item>
-                                </Fragment>
-                              );
-                            })}
-                        </Accordion>
-                      </Accordion.Body>
-                    </Col>
-                  </Row>
+                                        {loading == false
+                                          ? attributesClearly.attributes_new[
+                                              attribute
+                                            ].length >
+                                              (displayedAttributesCount[
+                                                product.name
+                                              ] &&
+                                              displayedAttributesCount[
+                                                product.name
+                                              ][attribute]
+                                                ? displayedAttributesCount[
+                                                    product.name
+                                                  ][attribute]
+                                                : initialDisplay) && (
+                                              <span
+                                                className="show_more"
+                                                onClick={() => {
+                                                  setloading(true),
+                                                    handleDisplayedAttributesCount(
+                                                      product.name,
+                                                      attribute
+                                                    );
+                                                  setTimeout(() => {
+                                                    setloading(false);
+                                                  }, 600);
+                                                }}
+                                              >
+                                                {"SHOW MORE "}
+                                                <i
+                                                  className={`ri-${
+                                                    initialDisplay <
+                                                    attributesClearly
+                                                      .attributes_new[attribute]
+                                                      .length
+                                                      ? "add"
+                                                      : "subtract"
+                                                  }-line`}
+                                                ></i>
+                                              </span>
+                                            )
+                                          : ""}
+                                      </Accordion.Body>
+                                    </Accordion.Item>
+                                  </Fragment>
+                                );
+                              })}
+                          </Accordion>
+                        </Accordion.Body>
+                      </Col>
+                    </Row>
+                  )}
                 </Accordion.Item>
               </Accordion>
             </Row>
