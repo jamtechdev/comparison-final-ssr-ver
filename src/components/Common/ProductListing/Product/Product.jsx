@@ -1307,8 +1307,12 @@ export default function Product({
                                           }}
                                           className={`color-item `}
                                           // onClick={(e) => handleItemClick(key)}
+                                           // onClick={(e) => handleItemClick(key)}
+                                           dangerouslySetInnerHTML={{
+                                            __html: data?.short_name,
+                                          }}
                                         >
-                                          {/* {data?.short_name} */}
+                                          
                                         </span>
                                       ) : (
                                         <a
@@ -1325,6 +1329,9 @@ export default function Product({
                                           }}
                                           className={`color-item `}
                                           // onClick={(e) => handleItemClick(key)}
+                                          dangerouslySetInnerHTML={{
+                                            __html: data?.short_name,
+                                          }}
                                         >
                                           {/* {data?.short_name} */}
                                         </a>
