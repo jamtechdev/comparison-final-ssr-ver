@@ -25,6 +25,7 @@ const CompareTable = React.memo(
       ref ||= newRef;
 
       // mount
+    
       useEffect(() => {
         const cachedRef = ref.current,
           observer = new IntersectionObserver(
@@ -102,7 +103,7 @@ const CompareTable = React.memo(
       const filterData = copiedFinalProducts
         .slice(0, defaultNo)
         .flatMap((product) =>
-          product.attributes[category.name].filter(
+          product.attributes[category.name]?.filter(
             (obj) => obj.attribute === catAttribute.name
           )
         );
@@ -111,10 +112,10 @@ const CompareTable = React.memo(
 
       numericValues = arrayOfObjects
         .map((obj) => {
-          if (!isNaN(parseFloat(obj.attribute_value))) {
-            return parseFloat(obj.attribute_value);
+          if (!isNaN(parseFloat(obj?.attribute_value))) {
+            return parseFloat(obj?.attribute_value);
           } else {
-            return obj.attribute_value;
+            return obj?.attribute_value;
           }
         })
         .filter((value) => !isNaN(value));
@@ -131,7 +132,7 @@ const CompareTable = React.memo(
 
       // Adding logic for String case
       if (numericValues.length === 0) {
-        const stringArray = arrayOfObjects.map((obj) => obj.attribute_value);
+        const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
         // console.log(
         //   stringArray,
         //   arrayOfObjects,
@@ -186,7 +187,7 @@ const CompareTable = React.memo(
         <>
           {arrayOfObjects.map((item, attrIndex) => (
             <td key={attrIndex}>
-              {item.attribute_value.includes("⭐") ? (
+              {item?.attribute_value.includes("⭐") ? (
                 <>
                   <div>
                     {item?.attribute_value.split("⭐")[0]}{" "}
@@ -210,7 +211,7 @@ const CompareTable = React.memo(
                   ) : (
                     <>
                       {" "}
-                      {item?.attribute_value} {item.unit ? item.unit : ""}
+                      {item?.attribute_value} {item?.unit ? item?.unit : ""}
                     </>
                   )}
                 </>
@@ -304,12 +305,14 @@ const CompareTable = React.memo(
                       <a
                         href={`/${product?.category_url}/${product?.permalink}`}
                       ></a>
-                      <small className="product-name-small">{product?.name}</small>
+                      <small className="product-name-small">
+                        {product?.name}
+                      </small>
                       <img
                         className="compare_image"
                         src={
-                          product?.main_image
-                            ? product?.main_image
+                          product?.mini_image
+                            ? product?.mini_image
                             : "/images/nofound.png"
                         }
                         width={0}
@@ -398,8 +401,8 @@ const CompareTable = React.memo(
                     <img
                       className="compare_image"
                       src={
-                        product?.main_image
-                          ? product?.main_image
+                        product?.mini_image
+                          ? product?.mini_image
                           : "/images/nofound.png"
                       }
                       width={0}
@@ -873,18 +876,24 @@ const CompareTable = React.memo(
                                 className="count"
                                 style={{
                                   background:
+                                    product.attributes[category.name] &&
+                                    product.attributes[category.name].length >
+                                      0 &&
                                     product.attributes[
                                       category.name
-                                    ][0].attribute_evaluation?.toFixed(1) >= 7.5
+                                    ]?.[0].attribute_evaluation?.toFixed(1) >=
+                                      7.5
                                       ? "#093673"
                                       : product.attributes[
                                           category.name
-                                        ][0].attribute_evaluation?.toFixed(1) >=
-                                          5 &&
+                                        ]?.[0].attribute_evaluation?.toFixed(
+                                          1
+                                        ) >= 5 &&
                                         product.attributes[
                                           category.name
-                                        ][0].attribute_evaluation?.toFixed(1) <
-                                          7.5
+                                        ]?.[0].attribute_evaluation?.toFixed(
+                                          1
+                                        ) < 7.5
                                       ? "#437ECE"
                                       : " #85B2F1",
                                 }}
@@ -892,7 +901,7 @@ const CompareTable = React.memo(
                                 {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
                                 {product.attributes[
                                   category.name
-                                ][0]?.attribute_evaluation?.toFixed(1)}{" "}
+                                ]?.[0]?.attribute_evaluation?.toFixed(1)}{" "}
                               </span>
                             </td>
                           );

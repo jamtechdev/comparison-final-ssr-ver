@@ -1308,7 +1308,7 @@ export default function Product({
                                           className={`color-item `}
                                           // onClick={(e) => handleItemClick(key)}
                                         >
-                                          {data?.short_name}
+                                          {/* {data?.short_name} */}
                                         </span>
                                       ) : (
                                         <a
@@ -1326,7 +1326,7 @@ export default function Product({
                                           className={`color-item `}
                                           // onClick={(e) => handleItemClick(key)}
                                         >
-                                          {data?.short_name}
+                                          {/* {data?.short_name} */}
                                         </a>
                                       )}
                                     </li>
@@ -1433,7 +1433,7 @@ export default function Product({
                                           {guidePhraseData &&
                                             guidePhraseData?.in_text}{" "}
                                         </span>
-                                        {data?.guide_short_name};
+                                        {/* {data?.guide_short_name}; */}
                                       </p>
                                     </a>
                                   );
