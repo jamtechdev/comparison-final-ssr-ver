@@ -307,7 +307,7 @@ export default function Product({
   };
 
   const attributesClearly = generateProductsWithAttributes();
-  console.log(attributesClearly, "neet");
+  // console.log(attributesClearly, "neet");
   const fetchProductData = async (productId, productCategory) => {
     // console.log(producnctId, productCategory);
     setIsLoading(true);
