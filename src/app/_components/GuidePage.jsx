@@ -27,7 +27,7 @@ export default function GuidePage({
   filters,
   searchParams,
 }) {
-  useChart("guide");
+  // useChart("guide");
   // console.log(guideData, "Abhay");
   const router = useRouter();
   const currentParams = new URLSearchParams(searchParams.toString());
@@ -449,7 +449,9 @@ export default function GuidePage({
                             >
                               {item.product.name}
                             </a>
-                          ) : <span>{item?.product?.name}</span>}
+                          ) : (
+                            <span>{item?.product?.name}</span>
+                          )}
                         </span>
                       </li>
                     ))}
@@ -957,14 +959,14 @@ export default function GuidePage({
                   : "No title found"}
               </h2>
               {/* {console.log(productForTable?.products?.length)} */}
-              {/* {guide && productForTable?.products?.length > 1 && (
+              {guide && productForTable?.products?.length > 1 && (
                 <CompareTable
                   guidePhraseData={guide?.page_phrases}
-                  products={productForTable?.products}
+                  products={productForTable}
                   categoryAttributes={attributesForTable && attributesForTable}
                   slug={slug}
                 />
-              )} */}
+              )}
             </Col>
           </Row>
         </Container>
