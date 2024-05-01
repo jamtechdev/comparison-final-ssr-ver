@@ -16,7 +16,7 @@ function PieChart(props) {
 
   const outerRadius = pieSize / 2;
   const center = svgSize / 2;
-  console.log(data, chartTitle , xUnit);
+  // console.log(data, chartTitle , xUnit);
   useEffect(() => {
     drawChart();
   }, [data]);
