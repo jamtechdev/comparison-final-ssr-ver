@@ -23,6 +23,8 @@ const useChart = () => {
   const shortCodepatternsRE =
     /^\[pie-chart|vertical-chart|horizontal-chart|correlation-chart|.*\]$/;
 
+
+
   useEffect(() => {
     // Function to search for the pattern
     const searchForPattern = async () => {

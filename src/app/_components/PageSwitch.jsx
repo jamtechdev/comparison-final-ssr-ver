@@ -15,13 +15,36 @@ export default async function PageSwitch({
 }) {
   let PageToRender;
   // console.log(PageType);
+  // decode html string
+  function searchCharts(text) {
+    const regex = /\[(.*?)\]/g;
+    let matches = [];
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+      matches.push(match[0]);
+    }
+    return matches;
+  }
+  // function replaceTextPart(matchShortCode,third_text){
+  //   console.log(matchShortCode?.length);
+  //   console.log(m);
+
+  // }
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
-      // console.log(pageData[1],"neetx")
+
+      // console.log(pageData[0],"neetx")
       // console.log(pageData[1]?.data,"neets");
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
       const productTable = await getProductForTable(guide?.category_url, slug);
+      const third_text = pageData[0]?.data?.text_third_part_main;
+      const matchShortCode = searchCharts(third_text);
+      // console.log(matchShortCode);
+      
+
+      // console.log(replacedTexts, "hello");
+
       // console.log(categorySlug)
       PageToRender = (
         <GuidePage
@@ -32,6 +55,7 @@ export default async function PageSwitch({
           attributesForTable={attributes?.data?.attribute_categories}
           productForTable={productTable?.data}
           searchParams={searchParams}
+          matchShortCode={matchShortCode}
         />
       );
       break;

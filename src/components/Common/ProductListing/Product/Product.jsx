@@ -290,7 +290,7 @@ export default function Product({
 
   // There I use show all button to show all product attributes and hide all button to hide all product attributes by hit API call
 
-  const [productData, setProductData] = useState({});
+  const [productData, setProductData] = useState(null);
   const [productID, setProductID] = useState(null);
   const [categoryID, setCategoryID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -316,7 +316,7 @@ export default function Product({
   };
 
   const attributesClearly = generateProductsWithAttributes();
-  console.log(attributesClearly, "neet");
+  // console.log(attributesClearly, "neet");
   const fetchProductData = async (productId, productCategory) => {
     // console.log(producnctId, productCategory);
     setIsLoading(true);
@@ -346,20 +346,22 @@ export default function Product({
 
   const handleShowAllClick = async (productId, productCategory) => {
     // console.log(productId, productCategory, "dataID");
-    if (!productData[productId]) {
-      await fetchProductData(productId, productCategory);
-    }
+
+    await fetchProductData(productId, productCategory);
   };
   // const decoratedOnClick = useAccordionButton(1, () =>
   //   console.log('totally custom!'),
   // );
 
   useEffect(() => {
-    console.log(searchParams, "change alert");
-    // decoratedOnClick()
-    setBar({ isHidden: false });
-    toggleHidden();
+    // console.log(searchParams, "change alert");
+    setProductData(null);
+    document.querySelectorAll(".accordion-button").forEach((button) => {
+      button.classList.add("collapsed");
+    });
   }, [searchParams]);
+
+  // console.log(productData);
 
   return (
     <Fragment>
@@ -1427,7 +1429,7 @@ export default function Product({
                       }
                     />
                   )}
-                  {!isLoading && (
+                  {!isLoading && productData && (
                     <Row className="m-0">
                       <Col md={12} className="p-0">
                         <Accordion.Body className="d-flex inner-accordion flex-wrap">

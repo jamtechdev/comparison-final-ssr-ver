@@ -27,6 +27,8 @@ export default function GuidePage({
   filters,
   searchParams,
 }) {
+
+
   useChart("guide");
   // console.log(guideData, "Abhay");
   const router = useRouter();
@@ -113,6 +115,8 @@ export default function GuidePage({
   //   window.history.replaceState(null, "", window.location.pathname);
   //   location.reload();
   // };
+
+
 
   const removeFilters = () => {
     const url = new URL(window.location.href);
