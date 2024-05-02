@@ -25,11 +25,14 @@ export default async function PageSwitch({
     }
     return matches;
   }
-  // function replaceTextPart(matchShortCode,third_text){
-  //   console.log(matchShortCode?.length);
-  //   console.log(m);
+  function replaceTextPart(matchShortCode, third_text) {
+    for (let i = 0; i < matchShortCode?.length; i++) {
+      
+      third_text = third_text?.replace(matchShortCode[i], `hello navneet`);
+    }
 
-  // }
+    return third_text;
+  }
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
@@ -40,8 +43,7 @@ export default async function PageSwitch({
       const productTable = await getProductForTable(guide?.category_url, slug);
       const third_text = pageData[0]?.data?.text_third_part_main;
       const matchShortCode = searchCharts(third_text);
-      // console.log(matchShortCode);
-      
+      console.log(replaceTextPart(matchShortCode, third_text));
 
       // console.log(replacedTexts, "hello");
 
