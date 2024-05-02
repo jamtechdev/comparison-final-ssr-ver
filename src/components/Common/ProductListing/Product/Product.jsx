@@ -1,6 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, Fragment, useEffect, useRef } from "react";
-import { Accordion, Col, Row, Button, Form, Container } from "react-bootstrap";
+import {
+  Accordion,
+  Col,
+  Row,
+  Button,
+  Form,
+  Container,
+  useAccordionButton,
+} from "react-bootstrap";
 import QuestionIcon from "../../../Svg/QuestionIcon";
 import Questiontool from "../../../Svg/Questiontool";
 import ProsConsToolTip from "../../../Svg/ProsConsToolTip";
@@ -36,6 +44,7 @@ export default function Product({
   text_before_listing,
   slug,
   order,
+  searchParams,
 }) {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
@@ -334,9 +343,6 @@ export default function Product({
       setIsLoading(false);
     }
   };
-  // useEffect(() => {
-  //   fetchProductData(productID, categoryID);
-  // }, [productID, categoryID]);
 
   const handleShowAllClick = async (productId, productCategory) => {
     // console.log(productId, productCategory, "dataID");
@@ -344,6 +350,17 @@ export default function Product({
       await fetchProductData(productId, productCategory);
     }
   };
+  // const decoratedOnClick = useAccordionButton(1, () =>
+  //   console.log('totally custom!'),
+  // );
+
+  useEffect(() => {
+    console.log(searchParams, "change alert");
+    // decoratedOnClick()
+    setBar({ isHidden: false });
+    toggleHidden();
+  }, [searchParams]);
+
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
@@ -1307,13 +1324,11 @@ export default function Product({
                                           }}
                                           className={`color-item `}
                                           // onClick={(e) => handleItemClick(key)}
-                                           // onClick={(e) => handleItemClick(key)}
-                                           dangerouslySetInnerHTML={{
+                                          // onClick={(e) => handleItemClick(key)}
+                                          dangerouslySetInnerHTML={{
                                             __html: data?.short_name,
                                           }}
-                                        >
-                                          
-                                        </span>
+                                        ></span>
                                       ) : (
                                         <a
                                           href={`/${data?.category_url}/${data?.permalink}`}

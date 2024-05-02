@@ -306,26 +306,26 @@ thead.isSticky {
   padding: 2px 12px !important;
 }
 
-.compare-container thead.isSticky tr th .device-name .product-name-small{
+.compare-container thead.isSticky tr th .device-name .product-name-small {
   display: -webkit-box !important;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-weight: 600 !important;
-    font-size: 15px !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 600 !important;
+  font-size: 15px !important;
 }
 
 .compare-container thead.isSticky tr th .best-tag-product {
   position: static !important;
 }
 
-.compare-container thead tr th .device-name .product-name-small{
+.compare-container thead tr th .device-name .product-name-small {
   display: -webkit-box !important;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-weight: 600 !important;
-    font-size: 15px !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 600 !important;
+  font-size: 15px !important;
 }
 
 .compare-container thead tr th:not(:first-child),
@@ -1268,7 +1268,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   .base_chart_graph {
     width: 100% !important;
   }
-  .best-tag-product{
+  .best-tag-product {
     margin-left: 10px;
     line-height: 18px;
     padding: 6px 10px;
@@ -1276,7 +1276,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
     font-size: 14px;
   }
 
-  .comparison-tool .not-availabel{
+  .comparison-tool .not-availabel {
     grid-template-columns: 1fr !important;
   }
 }
@@ -1286,7 +1286,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
     font-size: 14px;
     max-width: 180px;
   }
-  .site_tabs.graph-tab{
+  .site_tabs.graph-tab {
     flex-wrap: nowrap !important;
   }
   .site_tabs.graph-tab.compare-graph-tabs .nav-item button {

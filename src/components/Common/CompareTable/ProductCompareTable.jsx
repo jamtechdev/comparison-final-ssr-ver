@@ -300,8 +300,10 @@ const ProductCompareTable = React.memo(
                       >
                         {" "}
                       </a>
-                      <small className="product-name-small">{product?.name}</small>
-              
+                      <small className="product-name-small">
+                        {product?.name}
+                      </small>
+
                       <img
                         className="compare_image"
                         src={

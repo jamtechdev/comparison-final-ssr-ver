@@ -4,17 +4,21 @@ import React, { useEffect, useRef } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import Product from "./Product/Product";
 
-export default React.forwardRef(function ProductListing({
-  products,
-  productPositionArray,
-  handleToggleCollapse,
-  handleManageCollapsedDiv,
-  text_before_listing,
-  text_after_listing,
-  guidePhraseData,
-  slug,
-  order,
-}, ref) {
+export default React.forwardRef(function ProductListing(
+  {
+    products,
+    productPositionArray,
+    handleToggleCollapse,
+    handleManageCollapsedDiv,
+    text_before_listing,
+    text_after_listing,
+    guidePhraseData,
+    slug,
+    order,
+    searchParams,
+  },
+  ref
+) {
   const productListRef = ref || useRef(null);
 
   useEffect(() => {
@@ -38,7 +42,7 @@ export default React.forwardRef(function ProductListing({
       <span className="testing__text">
         <i>{text_before_listing}</i>
       </span>
-     
+
       {products?.map((product, index) => (
         <Product
           guidePhraseData={guidePhraseData}
@@ -49,6 +53,7 @@ export default React.forwardRef(function ProductListing({
           handleManageCollapsedDiv={handleManageCollapsedDiv}
           slug={slug}
           order={order}
+          searchParams={searchParams}
         />
       ))}
       <span className="testing__text">

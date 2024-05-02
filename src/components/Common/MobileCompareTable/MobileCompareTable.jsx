@@ -420,20 +420,21 @@ export default function MobileCompareTable({
         <div
           className={
             winPos == true
-              ?  currentIndex === 0 ?"slider-controls table__arrow arrow__fixed justify-content-end":"slider-controls table__arrow arrow__fixed justify-content-start"
+              ? currentIndex === 0
+                ? "slider-controls table__arrow arrow__fixed justify-content-end"
+                : "slider-controls table__arrow arrow__fixed justify-content-start"
               : "slider-controls table__arrow"
           }
         >
-          {currentIndex ===0 ? (
-              <span className="swiper-next" onClick={handleNext}>
-            <i className="ri-arrow-right-s-line"></i>
-          </span>
-            
-          ):(<span className="swiper-prev" onClick={handlePrevious}>
-          <i className="ri-arrow-left-s-line"></i>
-        </span>)}
-          
-        
+          {currentIndex === 0 ? (
+            <span className="swiper-next" onClick={handleNext}>
+              <i className="ri-arrow-right-s-line"></i>
+            </span>
+          ) : (
+            <span className="swiper-prev" onClick={handlePrevious}>
+              <i className="ri-arrow-left-s-line"></i>
+            </span>
+          )}
         </div>
         {/* <div
           className={
@@ -850,26 +851,89 @@ export default function MobileCompareTable({
                                 <td colSpan="2">
                                   <p className="table-main-heading">
                                     {product?.name}
-                                    <span className="question-marker-icon">
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                      </svg>
-                                    </span>
+                                    {/* <span className="question-marker-icon">
+                                      <div className="tooltip-title">
+                                        {products &&
+                                          products.length > 0 &&
+                                          products[0]
+                                            ?.overall_score_descriptions && (
+                                            <div
+                                              className="tooltip-display-content"
+                                              style={{
+                                                transform: "translateX(-65%)",
+                                              }}
+                                            >
+                                              {products[0]
+                                                ?.overall_score_descriptions
+                                                ?.description && (
+                                                <p className="mb-2">
+                                                  <b>What it is: </b>{" "}
+                                                  {
+                                                    products[0]
+                                                      ?.overall_score_descriptions
+                                                      ?.description
+                                                  }
+                                                </p>
+                                              )}
+                                              {products[0]
+                                                ?.overall_score_descriptions
+                                                ?.when_matters && (
+                                                <p className="mb-2">
+                                                  <b>When it matters: </b>{" "}
+                                                  {
+                                                    products[0]
+                                                      ?.overall_score_descriptions
+                                                      ?.when_matters
+                                                  }
+                                                </p>
+                                              )}
+                                            </div>
+                                          )}
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                                        </svg>
+                                      </div>
+                                    </span> */}
                                   </p>
                                 </td>
                               </tr>
                               <tr className="tr-bg-color">
                                 {slider_data.map((data, Sliderindex) => {
+                                  // console.log(data?.attributes[product.name]);
                                   return (
                                     <td key={Sliderindex}>
-                                      <span className="count">
-                                        {" "}
-                                        {data.attributes[
-                                          product.name
-                                        ]?.[0].final_points?.toFixed(1)}{" "}
+                                      <span
+                                        className="count"
+                                        style={{
+                                          background:
+                                            data?.attributes[
+                                              product?.name
+                                            ]?.[0]?.attribute_evaluation?.toFixed(
+                                              1
+                                            ) >= 7.5
+                                              ? "#093673"
+                                              : data?.attributes[
+                                                  product?.name
+                                                ]?.[0]?.attribute_evaluation?.toFixed(
+                                                  1
+                                                ) >= 5 &&
+                                                data?.attributes[
+                                                  product?.name
+                                                ]?.[0]?.attribute_evaluation?.toFixed(
+                                                  1
+                                                ) < 7.5
+                                              ? "#437ECE"
+                                              : "#85B2F1",
+                                        }}
+                                      >
+                                        {/* {console.log(data?.attributes[category.name].unit && data?.attributes[category.name].unit )} */}
+                                        {
+                                          data?.attributes[product.name]?.[0]
+                                            .attribute_evaluation
+                                        }{" "}
                                       </span>
                                     </td>
                                   );
@@ -999,6 +1063,22 @@ export default function MobileCompareTable({
                                     </>
                                   );
                                 })}
+                              {product.attributes.length >
+                                (pagination[product.name] ||
+                                  initialNoOfCategories) && (
+                                <tr className="text-center show_more_row">
+                                  <td colSpan="6">
+                                    <span
+                                      className="show_more"
+                                      onClick={() =>
+                                        handlePagination(product.name)
+                                      }
+                                    >
+                                      SHOW MORE <i className="ri-add-line"></i>
+                                    </span>
+                                  </td>
+                                </tr>
+                              )}
                             </>
                           );
                         });
