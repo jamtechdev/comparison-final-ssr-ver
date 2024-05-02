@@ -18,7 +18,7 @@ function ComparisonPieChart(props) {
   const outerRadius = pieSize / 2;
   const center = svgSize / 2;
 
-  console.log(color, "datas");
+  console.log(data, "data");
 
   // const datas = {
   //   label: ["no", "yes"],
@@ -148,7 +148,8 @@ function ComparisonPieChart(props) {
           customColorScale(d.label),
           d.value,
           d.label,
-          pieProductBatch[i],
+          d,
+          // pieProductBatch[i],
         ];
       })
       .enter()
@@ -177,9 +178,8 @@ function ComparisonPieChart(props) {
 
         if (i === 3 && d) {
           // console.log(d)
-        
-       
-          d.forEach((element) => {
+
+          d.products.forEach((element) => {
             if (element?.product_name) {
               d3.select(this)
                 .append("span")

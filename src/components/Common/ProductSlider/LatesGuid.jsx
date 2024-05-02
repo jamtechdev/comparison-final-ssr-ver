@@ -31,7 +31,7 @@ export default function LatesGuid({ favSlider }) {
             favSlider?.map((section, index) => (
               <SwiperSlide key={Math.random(1, 999)} className="product-card">
                 <a
-                  href={`${section?.category_url}/${section?.permalink}`}
+                  href={`/${section?.category_url}/${section?.permalink}`}
                   style={{ color: "#27304e" }}
                 >
                   <img

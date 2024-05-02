@@ -99,7 +99,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
             ".chart_Append" + index
           );
           const numberOfChartAppends = chartAppendElements.length;
-          // console.log(chartData?.type);
+          console.log(chartData);
           if (numberOfChartAppends == 1) {
             // console.log(chartData?.type);
             if (chartData?.type === "pie-chart") {

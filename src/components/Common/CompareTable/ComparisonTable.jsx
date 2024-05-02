@@ -302,7 +302,9 @@ export default function ComparisonTable({
                     <a
                       href={`/${product?.category_url}/${product?.permalink}`}
                     ></a>
-                    <small className="product-name-small">{product?.name}</small>
+                    <small className="product-name-small">
+                      {product?.name}
+                    </small>
                     <img
                       className="compare_image"
                       src={
@@ -783,53 +785,53 @@ export default function ComparisonTable({
                 })}
             </tr>
           )}
-            {products[0]?.area_evaluation?.map((data, index) => {
-              const maxValues = finalProducts.map(
-                (product) => product?.area_evaluation?.[index]?.value ?? null
-              );
-              const max = Math.max(
-                ...maxValues.filter((value) => value !== null)
-              );
+          {products[0]?.area_evaluation?.map((data, index) => {
+            const maxValues = finalProducts.map(
+              (product) => product?.area_evaluation?.[index]?.value ?? null
+            );
+            const max = Math.max(
+              ...maxValues.filter((value) => value !== null)
+            );
 
-              // Count occurrences of each value
-              const valueCounts = finalProducts.reduce((acc, product) => {
-                const value = product?.area_evaluation?.[index]?.value;
-                if (value !== null) {
-                  acc[value] = (acc[value] || 0) + 1;
-                }
-                return acc;
-              }, {});
+            // Count occurrences of each value
+            const valueCounts = finalProducts.reduce((acc, product) => {
+              const value = product?.area_evaluation?.[index]?.value;
+              if (value !== null) {
+                acc[value] = (acc[value] || 0) + 1;
+              }
+              return acc;
+            }, {});
 
-              return (
-                <tr className="" key={index}>
-                  {" "}
-                  {/* Ensure to set a unique key for each <tr> */}
-                  <th className="sub-inner-padding">
-                    <div className="tooltip-title">{data?.title}</div>
-                  </th>
-                  {finalProducts.slice(0, defaultNo).map((product, idx) => {
-                    const value =
-                      product?.area_evaluation?.[index]?.value ?? null;
-                    return (
-                      <td key={idx}>
-                        {formatValue(value)}
-                        {value === max && valueCounts[value] <= 1 && (
-                          <span key={value} className="tooltip-title-2">
-                            <img
-                              style={{ float: "right", paddingRight: "5px" }}
-                              src="/icons/star.png"
-                              alt="star"
-                            />
-                            <ProsConsToolTip hover_phrase={data?.star_text} />
-                          </span>
-                        )}
-                        {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+            return (
+              <tr className="" key={index}>
+                {" "}
+                {/* Ensure to set a unique key for each <tr> */}
+                <th className="sub-inner-padding">
+                  <div className="tooltip-title">{data?.title}</div>
+                </th>
+                {finalProducts.slice(0, defaultNo).map((product, idx) => {
+                  const value =
+                    product?.area_evaluation?.[index]?.value ?? null;
+                  return (
+                    <td key={idx}>
+                      {formatValue(value)}
+                      {value === max && valueCounts[value] <= 1 && (
+                        <span key={value} className="tooltip-title-2">
+                          <img
+                            style={{ float: "right", paddingRight: "5px" }}
+                            src="/icons/star.png"
+                            alt="star"
+                          />
+                          <ProsConsToolTip hover_phrase={data?.star_text} />
+                        </span>
+                      )}
+                      {/* Add star if the value is the maximum for this index and count is less than or equal to 2 */}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
           {removeLastObjectFromCategory
             ?.slice(0, fullTable || 2)
             .map((category, categoryIndex) => {
@@ -870,11 +872,29 @@ export default function ComparisonTable({
                       .map((product, productIndex) => {
                         return (
                           <td key={productIndex}>
-                            <span className="count">
-                              {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
+                            <span
+                              className="count"
+                              style={{
+                                background:
+                                  product.attributes[
+                                    category.name
+                                  ]?.[0].attribute_evaluation?.toFixed(1) >= 7.5
+                                    ? "#093673"
+                                    : product.attributes[
+                                        category.name
+                                      ]?.[0].attribute_evaluation?.toFixed(1) >=
+                                        5 &&
+                                      product.attributes[
+                                        category.name
+                                      ]?.[0].attribute_evaluation?.toFixed(1) <
+                                        7.5
+                                    ? "#437ECE"
+                                    : " #85B2F1",
+                              }}
+                            >
                               {product.attributes[
                                 category.name
-                              ]?.[0].attribute_evaluation?.toFixed(1)}{" "}
+                              ]?.[0].attribute_evaluation?.toFixed(1)}
                             </span>
                           </td>
                         );
