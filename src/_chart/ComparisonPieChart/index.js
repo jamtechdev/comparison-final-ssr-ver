@@ -18,7 +18,7 @@ function ComparisonPieChart(props) {
   const outerRadius = pieSize / 2;
   const center = svgSize / 2;
 
-  console.log(data, "data");
+  // console.log(data, "data");
 
   // const datas = {
   //   label: ["no", "yes"],

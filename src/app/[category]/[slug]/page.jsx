@@ -80,6 +80,24 @@ async function getSlugMetaData(slug, category) {
   return response.json();
 }
 
+async function getNoDataFound(slug, category) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/page-not-found`,
+    {
+      next: { revalidate: 10 },
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      },
+    }
+  );
+  if (!response.ok) {
+  }
+  return response.json();
+}
+
 export async function generateMetadata({ params: { slug, category } }) {
   const capitalizeFirstLetter = (str) =>
     str.replace(/-/g, " ").replace(/\b(\w)/g, (match) => match.toUpperCase());
@@ -114,12 +132,54 @@ export async function generateMetadata({ params: { slug, category } }) {
   };
 
   if (slug.includes("-vs-")) {
-    const extractedUrls = slug?.split("-vs-");
-    return generateComparisonMetaData(extractedUrls, category);
+    const meta_data = await getSlugMetaData(slug, category);
+    // console.log(meta_data);
+    const siteURL = "https://mondopedia.it";
+    if (meta_data && meta_data.data) {
+      return {
+        title: meta_data.data.title,
+        description: meta_data.data.meta_description,
+        generator: "Comparison web",
+        applicationName: "Comparison web",
+        referrer: "origin-when-cross-origin",
+        lang: "en",
+        keywords: ["compare", "product"],
+        alternates: {
+          canonical: `${siteURL}/${category}/${slug}`,
+        },
+        openGraph: {
+          type: "website",
+        },
+      };
+    } else {
+      console.error("Invalid meta_data response:", meta_data);
+      return "";
+    }
   } else {
     const slugType = await getSlugType(slug);
     if (slugType.error === "Permalink not found") {
-      return "";
+      const meta_data = await getNoDataFound();
+      const siteURL = "https://mondopedia.it";
+      if (meta_data && meta_data.data) {
+        return {
+          title: meta_data.data.title,
+          description: meta_data.data.meta_description,
+          generator: "Comparison web",
+          applicationName: "Comparison web",
+          referrer: "origin-when-cross-origin",
+          lang: "en",
+          keywords: ["compare", "product"],
+          alternates: {
+            canonical: `${siteURL}/${category}/${slug}`,
+          },
+          openGraph: {
+            type: "website",
+          },
+        };
+      } else {
+        console.error("Invalid meta_data response:", meta_data);
+        return "";
+      }
     } else {
       const meta_data = await getSlugMetaData(slug, category);
       const siteURL = "https://mondopedia.it";

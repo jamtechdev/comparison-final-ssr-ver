@@ -1438,7 +1438,9 @@ export default function Product({
                       <Col md={12} className="p-0">
                         <Accordion.Body className="d-flex inner-accordion flex-wrap">
                           <div className="inline-ranking-section w-100">
-                            <span className="ranking-heading">RANKINGS</span>
+                            <span className="ranking-heading">
+                              {guidePhraseData && guidePhraseData?.in_rankings}
+                            </span>
                             <img
                               src="/images/double-arrow.png"
                               width={0}
@@ -1473,7 +1475,7 @@ export default function Product({
                             <Accordion.Item eventKey="4">
                               <Accordion.Header as="div">
                                 <div className="table-accordion-header">
-                                  OVERALL
+                                  {guidePhraseData && guidePhraseData?.overall}
                                   <Questiontool
                                     attributes={
                                       product?.overall_score_descriptions
@@ -1500,7 +1502,7 @@ export default function Product({
                                   <div className="spec-item">
                                     <div className="spec-col">
                                       <div className="query ranking-tooltip-title">
-                                        Technical Score
+                                        {guidePhraseData?.technical_score}
                                         <span className="">
                                           <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -1652,7 +1654,8 @@ export default function Product({
                                   <div className="spec-item">
                                     <div className="spec-col">
                                       <div className="query ranking-tooltip-title">
-                                        User&rsquo;s Rating
+                                        {guidePhraseData &&
+                                          guidePhraseData?.users_ratings}
                                         <span className="">
                                           <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -1958,7 +1961,8 @@ export default function Product({
                                   <div className="spec-item">
                                     <div className="spec-col">
                                       <div className="query text-ellipse">
-                                        Popularity
+                                        {guidePhraseData &&
+                                          guidePhraseData?.popularity}
                                         <QuestionIcon
                                           attributes={
                                             product?.popularity_descriptions
@@ -2024,7 +2028,8 @@ export default function Product({
                                   <div className="spec-item">
                                     <div className="spec-col">
                                       <div className="query">
-                                        Ratio Quality-Price
+                                        {guidePhraseData &&
+                                          guidePhraseData?.ratio_quality_price_points}
                                         <QuestionIcon
                                           attributes={
                                             product?.ratio_qulitiy_points_descriptions

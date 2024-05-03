@@ -293,7 +293,7 @@ function ProductPage({
                   </div>
                 )}
                 <span>
-                  updated :
+                  {product && product?.page_phases?.updated} :
                   <i>
                     {""} {product?.updated_at}
                   </i>
@@ -1155,6 +1155,7 @@ function ProductPage({
               <Row className="m-0 technical-specifications">
                 {product && (
                   <TechnicalAccordion
+                    productPhaseData={product?.page_phases}
                     product={product}
                     overallScoreColor={overallScoreColor}
                     initialDisplay={initialDisplay}

@@ -25,7 +25,7 @@ const CompareTable = React.memo(
       ref ||= newRef;
 
       // mount
-    
+
       useEffect(() => {
         const cachedRef = ref.current,
           observer = new IntersectionObserver(
@@ -494,7 +494,7 @@ const CompareTable = React.memo(
             <tr className="tr-bg-color">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Overall Score
+                  {guidePhraseData && guidePhraseData?.overall_score}
                   {products &&
                     products.length > 0 &&
                     products[0]?.overall_score_descriptions && (
@@ -550,7 +550,7 @@ const CompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Technical Score
+                  {guidePhraseData && guidePhraseData?.technical_score}
                   {products &&
                     products.length > 0 &&
                     products[0]?.technical_score_descriptions && (
@@ -602,7 +602,7 @@ const CompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  User’s Ratings
+                  {guidePhraseData && guidePhraseData?.users_ratings}
                   {products &&
                     products.length > 0 &&
                     products[0]?.users_rating_descriptions && (
@@ -703,7 +703,7 @@ const CompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Popularity
+                  {guidePhraseData && guidePhraseData?.popularity}
                   {products && products[0]?.popularity_descriptions && (
                     <div className="tooltip-display-content">
                       {products[0]?.popularity_descriptions?.description && (
@@ -746,7 +746,8 @@ const CompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Ratio Qlt/Price
+                  {guidePhraseData &&
+                    guidePhraseData?.ratio_quality_price_points}
                   {products?.[0]?.ratio_qulitiy_points_descriptions && (
                     <div className="tooltip-display-content">
                       {products?.[0]?.ratio_qulitiy_points_descriptions
