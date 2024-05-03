@@ -231,7 +231,7 @@ function ProductPageGraph({ data, activeTab }) {
               : "#FF8F0B"
           )
           .style("fill", "white")
-          .attr("opacity", activeTab === i ? 0.9 : 0.1)
+          .attr("opacity", 1)
           .attr("class", `data-point${i}`)
           .attr("data-value", point.value)
           .attr("data-attribute", point.attribute)

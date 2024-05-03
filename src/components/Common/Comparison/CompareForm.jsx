@@ -316,15 +316,15 @@ export default function CompareForm({
               ></i>
             )}
             {formFields.productThird && isFocusedProductThird && (
-              <CompareSearchList
-                isFocused={isFocusedProductThird}
-                setIsFocused={isFocusedProductThird}
-                onSendValue={handleChildValue}
-                searchedKeyWord={formFields.productThird}
-                inputPostion={"productThird"}
-                category_id={formFields.category}
-              />
-            )}
+            <CompareSearchList
+              isFocused={isFocusedProductThird}
+              setIsFocused={isFocusedProductThird}
+              onSendValue={handleChildValue}
+              searchedKeyWord={formFields.productThird}
+              inputPostion={"productThird"}
+              category_id={formFields.category}
+            />
+           )} 
           </div>
           <Button
             disabled={isLoading}

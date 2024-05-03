@@ -293,6 +293,12 @@ const ProductCompareTable = React.memo(
                 return (
                   <th key={index}>
                     {/* <span className="best-tag-product">Best From All</span> */}
+                    {/* {console.log(product)} */}
+                    {product?.assigned_title && (
+                      <span className="best-tag-product">
+                        {product?.assigned_title}
+                      </span>
+                    )}
                     <p className="device-name">
                       {/* <a href="">/product/${product?.permalik</a> */}
                       <a

@@ -899,6 +899,7 @@ function ProductPage({
                   <div className="color-section">
                     {product?.available_colors?.map((data, key) => {
                       // const isCurrentVersion = data.permalink === slug;
+
                       return (
                         <>
                           <div className="color-item" key={key}>
@@ -1884,7 +1885,7 @@ function ProductPage({
 
       <section className="mt-3 pt-4">
         <Container>
-          <h1>hello</h1>
+          {/* <h1>hello</h1> */}
           <Row>
             <Col md={12}>
               {/* <h2 className="site-main-heading">Best Alternatives</h2> */}

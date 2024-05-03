@@ -261,8 +261,12 @@ select {
 }
 
 .site_tabs.graph-tab.compare-graph-tabs .nav-item button {
-  max-width: 200px;
+  max-width: 100%;
   font-size: 16px !important;
+}
+
+.site_tabs.graph-tab.compare-graph-tabs li {
+  width: 33.3%;
 }
 
 .site_tabs .nav-item button:focus,
@@ -296,6 +300,7 @@ select {
 .graph-tab {
   width: fit-content;
   margin: 0 auto 20px !important;
+  flex-wrap: nowrap !important;
 }
 
 .site_tabs.graph-tab .nav-item button.active {
@@ -305,7 +310,6 @@ select {
 
 .site_tabs.graph-tab .nav-item button.active:before {
   border-top: 0.3em solid var(--color-bg) !important;
-  
 }
 
 /* .site_tabs.graph-tab .nav-item button:after {
@@ -324,7 +328,6 @@ select {
   margin: auto;
   font-size: 16px;
 } */
-
 
 /* new css for rating buttons */
 
