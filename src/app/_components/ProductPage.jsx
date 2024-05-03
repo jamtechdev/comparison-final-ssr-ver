@@ -254,7 +254,7 @@ function ProductPage({
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
-            <Col md={12} >
+            <Col md={12}>
               <BreadCrumb
                 productPhaseData={product?.page_phases}
                 firstPageName={categorySlug}
@@ -859,8 +859,11 @@ function ProductPage({
                                 sizes="100%"
                                 alt={"double-arrow"}
                               />
+
                               <p>
-                                N.{item.position} in{" "}
+                                #{item?.position}{" "}
+                                {product?.page_phases &&
+                                  product?.page_phases?.in_text}{" "}
                                 <a
                                   href={`/${item?.category_url}/${item?.permalink}`}
                                 >
@@ -1887,36 +1890,35 @@ function ProductPage({
               {/* <h2 className="site-main-heading">Best Alternatives</h2> */}
               {/* <p>No Data Found</p> */}
               {product?.alternative_products?.map((data, index) => {
-  return (
-    <React.Fragment key={index}>
-      {index === 0 ? (
-        <h2 className="site-main-heading">{data?.heading}</h2>
-      ) : (
-        <h3
-          className="site-main-heading"
-          style={{ paddingTop: "20px" }}
-        >
-          {data?.heading}
-        </h3>
-      )}
+                return (
+                  <React.Fragment key={index}>
+                    {index === 0 ? (
+                      <h2 className="site-main-heading">{data?.heading}</h2>
+                    ) : (
+                      <h3
+                        className="site-main-heading"
+                        style={{ paddingTop: "20px" }}
+                      >
+                        {data?.heading}
+                      </h3>
+                    )}
 
-      {data?.alternative_products.length != 0 ? (
-        <ReviewSlider
-          favSlider={
-            data?.alternative_products &&
-            data?.alternative_products
-          }
-          index={index} // Pass index as a prop to ReviewSlider
-        />
-      ) : (
-        <span className="text-center m-2">
-          No Alternative Products Found
-        </span>
-      )}
-    </React.Fragment>
-  );
-})}
-
+                    {data?.alternative_products.length != 0 ? (
+                      <ReviewSlider
+                        favSlider={
+                          data?.alternative_products &&
+                          data?.alternative_products
+                        }
+                        index={index} // Pass index as a prop to ReviewSlider
+                      />
+                    ) : (
+                      <span className="text-center m-2">
+                        No Alternative Products Found
+                      </span>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </Col>
           </Row>
         </Container>

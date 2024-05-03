@@ -187,6 +187,10 @@ thead.nonSticky tr th:first-child,
   top: 0;
   bottom: 0;
 }
+#mobile-compare-tabler .device-name a{
+  position: static !important;
+  color: rgb(39 48 78 / 90%);
+}
 .compare-container thead tr th:hover .device-name a {
   color: #437ece !important;
 }

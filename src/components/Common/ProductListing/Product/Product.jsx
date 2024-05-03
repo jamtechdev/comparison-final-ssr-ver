@@ -352,13 +352,18 @@ export default function Product({
   // const decoratedOnClick = useAccordionButton(1, () =>
   //   console.log('totally custom!'),
   // );
-
+  console.log(productData, "neet");
   useEffect(() => {
     // console.log(searchParams, "change alert");
     setProductData(null);
-    document.querySelectorAll(".accordion-button").forEach((button) => {
-      button.classList.add("collapsed");
-    });
+    document
+      .querySelectorAll(".accordion-button:not(.collapsed)")
+      .forEach((button) => {
+        button.click(); // Simulate a click on non-collapsed buttons to collapse them
+      });
+    // document.querySelectorAll(".accordion-button").forEach((button) => {
+    //   button.classList.add("collapsed");
+    // });
   }, [searchParams]);
 
   // console.log(productData);
@@ -929,8 +934,7 @@ export default function Product({
                                             target="_blank"
                                             href={`/link?p=${btoa(data.url)}`}
                                           >
-                                            {formatValue(data?.price)}{" "}
-                                            {product?.currency}
+                                            {data?.price} {product?.currency}
                                           </a>
                                         </span>
                                       </>

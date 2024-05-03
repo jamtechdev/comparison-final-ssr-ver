@@ -82,6 +82,13 @@ function OutlineGenerator({ blogData, currentIndexId }) {
   // console.log(outline);
   // console.log(activeParentIndex);
 
+  const handleClick = (attribute) => {
+    setActiveParentIndex(attribute);
+    setTimeout(() => {
+      setActiveParentIndex(null);
+    }, 1000);
+  };
+
   return (
     <>
       <ol>
@@ -97,8 +104,8 @@ function OutlineGenerator({ blogData, currentIndexId }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setActiveParentIndex(section?.id, index);
-                debouncedScrollHandler.current(section?.id);
+
+                handleClick(section?.id);
               }}
             >
               {/* {console.log(section.text)} */}
