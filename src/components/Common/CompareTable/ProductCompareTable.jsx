@@ -132,62 +132,86 @@ const ProductCompareTable = React.memo(
         );
 
       const arrayOfObjects = [...filterData];
-      let numericValues = [];
+      // let numericValues = [];
 
-      numericValues = arrayOfObjects
-        .map((obj) => {
-          if (!isNaN(parseFloat(obj?.attribute_value))) {
-            return parseFloat(obj?.attribute_value);
-          } else {
-            return obj?.attribute_value;
-          }
-        })
-        .filter((value) => !isNaN(value));
+      // numericValues = arrayOfObjects
+      //   .map((obj) => {
+      //     if (!isNaN(parseFloat(obj?.attribute_value))) {
+      //       return parseFloat(obj?.attribute_value);
+      //     } else {
+      //       return obj?.attribute_value;
+      //     }
+      //   })
+      //   .filter((value) => !isNaN(value));
 
-      if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
-        numericValues.sort((a, b) => b - a);
-      } else {
-        numericValues.sort((a, b) => a - b);
-      }
+      // if (arrayOfObjects?.[0]?.algorithm == "highest_to_lowest") {
+      //   numericValues.sort((a, b) => b - a);
+      // } else if (arrayOfObjects?.[0]?.algorithm == "absolute_value") {
+      //   numericValues.sort((a, b) => b - a);
+      // } else {
+      //   numericValues.sort((a, b) => a - b);
+      // }
+
+      // console.log(
+      //   filterData[0]?.absolute_value_data,
+      //   filterData[0]?.attribute,
+      //   "test"
+      // );
+
+      // console.log(numericValues, arrayOfObjects[0]?.attribute, "numericValues");
 
       // Adding logic for String case
-      if (numericValues.length === 0) {
-        const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
+      // if (numericValues.length === 0) {
+      //   // const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
+      //   const starValue = arrayOfObjects.filter((obj) => obj?.star === true);
 
-        if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-          const targetString =
-            stringArray[0] === "yes"
-              ? "yes"
-              : "no" || stringArray[0] === "no"
-              ? "yes"
-              : "yes";
-          numericValues = stringArray.filter((value) => value === targetString);
-        }
-      }
+      //   const stringArray = arrayOfObjects.map((obj) => {
+      //     if (obj?.star && obj?.attribute_value !== "no") {
+      //       return obj?.attribute_value + "*";
+      //     } else {
+      //       return obj?.attribute_value;
+      //     }
+      //   });
+      //   console.log(stringArray);
 
-      const topValue = numericValues[0];
-      const occurrences = numericValues?.filter(
-        (value) => value === topValue
-      ).length;
+      // console.log(stringArray, "hello");
+      // console.log(
+      //   stringArray,
+      //   arrayOfObjects,
+      //   arrayOfObjects[0]?.attribute,
+      //   "neetx"
+      // );
 
-      if (occurrences === 1) {
-        arrayOfObjects.forEach((obj) => {
-          const numericValue =
-            typeof topValue === "string"
-              ? obj.attribute_value
-              : parseFloat(obj.attribute_value);
-          if (
-            numericValue === topValue &&
-            !obj.attribute_value?.includes("⭐")
-          ) {
-            obj.attribute_value += "⭐";
-          }
-        });
-      }
+      // if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
+      // console.log(stringArray[0], "neetx", "");
+      // const targetString =
+      //   stringArray[0] === "yes"
+      //     ? "yes"
+      //     : "no" || stringArray[0] === "no"
+      //     ? " "
+      //     : starValue[0]?.attribute_value;
+      // // console.log(targetString, "neet");
+      // console.log(targetString);
+      // numericValues = stringArray;
+      // numericValues = stringArray.filter((value, index) => index === 0);
+      // console.log(numericValues, "neetx");
+
+      // console.log(numericValues, arrayOfObjects[0]?.attribute, "neet");
+      // }
+      // }
+
+      // const topValue = numericValues[0];
+
+      arrayOfObjects.forEach((obj) => {
+        obj.star &&
+          obj.attribute_value !== "?" &&
+          obj.attribute_value !== "-" &&
+          (obj.attribute_value = obj?.attribute_value + "⭐");
+      });
 
       // Adjust this function according to your context as I don't have the complete code
       // It would be good to ensure that you have the required variables (finalProducts) in scope.
-      const value__data = [];
+      // const value__data = [];
       return (
         <>
           {arrayOfObjects.map((item, attrIndex) => (

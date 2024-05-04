@@ -13,6 +13,7 @@ export default function ComparisonTable({
   products,
   categoryAttributes,
   comparisonPhaseData,
+  productAttributes,
 }) {
   const router = useRouter();
   let initialNoOfCategories = 5;

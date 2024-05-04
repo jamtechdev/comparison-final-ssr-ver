@@ -127,12 +127,19 @@ const CompareTable = React.memo(
       } else {
         numericValues.sort((a, b) => a - b);
       }
-
       // console.log(numericValues, arrayOfObjects[0]?.attribute, "numericValues");
-
       // Adding logic for String case
       if (numericValues.length === 0) {
-        const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
+        // const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
+        const starValue = arrayOfObjects.filter((obj) => obj?.star === true);
+        const stringArray = arrayOfObjects.map((obj) => {
+          if (obj?.star && obj?.attribute_value !== "no") {
+            return obj?.attribute_value + "*";
+          } else {
+            return obj?.attribute_value;
+          }
+        });
+        // console.log(stringArray, "hello");
         // console.log(
         //   stringArray,
         //   arrayOfObjects,
@@ -142,20 +149,21 @@ const CompareTable = React.memo(
 
         if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
           // console.log(stringArray[0], "neetx", "");
-          const targetString =
-            stringArray[0] === "yes"
-              ? "yes"
-              : "no" || stringArray[0] === "no"
-              ? " "
-              : stringArray[0];
-          // console.log(targetString, "neet");
-          numericValues = stringArray.filter((value) => value === targetString);
+          // const targetString =
+          //   stringArray[0] === "yes"
+          //     ? "yes"
+          //     : "no" || stringArray[0] === "no"
+          //     ? " "
+          //     : starValue[0]?.attribute_value;
+          // // console.log(targetString, "neet");
+          // console.log(targetString);
+          numericValues = stringArray;
           // numericValues = stringArray.filter((value, index) => index === 0);
+          // console.log(numericValues, "neetx");
 
           // console.log(numericValues, arrayOfObjects[0]?.attribute, "neet");
         }
       }
-
       const topValue = numericValues[0];
       // console.log(topValue, typeof topValue === "string", arrayOfObjects[0]?.attribute,"neet");
       const occurrences = numericValues?.filter(
@@ -163,21 +171,27 @@ const CompareTable = React.memo(
       ).length;
 
       //  if (occurrences === 1 || occurrences === 2)
-      if (occurrences === 1) {
-        arrayOfObjects.forEach((obj) => {
-          const numericValue =
-            typeof topValue === "string"
-              ? obj.attribute_value
-              : parseFloat(obj.attribute_value);
-          // console.log(numericValue, "neet");
-          if (
-            numericValue === topValue &&
-            !obj.attribute_value?.includes("⭐")
-          ) {
-            obj.attribute_value += "⭐";
-          }
-        });
-      }
+      arrayOfObjects.forEach((obj) => {
+        obj.star &&
+          obj.attribute_value !== "?" &&
+          obj.attribute_value !== "-" &&
+          (obj.attribute_value = obj?.attribute_value + "⭐");
+      });
+      // if (occurrences === 1) {
+      //   arrayOfObjects.forEach((obj) => {
+      //     const numericValue =
+      //       typeof topValue === "string"
+      //         ? obj.attribute_value
+      //         : parseFloat(obj.attribute_value);
+      //     // console.log(numericValue, "neet");
+      //     if (
+      //       numericValue === topValue &&
+      //       !obj.attribute_value?.includes("⭐")
+      //     ) {
+      //       obj.attribute_value += "⭐";
+      //     }
+      //   });
+      // }
       // console.log(arrayOfObjects,"neet")
 
       // Adjust this function according to your context as I don't have the complete code

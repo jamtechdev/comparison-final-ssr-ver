@@ -46,6 +46,7 @@ function CompareDiv({
   const dispatch = useDispatch();
   const products = comparisonData.map((item) => item.data);
   // console.log(comparisonData?.length);
+  console.log(products);
   const [isOpen, setIsOpen] = useState(false);
   const [compareProDataFirst, setCompareProDataFirst] = useState(
     (products[0] && products[0]) || []
@@ -137,6 +138,7 @@ function CompareDiv({
   });
   productCopy["attributes"] = productAttributes;
   // console.log(comparisonTableProductData)
+  // console.log(productAttributes);
 
   // best alternative api call
   useEffect(() => {
@@ -524,6 +526,7 @@ function CompareDiv({
                 }
                 products={comparisonProductData}
                 categoryAttributes={categroyAttributes}
+                productAttributes={productAttributes}
               />
             </Col>
             {/* <Col md={12} className="table-section-desktop">
