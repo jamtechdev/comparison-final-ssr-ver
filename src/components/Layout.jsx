@@ -12,7 +12,6 @@ export default async function Layout({ children, footerData, headerData }) {
   }
   return (
     <>
-      
       <Provider store={store}>
         <Header
           headerData={headerData}
@@ -21,6 +20,7 @@ export default async function Layout({ children, footerData, headerData }) {
         {children}
         <div dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }} />
         <Footer footerData={footerData} />
+       
       </Provider>
     </>
   );
