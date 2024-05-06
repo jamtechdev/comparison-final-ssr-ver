@@ -6,8 +6,10 @@ import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import Tested from "../Tested/Tested";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-export default function ThumbSlider({ productData, is_tested,slug }) {
+export default function ThumbSlider({ productData, is_tested, slug }) {
   // console.log(slug)
   const product = [
     {
@@ -25,6 +27,7 @@ export default function ThumbSlider({ productData, is_tested,slug }) {
   ];
   const [swiper, setSwiper] = useState(null);
   const [activeThumb, setActiveThumb] = useState(0);
+  const [modalShow, setModalShow] = useState(false);
 
   const setSwiperRef = (swiper) => {
     setSwiper(swiper);
@@ -168,7 +171,7 @@ export default function ThumbSlider({ productData, is_tested,slug }) {
             }}
           >
             {productData?.all_images?.map((item, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} onClick={() => setModalShow(true)}>
                 <img
                   src={item.image}
                   width={0}
@@ -191,6 +194,31 @@ export default function ThumbSlider({ productData, is_tested,slug }) {
           <i className="ri-arrow-right-s-line"></i>
         </span>
       </section>
+
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <img
+            src="https://frontum.online/images/roborock-s8-pro-ultra.jpg"
+            width={0}
+            height={0}
+            sizes="100%"
+            alt={`${slug}`}
+            style={{
+              width: "50%",
+              height: "auto",
+              margin: "auto",
+              display: "block",
+            }}
+          />
+        </Modal.Body>
+      </Modal>
     </section>
   );
 }
