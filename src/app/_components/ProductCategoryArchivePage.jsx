@@ -125,7 +125,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                     <div className="review-card">
                                       <img
                                         src={
-                                          item?.main_image ||
+                                          item?.mini_image ||
                                           "/images/nofound.png"
                                         }
                                         width={0}

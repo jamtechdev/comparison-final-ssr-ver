@@ -116,8 +116,8 @@ export default function MobileComparisonTool({
                     <div className="comparison-card">
                       <img
                         src={
-                          item?.main_image
-                            ? item?.main_image
+                          item?.mini_image
+                            ? item?.mini_image
                             : "/images/nofound.png"
                         }
                         width={0}

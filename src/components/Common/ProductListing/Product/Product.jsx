@@ -149,7 +149,7 @@ export default function Product({
         category: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.main_image ? product.main_image : "/images/nofound.png",
+        image: product.mini_image ? product.mini_image : "/images/nofound.png",
       };
       dispatch(
         addCompareProduct({
@@ -178,7 +178,7 @@ export default function Product({
         category: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.main_image ? product.main_image : "/images/nofound.png",
+        image: product.mini_image ? product.mini_image : "/images/nofound.png",
       };
       dispatch(
         updateCompareProduct({
