@@ -50,35 +50,39 @@ const GuidePagination = ({ pagination }) => {
   let pagesArray = [];
 
   if (total_pages > 0) {
-    if (currentPage !== 1 && currentPage !== 9) {
+    if (currentPage !== 1 && currentPage !== total_pages) {
       pagesArray.push(currentPage);
     }
-
+  
     for (let i = 1; i <= 2; i++) {
-      if (currentPage - i > 1 && currentPage - i !== 9) {
+      if (currentPage - i > 1 && currentPage - i !== total_pages) {
         pagesArray.unshift(currentPage - i);
       }
       if (currentPage + i < total_pages && currentPage + i !== 1) {
         pagesArray.push(currentPage + i);
       }
     }
-
+  
     if (currentPage - 3 > 1) {
       pagesArray.unshift("...");
     }
-
+  
     if (currentPage + 3 < total_pages) {
       pagesArray.push("...");
     }
-
+  
     if (currentPage !== 1) {
       pagesArray.unshift(1);
       pagesArray.unshift("Previous");
+    } else {
+      pagesArray.unshift(1);
     }
-
+  
     if (currentPage !== total_pages) {
-      pagesArray.push(9);
+      pagesArray.push(total_pages);
       pagesArray.push("Next");
+    } else {
+      pagesArray.push(total_pages);
     }
   }
 

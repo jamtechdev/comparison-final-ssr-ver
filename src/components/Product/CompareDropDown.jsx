@@ -14,7 +14,7 @@ function CompareDropDown({
   pageType,
 }) {
   // console.log(product);
-  console.log(attributeDropDown);
+  // console.log(attributeDropDown);
 
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null

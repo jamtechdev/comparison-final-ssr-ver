@@ -54,7 +54,9 @@ function ProductPage({
   const productsWithAttributeGroup = {};
   const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
   const productAttributes = {};
-  productData[0].data?.attributes?.forEach((attribute) => {
+  // console.log( productData[0].data,'"xxx")')
+  productData[0].data?.attributes?.sort((a, b) => a?.attribute_category_position - b?.attribute_category_position)?.forEach((attribute) => {
+    
     const categoryName = attribute?.attribute_category?.name;
     if (!productAttributes[categoryName]) {
       productAttributes[categoryName] = [];

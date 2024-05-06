@@ -352,7 +352,7 @@ export default function Product({
   // const decoratedOnClick = useAccordionButton(1, () =>
   //   console.log('totally custom!'),
   // );
-  console.log(productData, "neet");
+  // console.log(productData, "neet");
   useEffect(() => {
     // console.log(searchParams, "change alert");
     setProductData(null);
@@ -940,7 +940,8 @@ export default function Product({
                                             target="_blank"
                                             href={`/link?p=${btoa(data.url)}`}
                                           >
-                                            {Number(data?.price).toFixed(2)} {product?.currency}
+                                            {Number(data?.price).toFixed(2)}{" "}
+                                            {product?.currency}
                                           </a>
                                         </span>
                                       </>
@@ -1221,64 +1222,30 @@ export default function Product({
                           <>
                             <div className="color-item" key={key}>
                               <li
+                                className="color-option"
                                 style={{
-                                  listStyleType: "none",
-                                  width: "auto",
-                                  padding: "0px 5px",
-                                  borderRadius: "5px",
-                                  cursor:
-                                    data.color === product?.color
-                                      ? "default"
-                                      : "pointer",
-
                                   outline:
                                     data.color === product?.color
                                       ? "1px solid #437ed0"
                                       : "none",
                                 }}
-                                className="current_version_not_found"
                               >
                                 {data.color === product?.color ? (
-                                  <span
-                                    className="color-check"
-                                    style={{
-                                      color: "#437ed0",
-                                      padding: "0px 5px",
-                                      cursor:
-                                        data.color === product?.color
-                                          ? "default"
-                                          : "pointer",
-                                    }}
-                                  >
+                                  <span className="color-check">
                                     {data.color}
                                   </span>
                                 ) : (
                                   <a
-                                    href={`/link?p=${btoa(data.url)}`}
-                                    style={{
-                                      color: "#437ed0",
-                                      padding: "0px 5px",
-                                      cursor:
-                                        data.color === product?.color
-                                          ? "default"
-                                          : "pointer",
-                                    }}
-                                    className={`color-item `}
-                                    // onClick={(e) => handleItemClick(key)}
+                                    href={`/link?p=${encodeURIComponent(
+                                      data.url
+                                    )}`}
+                                    className="color-link"
+                                    onClick={(e) => handleItemClick(key)}
                                   >
                                     {data.color}
                                   </a>
                                 )}
                               </li>
-
-                              {/* <Form.Check
-                                inline
-                                label={data?.short_name}
-                                name="color"
-                                type="radio"
-                                defaultChecked={key === 0}
-                                id={`inline-${data?.color}-${key}`}
-                              /> */}
                             </div>
                           </>
                         );

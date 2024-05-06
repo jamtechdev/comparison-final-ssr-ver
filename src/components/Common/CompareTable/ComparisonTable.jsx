@@ -323,7 +323,7 @@ export default function ComparisonTable({
 
                   {/* {console.log(product)} */}
                   {product?.assigned_title && (
-                    <span className="best-tag-product">compared</span>
+                    <span className="best-tag-product">{product?.assigned_title}</span>
                   )}
 
                   {/* {productScoreLabelIndex === -1000 && index === 0 && (
