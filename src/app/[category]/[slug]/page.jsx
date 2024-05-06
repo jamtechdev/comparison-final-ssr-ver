@@ -269,7 +269,7 @@ async function fetchDataBasedOnPageType(
       // console.log(permalinks);
       apiUrls = permalinks.map(
         (permalink) =>
-          `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${permalink}`
+          `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${permalink}?compare=${slug}`
       );
 
       break;

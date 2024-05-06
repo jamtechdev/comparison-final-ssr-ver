@@ -14,6 +14,7 @@ function CompareDropDown({
   pageType,
 }) {
   // console.log(product);
+  console.log(attributeDropDown);
 
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null
@@ -99,11 +100,13 @@ function CompareDropDown({
                   onChange={handleItemChange}
                   value={attributeDropDown.indexOf(selectedItem)}
                 >
-                  {attributeDropDown.map((item, index) => (
-                    <option key={index} value={index}>
-                      {item.name}
-                    </option>
-                  ))}
+                  {attributeDropDown
+                    .sort((a, b) => a.position - b.position)
+                    .map((item, index) => (
+                      <option key={index} value={index}>
+                        {item.name}
+                      </option>
+                    ))}
                 </Form.Select>
               </div>
               <div className="filtered-data-select justify-content-start mt-3">

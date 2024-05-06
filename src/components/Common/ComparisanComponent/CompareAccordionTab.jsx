@@ -21,7 +21,7 @@ import { LoaderIcon } from "react-hot-toast";
 import Loader from "@/app/_components/Loader";
 import Radar from "@/_chart/Radar";
 const CompareAccordionTab = React.memo(
-  ({ sendProductProps, comparePhaseData ,categorySlug }) => {
+  ({ sendProductProps, comparePhaseData, categorySlug }) => {
     const [activatab, setActiveTab] = useState("tab-1");
     const [apiData, setApiData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);

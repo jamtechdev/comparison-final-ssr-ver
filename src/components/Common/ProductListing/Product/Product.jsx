@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, Fragment, useEffect, useRef } from "react";
+import React, { useState, Fragment, useEffect, useRef, version } from "react";
 import {
   Accordion,
   Col,
@@ -1210,7 +1210,9 @@ export default function Product({
               <Row className="w-100 m-0 alternatives-border-top">
                 <Col lg={12} md={12} xl={12}>
                   <div className="alternatives mt-2">
-                    <span>Colors available:</span>
+                    <span>
+                      {guidePhraseData && guidePhraseData?.colors_available}:
+                    </span>
                     <div className="color-section">
                       {product?.available_colors?.map((data, key) => {
                         // console.log(data);
@@ -1291,8 +1293,12 @@ export default function Product({
               product?.available_versions?.length !== 0 && (
                 <Row className="w-100 m-0 alternatives-border-top">
                   <Col lg={12} md={12} xl={12}>
+                    {/* {console.log(guidePhraseData)} */}
                     <div className="alternatives mt-2">
-                      <span>Available versions:</span>
+                      <span>
+                        {guidePhraseData && guidePhraseData?.versions_available}
+                        :
+                      </span>
                       <div className="color-section">
                         {product?.available_versions
                           ?.sort((a, b) =>
