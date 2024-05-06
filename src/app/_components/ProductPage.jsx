@@ -55,8 +55,7 @@ function ProductPage({
   const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
   const productAttributes = {};
   // console.log( productData[0].data,'"xxx")')
-  productData[0].data?.attributes?.sort((a, b) => a?.attribute_category_position - b?.attribute_category_position)?.forEach((attribute) => {
-    
+  productData[0].data?.attributes?.forEach((attribute) => {
     const categoryName = attribute?.attribute_category?.name;
     if (!productAttributes[categoryName]) {
       productAttributes[categoryName] = [];
@@ -127,15 +126,12 @@ function ProductPage({
   //       : `(${item?.value})`;
   //   }
 
-    
-    
-  
   //   // return ""; // Return null for strings
   // };
 
   const renderValue = (item) => {
     const numericValue = parseFloat(item?.value);
-  
+
     if (!isNaN(numericValue)) {
       return `(${numericValue}${item.unit ? " " + item.unit : ""})`;
     } else {
@@ -146,7 +142,6 @@ function ProductPage({
         : `(${item?.value})`;
     }
   };
-  
 
   const setShowFullPrice = () => {
     showFullPrice = !setShowFullPrice;
@@ -1807,7 +1802,7 @@ function ProductPage({
                                       />
                                       {/* {console.log(item)} */}
                                       <p>
-                                      #.{item.position} in_{" "}
+                                        #.{item.position} in_{" "}
                                         <a
                                           href={`/${item?.category_url}/${item?.permalink}`}
                                         >

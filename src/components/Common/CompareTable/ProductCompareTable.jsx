@@ -14,6 +14,7 @@ const ProductCompareTable = React.memo(
   ({ products, categoryAttributes, slug, productPhaseData }) => {
     const router = useRouter();
     let initialNoOfCategories = 5;
+
     const [pagination, setPagination] = useState({});
     const defaultNo = 5;
 

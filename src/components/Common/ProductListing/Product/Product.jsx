@@ -299,7 +299,7 @@ export default function Product({
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
     if (productData && productData.attributes) {
-      productData.attributes.forEach((attribute) => {
+      productData.attributes?.sort((a, b) => a?.attribute_category_position - b?.attribute_category_position)?.forEach((attribute) => {
         const categoryName = attribute.attribute_category.name;
 
         if (!productAttributes[categoryName]) {
