@@ -106,7 +106,7 @@ console.log(categoryData,"check mahima")
                     <Row>
                       {categoryData[0]?.data?.popular_reviews?.length > 0 &&
                         // categoryData[0]?.data?.popular_reviews?.slice(0, 12)?.map(
-                          categoryData[0]?.data?.popular_reviews?.slice(0, 10)?.map(
+                          categoryData[0]?.data?.popular_reviews?.slice(0, 12)?.map(
                           (item, index) => {
                             return (
                               <Col
