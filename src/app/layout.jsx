@@ -23,13 +23,13 @@ export default async function RootLayout({ children }) {
         dangerouslySetInnerHTML={{ __html: footerData?.head_tag_code }}
       ></head>
       <body>
+        <div dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }} />
         <Layout footerData={footerData} headerData={headerData}>
           {children}
           {/* <div
             dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }}
           ></div>
           */}
-         
         </Layout>
       </body>
     </html>
