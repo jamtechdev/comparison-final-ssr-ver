@@ -72,7 +72,11 @@ const GuidePagination = ({ pagination }) => {
     }
 
     if (currentPage !== 1) {
+<<<<<<< HEAD
+      pagesArray.unshift(1)
+=======
       pagesArray.unshift(1);
+>>>>>>> 96a486fa55d54d793ce3fa1a28dd7702ac6b95bb
       pagesArray.unshift("Previous");
     }
 
@@ -84,6 +88,10 @@ const GuidePagination = ({ pagination }) => {
 
   // Always include numbers 1 and 9 in the pagination array
   // pagesArray.unshift(1);
+<<<<<<< HEAD
+  
+=======
+>>>>>>> 96a486fa55d54d793ce3fa1a28dd7702ac6b95bb
 
   return (
     <>

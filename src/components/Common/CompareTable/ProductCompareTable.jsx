@@ -165,6 +165,18 @@ const ProductCompareTable = React.memo(
       //   // const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
       //   const starValue = arrayOfObjects.filter((obj) => obj?.star === true);
 
+<<<<<<< HEAD
+        if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
+          const targetString =
+            stringArray[0] === "yes"
+              ? "yes"
+              : "no" || stringArray[0] === "no"
+                ? "yes"
+                : "yes";
+          numericValues = stringArray.filter((value) => value === targetString);
+        }
+      }
+=======
       //   const stringArray = arrayOfObjects.map((obj) => {
       //     if (obj?.star && obj?.attribute_value !== "no") {
       //       return obj?.attribute_value + "*";
@@ -173,6 +185,7 @@ const ProductCompareTable = React.memo(
       //     }
       //   });
       //   console.log(stringArray);
+>>>>>>> 96a486fa55d54d793ce3fa1a28dd7702ac6b95bb
 
       // console.log(stringArray, "hello");
       // console.log(
@@ -234,14 +247,14 @@ const ProductCompareTable = React.memo(
               ) : (
                 <>
                   {item?.attribute_value === "-" ||
-                  item?.attribute_value === null ||
-                  item?.attribute_value === "?" ? (
+                    item?.attribute_value === null ||
+                    item?.attribute_value === "?" ? (
                     "-"
                   ) : (
                     <>
                       {item?.attribute_value === "-" ||
-                      item?.attribute_value === null ||
-                      item?.attribute_value === "?" ? (
+                        item?.attribute_value === null ||
+                        item?.attribute_value === "?" ? (
                         item?.attribute_value
                       ) : (
                         <>
@@ -272,7 +285,7 @@ const ProductCompareTable = React.memo(
         const maxValue = Math.max(...uniqueValues);
         return values.map((value) =>
           value === maxValue &&
-          values.indexOf(value) === values.lastIndexOf(value) ? (
+            values.indexOf(value) === values.lastIndexOf(value) ? (
             <div>
               {formatValue(value)}
               <span key={value} className="tooltip-title-2">
@@ -333,7 +346,6 @@ const ProductCompareTable = React.memo(
                       <small className="product-name-small">
                         {product?.name}
                       </small>
-
                       <img
                         className="compare_image"
                         src={
@@ -528,24 +540,24 @@ const ProductCompareTable = React.memo(
                       <div className="tooltip-display-content">
                         {products[0]?.overall_score_descriptions
                           ?.description && (
-                          <p className="mb-2">
-                            <b>What it is: </b>{" "}
-                            {
-                              products[0]?.overall_score_descriptions
-                                ?.description
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>What it is: </b>{" "}
+                              {
+                                products[0]?.overall_score_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
                         {products[0]?.overall_score_descriptions
                           ?.when_matters && (
-                          <p className="mb-2">
-                            <b>When it matters: </b>{" "}
-                            {
-                              products[0]?.overall_score_descriptions
-                                ?.when_matters
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>When it matters: </b>{" "}
+                              {
+                                products[0]?.overall_score_descriptions
+                                  ?.when_matters
+                              }
+                            </p>
+                          )}
                       </div>
                     )}
                 </div>
@@ -563,8 +575,8 @@ const ProductCompareTable = React.memo(
                               ? "#093673"
                               : product.overall_score >= 5 &&
                                 product.overall_score < 7.5
-                              ? "#437ECE"
-                              : " #85B2F1",
+                                ? "#437ECE"
+                                : " #85B2F1",
                         }}
                       >
                         {formatValue(product.overall_score)}
@@ -583,24 +595,24 @@ const ProductCompareTable = React.memo(
                       <div className="tooltip-display-content">
                         {products[0]?.technical_score_descriptions
                           ?.description && (
-                          <p className="mb-2">
-                            <b>What it is: </b>{" "}
-                            {
-                              products[0]?.technical_score_descriptions
-                                ?.description
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>What it is: </b>{" "}
+                              {
+                                products[0]?.technical_score_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
                         {products[0]?.technical_score_descriptions
                           ?.when_matters && (
-                          <p className="mb-2">
-                            <b>When it matters: </b>{" "}
-                            {
-                              products[0]?.technical_score_descriptions
-                                ?.when_matters
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>When it matters: </b>{" "}
+                              {
+                                products[0]?.technical_score_descriptions
+                                  ?.when_matters
+                              }
+                            </p>
+                          )}
                       </div>
                     )}
                 </div>
@@ -634,27 +646,27 @@ const ProductCompareTable = React.memo(
                       <div className="tooltip-display-content">
                         {products[0]?.users_rating_descriptions
                           ?.description && (
-                          <p className="mb-2">
-                            <b>What it is: </b>
-                            {
-                              products[0]?.users_rating_descriptions
-                                ?.description
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>What it is: </b>
+                              {
+                                products[0]?.users_rating_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
                         {products[0]?.users_rating_descriptions
                           ?.when_it_matters && (
-                          <p className="mb-2">
-                            <b>When it matters: </b>
-                            {
-                              products[0]?.users_rating_descriptions
-                                ?.when_it_matters
-                            }
-                          </p>
-                        )}
-                        <p>
+                            <p className="mb-2">
+                              <b>When it matters: </b>
+                              {
+                                products[0]?.users_rating_descriptions
+                                  ?.when_it_matters
+                              }
+                            </p>
+                          )}
+                        {/* <p>
                           <b>
-                            {/* {product && product?.page_phases?.score_components}: */}
+
                             Score components :
                           </b>
                         </p>
@@ -677,8 +689,8 @@ const ProductCompareTable = React.memo(
                                           ? "#093673"
                                           : data?.attribute_evaluation >= 5 &&
                                             data?.attribute_evaluation < 7.5
-                                          ? "#437ECE"
-                                          : "#85B2F1",
+                                            ? "#437ECE"
+                                            : "#85B2F1",
                                     }}
                                   >
                                     {data?.attribute_evaluation != null
@@ -691,7 +703,7 @@ const ProductCompareTable = React.memo(
                                 </div>
                               );
                             }
-                          )}
+                          )} */}
                       </div>
                     )}
                 </div>
@@ -715,55 +727,55 @@ const ProductCompareTable = React.memo(
             {finalProducts.some(
               (product) => product.expert_reviews_rating !== 0
             ) && (
-              <tr className="">
-                <th className="sub-inner-padding">
-                  <div className="tooltip-title">
-                    Expert Reviews
-                    <div className="tooltip-display-content">
-                      {products[0]?.expert_reviews_descriptions
-                        ?.description && (
-                        <p className="mb-2">
-                          <b>What it is: </b>{" "}
-                          {
-                            products[0]?.expert_reviews_descriptions
-                              ?.description
-                          }
-                        </p>
-                      )}
-                      {products[0]?.expert_reviews_descriptions
-                        ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.expert_reviews_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+                <tr className="">
+                  <th className="sub-inner-padding">
+                    <div className="tooltip-title">
+                      Expert Reviews
+                      <div className="tooltip-display-content">
+                        {products[0]?.expert_reviews_descriptions
+                          ?.description && (
+                            <p className="mb-2">
+                              <b>What it is: </b>{" "}
+                              {
+                                products[0]?.expert_reviews_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
+                        {products[0]?.expert_reviews_descriptions
+                          ?.when_it_matters && (
+                            <p className="mb-2">
+                              <b>When it matters: </b>{" "}
+                              {
+                                products[0]?.expert_reviews_descriptions
+                                  ?.when_it_matters
+                              }
+                            </p>
+                          )}
+                      </div>
                     </div>
-                  </div>
-                </th>
-                {finalProducts
-                  .slice(0, defaultNo)
-                  .map((product, expert_reviews) => {
-                    const values = finalProducts.map(
-                      (p) => p.expert_reviews_rating
-                    );
-                    return (
-                      <td key={expert_reviews}>
-                        {
-                          addStarOnTable(
-                            defaultNo,
-                            "expert_reviews",
-                            values,
-                            product?.expert_reviews_rating_star_phase
-                          )[expert_reviews]
-                        }
-                      </td>
-                    );
-                  })}
-              </tr>
-            )}
+                  </th>
+                  {finalProducts
+                    .slice(0, defaultNo)
+                    .map((product, expert_reviews) => {
+                      const values = finalProducts.map(
+                        (p) => p.expert_reviews_rating
+                      );
+                      return (
+                        <td key={expert_reviews}>
+                          {
+                            addStarOnTable(
+                              defaultNo,
+                              "expert_reviews",
+                              values,
+                              product?.expert_reviews_rating_star_phase
+                            )[expert_reviews]
+                          }
+                        </td>
+                      );
+                    })}
+                </tr>
+              )}
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
@@ -816,24 +828,24 @@ const ProductCompareTable = React.memo(
                     <div className="tooltip-display-content">
                       {products[0]?.ratio_qulitiy_points_descriptions
                         ?.description && (
-                        <p className="mb-2">
-                          <b>What it is: </b>{" "}
-                          {
-                            products[0]?.ratio_qulitiy_points_descriptions
-                              ?.description
-                          }
-                        </p>
-                      )}
+                          <p className="mb-2">
+                            <b>What it is: </b>{" "}
+                            {
+                              products[0]?.ratio_qulitiy_points_descriptions
+                                ?.description
+                            }
+                          </p>
+                        )}
                       {products[0]?.technical_score_descriptions
                         ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+                          <p className="mb-2">
+                            <b>When it matters: </b>{" "}
+                            {
+                              products[0]?.technical_score_descriptions
+                                ?.when_it_matters
+                            }
+                          </p>
+                        )}
                     </div>
                   )}
                 </div>
@@ -952,20 +964,20 @@ const ProductCompareTable = React.memo(
                                     product.attributes[
                                       category?.name
                                     ]?.[0]?.attribute_evaluation?.toFixed(1) >=
-                                    7.5
+                                      7.5
                                       ? "#093673"
                                       : product.attributes[
-                                          category?.name
-                                        ]?.[0]?.attribute_evaluation?.toFixed(
-                                          1
-                                        ) >= 5 &&
+                                        category?.name
+                                      ]?.[0]?.attribute_evaluation?.toFixed(
+                                        1
+                                      ) >= 5 &&
                                         product.attributes[
                                           category?.name
                                         ]?.[0]?.attribute_evaluation?.toFixed(
                                           1
                                         ) < 7.5
-                                      ? "#437ECE"
-                                      : "#85B2F1",
+                                        ? "#437ECE"
+                                        : "#85B2F1",
                                 }}
                               >
                                 {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
@@ -990,30 +1002,30 @@ const ProductCompareTable = React.memo(
                                 {catAttribute.name}
                                 {(catAttribute.description ||
                                   catAttribute.when_matters) && (
-                                  <div className="tooltip-display-content">
-                                    {catAttribute?.description && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.what_it_is}
-                                          :{" "}
-                                        </b>
-                                        {catAttribute?.description}
-                                      </p>
-                                    )}
+                                    <div className="tooltip-display-content">
+                                      {catAttribute?.description && (
+                                        <p className="mb-2">
+                                          <b>
+                                            {productPhaseData &&
+                                              productPhaseData?.what_it_is}
+                                            :{" "}
+                                          </b>
+                                          {catAttribute?.description}
+                                        </p>
+                                      )}
 
-                                    {catAttribute?.when_matters && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.when_it_matters}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.when_matters}
-                                      </p>
-                                    )}
-                                  </div>
-                                )}
+                                      {catAttribute?.when_matters && (
+                                        <p className="mb-2">
+                                          <b>
+                                            {productPhaseData &&
+                                              productPhaseData?.when_it_matters}
+                                            :{" "}
+                                          </b>{" "}
+                                          {catAttribute?.when_matters}
+                                        </p>
+                                      )}
+                                    </div>
+                                  )}
                               </div>
                             </th>
                             {addAsterisksToTopValue(
@@ -1026,17 +1038,17 @@ const ProductCompareTable = React.memo(
                       })}
                     {category.attributes.length >
                       (pagination[category.name] || initialNoOfCategories) && (
-                      <tr className="text-center show_more_row">
-                        <td colSpan="6">
-                          <span
-                            className="show_more"
-                            onClick={() => handlePagination(category.name)}
-                          >
-                            SHOW MORE <i className="ri-add-line"></i>
-                          </span>
-                        </td>
-                      </tr>
-                    )}
+                        <tr className="text-center show_more_row">
+                          <td colSpan="6">
+                            <span
+                              className="show_more"
+                              onClick={() => handlePagination(category.name)}
+                            >
+                              SHOW MORE <i className="ri-add-line"></i>
+                            </span>
+                          </td>
+                        </tr>
+                      )}
                   </Fragment>
                 );
               })}

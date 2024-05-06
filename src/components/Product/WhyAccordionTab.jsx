@@ -19,6 +19,7 @@ import Radar from "@/_chart/Radar";
 import ProductPageGraph from "@/_chart/Radar/ProductPageGraph";
 import formatValue from "@/_helpers/formatValue";
 import useScreenSize from "@/_helpers/useScreenSize";
+import { color } from "d3";
 
 const WhyAccordionTab = React.memo(
   ({ categorySlug, product, pageType, slug }) => {
@@ -726,6 +727,7 @@ const WhyAccordionTab = React.memo(
                                         </span>
                                         <QuestionIcon
                                           attributes={item?.when_matters}
+                                          style={{color:" blue"}}
                                         />
                                         <small className="d-block tooltip-title">
                                           {item?.hover_phase && (

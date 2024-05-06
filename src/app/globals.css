@@ -786,6 +786,7 @@ body
 .table-accordion .accordion-button div.table-accordion-header {
   width: calc(50% - 50px);
   text-transform: uppercase !important;
+  line-height: 26px;
 }
 
 .technical-specifications
@@ -794,6 +795,7 @@ body
   div.table-accordion-header {
   width: calc(50% - 100px) !important;
   text-transform: uppercase !important;
+  line-height: 26px;
 }
 
 .technical-specifications .table-accordion .show_more {

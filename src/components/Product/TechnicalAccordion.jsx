@@ -158,7 +158,11 @@ const TechnicalAccordion = React.memo(
                       <div
                         className="tooltip-display-content"
                         ref={tooltipRef}
-                        style={{ left: tooltipPosition.left }}
+                        style={{
+                          left: isMobile ? "50%" : 0,
+                          transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+                          width: isMobile ? "250px" : "250px",
+                        }}
                       >
                         {product?.technical_score_descriptions.description && (
                           <p className="mb-2">
@@ -273,7 +277,11 @@ const TechnicalAccordion = React.memo(
                       <div
                         className="tooltip-display-content"
                         ref={tooltipRef}
-                        style={{ left: tooltipPosition.left }}
+                        style={{
+                          left: isMobile ? "50%" : 0,
+                          transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+                          width: isMobile ? "200px" : "250px",
+                        }}
                       >
                         {product?.users_rating_descriptions.description && (
                           <p className="mb-2">
@@ -1032,6 +1040,7 @@ const TechnicalAccordion = React.memo(
                                         attributes={
                                           attributeValues && attributeValues
                                         }
+                                        style={{backgroundColor:"yellow",}}
                                       />
                                     </div>
                                   </div>

@@ -112,11 +112,30 @@ function ProductPage({
   const RatingColor = getColorBasedOnScore(finalProducts[0]?.reviews);
 
   // filter a value which numeric or string
+  // const renderValue = (item) => {
+  //   const numericValue = parseFloat(item?.value);
+
+  //   if (!isNaN(numericValue)) {
+  //     return `(${numericValue} ${item.unit ? item.unit : ""})`;
+  //   } else {
+  //     return item?.value === undefined ||
+  //       item?.value === "" ||
+  //       item?.value === null
+  //       ? ""
+  //       : `(${item?.value})`;
+  //   }
+
+    
+    
+  
+  //   // return ""; // Return null for strings
+  // };
+
   const renderValue = (item) => {
     const numericValue = parseFloat(item?.value);
-
+  
     if (!isNaN(numericValue)) {
-      return `(${numericValue} ${item.unit ? item.unit : ""})`;
+      return `(${numericValue}${item.unit ? " " + item.unit : ""})`;
     } else {
       return item?.value === undefined ||
         item?.value === "" ||
@@ -124,8 +143,8 @@ function ProductPage({
         ? ""
         : `(${item?.value})`;
     }
-    // return ""; // Return null for strings
   };
+  
 
   const setShowFullPrice = () => {
     showFullPrice = !setShowFullPrice;
@@ -1786,7 +1805,7 @@ function ProductPage({
                                       />
                                       {/* {console.log(item)} */}
                                       <p>
-                                        N.{item.position} in{" "}
+                                      #.{item.position} in_{" "}
                                         <a
                                           href={`/${item?.category_url}/${item?.permalink}`}
                                         >
@@ -1886,7 +1905,6 @@ function ProductPage({
 
       <section className="mt-3 pt-4">
         <Container>
-          {/* <h1>hello</h1> */}
           <Row>
             <Col md={12}>
               {/* <h2 className="site-main-heading">Best Alternatives</h2> */}
