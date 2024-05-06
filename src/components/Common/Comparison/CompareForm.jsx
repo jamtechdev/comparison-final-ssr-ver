@@ -218,7 +218,7 @@ export default function CompareForm({
                 }
                 onFocus={() => setFocusedProductFirst(true)}
                 onChange={(e) =>
-                  handleFieldChange("productFirst", e.target.value.trim())
+                  handleFieldChange("productFirst", e.target.value)
                 }
               />
 

@@ -266,8 +266,9 @@ async function fetchDataBasedOnPageType(
       break;
     case "Comparison":
       const permalinks = slug.split("-vs-");
-      // console.log(permalinks);
-      apiUrls = permalinks.map(
+      const removeDuplicatePermalinks = Array.from(new Set(permalinks));
+      // console.log(removeDuplicatePermalinks);
+      apiUrls = removeDuplicatePermalinks.map(
         (permalink) =>
           `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${permalink}?compare=${slug}`
       );

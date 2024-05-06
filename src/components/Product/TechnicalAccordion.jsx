@@ -367,7 +367,8 @@ const TechnicalAccordion = React.memo(
                   </div>
                 </div>
               </div>
-              {product.expert_reviews_rating > 0 && (
+             {/* { console.log(product.expert_reviews_rating)} */}
+              { (
                 <div className="spec-section">
                   <div className="spec-item">
                     <div className="spec-col">

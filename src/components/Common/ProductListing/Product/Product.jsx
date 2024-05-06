@@ -178,7 +178,7 @@ export default function Product({
         category: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.main_image ? product.main_image : "/images/nofound.png",
+        image: product.mini_image ? product.mini_image : "/images/nofound.png",
       };
       dispatch(
         updateCompareProduct({
@@ -191,7 +191,7 @@ export default function Product({
     if (
       reduxData?.productThird === null &&
       reduxData?.productFirst !== null &&
-      reduxData?.productSecond !== null
+      reduxData?.productSecond !== null 
     ) {
       if (
         reduxData?.productFirst?.permalink === product.permalink ||
@@ -207,7 +207,7 @@ export default function Product({
         category_id: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.main_image ? product.main_image : "/images/nofound.png",
+        image: product.mini_image ? product.mini_image : "/images/nofound.png",
       };
       dispatch(
         updateCompareProduct({

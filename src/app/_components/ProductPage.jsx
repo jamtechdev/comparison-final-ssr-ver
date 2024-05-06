@@ -1946,7 +1946,7 @@ function ProductPage({
           <Container>
             <Row className="table-section-mobile">
               <Col md={12}>
-                <h2 className="site-main-heading pt-5">
+                <h2 className="site-main-heading pt-5"> 
                   {product?.page_phases?.table_compare_title}
                 </h2>
                 <ProductCompareTable

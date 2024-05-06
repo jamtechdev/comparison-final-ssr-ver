@@ -661,6 +661,7 @@ const CompareTable = React.memo(
                 );
               })}
             </tr>
+           
 
             {finalProducts.some(
               (product) => product.expert_reviews_rating !== 0
