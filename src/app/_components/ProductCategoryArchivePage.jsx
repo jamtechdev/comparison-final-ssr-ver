@@ -7,7 +7,7 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import formatValue from "@/_helpers/formatValue";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
-console.log(categoryData,"check mahima")
+// console.log(categoryData,"check mahima")
   return (
     <div>
       {categoryData != null && (

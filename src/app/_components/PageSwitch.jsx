@@ -42,7 +42,7 @@ export default async function PageSwitch({
       const productTable = await getProductForTable(guide?.category_url, slug);
       const third_text = pageData[0]?.data?.text_third_part_main;
       const matchShortCode = searchCharts(third_text);
-      console.log(replaceTextPart(matchShortCode, third_text));
+      // console.log(replaceTextPart(matchShortCode, third_text));
 
       // console.log(replacedTexts, "hello");
 
@@ -181,7 +181,7 @@ async function getProductForTable(category_url, slug) {
 }
 
 async function getProductCategroyAttributes(category_id) {
-  console.log(category_id);
+  // console.log(category_id);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/${category_id}/attributes`,
     {
