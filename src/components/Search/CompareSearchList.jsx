@@ -120,7 +120,7 @@ function CompareSearchList({
                   }}
                   style={{ cursor: "pointer" }}
                 >
-                  {capitalizeFirstLetter(item?.name)}
+                  <b>{capitalizeFirstLetter(item?.name)}</b>
                   <span>
                     <i>
                       (

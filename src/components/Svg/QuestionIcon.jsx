@@ -44,12 +44,12 @@ const QuestionIcon = ({ attributes }) => {
       ref={tooltipRef}
       style={{
         left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
-        width: isMobile ? "200px" : "250px",   
+        transform: isMobile ? "translateX(-50%)" : "translateX(-10%)",
+        width: isMobile ? "170px" : "250px",   
       }}
     >
           {attributes?.description && (
-            <p className="mb-2">
+            <p className="mb-2" >
               <b>What it is: </b>
               {attributes?.description}
             </p>

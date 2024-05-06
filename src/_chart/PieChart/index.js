@@ -154,7 +154,7 @@ function PieChart(props) {
           d3.select(this)
             .append("span")
             .attr("class", "legend-text")
-            .text((d) => `${d}%`);
+            .text((d) => `${d.toFixed(1)}%`);
         }
         // if (i == 2) {
         //   d3.select(this)

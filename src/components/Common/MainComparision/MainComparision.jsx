@@ -161,7 +161,10 @@ export default function MainComparision(products) {
                       )}
 
                       <div className="footer_content">
-                        <span>{item?.product_second}</span>
+                  
+                        <div className="flex-container-section">
+                          <span className="text-wrapper">{item?.product_second}</span>
+                        </div>
                       </div>
                       <span
                         className="rating_count"

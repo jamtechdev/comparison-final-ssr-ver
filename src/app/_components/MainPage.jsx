@@ -210,7 +210,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                           {favSlider && favSlider?.product_categories_text}
                         </h3>
                         {/* <div className="product-categories-container">
-                          {data?.categories?.map((item, index) => {
+                          {data?.categories?.sort((a,b)=>a?.title?.localeCompare(b?.title))?.map((item, index) => {
                             return (
                               <Link
                                 href={`/${item?.category_url.toLowerCase()}`}
@@ -226,29 +226,22 @@ export default function MainPage({ bannerCounts, favSlider }) {
                             );
                           })}
                         </div> */}
+
+{/* sorted array alphabateically */}
                         <div className="product-categories-container">
-                          {data &&
-                            data?.categories?.map((item, index) => {
-                              return (
-                                <div
-                                  key={index}
-                                  style={{ display: "inline-block" }}
-                                >
-                                  <span
-                                    className="product-categories-item"
-                                    style={{ cursor: "pointer" }}
-                                  >
-                                    <a
-                                      style={{ color: "#27304e" }}
-                                      href={`/${item?.category_url?.toLowerCase()}`}
-                                    >
-                                      {item?.title}
-                                    </a>
-                                  </span>
-                                </div>
-                              );
-                            })}
-                        </div>
+  {data &&
+    data.categories
+      ?.sort((a, b) => a.title.localeCompare(b.title)) 
+      ?.map((item, index) => (
+        <div key={index} style={{ display: "inline-block" }}>
+          <span className="product-categories-item" style={{ cursor: "pointer" }}>
+            <a style={{ color: "#27304e" }} href={`/${item.category_url?.toLowerCase()}`}>
+              {item.title}
+            </a>
+          </span>
+        </div>
+      ))}
+</div>
                       </Col>
                     </Row>
                   </Container>

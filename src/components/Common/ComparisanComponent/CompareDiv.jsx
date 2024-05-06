@@ -558,18 +558,20 @@ function CompareDiv({
         attributeDropDown={[...categroyAttributes].reverse()}
       />
       <section className="mt-3">
-      <Container>
-      <Row>
-        <Col md={12}>
-          <h2 className="site-main-heading">Best Alternatives</h2>
-          {bestAlternative?.alternative_products ? (
-            <ReviewSlider favSlider={bestAlternative?.alternative_products} />
-          ) : (
-            <p>No Data Found</p>
-          )}
-        </Col>
-      </Row>
-    </Container>
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">Best Alternatives</h2>
+              {bestAlternative?.alternative_products ? (
+                <ReviewSlider
+                  favSlider={bestAlternative?.alternative_products}
+                />
+              ) : (
+                <p>No Data Found</p>
+              )}
+            </Col>
+          </Row>
+        </Container>
       </section>
       <section>
         <Container>
@@ -590,6 +592,7 @@ function CompareDiv({
         <CompareModal
           location={"comparison"}
           setIsOpen={setIsOpen}
+          favSlider={bestAlternative}
           compareProDataFirst={{
             name: compareProDataFirst?.name,
             permalink: compareProDataFirst?.permalink,

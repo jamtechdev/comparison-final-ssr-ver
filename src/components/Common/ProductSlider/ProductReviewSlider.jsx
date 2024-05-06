@@ -66,7 +66,9 @@ function ProductReviewSlider({ favSlider }) {
                         alt={`${item?.permalink}`}
                       />
                       <div className="footer_content">
-                        <span className="text-wrapper">{item?.name}</span>
+                        <div className="flex-container-section">
+                          <span className="text-wrapper">{item?.name}</span>
+                        </div>
                         <p>{item?.category}</p>
                       </div>
                       <span

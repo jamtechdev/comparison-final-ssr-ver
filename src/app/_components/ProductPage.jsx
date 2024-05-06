@@ -112,11 +112,30 @@ function ProductPage({
   const RatingColor = getColorBasedOnScore(finalProducts[0]?.reviews);
 
   // filter a value which numeric or string
+  // const renderValue = (item) => {
+  //   const numericValue = parseFloat(item?.value);
+
+  //   if (!isNaN(numericValue)) {
+  //     return `(${numericValue} ${item.unit ? item.unit : ""})`;
+  //   } else {
+  //     return item?.value === undefined ||
+  //       item?.value === "" ||
+  //       item?.value === null
+  //       ? ""
+  //       : `(${item?.value})`;
+  //   }
+
+    
+    
+  
+  //   // return ""; // Return null for strings
+  // };
+
   const renderValue = (item) => {
     const numericValue = parseFloat(item?.value);
-
+  
     if (!isNaN(numericValue)) {
-      return `(${numericValue} ${item.unit ? item.unit : ""})`;
+      return `(${numericValue}${item.unit ? " " + item.unit : ""})`;
     } else {
       return item?.value === undefined ||
         item?.value === "" ||
@@ -124,8 +143,8 @@ function ProductPage({
         ? ""
         : `(${item?.value})`;
     }
-    // return ""; // Return null for strings
   };
+  
 
   const setShowFullPrice = () => {
     showFullPrice = !setShowFullPrice;
@@ -254,7 +273,7 @@ function ProductPage({
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
-            <Col md={12} >
+            <Col md={12}>
               <BreadCrumb
                 productPhaseData={product?.page_phases}
                 firstPageName={categorySlug}
@@ -293,7 +312,7 @@ function ProductPage({
                   </div>
                 )}
                 <span>
-                  updated :
+                  {product && product?.page_phases?.updated} :
                   <i>
                     {""} {product?.updated_at}
                   </i>
@@ -859,8 +878,11 @@ function ProductPage({
                                 sizes="100%"
                                 alt={"double-arrow"}
                               />
+
                               <p>
-                              #.{item.position} in_{" "}
+                                #{item?.position}{" "}
+                                {product?.page_phases &&
+                                  product?.page_phases?.in_text}{" "}
                                 <a
                                   href={`/${item?.category_url}/${item?.permalink}`}
                                 >
@@ -896,6 +918,7 @@ function ProductPage({
                   <div className="color-section">
                     {product?.available_colors?.map((data, key) => {
                       // const isCurrentVersion = data.permalink === slug;
+
                       return (
                         <>
                           <div className="color-item" key={key}>
@@ -1151,6 +1174,7 @@ function ProductPage({
               <Row className="m-0 technical-specifications">
                 {product && (
                   <TechnicalAccordion
+                    productPhaseData={product?.page_phases}
                     product={product}
                     overallScoreColor={overallScoreColor}
                     initialDisplay={initialDisplay}
@@ -1886,36 +1910,35 @@ function ProductPage({
               {/* <h2 className="site-main-heading">Best Alternatives</h2> */}
               {/* <p>No Data Found</p> */}
               {product?.alternative_products?.map((data, index) => {
-  return (
-    <React.Fragment key={index}>
-      {index === 0 ? (
-        <h2 className="site-main-heading">{data?.heading}</h2>
-      ) : (
-        <h3
-          className="site-main-heading"
-          style={{ paddingTop: "20px" }}
-        >
-          {data?.heading}
-        </h3>
-      )}
+                return (
+                  <React.Fragment key={index}>
+                    {index === 0 ? (
+                      <h2 className="site-main-heading">{data?.heading}</h2>
+                    ) : (
+                      <h3
+                        className="site-main-heading"
+                        style={{ paddingTop: "20px" }}
+                      >
+                        {data?.heading}
+                      </h3>
+                    )}
 
-      {data?.alternative_products.length != 0 ? (
-        <ReviewSlider
-          favSlider={
-            data?.alternative_products &&
-            data?.alternative_products
-          }
-          index={index} // Pass index as a prop to ReviewSlider
-        />
-      ) : (
-        <span className="text-center m-2">
-          No Alternative Products Found
-        </span>
-      )}
-    </React.Fragment>
-  );
-})}
-
+                    {data?.alternative_products.length != 0 ? (
+                      <ReviewSlider
+                        favSlider={
+                          data?.alternative_products &&
+                          data?.alternative_products
+                        }
+                        index={index} // Pass index as a prop to ReviewSlider
+                      />
+                    ) : (
+                      <span className="text-center m-2">
+                        No Alternative Products Found
+                      </span>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </Col>
           </Row>
         </Container>

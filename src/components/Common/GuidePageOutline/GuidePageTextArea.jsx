@@ -10,58 +10,58 @@ function GuidePageTextArea({ guide }) {
   const contentRef = useRef(null);
   // This code for text part and outline
   // This code for text part and outline
-  useEffect(() => {
-    const handleScroll = () => {
-      const headings = contentRef.current?.querySelectorAll(
-        "h1, h2, h3, h4, h5, h6"
-      );
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const headings = contentRef.current?.querySelectorAll(
+  //       "h1, h2, h3, h4, h5, h6"
+  //     );
 
-      let closestHeading = null;
-      let closestDistance = Number.MAX_VALUE;
+  //     let closestHeading = null;
+  //     let closestDistance = Number.MAX_VALUE;
 
-      headings.forEach((heading) => {
-        const bounding = heading.getBoundingClientRect();
-        const distanceToTop = bounding.top;
-        const threshold = window.innerHeight / 2;
+  //     headings.forEach((heading) => {
+  //       const bounding = heading.getBoundingClientRect();
+  //       const distanceToTop = bounding.top;
+  //       const threshold = window.innerHeight / 2;
 
-        // Check if heading is more than halfway into the viewport AND at least partially visible
-        if (
-          distanceToTop >= -threshold &&
-          distanceToTop < closestDistance &&
-          isPartiallyVisible(heading)
-        ) {
-          closestHeading = heading;
-          closestDistance = distanceToTop;
-        }
-      });
+  //       // Check if heading is more than halfway into the viewport AND at least partially visible
+  //       if (
+  //         distanceToTop >= -threshold &&
+  //         distanceToTop < closestDistance &&
+  //         isPartiallyVisible(heading)
+  //       ) {
+  //         closestHeading = heading;
+  //         closestDistance = distanceToTop;
+  //       }
+  //     });
 
-      if (closestHeading) {
-        setActiveOutlineId(closestHeading.id);
-      }
+  //     if (closestHeading) {
+  //       setActiveOutlineId(closestHeading.id);
+  //     }
 
-      const shortCodeText = document.getElementById("shortCodeText");
-      if (shortCodeText) {
-        const shortCodeTextBounding = shortCodeText.getBoundingClientRect();
-        if (
-          shortCodeTextBounding.top >= 0 &&
-          shortCodeTextBounding.bottom <= window.innerHeight
-        ) {
-          setActiveOutlineId("shortCodeText");
-        }
-      }
-    };
-    function isPartiallyVisible(element) {
-      const bounding = element.getBoundingClientRect();
-      return (
-        (bounding.top >= 0 && bounding.top < window.innerHeight) ||
-        (bounding.bottom > 0 && bounding.bottom <= window.innerHeight)
-      );
-    }
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
+  //     const shortCodeText = document.getElementById("shortCodeText");
+  //     if (shortCodeText) {
+  //       const shortCodeTextBounding = shortCodeText.getBoundingClientRect();
+  //       if (
+  //         shortCodeTextBounding.top >= 0 &&
+  //         shortCodeTextBounding.bottom <= window.innerHeight
+  //       ) {
+  //         setActiveOutlineId("shortCodeText");
+  //       }
+  //     }
+  //   };
+  //   function isPartiallyVisible(element) {
+  //     const bounding = element.getBoundingClientRect();
+  //     return (
+  //       (bounding.top >= 0 && bounding.top < window.innerHeight) ||
+  //       (bounding.bottom > 0 && bounding.bottom <= window.innerHeight)
+  //     );
+  //   }
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // });
 
   const addIdsToHeadings = (content) => {
     const headings = content.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];

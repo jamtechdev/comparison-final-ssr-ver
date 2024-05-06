@@ -293,6 +293,12 @@ const ProductCompareTable = React.memo(
                 return (
                   <th key={index}>
                     {/* <span className="best-tag-product">Best From All</span> */}
+                    {/* {console.log(product)} */}
+                    {product?.assigned_title && (
+                      <span className="best-tag-product">
+                        {product?.assigned_title}
+                      </span>
+                    )}
                     <p className="device-name">
                       {/* <a href="">/product/${product?.permalik</a> */}
                       <a
@@ -490,7 +496,7 @@ const ProductCompareTable = React.memo(
             <tr className="tr-bg-color">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Overall Score
+                  {productPhaseData && productPhaseData?.overall_score}
                   {products &&
                     products.length > 0 &&
                     products[0]?.overall_score_descriptions && (
@@ -545,7 +551,7 @@ const ProductCompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Technical Score
+                  {productPhaseData && productPhaseData?.technical_score}
                   {products &&
                     products.length > 0 &&
                     products[0]?.technical_score_descriptions && (
@@ -596,7 +602,7 @@ const ProductCompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  User’s Ratings
+                  {productPhaseData && productPhaseData?.users_ratings}
                   {products &&
                     products.length > 0 &&
                     products[0]?.users_rating_descriptions && (
@@ -621,9 +627,9 @@ const ProductCompareTable = React.memo(
                               }
                             </p>
                           )}
-                        <p>
+                        {/* <p>
                           <b>
-                            {/* {product && product?.page_phases?.score_components}: */}
+
                             Score components :
                           </b>
                         </p>
@@ -660,7 +666,7 @@ const ProductCompareTable = React.memo(
                                 </div>
                               );
                             }
-                          )}
+                          )} */}
                       </div>
                     )}
                 </div>
@@ -736,7 +742,7 @@ const ProductCompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Popularity
+                  {productPhaseData && productPhaseData?.popularity}
                   {products && products[0]?.popularity_descriptions && (
                     <div className="tooltip-display-content">
                       {products[0]?.popularity_descriptions?.description && (
@@ -779,7 +785,8 @@ const ProductCompareTable = React.memo(
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
-                  Ratio Qlt/Price
+                  {productPhaseData &&
+                    productPhaseData?.ratio_quality_price_points}
                   {products[0]?.ratio_qulitiy_points_descriptions && (
                     <div className="tooltip-display-content">
                       {products[0]?.ratio_qulitiy_points_descriptions

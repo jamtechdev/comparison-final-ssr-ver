@@ -252,7 +252,7 @@ function ComparisonVerticalChart(props) {
     .data((d, i) => {
       // Check if products is an array and return a nested array for multiple products
       if (d.products?.length > 1) {
-        return d.products.map((product, index) => [
+        return d.products.map((product, index) => [ 
           color[d.product_id[index]],
           product,
         ]);
@@ -284,7 +284,7 @@ function ComparisonVerticalChart(props) {
           .text(productName);
       } else {
         // Case when d is just a color name or a product name
-        console.log(d); // Log the value of d
+        // console.log(d); // Log the value of d
 
         // Append div for color or span for product name based on the index i
         if (i === 0) {

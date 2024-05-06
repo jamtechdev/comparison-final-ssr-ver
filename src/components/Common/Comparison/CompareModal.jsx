@@ -10,7 +10,7 @@ import {
 } from "@/redux/features/compareProduct/compareProSlice";
 import toast, { Toaster } from "react-hot-toast";
 import formatValue from "@/_helpers/formatValue";
-const CompareModal = ({ setIsOpen, location, favSlider }) => {
+const CompareModal = ({setIsOpen, location, favSlider }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   // console.log(reduxData);

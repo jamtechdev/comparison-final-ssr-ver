@@ -7,7 +7,7 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import formatValue from "@/_helpers/formatValue";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
-  // console.log(categoryData);
+console.log(categoryData,"check mahima")
   return (
     <div>
       {categoryData != null && (
@@ -89,19 +89,24 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 )}
               </Row>
               {/*---------------- POPULAR REVIEWS -----------------------*/}
+              
               {categoryData[0]?.data?.popular_reviews?.length > 0 && (
+
                 <Row className="py-3">
                   <Col md={12}>
+
                     <h2 className="heading-primary secondary">
                       Popular reviews
                     </h2>
+
                   </Col>
                   {/* if data found */}
 
                   <Col md={12}>
                     <Row>
                       {categoryData[0]?.data?.popular_reviews?.length > 0 &&
-                        categoryData[0]?.data?.popular_reviews?.map(
+                        // categoryData[0]?.data?.popular_reviews?.slice(0, 12)?.map(
+                          categoryData[0]?.data?.popular_reviews?.slice(0, 10)?.map(
                           (item, index) => {
                             return (
                               <Col
@@ -127,7 +132,12 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                         alt=""
                                       />
                                       <div className="footer_content">
-                                        <span className="text-wrapper">{item?.name}</span>
+                                        <div className="flex-container-section">
+                                          <span className="text-wrapper">
+                                            {item?.name}
+                                          </span>
+                                        </div>
+                                        {/* <span className="text-wrapper">{item?.name}</span> */}
                                         <p>{item?.category}</p>
                                       </div>
                                       <span
@@ -138,8 +148,8 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                               ? "#093673"
                                               : item.overall_score >= 5 &&
                                                 item.overall_score < 7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
+                                                ? "#437ECE"
+                                                : "#85B2F1",
                                         }}
                                       >
                                         {formatValue(item?.overall_score)}
@@ -184,11 +194,10 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                               >
                                 <div className="blog-card" role="button">
                                   <a
-                                    href={`/${
-                                      item.category_url
+                                    href={`/${item.category_url
                                         ? item.category_url
                                         : item.primary_category.toLowerCase()
-                                    }/${item?.permalink}`}
+                                      }/${item?.permalink}`}
                                   >
                                     <div className="blog-card-img">
                                       <img
@@ -249,11 +258,10 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                               >
                                 <div className="blog-card" role="button">
                                   <a
-                                    href={`/${
-                                      item.category_url
+                                    href={`/${item.category_url
                                         ? item.category_url
                                         : item.primary_category.toLowerCase()
-                                    }/${item?.permalink}`}
+                                      }/${item?.permalink}`}
                                   >
                                     <div className="blog-card-img">
                                       <img

@@ -1,5 +1,6 @@
 import formatValue from "@/_helpers/formatValue";
 import { useRef, useState } from "react";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 const Questiontool = ({ attributes }) => {
   const [tooltipPosition, setTooltipPosition] = useState({
@@ -7,6 +8,7 @@ const Questiontool = ({ attributes }) => {
     left: 0,
   });
   const tooltipRef = useRef(null);
+  const {isMobile}=useScreenSize()
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
     if (!tooltip) return;
@@ -42,7 +44,11 @@ const Questiontool = ({ attributes }) => {
         <div
           className="display-content"
           ref={tooltipRef}
-          style={{ left: tooltipPosition.left }}
+          style={{
+            left: isMobile ? "50%" : 0,
+            transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+            width: isMobile ? "230px" : "250px",
+          }}
         >
           {attributes?.description && (
             <p className="mb-2">

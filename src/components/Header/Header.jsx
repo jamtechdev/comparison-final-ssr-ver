@@ -180,7 +180,7 @@ export default function Header({ headerData, headerPhase }) {
                     type="search"
                     onFocus={() => setIsFocused(true)}
                     onBlur={handleBlur}
-                    placeholder="Search Shofy.com"
+                    placeholder={headerPhase?.search_header_text}
                     aria-label="Search"
                     value={search}
                     onChange={handleSearch}

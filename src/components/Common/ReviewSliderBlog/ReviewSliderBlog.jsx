@@ -112,7 +112,10 @@ export default function ReviewSlider() {
                     alt=""
                   />
                   <div className="footer_content">
-                    <span className="text-wrapper">{item.reviewName}</span>
+                  <div className="flex-container-section">
+                          <span className="text-wrapper">{item?.reviewName}</span>
+                        </div>
+                    {/* <span className="text-wrapper">{item.reviewName}</span> */}
                     <p>{item.reviewContent}</p>
                   </div>
                   <span className="rating_count">{item.rating}</span>
