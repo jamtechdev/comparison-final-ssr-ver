@@ -2340,3 +2340,6 @@ div#shortCodeText ul {
 span.isBetter {
   color: #437ece !important;
 }
+.swiper-button-lock{
+  display: block !important;
+}

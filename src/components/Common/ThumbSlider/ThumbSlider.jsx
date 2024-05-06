@@ -62,6 +62,14 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
       swiper.slideNext();
     }
   };
+  // show main image into modal
+  const [ImageModal, setImageModal] = useState("");
+
+  const handleImageModal = (image) => {
+    setImageModal(image);
+    setModalShow(true);
+  };
+
   return (
     <section className="thumb-section-container">
       {productData?.main_image === null ? (
@@ -171,7 +179,11 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
             }}
           >
             {productData?.all_images?.map((item, index) => (
-              <SwiperSlide key={index} onClick={() => setModalShow(true)}>
+              <SwiperSlide
+                key={index}
+                onClick={() => handleImageModal(item.image)}
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={item.image}
                   width={0}
@@ -205,7 +217,7 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <img
-            src="https://frontum.online/images/roborock-s8-pro-ultra.jpg"
+            src={ImageModal}
             width={0}
             height={0}
             sizes="100%"
