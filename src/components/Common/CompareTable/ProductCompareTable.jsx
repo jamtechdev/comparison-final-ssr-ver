@@ -165,18 +165,6 @@ const ProductCompareTable = React.memo(
       //   // const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
       //   const starValue = arrayOfObjects.filter((obj) => obj?.star === true);
 
-<<<<<<< HEAD
-        if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-          const targetString =
-            stringArray[0] === "yes"
-              ? "yes"
-              : "no" || stringArray[0] === "no"
-                ? "yes"
-                : "yes";
-          numericValues = stringArray.filter((value) => value === targetString);
-        }
-      }
-=======
       //   const stringArray = arrayOfObjects.map((obj) => {
       //     if (obj?.star && obj?.attribute_value !== "no") {
       //       return obj?.attribute_value + "*";
@@ -185,7 +173,6 @@ const ProductCompareTable = React.memo(
       //     }
       //   });
       //   console.log(stringArray);
->>>>>>> 96a486fa55d54d793ce3fa1a28dd7702ac6b95bb
 
       // console.log(stringArray, "hello");
       // console.log(

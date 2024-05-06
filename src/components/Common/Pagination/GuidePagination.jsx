@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useRouter, useSearchParams } from "next/navigation";
 import ProductListing from "../ProductListing/ProductListing";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 const GuidePagination = ({ pagination }) => {
   const { current_page, total_pages } = pagination;
@@ -9,6 +10,7 @@ const GuidePagination = ({ pagination }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const productListRef = useRef(null);
+  const {isMobile}=useScreenSize()
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -40,7 +42,7 @@ const GuidePagination = ({ pagination }) => {
     window.history.pushState({}, "", url.toString());
     router.push(`?${currentParams.toString()}`, { scroll: false });
 
-    // Scroll to the top of the product list
+    // Scroll to the top of the product list 
     const productListElement = document.getElementById("scroll__top");
     if (productListElement) {
       productListElement.scrollIntoView({ behavior: "smooth" });
@@ -53,7 +55,12 @@ const GuidePagination = ({ pagination }) => {
     if (currentPage !== 1 && currentPage !== 9) {
       pagesArray.push(currentPage);
     }
-
+if(currentPage == 1 ){
+  pagesArray.push(currentPage)
+}
+if(currentPage == 9){
+pagesArray.push(currentPage)
+}
     for (let i = 1; i <= 2; i++) {
       if (currentPage - i > 1 && currentPage - i !== 9) {
         pagesArray.unshift(currentPage - i);
@@ -72,11 +79,7 @@ const GuidePagination = ({ pagination }) => {
     }
 
     if (currentPage !== 1) {
-<<<<<<< HEAD
-      pagesArray.unshift(1)
-=======
       pagesArray.unshift(1);
->>>>>>> 96a486fa55d54d793ce3fa1a28dd7702ac6b95bb
       pagesArray.unshift("Previous");
     }
 
@@ -88,10 +91,6 @@ const GuidePagination = ({ pagination }) => {
 
   // Always include numbers 1 and 9 in the pagination array
   // pagesArray.unshift(1);
-<<<<<<< HEAD
-  
-=======
->>>>>>> 96a486fa55d54d793ce3fa1a28dd7702ac6b95bb
 
   return (
     <>
