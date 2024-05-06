@@ -11,7 +11,7 @@ export default async function RootLayout({ children }) {
   const headerData = await getterService.getTopNavBarData();
   // Function to construct the canonical URL dynamically
   // console.log(footerData);
-  // console.log(footerData?.body_tag_code )
+  // console.log(footerData?.footer_tag_code);
   return (
     <html lang="en">
       <link
@@ -25,9 +25,10 @@ export default async function RootLayout({ children }) {
       <body>
         <Layout footerData={footerData} headerData={headerData}>
           {children}
-          <div
+          {/* <div
             dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }}
           ></div>
+          */}
           <div
             dangerouslySetInnerHTML={{ __html: footerData?.footer_tag_code }}
           ></div>

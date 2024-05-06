@@ -19,7 +19,7 @@ export default async function Layout({ children, footerData, headerData }) {
           headerPhase={footerData?.header_page_phases}
         />
         {children}
-        {/* <div dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }} /> */}
+        <div dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }} />
         <Footer footerData={footerData} />
       </Provider>
     </>
