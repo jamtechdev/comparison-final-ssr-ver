@@ -31,7 +31,7 @@ export default function Header({ headerData, headerPhase }) {
 
   function useScrollDirection() {
     const [scrollDirection, setScrollDirection] = useState(null);
-    console.log(headerPhase);
+    // console.log(headerPhase);
 
     useEffect(() => {
       let lastScrollY = window.pageYOffset;
