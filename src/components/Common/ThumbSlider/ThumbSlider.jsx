@@ -207,7 +207,7 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
         </span>
       </section>
 
-      <Modal
+      {/* <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -230,7 +230,7 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
             }}
           />
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </section>
   );
 }
