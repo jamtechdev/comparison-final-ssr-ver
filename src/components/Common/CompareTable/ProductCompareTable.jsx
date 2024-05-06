@@ -337,8 +337,8 @@ const ProductCompareTable = React.memo(
                       <img
                         className="compare_image"
                         src={
-                          product?.main_image
-                            ? product?.main_image
+                          product?.mini_image
+                            ? product?.mini_image
                             : "/images/nofound.png"
                         }
                         width={0}
@@ -423,7 +423,7 @@ const ProductCompareTable = React.memo(
           <tbody id="tbody">
             <tr className="">
               <th>
-                <p>{productPhaseData?.image || "Image"}</p>
+                <p>{productPhaseData?.image ?? "Image"}</p>
               </th>
               {finalProducts.slice(0, defaultNo).map((product, imageIndex) => {
                 return (
@@ -431,8 +431,8 @@ const ProductCompareTable = React.memo(
                     <img
                       className="compare_image"
                       src={
-                        product?.main_image
-                          ? product?.main_image
+                        product?.mini_image
+                          ? product?.mini_image
                           : "/images/nofound.png"
                       }
                       width={0}
@@ -446,7 +446,7 @@ const ProductCompareTable = React.memo(
             </tr>
             <tr className="">
               <th>
-                <p>Price</p>
+                <p>{productPhaseData?.price}</p>
               </th>
               {finalProducts.slice(0, defaultNo).map((product, priceIndex) => {
                 return (

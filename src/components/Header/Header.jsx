@@ -31,6 +31,7 @@ export default function Header({ headerData, headerPhase }) {
 
   function useScrollDirection() {
     const [scrollDirection, setScrollDirection] = useState(null);
+    console.log(headerPhase);
 
     useEffect(() => {
       let lastScrollY = window.pageYOffset;
@@ -74,6 +75,7 @@ export default function Header({ headerData, headerPhase }) {
         scrollDirection === "down" ? "top-sticky-not" : "top-sticky"
       }`}
     >
+      {/* {console.log(headerPhase)} */}
       <Container>
         <Row className="py-2 align-items-center logo-header">
           <Col lg={2} md={4} xs={4} className="hidden">

@@ -19,6 +19,9 @@ const GuidePagination = ({ pagination }) => {
   }, []);
 
   const handlePageClick = (page) => {
+    if (page === "...") {
+      return; // Ignore clicks on dots, Previous, and Next
+    }
     let newPage;
 
     if (page === "Previous") {
@@ -47,13 +50,15 @@ const GuidePagination = ({ pagination }) => {
   let pagesArray = [];
 
   if (total_pages > 0) {
-    pagesArray.push(currentPage);
+    if (currentPage !== 1 && currentPage !== 9) {
+      pagesArray.push(currentPage);
+    }
 
     for (let i = 1; i <= 2; i++) {
-      if (currentPage - i > 1) {
+      if (currentPage - i > 1 && currentPage - i !== 9) {
         pagesArray.unshift(currentPage - i);
       }
-      if (currentPage + i < total_pages) {
+      if (currentPage + i < total_pages && currentPage + i !== 1) {
         pagesArray.push(currentPage + i);
       }
     }
@@ -67,13 +72,18 @@ const GuidePagination = ({ pagination }) => {
     }
 
     if (currentPage !== 1) {
+      pagesArray.unshift(1);
       pagesArray.unshift("Previous");
     }
 
     if (currentPage !== total_pages) {
+      pagesArray.push(9);
       pagesArray.push("Next");
     }
   }
+
+  // Always include numbers 1 and 9 in the pagination array
+  // pagesArray.unshift(1);
 
   return (
     <>

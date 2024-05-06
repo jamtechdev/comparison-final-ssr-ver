@@ -407,7 +407,7 @@ const CompareTable = React.memo(
           <tbody id="tbody">
             <tr className="">
               <th>
-                <p>{guidePhraseData && guidePhraseData?.image}</p>
+                <p>{(guidePhraseData && guidePhraseData?.image) || "Image"}</p>
               </th>
               {finalProducts.slice(0, defaultNo).map((product, imageIndex) => {
                 return (
@@ -430,7 +430,7 @@ const CompareTable = React.memo(
             </tr>
             <tr className="">
               <th>
-                <p>Price</p>
+                <p>{guidePhraseData && guidePhraseData?.price}</p>
               </th>
               {finalProducts.slice(0, defaultNo).map((product, priceIndex) => {
                 return (

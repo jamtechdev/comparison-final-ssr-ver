@@ -544,6 +544,7 @@ function CompareDiv({
                 {bestAlternative &&
                   bestAlternative?.page_phases?.compare_with_other_products}
               </h2>
+              {console.log(bestAlternative?.page_phases)}
               <CompareForm
                 favSlider={bestAlternative && bestAlternative?.page_phases}
                 location="ON_MAIN_PAGE"
@@ -584,6 +585,7 @@ function CompareDiv({
                 {bestAlternative &&
                   bestAlternative?.page_phases?.related_guides_bottom}
               </h2>
+              
             </Col>
             <Col md={12}>
               <ProductSlider favSlider={bestAlternative?.related_guides} />

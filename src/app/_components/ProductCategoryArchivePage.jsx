@@ -28,7 +28,9 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 </Col>
 
                 <Col md={12}>
-                  <h1 className="heading-primary text-capitalize">{slug}</h1>
+                  <h1 className="heading-primary text-capitalize">
+                    {categoryData[0]?.data?.title}
+                  </h1>
                 </Col>
               </Row>
             </Container>
