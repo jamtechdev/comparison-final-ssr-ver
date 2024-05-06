@@ -27,7 +27,6 @@ export default async function PageSwitch({
   }
   function replaceTextPart(matchShortCode, third_text) {
     for (let i = 0; i < matchShortCode?.length; i++) {
-      
       third_text = third_text?.replace(matchShortCode[i], `hello navneet`);
     }
 
@@ -182,6 +181,7 @@ async function getProductForTable(category_url, slug) {
 }
 
 async function getProductCategroyAttributes(category_id) {
+  console.log(category_id);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/${category_id}/attributes`,
     {

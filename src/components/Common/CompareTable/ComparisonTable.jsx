@@ -13,6 +13,7 @@ export default function ComparisonTable({
   products,
   categoryAttributes,
   comparisonPhaseData,
+  productAttributes,
 }) {
   const router = useRouter();
   let initialNoOfCategories = 5;
@@ -154,6 +155,38 @@ export default function ComparisonTable({
         numericValues = stringArray.filter((value) => value === targetString);
       }
     }
+
+    // function addStarToUniqueItems(array1, array2) {
+    //   // Filter out elements from array2 that are not present in array1
+    //   const filteredArray2 = array2.filter(
+    //     (item) =>
+    //       array1.includes(item) &&
+    //       array2.indexOf(item) === array2.lastIndexOf(item)
+    //   );
+
+    //   // Calculate indices for filteredArray2
+    //   const indices = filteredArray2.map((item) => array1.indexOf(item));
+
+    //   // Calculate minIndex for filteredArray2
+    //   const minIndex = Math.min(...indices);
+
+    //   // Create resultArray based on filteredArray2 and minIndex
+    //   const resultArray = array2.map(
+    //     (item, index) =>
+    //       (filteredArray2.includes(item) && array1.indexOf(item) === minIndex
+    //         ? "*"
+    //         : "") + item
+    //   );
+
+    //   return resultArray;
+    // }
+
+    // const array1 = ["yes", "no"];
+
+    // const array2 = ["no", "no", "yes"];
+
+    // const result = addStarToUniqueItems(array1, array2);
+    // console.log(result);
 
     const topValue = numericValues[0];
     // console.log(topValue);

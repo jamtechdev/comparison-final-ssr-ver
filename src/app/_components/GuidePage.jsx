@@ -18,6 +18,7 @@ import ConfirmationModal from "@/components/Common/Modal/ConfirmationModal";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 import GuidePageTextArea from "@/components/Common/GuidePageOutline/GuidePageTextArea";
 import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
+
 export default function GuidePage({
   slug,
   categorySlug,
@@ -27,8 +28,6 @@ export default function GuidePage({
   filters,
   searchParams,
 }) {
-
-
   useChart("guide");
   // console.log(guideData, "Abhay");
   const router = useRouter();
@@ -115,8 +114,6 @@ export default function GuidePage({
   //   window.history.replaceState(null, "", window.location.pathname);
   //   location.reload();
   // };
-
-
 
   const removeFilters = () => {
     const url = new URL(window.location.href);

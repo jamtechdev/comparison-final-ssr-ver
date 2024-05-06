@@ -348,7 +348,7 @@ export default function CompareForm({
                 />
               </>
             )}
-            Compare
+            {favSlider && favSlider?.compare_button}
           </Button>
         </div>
       </div>

@@ -28,7 +28,9 @@ console.log(categoryData,"check mahima")
                 </Col>
 
                 <Col md={12}>
-                  <h1 className="heading-primary text-capitalize">{slug}</h1>
+                  <h1 className="heading-primary text-capitalize">
+                    {categoryData[0]?.data?.title}
+                  </h1>
                 </Col>
               </Row>
             </Container>

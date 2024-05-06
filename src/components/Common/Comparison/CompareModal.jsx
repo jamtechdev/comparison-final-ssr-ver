@@ -10,7 +10,7 @@ import {
 } from "@/redux/features/compareProduct/compareProSlice";
 import toast, { Toaster } from "react-hot-toast";
 import formatValue from "@/_helpers/formatValue";
-const CompareModal = ({setIsOpen, location, favSlider }) => {
+const CompareModal = ({ setIsOpen, location, favSlider }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   // console.log(reduxData);
@@ -147,9 +147,10 @@ const CompareModal = ({setIsOpen, location, favSlider }) => {
       </div>
       {oftenProducts?.length > 0 && (
         <Container className="mt-4">
+          {/* {console.log(favSlider)} */}
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Often Compared With...</h2>
+              <h2 className="site-main-heading">{favSlider?.often_compared}</h2>
             </Col>
           </Row>
           {reduxData?.productFirst !== null && (
@@ -181,7 +182,9 @@ const CompareModal = ({setIsOpen, location, favSlider }) => {
                         />
 
                         <div className="footer_content">
-                          <span className="text-wrapper">{item?.name || ""}</span>
+                          <span className="text-wrapper">
+                            {item?.name || ""}
+                          </span>
                           {/* <p dangerouslySetInnerHTML={{ __html: item?.text_part}}></p> */}
                           <p>{item?.category || ""}</p>
                         </div>

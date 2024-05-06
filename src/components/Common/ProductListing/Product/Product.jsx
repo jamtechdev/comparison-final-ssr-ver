@@ -674,7 +674,10 @@ export default function Product({
                     </span>
                     {product?.users_rating_descriptions && (
                       <div className="score-detail tooltip-title">
-                        <span>User’s Rating</span>
+                        <span>
+                          {" "}
+                          {guidePhraseData && guidePhraseData?.users_ratings}
+                        </span>
 
                         <div
                           className="tooltip-display-content"
@@ -797,7 +800,10 @@ export default function Product({
                     </span>
                     {product?.ratio_qulitiy_points_descriptions && (
                       <div className="score-detail tooltip-title">
-                        <span>Ratio Quality-Price</span>
+                        <span>
+                          {guidePhraseData &&
+                            guidePhraseData?.ratio_quality_price_points}
+                        </span>
                         <div
                           className="tooltip-display-content"
                           style={{
