@@ -178,7 +178,7 @@ export default function Product({
         category: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.mini_image ? product.mini_image : "/images/nofound.png",
+        image: product.main_image ? product.main_image : "/images/nofound.png",
       };
       dispatch(
         updateCompareProduct({
@@ -1222,30 +1222,64 @@ export default function Product({
                           <>
                             <div className="color-item" key={key}>
                               <li
-                                className="color-option"
                                 style={{
+                                  listStyleType: "none",
+                                  width: "auto",
+                                  padding: "0px 5px",
+                                  borderRadius: "5px",
+                                  cursor:
+                                    data.color === product?.color
+                                      ? "default"
+                                      : "pointer",
+
                                   outline:
                                     data.color === product?.color
                                       ? "1px solid #437ed0"
                                       : "none",
                                 }}
+                                className="current_version_not_found"
                               >
                                 {data.color === product?.color ? (
-                                  <span className="color-check">
+                                  <span
+                                    className="color-check"
+                                    style={{
+                                      color: "#437ed0",
+                                      padding: "0px 5px",
+                                      cursor:
+                                        data.color === product?.color
+                                          ? "default"
+                                          : "pointer",
+                                    }}
+                                  >
                                     {data.color}
                                   </span>
                                 ) : (
                                   <a
-                                    href={`/link?p=${encodeURIComponent(
-                                      data.url
-                                    )}`}
-                                    className="color-link"
-                                    onClick={(e) => handleItemClick(key)}
+                                    href={`/link?p=${btoa(data.url)}`}
+                                    style={{
+                                      color: "#437ed0",
+                                      padding: "0px 5px",
+                                      cursor:
+                                        data.color === product?.color
+                                          ? "default"
+                                          : "pointer",
+                                    }}
+                                    className={`color-item `}
+                                    // onClick={(e) => handleItemClick(key)}
                                   >
                                     {data.color}
                                   </a>
                                 )}
                               </li>
+
+                              {/* <Form.Check
+                                inline
+                                label={data?.short_name}
+                                name="color"
+                                type="radio"
+                                defaultChecked={key === 0}
+                                id={`inline-${data?.color}-${key}`}
+                              /> */}
                             </div>
                           </>
                         );
