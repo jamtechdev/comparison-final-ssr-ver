@@ -66,8 +66,11 @@ function drawAxis(config) {
     svg
       .append("g")
       .attr("class", classnames(["base__axis axis__x fontStyle", axisClass]))
-      .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(xScale).tickFormat(customTickFormatXaxis));
+      .attr("transform", `translate(0,${height + 10})`)
+      .call(d3.axisBottom(xScale).tickFormat(customTickFormatXaxis))
+      .selectAll("text")
+      .style("transform-origin", "0 0")
+      .style("transform", "rotate(345deg)");
   }
 
   svg
