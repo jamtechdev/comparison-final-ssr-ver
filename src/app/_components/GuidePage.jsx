@@ -665,9 +665,9 @@ export default function GuidePage({
                   <div className="tooltip-title">
                     {" "}
                     {guide && guide?.page_phrases?.hide_similar}
-                    <div className="tooltip-display-content">
+                    {/* <div className="tooltip-display-content">
                       <h1>hello</h1>
-                    </div>
+                    </div> */}
                     <div className="custom-switch form-switch">
                       <input
                         required=""
@@ -753,7 +753,7 @@ export default function GuidePage({
                         </div>
                       </div> */}
 
-                  <div className="tooltip-title" style={{textDecoration: "none"}}>
+                  <div className="tooltip-title">
                     {" "}
                     {guide && guide?.page_phrases?.hide_similar}
                     <div className="tooltip-display-content">

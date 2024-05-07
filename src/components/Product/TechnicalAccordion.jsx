@@ -17,7 +17,7 @@ import useScreenSize from "@/_helpers/useScreenSize";
 const TechnicalAccordion = React.memo(
   ({ productPhaseData, product, overallScoreColor, initialDisplay }) => {
     // This funcation doing when attributeValues yes or no change the color by is is_worse_than and is_better_than
-// console.log(product,"xxx")
+    // console.log(product,"xxx")
     const getColorAttr = (attributeValues) => {
       if (
         attributeValues.attribute_value == "yes" ||
@@ -160,7 +160,9 @@ const TechnicalAccordion = React.memo(
                         ref={tooltipRef}
                         style={{
                           left: isMobile ? "50%" : 0,
-                          transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+                          transform: isMobile
+                            ? "translateX(-20%)"
+                            : "translateX(-10%)",
                           width: isMobile ? "250px" : "250px",
                         }}
                       >
@@ -279,7 +281,9 @@ const TechnicalAccordion = React.memo(
                         ref={tooltipRef}
                         style={{
                           left: isMobile ? "50%" : 0,
-                          transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+                          transform: isMobile
+                            ? "translateX(-20%)"
+                            : "translateX(-10%)",
                           width: isMobile ? "200px" : "250px",
                         }}
                       >
@@ -367,8 +371,9 @@ const TechnicalAccordion = React.memo(
                   </div>
                 </div>
               </div>
-             {/* { console.log(product.expert_reviews_rating)} */}
-              { (
+              {/* { console.log(product.expert_reviews_rating)} */}
+
+              {product.expert_reviews_rating > 0 && (
                 <div className="spec-section">
                   <div className="spec-item">
                     <div className="spec-col">
@@ -499,6 +504,7 @@ const TechnicalAccordion = React.memo(
                   </div>
                 </div>
               )}
+
               <div className="spec-section">
                 <div className="spec-item">
                   <div className="spec-col">
@@ -1041,7 +1047,7 @@ const TechnicalAccordion = React.memo(
                                         attributes={
                                           attributeValues && attributeValues
                                         }
-                                        style={{backgroundColor:"yellow",}}
+                                        style={{ backgroundColor: "yellow" }}
                                       />
                                     </div>
                                   </div>

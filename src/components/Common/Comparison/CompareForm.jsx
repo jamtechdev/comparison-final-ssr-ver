@@ -262,7 +262,7 @@ export default function CompareForm({
                 }
                 onFocus={() => setFocusedProductSecond(true)}
                 onChange={(e) =>
-                  handleFieldChange("productSecond", e.target.value.trim())
+                  handleFieldChange("productSecond", e.target.value)
                 }
                 disabled={formFields.productFirst ? false : true}
               />
@@ -303,7 +303,7 @@ export default function CompareForm({
                     : formFields.productThird?.name || ""
                 }
                 onChange={(e) =>
-                  handleFieldChange("productThird", e.target.value.trim())
+                  handleFieldChange("productThird", e.target.value)
                 }
                 disabled={formFields.productSecond ? false : true}
               />

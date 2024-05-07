@@ -715,112 +715,118 @@ const ProductCompareTable = React.memo(
                 );
               })}
             </tr>
-            {console.log(products,"xxx")}
-
-            <tr className="">
-              <th className="sub-inner-padding">
-                <div className="tooltip-title">
-                  Expert Reviews
-                  <div className="tooltip-display-content">
-                    {products[0]?.expert_reviews_descriptions?.description && (
-                      <p className="mb-2">
-                        <b>What it is: </b>{" "}
-                        {products[0]?.expert_reviews_descriptions?.description}
-                      </p>
-                    )}
-                    {products[0]?.expert_reviews_descriptions
-                      ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>When it matters: </b>{" "}
-                        
-                        {
-                          products[0]?.expert_reviews_descriptions
-                            ?.when_it_matters
-                        }
-                        {products[0]?.expert_reviews_websites?.map(
-                          (data, index) => {
-                            return (
-                              <div className="user__rating__popup" key={index}>
-                                <div className="user__rating__popup__list">
-                                  <span
-                                    className="user__rating__popup__rating"
-                                    style={{
-                                      background: getColorBasedOnScore(
-                                        data?.evaluation
-                                      ),
-                                    }}
-                                  >
-                                    {formatValue(data?.evaluation)}
-                                  </span>
-                                  <div className="user__rating__popup__content">
-                                    {data?.image !== null && (
-                                      <a
-                                        href={`/link?p=${btoa(
-                                          data?.website_name
-                                        )}`}
-                                      >
-                                        <img src={`${data?.image}`} />
-                                      </a>
-                                    )}
-
-                                    <p>
-                                      {" "}
-                                      {data?.name !== null ? (
+            {/* {console.log(products,"xxx")} */}
+            {products[0]?.expert_reviews_rating > 0 && (
+              <tr className="">
+                <th className="sub-inner-padding">
+                  <div className="tooltip-title">
+                    Expert Reviews
+                    <div className="tooltip-display-content">
+                      {products[0]?.expert_reviews_descriptions
+                        ?.description && (
+                        <p className="mb-2">
+                          <b>What it is: </b>{" "}
+                          {
+                            products[0]?.expert_reviews_descriptions
+                              ?.description
+                          }
+                        </p>
+                      )}
+                      {products[0]?.expert_reviews_descriptions
+                        ?.when_it_matters && (
+                        <p className="mb-2">
+                          <b>When it matters: </b>{" "}
+                          {
+                            products[0]?.expert_reviews_descriptions
+                              ?.when_it_matters
+                          }
+                          {products[0]?.expert_reviews_websites?.map(
+                            (data, index) => {
+                              return (
+                                <div
+                                  className="user__rating__popup"
+                                  key={index}
+                                >
+                                  <div className="user__rating__popup__list">
+                                    <span
+                                      className="user__rating__popup__rating"
+                                      style={{
+                                        background: getColorBasedOnScore(
+                                          data?.evaluation
+                                        ),
+                                      }}
+                                    >
+                                      {formatValue(data?.evaluation)}
+                                    </span>
+                                    <div className="user__rating__popup__content">
+                                      {data?.image !== null && (
                                         <a
                                           href={`/link?p=${btoa(
                                             data?.website_name
                                           )}`}
-                                          style={{ color: "inherit" }}
                                         >
-                                          {" "}
-                                          {data?.name}
-                                        </a>
-                                      ) : (
-                                        <a
-                                          href={`/link?p=${btoa(
-                                            data?.website_name
-                                          )}`}
-                                          style={{ color: "inherit" }}
-                                        >
-                                          {" "}
-                                          {extractDomainName(
-                                            data?.website_name
-                                          )}
+                                          <img src={`${data?.image}`} />
                                         </a>
                                       )}
-                                    </p>
+
+                                      <p>
+                                        {" "}
+                                        {data?.name !== null ? (
+                                          <a
+                                            href={`/link?p=${btoa(
+                                              data?.website_name
+                                            )}`}
+                                            style={{ color: "inherit" }}
+                                          >
+                                            {" "}
+                                            {data?.name}
+                                          </a>
+                                        ) : (
+                                          <a
+                                            href={`/link?p=${btoa(
+                                              data?.website_name
+                                            )}`}
+                                            style={{ color: "inherit" }}
+                                          >
+                                            {" "}
+                                            {extractDomainName(
+                                              data?.website_name
+                                            )}
+                                          </a>
+                                        )}
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                            );
-                          }
-                        )}
-                      </p>
-                    )}
-                    
+                              );
+                            }
+                          )}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </th>
-              {finalProducts
-                .slice(0, defaultNo)
-                .map((product, expert_reviews) => {
-                  const values = finalProducts.map(
-                    (p) => p.expert_reviews_rating
-                  );
-                  return (
-                    <td key={expert_reviews}>
-                      {
-                        addStarOnTable(
-                          defaultNo,
-                          "expert_reviews",
-                          values,
-                          product?.expert_reviews_rating_star_phase
-                        )[expert_reviews]
-                      }
-                    </td>
-                  );
-                })}
-            </tr>
+                </th>
+                {finalProducts
+                  .slice(0, defaultNo)
+                  .map((product, expert_reviews) => {
+                    const values = finalProducts.map(
+                      (p) => p.expert_reviews_rating
+                    );
+                    return (
+                      <td key={expert_reviews}>
+                        {
+                          addStarOnTable(
+                            defaultNo,
+                            "expert_reviews",
+                            values,
+                            product?.expert_reviews_rating_star_phase
+                          )[expert_reviews]
+                        }
+                      </td>
+                    );
+                  })}
+              </tr>
+            )}
 
             <tr className="">
               <th className="sub-inner-padding">
