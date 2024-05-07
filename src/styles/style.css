@@ -1107,12 +1107,12 @@ footer .search-icon {
   border-radius: 50px !important;
   padding: 8px;
   margin: 8px 0 0 !important;
-}
+} 
 
 .product-categories-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px !important; /* Reduce the gap value with !important */
+  gap: 35px !important; /* Reduce the gap value with !important */
 }
 
 .product-categories-item {

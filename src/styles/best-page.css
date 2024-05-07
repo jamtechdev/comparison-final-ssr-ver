@@ -1677,6 +1677,8 @@ body .product-listing-inner-content .score-section .score-detail h6 {
 
 .tooltip-title:hover .tooltip-display-content {
   display: block;
+  margin-bottom: 3px;
+  margin-top: 3px;
 }
 .tooltip-title-2:hover .tooltip-display-content {
   display: block;

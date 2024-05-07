@@ -221,7 +221,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
 
                                 >
                                   <span > {item?.title}</span>
-                                </div>
+                                </div>  
                               </Link>
                             );
                           })}

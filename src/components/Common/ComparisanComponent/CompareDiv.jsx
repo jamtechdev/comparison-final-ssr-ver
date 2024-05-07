@@ -557,7 +557,7 @@ function CompareDiv({
                 {bestAlternative &&
                   bestAlternative?.page_phases?.compare_with_other_products}
               </h2>
-              {console.log(bestAlternative?.page_phases)}
+              {/* {console.log(bestAlternative?.page_phases)} */}
               <CompareForm
                 favSlider={bestAlternative && bestAlternative?.page_phases}
                 location="ON_MAIN_PAGE"

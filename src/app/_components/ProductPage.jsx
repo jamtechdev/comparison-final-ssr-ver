@@ -993,7 +993,7 @@ function ProductPage({
               </Col>
             )}
             {/* {console.log(product,"neet")} */}
-            {console.log(product?.available_versions, "hllo")}
+            {/* {console.log(product?.available_versions, "hllo")} */}
 
             {product?.available_versions &&
               product?.available_versions?.length !== 0 && (
@@ -1845,7 +1845,7 @@ function ProductPage({
                   </h3>
                   <ul>
                     {product &&
-                      product?.top_pros?.map((data, key) => {
+                      product?.top_pros?.slice(0, 10).map((data, key) => {
                         return (
                           <>
                             <li
@@ -1970,16 +1970,17 @@ function ProductPage({
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              {isMobile ? (
-                <MobileCompareTable
-                  productPhaseData={product?.page_phases}
-                  products={compareByCatID?.data}
-                  categoryAttributes={productCatAttributes?.data}
-                  slug={slug}
-                />
-              ) : (
-                ""
-              )}
+              {/* {console.log(compareByCatID?.data?.length)} */}
+              {compareByCatID?.data?.length > 1 &&
+                (isMobile ? (
+                  <MobileCompareTable
+                    productPhaseData={product?.page_phases}
+                    products={compareByCatID?.data}
+                    categoryAttributes={productCatAttributes?.data}
+                    slug={slug}
+                  />
+                ) : null) // or any other fallback content for non-mobile
+              }
             </Col>
           </Row>
         </Container>

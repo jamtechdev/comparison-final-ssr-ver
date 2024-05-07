@@ -129,7 +129,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
   }
 
   Chart.defaultProps = {
-    scaleBandPadding: 0.5,
+    scaleBandPadding: 0.4,
   };
 
   return Chart;

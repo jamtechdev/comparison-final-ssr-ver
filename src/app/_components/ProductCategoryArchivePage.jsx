@@ -106,8 +106,11 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
 
                   <Col md={12}>
                     <Row>
+                      {/* {console.log(categoryData[0]?.data?.popular_reviews?.length)} */}
                       {categoryData[0]?.data?.popular_reviews?.length > 0 &&
                         // categoryData[0]?.data?.popular_reviews?.slice(0, 12)?.map(
+                       
+                
                           categoryData[0]?.data?.popular_reviews?.slice(0, 12)?.map(
                           (item, index) => {
                             return (

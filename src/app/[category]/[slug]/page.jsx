@@ -8,34 +8,11 @@ export default async function Page({
   try {
     const categoryslugType = await getSlugType(category);
     // console.log(categoryslugType)
-
     if (categoryslugType.error) {
       return <NotFound />;
     }
     const slugType = await getSlugType(slug);
-    // console.log(slugType);
-    // if (slugType.error === "Permalink not found") {
-    //   return <NotFound />;
-    // }
-    // Bypass for comparison page
-    if (slugType.error && slug.includes("-vs-")) {
-      const pageData = await fetchDataBasedOnPageType(
-        slug,
-        "Comparison",
-        category,
-        searchParams
-      );
-      // console.log(pageData);
-      return (
-        <PageSwitch
-          PageType="Comparison"
-          slug={slug}
-          pageData={pageData}
-          categorySlug={category}
-          searchParams={{}}
-        />
-      );
-    }
+    // console.log(slugType)
     if (slugType.type) {
       const pageData = await fetchDataBasedOnPageType(
         slug,
@@ -43,6 +20,7 @@ export default async function Page({
         category,
         searchParams
       );
+      // console.log(pageData)
       if (pageData) {
         return (
           <PageSwitch
@@ -57,7 +35,7 @@ export default async function Page({
     }
   } catch (error) {
     return <NotFound />;
-    console.error("Error:", error);
+    // console.error("Error:", error);
   }
   return <NotFound />;
 }
@@ -232,7 +210,7 @@ async function fetchDataBasedOnPageType(
   category,
   searchParams
 ) {
-  // console.log("Abhay", category);
+  // console.log("Abhay", pageType);
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
@@ -264,15 +242,16 @@ async function fetchDataBasedOnPageType(
         `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${slug}`,
       ];
       break;
-    case "Comparison":
+    case "Compare":
       const permalinks = slug.split("-vs-");
+      // console.log(permalinks, "permalinks");
       const removeDuplicatePermalinks = Array.from(new Set(permalinks));
       // console.log(removeDuplicatePermalinks);
       apiUrls = removeDuplicatePermalinks.map(
         (permalink) =>
           `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${permalink}?compare=${slug}`
       );
-
+      // console.log(apiUrls)
       break;
 
     default:

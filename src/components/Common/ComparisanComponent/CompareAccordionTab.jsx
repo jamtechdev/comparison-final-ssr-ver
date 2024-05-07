@@ -394,7 +394,7 @@ const CompareAccordionTab = React.memo(
                                 apiData?.general?.pros?.map((item, index) => {
                                   return (
                                     <li key={index}>
-                                      {console.log(item)}
+                                      {/* {console.log(item)} */}
                                       <span
                                         className={`${
                                           item?.hover_phase !== null

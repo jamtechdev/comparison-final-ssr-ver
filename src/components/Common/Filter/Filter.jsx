@@ -46,7 +46,7 @@ export default function Filter({
   const { isMobile } = useScreenSize();
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    console.log(filterName, key, value, "neet");
+    // console.log(filterName, key, value, "neet");
     const currentParams = new URLSearchParams(searchParams.toString());
     const url = new URL(window.location.href);
     switch (filterName) {
@@ -114,22 +114,6 @@ export default function Filter({
       case "range":
         if (!isChecked) {
           deleteQueryFormURL(key, updatedParams, currentParams, url);
-          const leftThumb = document.getElementById(`thumb thumb--left ${key}`);
-          const rightThumb = document.getElementById(
-            `thumb thumb--right ${key}`
-          );
-          // alert("hello");
-          // console.log(leftThumb, "left");
-          const splitValue = value.split(",");
-          console.log(splitValue);
-          if (leftThumb) {
-            leftThumb.value = 50;
-            // console.log(leftThumb,"neetx");
-
-            // // If you want the slider's position to update immediately,
-            // // you may need to trigger a change event manually
-            leftThumb.dispatchEvent(new Event("change", { bubbles: true }));
-          }
         } else {
           updatedParams[key] = value;
         }
