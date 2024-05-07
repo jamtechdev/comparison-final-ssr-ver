@@ -55,13 +55,17 @@ function ProductPage({
   const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
   const productAttributes = {};
   // console.log( productData[0].data,'"xxx")')
-  productData[0].data?.attributes?.forEach((attribute) => {
-    const categoryName = attribute?.attribute_category?.name;
-    if (!productAttributes[categoryName]) {
-      productAttributes[categoryName] = [];
-    }
-    productAttributes[categoryName]?.push({ ...attribute }); // Create a shallow copy of the attribute
-  });
+  productData[0].data?.attributes
+    ?.sort(
+      (a, b) => a?.attribute_category_position - b?.attribute_category_position
+    )
+    ?.forEach((attribute) => {
+      const categoryName = attribute?.attribute_category?.name;
+      if (!productAttributes[categoryName]) {
+        productAttributes[categoryName] = [];
+      }
+      productAttributes[categoryName]?.push({ ...attribute }); // Create a shallow copy of the attribute
+    });
 
   productCopy["attributes"] = productAttributes;
   productsWithAttributeGroup[productData[0]?.data?.name] = { ...productCopy }; // Create a shallow copy of productCopy
@@ -1946,7 +1950,7 @@ function ProductPage({
           <Container>
             <Row className="table-section-mobile">
               <Col md={12}>
-                <h2 className="site-main-heading pt-5"> 
+                <h2 className="site-main-heading pt-5">
                   {product?.page_phases?.table_compare_title}
                 </h2>
                 <ProductCompareTable
