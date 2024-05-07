@@ -177,7 +177,7 @@ const TechnicalAccordion = React.memo(
                         </p>
 
                         <p>
-                          <b>{product && product?.score_components}:</b>
+                          <b>{product && product?.page_phases?.score_components}:</b>
                         </p>
                         {product?.technical_score_descriptions
                           .score_components &&
@@ -295,7 +295,7 @@ const TechnicalAccordion = React.memo(
                           </p>
                         )}
                         <p>
-                          <b>{product && product?.score_components}:</b>
+                          <b>{product && product?.page_phases?.score_components}:</b>
                         </p>
                         {product?.users_rating_descriptions.score_components &&
                           product?.users_rating_descriptions.score_components?.map(
