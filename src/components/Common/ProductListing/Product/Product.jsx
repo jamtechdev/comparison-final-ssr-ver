@@ -191,7 +191,7 @@ export default function Product({
     if (
       reduxData?.productThird === null &&
       reduxData?.productFirst !== null &&
-      reduxData?.productSecond !== null 
+      reduxData?.productSecond !== null
     ) {
       if (
         reduxData?.productFirst?.permalink === product.permalink ||
@@ -299,15 +299,20 @@ export default function Product({
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
     if (productData && productData.attributes) {
-      productData.attributes?.sort((a, b) => a?.attribute_category_position - b?.attribute_category_position)?.forEach((attribute) => {
-        const categoryName = attribute.attribute_category.name;
+      productData.attributes
+        ?.sort(
+          (a, b) =>
+            a?.attribute_category_position - b?.attribute_category_position
+        )
+        ?.forEach((attribute) => {
+          const categoryName = attribute.attribute_category.name;
 
-        if (!productAttributes[categoryName]) {
-          productAttributes[categoryName] = [];
-        }
+          if (!productAttributes[categoryName]) {
+            productAttributes[categoryName] = [];
+          }
 
-        productAttributes[categoryName].push(attribute);
-      });
+          productAttributes[categoryName].push(attribute);
+        });
       // Update the original product object
       productData.attributes_new = productAttributes;
 

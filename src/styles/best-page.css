@@ -773,8 +773,8 @@ thead.isSticky {
 }
 
 .best-product-listing .compare_image {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   margin: 20px auto;
   display: block;

@@ -44,6 +44,10 @@
 }
 span.legend-text.barChartProduct {
   margin-top: 15px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 .tooltip {
   display: flex;
