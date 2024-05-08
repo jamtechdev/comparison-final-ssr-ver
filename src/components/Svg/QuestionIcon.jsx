@@ -66,6 +66,12 @@ const QuestionIcon = ({ attributes }) => {
               {attributes?.good_value}
             </p>
           )}
+          {attributes?.importance && (
+            <p className="mb-2">
+              <b>Importance: </b>
+              {attributes?.importance}
+            </p>
+          )}
         </div>
       )}
     </div>

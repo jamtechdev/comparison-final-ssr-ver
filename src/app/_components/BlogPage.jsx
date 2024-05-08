@@ -16,35 +16,35 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
   const contentRef = useRef(null);
   const lastHeadingIdRef = useRef(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const headings = contentRef?.current?.querySelectorAll(
-        "h1, h2, h3, h4, h5, h6"
-      );
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const headings = contentRef?.current?.querySelectorAll(
+  //       "h1, h2, h3, h4, h5, h6"
+  //     );
 
-      let closestHeading = null;
-      let closestDistance = Number.MAX_VALUE;
+  //     let closestHeading = null;
+  //     let closestDistance = Number.MAX_VALUE;
 
-      headings?.forEach((heading) => {
-        const bounding = heading.getBoundingClientRect();
-        const distanceToTop = bounding.top;
+  //     headings?.forEach((heading) => {
+  //       const bounding = heading.getBoundingClientRect();
+  //       const distanceToTop = bounding.top;
 
-        if (distanceToTop >= 0 && distanceToTop < closestDistance) {
-          closestHeading = heading;
-          closestDistance = distanceToTop;
-        }
-      });
+  //       if (distanceToTop >= 0 && distanceToTop < closestDistance) {
+  //         closestHeading = heading;
+  //         closestDistance = distanceToTop;
+  //       }
+  //     });
 
-      if (closestHeading) {
-        setActiveOutlineId(closestHeading.id);
-      }
-    };
+  //     if (closestHeading) {
+  //       setActiveOutlineId(closestHeading.id);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
   const addIdsToHeadings = (content) => {
     const headings = content?.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
 
@@ -132,7 +132,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
               <div className="outline-section top-sticky-0">
                 <p>{blogData[0]?.data?.page_phases?.outline}</p>
                 <OutlineGenerator
-                  currentIndexId={activeOutlineId}
+                  // currentIndexId={activeOutlineId}
                   blogData={contentWithIds}
                 />
                 {/* <ol>

@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable react/display-name */
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Accordion, Form } from "react-bootstrap";
 import { getFilteredAttributeValues } from "../../../_helpers";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider.js";
@@ -45,124 +45,127 @@ export default function Filter({
 
   const { isMobile } = useScreenSize();
 
-  const handelFilterActions = (filterName, key, value, isChecked = false) => {
-    // console.log(filterName, key, value, "neet");
-    const currentParams = new URLSearchParams(searchParams.toString());
-    const url = new URL(window.location.href);
-    switch (filterName) {
-      case "price":
-        if (!isChecked) {
-          deleteQueryFormURL(key, updatedParams, currentParams, url);
-        } else {
-          updatedParams.price = value;
-        }
-        break;
-      case "variant":
-        if (value) {
-          updatedParams.variant = value;
-        } else {
-          deleteQueryFormURL(key, updatedParams, currentParams, url);
-          deleteQueryFormURL("direct", updatedParams, currentParams, url);
-        }
-        break;
-      case "available":
-        if (value) {
-          updatedParams.available = value;
-        } else {
-          deleteQueryFormURL(key, updatedParams, currentParams, url);
-        }
+  const handelFilterActions = useCallback(
+    (filterName, key, value, isChecked = false) => {
+      // console.log(filterName, key, value, "neet");
+      const currentParams = new URLSearchParams(searchParams.toString());
+      const url = new URL(window.location.href);
+      switch (filterName) {
+        case "price":
+          if (!isChecked) {
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
+          } else {
+            updatedParams.price = value;
+          }
+          break;
+        case "variant":
+          if (value) {
+            updatedParams.variant = value;
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
+            deleteQueryFormURL("direct", updatedParams, currentParams, url);
+          }
+          break;
+        case "available":
+          if (value) {
+            updatedParams.available = value;
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
+          }
 
-      //   break;
-      // case "variants":
-      //   if (value) {
-      //     updatedParams.variants = value;
-      //   } else {
-      //     deleteQueryFormURL(key, updatedParams, currentParams, url);
-      //   }
+        //   break;
+        // case "variants":
+        //   if (value) {
+        //     updatedParams.variants = value;
+        //   } else {
+        //     deleteQueryFormURL(key, updatedParams, currentParams, url);
+        //   }
 
-      //   break;
-      case "brand":
-        if (isChecked) {
-          if (Object.values(value).length > 0) {
+        //   break;
+        case "brand":
+          if (isChecked) {
+            if (Object.values(value).length > 0) {
+              let existingValue = url.searchParams.get([key]);
+              updatedParams[key] = existingValue
+                ? `${existingValue},${Object.values(value).join()}`
+                : Object.values(value).join();
+            } else {
+              deleteQueryFormURL(key, updatedParams, currentParams, url);
+            }
+          } else {
             let existingValue = url.searchParams.get([key]);
-            updatedParams[key] = existingValue
-              ? `${existingValue},${Object.values(value).join()}`
-              : Object.values(value).join();
+            let valuesArray = existingValue ? existingValue.split(",") : [];
+            let valueToRemove = Object.values(value)[0];
+            valuesArray = valuesArray.filter((v) => v != valueToRemove);
+            const updatedValue = valuesArray.join(",");
+            if (updatedValue) {
+              updatedParams[key] = updatedValue;
+            } else {
+              deleteQueryFormURL(key, updatedParams, currentParams, url);
+            }
+          }
+          break;
+        case "radioSwitch":
+          if (isChecked) {
+            updatedParams[key] = value;
           } else {
             deleteQueryFormURL(key, updatedParams, currentParams, url);
           }
-        } else {
-          let existingValue = url.searchParams.get([key]);
-          let valuesArray = existingValue ? existingValue.split(",") : [];
-          let valueToRemove = Object.values(value)[0];
-          valuesArray = valuesArray.filter((v) => v != valueToRemove);
-          const updatedValue = valuesArray.join(",");
-          if (updatedValue) {
-            updatedParams[key] = updatedValue;
-          } else {
+          break;
+        case "range":
+          if (!isChecked) {
             deleteQueryFormURL(key, updatedParams, currentParams, url);
+          } else {
+            updatedParams[key] = value;
           }
-        }
-        break;
-      case "radioSwitch":
-        if (isChecked) {
-          updatedParams[key] = value;
-        } else {
-          deleteQueryFormURL(key, updatedParams, currentParams, url);
-        }
-        break;
-      case "range":
-        if (!isChecked) {
-          deleteQueryFormURL(key, updatedParams, currentParams, url);
-        } else {
-          updatedParams[key] = value;
-        }
-        break;
-      case "sort":
-        if (isChecked) {
-          updatedParams.sort = value;
-        } else {
-          deleteQueryFormURL(key, updatedParams, currentParams, url); // yet to do
-        }
-        break;
-      case "dropdown":
-        if (isChecked) {
-          if (Object.values(value).length > 0) {
+          break;
+        case "sort":
+          if (isChecked) {
+            updatedParams.sort = value;
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url); // yet to do
+          }
+          break;
+        case "dropdown":
+          if (isChecked) {
+            if (Object.values(value).length > 0) {
+              let existingValue = url.searchParams.get([key]);
+              updatedParams[key] = existingValue
+                ? `${existingValue},${Object.values(value).join()}`
+                : Object.values(value).join();
+            } else {
+              deleteQueryFormURL(key, updatedParams, currentParams, url);
+            }
+          } else {
             let existingValue = url.searchParams.get([key]);
-            updatedParams[key] = existingValue
-              ? `${existingValue},${Object.values(value).join()}`
-              : Object.values(value).join();
-          } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url);
+            let valuesArray = existingValue ? existingValue.split(",") : [];
+            let valueToRemove = Object.values(value)[0];
+            valuesArray = valuesArray.filter((v) => v != valueToRemove);
+            const updatedValue = valuesArray.join(",");
+            if (updatedValue) {
+              updatedParams[key] = updatedValue;
+            } else {
+              deleteQueryFormURL(key, updatedParams, currentParams, url);
+            }
           }
-        } else {
-          let existingValue = url.searchParams.get([key]);
-          let valuesArray = existingValue ? existingValue.split(",") : [];
-          let valueToRemove = Object.values(value)[0];
-          valuesArray = valuesArray.filter((v) => v != valueToRemove);
-          const updatedValue = valuesArray.join(",");
-          if (updatedValue) {
-            updatedParams[key] = updatedValue;
-          } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url);
-          }
-        }
-        break;
-      default:
-        return;
-    }
-    Object.entries(updatedParams).forEach(([paramKey, paramValue]) => {
-      currentParams.set(paramKey, paramValue);
-      url.searchParams.set(paramKey, paramValue);
-    });
-    // Update the URL without triggering a page reload (hack)
-    window.history.pushState({}, "", url.toString());
-    // console.log(currentParams);
-    // console.log(currentParams.toString());
+          break;
+        default:
+          return;
+      }
+      Object.entries(updatedParams).forEach(([paramKey, paramValue]) => {
+        currentParams.set(paramKey, paramValue);
+        url.searchParams.set(paramKey, paramValue);
+      });
+      // Update the URL without triggering a page reload (hack)
+      window.history.pushState({}, "", url.toString());
+      // console.log(currentParams);
+      // console.log(currentParams.toString());
 
-    //call the next router for srr
-    router.push(`?${currentParams.toString()}`, { scroll: false });
-  };
+      //call the next router for srr
+      router.push(`?${currentParams.toString()}`, { scroll: false });
+    },
+    [removedParam]
+  );
   // console.log(sliderValues);
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
     delete updatedParams[key];
@@ -295,14 +298,15 @@ export default function Filter({
               }
             }
           } else {
-            let min =
+            // alert("else");
+            let minn =
               filteredArrayOfAttributeValues.maxValue -
                 filteredArrayOfAttributeValues.minValue >=
               1
                 ? filteredArrayOfAttributeValues.minValue
                 : 0;
 
-            let max =
+            let maxx =
               filteredArrayOfAttributeValues.maxValue -
                 filteredArrayOfAttributeValues.minValue >=
               1
@@ -327,11 +331,11 @@ export default function Filter({
             //   [removedParam]: { minVal: min, maxVal: max },
             // };
             // setSliderValues(newRangerfilter);
-            const value = `${min},${max}`;
+            const value = `${minn},${maxx}`;
             const newFilters = {
               [removedParam]: value,
             };
-            setSliderValues(newFilters);
+            // setSliderValues(newFilters);
             // setSliderValues(newFilters);
 
             // thumb thumb--left ${classForSlider}
@@ -344,27 +348,35 @@ export default function Filter({
             handelFilterActions(
               "range",
               removedParam,
-              { min: min, max: max },
+              { min: minn, max: maxx },
               false
             );
-            // const leftThumb = document.getElementById(
-            //   `thumb thumb--left ${removedParam}`
-            // );
-            // const rightThumb = document.getElementById(
-            //   `thumb thumb--right ${removedParam}`
-            // );
-            // // alert("hello");
-            // // leftThumb.value = min;
+            // alert(removedParam);
+            // console.log(sliderValues);
+            // console.log(minn, maxx, removedParam);
+            const leftThumb = document.getElementById(
+              `thumb thumb--left ${removedParam}`
+            );
+            const rightThumb = document.getElementById(
+              `thumb thumb--right ${removedParam}`
+            );
+            // alert("hello");
+            // leftThumb.value = min;
 
-            // if (leftThumb) {
-
-            //   leftThumb.value = min;
-            //   // console.log(leftThumb,"neetx");
-
-            //   // // If you want the slider's position to update immediately,
-            //   // // you may need to trigger a change event manually
-            //   leftThumb.dispatchEvent(new Event("change", { bubbles: true }));
-            // }
+            if (leftThumb) {
+              leftThumb.value = 0;
+              // console.log(leftThumb,"neetx");
+              // // If you want the slider's position to update immediately,
+              // // you may need to trigger a change event manually
+              leftThumb.dispatchEvent(new Event("change", { bubbles: true }));
+            }
+            if (rightThumb) {
+              rightThumb.value = 900;
+              // console.log(rightThumb,"neetx");
+              // // If you want the slider's position to update immediately,
+              // // you may need to trigger a change event manually
+              rightThumb.dispatchEvent(new Event("change", { bubbles: true }));
+            }
 
             // if (rightThumb) {
             //   rightThumb.value = max;

@@ -8,31 +8,31 @@ function OutlineGenerator({ blogData, currentIndexId }) {
   const [activeParentIndex, setActiveParentIndex] = useState(null);
   const debouncedScrollHandler = useRef(null);
 
-  useEffect(() => {
-    // Define a debounced version of the scroll event handler
-    debouncedScrollHandler.current = debounce((id) => {
-      const section = document.getElementById(id);
-      if (section) {
-        const header = document.getElementById("testone");
-        if (header) {
-          const headerHeight = header.offsetHeight;
-          section.scrollIntoView({ behavior: "smooth", block: "center" });
-          // section.style.marginTop = `${headerHeight}px`;
-        }
-      }
-    }, 100); // Adjust the debounce delay as needed
+  // useEffect(() => {
+  //   // Define a debounced version of the scroll event handler
+  //   debouncedScrollHandler.current = debounce((id) => {
+  //     const section = document.getElementById(id);
+  //     if (section) {
+  //       const header = document.getElementById("testone");
+  //       if (header) {
+  //         const headerHeight = header.offsetHeight;
+  //         section.scrollIntoView({ behavior: "smooth", block: "center" });
+  //         // section.style.marginTop = `${headerHeight}px`;
+  //       }
+  //     }
+  //   }, 100); // Adjust the debounce delay as needed
 
-    return () => {
-      // Cleanup the debounced function on unmount
-      debouncedScrollHandler.current.cancel();
-    };
-  }, []);
+  //   return () => {
+  //     // Cleanup the debounced function on unmount
+  //     debouncedScrollHandler.current.cancel();
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    if (currentIndexId) {
-      setActiveParentIndex(currentIndexId);
-    }
-  }, [currentIndexId]);
+  // useEffect(() => {
+  //   if (currentIndexId) {
+  //     setActiveParentIndex(currentIndexId);
+  //   }
+  // }, [currentIndexId]);
 
   useEffect(() => {
     const headings = document
@@ -134,7 +134,6 @@ function OutlineGenerator({ blogData, currentIndexId }) {
                           e.preventDefault();
                           e.stopPropagation();
                           setActiveParentIndex(child?.id);
-                          debouncedScrollHandler.current(child?.id);
                         }}
                       >
                         <Link

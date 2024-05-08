@@ -738,27 +738,11 @@ export default function GuidePage({
               </Col>
               <Col md={6} className="mobile-hide">
                 <div className="sidebar_filter">
-                  {/* <div>
-                        {guide && guide?.page_phrases?.hide_non_available}
-                        <div class="custom-switch form-switch">
-                          <input
-                            required=""
-                            id="variant"
-                            class="form-check-input"
-                            type="checkbox"
-                            // checked={isChecked}
-                            onChange={handleChange}
-                            checked={isChecked}
-                          />
-                        </div>
-                      </div> */}
-
                   <div className="tooltip-title">
                     {" "}
                     {guide && guide?.page_phrases?.hide_similar}
                     <div className="tooltip-display-content">
                       <p>{guide?.page_phrases?.hide_similar_hover_phrase}</p>
-                      
                     </div>
                     <div className="custom-switch form-switch">
                       <input
