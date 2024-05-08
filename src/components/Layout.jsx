@@ -16,12 +16,12 @@ export default async function Layout({ children, footerData, headerData }) {
         <Header
           headerData={headerData}
           headerPhase={footerData?.header_page_phases}
+          logo={footerData && footerData?.logo}
+          favicon={footerData?.favicon}
         />
         {children}
-        
+
         <Footer footerData={footerData} />
-        
-       
       </Provider>
     </>
   );

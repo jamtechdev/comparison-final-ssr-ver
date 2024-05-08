@@ -12,11 +12,13 @@ export default async function RootLayout({ children }) {
   // Function to construct the canonical URL dynamically
   // console.log(footerData);
   // console.log(footerData?.footer_tag_code);
+  // console.log(footerData?.favicon)
+
   return (
     <html lang="en">
       <link
         rel="icon"
-        href={`https://panel.mondopedia.it/logos/app_favicon.ico`}
+        href={`${footerData?.favicon}`}
         sizes="any"
       />
       <head
