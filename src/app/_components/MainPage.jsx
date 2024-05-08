@@ -15,6 +15,8 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { resetGuideCompareProduct } from "@/redux/features/compareProduct/compareProSlice";
 import Head from "next/head";
+import MainComparision from "@/components/Common/MainComparision/MainComparision";
+import HomeCompareSlider from "@/components/Common/HomeComparisonSlider/HomeCompareSlider";
 
 export default function MainPage({ bannerCounts, favSlider }) {
   const [search, setsearch] = useState("");
@@ -209,39 +211,30 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         <h3 className="site-main-heading">
                           {favSlider && favSlider?.product_categories_text}
                         </h3>
-                        {/* <div className="product-categories-container">
-                          {data?.categories?.sort((a,b)=>a?.title?.localeCompare(b?.title))?.map((item, index) => {
-                            return (
-                              <Link
-                                href={`/${item?.category_url.toLowerCase()}`}
-                              >
-                                <div
-                                  className="product-categories-item"
-                                  key={index}
-
-                                >
-                                  <span > {item?.title}</span>
-                                </div>  
-                              </Link>
-                            );
-                          })}
-                        </div> */}
-
-{/* sorted array alphabateically */}
+                        {/* sorted array alphabateically */}
                         <div className="product-categories-container">
-  {data &&
-    data.categories
-      ?.sort((a, b) => a.title.localeCompare(b.title)) 
-      ?.map((item, index) => (
-        <div key={index} style={{ display: "inline-block" }}>
-          <span className="product-categories-item" style={{ cursor: "pointer" }}>
-            <a style={{ color: "#27304e" }} href={`/${item.category_url?.toLowerCase()}`}>
-              {item.title}
-            </a>
-          </span>
-        </div>
-      ))}
-</div>
+                          {data &&
+                            data.categories
+                              ?.sort((a, b) => a.title.localeCompare(b.title))
+                              ?.map((item, index) => (
+                                <div
+                                  key={index}
+                                  style={{ display: "inline-block" }}
+                                >
+                                  <span
+                                    className="product-categories-item"
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <a
+                                      style={{ color: "#27304e" }}
+                                      href={`/${item.category_url?.toLowerCase()}`}
+                                    >
+                                      {item.title}
+                                    </a>
+                                  </span>
+                                </div>
+                              ))}
+                        </div>
                       </Col>
                     </Row>
                   </Container>
@@ -320,6 +313,19 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         <ReviewSlider favSlider={data?.latest_reviews} />
                       </Tab>
                     </Tabs>
+                  </Col>
+                </Row>
+              </Container>
+              <Container className="mt-3">
+                <Row>
+                  <Col md={12}>
+                    <h3 className="site-main-heading">
+                      COMPARISONS
+                      {/* {favSlider && favSlider?.review_text} */}
+                    </h3>
+                    {/* {console.log(data?.comparison)} */}
+
+                    <HomeCompareSlider products={data?.comparison} />
                   </Col>
                 </Row>
               </Container>

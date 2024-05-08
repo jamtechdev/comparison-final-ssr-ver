@@ -7,9 +7,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
 
-export default function MainComparision(products) {
+export default function HomeCompareSlider(products) {
   const router = useRouter();
-  // console.log(products?.products);
+
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -19,60 +19,11 @@ export default function MainComparision(products) {
       return "#85B2F1";
     }
   };
-  const product = [
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-  ];
 
   const filteredComparisons = products?.products?.filter(
     (comparison) => comparison.verdict_text !== null
   );
+  //   console.log(filteredComparisons)
   return (
     <section className="comparisons-slider">
       <Swiper

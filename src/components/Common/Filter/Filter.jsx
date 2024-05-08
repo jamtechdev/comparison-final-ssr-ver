@@ -217,6 +217,7 @@ export default function Filter({
           if (brandValues) {
             brandValues.map((item) => {
               handelFilterActions("brand", "brand", { brand: item }, false);
+              console.log(item);
               document.getElementById(`${item}`).checked = false;
             });
           }
@@ -485,24 +486,114 @@ export default function Filter({
             <i className="ri-arrow-down-s-fill"></i>
           </Accordion.Header>
           <Accordion.Body className="brand-list-section">
-            {brands?.map((brand, brandIndex) => {
-              return (
-                <Form.Check
-                  required
-                  label={<span>{brand}</span>}
-                  key={brandIndex}
-                  id={brand}
-                  onChange={(e) =>
-                    handelFilterActions(
-                      "brand",
-                      "brand",
-                      { brand: brand },
-                      e.target.checked
-                    )
-                  }
-                />
-              );
-            })}
+            {brands
+              ?.sort((a, b) => a.brands?.brand.localeCompare(b.brands?.brand))
+              .map((brand, brandIndex) => {
+                return (
+                  <div
+                    key={brandIndex}
+                    className="d-flex flex-row justify-content-between"
+                  >
+                    <div className="d-flex flex-row curser-pointer">
+                      <Form.Check
+                        required
+                        label={
+                          <span style={{ cursor: "pointer" }}>
+                            {brand.brand}{" "}
+                            {/* {brand?.brand == "-" || brand?.brand == "?"
+                            ? ""
+                            : brand?.brand} */}
+                          </span>
+                        }
+                        key={brandIndex}
+                        id={`${brand.brand}`}
+                        onChange={(e) =>
+                          handelFilterActions(
+                            "brand",
+                            "brand",
+                            { brand: brand?.brand },
+                            e.target.checked
+                          )
+                        }
+                        // onChange={(e) =>
+                        //   handelFilterActions(
+                        //     "dropdown",
+                        //     brand.brand,
+                        //     { key: brand.brand },
+                        //     e.target.checked
+                        //   )
+                        // }
+                      />
+                    </div>
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: `<p>(${brand?.count})</p>`,
+                      }}
+                    />
+                  </div>
+                  // console.log(brand)
+                  //   <Form.Check
+                  //   required
+                  //   label={
+                  //     <span style={{ cursor: "pointer" }}>
+                  //       {value.toString()}{" "}
+                  //       {filteredArrayOfAttributeValues?.unit ==
+                  //         "-" ||
+                  //       filteredArrayOfAttributeValues?.unit ==
+                  //         "?"
+                  //         ? ""
+                  //         : filteredArrayOfAttributeValues?.unit}
+                  //     </span>
+                  //   }
+                  //   key={valIndex}
+                  //   id={`${attribute.name}${value}`}
+                  //   onChange={(e) =>
+                  //     handelFilterActions(
+                  //       "dropdown",
+                  //       attribute.name,
+                  //       { key: value },
+                  //       e.target.checked
+                  //     )
+                  //   }
+                  // />
+                  //   <Form.Check
+                  //     required
+                  //     label={
+                  //       <span>
+                  //         {brand?.brand}
+
+                  //         {brand?.count == "-" || brand?.count == "?"
+                  //           ? ""
+                  //           : brand?.count}
+                  //       </span>
+                  //     }
+                  //     key={brandIndex}
+                  //     id={brand}
+                  //     onChange={(e) =>
+                  //       handelFilterActions(
+                  //         "brand",
+                  //         "brand",
+                  //         { brand: brand },
+                  //         e.target.checked
+                  //       )
+                  //     }
+                  //   />
+                  //   <span
+                  //   dangerouslySetInnerHTML={{
+                  //     __html: `<p>(${
+                  //       filteredArrayOfAttributeValues.values &&
+                  //       filteredArrayOfAttributeValues.product_count &&
+                  //       filteredArrayOfAttributeValues
+                  //         .product_count[valIndex] !==
+                  //         undefined
+                  //         ? filteredArrayOfAttributeValues
+                  //             .product_count[valIndex]
+                  //         : "0"
+                  //     })</p>`,
+                  //   }}
+                  // />
+                );
+              })}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
@@ -613,30 +704,6 @@ export default function Filter({
                                           )
                                         }
                                       />
-
-                                      {/* <Form.Check
-                                        required
-                                        label={`${value.toString()} ${}` }
-                                        key={valIndex}
-                                        id={`${attribute.name}${value}`}
-                                        onChange={(e) =>
-                                          handelFilterActions(
-                                            "dropdown",
-                                            attribute.name,
-                                            { key: value },
-                                            e.target.checked
-                                          )
-                                        }
-                                      /> */}
-                                      {/* <span>
-                                        {value.toString()}{" "}
-                                        {filteredArrayOfAttributeValues?.unit ==
-                                          "-" ||
-                                        filteredArrayOfAttributeValues?.unit ==
-                                          "?"
-                                          ? ""
-                                          : filteredArrayOfAttributeValues?.unit}
-                                      </span> */}
                                     </div>
                                     <span
                                       dangerouslySetInnerHTML={{
