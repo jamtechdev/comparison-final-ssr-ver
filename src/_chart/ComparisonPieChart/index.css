@@ -30,6 +30,7 @@
 }
 
 .legend-avatar { 
+  min-width: 20px;
   width:20px !important;
   height:20px !important;
   border-radius:100px;
