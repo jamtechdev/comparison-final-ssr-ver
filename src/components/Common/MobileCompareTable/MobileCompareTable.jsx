@@ -419,7 +419,13 @@ export default function MobileCompareTable({
           </div>
         </Col>
       </Row> */}
-      <div className="compare-container-wrapper">
+      <div
+        className={
+          fullTable == 2
+            ? "compare-container-wrapper"
+            : "compare-container-wrapper no-before"
+        }
+      >
         <div
           className={
             winPos == true
@@ -439,33 +445,6 @@ export default function MobileCompareTable({
             </span>
           )}
         </div>
-        {/* <div
-          className={
-            winPos == true
-              ? "slider-controls table__image__arrow d-none"
-              : "slider-controls table__image__arrow "
-          }
-        >
-          {currentIndex === 0 ? (
-            <span
-              className="swiper-next"
-              onClick={handleNext}
-              style={{ marginLeft: "88vw", marginTop: "20px" }}
-            >
-              <i className="ri-arrow-right-s-line"></i>
-            </span>
-          ) : (
-            <span
-              className="swiper-prev"
-              onClick={handlePrevious}
-              style={{ marginTop: "20px" }}
-            >
-              <i className="ri-arrow-left-s-line"></i>
-            </span>
-          )}
-        </div> */}
-
-        {/* <Swiper onSlideChange={(swiper) => setTableIndex(swiper.activeIndex)} */}
         <Swiper
           onSlideChange={handleSlideChange}
           id="mobile-compare-table"
@@ -494,14 +473,12 @@ export default function MobileCompareTable({
           className="product-slider"
         >
           {chunkedData?.map((slider_data, swiperIndex) => {
-            // console.log(swiperIndex, "check swiper index");
             return (
               <SwiperSlide key={swiperIndex}>
                 <Table className="compare-container">
                   <thead data-sticky-header-offset-y ref={ref}>
                     <tr>
                       {slider_data?.map((data, dIndex) => {
-                        // console.log(dIndex, "table index");
                         return (
                           <th key={dIndex}>
                             <p className="device-name">
@@ -550,7 +527,6 @@ export default function MobileCompareTable({
                                   (data) => data.price === null
                                 ) && (
                                   <div className="not-availabel">
-                                    {/* <span className="txt">NOT AVAILABLE</span> */}
                                     <i>N/A</i>
                                     <span className="price">
                                       ~ {data?.price} €
@@ -671,13 +647,6 @@ export default function MobileCompareTable({
                           </td>
                         );
                       })}
-
-                      {/* <td>
-                          <span className="count dark-color">8.5</span>
-                        </td>
-                        <td>
-                          <span className="count dark-color">8.5</span>
-                        </td> */}
                     </tr>
                     <tr>
                       <td colSpan="2">
@@ -867,7 +836,6 @@ export default function MobileCompareTable({
                         );
                         return (
                           <td key={ratioIndex}>
-                            {/* {console.log(values, "neetxy")} */}
                             {
                               addStarOnTable(
                                 defaultNo,
@@ -881,7 +849,6 @@ export default function MobileCompareTable({
                       })}
                     </tr>
                     {products[0]?.area_evaluation?.map((data, index) => {
-                      // console.log(data, "check products");
                       const maxValues = slider_data.map(
                         (product) =>
                           product?.area_evaluation?.[index]?.value ?? null
@@ -890,7 +857,6 @@ export default function MobileCompareTable({
                         ...maxValues.filter((value) => value !== null)
                       );
 
-                      // Count occurrences of each value
                       const valueCounts = slider_data.reduce((acc, product) => {
                         const value = product?.area_evaluation?.[index]?.value;
                         if (value !== null) {
@@ -951,8 +917,6 @@ export default function MobileCompareTable({
                           </tr>
 
                           <tr className="" key={index}>
-                            {" "}
-                            {/* Ensure to set a unique key for each <tr> */}
                             {slider_data.map((product, idx) => {
                               const value =
                                 product?.area_evaluation?.[index]?.value ??
@@ -996,52 +960,6 @@ export default function MobileCompareTable({
                                 <td colSpan="2">
                                   <p className="table-main-heading">
                                     {product?.name}
-                                    {/* <span className="question-marker-icon">
-                                      <div className="tooltip-title">
-                                        {products &&
-                                          products.length > 0 &&
-                                          products[0]
-                                            ?.overall_score_descriptions && (
-                                            <div
-                                              className="tooltip-display-content"
-                                              style={{
-                                                transform: "translateX(-65%)",
-                                              }}
-                                            >
-                                              {products[0]
-                                                ?.overall_score_descriptions
-                                                ?.description && (
-                                                <p className="mb-2">
-                                                  <b>What it is: </b>{" "}
-                                                  {
-                                                    products[0]
-                                                      ?.overall_score_descriptions
-                                                      ?.description
-                                                  }
-                                                </p>
-                                              )}
-                                              {products[0]
-                                                ?.overall_score_descriptions
-                                                ?.when_matters && (
-                                                <p className="mb-2">
-                                                  <b>When it matters: </b>{" "}
-                                                  {
-                                                    products[0]
-                                                      ?.overall_score_descriptions
-                                                      ?.when_matters
-                                                  }
-                                                </p>
-                                              )}
-                                            </div>
-                                          )}
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          viewBox="0 0 24 24"
-                                        >
-                                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
-                                        </svg>
-                                      </div>
-                                    </span> */}
                                   </p>
                                 </td>
                               </tr>
@@ -1075,10 +993,10 @@ export default function MobileCompareTable({
                                         }}
                                       >
                                         {/* {console.log(data?.attributes[category.name].unit && data?.attributes[category.name].unit )} */}
-                                        {
+                                        {formatValue(
                                           data?.attributes[product.name]?.[0]
                                             .attribute_evaluation
-                                        }{" "}
+                                        )}{" "}
                                       </span>
                                     </td>
                                   );
@@ -1268,9 +1186,11 @@ export default function MobileCompareTable({
             );
           })}
         </Swiper>
+
+        {/* {console.log(fullTable)} */}
         {fullTable == 2 && (
-          <div className="text-center">
-            <Button className="see_all_btn_outline" onClick={handleTableShow}>
+          <div className="text-center" onClick={handleTableShow}>
+            <Button className="see_all_btn_outline">
               {/* {console.log(productPhaseData)} */}
               See Full Table
               <i className="ri-arrow-down-s-line"></i>

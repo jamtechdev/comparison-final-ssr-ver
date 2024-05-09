@@ -401,6 +401,9 @@ thead.isSticky {
 .compare-container-wrapper.no-before:before {
   display: none !important;
 }
+section.comparisons-slider.no-before:before {
+  display: none !important;
+}
 
 .compare-container-wrapper:before {
   content: "";
