@@ -2024,7 +2024,7 @@ function ProductPage({
         </section>
       )}
 
-      {console.log(product?.alternative_comparisons?.products)}
+      {/* {console.log(product?.alternative_comparisons?.products)} */}
       {product?.alternative_comparisons?.length > 0 && (
         <section className="mt-3 mobile-popular-comparison">
           <Container>

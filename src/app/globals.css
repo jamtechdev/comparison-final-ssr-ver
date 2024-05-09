@@ -201,10 +201,10 @@ select {
 .para_content_text ul {
   all: unset !important;
 }
-h2.site-main-heading{
+h2.site-main-heading {
   line-height: 42px;
 }
-h1.site-main-heading{
+h1.site-main-heading {
   line-height: 46px;
 }
 
@@ -1466,7 +1466,7 @@ li.color-item.selected {
   font-size: 16px;
 }
 
-.sidebar_filter div.tooltip-title{
+.sidebar_filter div.tooltip-title {
   display: flex;
   column-gap: 10px;
   align-items: center;
@@ -1978,6 +1978,10 @@ h4.attribute__title {
   padding: 8px 0;
 }
 
+.main__comparisons__footer p {
+  min-height: 193px;
+}
+
 .comparisons__footer__text span {
   font-size: 16px;
   font-style: italic;
@@ -2347,11 +2351,12 @@ div#shortCodeText ul {
 span.isBetter {
   color: #437ece !important;
 }
-.swiper-button-lock{
+.swiper-button-lock {
   display: block !important;
 }
 
-.thumb-slider .swiper-prev, .thumb-slider .swiper-next {
+.thumb-slider .swiper-prev,
+.thumb-slider .swiper-next {
   display: flex !important;
   align-items: center;
   justify-content: center;

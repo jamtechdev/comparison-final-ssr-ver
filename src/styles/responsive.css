@@ -1,5 +1,7 @@
 /*Tab Responsive Start */
 @media screen and (max-width: 992px) {
+  section.comparisons-slider.no-before::before{display: none;}
+  
   .compare-container .best-list-item li img {
     margin: 0 !important;
   }

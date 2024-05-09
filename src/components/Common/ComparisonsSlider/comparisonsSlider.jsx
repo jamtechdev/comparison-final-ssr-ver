@@ -19,60 +19,11 @@ export default function ComparisonsSlider(products) {
       return "#85B2F1";
     }
   };
-  const product = [
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-  ];
+
   const filteredComparisons = products?.products?.filter(
-    (comparison) => comparison.verdict_text !== null
+    (comparison) => comparison.verdict_text === null
   );
-  console.log(filteredComparisons);
+  // console.log(filteredComparisons);
   return (
     <section className="comparisons-slider">
       <Swiper

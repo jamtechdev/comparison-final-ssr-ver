@@ -656,7 +656,6 @@ const ProductCompareTable = React.memo(
                             }
                           </p>
                         )}
-                       
                       </div>
                     )}
                 </div>
