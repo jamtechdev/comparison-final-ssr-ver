@@ -19,60 +19,11 @@ export default function MainComparision(products) {
       return "#85B2F1";
     }
   };
-  const product = [
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-    {
-      firstImage: "/images/review-image.png",
-      secondImage: "/images/review-image2.png",
-      firstReviewName: "Klarstein 22X",
-      secondReviewName: "DJI Mini 3 Po",
-      reviewContent: "Kitchen Robots",
-      rating: "8.0",
-    },
-  ];
 
   const filteredComparisons = products?.products?.filter(
     (comparison) => comparison.verdict_text !== null
   );
+
   return (
     <section className="comparisons-slider">
       <Swiper
@@ -107,8 +58,8 @@ export default function MainComparision(products) {
         {products &&
           filteredComparisons?.map(function (item, index) {
             const verdictText =
-              item?.verdict_text.length > 260
-                ? item?.verdict_text.substring(0, 260) + "..."
+              item?.verdict_text.length > 400
+                ? item?.verdict_text.substring(0, 400) + "..."
                 : item?.verdict_text;
             return (
               <SwiperSlide key={index}>
@@ -185,7 +136,10 @@ export default function MainComparision(products) {
                       </span>
                     </div>
                     <div className="comparisons-footer">{item?.category}</div>
-                    <div className="comparisons-footer comparisons__footer__text">
+                    <div
+                      className="comparisons-footer comparisons__footer__text"
+                      // style={{ minHeight: "155px" }}
+                    >
                       <div
                         dangerouslySetInnerHTML={{ __html: verdictText }}
                       ></div>
