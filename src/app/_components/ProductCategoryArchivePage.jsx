@@ -7,7 +7,7 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import formatValue from "@/_helpers/formatValue";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
-console.log(categoryData,"check mahima")
+// console.log(categoryData,"check mahima")
   return (
     <div>
       {categoryData != null && (
@@ -125,7 +125,7 @@ console.log(categoryData,"check mahima")
                                     <div className="review-card">
                                       <img
                                         src={
-                                          item?.main_image ||
+                                          item?.mini_image ||
                                           "/images/nofound.png"
                                         }
                                         width={0}

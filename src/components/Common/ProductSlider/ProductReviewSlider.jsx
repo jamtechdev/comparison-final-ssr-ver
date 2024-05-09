@@ -59,7 +59,7 @@ function ProductReviewSlider({ favSlider }) {
                   <div className="review-wrapper">
                     <div className="review-card">
                       <img
-                        src={item?.main_image || "/images/nofound.png"}
+                        src={item?.mini_image || "/images/nofound.png"}
                         width={0}
                         height={0}
                         sizes="100%"

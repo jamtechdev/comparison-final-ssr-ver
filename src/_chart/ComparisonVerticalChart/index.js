@@ -21,7 +21,7 @@ function ComparisonVerticalChart(props) {
   const width = 500 - margin.left - margin.right;
   const heights = 450 - margin.top - margin.bottom;
   const svg = d3.select(svgRef.current).select("g");
-  console.log(data, "data");
+  // console.log(data, "data");
 
   // Remove zero after decimal point
   // let updatedData = data.map(({ label, ...rest }) => ({
@@ -29,21 +29,20 @@ function ComparisonVerticalChart(props) {
   //   label: label.split("-").map(Number).join("-"),
   // }));
 
-
   let updatedData = data.map(({ label, ...rest }, index) => {
-    if(label.split("-").map(Number).join("-") === "NaN"){
-     const value  = '10-'+ label.match(/\d+/)
+    if (label.split("-").map(Number).join("-") === "NaN") {
+      const value = "10-" + label.match(/\d+/);
       return {
         ...rest,
         label: value,
-      }
-    }else{
+      };
+    } else {
       return {
         ...rest,
         label: label.split("-").map(Number).join("-"),
-      }
+      };
     }
-});
+  });
 
   // console.log(updatedData,'updatedData',);
 
@@ -252,7 +251,7 @@ function ComparisonVerticalChart(props) {
     .data((d, i) => {
       // Check if products is an array and return a nested array for multiple products
       if (d.products?.length > 1) {
-        return d.products.map((product, index) => [ 
+        return d.products.map((product, index) => [
           color[d.product_id[index]],
           product,
         ]);

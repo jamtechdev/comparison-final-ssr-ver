@@ -66,7 +66,7 @@ const CompareTable = React.memo(
     products?.forEach((product) => {
       const productCopy = { ...product };
       const productAttributes = {};
-      product?.attributes?.forEach((attribute) => {
+      product?.attributes?.sort((a, b) => a?.attribute_category_position - b?.attribute_category_position)?.forEach((attribute) => {
         const categoryName = attribute.attribute_category.name;
         if (!productAttributes[categoryName]) {
           productAttributes[categoryName] = [];

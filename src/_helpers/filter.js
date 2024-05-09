@@ -162,6 +162,7 @@ export const getAttributeHalf = (product, half) => {
 
 // this funcation designed to extract and return half of the attributes from a given product object.
 export const getAttributeProductHalf = (product, half) => {
+  // console.log(product)
   if (!product?.attributes) {
     return null;
   }

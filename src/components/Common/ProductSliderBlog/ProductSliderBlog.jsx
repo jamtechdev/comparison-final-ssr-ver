@@ -2,7 +2,7 @@
 import { useState } from "react";
 export default function ProductSliderBlog({ favSlider }) {
   const [showFullData, setShowFullData] = useState(false);
-  console.log(favSlider);
+  // console.log(favSlider);
 
   const toggleShowFullData = () => {
     setShowFullData(!showFullData);

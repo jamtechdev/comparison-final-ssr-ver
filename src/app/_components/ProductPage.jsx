@@ -54,6 +54,7 @@ function ProductPage({
   const productsWithAttributeGroup = {};
   const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
   const productAttributes = {};
+  // console.log( productData[0].data,'"xxx")')
   productData[0].data?.attributes?.forEach((attribute) => {
     const categoryName = attribute?.attribute_category?.name;
     if (!productAttributes[categoryName]) {
@@ -125,16 +126,14 @@ function ProductPage({
   //       : `(${item?.value})`;
   //   }
 
-    
-    
-  
   //   // return ""; // Return null for strings
   // };
 
   const renderValue = (item) => {
     const numericValue = parseFloat(item?.value);
-  
+
     if (!isNaN(numericValue)) {
+      // new line added for removing space if there is no unit
       return `(${numericValue}${item.unit ? " " + item.unit : ""})`;
     } else {
       return item?.value === undefined ||
@@ -144,7 +143,6 @@ function ProductPage({
         : `(${item?.value})`;
     }
   };
-  
 
   const setShowFullPrice = () => {
     showFullPrice = !setShowFullPrice;
@@ -271,6 +269,7 @@ function ProductPage({
       {/* {console.log(product?.text_under_ranking)} */}
       <div>{useChart()}</div>
       <section className="product-header">
+     
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
@@ -992,7 +991,7 @@ function ProductPage({
               </Col>
             )}
             {/* {console.log(product,"neet")} */}
-            {console.log(product?.available_versions, "hllo")}
+            {/* {console.log(product?.available_versions, "hllo")} */}
 
             {product?.available_versions &&
               product?.available_versions?.length !== 0 && (
@@ -1309,7 +1308,7 @@ function ProductPage({
                                   key={index}
                                   style={{ color: "rgba(39, 48, 78, 0.7)" }}
                                 >
-                                  {item}
+                                 {item}
                                 </li>
                               </>
                             );
@@ -1805,7 +1804,7 @@ function ProductPage({
                                       />
                                       {/* {console.log(item)} */}
                                       <p>
-                                      #.{item.position} in_{" "}
+                                        #.{item.position} in_{" "}
                                         <a
                                           href={`/${item?.category_url}/${item?.permalink}`}
                                         >

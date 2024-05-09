@@ -17,7 +17,7 @@ import useScreenSize from "@/_helpers/useScreenSize";
 const TechnicalAccordion = React.memo(
   ({ productPhaseData, product, overallScoreColor, initialDisplay }) => {
     // This funcation doing when attributeValues yes or no change the color by is is_worse_than and is_better_than
-
+// console.log(product,"xxx")
     const getColorAttr = (attributeValues) => {
       if (
         attributeValues.attribute_value == "yes" ||

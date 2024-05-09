@@ -711,7 +711,6 @@ export default function MobileCompareTable({
                             </div>
                           </span>
                         </div>
-
                       </td>
                     </tr>
                     <tr>
@@ -848,7 +847,7 @@ export default function MobileCompareTable({
                       })}
                     </tr>
                     {products[0]?.area_evaluation?.map((data, index) => {
-                      console.log(data,"check products")
+                      // console.log(data,"check products")
                       const maxValues = slider_data.map(
                         (product) =>
                           product?.area_evaluation?.[index]?.value ?? null

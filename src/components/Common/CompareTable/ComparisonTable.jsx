@@ -194,18 +194,12 @@ export default function ComparisonTable({
       (value) => value === topValue
     ).length;
 
-    if (occurrences === 1) {
-      arrayOfObjects.forEach((obj) => {
-        const numericValue =
-          typeof topValue === "string"
-            ? obj.attribute_value
-            : parseFloat(obj.attribute_value);
-        // console.log(numericValue)
-        if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
-          obj.attribute_value += "⭐";
-        }
-      });
-    }
+    arrayOfObjects.forEach((obj) => {
+      obj.star &&
+        obj.attribute_value !== "?" &&
+        obj.attribute_value !== "-" &&
+        (obj.attribute_value = obj?.attribute_value + "⭐");
+    });
 
     // Adjust this function according to your context as I don't have the complete code
     // It would be good to ensure that you have the required variables (finalProducts) in scope.
@@ -327,11 +321,9 @@ export default function ComparisonTable({
                       </span>
                     )} */}
 
-                  {console.log(product)}
+                  {/* {console.log(product)} */}
                   {product?.assigned_title && (
-                    <span className="best-tag-product">
-                      {product?.assigned_title}
-                    </span>
+                    <span className="best-tag-product">Winner</span>
                   )}
 
                   {/* {productScoreLabelIndex === -1000 && index === 0 && (

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, Fragment, useEffect, useRef } from "react";
+import React, { useState, Fragment, useEffect, useRef, version } from "react";
 import {
   Accordion,
   Col,
@@ -149,7 +149,7 @@ export default function Product({
         category: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.main_image ? product.main_image : "/images/nofound.png",
+        image: product.mini_image ? product.mini_image : "/images/nofound.png",
       };
       dispatch(
         addCompareProduct({
@@ -299,7 +299,7 @@ export default function Product({
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
     if (productData && productData.attributes) {
-      productData.attributes.forEach((attribute) => {
+      productData.attributes?.sort((a, b) => a?.attribute_category_position - b?.attribute_category_position)?.forEach((attribute) => {
         const categoryName = attribute.attribute_category.name;
 
         if (!productAttributes[categoryName]) {
@@ -352,7 +352,7 @@ export default function Product({
   // const decoratedOnClick = useAccordionButton(1, () =>
   //   console.log('totally custom!'),
   // );
-  console.log(productData, "neet");
+  // console.log(productData, "neet");
   useEffect(() => {
     // console.log(searchParams, "change alert");
     setProductData(null);
@@ -940,7 +940,8 @@ export default function Product({
                                             target="_blank"
                                             href={`/link?p=${btoa(data.url)}`}
                                           >
-                                            {Number(data?.price).toFixed(2)} {product?.currency}
+                                            {Number(data?.price).toFixed(2)}{" "}
+                                            {product?.currency}
                                           </a>
                                         </span>
                                       </>
@@ -1210,7 +1211,9 @@ export default function Product({
               <Row className="w-100 m-0 alternatives-border-top">
                 <Col lg={12} md={12} xl={12}>
                   <div className="alternatives mt-2">
-                    <span>Colors available:</span>
+                    <span>
+                      {guidePhraseData && guidePhraseData?.colors_available}:
+                    </span>
                     <div className="color-section">
                       {product?.available_colors?.map((data, key) => {
                         // console.log(data);
@@ -1291,8 +1294,12 @@ export default function Product({
               product?.available_versions?.length !== 0 && (
                 <Row className="w-100 m-0 alternatives-border-top">
                   <Col lg={12} md={12} xl={12}>
+                    {/* {console.log(guidePhraseData)} */}
                     <div className="alternatives mt-2">
-                      <span>Available versions:</span>
+                      <span>
+                        {guidePhraseData && guidePhraseData?.versions_available}
+                        :
+                      </span>
                       <div className="color-section">
                         {product?.available_versions
                           ?.sort((a, b) =>

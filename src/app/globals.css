@@ -266,7 +266,8 @@ select {
 }
 
 .site_tabs.graph-tab.compare-graph-tabs li {
-  width: 33.3%;
+  width: 100%;
+  flex: 1;
 }
 
 .site_tabs .nav-item button:focus,
