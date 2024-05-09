@@ -617,6 +617,7 @@ export default function Filter({
                   // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
                   // const uniqueValues = Array.from(uniqueValuesSet);
                   // console.log(uniqueValues,"uniqueValues")
+                  // {console.log(attribute?.name, "check")}
 
                   if (filteredArrayOfAttributeValues?.type == "dropdown") {
                     countAttribute++;
@@ -666,13 +667,13 @@ export default function Filter({
                           </Accordion.Header>
 
                           <Accordion.Body>
-                            {filteredArrayOfAttributeValues.values?.map(
+                            {filteredArrayOfAttributeValues?.values?.map(
                               (value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
                                 const uniqueValues = Array.isArray(value)
                                   ? [...new Set(value.flat())]
                                   : [value];
-                                // console.log(uniqueValues, "next");
+                                // console.log(value, "next");
 
                                 return (
                                   <div
