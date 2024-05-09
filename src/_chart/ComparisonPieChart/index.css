@@ -30,6 +30,7 @@
 }
 
 .legend-avatar { 
+  min-width: 20px;
   width:20px !important;
   height:20px !important;
   border-radius:100px;
@@ -41,7 +42,7 @@
    font-weight: 400;
   color: rgba(39, 48, 78, 0.80);
    margin-right: 10px;
-   white-space: nowrap;
+   /* white-space: nowrap; */
 }
 
 .tooltip {

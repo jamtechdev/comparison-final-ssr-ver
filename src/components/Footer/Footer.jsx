@@ -29,7 +29,7 @@ export default function Footer({ footerData }) {
   };
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true); 
+  const handleShow = () => setShow(true);
   return (
     <footer>
       <div className={styles.signupContainer}>
@@ -212,6 +212,9 @@ export default function Footer({ footerData }) {
           {footerData?.footer_page_phases?.copyright}
         </p>
       </div>
+      <div
+        dangerouslySetInnerHTML={{ __html: footerData?.footer_tag_code }}
+      ></div>
     </footer>
   );
 }

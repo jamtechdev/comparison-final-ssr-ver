@@ -189,6 +189,7 @@ thead.nonSticky tr th:first-child,
 }
 #mobile-compare-tabler .device-name a {
   position: static !important;
+  display: none;
   color: rgb(39 48 78 / 90%);
 }
 .compare-container thead tr th:hover .device-name a {
@@ -772,8 +773,8 @@ thead.isSticky {
 }
 
 .best-product-listing .compare_image {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
   margin: 20px auto;
   display: block;
@@ -1626,7 +1627,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   z-index: 10000;
   font-weight: 400;
   font-size: 14px !important;
-  padding: 10px 10px;
+  padding: 10px 18px;
   text-align: left;
   bottom: 100%;
   left: 5px;
@@ -1676,6 +1677,8 @@ body .product-listing-inner-content .score-section .score-detail h6 {
 
 .tooltip-title:hover .tooltip-display-content {
   display: block;
+  margin-bottom: 3px;
+  margin-top: 3px;
 }
 .tooltip-title-2:hover .tooltip-display-content {
   display: block;
@@ -1707,6 +1710,8 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   line-height: 20px !important;
   display: block !important;
   color: rgb(39 48 78 / 90%) !important;
+
+ 
 }
 .compare-container tbody tr th .tooltip-display-content p {
   font-weight: 400 !important;

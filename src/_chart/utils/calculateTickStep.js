@@ -19,7 +19,7 @@ export function calculateNextStep(maxLimit, mulfactor) {
   
   function isStepMultipleOfmultipleFactor(val) {
     return isNumIsMultipleOfmultipleFactor(val);
-  }
+  } 
   
   function isNumIsMultipleOfmultipleFactor(val) {
     if (val % multipleFactor === 0) {

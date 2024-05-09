@@ -17,7 +17,7 @@ import useScreenSize from "@/_helpers/useScreenSize";
 const TechnicalAccordion = React.memo(
   ({ productPhaseData, product, overallScoreColor, initialDisplay }) => {
     // This funcation doing when attributeValues yes or no change the color by is is_worse_than and is_better_than
-// console.log(product,"xxx")
+    // console.log(product,"xxx")
     const getColorAttr = (attributeValues) => {
       if (
         attributeValues.attribute_value == "yes" ||
@@ -160,27 +160,24 @@ const TechnicalAccordion = React.memo(
                         ref={tooltipRef}
                         style={{
                           left: isMobile ? "50%" : 0,
-                          transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
-                          width: isMobile ? "250px" : "250px",
+                          transform: isMobile
+                            ? "translateX(-20%)"
+                            : "translateX(-10%)",
+                          width: isMobile ? "250px" : "250px"
                         }}
                       >
-                        {product?.technical_score_descriptions.description && (
-                          <p className="mb-2">
-                            <b>{product && product?.what_it_is}: </b>
-                            {product?.technical_score_descriptions?.description}
-                          </p>
-                        )}
-                        {product?.technical_score_descriptions.when_matters && (
-                          <p className="mb-2">
-                            <b>{product && product?.when_it_matters}: </b>
-                            {
-                              product?.technical_score_descriptions
-                                ?.when_matters
-                            }
-                          </p>
-                        )}
+                        <p className="mb-2">
+                          <b>{product && product?.page_phases?.what_it_is}: </b>
+                          {product?.technical_score_descriptions?.description}
+                        </p>
+
+                        <p className="mb-2">
+                          <b>{product && product?.page_phases?.when_it_matters}: </b>
+                          {product?.technical_score_descriptions?.when_matters}
+                        </p>
+
                         <p>
-                          <b>{product && product?.score_components}:</b>
+                          <b>{product && product?.page_phases?.score_components}:</b>
                         </p>
                         {product?.technical_score_descriptions
                           .score_components &&
@@ -279,24 +276,26 @@ const TechnicalAccordion = React.memo(
                         ref={tooltipRef}
                         style={{
                           left: isMobile ? "50%" : 0,
-                          transform: isMobile ? "translateX(-20%)" : "translateX(-10%)",
+                          transform: isMobile
+                            ? "translateX(-20%)"
+                            : "translateX(-10%)",
                           width: isMobile ? "200px" : "250px",
                         }}
                       >
                         {product?.users_rating_descriptions.description && (
                           <p className="mb-2">
-                            <b>{product && product?.what_it_is}: </b>
+                            <b>{product && product?.page_phases?.what_it_is}: </b>
                             {product?.users_rating_descriptions?.description}
                           </p>
                         )}
                         {product?.users_rating_descriptions.when_matters && (
                           <p className="mb-2">
-                            <b>{product && product?.when_it_matters}: </b>
+                            <b>{product && product?.page_phases?.when_it_matters}: </b>
                             {product?.users_rating_descriptions?.when_matters}
                           </p>
                         )}
                         <p>
-                          <b>{product && product?.score_components}:</b>
+                          <b>{product && product?.page_phases?.score_components}:</b>
                         </p>
                         {product?.users_rating_descriptions.score_components &&
                           product?.users_rating_descriptions.score_components?.map(
@@ -367,6 +366,8 @@ const TechnicalAccordion = React.memo(
                   </div>
                 </div>
               </div>
+              {/* { console.log(product.expert_reviews_rating)} */}
+
               {product.expert_reviews_rating > 0 && (
                 <div className="spec-section">
                   <div className="spec-item">
@@ -498,6 +499,7 @@ const TechnicalAccordion = React.memo(
                   </div>
                 </div>
               )}
+
               <div className="spec-section">
                 <div className="spec-item">
                   <div className="spec-col">
@@ -1040,7 +1042,7 @@ const TechnicalAccordion = React.memo(
                                         attributes={
                                           attributeValues && attributeValues
                                         }
-                                        style={{backgroundColor:"yellow",}}
+                                        style={{ backgroundColor: "yellow" }}
                                       />
                                     </div>
                                   </div>

@@ -178,7 +178,7 @@ export default function Product({
         category: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.main_image ? product.main_image : "/images/nofound.png",
+        image: product.mini_image ? product.mini_image : "/images/nofound.png",
       };
       dispatch(
         updateCompareProduct({
@@ -207,7 +207,7 @@ export default function Product({
         category_id: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.main_image ? product.main_image : "/images/nofound.png",
+        image: product.mini_image ? product.mini_image : "/images/nofound.png",
       };
       dispatch(
         updateCompareProduct({
@@ -299,15 +299,20 @@ export default function Product({
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
     if (productData && productData.attributes) {
-      productData.attributes?.sort((a, b) => a?.attribute_category_position - b?.attribute_category_position)?.forEach((attribute) => {
-        const categoryName = attribute.attribute_category.name;
+      productData.attributes
+        ?.sort(
+          (a, b) =>
+            a?.attribute_category_position - b?.attribute_category_position
+        )
+        ?.forEach((attribute) => {
+          const categoryName = attribute.attribute_category.name;
 
-        if (!productAttributes[categoryName]) {
-          productAttributes[categoryName] = [];
-        }
+          if (!productAttributes[categoryName]) {
+            productAttributes[categoryName] = [];
+          }
 
-        productAttributes[categoryName].push(attribute);
-      });
+          productAttributes[categoryName].push(attribute);
+        });
       // Update the original product object
       productData.attributes_new = productAttributes;
 

@@ -57,6 +57,7 @@ const useChart = () => {
     shortCodesMatched,
     index
   ) {
+    // console.log(shortCodesMatched)
     const parentDiv = document.createElement("div");
     parentDiv.classList.add("container-div");
     element.insertAdjacentElement("afterend", parentDiv);

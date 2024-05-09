@@ -43,10 +43,11 @@ function CompareDiv({
   slug,
   categorySlug,
 }) {
+  // const router = useRouter();
   const dispatch = useDispatch();
   const products = comparisonData.map((item) => item.data);
-  // console.log(comparisonData?.length);
-  console.log(products);
+
+  // console.log(products);
   const [isOpen, setIsOpen] = useState(false);
   const [compareProDataFirst, setCompareProDataFirst] = useState(
     (products[0] && products[0]) || []
@@ -65,6 +66,18 @@ function CompareDiv({
   const contentRef = useRef(null);
 
   const router = useRouter();
+
+  // check slug have duplicate product have or not
+  const isDuplicateProduct =
+    slug.split("-vs-").length !== new Set(slug.split("-vs-")).size;
+  // console.log(isDuplicateProduct);
+  useEffect(() => {
+    const uniqueProducts = [...new Set(slug.split("-vs-"))];
+    slug = uniqueProducts.join("-vs-");
+    // redirect to new slug window
+    // window.location.href = `/${categorySlug}/${slug}`;
+    router.push(`/${categorySlug}/${slug}`);
+  }, []);
 
   const handelRemoveProductFormComparison = (index) => {
     // Remove the last product's URL from the comparison store.
@@ -544,7 +557,7 @@ function CompareDiv({
                 {bestAlternative &&
                   bestAlternative?.page_phases?.compare_with_other_products}
               </h2>
-              {console.log(bestAlternative?.page_phases)}
+              {/* {console.log(bestAlternative?.page_phases)} */}
               <CompareForm
                 favSlider={bestAlternative && bestAlternative?.page_phases}
                 location="ON_MAIN_PAGE"
@@ -585,7 +598,6 @@ function CompareDiv({
                 {bestAlternative &&
                   bestAlternative?.page_phases?.related_guides_bottom}
               </h2>
-              
             </Col>
             <Col md={12}>
               <ProductSlider favSlider={bestAlternative?.related_guides} />

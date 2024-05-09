@@ -201,11 +201,17 @@ select {
 .para_content_text ul {
   all: unset !important;
 }
+h2.site-main-heading{
+  line-height: 42px;
+}
+h1.site-main-heading{
+  line-height: 46px;
+}
 
 .site-main-heading {
   font-weight: 400 !important;
   font-size: 30px;
-  line-height: 34px;
+  line-height: 46px;
   color: var(--heading-color);
   margin: 0 0 15px !important;
   word-wrap: break-word;
@@ -262,6 +268,7 @@ select {
 
 .site_tabs.graph-tab.compare-graph-tabs .nav-item button {
   max-width: 100%;
+  width: 100%;
   font-size: 16px !important;
 }
 
@@ -1459,7 +1466,7 @@ li.color-item.selected {
   font-size: 16px;
 }
 
-.sidebar_filter div {
+.sidebar_filter div.tooltip-title{
   display: flex;
   column-gap: 10px;
   align-items: center;
@@ -2339,4 +2346,13 @@ div#shortCodeText ul {
 }
 span.isBetter {
   color: #437ece !important;
+}
+.swiper-button-lock{
+  display: block !important;
+}
+
+.thumb-slider .swiper-prev, .thumb-slider .swiper-next {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }

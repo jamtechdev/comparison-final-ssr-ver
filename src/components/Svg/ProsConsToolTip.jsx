@@ -55,7 +55,9 @@ const ProsConsToolTip = (props) => {
           style={{
             left: isMobile ? "50%" : 0,
             transform: isMobile ? "translateX(-60%)" : "translateX(-10%)",
-            width: isMobile ? "180px" : "250px",
+            width: isMobile ? "180px" : "250px", 
+             marginBottom:"8px",
+             marginTop:"8px",
           }}
         >
           <div

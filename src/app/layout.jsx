@@ -11,25 +11,27 @@ export default async function RootLayout({ children }) {
   const headerData = await getterService.getTopNavBarData();
   // Function to construct the canonical URL dynamically
   // console.log(footerData);
+  // console.log(footerData?.footer_tag_code);
+  // console.log(footerData?.favicon)
+
   return (
     <html lang="en">
       <link
         rel="icon"
-        href={`https://panel.mondopedia.it/logos/app_favicon.ico`}
+        href={`${footerData?.favicon}`}
         sizes="any"
       />
-      {/* <head
+      <head
         dangerouslySetInnerHTML={{ __html: footerData?.head_tag_code }}
-      ></head> */}
+      ></head>
       <body>
+        <div dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }} />
         <Layout footerData={footerData} headerData={headerData}>
           {children}
-          <div
+          {/* <div
             dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }}
           ></div>
-          {/* <div
-            dangerouslySetInnerHTML={{ __html: footerData?.footer_tag_code }}
-          ></div> */}
+          */}
         </Layout>
       </body>
     </html>

@@ -44,7 +44,7 @@ const ProductCompareTable = React.memo(
         }, observerSettings);
 
         observer.observe(cachedRef);
-        // console.log(observerSettings);
+        // // console.log(observerSettings);
         return () => {
           observer.unobserve(cachedRef);
           // console.log(observerSettings);
@@ -656,45 +656,7 @@ const ProductCompareTable = React.memo(
                             }
                           </p>
                         )}
-                        {/* <p>
-                          <b>
-                            Score components :
-                          </b>
-                        </p>
-                        {products[0]?.users_rating_descriptions
-                          .score_components &&
-                          products[0]?.users_rating_descriptions.score_components?.map(
-                            (data, index) => {
-                              return (
-                                <div className="scroe_section" key={index}>
-                                  <p className="text-end">
-                                    {`${parseFloat(data?.importance).toFixed(
-                                      1
-                                    )}%`}
-                                  </p>
-                                  <div
-                                    className="score-count"
-                                    style={{
-                                      background:
-                                        data?.attribute_evaluation >= 7.5
-                                          ? "#093673"
-                                          : data?.attribute_evaluation >= 5 &&
-                                            data?.attribute_evaluation < 7.5
-                                          ? "#437ECE"
-                                          : "#85B2F1",
-                                    }}
-                                  >
-                                    {data?.attribute_evaluation != null
-                                      ? data?.attribute_evaluation >= 10
-                                        ? Math.trunc(data?.attribute_evaluation)
-                                        : data?.attribute_evaluation.toFixed(1)
-                                      : "0.0"}
-                                  </div>
-                                  <p>{data?.attribute_category}</p>
-                                </div>
-                              );
-                            }
-                          )} */}
+                       
                       </div>
                     )}
                 </div>
@@ -715,9 +677,8 @@ const ProductCompareTable = React.memo(
                 );
               })}
             </tr>
-            {finalProducts.some(
-              (product) => product.expert_reviews_rating !== 0
-            ) && (
+            {/* {console.log(products,"xxx")} */}
+            {products[0]?.expert_reviews_rating > 0 && (
               <tr className="">
                 <th className="sub-inner-padding">
                   <div className="tooltip-title">
@@ -741,6 +702,67 @@ const ProductCompareTable = React.memo(
                             products[0]?.expert_reviews_descriptions
                               ?.when_it_matters
                           }
+                          {products[0]?.expert_reviews_websites?.map(
+                            (data, index) => {
+                              return (
+                                <div
+                                  className="user__rating__popup"
+                                  key={index}
+                                >
+                                  <div className="user__rating__popup__list">
+                                    <span
+                                      className="user__rating__popup__rating"
+                                      style={{
+                                        background: getColorBasedOnScore(
+                                          data?.evaluation
+                                        ),
+                                      }}
+                                    >
+                                      {formatValue(data?.evaluation)}
+                                    </span>
+                                    <div className="user__rating__popup__content">
+                                      {data?.image !== null && (
+                                        <a
+                                          href={`/link?p=${btoa(
+                                            data?.website_name
+                                          )}`}
+                                        >
+                                          <img src={`${data?.image}`} />
+                                        </a>
+                                      )}
+
+                                      <p>
+                                        {" "}
+                                        {data?.name !== null ? (
+                                          <a
+                                            href={`/link?p=${btoa(
+                                              data?.website_name
+                                            )}`}
+                                            style={{ color: "inherit" }}
+                                          >
+                                            {" "}
+                                            {data?.name}
+                                          </a>
+                                        ) : (
+                                          <a
+                                            href={`/link?p=${btoa(
+                                              data?.website_name
+                                            )}`}
+                                            style={{ color: "inherit" }}
+                                          >
+                                            {" "}
+                                            {extractDomainName(
+                                              data?.website_name
+                                            )}
+                                          </a>
+                                        )}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            }
+                          )}
                         </p>
                       )}
                     </div>
@@ -767,6 +789,7 @@ const ProductCompareTable = React.memo(
                   })}
               </tr>
             )}
+
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">

@@ -62,6 +62,16 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
       swiper.slideNext();
     }
   };
+  // show main image into modal
+  const [ImageModal, setImageModal] = useState("");
+
+  const handleImageModal = (image) => {
+    setImageModal(image);
+    setModalShow(true);
+  };
+
+  const showArrows = productData?.all_images?.length > 1;
+
   return (
     <section className="thumb-section-container">
       {productData?.main_image === null ? (
@@ -137,7 +147,7 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
               }}
             >
               {product.map((item, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={index} >
                   <img
                     src={item.image}
                     width={0}
@@ -171,7 +181,11 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
             }}
           >
             {productData?.all_images?.map((item, index) => (
-              <SwiperSlide key={index} onClick={() => setModalShow(true)}>
+              <SwiperSlide
+                key={index}
+                onClick={() => handleImageModal(item.image)}
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={item.image}
                   width={0}
@@ -184,15 +198,16 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
           </Swiper>
         )}
 
-        <span
-          className="swiper-prev"
-          onClick={() => handlePrevious(activeThumb)}
-        >
-          <i className="ri-arrow-left-s-line"></i>
-        </span>
-        <span className="swiper-next" onClick={() => handleNext(activeThumb)}>
-          <i className="ri-arrow-right-s-line"></i>
-        </span>
+{showArrows && (
+          <>
+            <span className="swiper-prev" onClick={handlePrevious}>
+              <i className="ri-arrow-left-s-line"></i>
+            </span>
+            <span className="swiper-next" onClick={handleNext}>
+              <i className="ri-arrow-right-s-line"></i>
+            </span>
+          </>
+        )}
       </section>
 
       <Modal
@@ -205,7 +220,7 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <img
-            src="https://frontum.online/images/roborock-s8-pro-ultra.jpg"
+            src={ImageModal}
             width={0}
             height={0}
             sizes="100%"

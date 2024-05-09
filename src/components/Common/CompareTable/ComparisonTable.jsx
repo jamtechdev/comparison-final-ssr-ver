@@ -314,17 +314,17 @@ export default function ComparisonTable({
             {finalProducts.slice(0, defaultNo).map((product, index) => {
               return (
                 <th key={index}>
-                  {/* {productScoreLabelIndex !== "" &&
+                  {productScoreLabelIndex !== "" &&
                     productScoreLabelIndex === index && (
                       <span className="best-tag-product">
                         {comparisonPhaseData && comparisonPhaseData?.winner}
                       </span>
-                    )} */}
+                    )}
 
                   {/* {console.log(product)} */}
-                  {product?.assigned_title && (
+                  {/* {product?.assigned_title && (
                     <span className="best-tag-product">Winner</span>
-                  )}
+                  )} */}
 
                   {/* {productScoreLabelIndex === -1000 && index === 0 && (
                     <div className="comparison-tag">draw! No clear winner</div>

@@ -14,7 +14,7 @@ export default async function PageSwitch({
   searchParams,
 }) {
   let PageToRender;
-  // console.log(PageType);
+  // console.log(PageType,slug);
   // decode html string
   function searchCharts(text) {
     const regex = /\[(.*?)\]/g;
@@ -32,6 +32,7 @@ export default async function PageSwitch({
 
     return third_text;
   }
+
   switch (PageType) {
     case "Guide":
       const guide = pageData[0]?.data;
@@ -95,7 +96,7 @@ export default async function PageSwitch({
         <ProductCategoryArchivePage slug={slug} categoryData={pageData} />
       );
       break;
-    case "Comparison":
+    case "Compare":
       const compareData = pageData[0]?.data;
 
       // console.log(compareData?.category_url)

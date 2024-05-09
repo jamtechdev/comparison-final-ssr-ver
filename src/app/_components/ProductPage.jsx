@@ -55,13 +55,17 @@ function ProductPage({
   const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
   const productAttributes = {};
   // console.log( productData[0].data,'"xxx")')
-  productData[0].data?.attributes?.forEach((attribute) => {
-    const categoryName = attribute?.attribute_category?.name;
-    if (!productAttributes[categoryName]) {
-      productAttributes[categoryName] = [];
-    }
-    productAttributes[categoryName]?.push({ ...attribute }); // Create a shallow copy of the attribute
-  });
+  productData[0].data?.attributes
+    ?.sort(
+      (a, b) => a?.attribute_category_position - b?.attribute_category_position
+    )
+    ?.forEach((attribute) => {
+      const categoryName = attribute?.attribute_category?.name;
+      if (!productAttributes[categoryName]) {
+        productAttributes[categoryName] = [];
+      }
+      productAttributes[categoryName]?.push({ ...attribute }); // Create a shallow copy of the attribute
+    });
 
   productCopy["attributes"] = productAttributes;
   productsWithAttributeGroup[productData[0]?.data?.name] = { ...productCopy }; // Create a shallow copy of productCopy
@@ -269,7 +273,7 @@ function ProductPage({
       {/* {console.log(product?.text_under_ranking)} */}
       <div>{useChart()}</div>
       <section className="product-header">
-     
+
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
@@ -643,6 +647,7 @@ function ProductPage({
                           return (
                             <>
                               <div className="rating__section">
+                                <h1>mahima</h1>
                                 <img src={`${data?.logo}`} />
                                 <div className="rating__content">
                                   <b>{formatValue(data?.rating)}</b>
@@ -1843,7 +1848,7 @@ function ProductPage({
                   </h3>
                   <ul>
                     {product &&
-                      product?.top_pros?.map((data, key) => {
+                      product?.top_pros?.slice(0, 10).map((data, key) => {
                         return (
                           <>
                             <li
@@ -1968,16 +1973,17 @@ function ProductPage({
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              {isMobile ? (
-                <MobileCompareTable
-                  productPhaseData={product?.page_phases}
-                  products={compareByCatID?.data}
-                  categoryAttributes={productCatAttributes?.data}
-                  slug={slug}
-                />
-              ) : (
-                ""
-              )}
+              {/* {console.log(compareByCatID?.data?.length)} */}
+              {compareByCatID?.data?.length > 1 &&
+                (isMobile ? (
+                  <MobileCompareTable
+                    productPhaseData={product?.page_phases}
+                    products={compareByCatID?.data}
+                    categoryAttributes={productCatAttributes?.data}
+                    slug={slug}
+                  />
+                ) : null) // or any other fallback content for non-mobile
+              }
             </Col>
           </Row>
         </Container>
@@ -2018,7 +2024,7 @@ function ProductPage({
         </section>
       )}
 
-      {/* {console.log(product?.alternative_comparisons)} */}
+      {console.log(product?.alternative_comparisons?.products)}
       {product?.alternative_comparisons?.length > 0 && (
         <section className="mt-3 mobile-popular-comparison">
           <Container>

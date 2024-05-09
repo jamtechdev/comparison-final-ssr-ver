@@ -16,7 +16,7 @@ import {
 } from "react-bootstrap";
 import SearchList from "../Search/SearchList";
 import CompareModal from "../Common/Comparison/CompareModal";
-export default function Header({ headerData, headerPhase }) {
+export default function Header({ headerData, headerPhase , logo }) {
   const [isFocused, setIsFocused] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -166,7 +166,7 @@ export default function Header({ headerData, headerPhase }) {
           <Col lg={2} md={8} xs={8}>
             <a href="/">
               <img
-                src={`https://panel.mondopedia.it/logos/app_logo.png`}
+                src={`${logo}`}
                 className="logo"
                 width={155}
                 height={52}

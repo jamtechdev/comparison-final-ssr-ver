@@ -70,7 +70,7 @@ function drawAxis(config) {
       .call(d3.axisBottom(xScale).tickFormat(customTickFormatXaxis))
       .selectAll('text')
       .style('transform-origin', '0 0')
-      .style('transform', 'rotate(335deg)');
+      .style('transform', 'rotate(345deg)');
   }
 
   svg

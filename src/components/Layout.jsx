@@ -12,14 +12,15 @@ export default async function Layout({ children, footerData, headerData }) {
   }
   return (
     <>
-      
       <Provider store={store}>
         <Header
           headerData={headerData}
           headerPhase={footerData?.header_page_phases}
+          logo={footerData && footerData?.logo}
+          favicon={footerData?.favicon}
         />
         {children}
-        {/* <div dangerouslySetInnerHTML={{ __html: footerData?.body_tag_code }} /> */}
+
         <Footer footerData={footerData} />
       </Provider>
     </>
