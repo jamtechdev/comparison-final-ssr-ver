@@ -58,8 +58,8 @@ export default function HomeCompareSlider(products) {
         {products &&
           filteredComparisons?.map(function (item, index) {
             const verdictText =
-              item?.verdict_text.length > 260
-                ? item?.verdict_text.substring(0, 260) + "..."
+              item?.verdict_text.length > 400
+                ? item?.verdict_text.substring(0, 400) + "..."
                 : item?.verdict_text;
             return (
               <SwiperSlide key={index}>
@@ -136,7 +136,7 @@ export default function HomeCompareSlider(products) {
                       </span>
                     </div>
                     <div className="comparisons-footer">{item?.category}</div>
-                    <div className="comparisons-footer comparisons__footer__text">
+                    <div className="comparisons-footer comparisons__footer__text main__comparisons__footer">
                       <div
                         dangerouslySetInnerHTML={{ __html: verdictText }}
                       ></div>

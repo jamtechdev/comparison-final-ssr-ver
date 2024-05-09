@@ -137,7 +137,7 @@ export default function MainComparision(products) {
                     </div>
                     <div className="comparisons-footer">{item?.category}</div>
                     <div
-                      className="comparisons-footer comparisons__footer__text"
+                      className="comparisons-footer comparisons__footer__text main__comparisons__footer "
                       // style={{ minHeight: "155px" }}
                     >
                       <div
