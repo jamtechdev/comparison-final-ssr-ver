@@ -106,7 +106,7 @@ function GuidePageTextArea({ guide }) {
         <Col className="mobile-hide" md={12} lg={2}>
           <div className="ranking-section">
             <div className="site-main-heading">
-              {guide && guide?.page_phrases?.in_rankings}
+            {guide && guide?.page_phrases?.in_rankings}
             </div>
             {guide?.recommended_guides &&
               guide?.recommended_guides.slice(0, 3)?.map((data, index) => {
