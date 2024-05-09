@@ -55,7 +55,7 @@ const MultiRangeSlider = ({
 
   return (
     <div className="multi-range-slider-container">
-      <h1>hey</h1>
+    
       <input
         type="range"
         min={min}
