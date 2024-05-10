@@ -1440,10 +1440,11 @@ export default function Product({
                         handleShowAllClick(product?.id, product?.category_id)
                       }
                     >
-                      Show All <i className="ri-arrow-down-s-line"></i>
+                      {guidePhraseData?.show_all}{" "}
+                      <i className="ri-arrow-down-s-line"></i>
                     </div>
                     <div className="hide-btn">
-                      Hide All <i className="ri-arrow-up-s-line"></i>
+                      {guidePhraseData?.hide_all} <i className="ri-arrow-up-s-line"></i>
                     </div>
                   </Accordion.Header>
                   {isLoading && (
@@ -1513,11 +1514,11 @@ export default function Product({
                                   {formatValue(product?.overall_score)}
                                 </span>
                                 <div className="show-btn">
-                                  Show All{" "}
+                                {guidePhraseData?.show_all}{" "}
                                   <i className="ri-arrow-down-s-line"></i>
                                 </div>
                                 <div className="hide-btn">
-                                  Hide All{" "}
+                                {guidePhraseData?.hide_all}{" "}
                                   <i className="ri-arrow-up-s-line"></i>
                                 </div>
                               </Accordion.Header>
@@ -2176,11 +2177,11 @@ export default function Product({
                                           )}
                                         </span>
                                         <div className="show-btn">
-                                          Show All{" "}
+                                          {guidePhraseData?.show_all}{" "}
                                           <i className="ri-arrow-down-s-line"></i>
                                         </div>
                                         <div className="hide-btn">
-                                          Hide All{" "}
+                                          {guidePhraseData?.hide_all}{" "}
                                           <i className="ri-arrow-up-s-line"></i>
                                         </div>
                                       </Accordion.Header>
@@ -2596,11 +2597,11 @@ export default function Product({
                                           )}
                                         </span>
                                         <div className="show-btn">
-                                          Show All{" "}
+                                          {guidePhraseData?.show_all}
                                           <i className="ri-arrow-down-s-line"></i>
                                         </div>
                                         <div className="hide-btn">
-                                          Hide All{" "}
+                                          {guidePhraseData?.hide_all}
                                           <i className="ri-arrow-up-s-line"></i>
                                         </div>
                                       </Accordion.Header>

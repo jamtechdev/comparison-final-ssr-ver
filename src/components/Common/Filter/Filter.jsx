@@ -114,7 +114,6 @@ export default function Filter({
           break;
         case "range":
           if (!isChecked) {
-            setSliderValues({});
             deleteQueryFormURL(key, updatedParams, currentParams, url);
           } else {
             updatedParams[key] = value;
@@ -163,7 +162,7 @@ export default function Filter({
       // console.log(currentParams.toString());
 
       //call the next router for srr
-      router.push(`${currentParams.toString()}`, { scroll: false });
+      router.push(`?${currentParams.toString()}`, { scroll: false });
     },
     [removedParam]
   );

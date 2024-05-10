@@ -678,7 +678,7 @@ const TechnicalAccordion = React.memo(
                               b.attribute_position - a.attribute_position
                           )
                         )} */}
-                        console.log()
+
                         {loading == false ? (
                           product?.attributes[attribute]
                             .sort(
