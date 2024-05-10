@@ -216,7 +216,7 @@ const useChart = () => {
       chartData.data.forEach((val, index) => {
         dataForChart.push({
           label: chartData.lable[index],
-          value: Number(val),
+          value: val,
         });
         if (chartData.product_count) {
           dataForChart[index]["productCount"] = chartData.product_count[index];
@@ -233,7 +233,7 @@ const useChart = () => {
       chartData.data.forEach((val, index) => {
         dataForChart.push({
           label: chartData.lable[index],
-          value: Number(val),
+          value: val,
         });
       });
     } else if (
@@ -245,14 +245,14 @@ const useChart = () => {
       chartData.data.forEach((val, index) => {
         dataForChart.push({
           label: chartData.label[index],
-          value: Number(val),
+          value: val,
         });
       });
     } else if (chartData && chartData.data && chartData.data.length > 0) {
       chartData.data.forEach((val) => {
         dataForChart.push({
           label: val,
-          value: Number(val),
+          value: val,
         });
       });
     }
