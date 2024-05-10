@@ -1002,6 +1002,7 @@ const ProductCompareTable = React.memo(
                         })}
                     </tr>
                     {category.attributes
+                      ?.sort((a, b) => a.position - b.position)
                       .slice(
                         0,
                         pagination[category.name] || initialNoOfCategories

@@ -606,7 +606,7 @@ export default function Filter({
             <div className="tech-features">{category.name}</div>
             <Accordion className="filter-accordion">
               {/* {console.log(category?.attributes, "checking attributes")} */}
-              {category?.attributes?.map((attribute, attrIndex) => {
+              {category?.attributes?.sort((a,b)=>a.position - b.position)?.map((attribute, attrIndex) => {
                 if (
                   countAttribute <=
                   (pagination[category.name] || initialNoOfCategories)

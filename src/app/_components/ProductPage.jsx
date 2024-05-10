@@ -1442,8 +1442,13 @@ function ProductPage({
                                   </div>
                                   <div className="attribute__card__body">
                                     <Row className="mb-3">
-                                      {product.attributes[attribute].map(
-                                        (attributeValues, valueIndex) => (
+                                      {product?.attributes[attribute]
+                                        .sort(
+                                          (a, b) =>
+                                            a.attribute_position -
+                                            b.attribute_position
+                                        )
+                                        .map((attributeValues, valueIndex) => (
                                           <React.Fragment key={valueIndex}>
                                             <Col lg={6} md={12}>
                                               <p>
@@ -1468,8 +1473,7 @@ function ProductPage({
                                               </p>
                                             </Col>
                                           </React.Fragment>
-                                        )
-                                      )}
+                                        ))}
                                     </Row>
 
                                     <div
