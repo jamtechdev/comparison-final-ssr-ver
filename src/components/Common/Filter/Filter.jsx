@@ -670,7 +670,7 @@ export default function Filter({
                             {filteredArrayOfAttributeValues?.values
                               ?.slice()
                               .sort((a, b) =>
-                                a[0].toString().localeCompare(b[0].toString())
+                                a[0]?.toString().localeCompare(b[0]?.toString())
                               )
                               ?.map((value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
