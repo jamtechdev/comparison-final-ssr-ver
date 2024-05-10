@@ -9,15 +9,15 @@ function drawBarChart(props) {
   const toolTip = d3.select(tooltipRef.current);
   const svg = d3.select(svgRef.current).select("g");
 
-  // Remove zero after decimal point
-  let updatedData = data.map(({ label, ...rest }) => ({
-    ...rest,
-    label: label.split("-").map(Number).join("-"),
-  }));
+  // // Remove zero after decimal point
+  // let updatedData = data.map(({ label, ...rest }) => ({
+  //   ...rest,
+  //   label: label.split("-").map(Number).join("-"),
+  // }));
 
   svg
     .selectAll("bar")
-    .data(updatedData)
+    .data(data)
     .attr("viewBox", `0 0 ${xScale.bandwidth()} ${height}`)
     .enter()
     .append("rect")
