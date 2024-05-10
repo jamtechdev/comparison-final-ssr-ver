@@ -883,6 +883,7 @@ export default function GuidePage({
                     slug={slug}
                     order={order}
                     searchParams={searchParams}
+                    productPagination={productPagination}
                   />
                 ) : (
                   <ProductSkeleton />

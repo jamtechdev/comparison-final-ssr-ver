@@ -16,7 +16,7 @@ import {
 } from "react-bootstrap";
 import SearchList from "../Search/SearchList";
 import CompareModal from "../Common/Comparison/CompareModal";
-export default function Header({ headerData, headerPhase , logo }) {
+export default function Header({ headerData, headerPhase, logo }) {
   const [isFocused, setIsFocused] = useState(false);
   const pathname = usePathname();
   const router = useRouter();

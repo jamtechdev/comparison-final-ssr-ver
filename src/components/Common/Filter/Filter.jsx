@@ -114,6 +114,7 @@ export default function Filter({
           break;
         case "range":
           if (!isChecked) {
+            setSliderValues({});
             deleteQueryFormURL(key, updatedParams, currentParams, url);
           } else {
             updatedParams[key] = value;
@@ -162,7 +163,7 @@ export default function Filter({
       // console.log(currentParams.toString());
 
       //call the next router for srr
-      router.push(`?${currentParams.toString()}`, { scroll: false });
+      router.push(`${currentParams.toString()}`, { scroll: false });
     },
     [removedParam]
   );
@@ -667,8 +668,12 @@ export default function Filter({
                           </Accordion.Header>
 
                           <Accordion.Body>
-                            {filteredArrayOfAttributeValues?.values?.map(
-                              (value, valIndex) => {
+                            {filteredArrayOfAttributeValues?.values
+                              ?.slice()
+                              .sort((a, b) =>
+                                a[0].toString().localeCompare(b[0].toString())
+                              )
+                              ?.map((value, valIndex) => {
                                 const groupName = `${category.attribute}-${attribute.values[0]}`;
                                 const uniqueValues = Array.isArray(value)
                                   ? [...new Set(value.flat())]
@@ -722,8 +727,7 @@ export default function Filter({
                                     />
                                   </div>
                                 );
-                              }
-                            )}
+                              })}
                           </Accordion.Body>
                         </Accordion.Item>
                       );

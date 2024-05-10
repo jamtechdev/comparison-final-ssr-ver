@@ -16,6 +16,7 @@ export default React.forwardRef(function ProductListing(
     slug,
     order,
     searchParams,
+    productPagination,
   },
   ref
 ) {
@@ -26,7 +27,7 @@ export default React.forwardRef(function ProductListing(
       productListRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [products]); // Scroll when products change
-
+  console.log(productPagination);
   function findProductPosition(name) {
     const index = Object.values(productPositionArray).indexOf(name);
 
@@ -54,6 +55,7 @@ export default React.forwardRef(function ProductListing(
           slug={slug}
           order={order}
           searchParams={searchParams}
+          productPagination={productPagination}
         />
       ))}
       <span className="testing__text">
