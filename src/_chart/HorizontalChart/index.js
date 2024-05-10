@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import "./index.css";
+import formatValue from "@/_helpers/formatValue";
 
 function HorizontalChart(props) {
   const {
@@ -22,7 +23,7 @@ function HorizontalChart(props) {
     "#abcdf6",
     "#c9e0fa",
   ];
-  const margin = {  top: 20, right: 30, bottom: 20, left: 450  };
+  const margin = { top: 20, right: 30, bottom: 20, left: 450 };
 
   const newWidth = width - margin.left - margin.right;
   const newHeight = calculateHeight(
@@ -121,7 +122,7 @@ function HorizontalChart(props) {
         return yScale(d.label) + 5 + yScale.bandwidth() / 2; // Adjust vertical positioning
       })
       .text(function (d) {
-        return d.value ? `${d.value} ${xUnit}` : "";
+        return d.value ? `${formatValue(d.value)} ${xUnit}` : "";
       });
 
     svg.select("path").style("display", "none");

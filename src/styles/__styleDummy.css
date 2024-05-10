@@ -192,7 +192,8 @@ footer .search-icon{
     font-size:40px;
     margin: 0 0 32px !important;
     font-weight: 400 !important;
-    line-height: 34px;
+    /* line-height: 34px; */
+    line-height: 46px ;
 }
 
 .hero_section p{

@@ -1111,7 +1111,7 @@ footer .search-icon {
 
 .product-categories-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 35px !important; /* Reduce the gap value with !important */
 }
 
@@ -1149,7 +1149,7 @@ footer .search-icon {
   }
   .center-section {
     flex: 0 0 auto;
-    width: 60% !important;
+    width: 60% !important; 
   }
 }
 .left-side-bar,

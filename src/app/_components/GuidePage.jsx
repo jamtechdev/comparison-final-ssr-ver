@@ -47,9 +47,9 @@ export default function GuidePage({
   const productPosition = guideData[1]?.data?.product_names || [];
   // console.log(productPosition);
 
-  // const sortedProducts = products.sort(
-  //   (a, b) => b.overall_score - a.overall_score
-  // );
+  //  const sortedProducts = products.sort(
+  //    (a, b) => b.overall_score - a.overall_score
+  //  );
 
   const productPagination = guideData[1]?.data?.pagination;
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -666,7 +666,6 @@ export default function GuidePage({
                     {" "}
                     {guide && guide?.page_phrases?.hide_similar}
                     {/* <div className="tooltip-display-content">
-                      <h1>hello</h1>
                     </div> */}
                     <div className="custom-switch form-switch">
                       <input

@@ -122,7 +122,7 @@ const TechnicalAccordion = React.memo(
     };
     return (
       <>
-        <Accordion className="table-accordion w-50 p-0 left-accordion">
+        <Accordion className="table-accordion w-50 p-0 left-accordion" >
           <Accordion.Item eventKey="4">
             <Accordion.Header as="div">
               <div className="table-accordion-header">

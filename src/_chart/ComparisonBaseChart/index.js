@@ -35,7 +35,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
       .scaleLinear()
       .domain([xMinValue, xMaxValue])
       .range([0, width]);
-
+      
     // .attr("transform", "rotate(-45)");
 
     if (useScaleBands.x) {

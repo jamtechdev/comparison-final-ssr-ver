@@ -24,6 +24,7 @@ const CompareTable = React.memo(
       const newRef = useRef();
       ref ||= newRef;
 
+      console.log(guidePhraseData,"check guide")
       // mount
 
       useEffect(() => {
@@ -983,7 +984,7 @@ const CompareTable = React.memo(
         {fullTable == 2 && (
           <div className="text-center">
             <Button className="see_all_btn_outline" onClick={handleTableShow}>
-              See Full Table <i className="ri-arrow-down-s-line"></i>
+              See Full Table  <i className="ri-arrow-down-s-line"></i>
             </Button>
           </div>
         )}

@@ -21,44 +21,14 @@ function ComparisonVerticalChart(props) {
   const width = 500 - margin.left - margin.right;
   const heights = 450 - margin.top - margin.bottom;
   const svg = d3.select(svgRef.current).select("g");
-  // console.log(data, "data");
-
-  // Remove zero after decimal point
-  // let updatedData = data.map(({ label, ...rest }) => ({
-  //   ...rest,
-  //   label: label.split("-").map(Number).join("-"),
-  // }));
-
-  let updatedData = data.map(({ label, ...rest }, index) => {
-    if (label.split("-").map(Number).join("-") === "NaN") {
-      const value = "10-" + label.match(/\d+/);
-      return {
-        ...rest,
-        label: value,
-      };
-    } else {
-      return {
-        ...rest,
-        label: label.split("-").map(Number).join("-"),
-      };
-    }
-  });
-
-  // console.log(updatedData,'updatedData',);
-
-  // console.log(updatedData);
   const slugsExtract = slug.split("-vs-");
-  // console.log(slugsExtract);
-  // console.log(slug);
-  // console.log(updatedData)
-
   // Bar chart Valur Based on selected product
   let fristIndex = -1;
   let secondIndex = -1;
   let thirdIndex = -1;
   let count = 0;
 
-  updatedData.forEach((item, index) => {
+  data.forEach((item, index) => {
     if (item.selected === 1) {
       count++;
       // console.log(item);
@@ -69,10 +39,9 @@ function ComparisonVerticalChart(props) {
     }
   });
 
-  // console.log(updatedData, "updatedData");
   svg
     .selectAll("bar")
-    .data(updatedData)
+    .data(data)
     .enter()
     .append("rect")
     // .attr("viewBox", `40 90 280 100`)
@@ -123,7 +92,7 @@ function ComparisonVerticalChart(props) {
     });
   svg
     .selectAll("bar")
-    .data(updatedData)
+    .data(data)
     .enter()
     .append("rect")
     .attr("class", classnames(["bar-chart__bar rect-hover", barClass]))
@@ -175,7 +144,7 @@ function ComparisonVerticalChart(props) {
     });
   svg
     .selectAll("bar")
-    .data(updatedData)
+    .data(data)
     .enter()
     .append("rect")
     .attr("class", classnames(["bar-chart__bar rect-hover", barClass]))

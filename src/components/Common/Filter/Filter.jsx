@@ -726,6 +726,7 @@ export default function Filter({
 
 </Accordion.Body>
 
+                            
                         </Accordion.Item>
                       );
                     }

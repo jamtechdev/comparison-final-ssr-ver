@@ -315,7 +315,7 @@ function ProductPage({
                   </div>
                 )}
                 <span>
-                  {product && product?.page_phases?.updated} :
+                  {product && product?.page_phases?.updated} 
                   <i>
                     {""} {product?.updated_at}
                   </i>
@@ -647,7 +647,6 @@ function ProductPage({
                           return (
                             <>
                               <div className="rating__section">
-                                <h1>mahima</h1>
                                 <img src={`${data?.logo}`} />
                                 <div className="rating__content">
                                   <b>{formatValue(data?.rating)}</b>
@@ -918,7 +917,8 @@ function ProductPage({
             {product?.available_colors?.length !== 0 && (
               <Col lg={12} md={12} xl={12}>
                 <div className="alternatives mt-2">
-                  <span>Colors available:</span>
+                
+                  <span>{product?.page_phases?.colors_available}:</span>
                   <div className="color-section">
                     {product?.available_colors?.map((data, key) => {
                       // const isCurrentVersion = data.permalink === slug;
@@ -1002,7 +1002,7 @@ function ProductPage({
               product?.available_versions?.length !== 0 && (
                 <Col lg={12} md={12} xl={12}>
                   <div className="alternatives">
-                    <span>Available versions:</span>
+                    <span>{product?.page_phases?.versions_available}:</span>
                     <div className="color-section">
                       {product?.available_versions
                         ?.sort((a, b) =>
