@@ -73,6 +73,13 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
   }, []);
   // console.log(outline);
 
+  const handleClick = (attribute) => {
+    setActiveParentIndex(attribute);
+    setTimeout(() => {
+      setActiveParentIndex(null);
+    }, 1000);
+  };
+
   return (
     <>
       <ol>
@@ -88,7 +95,8 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setActiveParentIndex(section?.id);
+
+                handleClick(section?.id);
               }}
             >
               {/* {console.log(section.text)} */}
@@ -116,8 +124,8 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          setActiveParentIndex(child?.id);
-                          debouncedScrollHandler.current(child?.id);
+          
+                          handleClick(child?.id);
                         }}
                       >
                         <Link
@@ -149,10 +157,8 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
                                     onClick={(e) => {
                                       e.preventDefault();
                                       e.stopPropagation();
-                                      setActiveParentIndex(subSubMain?.id);
-                                      debouncedScrollHandler.current(
-                                        subSubMain?.id
-                                      );
+                      
+                                      handleClick(subSubMain?.id);
                                     }}
                                   >
                                     <Link

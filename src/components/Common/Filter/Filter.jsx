@@ -607,7 +607,7 @@ export default function Filter({
             <Accordion className="filter-accordion">
               
               {/* {console.log(category?.attributes, "checking attributes")} */}
-              {category?.attributes?.map((attribute, attrIndex) => {
+              {category?.attributes?.sort((a,b)=>a.position - b.position)?.map((attribute, attrIndex) => {
                 if (
                   countAttribute <=
                   (pagination[category.name] || initialNoOfCategories)
@@ -666,67 +666,67 @@ export default function Filter({
                             <i className="ri-arrow-down-s-fill"></i>
                           </Accordion.Header>
                           <Accordion.Body>
-                          {filteredArrayOfAttributeValues.values
-  ?.slice()
-  .sort((a, b) => {
-    const valueA = a && a[0] && a[0][0] ? a[0][0] : '';
-    const valueB = b && b[0] && b[0][0] ? b[0][0] : '';
+                            {filteredArrayOfAttributeValues?.values
+                              ?.slice()
+                              .sort((a, b) =>
+                                a[0]?.toString().localeCompare(b[0]?.toString())
+                              )
+                              ?.map((value, valIndex) => {
+                                const groupName = `${category.attribute}-${attribute.values[0]}`;
+                                const uniqueValues = Array.isArray(value)
+                                  ? [...new Set(value.flat())]
+                                  : [value];
+                                // console.log(value, "next");
 
-    return valueA.localeCompare(valueB);
-  })
-  .map((value, valIndex) => {
-    const groupName = `${category.attribute}-${attribute.values[0]}`;
-
-    return (
-      <div
-        key={valIndex}
-        className="d-flex flex-row justify-content-between"
-      >
-        <div className="d-flex flex-row cursor-pointer">
-          <Form.Check
-            required
-            label={
-              <span style={{ cursor: "pointer" }}>
-                {value[0]}{" "}
-                {filteredArrayOfAttributeValues?.unit == "-" ||
-                filteredArrayOfAttributeValues?.unit == "?"
-                  ? ""
-                  : filteredArrayOfAttributeValues?.unit}
-              </span>
-            }
-            key={valIndex}
-            id={`${attribute.name}${value}`}
-            onChange={(e) =>
-              handelFilterActions(
-                "dropdown",
-                attribute.name,
-                { key: value },
-                e.target.checked
-              )
-            }
-          />
-        </div>
-        <span
-          dangerouslySetInnerHTML={{
-            __html: `<p>(${
-              filteredArrayOfAttributeValues.values &&
-              filteredArrayOfAttributeValues.product_count &&
-              filteredArrayOfAttributeValues.product_count[valIndex] !==
-                undefined
-                ? filteredArrayOfAttributeValues.product_count[valIndex]
-                : "0"
-            })</p>`,
-          }}
-        />
-      </div>
-    );
-  })}
-
-
-
-</Accordion.Body>
-
-                            
+                                return (
+                                  <div
+                                    key={valIndex}
+                                    className="d-flex flex-row justify-content-between"
+                                  >
+                                    <div className="d-flex flex-row curser-pointer">
+                                      <Form.Check
+                                        required
+                                        label={
+                                          <span style={{ cursor: "pointer" }}>
+                                            {value.toString()}{" "}
+                                            {filteredArrayOfAttributeValues?.unit ==
+                                              "-" ||
+                                            filteredArrayOfAttributeValues?.unit ==
+                                              "?"
+                                              ? ""
+                                              : filteredArrayOfAttributeValues?.unit}
+                                          </span>
+                                        }
+                                        key={valIndex}
+                                        id={`${attribute.name}${value}`}
+                                        onChange={(e) =>
+                                          handelFilterActions(
+                                            "dropdown",
+                                            attribute.name,
+                                            { key: value },
+                                            e.target.checked
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <span
+                                      dangerouslySetInnerHTML={{
+                                        __html: `<p>(${
+                                          filteredArrayOfAttributeValues.values &&
+                                          filteredArrayOfAttributeValues.product_count &&
+                                          filteredArrayOfAttributeValues
+                                            .product_count[valIndex] !==
+                                            undefined
+                                            ? filteredArrayOfAttributeValues
+                                                .product_count[valIndex]
+                                            : "0"
+                                        })</p>`,
+                                      }}
+                                    />
+                                  </div>
+                                );
+                              })}
+                          </Accordion.Body>
                         </Accordion.Item>
                       );
                     }

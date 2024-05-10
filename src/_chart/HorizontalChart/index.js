@@ -119,10 +119,10 @@ function HorizontalChart(props) {
         return xScale(d.value); // Adjust horizontal positioning
       })
       .attr("y", function (d) {
-        return yScale(d.label) + 5 + yScale.bandwidth() / 2; // Adjust vertical positioning
+        return yScale(d.label) + 5 + yScale.bandwidth() / 2; // Adjust vertical positioning 
       })
       .text(function (d) {
-        return d.value ? `${formatValue(d.value)} ${xUnit}` : "";
+        return d.value ? `${d.value} ${xUnit}` : "";
       });
 
     svg.select("path").style("display", "none");

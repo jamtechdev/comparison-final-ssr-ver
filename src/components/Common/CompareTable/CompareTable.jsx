@@ -67,13 +67,18 @@ const CompareTable = React.memo(
     products?.forEach((product) => {
       const productCopy = { ...product };
       const productAttributes = {};
-      product?.attributes?.sort((a, b) => a?.attribute_category_position - b?.attribute_category_position)?.forEach((attribute) => {
-        const categoryName = attribute.attribute_category.name;
-        if (!productAttributes[categoryName]) {
-          productAttributes[categoryName] = [];
-        }
-        productAttributes[categoryName].push(attribute);
-      });
+      product?.attributes
+        ?.sort(
+          (a, b) =>
+            a?.attribute_category_position - b?.attribute_category_position
+        )
+        ?.forEach((attribute) => {
+          const categoryName = attribute.attribute_category.name;
+          if (!productAttributes[categoryName]) {
+            productAttributes[categoryName] = [];
+          }
+          productAttributes[categoryName].push(attribute);
+        });
       productCopy.attributes = productAttributes;
       productsWithAttributeGroup[product.name] = productCopy;
     });
@@ -662,7 +667,6 @@ const CompareTable = React.memo(
                 );
               })}
             </tr>
-           
 
             {finalProducts.some(
               (product) => product.expert_reviews_rating !== 0
@@ -855,6 +859,7 @@ const CompareTable = React.memo(
                 </tr>
               );
             })}
+            {/* {console.log(categoryAttributes)} */}
 
             {categoryAttributes
               ?.slice(0, fullTable || 2)
@@ -924,7 +929,9 @@ const CompareTable = React.memo(
                           );
                         })}
                     </tr>
+                    {/* {console.log(category.attributes)} */}
                     {category.attributes
+                      ?.sort((a, b) => a.position - b.position)
                       .slice(
                         0,
                         pagination[category.name] || initialNoOfCategories

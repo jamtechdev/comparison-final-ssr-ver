@@ -45,6 +45,7 @@ export default function Product({
   slug,
   order,
   searchParams,
+  productPagination,
 }) {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
@@ -372,7 +373,7 @@ export default function Product({
   }, [searchParams]);
 
   // console.log(productData);
-
+  // console.log(productPagination)
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
@@ -384,7 +385,12 @@ export default function Product({
               {/* {product?.price_websites?.length > 0 ? <p>{KeyIndex + 1}</p> : ""} */}
               {splitData?.[0] === "available" ||
               (product?.price_websites?.length > 0 && KeyIndex !== null) ? (
-                <p>{KeyIndex + 1}</p>
+                <p>
+                  {(productPagination?.current_page - 1) *
+                    productPagination?.per_page +
+                    KeyIndex +
+                    1}
+                </p>
               ) : null}
 
               {/* <p>{position}</p> */}
@@ -1434,10 +1440,11 @@ export default function Product({
                         handleShowAllClick(product?.id, product?.category_id)
                       }
                     >
-                      Show All <i className="ri-arrow-down-s-line"></i>
+                      {guidePhraseData?.show_all}{" "}
+                      <i className="ri-arrow-down-s-line"></i>
                     </div>
                     <div className="hide-btn">
-                      Hide All <i className="ri-arrow-up-s-line"></i>
+                      {guidePhraseData?.hide_all} <i className="ri-arrow-up-s-line"></i>
                     </div>
                   </Accordion.Header>
                   {isLoading && (
@@ -1507,11 +1514,11 @@ export default function Product({
                                   {formatValue(product?.overall_score)}
                                 </span>
                                 <div className="show-btn">
-                                  Show All{" "}
+                                {guidePhraseData?.show_all}{" "}
                                   <i className="ri-arrow-down-s-line"></i>
                                 </div>
                                 <div className="hide-btn">
-                                  Hide All{" "}
+                                {guidePhraseData?.hide_all}{" "}
                                   <i className="ri-arrow-up-s-line"></i>
                                 </div>
                               </Accordion.Header>
@@ -2170,19 +2177,34 @@ export default function Product({
                                           )}
                                         </span>
                                         <div className="show-btn">
-                                          Show All{" "}
+                                          {guidePhraseData?.show_all}{" "}
                                           <i className="ri-arrow-down-s-line"></i>
                                         </div>
                                         <div className="hide-btn">
-                                          Hide All{" "}
+                                          {guidePhraseData?.hide_all}{" "}
                                           <i className="ri-arrow-up-s-line"></i>
                                         </div>
                                       </Accordion.Header>
+                                      {/* {console.log(
+                                        attributesClearly?.attributes_new[
+                                          attribute
+                                        ].sort(
+                                          (a, b) => 
+                                            a.attribute_position -
+                                            b.attribute_position
+                                        )
+                                      )} */}
+
                                       <Accordion.Body>
                                         {loading == false ? (
-                                          attributesClearly.attributes_new[
+                                          attributesClearly?.attributes_new[
                                             attribute
                                           ]
+                                            .sort(
+                                              (a, b) =>
+                                                a.attribute_position -
+                                                b.attribute_position
+                                            )
                                             .slice(
                                               0,
                                               displayedAttributesCount[
@@ -2575,19 +2597,24 @@ export default function Product({
                                           )}
                                         </span>
                                         <div className="show-btn">
-                                          Show All{" "}
+                                          {guidePhraseData?.show_all}
                                           <i className="ri-arrow-down-s-line"></i>
                                         </div>
                                         <div className="hide-btn">
-                                          Hide All{" "}
+                                          {guidePhraseData?.hide_all}
                                           <i className="ri-arrow-up-s-line"></i>
                                         </div>
                                       </Accordion.Header>
                                       <Accordion.Body>
                                         {loading == false ? (
-                                          attributesClearly.attributes_new[
+                                          attributesClearly?.attributes_new[
                                             attribute
                                           ]
+                                            .sort(
+                                              (a, b) =>
+                                                a.attribute_position -
+                                                b.attribute_position
+                                            )
                                             .slice(
                                               0,
                                               displayedAttributesCount[

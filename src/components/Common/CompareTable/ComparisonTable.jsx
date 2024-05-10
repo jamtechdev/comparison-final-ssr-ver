@@ -934,6 +934,11 @@ export default function ComparisonTable({
                       })}
                   </tr>
                   {category.attributes
+                    ?.sort((a, b) => a.position - b.position)
+                    .slice(
+                      0,
+                      pagination[category.name] || initialNoOfCategories
+                    )
                     .slice(
                       0,
                       pagination[category.name] || initialNoOfCategories

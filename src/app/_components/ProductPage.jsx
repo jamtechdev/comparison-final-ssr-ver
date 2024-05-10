@@ -102,7 +102,8 @@ function ProductPage({
   };
 
   let showFullPrice = false;
-  let showFullRanking = false;
+  const [showFullRanking, setShowFullRanking] = useState(false);
+  // let showFullRanking = false;
   const resultOverallScore = getEvaluation(finalProducts[0]?.overall_score);
   const resultTechnicalScoreColor = getEvaluation(
     finalProducts[0]?.technical_score
@@ -268,6 +269,12 @@ function ProductPage({
     window.addEventListener("resize", updatePosition);
     return () => window.removeEventListener("resize", updatePosition);
   }, []);
+
+  const handleShowAllRanking = () => {
+    setShowFullRanking(!showFullRanking);
+    // alert("hello");
+  };
+
   return (
     <>
       {/* {console.log(product?.text_under_ranking)} */}
@@ -853,8 +860,11 @@ function ProductPage({
                         );
                       })}
                 </ul>
-                {product?.price_websites?.length > 5 && (
-                  <Button className="see_all_btn">
+                {product?.price_websites?.length > 4 && (
+                  <Button
+                    className="see_all_btn"
+                    onClick={handleShowAllRanking}
+                  >
                     See All <i className="ri-arrow-down-s-line"></i>
                   </Button>
                 )}
@@ -866,7 +876,10 @@ function ProductPage({
                   {" "}
                   {product && product?.page_phases?.best_rankings}
                 </h2>
-                <ul className="best-list-item">
+                <ul
+                  className="best-list-item"
+                  style={{ paddingBottom: "20px !important" }}
+                >
                   {product &&
                     product?.guide_ratings
                       ?.slice(0, showFullRanking ? 8 : 4)
@@ -897,14 +910,28 @@ function ProductPage({
                         );
                       })}
                 </ul>
+                {/* {console.log(showFullPrice)} */}
                 {product?.guide_ratings?.length > 5 && (
                   <Button
                     className="see_all_btn"
-                    // onClick={() => {
-                    //   showFullRanking = !showFullRanking;
-                    // }}
+                    onClick={handleShowAllRanking}
                   >
                     See All <i className="ri-arrow-down-s-line"></i>
+                  </Button>
+                )}
+                {showFullRanking && product?.guide_ratings?.length > 5 && (
+                  <Button
+                    className="see_all_btn"
+                    onClick={handleShowAllRanking}
+                  >
+                    Hide All{" "}
+                    <i
+                      className={
+                        showFullRanking
+                          ? "ri-arrow-up-s-line"
+                          : "ri-arrow-down-s-line"
+                      }
+                    ></i>
                   </Button>
                 )}
               </div>
@@ -1418,8 +1445,13 @@ function ProductPage({
                                   </div>
                                   <div className="attribute__card__body">
                                     <Row className="mb-3">
-                                      {product.attributes[attribute].map(
-                                        (attributeValues, valueIndex) => (
+                                      {product?.attributes[attribute]
+                                        .sort(
+                                          (a, b) =>
+                                            a.attribute_position -
+                                            b.attribute_position
+                                        )
+                                        .map((attributeValues, valueIndex) => (
                                           <React.Fragment key={valueIndex}>
                                             <Col lg={6} md={12}>
                                               <p>
@@ -1444,8 +1476,7 @@ function ProductPage({
                                               </p>
                                             </Col>
                                           </React.Fragment>
-                                        )
-                                      )}
+                                        ))}
                                     </Row>
 
                                     <div
@@ -1781,7 +1812,10 @@ function ProductPage({
                               })}
                         </ul>
                         {product?.price_websites.length > 5 && (
-                          <Button className="see_all_btn">
+                          <Button
+                            className="see_all_btn"
+                            onClick={() => setShowFullPrice(!showFullPrice)}
+                          >
                             See All <i className="ri-arrow-down-s-line"></i>
                           </Button>
                         )}
@@ -1821,12 +1855,10 @@ function ProductPage({
                                 );
                               })}
                         </ul>
-                        {product?.guide_ratings.length > 5 && (
+                        {product?.guide_ratings.length > 4 && (
                           <Button
                             className="see_all_btn"
-                            // onClick={() => {
-                            //   showFullRanking = !showFullRanking;
-                            // }}
+                            onClick={handleShowAllRanking}
                           >
                             See All <i className="ri-arrow-down-s-line"></i>
                           </Button>
@@ -1974,15 +2006,16 @@ function ProductPage({
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
               {/* {console.log(compareByCatID?.data?.length)} */}
-              {compareByCatID?.data?.length > 1 &&
-                (isMobile ? (
-                  <MobileCompareTable
-                    productPhaseData={product?.page_phases}
-                    products={compareByCatID?.data}
-                    categoryAttributes={productCatAttributes?.data}
-                    slug={slug}
-                  />
-                ) : null) // or any other fallback content for non-mobile
+              {
+                compareByCatID?.data?.length > 1 &&
+                  (isMobile ? (
+                    <MobileCompareTable
+                      productPhaseData={product?.page_phases}
+                      products={compareByCatID?.data}
+                      categoryAttributes={productCatAttributes?.data}
+                      slug={slug}
+                    />
+                  ) : null) // or any other fallback content for non-mobile
               }
             </Col>
           </Row>

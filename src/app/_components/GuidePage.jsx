@@ -185,16 +185,16 @@ export default function GuidePage({
     });
   }, [searchParams]);
   const handleSort = (sortAttribute) => {
-    // console.log(sortAttribute, "neet");
+    console.log(sortAttribute, "neet");
     let param = JSON.parse(sortAttribute);
 
-    // console.log(param.rangeAttributes);
+    console.log(param.rangeAttributes);
     if (param.algo) {
       const currentUrl = new URL(window.location.href);
-      // console.log(currentUrl);
+      console.log(currentUrl);
       const searchParam = new URLSearchParams(currentUrl.search);
       const sortValue = `${param.algo},${param.rangeAttributes}`;
-      // console.log(sortValue);
+      console.log(sortValue);
       setorder((prev) => {
         return {
           value: sortValue,
@@ -882,6 +882,7 @@ export default function GuidePage({
                     slug={slug}
                     order={order}
                     searchParams={searchParams}
+                    productPagination={productPagination}
                   />
                 ) : (
                   <ProductSkeleton />
