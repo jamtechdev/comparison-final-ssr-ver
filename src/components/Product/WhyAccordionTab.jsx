@@ -312,7 +312,7 @@ const WhyAccordionTab = React.memo(
                                     >
                                       {typeof item?.difference_value == "number"
                                         ? item?.difference
-                                        : item?.phrase.toFixed(2)}
+                                        : item?.phrase}
 
                                       {item?.hover_phase && (
                                         <>
@@ -558,7 +558,7 @@ const WhyAccordionTab = React.memo(
                                       {typeof item?.difference_value ===
                                       "number"
                                         ? `${item?.difference} ${item?.phrase}`
-                                        : item?.phrase.toFixed(2)}
+                                        : item?.phrase}
 
                                       {item?.hover_phase && (
                                         <>
@@ -633,7 +633,7 @@ const WhyAccordionTab = React.memo(
                                           {typeof item?.difference_value ===
                                           "number"
                                             ? `${item?.difference} ${item?.phrase}`
-                                            : item?.phrase.toFixed(2)}
+                                            : item?.phrase}
                                           {item?.hover_phase && (
                                             <>
                                               <div className="tooltip-display-content">
