@@ -116,7 +116,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   </div>
                 )}
                 <span>
-                  updated :{""}
+                  updated mahiam :{""}
                   {""}{" "}
                   <i>
                     {""} {blogData[0]?.data?.updated_at}

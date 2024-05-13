@@ -193,9 +193,10 @@ select {
 
 .para_content_text {
   font-weight: 400;
-  font-size: 17px;
+  font-size: 18px;
   color: rgb(39 48 78 / 90%);
   line-height: 30px;
+  padding-bottom: 15px;
 }
 
 .para_content_text ul {

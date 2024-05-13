@@ -282,6 +282,7 @@ function ProductPage({
       <section className="product-header">
 
         <Container>
+
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
@@ -383,7 +384,7 @@ function ProductPage({
               <div className="score-detail ">
                 <div className="tooltip-title removeUnderlineFrom">
                   <p>
-                    {product && product?.page_phases?.overall_score}
+                   {product && product?.page_phases?.overall_score}
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -403,6 +404,7 @@ function ProductPage({
                       width: isMobile ? "230px" : "250px",
                     }}
                   >
+                  
                     {product?.overall_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -466,9 +468,11 @@ function ProductPage({
                 </div>
                 {resultOverallScore && (
                   <small>
+{/* {product?.page_phases?.evaluation} */}
                     {resultOverallScore}{" "}
-                    {/* <i>{`${product?.overall_score_better_then * 100}`}</i> */}
+                 
                   </small>
+                 
                 )}
               </div>
             </div>
@@ -729,7 +733,7 @@ function ProductPage({
                             >
                               {
                                 <p className="mb-2">
-                                  <b>What it is : </b>
+                                  <b>{product && product?.page_phases?.what_it_is} : </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }

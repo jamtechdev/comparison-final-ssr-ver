@@ -773,7 +773,7 @@ const CompareTable = React.memo(
                       {products?.[0]?.ratio_qulitiy_points_descriptions
                         ?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
                           {
                             products[0]?.ratio_qulitiy_points_descriptions
                               ?.description
@@ -874,7 +874,7 @@ const CompareTable = React.memo(
                             <div className="tooltip-display-content">
                               {category?.description && (
                                 <p className="mb-2">
-                                  <b>What it is: </b>
+                                  <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>
                                   {category?.description}
                                 </p>
                               )}
@@ -978,7 +978,7 @@ const CompareTable = React.memo(
                             className="show_more"
                             onClick={() => handlePagination(category.name)}
                           >
-                            SHOW MORE <i className="ri-add-line"></i>
+                             {guidePhraseData && guidePhraseData?.show_all} <i className="ri-add-line"></i>
                           </span>
                         </td>
                       </tr>
@@ -991,7 +991,7 @@ const CompareTable = React.memo(
         {fullTable == 2 && (
           <div className="text-center">
             <Button className="see_all_btn_outline" onClick={handleTableShow}>
-              See Full Table  <i className="ri-arrow-down-s-line"></i>
+            {guidePhraseData && guidePhraseData?.see_full_table}  <i className="ri-arrow-down-s-line"></i>
             </Button>
           </div>
         )}
