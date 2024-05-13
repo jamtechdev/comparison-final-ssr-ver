@@ -23,8 +23,6 @@ const useChart = () => {
   const shortCodepatternsRE =
     /^\[pie-chart|vertical-chart|horizontal-chart|correlation-chart|.*\]$/;
 
-
-
   useEffect(() => {
     // Function to search for the pattern
     const searchForPattern = async () => {
@@ -72,7 +70,10 @@ const useChart = () => {
         const chartData = await res.data.data;
 
         if (chartData && chartData.data && chartData.data.length > 0) {
+          // console.log(xAixsLabel)
           const xAixsLabel = chartData.x_axis_label ?? "";
+
+          // console.log(xAixsLabel)
           const yAixsLabel = chartData.y_axis_label ?? "";
           const xAxisTitle = chartData.x_title ?? "";
           const yAxisTitle = chartData.y_title ?? "";
@@ -104,6 +105,33 @@ const useChart = () => {
             //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
             // );
             // console.log(shortCodesMatched[indx].pattern);
+            // console.log(chartData?.data);
+            // const data = [
+            //   {
+            //     data: {
+            //       data: [
+            //         {
+            //           x: "120",
+            //           y: "62",
+            //           name: "amarey A90+",
+            //         },
+            //         {
+            //           x: "140",
+            //           y: "46",
+            //           name: "AONUS S8",
+            //         },
+            //       ],
+            //       title: "Title sample",
+            //       x_unit: "",
+            //       y_unit: "dB",
+            //       x_title: "Runtime",
+            //       y_title: "Noisiness",
+            //       x_labels: ["80", "120", "160", "200", "240", "280"],
+            //       y_labels: ["50", "55", "60", "65", "70", "75"],
+            //     },
+            //   },
+            // ];
+
             if (numberOfChartAppends == 1) {
               if (shortCodesMatched[indx].pattern == ChartName.PieChart) {
                 root.render(
@@ -171,18 +199,18 @@ const useChart = () => {
               ) {
                 root.render(
                   <CorrelationChart
-                    data={plotData}
+                    data={chartData?.data}
                     height={300}
                     width={478}
                     chartTitle={shortCodesMatched[indx].chartTitle}
-                    xLabel={xAixsLabel}
-                    yLabel={yAixsLabel}
+                    xLabel={chartData?.x_labels}
+                    yLabel={chartData?.y_labels}
                     xTick={9}
                     yTick={7}
-                    xUnit={xAxisUnit}
-                    yUnit={yAxisUnit}
-                    xTitle={xAxisTitle}
-                    yTitle={yAxisTitle}
+                    xUnit={chartData?.x_unit}
+                    yUnit={chartData?.y_unit}
+                    xTitle={chartData?.x_title}
+                    yTitle={chartData?.y_title}
                     isGeneralAttribute_x={
                       isGeneralAttributesOfCorrelationChart_x
                     }
