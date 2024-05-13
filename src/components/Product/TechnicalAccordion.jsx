@@ -122,7 +122,7 @@ const TechnicalAccordion = React.memo(
     };
     return (
       <>
-        <Accordion className="table-accordion w-50 p-0 left-accordion" >
+        <Accordion className="table-accordion w-50 p-0 left-accordion">
           <Accordion.Item eventKey="4">
             <Accordion.Header as="div">
               <div className="table-accordion-header">
@@ -163,7 +163,7 @@ const TechnicalAccordion = React.memo(
                           transform: isMobile
                             ? "translateX(-20%)"
                             : "translateX(-10%)",
-                          width: isMobile ? "250px" : "250px"
+                          width: isMobile ? "250px" : "250px",
                         }}
                       >
                         <p className="mb-2">
@@ -428,7 +428,7 @@ const TechnicalAccordion = React.memo(
 
                         <div className="tooltip-display-content why-tooltip">
                           <div
-                            className="mb-2 prosconsColor"
+                            className=" prosconsColor"
                             dangerouslySetInnerHTML={{
                               __html: product.expert_reviews_rating_phase,
                             }}

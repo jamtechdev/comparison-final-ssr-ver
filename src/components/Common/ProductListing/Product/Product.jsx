@@ -1889,7 +1889,7 @@ export default function Product({
                                           )}
                                           <div className="tooltip-display-content why-tooltip">
                                             <div
-                                              className="mb-2 prosconsColor"
+                                              className=" prosconsColor"
                                               dangerouslySetInnerHTML={{
                                                 __html:
                                                   product.expert_reviews_rating_phase,
@@ -2959,4 +2959,4 @@ export default function Product({
     </Fragment>
   );
 }
-''
+("");

@@ -228,7 +228,7 @@ const WhyAccordionTab = React.memo(
                                                 }}
                                               >
                                                 <span
-                                                  className="mb-2 prosconsColor"
+                                                  className="prosconsColor"
                                                   dangerouslySetInnerHTML={{
                                                     __html: item?.hover_phase,
                                                   }}
@@ -260,7 +260,7 @@ const WhyAccordionTab = React.memo(
                                                 }}
                                               >
                                                 <span
-                                                  className="mb-2 prosconsColor"
+                                                  className="prosconsColor"
                                                   dangerouslySetInnerHTML={{
                                                     __html: item?.hover_phase,
                                                   }}
@@ -318,7 +318,7 @@ const WhyAccordionTab = React.memo(
                                         <>
                                           <div className="tooltip-display-content">
                                             <span
-                                              className="mb-2 prosconsColor"
+                                              className="prosconsColor"
                                               dangerouslySetInnerHTML={{
                                                 __html: item?.hover_phase,
                                               }}
@@ -337,7 +337,7 @@ const WhyAccordionTab = React.memo(
                                         <>
                                           <span className="tooltip-display-content">
                                             <span
-                                              className="mb-2 prosconsColor"
+                                              className="prosconsColor"
                                               dangerouslySetInnerHTML={{
                                                 __html: item?.hover_phase,
                                               }}
@@ -394,7 +394,7 @@ const WhyAccordionTab = React.memo(
                                           <>
                                             <div className="tooltip-display-content">
                                               <span
-                                                className="mb-2 prosconsColor"
+                                                className="prosconsColor"
                                                 dangerouslySetInnerHTML={{
                                                   __html: item?.hover_phase,
                                                 }}
@@ -416,7 +416,7 @@ const WhyAccordionTab = React.memo(
                                               className="toolt
                                             ip-display-content"
                                             >
-                                              <span className="mb-2 prosconsColor">
+                                              <span className="prosconsColor">
                                                 {/* {item?.hover_phase} */}
                                               </span>
                                             </span>
@@ -564,7 +564,7 @@ const WhyAccordionTab = React.memo(
                                         <>
                                           <div className="tooltip-display-content">
                                             <span
-                                              className="mb-2 prosconsColor"
+                                              className="prosconsColor"
                                               dangerouslySetInnerHTML={{
                                                 __html: item?.hover_phase,
                                               }}
@@ -583,7 +583,7 @@ const WhyAccordionTab = React.memo(
                                         <>
                                           <span className="tooltip-display-content">
                                             <span
-                                              className="mb-2 prosconsColor"
+                                              className="prosconsColor"
                                               dangerouslySetInnerHTML={{
                                                 __html: item?.hover_phase,
                                               }}
@@ -638,7 +638,7 @@ const WhyAccordionTab = React.memo(
                                             <>
                                               <div className="tooltip-display-content">
                                                 <span
-                                                  className="mb-2 prosconsColor"
+                                                  className="prosconsColor"
                                                   dangerouslySetInnerHTML={{
                                                     __html: item?.hover_phase,
                                                   }}
@@ -656,7 +656,7 @@ const WhyAccordionTab = React.memo(
                                             <>
                                               <span className="tooltip-display-content">
                                                 <span
-                                                  className="mb-2 prosconsColor"
+                                                  className="prosconsColor"
                                                   dangerouslySetInnerHTML={{
                                                     __html: item?.hover_phase,
                                                   }}
@@ -714,7 +714,7 @@ const WhyAccordionTab = React.memo(
                                             <>
                                               <div className="tooltip-display-content">
                                                 <span
-                                                  className="mb-2 prosconsColor"
+                                                  className="prosconsColor"
                                                   dangerouslySetInnerHTML={{
                                                     __html: item?.hover_phase,
                                                   }}
@@ -734,7 +734,7 @@ const WhyAccordionTab = React.memo(
                                             <>
                                               <span className="tooltip-display-content">
                                                 <span
-                                                  className="mb-2 prosconsColor"
+                                                  className="prosconsColor"
                                                   dangerouslySetInnerHTML={{
                                                     __html: item?.hover_phase,
                                                   }}
