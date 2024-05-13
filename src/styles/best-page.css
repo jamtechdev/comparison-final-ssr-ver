@@ -1639,10 +1639,13 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   z-index: 10000;
   text-transform: none !important;
   border: 1px solid #d4d6dc;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .question_hover_container:hover .display-content {
   display: block;
+
 }
 
 .tooltip-title {

@@ -434,12 +434,10 @@ export default function Product({
             <img
               className="compare_image"
               src={
-                product?.mini_image
-                  ? product?.mini_image
+                product?.main_image
+                  ? product?.main_image
                   : "/images/nofound.png"
               }
-              width={0}
-              height={0}
               alt={`${product?.permalink}`}
               sizes="100%"
             />
@@ -1444,7 +1442,8 @@ export default function Product({
                       <i className="ri-arrow-down-s-line"></i>
                     </div>
                     <div className="hide-btn">
-                      {guidePhraseData?.hide_all} <i className="ri-arrow-up-s-line"></i>
+                      {guidePhraseData?.hide_all}{" "}
+                      <i className="ri-arrow-up-s-line"></i>
                     </div>
                   </Accordion.Header>
                   {isLoading && (
@@ -1514,11 +1513,11 @@ export default function Product({
                                   {formatValue(product?.overall_score)}
                                 </span>
                                 <div className="show-btn">
-                                {guidePhraseData?.show_all}{" "}
+                                  {guidePhraseData?.show_all}{" "}
                                   <i className="ri-arrow-down-s-line"></i>
                                 </div>
                                 <div className="hide-btn">
-                                {guidePhraseData?.hide_all}{" "}
+                                  {guidePhraseData?.hide_all}{" "}
                                   <i className="ri-arrow-up-s-line"></i>
                                 </div>
                               </Accordion.Header>
