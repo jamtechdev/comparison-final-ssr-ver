@@ -555,8 +555,9 @@ const WhyAccordionTab = React.memo(
                                             : "dotted",
                                       }}
                                     >
-                                      {typeof item?.difference_value == "number"
-                                        ? item?.difference
+                                      {typeof item?.difference_value ===
+                                      "number"
+                                        ? `${item?.difference} ${item?.phrase}`
                                         : item?.phrase.toFixed(2)}
 
                                       {item?.hover_phase && (
@@ -629,11 +630,10 @@ const WhyAccordionTab = React.memo(
                                                 : "dotted",
                                           }}
                                         >
-                                          {typeof item?.difference_value ==
+                                          {typeof item?.difference_value ===
                                           "number"
-                                            ? item?.difference
-                                            : item?.phrase}
-
+                                            ? `${item?.difference} ${item?.phrase}`
+                                            : item?.phrase.toFixed(2)}
                                           {item?.hover_phase && (
                                             <>
                                               <div className="tooltip-display-content">
@@ -705,9 +705,9 @@ const WhyAccordionTab = React.memo(
                                                 : "dotted",
                                           }}
                                         >
-                                          {typeof item?.difference_value ==
+                                          {typeof item?.difference_value ===
                                           "number"
-                                            ? item?.difference
+                                            ? `${item?.difference} ${item?.phrase}`
                                             : item?.phrase}
 
                                           {item?.hover_phase && (
@@ -727,7 +727,7 @@ const WhyAccordionTab = React.memo(
                                         </span>
                                         <QuestionIcon
                                           attributes={item?.when_matters}
-                                          style={{color:" blue"}}
+                                          style={{ color: " blue" }}
                                         />
                                         <small className="d-block tooltip-title">
                                           {item?.hover_phase && (
