@@ -61,7 +61,7 @@ const ProsConsToolTip = (props) => {
           }}
         >
           <div
-            className="mb-2 prosconsColor"
+            className="prosconsColor"
             dangerouslySetInnerHTML={{ __html: hover_phrase }}
           ></div>
 
