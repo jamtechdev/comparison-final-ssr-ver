@@ -193,9 +193,10 @@ select {
 
 .para_content_text {
   font-weight: 400;
-  font-size: 17px;
-  color: rgb(39 48 78 / 90%);
+  font-size: 18px;
+  color: rgba(39, 48, 78, 0.85);
   line-height: 30px;
+  padding-bottom: 15px;
 }
 
 .para_content_text ul {
@@ -1825,6 +1826,7 @@ li.color-item.selected {
   position: relative;
   margin: 10px 0;
   padding: 20px;
+  min-height: 354px;
   /* margin-top: 35px; */
 }
 
@@ -1912,8 +1914,8 @@ h4.attribute__title {
 }
 
 .box__content__section__textarea {
-  font-size: 17px !important;
-  line-height: 20px !important;
+  font-size: 18px !important;
+  line-height: 30px !important;
   color: rgb(39 48 78 / 85%);
 }
 

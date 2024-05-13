@@ -280,7 +280,6 @@ function ProductPage({
       {/* {console.log(product?.text_under_ranking)} */}
       <div>{useChart()}</div>
       <section className="product-header">
-
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
@@ -321,8 +320,9 @@ function ProductPage({
                     </div>
                   </div>
                 )}
+                {console.log(product?.updated_at)}
                 <span>
-                  {product && product?.page_phases?.updated} 
+                  {product && product?.page_phases?.updated}
                   <i>
                     {""} {product?.updated_at}
                   </i>
@@ -654,7 +654,7 @@ function ProductPage({
                           return (
                             <>
                               <div className="rating__section">
-                                <img src={`${data?.logo}`} />
+                                <img src={`${data?.logo}`} alt={data?.alt} />
                                 <div className="rating__content">
                                   <b>{formatValue(data?.rating)}</b>
                                   <Rating value={data?.rating} />
@@ -700,7 +700,7 @@ function ProductPage({
                   /> */}
                   {/* {console.log(filteredTech_data[0]?.data)} */}
 
-                  <ul className="badge-list-section">
+                  <ul className="badge-list-section gap_top">
                     {product?.area_evaluation?.map((data, index) => {
                       return (
                         <li key={index}>
@@ -722,10 +722,7 @@ function ProductPage({
                             </div>
                             <div
                               className="tooltip-display-content"
-                              style={{
-                                left: position.left,
-                                right: position.right,
-                              }}
+                            
                             >
                               {
                                 <p className="mb-2">
@@ -944,7 +941,6 @@ function ProductPage({
             {product?.available_colors?.length !== 0 && (
               <Col lg={12} md={12} xl={12}>
                 <div className="alternatives mt-2">
-                
                   <span>{product?.page_phases?.colors_available}:</span>
                   <div className="color-section">
                     {product?.available_colors?.map((data, key) => {
@@ -1243,6 +1239,21 @@ function ProductPage({
       />
       {/* {console.log(product?.line_chart_data[0])} */}
 
+      {is_found?.length > 0 && (
+        <section className="mt-3 mobile-popular-comparison">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <h2 className="site-main-heading">Main Comparision</h2>
+                <MainComparision
+                  products={product && product?.alternative_comparisons}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
+
       {product?.line_chart_data[0]?.values?.length !== 0 && (
         <section className="mt-3 mobile-popular-comparison">
           <Container>
@@ -1340,7 +1351,7 @@ function ProductPage({
                                   key={index}
                                   style={{ color: "rgba(39, 48, 78, 0.7)" }}
                                 >
-                                 {item}
+                                  {item}
                                 </li>
                               </>
                             );
@@ -2042,20 +2053,6 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {is_found?.length > 0 && (
-        <section className="mt-3 mobile-popular-comparison">
-          <Container>
-            <Row>
-              <Col md={12}>
-                <h2 className="site-main-heading">Main Comparision</h2>
-                <MainComparision
-                  products={product && product?.alternative_comparisons}
-                />
-              </Col>
-            </Row>
-          </Container>
-        </section>
-      )}
 
       {/* {console.log(product?.alternative_comparisons?.products)} */}
       {product?.alternative_comparisons?.length > 0 && (

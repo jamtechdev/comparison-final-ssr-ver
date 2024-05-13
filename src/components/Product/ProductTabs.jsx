@@ -14,7 +14,7 @@ function ProductTabs({
   expertReview,
   videoReview,
 }) {
-  // console.log(expertReview)
+  // console.log(productReview, expertReview, videoReview);
   return (
     <>
       {" "}

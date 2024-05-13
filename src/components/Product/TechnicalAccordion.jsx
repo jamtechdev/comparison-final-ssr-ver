@@ -462,7 +462,7 @@ const TechnicalAccordion = React.memo(
                                               data?.website_name
                                             )}`}
                                           >
-                                            <img src={`${data?.image}`} />
+                                            <img src={`${data?.image}`} alt={data?.alt} />
                                           </a>
                                         )}
 
@@ -823,9 +823,7 @@ const TechnicalAccordion = React.memo(
                                                   </i>
                                                   <div
                                                     className="tooltip-display-content"
-                                                    style={{
-                                                      backgroundColor: "blue",
-                                                    }}
+                                                   
                                                   >
                                                     Information is not verified.
                                                     If you believe this is a
@@ -1160,6 +1158,7 @@ const TechnicalAccordion = React.memo(
                                                       : "")}
                                                 </span>
                                               }
+                                              {console.log(attributeValues?.commnet)}
 
                                               {attributeValues.attribute_value !==
                                                 "?" && (

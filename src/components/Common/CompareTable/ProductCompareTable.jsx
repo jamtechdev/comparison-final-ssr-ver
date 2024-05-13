@@ -360,6 +360,7 @@ const ProductCompareTable = React.memo(
                           {" "}
                           <>
                             <ul className="best-list-item d-none">
+                              {/* {console.log(product?.currency)} */}
                               {" "}
                               {product.price_websites &&
                                 product?.price_websites?.every(
@@ -369,7 +370,7 @@ const ProductCompareTable = React.memo(
                                     {/* <span className="txt">NOT AVAILABLE</span> */}
                                     <i>N/A</i>
                                     <span className="price font__16__inline">
-                                      ~ {product?.price} €
+                                      ~ {product?.price} {product?.currency}
                                     </span>
                                   </div>
                                 )}

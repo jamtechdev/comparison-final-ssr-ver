@@ -1433,9 +1433,13 @@
   .color-section {
     padding: 0 10px;
   }
+
   .inline-power-section ul {
     row-gap: 0 !important;
     column-gap: 20px !important;
+  }
+  .badge-list-section.gap_top{
+    gap: 10px !important
   }
   .similar-guides {
     margin: 20px 0 !important;

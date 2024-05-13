@@ -988,6 +988,7 @@ export default function Product({
                                     data?.hover_phrase !== "" && "tooltip-title"
                                   }`}
                                 >
+                                  {console.log(data?.comment)}
                                   <span className="pros-crons-text">
                                     {data?.name} {renderValue(data)}
                                   </span>
@@ -996,6 +997,7 @@ export default function Product({
                                     info_not_verified={data.info_not_verified}
                                     hover_phrase={data.hover_phrase}
                                     data={data}
+                                    comment={data.comment}
                                   />
                                 </li>
                               </React.Fragment>
@@ -2734,12 +2736,13 @@ export default function Product({
                                                                           : "")}
                                                                     </span>
                                                                   }
+                                                                  {console.log(attributeValues?.comment)}
 
                                                                   {attributeValues.attribute_value !==
                                                                     "?" && (
                                                                     <ProsConsToolTip
                                                                       comment={
-                                                                        attributeValues?.commnet
+                                                                        attributeValues?.comment
                                                                       }
                                                                       hover_phrase={
                                                                         attributeValues &&
@@ -2748,48 +2751,46 @@ export default function Product({
                                                                     />
                                                                   )}
                                                                 </div>{" "}
-                                                                {attributeValues?.info_not_verified && (
-                                                                  <div
-                                                                    className="tooltip-title"
+                                                                {/* {console.log()} */}
+                                                                <div
+                                                                  className="tooltip-title"
+                                                                  style={{
+                                                                    textDecoration:
+                                                                      "none",
+                                                                    textDecorationLine:
+                                                                      "none",
+                                                                    textDecorationStyle:
+                                                                      "none",
+                                                                  }}
+                                                                >
+                                                                  {" "}
+                                                                  <i
                                                                     style={{
-                                                                      textDecoration:
-                                                                        "none",
-                                                                      textDecorationLine:
-                                                                        "none",
-                                                                      textDecorationStyle:
-                                                                        "none",
+                                                                      opacity:
+                                                                        "70%",
                                                                     }}
                                                                   >
                                                                     {" "}
-                                                                    <i
-                                                                      style={{
-                                                                        opacity:
-                                                                          "70%",
-                                                                      }}
-                                                                    >
-                                                                      {" "}
-                                                                      (?){" "}
-                                                                    </i>
-                                                                    <div
-                                                                      className="tooltip-display-content"
-                                                                      style={{
-                                                                        opacity:
-                                                                          "100%",
-                                                                      }}
-                                                                    >
-                                                                      Information
-                                                                      is not
-                                                                      verified.
-                                                                      If you
-                                                                      believe
-                                                                      this is a
-                                                                      mistake,
-                                                                      please,
-                                                                      contact
-                                                                      our team
-                                                                    </div>
+                                                                    (?){" "}
+                                                                  </i>
+                                                                  <div
+                                                                    className="tooltip-display-content"
+                                                                    style={{
+                                                                      opacity:
+                                                                        "100%",
+                                                                    }}
+                                                                  >
+                                                                    Information
+                                                                    is not
+                                                                    verified. If
+                                                                    you believe
+                                                                    this is a
+                                                                    mistake,
+                                                                    please,
+                                                                    contact our
+                                                                    team
                                                                   </div>
-                                                                )}
+                                                                </div>
                                                               </>
                                                             )}
                                                           {/* newww */}

@@ -64,6 +64,8 @@ function ExperReviwes({ expertReview }) {
       .split(/[/?#]/)[0];
     return domain;
   };
+
+  console.log(expertReview)
   return (
     <>
       <Swiper
@@ -140,7 +142,7 @@ function ExperReviwes({ expertReview }) {
                   <div className="review__name">
                     {data?.image !== null && (
                       <a href={`/link?p=${btoa(data?.website_name)}`}>
-                        <img src={`${data?.image}`} />
+                        <img src={`${data?.image}`}  />
                       </a>
                     )}
 

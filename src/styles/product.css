@@ -28,12 +28,12 @@
   cursor: pointer;
 }
 
-.user-section .user-detail p a{
+.user-section .user-detail p a {
   color: var(--secondary-color);
 }
 
 .user-section .user-detail p a:hover {
-  color:  #3363a4;
+  color: #3363a4;
 }
 
 .user-section .user-detail span {
@@ -46,8 +46,8 @@
   font-weight: 400 !important;
   margin: 20px 0 0 !important;
   font-size: 18px;
-  line-height: 20px;
-  color: rgb(39 48 78 / 90%);
+  line-height: 30px;
+  color: rgba(39, 48, 78, 0.85);
 }
 .product-header .product-inner-content li {
   list-style: disc !important;
@@ -165,7 +165,7 @@
   opacity: 90%;
 }
 .score-section .score-detail small a {
-  color:  var(--heading-color);
+  color: var(--heading-color);
 }
 
 .color-change .count,
@@ -269,7 +269,7 @@
 }
 
 .best-list-item li {
-  padding: 6px ;
+  padding: 6px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -1111,7 +1111,7 @@
   top: 20px !important;
 } */
 /* new css added */
-.div tooltip-title .div tooltip-display-content .why-tooltip{
+.div tooltip-title .div tooltip-display-content .why-tooltip {
   left: "calc(50% - 128px)";
   background-color: #db2d2d;
 }

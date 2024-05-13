@@ -93,7 +93,11 @@ footer .search-icon {
 .footer-container {
   padding: 40px 1.5rem;
 }
-
+.footer-container .footer-content img {
+  width: 155px;
+  aspect-ratio: 155 / 52;
+  height: 52px;
+}
 .footer-container .footer-content p {
   line-height: 26px;
   margin: 5px 0 30px !important;
@@ -784,8 +788,10 @@ footer .search-icon {
 }
 
 .review-card img {
-  width: 100%;
-  height: 100px;
+  width: 60px;
+  height: 60px;
+  /* width: 100%;
+  height: 100px; */
   object-fit: contain;
   max-width: 100px;
   margin: auto;
@@ -1116,7 +1122,7 @@ footer .search-icon {
 
 .product-categories-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
   grid-gap: 20px !important;
   gap: 20px !important;
 }

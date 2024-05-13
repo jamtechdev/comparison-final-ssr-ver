@@ -20,8 +20,9 @@ export default function Category({ categories }) {
           //   router.push(`/${section?.primary_archive_category}`);
           // }}
         >
+          {/* {console.log(section)} */}
           <div className="category-section">
-            <a href={`/${section?.primary_archive_category}`}>
+            <a href={`/${section?.permalink}`}>
               <img
                 src={
                   section?.square_image
