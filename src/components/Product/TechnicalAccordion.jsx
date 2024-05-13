@@ -800,9 +800,7 @@ const TechnicalAccordion = React.memo(
                                                   </i>
                                                   <div
                                                     className="tooltip-display-content"
-                                                    style={{
-                                                      backgroundColor: "blue",
-                                                    }}
+                                                  
                                                   >
                                                     Information is not verified.
                                                     If you believe this is a
@@ -1042,7 +1040,7 @@ const TechnicalAccordion = React.memo(
                                         attributes={
                                           attributeValues && attributeValues
                                         }
-                                        style={{ backgroundColor: "yellow" }}
+                                      
                                       />
                                     </div>
                                   </div>

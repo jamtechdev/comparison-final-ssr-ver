@@ -61,8 +61,8 @@ export default function ReviewSlider({ favSlider, index }) {
                   <div className="review-card">
                     <img
                       src={item?.main_image || "/images/nofound.png"}
-                      width={0}
-                      height={0}
+                      width={60}
+                      height={60}
                       sizes="100%"
                       alt={`${item?.permalink}`}
                     />

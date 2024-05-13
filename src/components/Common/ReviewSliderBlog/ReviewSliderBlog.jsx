@@ -106,8 +106,8 @@ export default function ReviewSlider() {
                 <div className="review-card">
                   <Image
                     src={item.image}
-                    width={0}
-                    height={0}
+                    width={60}
+                    height={60}
                     sizes="100%"
                     alt=""
                   />

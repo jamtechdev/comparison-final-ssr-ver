@@ -10,17 +10,20 @@ export default function ProductSliderBlog({ favSlider }) {
 
   return (
     <section className="product-slider single-blog">
+      
       {favSlider &&
         favSlider
           ?.slice(0, showFullData ? favSlider?.length : 2)
           .map(function (item, index) {
+            // console.log(favSlider,"checking sidebar")
             return (
-              <div className="product-card mb-3" key={index}>
+              <div className="product-card mb-3" key={index}>  
                 <img
                   src={
                     item.bannerImage === null
-                      ? item?.bannerImage
-                      : `/images/nofound.png`
+                     
+                      ? `/images/nofound.png`
+                      :   item?.bannerImage
                   }
                   width={0}
                   height={0}
@@ -36,8 +39,11 @@ export default function ProductSliderBlog({ favSlider }) {
                     {item?.short_name || item?.guide_name}
                   </a>
                 </span>
+                
               </div>
+              
             );
+            
           })}
     </section>
   );

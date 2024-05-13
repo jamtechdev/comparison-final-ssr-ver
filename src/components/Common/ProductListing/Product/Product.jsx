@@ -1063,6 +1063,7 @@ export default function Product({
           <Col md={12} className="p-0">
             <Row className="w-100 m-0 alternatives-border-top">
               <Col md={12}>
+
                 <div className="inline-power-section w-100">
                   {/* <img
                     src="/images/double-arrow.png"
@@ -1087,7 +1088,7 @@ export default function Product({
                                   : "#85B2F1",
                             }}
                           >
-                            {parseFloat(data?.value).toFixed(1)}
+                           {parseFloat(data?.value).toFixed(1)}
                           </span>
                           <div className="tooltip-title">
                             {" "}
@@ -1119,7 +1120,7 @@ export default function Product({
                               {/* Tooltip content */}
                               {
                                 <p className="mb-2">
-                                  <b>What it is : </b>
+                                  <b>What it is  : </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }

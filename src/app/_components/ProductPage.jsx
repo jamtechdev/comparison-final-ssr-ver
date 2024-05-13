@@ -325,7 +325,7 @@ function ProductPage({
                 <span>
                   {product && product?.page_phases?.updated} 
                   <i>
-                    {""} {product?.updated_at}
+                    {""}   {product?.updated_at.split('/').reverse().join('-')}
                   </i>
                 </span>
               </div>
@@ -658,7 +658,7 @@ function ProductPage({
                           return (
                             <>
                               <div className="rating__section">
-                                <img src={`${data?.logo}`} />
+                                <img src={`${data?.logo}`} alt="image"  />
                                 <div className="rating__content">
                                   <b>{formatValue(data?.rating)}</b>
                                   <Rating value={data?.rating} />
@@ -1876,7 +1876,7 @@ function ProductPage({
           )}
           {/* {console.log(product?.top_pros)} */}
           {product?.top_pros !== null && (
-            <Row className="mt-5">
+            <Row className="" style={{marginTop:"30px",marginBottom:"20px"}}>
               <Col md={6}>
                 <div className="pros-corns-section pros light-background">
                   <h3 className="pros-header">

@@ -33,9 +33,11 @@ export default function Category({ categories }) {
                 sizes="100%"
                 alt={`/${section?.primary_archive_category}`}
               />
-              <span className="category_name">
-                {section?.primary_archive_category || "NOT FOUND"}
-              </span>
+             
+             <span className="category_name">
+  {section?.primary_archive_category ? section.primary_archive_category.replace(/\s+/g, '-') : "NOT-FOUND"}
+</span>
+
             </a>
           </div>
         </Col>

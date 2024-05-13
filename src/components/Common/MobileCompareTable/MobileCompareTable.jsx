@@ -871,39 +871,60 @@ export default function MobileCompareTable({
                             <td colSpan="2">
                               <div className="table-inner-heading">
                                 {data?.title}
-                                <span className="question-marker-icon">
+                                 <span className="question-marker-icon">
                                   <div className="tooltip-title">
-                                    {(data.description ||
-                                      data.when_matters) && (
+                                  <div className="tooltip-display-content" style={{ transform: "translateX(-65%)" }}>
+                       {
+                                <p className="mb-2">
+                                  <b>What it is  : </b>
+                                  {data?.hover_phase?.what_is_it}
+                                </p>
+                              }
+
+                              <p>
+                                <b>Score components :</b>
+                              </p>
+                              {data?.hover_phase.attributes?.map(
+                                (hoverPhaseData, index) => {
+                                  return (
+                                    <div className="scroe_section" key={index}>
+                                      <p className="text-end">
+                                        {`${parseFloat(
+                                          hoverPhaseData?.percentage
+                                        ).toFixed(1)}%`}
+                                      </p>
                                       <div
-                                        className="tooltip-display-content"
+                                        className="score-count"
                                         style={{
-                                          transform: "translateX(-65%)",
+                                          background:
+                                            hoverPhaseData?.attribute_value >=
+                                            7.5
+                                              ? "#093673"
+                                              : hoverPhaseData?.attribute_value >=
+                                                  5 &&
+                                                hoverPhaseData?.attribute_value <
+                                                  7.5
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                         }}
                                       >
-                                        {data?.description && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {productPhaseData &&
-                                                productPhaseData?.what_it_is}
-                                              :{" "}
-                                            </b>
-                                            {data?.description}
-                                          </p>
-                                        )}
-
-                                        {data?.when_matters && (
-                                          <p className="mb-2">
-                                            <b>
-                                              {productPhaseData &&
-                                                productPhaseData?.when_it_matters}
-                                              :{" "}
-                                            </b>{" "}
-                                            {data?.when_matters}
-                                          </p>
-                                        )}
+                                        {hoverPhaseData?.attribute_value != null
+                                          ? hoverPhaseData?.attribute_value >=
+                                            10
+                                            ? formatValue(
+                                                Math.trunc(
+                                                  hoverPhaseData?.attribute_value
+                                                )
+                                              )
+                                            : hoverPhaseData?.attribute_value
+                                          : "0.0"}
                                       </div>
-                                    )}
+                                      <p>{hoverPhaseData?.attribute_name}</p>
+                                    </div>
+                                  );
+                                }
+                              )}
+                              </div>
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
                                       viewBox="0 0 24 24"
@@ -959,7 +980,7 @@ export default function MobileCompareTable({
                               <tr className="tr-bg-color">
                                 <td colSpan="2">
                                   <p className="table-main-heading">
-                                    {product?.name}
+                                  {product?.name}
                                   </p>
                                 </td>
                               </tr>

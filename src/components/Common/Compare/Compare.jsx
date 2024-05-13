@@ -163,6 +163,7 @@ export default function Compare({
         </div>
         <div className="compare-section-form">
           <div className="position-relative w-100">
+           
             <Form.Control
               type="text"
               placeholder={"1st product..."}

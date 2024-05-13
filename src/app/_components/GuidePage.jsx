@@ -394,7 +394,7 @@ export default function GuidePage({
                 )}
                 <span>
                   {guide && guide?.page_phrases?.updated}
-                  <i> {guide?.updated_at}</i>
+                  <i>  {guide?.updated_at.split('/').reverse().join('-')}</i>
                 </span>
               </div>
             </Col>

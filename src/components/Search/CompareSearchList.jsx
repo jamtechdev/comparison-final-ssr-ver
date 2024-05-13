@@ -111,7 +111,7 @@ function CompareSearchList({
         <div className="search-dropdown-list">
           {/* compare home page */}
           {filteredProData &&
-            filteredProData.map((item, index) => (
+            filteredProData.slice(0,10).map((item, index) => (
               <div className="search-data-list" key={index}>
                 <h2
                   className="search-data-heading compare-search-list"

@@ -1783,6 +1783,7 @@ li.color-item.selected {
   padding: 5px 10px;
   border-radius: 4px;
   font-size: 13px;
+ margin-bottom: 3px;
 }
 .test__phrase__content {
   border-top: 1px solid #ddd;
@@ -2187,9 +2188,9 @@ div#shortCodeText ul {
   list-style: none !important;
 } */
 #shortCodeText .pros-corns-section ul li {
-  padding: 12px 0 5px;
+  padding: 4px 0 5px;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 26px;
   line-height: 17px;
   color: rgba(39, 48, 78, 0.7);
   font-family: Lato, sans-serif !important;

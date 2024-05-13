@@ -116,10 +116,12 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   </div>
                 )}
                 <span>
-                  updated mahiam :{""}
+                  updated  :{""}
                   {""}{" "}
                   <i>
-                    {""} {blogData[0]?.data?.updated_at}
+                    {""} 
+    {blogData[0]?.data?.updated_at.split('/').reverse().join('-')}
+                    
                   </i>
                 </span>
               </div>
