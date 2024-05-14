@@ -22,7 +22,7 @@ export default function ProductSlider({ favSlider }) {
             return (
               // <SwiperSlide key={index}>
               <div className="product-card mb-3" key={index}>
-                <h1>hello</h1>
+               
                 <Image
                   src={
                     item.bannerImage === null

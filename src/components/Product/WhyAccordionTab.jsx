@@ -255,9 +255,7 @@ const WhyAccordionTab = React.memo(
                                             <>
                                               <span
                                                 className="tooltip-display-content"
-                                                // style={{
-                                                //   backgroundColor: "red",
-                                                // }}
+                                               
                                               >
                                                 <span
                                                   className="mb-2 prosconsColor"

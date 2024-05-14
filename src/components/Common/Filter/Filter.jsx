@@ -826,7 +826,7 @@ export default function Filter({
                 className="show_more"
                 onClick={() => handlePagination(category.name)}
               >
-                SHOW MORE <i className="ri-add-line"></i>
+              {guidePhraseData && guidePhraseData?.show_all}<i className="ri-add-line"></i>
               </span>
             )}
           </div>

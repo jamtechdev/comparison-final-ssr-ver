@@ -748,7 +748,7 @@ function ProductPage({
                                       <p className="text-end">
                                         {`${parseFloat(
                                           hoverPhaseData?.percentage
-                                        ).toFixed(1)}%`}
+                                      ).toFixed(1)}%`}
                                       </p>
                                       <div
                                         className="score-count"
