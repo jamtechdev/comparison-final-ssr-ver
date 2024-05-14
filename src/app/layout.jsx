@@ -16,7 +16,7 @@ export default async function RootLayout({ children }) {
   // console.log(footerData?.favicon)
 
   return (
-    <html lang={footerData?.website_language}>
+    <html lang={footerData?.website_language?.toLowerCase()}>
       <link rel="icon" href={`${footerData?.favicon}`} sizes="any" />
       <head
         dangerouslySetInnerHTML={{ __html: footerData?.head_tag_code }}
