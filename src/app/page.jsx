@@ -13,6 +13,7 @@ export default async function Page() {
 }
 export async function generateMetadata(params) {
   const meta_data = await getMetaData();
+  // console.log(meta_data)
   const siteURL = "https://mondopedia.it";
   return {
     title: meta_data?.data?.title || "Comparison web",

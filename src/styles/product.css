@@ -585,6 +585,8 @@
 
 .table-accordion .spec-section .spec-item .spec-col {
   width: 50%;
+  display: flex;
+  gap: 2px;
 }
 
 .table-accordion .spec-section .spec-item .spec-col .query .hover_container {

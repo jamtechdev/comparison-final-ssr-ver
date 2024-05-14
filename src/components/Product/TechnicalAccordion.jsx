@@ -462,7 +462,10 @@ const TechnicalAccordion = React.memo(
                                               data?.website_name
                                             )}`}
                                           >
-                                            <img src={`${data?.image}`} alt={data?.alt} />
+                                            <img
+                                              src={`${data?.image}`}
+                                              alt={data?.name}
+                                            />
                                           </a>
                                         )}
 
@@ -821,10 +824,7 @@ const TechnicalAccordion = React.memo(
                                                     {" "}
                                                     (?){" "}
                                                   </i>
-                                                  <div
-                                                    className="tooltip-display-content"
-                                                   
-                                                  >
+                                                  <div className="tooltip-display-content">
                                                     Information is not verified.
                                                     If you believe this is a
                                                     mistake, please, contact our
@@ -1158,7 +1158,9 @@ const TechnicalAccordion = React.memo(
                                                       : "")}
                                                 </span>
                                               }
-                                              {console.log(attributeValues?.commnet)}
+                                              {console.log(
+                                                attributeValues?.commnet
+                                              )}
 
                                               {attributeValues.attribute_value !==
                                                 "?" && (

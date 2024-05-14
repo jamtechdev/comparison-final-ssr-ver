@@ -9,18 +9,15 @@ import Head from "next/head";
 export default async function RootLayout({ children }) {
   const footerData = await getterService.getFooterData();
   const headerData = await getterService.getTopNavBarData();
+  // console.log(footerData);
   // Function to construct the canonical URL dynamically
   // console.log(footerData);
   // console.log(footerData?.footer_tag_code);
   // console.log(footerData?.favicon)
 
   return (
-    <html lang="en">
-      <link
-        rel="icon"
-        href={`${footerData?.favicon}`}
-        sizes="any"
-      />
+    <html lang={footerData?.website_language}>
+      <link rel="icon" href={`${footerData?.favicon}`} sizes="any" />
       <head
         dangerouslySetInnerHTML={{ __html: footerData?.head_tag_code }}
       ></head>
