@@ -235,9 +235,9 @@ function CorrelationChart(props) {
       .append("text")
       .attr("class", "axis-label")
       .attr("text-anchor", "middle")
-      .attr("x", -height / 2 + 30)
-      .attr("y", -50)
-      .attr("transform", "rotate(-90)")
+      .attr("x", -40)
+      .attr("y", -20)
+      .attr("transform", "rotate(0)")
       .text(yTitle);
 
     //plot graph

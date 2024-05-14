@@ -1159,22 +1159,28 @@ const TechnicalAccordion = React.memo(
                                                 </span>
                                               }
                                               {console.log(
-                                                attributeValues?.commnet
+                                                attributeValues?.info_not_verified
                                               )}
 
                                               {attributeValues.attribute_value !==
                                                 "?" && (
                                                 <ProsConsToolTip
                                                   comment={
-                                                    attributeValues?.commnet
+                                                    attributeValues?.comment
                                                   }
                                                   hover_phrase={
                                                     attributeValues &&
                                                     attributeValues.hover_phase
                                                   }
+                                                  info_not_verified={
+                                                    attributeValues &&
+                                                    attributeValues
+                                                  }
                                                 />
                                               )}
                                             </div>{" "}
+
+                                            {/* {comment && <div className="test__phrase__content ">{comment}</div>} */}
                                             {attributeValues?.info_not_verified && (
                                               <div
                                                 className="tooltip-title"

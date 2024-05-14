@@ -4,16 +4,18 @@ import useScreenSize from "@/_helpers/useScreenSize";
 
 const ProsConsToolTip = (props) => {
   const {
+    comment,
     hover_phrase,
     info_not_verified,
     data,
-    comment,
+    
     typeComp,
     finalvalue,
     expert_reviews,
   } = props;
 
   const { isMobile } = useScreenSize();
+  // console.log(info_not_verified)
 
   let tooltipStyles = {};
   // console.log(expert_reviews&&expert_reviews);

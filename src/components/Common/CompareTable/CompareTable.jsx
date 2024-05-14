@@ -24,7 +24,7 @@ const CompareTable = React.memo(
       const newRef = useRef();
       ref ||= newRef;
 
-      console.log(guidePhraseData,"check guide")
+      console.log(guidePhraseData, "check guide");
       // mount
 
       useEffect(() => {
@@ -522,7 +522,7 @@ const CompareTable = React.memo(
                         {products[0]?.overall_score_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>{" "}
+                            <b>{guidePhraseData?.what_it_is}: </b>{" "}
                             {
                               products[0]?.overall_score_descriptions
                                 ?.description
@@ -578,7 +578,7 @@ const CompareTable = React.memo(
                         {products[0]?.technical_score_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>{" "}
+                            <b>{guidePhraseData?.what_it_is} : </b>{" "}
                             {
                               products[0]?.technical_score_descriptions
                                 ?.description
@@ -630,7 +630,7 @@ const CompareTable = React.memo(
                         {products[0]?.users_rating_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>
+                            <b>{guidePhraseData?.what_it_is} : </b>
                             {
                               products[0]?.users_rating_descriptions
                                 ?.description
@@ -679,7 +679,7 @@ const CompareTable = React.memo(
                       {products[0]?.expert_reviews_descriptions
                         ?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{guidePhraseData?.what_it_is} : </b>{" "}
                           {
                             products[0]?.expert_reviews_descriptions
                               ?.description
@@ -728,7 +728,7 @@ const CompareTable = React.memo(
                     <div className="tooltip-display-content">
                       {products[0]?.popularity_descriptions?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{guidePhraseData?.what_it_is} : </b>{" "}
                           {products[0]?.popularity_descriptions?.description}
                         </p>
                       )}
@@ -773,7 +773,7 @@ const CompareTable = React.memo(
                       {products?.[0]?.ratio_qulitiy_points_descriptions
                         ?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{guidePhraseData?.what_it_is} : </b>{" "}
                           {
                             products[0]?.ratio_qulitiy_points_descriptions
                               ?.description
@@ -874,7 +874,7 @@ const CompareTable = React.memo(
                             <div className="tooltip-display-content">
                               {category?.description && (
                                 <p className="mb-2">
-                                  <b>What it is: </b>
+                                  <b>{guidePhraseData?.what_it_is}: </b>
                                   {category?.description}
                                 </p>
                               )}
@@ -947,7 +947,7 @@ const CompareTable = React.memo(
                                   <div className="tooltip-display-content">
                                     {catAttribute?.description && (
                                       <p className="mb-2">
-                                        <b>What it is: </b>
+                                        <b>{guidePhraseData?.what_it_is}: </b>
                                         {catAttribute?.description}
                                       </p>
                                     )}
@@ -991,7 +991,7 @@ const CompareTable = React.memo(
         {fullTable == 2 && (
           <div className="text-center">
             <Button className="see_all_btn_outline" onClick={handleTableShow}>
-              See Full Table  <i className="ri-arrow-down-s-line"></i>
+              See Full Table <i className="ri-arrow-down-s-line"></i>
             </Button>
           </div>
         )}

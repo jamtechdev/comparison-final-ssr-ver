@@ -720,19 +720,18 @@ function ProductPage({
                             <div className="" style={{ fontWeight: 400 }}>
                               {data?.title}
                             </div>
-                            <div
-                              className="tooltip-display-content"
-                            
-                            >
+                            <div className="tooltip-display-content">
                               {
                                 <p className="mb-2">
-                                  <b>What it is : </b>
+                                  <b>{product?.page_phases?.what_it_is} : </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
 
                               <p>
-                                <b>Score components :</b>
+                                <b>
+                                  {product?.page_phases?.score_components} :
+                                </b>
                               </p>
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {

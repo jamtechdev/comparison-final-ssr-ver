@@ -988,16 +988,16 @@ export default function Product({
                                     data?.hover_phrase !== "" && "tooltip-title"
                                   }`}
                                 >
-                                  {console.log(data?.comment)}
+                                  {/* {console.log(data?.comment)} */}
                                   <span className="pros-crons-text">
                                     {data?.name} {renderValue(data)}
                                   </span>
                                   <ProsConsToolTip
-                                    typeComp={`pros`}
-                                    info_not_verified={data.info_not_verified}
-                                    hover_phrase={data.hover_phrase}
-                                    data={data}
                                     comment={data.comment}
+                                    hover_phrase={data.hover_phrase}
+                                    info_not_verified={data.info_not_verified}
+                                    data={data}
+                                    typeComp={`pros`}
                                   />
                                 </li>
                               </React.Fragment>
@@ -1033,10 +1033,11 @@ export default function Product({
                                     {data?.name} {renderValue(data).trim()}
                                   </span>
                                   <ProsConsToolTip
-                                    typeComp={`cons`}
-                                    data={data}
-                                    info_not_verified={data.info_not_verified}
+                                    comment={data.comment}
                                     hover_phrase={data.hover_phrase}
+                                    info_not_verified={data.info_not_verified}
+                                    data={data}
+                                    typeComp={`cons`}
                                     finalvalue={finalvalue}
                                   />
                                 </li>
@@ -2326,12 +2327,13 @@ export default function Product({
                                                                           : "")}
                                                                     </span>
                                                                   }
+                                                                  {/* {console.log(attributeValues)} */}
 
                                                                   {attributeValues.attribute_value !==
                                                                     "?" && (
                                                                     <ProsConsToolTip
                                                                       comment={
-                                                                        attributeValues?.commnet
+                                                                        attributeValues?.comment
                                                                       }
                                                                       hover_phrase={
                                                                         attributeValues &&
@@ -2459,9 +2461,16 @@ export default function Product({
                                                               }
                                                               {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
                                                               <ProsConsToolTip
+                                                                comment={
+                                                                  attributeValues?.comment
+                                                                }
                                                                 hover_phrase={
                                                                   attributeValues &&
                                                                   attributeValues.hover_phase
+                                                                }
+                                                                info_not_verified={
+                                                                  attributeValues &&
+                                                                  attributeValues
                                                                 }
                                                               />
                                                             </div>
@@ -2736,7 +2745,9 @@ export default function Product({
                                                                           : "")}
                                                                     </span>
                                                                   }
-                                                                  {console.log(attributeValues?.comment)}
+                                                                  {/* {console.log(
+                                                                    attributeValues?.comment
+                                                                  )} */}
 
                                                                   {attributeValues.attribute_value !==
                                                                     "?" && (
@@ -2748,49 +2759,67 @@ export default function Product({
                                                                         attributeValues &&
                                                                         attributeValues.hover_phase
                                                                       }
+                                                                      // info_not_verified={
+                                                                      //   attributeValues &&
+                                                                      //   attributeValues
+                                                                      // }
                                                                     />
                                                                   )}
                                                                 </div>{" "}
-                                                                {/* {console.log()} */}
-                                                                <div
-                                                                  className="tooltip-title"
-                                                                  style={{
-                                                                    textDecoration:
-                                                                      "none",
-                                                                    textDecorationLine:
-                                                                      "none",
-                                                                    textDecorationStyle:
-                                                                      "none",
-                                                                  }}
-                                                                >
-                                                                  {" "}
-                                                                  <i
+                                                                {attributeValues?.info_not_verified && (
+                                                                  <div
+                                                                    className="tooltip-title"
                                                                     style={{
-                                                                      opacity:
-                                                                        "70%",
+                                                                      textDecoration:
+                                                                        "none",
+                                                                      textDecorationLine:
+                                                                        "none",
+                                                                      textDecorationStyle:
+                                                                        "none",
                                                                     }}
                                                                   >
                                                                     {" "}
-                                                                    (?){" "}
-                                                                  </i>
-                                                                  <div
-                                                                    className="tooltip-display-content"
-                                                                    style={{
-                                                                      opacity:
-                                                                        "100%",
-                                                                    }}
-                                                                  >
-                                                                    Information
-                                                                    is not
-                                                                    verified. If
-                                                                    you believe
-                                                                    this is a
-                                                                    mistake,
-                                                                    please,
-                                                                    contact our
-                                                                    team
+                                                                    <i
+                                                                      style={{
+                                                                        opacity:
+                                                                          "70%",
+                                                                      }}
+                                                                    >
+                                                                      {" "}
+                                                                      (?){" "}
+                                                                    </i>
+                                                                    <div
+                                                                      className="tooltip-display-content"
+                                                                      style={{
+                                                                        left: isMobile
+                                                                          ? "50%"
+                                                                          : 0,
+                                                                        transform:
+                                                                          isMobile
+                                                                            ? "translateX(-20%)"
+                                                                            : "translateX(-10%)",
+                                                                        width:
+                                                                          isMobile
+                                                                            ? "200px"
+                                                                            : "250px",
+                                                                        opacity:
+                                                                          "100%",
+                                                                      }}
+                                                                    >
+                                                                      Information
+                                                                      is not
+                                                                      verified.
+                                                                      If you
+                                                                      believe
+                                                                      this is a
+                                                                      mistake,
+                                                                      please,
+                                                                      contact
+                                                                      our team
+                                                                    </div>
                                                                   </div>
-                                                                </div>
+                                                                )}
+                                                                {/* {console.log()} */}
                                                               </>
                                                             )}
                                                           {/* newww */}

@@ -64,6 +64,7 @@ export default function Header({ headerData, headerPhase, logo }) {
   const openCompareModel = () => {
     setIsOpen(true);
     setShow(false);
+    document.body.style.overflow = "hidden";
   };
   const handleClear = () => {
     setSearch("");
@@ -208,7 +209,7 @@ export default function Header({ headerData, headerPhase, logo }) {
           </Col>
           <Col lg={5} md={6} className="hide-header-list">
             <ul className={styles.navitem}>
-              <li onClick={() => setIsOpen(true)} role="button">
+              <li onClick={openCompareModel} role="button">
                 {headerPhase && headerPhase?.compare}
               </li>
               <li>

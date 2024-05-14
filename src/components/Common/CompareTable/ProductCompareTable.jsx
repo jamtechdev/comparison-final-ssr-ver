@@ -310,7 +310,6 @@ const ProductCompareTable = React.memo(
         }
         ref={ref}
       >
-       
         <Table className="compare-container">
           <thead id="testone" className={className} ref={ref}>
             <tr className="">
@@ -360,8 +359,7 @@ const ProductCompareTable = React.memo(
                           {" "}
                           <>
                             <ul className="best-list-item d-none">
-                              {/* {console.log(product?.currency)} */}
-                              {" "}
+                              {/* {console.log(product?.currency)} */}{" "}
                               {product.price_websites &&
                                 product?.price_websites?.every(
                                   (data) => data.price === null
@@ -407,7 +405,7 @@ const ProductCompareTable = React.memo(
                                                   )}`}
                                                   className="font__16__inline"
                                                 >
-                                                  {data?.price} €
+                                                  {data?.price} {data?.currency}
                                                 </a>
                                               </span>
                                             </>
@@ -534,7 +532,7 @@ const ProductCompareTable = React.memo(
                         {products[0]?.overall_score_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>{" "}
+                            <b>{productPhaseData?.what_it_is}: </b>{" "}
                             {
                               products[0]?.overall_score_descriptions
                                 ?.description
@@ -589,7 +587,7 @@ const ProductCompareTable = React.memo(
                         {products[0]?.technical_score_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>{" "}
+                            <b>{productPhaseData?.what_it_is}: </b>{" "}
                             {
                               products[0]?.technical_score_descriptions
                                 ?.description
@@ -640,7 +638,7 @@ const ProductCompareTable = React.memo(
                         {products[0]?.users_rating_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>
+                            <b>{productPhaseData?.what_it_is} : </b>
                             {
                               products[0]?.users_rating_descriptions
                                 ?.description
@@ -687,7 +685,7 @@ const ProductCompareTable = React.memo(
                       {products[0]?.expert_reviews_descriptions
                         ?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{productPhaseData?.what_it_is}: </b>{" "}
                           {
                             products[0]?.expert_reviews_descriptions
                               ?.description
@@ -798,7 +796,7 @@ const ProductCompareTable = React.memo(
                     <div className="tooltip-display-content">
                       {products[0]?.popularity_descriptions?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{productPhaseData?.what_it_is}: </b>{" "}
                           {products[0]?.popularity_descriptions?.description}
                         </p>
                       )}
@@ -843,7 +841,7 @@ const ProductCompareTable = React.memo(
                       {products[0]?.ratio_qulitiy_points_descriptions
                         ?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{productPhaseData?.what_it_is}: </b>{" "}
                           {
                             products[0]?.ratio_qulitiy_points_descriptions
                               ?.description

@@ -367,7 +367,7 @@ export default function ComparisonTable({
                                 <div className="not-availabel p-3">
                                   <i>N/A</i>
                                   <span className="price font__16__inline">
-                                    ~ {product?.price} €
+                                    ~ {product?.price} {product?.currency}
                                   </span>
                                 </div>
                               )}
@@ -402,7 +402,7 @@ export default function ComparisonTable({
                                                 )}`}
                                                 className="font__16__inline"
                                               >
-                                                {data?.price} €
+                                                {data?.price} {data?.currency}
                                               </a>
                                             </span>
                                           </>
@@ -632,7 +632,11 @@ export default function ComparisonTable({
                   <div className="tooltip-display-content">
                     {products[0]?.popularity_descriptions?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>{" "}
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.what_it_is}{" "}
+                          :{" "}
+                        </b>{" "}
                         {products[0]?.popularity_descriptions?.description}
                       </p>
                     )}
@@ -780,7 +784,11 @@ export default function ComparisonTable({
                   <div className="tooltip-display-content">
                     {products[0]?.expert_reviews_descriptions?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>{" "}
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.what_it_is}
+                          :{" "}
+                        </b>{" "}
                         {products[0]?.expert_reviews_descriptions?.description}
                       </p>
                     )}

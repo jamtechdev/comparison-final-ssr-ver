@@ -348,6 +348,21 @@ export default function GuidePage({
   // console.log(isFilterActive)
   // console.log(isFilterActive, "neetx");
 
+  useEffect(() => {
+    function showTooltip(event, content) {
+      const tooltip = document.getElementById("tooltip");
+      tooltip.style.display = "block";
+      tooltip.style.left = event.pageX + "px";
+      tooltip.style.top = event.pageY + "px";
+      tooltip.innerHTML = content;
+    }
+
+    function hideTooltip() {
+      const tooltip = document.getElementById("tooltip");
+      tooltip.style.display = "none";
+    }
+  }, []);
+
   return (
     <>
       <section className="product-header">
