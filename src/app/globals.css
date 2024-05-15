@@ -107,6 +107,9 @@ p {
   line-height: 30px !important;
   padding: 0 40px 12px !important;
 }
+.attribute__card__body ul li::marker{
+  font-size: 17px ;
+}
 .attribute__card__body ul{
   list-style-type: disc !important;
 }
