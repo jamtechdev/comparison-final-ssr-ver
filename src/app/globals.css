@@ -98,6 +98,22 @@ p {
   line-height: 30px !important;
   padding: 0 40px 12px !important;
 }
+.attribute__card__body ul,
+.attribute__card__body ol {
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  color: rgb(39 48 78 / 85%) !important;
+  text-align: left !important;
+  line-height: 30px !important;
+  padding: 0 40px 12px !important;
+}
+.attribute__card__body ul{
+  list-style-type: disc !important;
+}
+.attribute__card__body ol{
+  list-style-type: auto !important;
+}
+
 
 .content-para ul,
 .content-para ol{

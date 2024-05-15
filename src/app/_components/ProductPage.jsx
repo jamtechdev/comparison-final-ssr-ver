@@ -425,7 +425,7 @@ function ProductPage({
                     )}
                     <p>
                       <b>
-                        {product && product?.page_phases?.score_components} :
+                        {product && product?.page_phases?.score_components}:
                       </b>
                     </p>
                     {product.overall_score_descriptions?.score_components &&
