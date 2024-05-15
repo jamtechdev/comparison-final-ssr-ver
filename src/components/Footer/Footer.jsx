@@ -195,10 +195,13 @@ export default function Footer({ footerData }) {
             <ul className="footer_list-item">
               {footerData &&
                 footerData?.column_four?.categories?.map((cat, index) => {
+   
                   return (
                     cat?.title && (
                       <li key={index}>
-                        <a href={`/${cat.title}`}>{cat.title}</a>
+                        <a href={`/${cat?.permalink}`}>{cat?.title}</a>
+                        {/* {console.log(cat)} */}
+                
                       </li>
                     )
                   );

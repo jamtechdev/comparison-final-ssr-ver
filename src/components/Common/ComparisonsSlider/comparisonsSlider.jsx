@@ -7,9 +7,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
 
-export default function ComparisonsSlider(products) {
+export default function ComparisonsSlider({products}) {
   const router = useRouter();
-  // console.log(products?.products);
+  console.log(products);
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -20,10 +20,10 @@ export default function ComparisonsSlider(products) {
     }
   };
 
-  const filteredComparisons = products?.products?.filter(
+  const filteredComparisons = products?.filter(
     (comparison) => comparison.verdict_text === null
   );
-  // console.log(filteredComparisons);
+  console.log(filteredComparisons);
   return (
     <section className="comparisons-slider">
       <Swiper

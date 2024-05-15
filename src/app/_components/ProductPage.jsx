@@ -275,6 +275,12 @@ function ProductPage({
     // alert("hello");
   };
 
+  // check  vedirct_text present in popular comparision or not
+  const checkVerdictText = product?.alternative_comparisons?.filter(
+    (item) => item?.verdict_text === null
+  );
+  // console.log(checkVerdictText)
+
   return (
     <>
       {/* {console.log(product?.text_under_ranking)} */}
@@ -729,9 +735,7 @@ function ProductPage({
                               }
 
                               <p>
-                                <b>
-                                  {product?.page_phases?.score_components}:
-                                </b>
+                                <b>{product?.page_phases?.score_components}:</b>
                               </p>
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {
@@ -2053,8 +2057,8 @@ function ProductPage({
         </Container>
       </section>
 
-      {/* {console.log(product?.alternative_comparisons?.products)} */}
-      {product?.alternative_comparisons?.length > 0 && (
+      {/* {console.log()} */}
+      {checkVerdictText > 0 && (
         <section className="mt-3 mobile-popular-comparison">
           <Container>
             <Row>

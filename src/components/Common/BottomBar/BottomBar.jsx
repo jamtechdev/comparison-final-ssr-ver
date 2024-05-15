@@ -130,6 +130,7 @@ export default function BottomBar({
                           height={0}
                           alt=""
                         />
+                        {console.log(item)}
                         <p>{item.name}</p>
                         <i
                           className="ri-close-fill"
