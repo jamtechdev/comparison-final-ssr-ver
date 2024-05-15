@@ -101,7 +101,7 @@ p {
 .attribute__card__body ul,
 .attribute__card__body ol {
   font-weight: 400 !important;
-  font-size: 18px !important;
+  font-size: 17px !important;
   color: rgb(39 48 78 / 85%) !important;
   text-align: left !important;
   line-height: 30px !important;
@@ -109,9 +109,11 @@ p {
 }
 .attribute__card__body ul li::marker{
   font-size: 17px ;
+  opacity: 0.85;
 }
 .attribute__card__body ul ol::marker{
   font-size: 17px ;
+  opacity: 0.85;
 }
 .attribute__card__body ul{
   list-style-type: disc !important;
