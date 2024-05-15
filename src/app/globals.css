@@ -122,7 +122,9 @@ p {
   list-style-type: auto !important;
 }
 
-
+.para_content_text ol{
+  list-style: auto !important;
+}
 .content-para ul,
 .content-para ol{
   list-style: auto !important;
