@@ -838,7 +838,7 @@
   content: url("/images/check.svg") !important;
   position: absolute;
   right: 100%;
-  top: 10px;
+  top: 5px;
   bottom: 0;
   padding-right: 8px;
 }
@@ -857,7 +857,7 @@
   content: url("/images/close.svg") !important;
   position: absolute;
   right: 100%;
-  top: 14px !important;
+  top: 4px !important;
   bottom: 0;
   padding-right: 8px;
 }
