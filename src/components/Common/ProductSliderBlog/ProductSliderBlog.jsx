@@ -19,11 +19,10 @@ export default function ProductSliderBlog({ favSlider }) {
             return (
               <div className="product-card mb-3" key={index}>  
                 <img
-                  src={
-                    item.bannerImage === null
-                     
+                   src={
+                    item.bannerImage == null
                       ? `/images/nofound.png`
-                      :   item?.bannerImage
+                      : item?.bannerImage
                   }
                   width={0}
                   height={0}

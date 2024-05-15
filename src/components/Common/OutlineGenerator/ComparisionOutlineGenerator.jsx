@@ -37,7 +37,7 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
     let currentSubSubMain = null;
 
     headings?.forEach((heading) => {
-      const id = heading.getAttribute("id");  
+      const id = heading.getAttribute("id");
 
       if (heading.tagName === "H2") {
         currentMain = {
@@ -124,7 +124,7 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-          
+
                           handleClick(child?.id);
                         }}
                       >
@@ -157,7 +157,7 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
                                     onClick={(e) => {
                                       e.preventDefault();
                                       e.stopPropagation();
-                      
+
                                       handleClick(subSubMain?.id);
                                     }}
                                   >

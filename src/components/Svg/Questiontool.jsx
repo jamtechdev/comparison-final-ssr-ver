@@ -1,8 +1,11 @@
 import formatValue from "@/_helpers/formatValue";
 import { useRef, useState } from "react";
 import useScreenSize from "@/_helpers/useScreenSize";
+import Product from "../Common/ProductListing/Product/Product";
+import ProductPage from "@/app/_components/ProductPage";
+import CompareDiv from "../Common/ComparisanComponent/CompareDiv";
 
-const Questiontool = ({ attributes }) => {
+const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
   const [tooltipPosition, setTooltipPosition] = useState({
     top: 0,
     left: 0,
@@ -31,6 +34,7 @@ const Questiontool = ({ attributes }) => {
 
     setTooltipPosition({ ...tooltipPosition, left });
   }
+    // console.log(productPhaseData,"mahima")
 
   return (
     <div
@@ -52,18 +56,50 @@ const Questiontool = ({ attributes }) => {
         >
           {attributes?.description && (
             <p className="mb-2">
-              <b>What it is:{""}</b>
+             {
+  <Product/> && guidePhraseData && (
+    <b>{guidePhraseData.what_it_is}</b>
+  )
+}
+{
+  <ProductPage/> && productPhaseData && (
+    <b>{productPhaseData.what_it_is}</b>
+  )
+}
+{/* {
+  <CompareDiv/> &&  && (
+    <b>{guidePhraseData.what_it_is}</b>
+  )
+} */}
               {""} {attributes?.description}
             </p>
           )}
           {attributes?.when_matters && (
             <p className="mb-2">
-              <b>When it matters:{""}</b>
+              {
+  <Product/> && guidePhraseData && (
+    <b>{guidePhraseData.when_it_matters}</b>
+  )
+}
+{
+  <ProductPage/> && productPhaseData && (
+    <b>{productPhaseData.when_it_matters}</b>
+  )
+}
+
               {`${" "} ${attributes?.when_matters}`}
             </p>
           )}
-
-          <b>Score components: </b>
+        {
+  <Product/> && guidePhraseData && (
+    <b>{guidePhraseData.score_components}</b>
+  )
+}
+{
+  <ProductPage/> && productPhaseData && (
+    <b>{productPhaseData.score_components}</b>
+  )
+}
           {attributes.score_components &&
             attributes.score_components?.map((data, index) => {
               const roundedNumber = parseFloat(data?.attribute_evaluation);
@@ -74,6 +110,7 @@ const Questiontool = ({ attributes }) => {
                   : roundedNumber.toFixed(1);
               return (
                 <div className="scroe_section" key={index}>
+                  
                   <p className="text-end">{`${parseFloat(
                     data?.importance
                   ).toFixed(1)}%`}</p>

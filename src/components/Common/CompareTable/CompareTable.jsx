@@ -24,7 +24,7 @@ const CompareTable = React.memo(
       const newRef = useRef();
       ref ||= newRef;
 
-      console.log(guidePhraseData,"check guide")
+       console.log(guidePhraseData,"check guide")
       // mount
 
       useEffect(() => {
@@ -522,7 +522,7 @@ const CompareTable = React.memo(
                         {products[0]?.overall_score_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>{" "}
+                            <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
                             {
                               products[0]?.overall_score_descriptions
                                 ?.description
@@ -532,7 +532,7 @@ const CompareTable = React.memo(
                         {products[0]?.overall_score_descriptions
                           ?.when_matters && (
                           <p className="mb-2">
-                            <b>When it matters: </b>{" "}
+                            <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
                             {
                               products[0]?.overall_score_descriptions
                                 ?.when_matters
@@ -578,7 +578,7 @@ const CompareTable = React.memo(
                         {products[0]?.technical_score_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>{" "}
+                            <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
                             {
                               products[0]?.technical_score_descriptions
                                 ?.description
@@ -630,7 +630,7 @@ const CompareTable = React.memo(
                         {products[0]?.users_rating_descriptions
                           ?.description && (
                           <p className="mb-2">
-                            <b>What it is: </b>
+                            <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>
                             {
                               products[0]?.users_rating_descriptions
                                 ?.description
@@ -679,7 +679,7 @@ const CompareTable = React.memo(
                       {products[0]?.expert_reviews_descriptions
                         ?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
                           {
                             products[0]?.expert_reviews_descriptions
                               ?.description
@@ -728,7 +728,7 @@ const CompareTable = React.memo(
                     <div className="tooltip-display-content">
                       {products[0]?.popularity_descriptions?.description && (
                         <p className="mb-2">
-                          <b>What it is: </b>{" "}
+                          <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
                           {products[0]?.popularity_descriptions?.description}
                         </p>
                       )}
@@ -947,7 +947,7 @@ const CompareTable = React.memo(
                                   <div className="tooltip-display-content">
                                     {catAttribute?.description && (
                                       <p className="mb-2">
-                                        <b>What it is: </b>
+                                        <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>
                                         {catAttribute?.description}
                                       </p>
                                     )}
@@ -978,7 +978,7 @@ const CompareTable = React.memo(
                             className="show_more"
                             onClick={() => handlePagination(category.name)}
                           >
-                             {guidePhraseData && guidePhraseData?.show_all} <i className="ri-add-line"></i>
+                            {guidePhraseData && guidePhraseData?.show_all} <i className="ri-add-line"></i>
                           </span>
                         </td>
                       </tr>

@@ -360,6 +360,7 @@ const ProductCompareTable = React.memo(
                           {" "}
                           <>
                             <ul className="best-list-item d-none">
+                              {/* {console.log(product?.currency)} */}
                               {" "}
                               {product.price_websites &&
                                 product?.price_websites?.every(
@@ -369,7 +370,7 @@ const ProductCompareTable = React.memo(
                                     {/* <span className="txt">NOT AVAILABLE</span> */}
                                     <i>N/A</i>
                                     <span className="price font__16__inline">
-                                      ~ {product?.price} €
+                                      ~ {product?.price} {product?.currency}
                                     </span>
                                   </div>
                                 )}
@@ -908,12 +909,12 @@ const ProductCompareTable = React.memo(
                   {/* Ensure to set a unique key for each <tr> */}
                   <th className="sub-inner-padding">
                     <div className="tooltip-title">
-                    {data?.title}
+                 {data?.title}
               
                     <div className="tooltip-display-content">
                        {
                                 <p className="mb-2">
-                                  <b>What it is  : </b>
+                                  <b>{productPhaseData && productPhaseData?.what_it_is}  : </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
@@ -1116,7 +1117,7 @@ const ProductCompareTable = React.memo(
                             className="show_more"
                             onClick={() => handlePagination(category.name)}
                           >
-                            SHOW MORE <i className="ri-add-line"></i>
+                         {productPhaseData && productPhaseData?.show_all} <i className="ri-add-line"></i>
                           </span>
                         </td>
                       </tr>

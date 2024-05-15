@@ -2,7 +2,7 @@ import * as React from "react";
 import * as d3 from "d3";
 
 function lineChart(svgRef, lineChartData) {
-  console.log(lineChartData?.lineChartData[0], "xxx");
+  // console.log(lineChartData?.lineChartData[0], "xxx");
   let date_time_store = "";
   if (lineChartData?.lineChartData[0]?.format === "Y-m-d") {
     date_time_store = "%Y-%m-%d";

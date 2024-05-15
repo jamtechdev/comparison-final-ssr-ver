@@ -93,7 +93,11 @@ footer .search-icon {
 .footer-container {
   padding: 40px 1.5rem;
 }
-
+.footer-container .footer-content img {
+  width: 155px;
+  aspect-ratio: 155 / 52;
+  height: 52px;
+}
 .footer-container .footer-content p {
   line-height: 26px;
   margin: 5px 0 30px !important;
@@ -784,8 +788,10 @@ footer .search-icon {
 }
 
 .review-card img {
-  width: 100%;
-  height: 100px;
+  width: 60px;
+  height: 60px;
+  /* width: 100%;
+  height: 100px; */
   object-fit: contain;
   max-width: 100px;
   margin: auto;
@@ -1107,12 +1113,18 @@ footer .search-icon {
   border-radius: 50px !important;
   padding: 8px;
   margin: 8px 0 0 !important;
-} 
+}
 
-.product-categories-container {
+/* .product-categories-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 35px !important; /* Reduce the gap value with !important */
+
+.product-categories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  grid-gap: 20px !important;
+  gap: 20px !important;
 }
 
 .product-categories-item {
@@ -1149,7 +1161,7 @@ footer .search-icon {
   }
   .center-section {
     flex: 0 0 auto;
-    width: 60% !important; 
+    width: 60% !important;
   }
 }
 .left-side-bar,

@@ -46,6 +46,7 @@ export default function Product({
   order,
   searchParams,
   productPagination,
+  productPhaseData
 }) {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
@@ -372,7 +373,7 @@ export default function Product({
     // });
   }, [searchParams]);
 
-  // console.log(productData);
+  // console.log(productPhaseData,"check");
   // console.log(productPagination)
   return (
     <Fragment>
@@ -434,12 +435,10 @@ export default function Product({
             <img
               className="compare_image"
               src={
-                product?.mini_image
-                  ? product?.mini_image
+                product?.main_image
+                  ? product?.main_image
                   : "/images/nofound.png"
               }
-              width={0}
-              height={0}
               alt={`${product?.permalink}`}
               sizes="100%"
             />
@@ -990,6 +989,7 @@ export default function Product({
                                     data?.hover_phrase !== "" && "tooltip-title"
                                   }`}
                                 >
+                                  {console.log(data?.comment)}
                                   <span className="pros-crons-text">
                                     {data?.name} {renderValue(data)}
                                   </span>
@@ -998,6 +998,7 @@ export default function Product({
                                     info_not_verified={data.info_not_verified}
                                     hover_phrase={data.hover_phrase}
                                     data={data}
+                                    comment={data.comment}
                                   />
                                 </li>
                               </React.Fragment>
@@ -1120,19 +1121,20 @@ export default function Product({
                               {/* Tooltip content */}
                               {
                                 <p className="mb-2">
-                                  <b>What it is  : </b>
+                                  <b>{guidePhraseData && guidePhraseData?.what_it_is}  : </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
 
                               <p>
-                                <b>Score components :</b>
+                                <b>{guidePhraseData && guidePhraseData?.score_components }:</b>
                               </p>
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {
                                   return (
                                     <div className="scroe_section" key={index}>
                                       <p className="text-end">
+                              
                                         {`${parseFloat(
                                           hoverPhaseData?.percentage
                                         ).toFixed(1)}%`}
@@ -1445,7 +1447,8 @@ export default function Product({
                       <i className="ri-arrow-down-s-line"></i>
                     </div>
                     <div className="hide-btn">
-                      {guidePhraseData?.hide_all} <i className="ri-arrow-up-s-line"></i>
+                      {guidePhraseData?.hide_all}{" "}
+                      <i className="ri-arrow-up-s-line"></i>
                     </div>
                   </Accordion.Header>
                   {isLoading && (
@@ -1502,10 +1505,11 @@ export default function Product({
                               <Accordion.Header as="div">
                                 <div className="table-accordion-header">
                                   {guidePhraseData && guidePhraseData?.overall}
-                                  <Questiontool
+                                <Questiontool
                                     attributes={
                                       product?.overall_score_descriptions
                                     }
+                                    guidePhraseData={guidePhraseData}
                                   />
                                 </div>
                                 <span
@@ -1515,11 +1519,11 @@ export default function Product({
                                   {formatValue(product?.overall_score)}
                                 </span>
                                 <div className="show-btn">
-                                {guidePhraseData?.show_all}{" "}
+                                  {guidePhraseData?.show_all}{" "}
                                   <i className="ri-arrow-down-s-line"></i>
                                 </div>
                                 <div className="hide-btn">
-                                {guidePhraseData?.hide_all}{" "}
+                                  {guidePhraseData?.hide_all}{" "}
                                   <i className="ri-arrow-up-s-line"></i>
                                 </div>
                               </Accordion.Header>
@@ -1838,6 +1842,7 @@ export default function Product({
                                             attributes={
                                               product?.expert_reviews_descriptions
                                             }
+                                            guidePhraseData={guidePhraseData}
                                           />
                                         </div>
                                       </div>
@@ -1891,7 +1896,7 @@ export default function Product({
                                           )}
                                           <div className="tooltip-display-content why-tooltip">
                                             <div
-                                              className="mb-2 prosconsColor"
+                                              className=" prosconsColor"
                                               dangerouslySetInnerHTML={{
                                                 __html:
                                                   product.expert_reviews_rating_phase,
@@ -1993,6 +1998,7 @@ export default function Product({
                                           attributes={
                                             product?.popularity_descriptions
                                           }
+                                          guidePhraseData={guidePhraseData}
                                         />
                                       </div>
                                     </div>
@@ -2060,6 +2066,7 @@ export default function Product({
                                           attributes={
                                             product?.ratio_qulitiy_points_descriptions
                                           }
+                                          guidePhraseData={guidePhraseData}
                                         />
                                       </div>
                                     </div>
@@ -2147,6 +2154,7 @@ export default function Product({
                                                 attribute
                                               ][0]?.attribute_category
                                             }
+                                            guidePhraseData={guidePhraseData}
                                           />
                                         </div>
                                         <span
@@ -2238,6 +2246,7 @@ export default function Product({
                                                                 attributeValues &&
                                                                 attributeValues
                                                               }
+                                                              guidePhraseData={guidePhraseData}
                                                             />
                                                           </div>
                                                         </div>
@@ -2518,7 +2527,8 @@ export default function Product({
                                                   }, 600);
                                                 }}
                                               >
-                                                {"SHOW MORE "}
+                                                {/* {"SHOW MORE "} */}
+                                                {guidePhraseData && guidePhraseData?.show_all}
                                                 <i
                                                   className={`ri-${
                                                     initialDisplay <
@@ -2567,6 +2577,7 @@ export default function Product({
                                                 attribute
                                               ][0]?.attribute_category
                                             }
+                                            guidePhraseData={guidePhraseData}
                                           />
                                         </div>
                                         <span
@@ -2648,6 +2659,7 @@ export default function Product({
                                                                 attributeValues &&
                                                                 attributeValues
                                                               }
+                                                              guidePhraseData={guidePhraseData}
                                                             />
                                                           </div>
                                                         </div>
@@ -2736,12 +2748,13 @@ export default function Product({
                                                                           : "")}
                                                                     </span>
                                                                   }
+                                                                  {console.log(attributeValues?.comment)}
 
                                                                   {attributeValues.attribute_value !==
                                                                     "?" && (
                                                                     <ProsConsToolTip
                                                                       comment={
-                                                                        attributeValues?.commnet
+                                                                        attributeValues?.comment
                                                                       }
                                                                       hover_phrase={
                                                                         attributeValues &&
@@ -2750,48 +2763,46 @@ export default function Product({
                                                                     />
                                                                   )}
                                                                 </div>{" "}
-                                                                {attributeValues?.info_not_verified && (
-                                                                  <div
-                                                                    className="tooltip-title"
+                                                                {/* {console.log()} */}
+                                                                <div
+                                                                  className="tooltip-title"
+                                                                  style={{
+                                                                    textDecoration:
+                                                                      "none",
+                                                                    textDecorationLine:
+                                                                      "none",
+                                                                    textDecorationStyle:
+                                                                      "none",
+                                                                  }}
+                                                                >
+                                                                  {" "}
+                                                                  <i
                                                                     style={{
-                                                                      textDecoration:
-                                                                        "none",
-                                                                      textDecorationLine:
-                                                                        "none",
-                                                                      textDecorationStyle:
-                                                                        "none",
+                                                                      opacity:
+                                                                        "70%",
                                                                     }}
                                                                   >
                                                                     {" "}
-                                                                    <i
-                                                                      style={{
-                                                                        opacity:
-                                                                          "70%",
-                                                                      }}
-                                                                    >
-                                                                      {" "}
-                                                                      (?){" "}
-                                                                    </i>
-                                                                    <div
-                                                                      className="tooltip-display-content"
-                                                                      style={{
-                                                                        opacity:
-                                                                          "100%",
-                                                                      }}
-                                                                    >
-                                                                      Information
-                                                                      is not
-                                                                      verified.
-                                                                      If you
-                                                                      believe
-                                                                      this is a
-                                                                      mistake,
-                                                                      please,
-                                                                      contact
-                                                                      our team
-                                                                    </div>
+                                                                    (?){" "}
+                                                                  </i>
+                                                                  <div
+                                                                    className="tooltip-display-content"
+                                                                    style={{
+                                                                      opacity:
+                                                                        "100%",
+                                                                    }}
+                                                                  >
+                                                                    Information
+                                                                    is not
+                                                                    verified. If
+                                                                    you believe
+                                                                    this is a
+                                                                    mistake,
+                                                                    please,
+                                                                    contact our
+                                                                    team
                                                                   </div>
-                                                                )}
+                                                                </div>
                                                               </>
                                                             )}
                                                           {/* newww */}
@@ -2928,7 +2939,8 @@ export default function Product({
                                                   }, 600);
                                                 }}
                                               >
-                                                {"SHOW MORE "}
+                                                {/* {"SHOW MORE "} */}
+                                                {guidePhraseData && guidePhraseData?.show_all}
                                                 <i
                                                   className={`ri-${
                                                     initialDisplay <
@@ -2961,3 +2973,4 @@ export default function Product({
     </Fragment>
   );
 }
+("");

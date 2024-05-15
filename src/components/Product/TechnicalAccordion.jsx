@@ -122,7 +122,7 @@ const TechnicalAccordion = React.memo(
     };
     return (
       <>
-        <Accordion className="table-accordion w-50 p-0 left-accordion" >
+        <Accordion className="table-accordion w-50 p-0 left-accordion">
           <Accordion.Item eventKey="4">
             <Accordion.Header as="div">
               <div className="table-accordion-header">
@@ -163,7 +163,7 @@ const TechnicalAccordion = React.memo(
                           transform: isMobile
                             ? "translateX(-20%)"
                             : "translateX(-10%)",
-                          width: isMobile ? "250px" : "250px"
+                          width: isMobile ? "250px" : "250px",
                         }}
                       >
                         <p className="mb-2">
@@ -376,6 +376,7 @@ const TechnicalAccordion = React.memo(
                         Expert reviews
                         <QuestionIcon
                           attributes={product?.expert_reviews_descriptions}
+                          productPhaseData={productPhaseData}
                         />
                       </div>
                     </div>
@@ -417,7 +418,7 @@ const TechnicalAccordion = React.memo(
 
                         <div className="tooltip-display-content why-tooltip">
                           <div
-                            className="mb-2 prosconsColor"
+                            className=" prosconsColor"
                             dangerouslySetInnerHTML={{
                               __html: product.expert_reviews_rating_phase,
                             }}
@@ -451,7 +452,7 @@ const TechnicalAccordion = React.memo(
                                               data?.website_name
                                             )}`}
                                           >
-                                            <img src={`${data?.image}`} />
+                                            <img src={`${data?.image}`} alt={data?.alt} />
                                           </a>
                                         )}
 
@@ -507,6 +508,7 @@ const TechnicalAccordion = React.memo(
                       {productPhaseData && productPhaseData?.popularity}
                       <QuestionIcon
                         attributes={product?.popularity_descriptions}
+                        productPhaseData={productPhaseData}
                       />
                     </div>
                   </div>
@@ -562,6 +564,7 @@ const TechnicalAccordion = React.memo(
                         productPhaseData?.ratio_quality_price_points}
                       <QuestionIcon
                         attributes={product?.ratio_qulitiy_points_descriptions}
+                        productPhaseData={productPhaseData}
                       />
                     </div>
                   </div>
@@ -631,6 +634,8 @@ const TechnicalAccordion = React.memo(
                               product.attributes[attribute][0]
                                 ?.attribute_category
                             }
+                            productPhaseData={productPhaseData}
+                            
                           />
                         </div>
                         <span
@@ -684,6 +689,7 @@ const TechnicalAccordion = React.memo(
                                           attributes={
                                             attributeValues && attributeValues
                                           }
+                                          productPhaseData={productPhaseData}
                                         />
                                       </div>
                                     </div>
@@ -954,7 +960,8 @@ const TechnicalAccordion = React.memo(
                                   }, 600);
                                 }}
                               >
-                                {"SHOW MORE "}
+                                {/* {"SHOW MORE "} */}
+                                {productPhaseData && productPhaseData?.show_all}
                                 <i
                                   className={`ri-${
                                     initialDisplay <
@@ -987,6 +994,7 @@ const TechnicalAccordion = React.memo(
                           attributes={
                             product.attributes[attribute][0]?.attribute_category
                           }
+                          productPhaseData={productPhaseData}
                         />
                       </div>
                       <span
@@ -1040,7 +1048,7 @@ const TechnicalAccordion = React.memo(
                                         attributes={
                                           attributeValues && attributeValues
                                         }
-                                      
+                                        productPhaseData={productPhaseData}
                                       />
                                     </div>
                                   </div>
@@ -1135,6 +1143,7 @@ const TechnicalAccordion = React.memo(
                                                       : "")}
                                                 </span>
                                               }
+                                              {console.log(attributeValues?.commnet)}
 
                                               {attributeValues.attribute_value !==
                                                 "?" && (
@@ -1326,7 +1335,8 @@ const TechnicalAccordion = React.memo(
                                 }, 600);
                               }}
                             >
-                              {"SHOW MORE "}
+                              {/* {"SHOW MORE "} */}
+                              {productPhaseData && productPhaseData?.show_all}
                               <i
                                 className={`ri-${
                                   initialDisplay <

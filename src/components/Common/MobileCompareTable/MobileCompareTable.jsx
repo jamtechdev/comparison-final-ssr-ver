@@ -596,7 +596,7 @@ export default function MobileCompareTable({
                                   {products[0]?.overall_score_descriptions
                                     ?.description && (
                                     <p className="mb-2">
-                                      <b>What it is: </b>{" "}
+                                      <b>{productPhaseData && productPhaseData?.what_it_is}: </b>{" "}
                                       {
                                         products[0]?.overall_score_descriptions
                                           ?.description
@@ -606,7 +606,7 @@ export default function MobileCompareTable({
                                   {products[0]?.overall_score_descriptions
                                     ?.when_it_matters && (
                                     <p className="mb-2">
-                                      <b>When it matters: </b>{" "}
+                                      <b>{productPhaseData && productPhaseData?.when_it_matters}: </b>{" "}
                                       {
                                         products[0]?.overall_score_descriptions
                                           ?.when_it_matters
@@ -663,7 +663,7 @@ export default function MobileCompareTable({
                                   {products[0]?.technical_score_descriptions
                                     ?.description && (
                                     <p className="mb-2">
-                                      <b>What it is: </b>{" "}
+                                      <b>{productPhaseData && productPhaseData?.what_it_is}: </b>{" "}
                                       {
                                         products[0]
                                           ?.technical_score_descriptions
@@ -674,7 +674,7 @@ export default function MobileCompareTable({
                                   {products[0]?.technical_score_descriptions
                                     ?.when_it_matters && (
                                     <p className="mb-2">
-                                      <b>When it matters: </b>{" "}
+                                      <b>{productPhaseData && productPhaseData?.when_it_matters}: </b>{" "}
                                       {
                                         products[0]
                                           ?.technical_score_descriptions
@@ -731,7 +731,7 @@ export default function MobileCompareTable({
                                       {products[0]?.users_rating_descriptions
                                         ?.description && (
                                         <p className="mb-2">
-                                          <b>What it is: </b>{" "}
+                                          <b>{productPhaseData && productPhaseData?.what_it_is}: </b>{" "}
                                           {
                                             products[0]
                                               ?.users_rating_descriptions
@@ -742,7 +742,7 @@ export default function MobileCompareTable({
                                       {products[0]?.users_rating_descriptions
                                         ?.when_matters && (
                                         <p className="mb-2">
-                                          <b>When it matters: </b>{" "}
+                                          <b>{productPhaseData && productPhaseData?.when_it_matters}: </b>{" "}
                                           {
                                             products[0]
                                               ?.users_rating_descriptions
@@ -797,7 +797,7 @@ export default function MobileCompareTable({
                                     ?.ratio_qulitiy_points_descriptions
                                     ?.description && (
                                     <p className="mb-2">
-                                      <b>What it is: </b>{" "}
+                                      <b>{productPhaseData && productPhaseData?.what_it_is}: </b>{" "}
                                       {
                                         products[0]
                                           ?.ratio_qulitiy_points_descriptions
@@ -808,7 +808,7 @@ export default function MobileCompareTable({
                                   {products[0]?.technical_score_descriptions
                                     ?.when_it_matters && (
                                     <p className="mb-2">
-                                      <b>When it matters: </b>{" "}
+                                      <b>{productPhaseData && productPhaseData?.when_it_matters}: </b>{" "}
                                       {
                                         products[0]
                                           ?.technical_score_descriptions
@@ -876,13 +876,13 @@ export default function MobileCompareTable({
                                   <div className="tooltip-display-content" style={{ transform: "translateX(-65%)" }}>
                        {
                                 <p className="mb-2">
-                                  <b>What it is  : </b>
+                                  <b>{productPhaseData && productPhaseData?.what_it_is}  : </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
 
                               <p>
-                                <b>Score components :</b>
+                                <b>{productPhaseData && productPhaseData?.score_components} :</b>
                               </p>
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {
@@ -1192,7 +1192,7 @@ export default function MobileCompareTable({
                                         handlePagination(product.name)
                                       }
                                     >
-                                      SHOW MORE <i className="ri-add-line"></i>
+                                      {productPhaseData && productPhaseData?.show_all}   <i className="ri-add-line"></i>
                                     </span>
                                   </td>
                                 </tr>

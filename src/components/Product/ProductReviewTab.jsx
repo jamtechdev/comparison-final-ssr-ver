@@ -10,7 +10,7 @@ import Rating from "../Common/Rating/Rating";
 import formatValue from "@/_helpers/formatValue";
 
 function ProductReviewTab({ productReview }) {
-  // console.log(productReview?.length);
+  // console.log(productReview);
   return (
     <>
       {" "}
@@ -53,6 +53,7 @@ function ProductReviewTab({ productReview }) {
                   >
                     <img
                       src={data?.logo ? data?.logo : "/images/nofound.png"}
+                      alt={data?.alt}
                     />
                     <div className="rating__count">
                       <span>{formatValue(data?.rating)}</span>

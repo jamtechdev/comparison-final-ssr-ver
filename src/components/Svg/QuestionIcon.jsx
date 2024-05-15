@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
 import useScreenSize from "@/_helpers/useScreenSize";
-const QuestionIcon = ({ attributes }) => {
+import Product from "../Common/ProductListing/Product/Product";
+import ProductPage from "@/app/_components/ProductPage";
+import CompareDiv from "../Common/ComparisanComponent/CompareDiv";
+
+const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhaseData}) => {
   const [tooltipPosition, setTooltipPosition] = useState({
     top: 0,
     left: 0,
@@ -28,6 +32,7 @@ const QuestionIcon = ({ attributes }) => {
   
     setTooltipPosition({ ...tooltipPosition, left, width: tooltipWidth });
   }
+  // console.log(productPhaseData,"hey")
   const {isMobile}=useScreenSize();
   return (
     <div
@@ -50,19 +55,51 @@ const QuestionIcon = ({ attributes }) => {
     >
           {attributes?.description && (
             <p className="mb-2" >
-              <b>What it is: </b>
+             {
+  <Product/> && guidePhraseData && (
+    <b>{guidePhraseData.what_it_is}</b>
+  )
+}
+{
+  <ProductPage/> && productPhaseData && (
+    <b>{productPhaseData.what_it_is}</b>
+  )
+}
+{
+  <CompareDiv/> && comparePhaseData &&(
+    <b>{comparePhaseData.what_it_is}</b>
+  )
+}
+
+              {/* <b>What it is:{""}</b> */}
               {attributes?.description}
             </p>
           )}
           {attributes?.when_matters && (
             <p className="mb-2">
-              <b>When it matters: </b>
+              {
+  <Product/> && guidePhraseData && (
+    <b>{guidePhraseData.when_it_matters}</b>
+  )
+}
+{
+  <ProductPage/> && productPhaseData && (
+    <b>{productPhaseData.when_it_matters}</b>
+  )
+}
+{
+  <CompareDiv/> && comparePhaseData &&(
+    <b>{comparePhaseData.when_it_matters}</b>
+  )
+}
+           
+              {/* <b> When it matters:{""}</b> */}
               {attributes?.when_matters}
             </p>
-          )}
+          )} 
            {attributes?.importance && (
             <p className="mb-2">
-              <b>Importance: </b>
+               <b>Importance: </b>
               {attributes?.importance}
             </p>
           )}

@@ -23,7 +23,6 @@ async function counterApi(data) {
     data
   );
 }
-
 // search start https://panel.mondopedia.it/api/v1/
 async function searchFilter(query) {
   return await axios.get(

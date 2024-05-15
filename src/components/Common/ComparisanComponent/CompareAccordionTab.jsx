@@ -338,7 +338,7 @@ const CompareAccordionTab = React.memo(
                                               <>
                                                 <div className="tooltip-display-content">
                                                   <span
-                                                    className="mb-2 prosconsColor"
+                                                    className="prosconsColor"
                                                     dangerouslySetInnerHTML={{
                                                       __html: item?.hover_phase,
                                                     }}
@@ -347,9 +347,9 @@ const CompareAccordionTab = React.memo(
                                               </>
                                             )}
                                           </span>
-
                                           <QuestionIcon
                                             attributes={item?.when_matters}
+comparePhaseData={comparePhaseData}
                                           />
 
                                           <small className="d-block tooltip-title">
@@ -357,7 +357,7 @@ const CompareAccordionTab = React.memo(
                                               <>
                                                 <span className="tooltip-display-content">
                                                   <span
-                                                    className="mb-2 prosconsColor"
+                                                    className="prosconsColor"
                                                     dangerouslySetInnerHTML={{
                                                       __html: item?.hover_phase,
                                                     }}
@@ -425,7 +425,7 @@ const CompareAccordionTab = React.memo(
                                           <>
                                             <div className="tooltip-display-content">
                                               <span
-                                                className="mb-2 prosconsColor"
+                                                className="prosconsColor"
                                                 dangerouslySetInnerHTML={{
                                                   __html: item?.hover_phase,
                                                 }}
@@ -434,9 +434,9 @@ const CompareAccordionTab = React.memo(
                                           </>
                                         )}
                                       </span>
-
                                       <QuestionIcon
                                         attributes={item?.when_matters}
+                                        comparePhaseData={comparePhaseData}
                                       />
 
                                       <small className="d-block tooltip-title">
@@ -444,7 +444,7 @@ const CompareAccordionTab = React.memo(
                                           <>
                                             <span className="tooltip-display-content">
                                               <span
-                                                className="mb-2 prosconsColor"
+                                                className="prosconsColor"
                                                 dangerouslySetInnerHTML={{
                                                   __html: item?.hover_phase,
                                                 }}
@@ -509,7 +509,7 @@ const CompareAccordionTab = React.memo(
                                             <>
                                               <div className="tooltip-display-content">
                                                 <span
-                                                  className="mb-2 prosconsColor"
+                                                  className="prosconsColor"
                                                   dangerouslySetInnerHTML={{
                                                     __html: item?.hover_phase,
                                                   }}
@@ -522,6 +522,7 @@ const CompareAccordionTab = React.memo(
                                         </span>
                                         <QuestionIcon
                                           attributes={item?.when_matters}
+                                          comparePhaseData={comparePhaseData}
                                         />
 
                                         <small className="d-block tooltip-title invisible">
@@ -531,7 +532,7 @@ const CompareAccordionTab = React.memo(
                                                 className="toolt
                                             ip-display-content"
                                               >
-                                                <span className="mb-2 prosconsColor">
+                                                <span className="prosconsColor">
                                                   {/* {item?.hover_phase} */}
                                                 </span>
                                               </span>
@@ -680,7 +681,7 @@ const CompareAccordionTab = React.memo(
                                           <>
                                             <div className="tooltip-display-content">
                                               <span
-                                                className="mb-2 prosconsColor"
+                                                className="prosconsColor"
                                                 dangerouslySetInnerHTML={{
                                                   __html: item?.hover_phase,
                                                 }}
@@ -692,6 +693,7 @@ const CompareAccordionTab = React.memo(
 
                                       <QuestionIcon
                                         attributes={item?.when_matters}
+                                        comparePhaseData={comparePhaseData}
                                       />
 
                                       <small className="d-block tooltip-title">
@@ -699,7 +701,7 @@ const CompareAccordionTab = React.memo(
                                           <>
                                             <span className="tooltip-display-content">
                                               <span
-                                                className="mb-2 prosconsColor"
+                                                className="prosconsColor"
                                                 dangerouslySetInnerHTML={{
                                                   __html: item?.hover_phase,
                                                 }}
@@ -762,7 +764,7 @@ const CompareAccordionTab = React.memo(
                                               <>
                                                 <div className="tooltip-display-content">
                                                   <span
-                                                    className="mb-2 prosconsColor"
+                                                    className="prosconsColor"
                                                     dangerouslySetInnerHTML={{
                                                       __html: item?.hover_phase,
                                                     }}
@@ -774,6 +776,7 @@ const CompareAccordionTab = React.memo(
                                           </span>
                                           <QuestionIcon
                                             attributes={item?.when_matters}
+                                            comparePhaseData={comparePhaseData}
                                           />
 
                                           <small className="d-block tooltip-title">
@@ -781,7 +784,7 @@ const CompareAccordionTab = React.memo(
                                               <>
                                                 <span className="tooltip-display-content">
                                                   <span
-                                                    className="mb-2 prosconsColor"
+                                                    className="prosconsColor"
                                                     dangerouslySetInnerHTML={{
                                                       __html: item?.hover_phase,
                                                     }}
@@ -847,7 +850,7 @@ const CompareAccordionTab = React.memo(
                                               <>
                                                 <div className="tooltip-display-content">
                                                   <span
-                                                    className="mb-2 prosconsColor"
+                                                    className="prosconsColor"
                                                     dangerouslySetInnerHTML={{
                                                       __html: item?.hover_phase,
                                                     }}
@@ -859,6 +862,7 @@ const CompareAccordionTab = React.memo(
                                           </span>
                                           <QuestionIcon
                                             attributes={item?.when_matters}
+                                            comparePhaseData={comparePhaseData}
                                           />
 
                                           <small className="d-block tooltip-title">
@@ -866,7 +870,7 @@ const CompareAccordionTab = React.memo(
                                               <>
                                                 <span className="tooltip-display-content">
                                                   <span
-                                                    className="mb-2 prosconsColor"
+                                                    className="prosconsColor"
                                                     dangerouslySetInnerHTML={{
                                                       __html: item?.hover_phase,
                                                     }}

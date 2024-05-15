@@ -26,13 +26,13 @@ function CorrelationChart(props) {
     rangeMaxY,
   } = props;
 
+  // console.log(correlationChartData);
+
   const svgContainer = useRef();
-  let maxY = rangeMaxY ?? d3.max(correlationChartData.map((d) => d.value));
-  let minY = rangeMinY ?? d3.min(correlationChartData.map((d) => d.value));
-  let maxX =
-    rangeMaxX ?? d3.max(correlationChartData.map((d) => Number(d.label)));
-  let minX =
-    rangeMinX ?? d3.min(correlationChartData.map((d) => Number(d.label)));
+  let maxY = rangeMaxY ?? d3.max(correlationChartData.map((d) => Number(d.y)));
+  let minY = rangeMinY ?? d3.min(correlationChartData.map((d) => Number(d.y)));
+  let maxX = rangeMaxX ?? d3.max(correlationChartData.map((d) => Number(d.x)));
+  let minX = rangeMinX ?? d3.min(correlationChartData.map((d) => Number(d.x)));
   let x_tick = xTick;
   let y_tick = yTick;
 
@@ -249,10 +249,10 @@ function CorrelationChart(props) {
       .enter()
       .append("circle")
       .attr("cx", function (d) {
-        return xScale(d.label) - margin.left;
+        return xScale(d.x) - margin.left;
       })
       .attr("cy", function (d) {
-        return yScale(d.value) - margin.top;
+        return yScale(d.y) - margin.top;
       })
       .attr("r", 7)
       .attr("class", "hover-effect")
@@ -263,11 +263,9 @@ function CorrelationChart(props) {
           .html(
             `<div class="tooltip-font">
             <span style="margin-right:4px">
-            ${data.label} ${xUnit} , ${data.value} ${yUnit}
+            ${data.x} ${xUnit} , ${data.y} ${yUnit}
             </span>
-            <span>${
-              data.productCount ? `(${data.productCount})` : ""
-            }</span></div>`
+            <span>${data.name ? `(${data.name})` : ""}</span></div>`
           )
           .style("left", e.clientX - 20 + "px")
           .style("top", e.clientY - 50 + "px");

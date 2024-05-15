@@ -318,6 +318,7 @@ export default function ComparisonTable({
                     productScoreLabelIndex === index && (
                       <span className="best-tag-product">
                         {comparisonPhaseData && comparisonPhaseData?.winner}
+                        {/* {data?.winner} */}
                       </span>
                     )}
 
@@ -632,7 +633,7 @@ export default function ComparisonTable({
                   <div className="tooltip-display-content">
                     {products[0]?.popularity_descriptions?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>{" "}
+                        <b>{comparisonPhaseData && comparisonPhaseData?.what_it_is}: </b>{" "}
                         {products[0]?.popularity_descriptions?.description}
                       </p>
                     )}
@@ -780,7 +781,7 @@ export default function ComparisonTable({
                   <div className="tooltip-display-content">
                     {products[0]?.expert_reviews_descriptions?.description && (
                       <p className="mb-2">
-                        <b>What it is: </b>{" "}
+                        <b>{comparisonPhaseData && comparisonPhaseData?.what_it_is}: </b>{" "}
                         {products[0]?.expert_reviews_descriptions?.description}
                       </p>
                     )}
@@ -993,7 +994,7 @@ export default function ComparisonTable({
                           className="show_more"
                           onClick={() => handlePagination(category.name)}
                         >
-                          SHOW MORE <i className="ri-add-line"></i>
+                         {comparisonPhaseData && comparisonPhaseData?.show_all} <i className="ri-add-line"></i>
                         </span>
                       </td>
                     </tr>
