@@ -320,7 +320,7 @@ function ProductPage({
                     </div>
                   </div>
                 )}
-                {console.log(product?.updated_at)}
+                {/* {console.log(product?.updated_at)} */}
                 <span>
                   {product && product?.page_phases?.updated}
                   <i>
@@ -723,14 +723,14 @@ function ProductPage({
                             <div className="tooltip-display-content">
                               {
                                 <p className="mb-2">
-                                  <b>{product?.page_phases?.what_it_is} : </b>
+                                  <b>{product?.page_phases?.what_it_is}: </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
 
                               <p>
                                 <b>
-                                  {product?.page_phases?.score_components} :
+                                  {product?.page_phases?.score_components}:
                                 </b>
                               </p>
                               {data?.hover_phase.attributes?.map(

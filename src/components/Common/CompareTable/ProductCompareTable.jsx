@@ -327,6 +327,7 @@ const ProductCompareTable = React.memo(
                     )}
 
                     <p className="device-name">
+                      
                       {/* <a href="">/product/${product?.permalik</a> */}
                       <a
                         href={`/${product?.category_url}/${product?.permalink}`}
@@ -359,7 +360,7 @@ const ProductCompareTable = React.memo(
                           {" "}
                           <>
                             <ul className="best-list-item d-none">
-                              {/* {console.log(product?.currency)} */}{" "}
+                              {console.log(product?.currency)}
                               {product.price_websites &&
                                 product?.price_websites?.every(
                                   (data) => data.price === null
@@ -405,7 +406,7 @@ const ProductCompareTable = React.memo(
                                                   )}`}
                                                   className="font__16__inline"
                                                 >
-                                                  {data?.price} {data?.currency}
+                                                  {data?.price} {product?.currency}
                                                 </a>
                                               </span>
                                             </>
@@ -464,7 +465,7 @@ const ProductCompareTable = React.memo(
                             <i>N/A</i>
 
                             <span className="price font__16__inline">
-                              ~ {product?.price} €
+                              ~ {product?.price} {product?.currency}
                             </span>
                           </div>
                         )}
@@ -503,7 +504,8 @@ const ProductCompareTable = React.memo(
                                                 )}`}
                                                 className="font__16__inline"
                                               >
-                                                {data?.price} €
+                                                {/* {console.log(data?.currency)} */}
+                                                {data?.price} {product?.currency}
                                               </a>
                                             </span>
                                           </>

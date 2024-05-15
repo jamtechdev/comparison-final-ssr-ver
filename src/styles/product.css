@@ -838,7 +838,7 @@
   content: url("/images/check.svg") !important;
   position: absolute;
   right: 100%;
-  top: 5px;
+  top: 10px;
   bottom: 0;
   padding-right: 8px;
 }
