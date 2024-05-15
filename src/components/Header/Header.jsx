@@ -165,7 +165,7 @@ export default function Header({ headerData, headerPhase, logo }) {
             </div>
           </Col>
           <Col lg={2} md={8} xs={8}>
-            <a href="/">
+            <a href="/" className="mobile_logo">
               <img
                 src={`${logo}`}
                 className="logo"

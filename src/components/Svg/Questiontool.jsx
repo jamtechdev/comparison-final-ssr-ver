@@ -2,13 +2,13 @@ import formatValue from "@/_helpers/formatValue";
 import { useRef, useState } from "react";
 import useScreenSize from "@/_helpers/useScreenSize";
 
-const Questiontool = ({ attributes }) => {
+const Questiontool = ({ attributes, phraseData }) => {
   const [tooltipPosition, setTooltipPosition] = useState({
     top: 0,
     left: 0,
   });
   const tooltipRef = useRef(null);
-  const {isMobile}=useScreenSize()
+  const { isMobile } = useScreenSize();
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
     if (!tooltip) return;
@@ -52,18 +52,22 @@ const Questiontool = ({ attributes }) => {
         >
           {attributes?.description && (
             <p className="mb-2">
-              <b>What it is:{""}</b>
+              <b>
+                {phraseData && phraseData?.what_it_is}:{""}
+              </b>
               {""} {attributes?.description}
             </p>
           )}
           {attributes?.when_matters && (
             <p className="mb-2">
-              <b>When it matters:{""}</b>
+              <b>
+                {phraseData && phraseData?.when_it_matters}:{""}
+              </b>
               {`${" "} ${attributes?.when_matters}`}
             </p>
           )}
 
-          <b>Score components: </b>
+          <b>{phraseData && phraseData?.score_components}: </b>
           {attributes.score_components &&
             attributes.score_components?.map((data, index) => {
               const roundedNumber = parseFloat(data?.attribute_evaluation);
@@ -89,11 +93,10 @@ const Questiontool = ({ attributes }) => {
                           : "#85B2F1",
                     }}
                   >
-                   {/* { console.log(data?.attribute_evaluation)} */}
+                    {/* { console.log(data?.attribute_evaluation)} */}
                     {formattedNumber != "NaN"
                       ? formattedNumber
                       : data?.attribute_evaluation}
-                      
                   </span>
                   <p style={{ textTransform: "none" }}>
                     {" "}

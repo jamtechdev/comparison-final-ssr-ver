@@ -11,7 +11,7 @@ import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenera
 import debounce from "lodash/debounce";
 
 export default function BlogPage({ slug, blogData, categorySlug }) {
-  // console.log(blogData[0]?.data?.text_part);
+  // console.log(blogData[0]?.data?.page_phases?.updated);
   const [activeOutlineId, setActiveOutlineId] = useState("");
   const contentRef = useRef(null);
   const lastHeadingIdRef = useRef(null);
@@ -73,7 +73,6 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
       <div>{useChart()}</div>
       <section className="product-header">
-        
         <Container>
           <Row className="align-items-center">
             <Col md={12}>
@@ -89,7 +88,6 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
 
             <Col md={12} lg={12} xl={3}>
               <div className="user-info-section">
-              
                 {blogData[0]?.data?.author && (
                   <div className="user-section">
                     {blogData[0]?.data?.author?.image && (
@@ -116,7 +114,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   </div>
                 )}
                 <span>
-                  updated :{""}
+                 { blogData[0]?.data?.page_phases?.updated} {""}
                   {""}{" "}
                   <i>
                     {""} {blogData[0]?.data?.updated_at}
@@ -224,7 +222,6 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
         <Container>
           <Row className="my-3">
             <Col md={12}>
-            
               <h2 className="heading-primary secondary blog-post">
                 {blogData[0]?.data?.page_phases?.blog_posts}
               </h2>

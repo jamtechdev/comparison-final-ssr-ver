@@ -143,9 +143,9 @@ function CorrelationChart(props) {
       .select(svgContainer.current)
       .append("svg")
       // .attr("width", "520px !important")
-      .attr("height", 220)
+      .attr("height", 250)
       // .attr("viewBox", isMobileScreen ? "15 0 410 400" : "0 150 400  210")
-      .attr("viewBox", isMobileScreen ? "-20 150 500 100" : "-20 150 500 100")
+      .attr("viewBox", isMobileScreen ? "-20 150 500 60" : "-20 150 500 60")
       .append("g")
       .style("background-color", "#fff")
       .attr("transform", "translate(" + translateX + "," + margin.top + ")");

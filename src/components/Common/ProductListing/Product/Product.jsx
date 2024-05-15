@@ -1120,13 +1120,21 @@ export default function Product({
                               {/* Tooltip content */}
                               {
                                 <p className="mb-2">
-                                  <b>What it is : </b>
+                                  <b>
+                                    {guidePhraseData &&
+                                      guidePhraseData?.what_it_is}{" "}
+                                    :{" "}
+                                  </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
 
                               <p>
-                                <b>Score components :</b>
+                                <b>
+                                  {guidePhraseData &&
+                                    guidePhraseData?.score_components}{" "}
+                                  :
+                                </b>
                               </p>
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {
@@ -1507,6 +1515,7 @@ export default function Product({
                                     attributes={
                                       product?.overall_score_descriptions
                                     }
+                                    phraseData={guidePhraseData}
                                   />
                                 </div>
                                 <span
@@ -2148,6 +2157,7 @@ export default function Product({
                                                 attribute
                                               ][0]?.attribute_category
                                             }
+                                            phraseData={guidePhraseData}
                                           />
                                         </div>
                                         <span
@@ -2759,13 +2769,14 @@ export default function Product({
                                                                         attributeValues &&
                                                                         attributeValues.hover_phase
                                                                       }
-                                                                      // info_not_verified={
-                                                                      //   attributeValues &&
-                                                                      //   attributeValues
-                                                                      // }
+                                                                      info_not_verified={
+                                                                        attributeValues &&
+                                                                        attributeValues?.info_not_verified
+                                                                      }
                                                                     />
                                                                   )}
                                                                 </div>{" "}
+                                                                {/* {console.log(attributeValues?.info_not_verified)} */}
                                                                 {attributeValues?.info_not_verified && (
                                                                   <div
                                                                     className="tooltip-title"
@@ -2819,7 +2830,7 @@ export default function Product({
                                                                     </div>
                                                                   </div>
                                                                 )}
-                                                                {/* {console.log()} */}
+                                                            
                                                               </>
                                                             )}
                                                           {/* newww */}

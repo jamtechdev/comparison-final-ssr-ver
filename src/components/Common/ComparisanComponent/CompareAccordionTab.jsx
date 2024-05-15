@@ -234,6 +234,10 @@ const CompareAccordionTab = React.memo(
       setHighlighted(hovered);
     };
     // console.log(comparePhaseData)
+    useEffect(() => {
+      handleAccordionChange("total" ,"pros");
+    }, [activatab])
+    
     return (
       <>
         <Row>
@@ -297,11 +301,12 @@ const CompareAccordionTab = React.memo(
                   >
                     <Row>
                       {!isLoading && <Loader pageType={"comparison"} />}
+                      {/* {console.log(apiData)} */}
                       <Col md={8} xl={8} className="dividers">
                         <Tab.Content className="compare-tab-content">
                           <Tab.Pane eventKey={tabvalue?.pros}>
                             <ul>
-                              {apiData && tabvalue?.pros == "total"
+                              {apiData && tabvalue?.pros === "total"
                                 ? apiData?.total_average_pros
                                     ?.slice(0, 8)
                                     ?.map((item, index) => {

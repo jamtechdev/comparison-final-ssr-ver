@@ -486,7 +486,7 @@ function CompareDiv({
                   </div>
                 </Col>
                 <Col md={6}>
-                  <div className="pros-corns-section corns">
+                  <div className="pros-corns-section pros">
                     <div className="pros-header">
                       {bestAlternative?.page_phases?.when_should_buy}
                       {/* Who SHOULD NOT BUY {compareProDataSec?.name} ? */}

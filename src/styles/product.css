@@ -838,7 +838,7 @@
   content: url("/images/check.svg") !important;
   position: absolute;
   right: 100%;
-  top: 14px;
+  top: 10px;
   bottom: 0;
   padding-right: 8px;
 }
@@ -868,10 +868,10 @@
 }
 
 .pros-corns-section ul li {
-  padding: 12px 0 5px;
+  padding: 4px 0 5px;
   font-weight: 400;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 26px;
   color: rgb(39 48 78 / 70%);
   font-family: "Lato", sans-serif !important;
 }
