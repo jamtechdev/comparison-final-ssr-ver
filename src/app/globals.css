@@ -232,7 +232,7 @@ select {
   font-size: 18px;
   color: rgba(39, 48, 78, 0.85);
   line-height: 30px;
-  padding-bottom: 15px;
+  padding-bottom: 12px;
 }
 
 .para_content_text ul {
@@ -244,7 +244,7 @@ h2.site-main-heading {
 h1.site-main-heading {
   line-height: 46px;
 }
-
+ 
 .site-main-heading {
   font-weight: 400 !important;
   font-size: 30px;
