@@ -99,6 +99,11 @@ p {
   padding: 0 40px 12px !important;
 }
 
+.content-para ul,
+.content-para ol{
+  list-style: auto !important;
+}
+
 .content-para p * {
   opacity: 100% !important;
 }
@@ -2379,4 +2384,18 @@ a.product_link:hover {
 .content-para h2 {
   line-height: 42px !important;
   padding-top: 12px !important;
+}
+
+.box__content__section__textarea ul,
+.box__content__section__textarea ol{
+  padding-left: 2rem !important;
+}
+
+.box__content__section__textarea ul{
+  list-style: disc !important;
+
+}
+
+.box__content__section__textarea ol{
+  list-style-type: decimal !important;
 }

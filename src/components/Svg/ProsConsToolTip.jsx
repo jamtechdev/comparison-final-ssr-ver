@@ -7,6 +7,7 @@ const ProsConsToolTip = (props) => {
     comment,
     hover_phrase,
     info_not_verified,
+    info_not_verified_text,
     data,
     
     typeComp,
@@ -74,9 +75,8 @@ const ProsConsToolTip = (props) => {
               <hr />
 
               <span className="mb-2">
-                <i>
-                  (Information is not verified. If you believe this is a
-                  mistake, please, contact our team.)
+                <i dangerouslySetInnerHTML={{ __html: info_not_verified_text }}>
+                  
                 </i>
               </span>
             </>

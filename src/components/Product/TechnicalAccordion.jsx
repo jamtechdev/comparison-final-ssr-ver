@@ -1158,9 +1158,9 @@ const TechnicalAccordion = React.memo(
                                                       : "")}
                                                 </span>
                                               }
-                                              {console.log(
+                                              {/* {console.log(
                                                 attributeValues?.info_not_verified
-                                              )}
+                                              )} */}
 
                                               {attributeValues.attribute_value !==
                                                 "?" && (
@@ -1174,12 +1174,15 @@ const TechnicalAccordion = React.memo(
                                                   }
                                                   info_not_verified={
                                                     attributeValues &&
-                                                    attributeValues
+                                                    attributeValues?.info_not_verified
+                                                  }
+                                                  info_not_verified_text={
+                                                    attributeValues &&
+                                                    attributeValues?.info_not_verified_text
                                                   }
                                                 />
                                               )}
                                             </div>{" "}
-
                                             {/* {comment && <div className="test__phrase__content ">{comment}</div>} */}
                                             {attributeValues?.info_not_verified && (
                                               <div

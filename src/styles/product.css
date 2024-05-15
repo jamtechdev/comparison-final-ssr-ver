@@ -842,6 +842,14 @@
   bottom: 0;
   padding-right: 8px;
 }
+.guide_pros_cons.pros ul li:before {
+  content: url("/images/check.svg") !important;
+  position: absolute;
+  right: 100%;
+  top: 10px !important;
+  bottom: 0;
+  padding-right: 8px;
+}
 
 .pros-corns-section.corns ul {
   padding: 0 20px 0 50px !important;
@@ -875,6 +883,24 @@
   color: rgb(39 48 78 / 70%);
   font-family: "Lato", sans-serif !important;
 }
+.guide_pros_cons ul li {
+  padding: 4px 0 5px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px !important;
+  color: rgb(39 48 78 / 70%);
+  font-family: "Lato", sans-serif !important;
+}
+
+.best-product-listing
+  .product-listing-inner-content
+  .guide_pros_cons
+  .pros
+  ul
+  li:before {
+  top: 10px !important;
+}
+
 /* 
 .pros-corns-section ul li span.pros-crons-text {
   opacity: 70%;

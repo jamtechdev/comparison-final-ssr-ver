@@ -966,7 +966,7 @@ export default function Product({
               </div>
               <div className="listing-container">
                 <div id="pros" className="col light-bg-color guide">
-                  <div className="pros-corns-section pros">
+                  <div className="pros-corns-section guide_pros_cons pros">
                     <p className="buy-avoid">
                       {guidePhraseData && guidePhraseData?.why_to_buy}
                     </p>
@@ -1008,7 +1008,7 @@ export default function Product({
                   </div>
                 </div>
                 <div id="cons" className="col guide">
-                  <div className="pros-corns-section corns">
+                  <div className="pros-corns-section guide_pros_cons corns">
                     <p className="buy-avoid">
                       {" "}
                       {guidePhraseData && guidePhraseData?.why_to_avoid}
@@ -2773,6 +2773,10 @@ export default function Product({
                                                                         attributeValues &&
                                                                         attributeValues?.info_not_verified
                                                                       }
+                                                                      info_not_verified_text={
+                                                                        attributeValues &&
+                                                                        attributeValues?.info_not_verified_text
+                                                                      }
                                                                     />
                                                                   )}
                                                                 </div>{" "}
@@ -2817,20 +2821,12 @@ export default function Product({
                                                                           "100%",
                                                                       }}
                                                                     >
-                                                                      Information
-                                                                      is not
-                                                                      verified.
-                                                                      If you
-                                                                      believe
-                                                                      this is a
-                                                                      mistake,
-                                                                      please,
-                                                                      contact
-                                                                      our team
+                                                                      {
+                                                                        attributeValues?.info_not_verified_text
+                                                                      }
                                                                     </div>
                                                                   </div>
                                                                 )}
-                                                            
                                                               </>
                                                             )}
                                                           {/* newww */}
