@@ -115,7 +115,7 @@ const CompareAccordionTab = React.memo(
     const splitVsValue = (value) => {
       const splitValue = value && value.trim().split("vs");
       // console.log(splitValue[0])
-      const boldedPart = `<strong>${Math.round(splitValue[0])}</strong>`;
+      const boldedPart = `<strong>${splitValue[0]}</strong>`;
       if (splitValue?.length > 2) {
         return `${boldedPart} vs ${splitValue[1]} vs ${splitValue[2]}`;
       } else {
