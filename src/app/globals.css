@@ -117,6 +117,7 @@ p {
 }
 .attribute__card__body ul{
   list-style-type: disc !important;
+  
 }
 .attribute__card__body ol{
   list-style-type: auto !important;
@@ -124,6 +125,10 @@ p {
 
 .para_content_text ol{
   list-style: auto !important;
+  padding-left: 2rem !important;
+}
+.para_content_text ul {
+  padding-left: 2rem !important;
 }
 .content-para ul,
 .content-para ol{
@@ -231,7 +236,7 @@ select {
 }
 
 .para_content_text ul {
-  all: unset !important;
+list-style: disc !important;
 }
 h2.site-main-heading {
   line-height: 42px;
