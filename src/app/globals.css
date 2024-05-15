@@ -1833,6 +1833,7 @@ li.color-item.selected {
   padding: 20px;
   min-height: 354px;
   /* margin-top: 35px; */
+  height: calc(100% - 30px);
 }
 
 .attribute__card__header {

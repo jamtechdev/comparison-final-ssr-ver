@@ -1128,7 +1128,7 @@ export default function Product({
                               <p>
                                 <b>
                                   {guidePhraseData &&
-                                    guidePhraseData?.score_components}{" "}
+                                    guidePhraseData?.score_components}
                                   :
                                 </b>
                               </p>
