@@ -235,9 +235,9 @@ const CompareAccordionTab = React.memo(
     };
     // console.log(comparePhaseData)
     useEffect(() => {
-      handleAccordionChange("total" ,"pros");
-    }, [activatab])
-    
+      handleAccordionChange("total", "pros");
+    }, [activatab]);
+
     return (
       <>
         <Row>
@@ -336,7 +336,7 @@ const CompareAccordionTab = React.memo(
                                                 : item?.phrase
                                               : typeof item?.difference_value ==
                                                 "number"
-                                              ? item?.difference
+                                              ? item?.phrase
                                               : item?.phrase}
 
                                             {item?.hover_phase && (

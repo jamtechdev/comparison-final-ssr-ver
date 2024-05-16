@@ -638,12 +638,12 @@ const CompareTable = React.memo(
                           </p>
                         )}
                         {products[0]?.users_rating_descriptions
-                          ?.when_it_matters && (
+                          ?.when_matters && (
                           <p className="mb-2">
-                            <b>When it matters: </b>
+                            <b>{guidePhraseData&&guidePhraseData?.when_it_matters}: </b>
                             {
                               products[0]?.users_rating_descriptions
-                                ?.when_it_matters
+                                ?.when_matters
                             }
                           </p>
                         )}
