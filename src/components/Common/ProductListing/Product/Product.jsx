@@ -151,7 +151,7 @@ export default function Product({
         category: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.mini_image ? product.mini_image : "/images/nofound.png",
+        image: product.main_image ? product.main_image : "/images/nofound.png",
       };
       dispatch(
         addCompareProduct({
@@ -180,7 +180,7 @@ export default function Product({
         category: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.mini_image ? product.mini_image : "/images/nofound.png",
+        image: product.main_image ? product.main_image : "/images/nofound.png",
       };
       dispatch(
         updateCompareProduct({
@@ -209,7 +209,7 @@ export default function Product({
         category_id: product.category_id,
         category_url: product.category_url,
         permalink: product.permalink,
-        image: product.mini_image ? product.mini_image : "/images/nofound.png",
+        image: product.main_image ? product.main_image : "/images/nofound.png",
       };
       dispatch(
         updateCompareProduct({
@@ -721,8 +721,7 @@ export default function Product({
                           <p>
                             <b>
                               {guidePhraseData &&
-                                guidePhraseData?.score_components}
-                              :
+                                guidePhraseData?.score_components}:
                             </b>
                           </p>
                           {product?.users_rating_descriptions
@@ -842,8 +841,7 @@ export default function Product({
                             <p className="mb-2">
                               <b>
                                 {guidePhraseData &&
-                                  guidePhraseData?.when_it_matters}
-                                :{" "}
+                                  guidePhraseData?.when_it_matters}:{" "}
                               </b>
                               {
                                 product?.ratio_qulitiy_points_descriptions
@@ -854,8 +852,7 @@ export default function Product({
                           <p>
                             <b>
                               {guidePhraseData &&
-                                guidePhraseData?.score_components}
-                              :
+                                guidePhraseData?.score_components}:
                             </b>
                           </p>
                           {product?.ratio_qulitiy_points_descriptions
@@ -1546,8 +1543,7 @@ export default function Product({
                                             <p className="mb-2">
                                               <b>
                                                 {guidePhraseData &&
-                                                  guidePhraseData?.what_it_is}
-                                                :{" "}
+                                                  guidePhraseData?.what_it_is}:{" "}
                                               </b>
                                               {
                                                 product
@@ -1574,8 +1570,7 @@ export default function Product({
                                           <p>
                                             <b>
                                               {guidePhraseData &&
-                                                guidePhraseData?.score_components}
-                                              :
+                                                guidePhraseData?.score_components}:
                                             </b>
                                           </p>
                                           {product?.technical_score_descriptions
@@ -1699,8 +1694,7 @@ export default function Product({
                                             <p className="mb-2">
                                               <b>
                                                 {guidePhraseData &&
-                                                  guidePhraseData?.what_it_is}
-                                                :{" "}
+                                                  guidePhraseData?.what_it_is}:{" "}
                                               </b>
                                               {
                                                 product
@@ -1727,8 +1721,7 @@ export default function Product({
                                           <p>
                                             <b>
                                               {guidePhraseData &&
-                                                guidePhraseData?.score_components}
-                                              :
+                                                guidePhraseData?.score_components}:
                                             </b>
                                           </p>
                                           {product?.users_rating_descriptions

@@ -1199,10 +1199,7 @@ const TechnicalAccordion = React.memo(
                                                     opacity: "100%",
                                                   }}
                                                 >
-                                                  Information is not verified.
-                                                  If you believe this is a
-                                                  mistake, please, contact our
-                                                  team
+                                                 {attributeValues?.info_not_verified_text}
                                                 </div>
                                               </div>
                                             )}

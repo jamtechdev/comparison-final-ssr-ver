@@ -504,10 +504,10 @@ export default function GuidePage({
           >
             <div className="desktop-hide">
               <div className="header--section">
-                <h6>
+                <span style={{fontSize:"1rem"}}>
                   {" "}
                   <i className="ri-equalizer-line"></i> Filter
-                </h6>
+                </span>
                 <i class="ri-close-circle-line" onClick={closeClick}></i>
               </div>
             </div>

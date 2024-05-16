@@ -849,7 +849,7 @@ const ProductCompareTable = React.memo(
                               ?.description
                           }
                         </p>
-                      )}
+                      )} 
                       {products[0]?.technical_score_descriptions
                         ?.when_it_matters && (
                         <p className="mb-2">

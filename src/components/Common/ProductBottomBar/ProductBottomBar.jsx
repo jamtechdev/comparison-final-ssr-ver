@@ -6,6 +6,7 @@ function ProductBottomBar({ favSlider }) {
   const [isOpen, setIsOpen] = useState(false);
   const openCompareModel = () => {
     setIsOpen(true);
+
     document.body.style.overflow = "hidden";
   };
 

@@ -403,7 +403,7 @@ export default function ComparisonTable({
                                                 )}`}
                                                 className="font__16__inline"
                                               >
-                                                {data?.price} {data?.currency}
+                                                {data?.price} {product?.currency}
                                               </a>
                                             </span>
                                           </>
@@ -463,7 +463,7 @@ export default function ComparisonTable({
                           {/* <span className="txt">NOT AVAILABLE</span> */}
                           <i>N/A</i>
                           <span className="price font__16__inline">
-                            ~ {product?.price} €
+                            ~ {product?.price} {product?.currency}
                           </span>
                         </div>
                       )}
@@ -505,7 +505,7 @@ export default function ComparisonTable({
                                           href={`/link?p=${btoa(data.url)}`}
                                           className="font__16__inline"
                                         >
-                                          {data?.price} {product.currency}
+                                          {data?.price} {product?.currency}
                                         </Link>
                                       </span>
                                     </li>

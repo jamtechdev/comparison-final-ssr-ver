@@ -70,7 +70,7 @@ const ProsConsToolTip = (props) => {
 
           {comment && <div className="test__phrase__content ">{comment}</div>}
 
-          {info_not_verified && (
+          {/* {info_not_verified && (
             <>
               <hr />
 
@@ -80,7 +80,7 @@ const ProsConsToolTip = (props) => {
                 </i>
               </span>
             </>
-          )}
+          )} */}
           {/* for expert review  now I comment this code */}
           {/* <div className="user__rating__popup">
               <div className="user__rating__popup__list">
