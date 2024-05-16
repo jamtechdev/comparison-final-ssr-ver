@@ -91,7 +91,9 @@ function VideoReviews({ videoReview }) {
             </SwiperSlide>
           );
         })} */}
-        {videoReview?.length > 3 ? (
+       
+      </Swiper>
+      {videoReview?.length > 3 ? (
           <>
             <span className="swiper-prev">
               <i className="ri-arrow-left-s-line"></i>
@@ -103,7 +105,6 @@ function VideoReviews({ videoReview }) {
         ) : (
           ""
         )}
-      </Swiper>
     </>
   );
 }

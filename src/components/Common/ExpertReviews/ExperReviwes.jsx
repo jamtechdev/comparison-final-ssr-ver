@@ -65,7 +65,7 @@ function ExperReviwes({ expertReview }) {
     return domain;
   };
 
-  console.log(expertReview)
+  console.log(expertReview);
   return (
     <>
       <Swiper
@@ -142,7 +142,7 @@ function ExperReviwes({ expertReview }) {
                   <div className="review__name">
                     {data?.image !== null && (
                       <a href={`/link?p=${btoa(data?.website_name)}`}>
-                        <img src={`${data?.image}`}  alt={data?.name} />
+                        <img src={`${data?.image}`} alt={data?.name} />
                       </a>
                     )}
 
@@ -251,19 +251,19 @@ function ExperReviwes({ expertReview }) {
             </SwiperSlide>
           );
         })}
-        {expertReview?.length > 3 ? (
-          <>
-            <span className="swiper-prev" style={{ left: "0px" }}>
-              <i className="ri-arrow-left-s-line"></i>
-            </span>
-            <span className="swiper-next" style={{ right: "0px" }}>
-              <i className="ri-arrow-right-s-line"></i>
-            </span>
-          </>
-        ) : (
-          ""
-        )}
       </Swiper>
+      {expertReview?.length > 3 ? (
+        <>
+          <span className="swiper-prev" style={{ left: "0px" }}>
+            <i className="ri-arrow-left-s-line"></i>
+          </span>
+          <span className="swiper-next" style={{ right: "0px" }}>
+            <i className="ri-arrow-right-s-line"></i>
+          </span>
+        </>
+      ) : (
+        ""
+      )}
     </>
   );
 }

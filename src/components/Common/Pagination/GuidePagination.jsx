@@ -3,14 +3,12 @@ import { Col, Row } from "react-bootstrap";
 import { useRouter, useSearchParams } from "next/navigation";
 import ProductListing from "../ProductListing/ProductListing";
 
-
 const GuidePagination = ({ pagination }) => {
   const { current_page, total_pages } = pagination;
   const [currentPage, setCurrentPage] = useState(current_page || 1);
   const router = useRouter();
   const searchParams = useSearchParams();
   const productListRef = useRef(null);
-  
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -42,7 +40,7 @@ const GuidePagination = ({ pagination }) => {
     window.history.pushState({}, "", url.toString());
     router.push(`?${currentParams.toString()}`, { scroll: false });
 
-    // Scroll to the top of the product list 
+    // Scroll to the top of the product list
     const productListElement = document.getElementById("scroll__top");
     if (productListElement) {
       productListElement.scrollIntoView({ behavior: "smooth" });
@@ -54,12 +52,12 @@ const GuidePagination = ({ pagination }) => {
     if (currentPage !== 1 && currentPage !== 9) {
       pagesArray.push(currentPage);
     }
-if(currentPage == 1 ){
-  pagesArray.push(currentPage)
-}
-if(currentPage == 9){
-  pagesArray.push(currentPage)
-}
+    if (currentPage == 1) {
+      pagesArray.push(currentPage);
+    }
+    if (currentPage == 9) {
+      pagesArray.push(currentPage);
+    }
     for (let i = 1; i <= 2; i++) {
       if (currentPage - i > 1 && currentPage - i !== 9) {
         pagesArray.unshift(currentPage - i);

@@ -103,7 +103,9 @@ function ProductReviewTab({ productReview }) {
             </SwiperSlide>
           );
         })} */}
-        {productReview?.length > 4 ? (
+       
+      </Swiper>
+      {productReview?.length > 4 ? (
           <>
             <span className="swiper-prev" style={{left:"5px"}}>
               <i className="ri-arrow-left-s-line"></i>
@@ -115,7 +117,6 @@ function ProductReviewTab({ productReview }) {
         ) : (
           ""
         )}
-      </Swiper>
     </>
   );
 }

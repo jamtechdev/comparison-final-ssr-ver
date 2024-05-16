@@ -1966,16 +1966,17 @@ function ProductPage({
               {product?.alternative_products?.map((data, index) => {
                 return (
                   <React.Fragment key={index}>
-                    {index === 0 ? (
-                      <h2 className="site-main-heading">{data?.heading}</h2>
-                    ) : (
-                      <h3
-                        className="site-main-heading"
-                        style={{ paddingTop: "20px" }}
-                      >
-                        {data?.heading}
-                      </h3>
-                    )}
+                    {data?.alternative_products.length != 0 &&
+                      (index === 0 ? (
+                        <h2 className="site-main-heading">{data?.heading}</h2>
+                      ) : (
+                        <h3
+                          className="site-main-heading"
+                          style={{ paddingTop: "20px" }}
+                        >
+                          {data?.heading}
+                        </h3>
+                      ))}
 
                     {data?.alternative_products.length != 0 ? (
                       <ReviewSlider
@@ -2062,23 +2063,23 @@ function ProductPage({
       </section>
 
       {/* {console.log()} */}
-      {checkVerdictText > 0 && (
-        <section className="mt-3 mobile-popular-comparison">
-          <Container>
-            <Row>
-              <Col md={12}>
-                <h2 className="site-main-heading">
-                  {product?.page_phases?.popular_comparison}
-                </h2>
 
-                <ComparisonsSlider
-                  products={product && product?.alternative_comparisons}
-                />
-              </Col>
-            </Row>
-          </Container>
-        </section>
-      )}
+      <section className="mt-3 mobile-popular-comparison">
+        <Container>
+          <Row>
+            <Col md={12}>
+              <h2 className="site-main-heading">
+                {product?.page_phases?.popular_comparison}
+              </h2>
+
+              <ComparisonsSlider
+                products={product && product?.alternative_comparisons}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
       <ProductBottomBar favSlider={product && product} />
     </>
   );
