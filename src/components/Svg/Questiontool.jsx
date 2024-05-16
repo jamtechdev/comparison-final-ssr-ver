@@ -11,7 +11,7 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
     left: 0,
   });
   const tooltipRef = useRef(null);
-  const {isMobile}=useScreenSize()
+  const { isMobile } = useScreenSize();
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
     if (!tooltip) return;
@@ -31,11 +31,8 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
       Math.max(0, idealLeft),
       viewportWidth - tooltipWidth / 2 - viewportWidth + 50
     );
-
     setTooltipPosition({ ...tooltipPosition, left });
   }
-    // console.log(productPhaseData,"mahima")
-
   return (
     <div
       className="question_hover_container question-marker-icon"
@@ -58,17 +55,17 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
             <p className="mb-2">
              {
   <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.what_it_is}</b>
+    <b>{guidePhraseData.what_it_is}{""}</b>
   )
 }
 {
   <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.what_it_is}</b>
+    <b>{productPhaseData.what_it_is}{""}</b>
   )
 }
 {/* {
-  <CompareDiv/> &&  && (
-    <b>{guidePhraseData.what_it_is}</b>
+  <CompareDiv/> && comparePhaseData &&(
+    <b>{comparePhaseData.what_it_is}</b>
   )
 } */}
               {""} {attributes?.description}
@@ -78,12 +75,12 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
             <p className="mb-2">
               {
   <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.when_it_matters}</b>
+    <b>{guidePhraseData.when_it_matters}{""}</b>
   )
 }
 {
   <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.when_it_matters}</b>
+    <b>{productPhaseData.when_it_matters}{""}</b>
   )
 }
 
@@ -92,12 +89,12 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
           )}
         {
   <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.score_components}</b>
+    <b>{guidePhraseData.score_components}{""}</b>
   )
 }
 {
   <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.score_components}</b>
+    <b>{productPhaseData.score_components}{""}</b>
   )
 }
           {attributes.score_components &&
@@ -126,11 +123,10 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
                           : "#85B2F1",
                     }}
                   >
-                   {/* { console.log(data?.attribute_evaluation)} */}
+                    {/* { console.log(data?.attribute_evaluation)} */}
                     {formattedNumber != "NaN"
                       ? formattedNumber
                       : data?.attribute_evaluation}
-                      
                   </span>
                   <p style={{ textTransform: "none" }}>
                     {" "}

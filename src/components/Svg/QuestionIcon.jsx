@@ -3,8 +3,9 @@ import useScreenSize from "@/_helpers/useScreenSize";
 import Product from "../Common/ProductListing/Product/Product";
 import ProductPage from "@/app/_components/ProductPage";
 import CompareDiv from "../Common/ComparisanComponent/CompareDiv";
+import WhyAccordionTab from "../Product/WhyAccordionTab";
 
-const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhaseData}) => {
+const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhaseData,product}) => {
   const [tooltipPosition, setTooltipPosition] = useState({
     top: 0,
     left: 0,
@@ -32,7 +33,7 @@ const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhas
   
     setTooltipPosition({ ...tooltipPosition, left, width: tooltipWidth });
   }
-  // console.log(productPhaseData,"hey")
+    // console.log(product,"mahima")
   const {isMobile}=useScreenSize();
   return (
     <div
@@ -57,21 +58,25 @@ const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhas
             <p className="mb-2" >
              {
   <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.what_it_is}</b>
+    <b>{guidePhraseData.what_it_is}:{""}</b>
   )
 }
 {
   <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.what_it_is}</b>
+    <b>{productPhaseData.what_it_is}:{""}</b>
   )
 }
 {
   <CompareDiv/> && comparePhaseData &&(
-    <b>{comparePhaseData.what_it_is}</b>
+    <b>{comparePhaseData.what_it_is}:{""}</b>
+  )
+}
+{
+  <WhyAccordionTab/> && product && (
+  <b>{product?.page_phases?.what_it_is}:{""}</b>
   )
 }
 
-              {/* <b>What it is:{""}</b> */}
               {attributes?.description}
             </p>
           )}
@@ -79,20 +84,24 @@ const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhas
             <p className="mb-2">
               {
   <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.when_it_matters}</b>
+    <b>{guidePhraseData.when_it_matters}:{""}</b>
   )
 }
 {
   <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.when_it_matters}</b>
+    <b>{productPhaseData.when_it_matters}:{""}</b>
   )
 }
 {
   <CompareDiv/> && comparePhaseData &&(
-    <b>{comparePhaseData.when_it_matters}</b>
+    <b>{comparePhaseData.when_it_matters}{" "}</b>
   )
 }
-           
+{
+  <WhyAccordionTab/> && product && (
+  <b>{product?.page_phases?.when_it_matters}:{""}</b>
+  )
+}        
               {/* <b> When it matters:{""}</b> */}
               {attributes?.when_matters}
             </p>

@@ -1213,7 +1213,7 @@ export default function MobileCompareTable({
           <div className="text-center" onClick={handleTableShow}>
             <Button className="see_all_btn_outline">
               {/* {console.log(productPhaseData)} */}
-              See Full Table
+              {productPhaseData && productPhaseData?.see_full_table}{" "}
               <i className="ri-arrow-down-s-line"></i>
             </Button>
           </div>

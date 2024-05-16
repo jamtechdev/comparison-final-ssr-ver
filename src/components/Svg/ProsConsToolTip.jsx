@@ -4,16 +4,19 @@ import useScreenSize from "@/_helpers/useScreenSize";
 
 const ProsConsToolTip = (props) => {
   const {
+    comment,
     hover_phrase,
     info_not_verified,
+    info_not_verified_text,
     data,
-    comment,
+    
     typeComp,
     finalvalue,
     expert_reviews,
   } = props;
 
   const { isMobile } = useScreenSize();
+  // console.log(info_not_verified)
 
   let tooltipStyles = {};
   // console.log(expert_reviews&&expert_reviews);
@@ -72,9 +75,8 @@ const ProsConsToolTip = (props) => {
               <hr />
 
               <span className="mb-2">
-                <i>
-                  (Information is not verified. If you believe this is a
-                  mistake, please, contact our team.)
+                <i dangerouslySetInnerHTML={{ __html: info_not_verified_text }}>
+                  
                 </i>
               </span>
             </>

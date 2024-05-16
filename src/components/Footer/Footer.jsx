@@ -81,8 +81,8 @@ export default function Footer({ footerData }) {
               <img
                 src={`https://panel.mondopedia.it/logos/app_logo.png`}
                 alt="Logo"
-                width={118}
-                height={40}
+                width={60}
+                height={60}
               />
               <p>{footerData && footerData?.column_one?.desc}</p>
               <div className="social-icon">

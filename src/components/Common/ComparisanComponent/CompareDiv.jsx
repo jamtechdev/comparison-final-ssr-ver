@@ -331,19 +331,22 @@ function CompareDiv({
             </Col>
           </Row>
           {/* {console.log(bestAlternative?.verdict_text)} */}
-          {bestAlternative?.verdict_text !== null && (
-            <Row>
-              <div className="box__content__section">
-                <h2 class="site-main-heading">Verdict</h2>
-                <div
-                  className="box__content__section__textarea"
-                  dangerouslySetInnerHTML={{
-                    __html: bestAlternative?.verdict_text,
-                  }}
-                ></div>
-              </div>
-            </Row>
-          )}
+          {bestAlternative?.verdict_text &&
+            bestAlternative?.verdict_text &&
+            bestAlternative?.verdict_text !== "" &&
+            bestAlternative?.verdict_text !== null && (
+              <Row>
+                <div className="box__content__section">
+                  <h2 class="site-main-heading">Verdict</h2>
+                  <div
+                    className="box__content__section__textarea"
+                    dangerouslySetInnerHTML={{
+                      __html: bestAlternative?.verdict_text,
+                    }}
+                  ></div>
+                </div>
+              </Row>
+            )}
         </Container>
       </section>
 
@@ -483,7 +486,7 @@ function CompareDiv({
                   </div>
                 </Col>
                 <Col md={6}>
-                  <div className="pros-corns-section corns">
+                  <div className="pros-corns-section pros">
                     <div className="pros-header">
                       {bestAlternative?.page_phases?.when_should_buy}
                       {/* Who SHOULD NOT BUY {compareProDataSec?.name} ? */}

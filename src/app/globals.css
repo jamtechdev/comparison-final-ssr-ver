@@ -99,6 +99,11 @@ p {
   padding: 0 40px 12px !important;
 }
 
+.content-para ul,
+.content-para ol{
+  list-style: auto !important;
+}
+
 .content-para p * {
   opacity: 100% !important;
 }
@@ -2191,8 +2196,8 @@ div#shortCodeText ul {
 #shortCodeText .pros-corns-section ul li {
   padding: 4px 0 5px;
   font-weight: 400;
-  font-size: 26px;
-  line-height: 17px;
+  font-size: 17px;
+  line-height: 26px;
   color: rgba(39, 48, 78, 0.7);
   font-family: Lato, sans-serif !important;
 }
@@ -2379,4 +2384,19 @@ a.product_link:hover {
 
 .content-para h2 {
   line-height: 42px !important;
+  padding-top: 12px !important;
+}
+
+.box__content__section__textarea ul,
+.box__content__section__textarea ol{
+  padding-left: 2rem !important;
+}
+
+.box__content__section__textarea ul{
+  list-style: disc !important;
+
+}
+
+.box__content__section__textarea ol{
+  list-style-type: decimal !important;
 }

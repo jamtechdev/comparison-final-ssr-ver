@@ -21,6 +21,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
 
   const handelCloseCompareModel = () => {
     setIsOpen(false);
+    document.body.style.overflow = "auto";
   };
   const handelCategoryForOffenProduct = (id) => {
     setCategoryId(id);
@@ -128,7 +129,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
             <Col md={12}>
               <span
                 className="d-block text-end"
-                onClick={() => setIsOpen(false)}
+                onClick={handelCloseCompareModel}
               >
                 <i className="ri-close-circle-line close_icon"></i>
               </span>

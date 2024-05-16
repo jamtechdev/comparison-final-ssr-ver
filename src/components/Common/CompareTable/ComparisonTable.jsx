@@ -368,7 +368,7 @@ export default function ComparisonTable({
                                 <div className="not-availabel p-3">
                                   <i>N/A</i>
                                   <span className="price font__16__inline">
-                                    ~ {product?.price} €
+                                    ~ {product?.price} {product?.currency}
                                   </span>
                                 </div>
                               )}
@@ -403,7 +403,7 @@ export default function ComparisonTable({
                                                 )}`}
                                                 className="font__16__inline"
                                               >
-                                                {data?.price} €
+                                                {data?.price} {data?.currency}
                                               </a>
                                             </span>
                                           </>
@@ -639,7 +639,7 @@ export default function ComparisonTable({
                     )}
                     {products[0]?.popularity_points?.when_it_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>{" "}
+                        <b>{comparisonPhaseData && comparisonPhaseData?.when_it_matters}: </b>{" "}
                         {products[0]?.popularity_descriptions?.when_it_matters}
                       </p>
                     )}
@@ -788,7 +788,7 @@ export default function ComparisonTable({
                     {products[0]?.expert_reviews_descriptions
                       ?.when_it_matters && (
                       <p className="mb-2">
-                        <b>When it matters: </b>{" "}
+                        <b>{comparisonPhaseData  && comparisonPhaseData?.when_it_matters}: </b>{" "}
                         {
                           products[0]?.expert_reviews_descriptions
                             ?.when_it_matters

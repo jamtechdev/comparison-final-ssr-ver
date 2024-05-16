@@ -162,11 +162,14 @@ export const getAttributeHalf = (product, half) => {
 
 // this funcation designed to extract and return half of the attributes from a given product object.
 export const getAttributeProductHalf = (product, half) => {
-  // console.log(product)
+ 
   if (!product?.attributes) {
     return null;
   }
   const attributeKeys = Object.keys(product.attributes);
+  // attributeKeys.push('Overall')
+  // console.log(attributeKeys)
+  // console.log(...attributeKeys)
   const halfLength = Math.ceil(attributeKeys.length / 2);
   // console.log(halfLength)
   if (half === "first") {

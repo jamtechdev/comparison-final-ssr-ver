@@ -900,7 +900,7 @@ export default function Product({
                       </div>
                     )}
                   </div>
-                  {/* Popularity end */}
+              {/* Popularity Ends Here */}
                 </div>
               </div>
               <div className="col">
@@ -967,11 +967,10 @@ export default function Product({
               </div>
               <div className="listing-container">
                 <div id="pros" className="col light-bg-color guide">
-                  <div className="pros-corns-section pros">
+                  <div className="pros-corns-section guide_pros_cons pros">
                     <p className="buy-avoid">
                       {guidePhraseData && guidePhraseData?.why_to_buy}
                     </p>
-
                     <ul>
                       {product &&
                         product?.top_pros
@@ -989,16 +988,16 @@ export default function Product({
                                     data?.hover_phrase !== "" && "tooltip-title"
                                   }`}
                                 >
-                                  {console.log(data?.comment)}
+                                  {/* {console.log(data?.comment)} */}
                                   <span className="pros-crons-text">
                                     {data?.name} {renderValue(data)}
                                   </span>
                                   <ProsConsToolTip
-                                    typeComp={`pros`}
-                                    info_not_verified={data.info_not_verified}
-                                    hover_phrase={data.hover_phrase}
-                                    data={data}
                                     comment={data.comment}
+                                    hover_phrase={data.hover_phrase}
+                                    info_not_verified={data.info_not_verified}
+                                    data={data}
+                                    typeComp={`pros`}
                                   />
                                 </li>
                               </React.Fragment>
@@ -1009,7 +1008,7 @@ export default function Product({
                   </div>
                 </div>
                 <div id="cons" className="col guide">
-                  <div className="pros-corns-section corns">
+                  <div className="pros-corns-section guide_pros_cons corns">
                     <p className="buy-avoid">
                       {" "}
                       {guidePhraseData && guidePhraseData?.why_to_avoid}
@@ -1034,10 +1033,11 @@ export default function Product({
                                     {data?.name} {renderValue(data).trim()}
                                   </span>
                                   <ProsConsToolTip
-                                    typeComp={`cons`}
-                                    data={data}
-                                    info_not_verified={data.info_not_verified}
+                                    comment={data.comment}
                                     hover_phrase={data.hover_phrase}
+                                    info_not_verified={data.info_not_verified}
+                                    data={data}
+                                    typeComp={`cons`}
                                     finalvalue={finalvalue}
                                   />
                                 </li>
@@ -1395,7 +1395,6 @@ export default function Product({
                   </Col>
                 </Row>
               )}
-
             {product?.summary && product?.summary.length !== 0 && (
               <>
                 <div className="w-100">
@@ -1432,7 +1431,7 @@ export default function Product({
             <Row className="m-0">
               <Accordion className="table-accordion product-listing-inner-content-table-accordion p-0 ">
                 <Accordion.Item eventKey="1" className="inner-accordion">
-                  <Accordion.Header
+                 <Accordion.Header
                     as="div"
                     className="product-listing-inner-content-table-accordion-btn"
                     onClick={toggleHidden}
@@ -2335,12 +2334,13 @@ export default function Product({
                                                                           : "")}
                                                                     </span>
                                                                   }
+                                                                  {/* {console.log(attributeValues)} */}
 
                                                                   {attributeValues.attribute_value !==
                                                                     "?" && (
                                                                     <ProsConsToolTip
                                                                       comment={
-                                                                        attributeValues?.commnet
+                                                                        attributeValues?.comment
                                                                       }
                                                                       hover_phrase={
                                                                         attributeValues &&
@@ -2468,9 +2468,16 @@ export default function Product({
                                                               }
                                                               {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
                                                               <ProsConsToolTip
+                                                                comment={
+                                                                  attributeValues?.comment
+                                                                }
                                                                 hover_phrase={
                                                                   attributeValues &&
                                                                   attributeValues.hover_phase
+                                                                }
+                                                                info_not_verified={
+                                                                  attributeValues &&
+                                                                  attributeValues
                                                                 }
                                                               />
                                                             </div>
@@ -2748,7 +2755,9 @@ export default function Product({
                                                                           : "")}
                                                                     </span>
                                                                   }
-                                                                  {console.log(attributeValues?.comment)}
+                                                                  {/* {console.log(
+                                                                    attributeValues?.comment
+                                                                  )} */}
 
                                                                   {attributeValues.attribute_value !==
                                                                     "?" && (
@@ -2760,49 +2769,64 @@ export default function Product({
                                                                         attributeValues &&
                                                                         attributeValues.hover_phase
                                                                       }
+                                                                      info_not_verified={
+                                                                        attributeValues &&
+                                                                        attributeValues?.info_not_verified
+                                                                      }
+                                                                      info_not_verified_text={
+                                                                        attributeValues &&
+                                                                        attributeValues?.info_not_verified_text
+                                                                      }
                                                                     />
                                                                   )}
                                                                 </div>{" "}
-                                                                {/* {console.log()} */}
-                                                                <div
-                                                                  className="tooltip-title"
-                                                                  style={{
-                                                                    textDecoration:
-                                                                      "none",
-                                                                    textDecorationLine:
-                                                                      "none",
-                                                                    textDecorationStyle:
-                                                                      "none",
-                                                                  }}
-                                                                >
-                                                                  {" "}
-                                                                  <i
+                                                                {/* {console.log(attributeValues?.info_not_verified)} */}
+                                                                {attributeValues?.info_not_verified && (
+                                                                  <div
+                                                                    className="tooltip-title"
                                                                     style={{
-                                                                      opacity:
-                                                                        "70%",
+                                                                      textDecoration:
+                                                                        "none",
+                                                                      textDecorationLine:
+                                                                        "none",
+                                                                      textDecorationStyle:
+                                                                        "none",
                                                                     }}
                                                                   >
                                                                     {" "}
-                                                                    (?){" "}
-                                                                  </i>
-                                                                  <div
-                                                                    className="tooltip-display-content"
-                                                                    style={{
-                                                                      opacity:
-                                                                        "100%",
-                                                                    }}
-                                                                  >
-                                                                    Information
-                                                                    is not
-                                                                    verified. If
-                                                                    you believe
-                                                                    this is a
-                                                                    mistake,
-                                                                    please,
-                                                                    contact our
-                                                                    team
+                                                                    <i
+                                                                      style={{
+                                                                        opacity:
+                                                                          "70%",
+                                                                      }}
+                                                                    >
+                                                                      {" "}
+                                                                      (?){" "}
+                                                                    </i>
+                                                                    <div
+                                                                      className="tooltip-display-content"
+                                                                      style={{
+                                                                        left: isMobile
+                                                                          ? "50%"
+                                                                          : 0,
+                                                                        transform:
+                                                                          isMobile
+                                                                            ? "translateX(-20%)"
+                                                                            : "translateX(-10%)",
+                                                                        width:
+                                                                          isMobile
+                                                                            ? "200px"
+                                                                            : "250px",
+                                                                        opacity:
+                                                                          "100%",
+                                                                      }}
+                                                                    >
+                                                                      {
+                                                                        attributeValues?.info_not_verified_text
+                                                                      }
+                                                                    </div>
                                                                   </div>
-                                                                </div>
+                                                                )}
                                                               </>
                                                             )}
                                                           {/* newww */}

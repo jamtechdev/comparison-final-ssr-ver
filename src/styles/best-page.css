@@ -1474,7 +1474,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   .pros-corns-section.pros
   ul
   li:before {
-  top: 6px !important;
+  top: 6px;
 }
 
 @media screen and (max-width: 767px) {

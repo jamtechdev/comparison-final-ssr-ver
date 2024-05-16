@@ -185,7 +185,7 @@ export default function GuidePage({
     });
   }, [searchParams]);
   const handleSort = (sortAttribute) => {
-    console.log(sortAttribute, "neet");
+    // console.log(sortAttribute, "neet");
     let param = JSON.parse(sortAttribute);
 
     console.log(param.rangeAttributes);
@@ -347,6 +347,21 @@ export default function GuidePage({
   }, []);
   // console.log(isFilterActive)
   // console.log(isFilterActive, "neetx");
+
+  useEffect(() => {
+    function showTooltip(event, content) {
+      const tooltip = document.getElementById("tooltip");
+      tooltip.style.display = "block";
+      tooltip.style.left = event.pageX + "px";
+      tooltip.style.top = event.pageY + "px";
+      tooltip.innerHTML = content;
+    }
+
+    function hideTooltip() {
+      const tooltip = document.getElementById("tooltip");
+      tooltip.style.display = "none";
+    }
+  }, []);
 
   return (
     <>

@@ -452,7 +452,10 @@ const TechnicalAccordion = React.memo(
                                               data?.website_name
                                             )}`}
                                           >
-                                            <img src={`${data?.image}`} alt={data?.alt} />
+                                            <img
+                                              src={`${data?.image}`}
+                                              alt={data?.name}
+                                            />
                                           </a>
                                         )}
 
@@ -1143,21 +1146,32 @@ const TechnicalAccordion = React.memo(
                                                       : "")}
                                                 </span>
                                               }
-                                              {console.log(attributeValues?.commnet)}
+                                              {/* {console.log(
+                                                attributeValues?.info_not_verified
+                                              )} */}
 
                                               {attributeValues.attribute_value !==
                                                 "?" && (
                                                 <ProsConsToolTip
                                                   comment={
-                                                    attributeValues?.commnet
+                                                    attributeValues?.comment
                                                   }
                                                   hover_phrase={
                                                     attributeValues &&
                                                     attributeValues.hover_phase
                                                   }
+                                                  info_not_verified={
+                                                    attributeValues &&
+                                                    attributeValues?.info_not_verified
+                                                  }
+                                                  info_not_verified_text={
+                                                    attributeValues &&
+                                                    attributeValues?.info_not_verified_text
+                                                  }
                                                 />
                                               )}
                                             </div>{" "}
+                                            {/* {comment && <div className="test__phrase__content ">{comment}</div>} */}
                                             {attributeValues?.info_not_verified && (
                                               <div
                                                 className="tooltip-title"

@@ -71,6 +71,7 @@ function ProductPage({
   productsWithAttributeGroup[productData[0]?.data?.name] = { ...productCopy }; // Create a shallow copy of productCopy
   const finalProducts = Object.values(productsWithAttributeGroup);
 
+  
   let product = finalProducts[0];
   let loading = false;
   let displayedAttributesCount = {};
@@ -86,19 +87,19 @@ function ProductPage({
   // rating texr
   const getEvaluation = (score) => {
     if (score >= 9) {
-      return "Outstanding";
+      return "Outstandingx";
     } else if (score >= 8) {
-      return "Excellent";
+      return "Excellentx";
     } else if (score >= 7) {
-      return "Very good";
+      return "Very goodx";
     } else if (score >= 5) {
-      return "Good";
+      return "Goodx";
     } else if (score >= 3) {
-      return "Fair";
+      return "Fairx";
     } else if (score >= 1) {
-      return "Poor";
+      return "Poorx";
     }
-    return "Poor"; // Handle other cases as needed
+    return "Poorx"; // Handle other cases as needed
   };
 
   let showFullPrice = false;
@@ -281,7 +282,6 @@ function ProductPage({
       <div>{useChart()}</div>
       <section className="product-header">
         <Container>
-
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
@@ -290,7 +290,7 @@ function ProductPage({
                 secondPageName={product}
               />
             </Col>
-            {console.log(product?.currency, "neet")}
+            {/* {console.log(product?.currency, "neet")} */}
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{product?.heading_title}</h1>
             </Col>
@@ -468,7 +468,7 @@ function ProductPage({
                 </div>
                 {resultOverallScore && (
                   <small>
-{/* {product?.page_phases?.evaluation} */}
+{/* {product?.page_phases?.evaluation}{" "} */}
                     {resultOverallScore}{" "}
                  
                   </small>
@@ -724,10 +724,7 @@ function ProductPage({
                             <div className="" style={{ fontWeight: 400 }}>
                               {data?.title}
                             </div>
-                            <div
-                              className="tooltip-display-content"
-                            
-                            >
+                            <div className="tooltip-display-content">
                               {
                                 <p className="mb-2">
                                   <b>{product && product?.page_phases?.what_it_is} : </b>
@@ -736,7 +733,9 @@ function ProductPage({
                               }
 
                               <p>
-                                <b>Score components :</b>
+                                <b>
+                                  {product?.page_phases?.score_components} :
+                                </b>
                               </p>
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {

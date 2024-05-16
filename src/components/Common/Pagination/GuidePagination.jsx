@@ -48,7 +48,6 @@ const GuidePagination = ({ pagination }) => {
       productListElement.scrollIntoView({ behavior: "smooth" });
     }
   };
-
   let pagesArray = [];
 
   if (total_pages > 0) {
@@ -109,7 +108,7 @@ if(currentPage == 9){
                 }
                 key={index}
               >
-                {item}
+               {item}
               </li>
             ))}
           </ul>

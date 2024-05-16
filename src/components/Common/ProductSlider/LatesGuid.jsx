@@ -46,7 +46,7 @@ export default function LatesGuid({ favSlider }) {
                     alt={`${section?.category_url}/${section?.permalink}`}
                   />
                   <div className="product-name-wrapper">
-                    <span>{section?.short_name}</span>
+                    <span> {section?.short_name}</span>
                   </div>
                 </a>
               </SwiperSlide>

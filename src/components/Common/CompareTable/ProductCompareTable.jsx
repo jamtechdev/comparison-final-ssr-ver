@@ -310,7 +310,6 @@ const ProductCompareTable = React.memo(
         }
         ref={ref}
       >
-       
         <Table className="compare-container">
           <thead id="testone" className={className} ref={ref}>
             <tr className="">
@@ -360,8 +359,7 @@ const ProductCompareTable = React.memo(
                           {" "}
                           <>
                             <ul className="best-list-item d-none">
-                              {/* {console.log(product?.currency)} */}
-                              {" "}
+                              {/* {console.log(product?.currency)} */}{" "}
                               {product.price_websites &&
                                 product?.price_websites?.every(
                                   (data) => data.price === null
@@ -407,7 +405,7 @@ const ProductCompareTable = React.memo(
                                                   )}`}
                                                   className="font__16__inline"
                                                 >
-                                                  {data?.price} €
+                                                  {data?.price} {data?.currency}
                                                 </a>
                                               </span>
                                             </>
@@ -918,9 +916,8 @@ const ProductCompareTable = React.memo(
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
-
                               <p>
-                                <b>Score components :</b>
+                                <b>{productPhaseData && productPhaseData?.score_components} :</b>
                               </p>
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {

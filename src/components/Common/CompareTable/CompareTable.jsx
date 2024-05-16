@@ -24,7 +24,7 @@ const CompareTable = React.memo(
       const newRef = useRef();
       ref ||= newRef;
 
-       console.log(guidePhraseData,"check guide")
+      //  console.log(guidePhraseData,"check guide")
       // mount
 
       useEffect(() => {
@@ -225,8 +225,8 @@ const CompareTable = React.memo(
               ) : (
                 <>
                   {item?.attribute_value === "-" ||
-                  item?.attribute_value === null ||
-                  item?.attribute_value === "?" ? (
+                    item?.attribute_value === null ||
+                    item?.attribute_value === "?" ? (
                     item?.attribute_value
                   ) : (
                     <>
@@ -264,7 +264,7 @@ const CompareTable = React.memo(
         const maxValue = Math.max(...uniqueValues);
         return values.map((value) =>
           value === maxValue &&
-          values.indexOf(value) === values.lastIndexOf(value) ? (
+            values.indexOf(value) === values.lastIndexOf(value) ? (
             <div>
               {formatValue(value)}
               <span key={value} className="tooltip-title-2">
@@ -521,24 +521,24 @@ const CompareTable = React.memo(
                       <div className="tooltip-display-content">
                         {products[0]?.overall_score_descriptions
                           ?.description && (
-                          <p className="mb-2">
-                            <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
-                            {
-                              products[0]?.overall_score_descriptions
-                                ?.description
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
+                              {
+                                products[0]?.overall_score_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
                         {products[0]?.overall_score_descriptions
                           ?.when_matters && (
-                          <p className="mb-2">
-                            <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
-                            {
-                              products[0]?.overall_score_descriptions
-                                ?.when_matters
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
+                              {
+                                products[0]?.overall_score_descriptions
+                                  ?.when_matters
+                              }
+                            </p>
+                          )}
                       </div>
                     )}
                 </div>
@@ -556,8 +556,8 @@ const CompareTable = React.memo(
                               ? "#093673"
                               : product.overall_score >= 5 &&
                                 product.overall_score < 7.5
-                              ? "#437ECE"
-                              : " #85B2F1",
+                                ? "#437ECE"
+                                : " #85B2F1",
                         }}
                       >
                         {formatValue(product.overall_score)}
@@ -577,24 +577,24 @@ const CompareTable = React.memo(
                       <div className="tooltip-display-content">
                         {products[0]?.technical_score_descriptions
                           ?.description && (
-                          <p className="mb-2">
-                            <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
-                            {
-                              products[0]?.technical_score_descriptions
-                                ?.description
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
+                              {
+                                products[0]?.technical_score_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
                         {products[0]?.technical_score_descriptions
                           ?.when_matters && (
-                          <p className="mb-2">
-                            <b>When it matters: </b>{" "}
-                            {
-                              products[0]?.technical_score_descriptions
-                                ?.when_matters
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
+                              {
+                                products[0]?.technical_score_descriptions
+                                  ?.when_matters
+                              }
+                            </p>
+                          )}
                       </div>
                     )}
                 </div>
@@ -629,24 +629,24 @@ const CompareTable = React.memo(
                       <div className="tooltip-display-content">
                         {products[0]?.users_rating_descriptions
                           ?.description && (
-                          <p className="mb-2">
-                            <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>
-                            {
-                              products[0]?.users_rating_descriptions
-                                ?.description
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                              <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>
+                              {
+                                products[0]?.users_rating_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
                         {products[0]?.users_rating_descriptions
                           ?.when_it_matters && (
-                          <p className="mb-2">
-                            <b>When it matters: </b>
-                            {
-                              products[0]?.users_rating_descriptions
-                                ?.when_it_matters
-                            }
-                          </p>
-                        )}
+                            <p className="mb-2">
+                    <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>
+                              {
+                                products[0]?.users_rating_descriptions
+                                  ?.when_it_matters
+                              }
+                            </p>
+                          )}
                       </div>
                     )}
                 </div>
@@ -671,55 +671,55 @@ const CompareTable = React.memo(
             {finalProducts.some(
               (product) => product.expert_reviews_rating !== 0
             ) && (
-              <tr className="">
-                <th className="sub-inner-padding">
-                  <div className="tooltip-title">
-                    Expert Reviews
-                    <div className="tooltip-display-content">
-                      {products[0]?.expert_reviews_descriptions
-                        ?.description && (
-                        <p className="mb-2">
-                          <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
-                          {
-                            products[0]?.expert_reviews_descriptions
-                              ?.description
-                          }
-                        </p>
-                      )}
-                      {products[0]?.expert_reviews_descriptions
-                        ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.expert_reviews_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+                <tr className="">
+                  <th className="sub-inner-padding">
+                    <div className="tooltip-title">
+                      Expert Reviews
+                      <div className="tooltip-display-content">
+                        {products[0]?.expert_reviews_descriptions
+                          ?.description && (
+                            <p className="mb-2">
+                              <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>{" "}
+                              {
+                                products[0]?.expert_reviews_descriptions
+                                  ?.description
+                              }
+                            </p>
+                          )}
+                        {products[0]?.expert_reviews_descriptions
+                          ?.when_it_matters && (
+                            <p className="mb-2">
+                              <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
+                              {
+                                products[0]?.expert_reviews_descriptions
+                                  ?.when_it_matters
+                              }
+                            </p>
+                          )}
+                      </div>
                     </div>
-                  </div>
-                </th>
-                {finalProducts
-                  .slice(0, defaultNo)
-                  .map((product, expert_reviews) => {
-                    const values = finalProducts.map(
-                      (p) => p.expert_reviews_rating
-                    );
-                    return (
-                      <td key={expert_reviews}>
-                        {
-                          addStarOnTable(
-                            defaultNo,
-                            "expert_reviews",
-                            values,
-                            product?.expert_reviews_rating_star_phase
-                          )[expert_reviews]
-                        }
-                      </td>
-                    );
-                  })}
-              </tr>
-            )}
+                  </th>
+                  {finalProducts
+                    .slice(0, defaultNo)
+                    .map((product, expert_reviews) => {
+                      const values = finalProducts.map(
+                        (p) => p.expert_reviews_rating
+                      );
+                      return (
+                        <td key={expert_reviews}>
+                          {
+                            addStarOnTable(
+                              defaultNo,
+                              "expert_reviews",
+                              values,
+                              product?.expert_reviews_rating_star_phase
+                            )[expert_reviews]
+                          }
+                        </td>
+                      );
+                    })}
+                </tr>
+              )}
             <tr className="">
               <th className="sub-inner-padding">
                 <div className="tooltip-title">
@@ -734,7 +734,7 @@ const CompareTable = React.memo(
                       )}
                       {products[0]?.popularity_points?.when_it_matters && (
                         <p className="mb-2">
-                          <b>When it matters: </b>{" "}
+                          <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
                           {
                             products[0]?.popularity_descriptions
                               ?.when_it_matters
@@ -772,24 +772,24 @@ const CompareTable = React.memo(
                     <div className="tooltip-display-content">
                       {products?.[0]?.ratio_qulitiy_points_descriptions
                         ?.description && (
-                        <p className="mb-2">
-                          <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
-                          {
-                            products[0]?.ratio_qulitiy_points_descriptions
-                              ?.description
-                          }
-                        </p>
-                      )}
+                          <p className="mb-2">
+                            <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
+                            {
+                              products[0]?.ratio_qulitiy_points_descriptions
+                                ?.description
+                            }
+                          </p>
+                        )}
                       {products[0]?.technical_score_descriptions
                         ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+                          <p className="mb-2">
+                            <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
+                            {
+                              products[0]?.technical_score_descriptions
+                                ?.when_it_matters
+                            }
+                          </p>
+                        )}
                     </div>
                   )}
                 </div>
@@ -881,7 +881,7 @@ const CompareTable = React.memo(
 
                               {category?.when_matters && (
                                 <p className="mb-2">
-                                  <b>When it matters: </b>{" "}
+                                  <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
                                   {category?.when_matters}
                                 </p>
                               )}
@@ -899,25 +899,25 @@ const CompareTable = React.memo(
                                 style={{
                                   background:
                                     product.attributes[category.name] &&
-                                    product.attributes[category.name].length >
+                                      product.attributes[category.name].length >
                                       0 &&
-                                    product.attributes[
-                                      category.name
-                                    ]?.[0].attribute_evaluation?.toFixed(1) >=
+                                      product.attributes[
+                                        category.name
+                                      ]?.[0].attribute_evaluation?.toFixed(1) >=
                                       7.5
                                       ? "#093673"
                                       : product.attributes[
-                                          category.name
-                                        ]?.[0].attribute_evaluation?.toFixed(
-                                          1
-                                        ) >= 5 &&
+                                        category.name
+                                      ]?.[0].attribute_evaluation?.toFixed(
+                                        1
+                                      ) >= 5 &&
                                         product.attributes[
                                           category.name
                                         ]?.[0].attribute_evaluation?.toFixed(
                                           1
                                         ) < 7.5
-                                      ? "#437ECE"
-                                      : " #85B2F1",
+                                        ? "#437ECE"
+                                        : " #85B2F1",
                                 }}
                               >
                                 {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
@@ -944,22 +944,22 @@ const CompareTable = React.memo(
                                 {catAttribute.name}
                                 {(catAttribute.description ||
                                   catAttribute.when_matters) && (
-                                  <div className="tooltip-display-content">
-                                    {catAttribute?.description && (
-                                      <p className="mb-2">
-                                        <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>
-                                        {catAttribute?.description}
-                                      </p>
-                                    )}
+                                    <div className="tooltip-display-content">
+                                      {catAttribute?.description && (
+                                        <p className="mb-2">
+                                          <b>{guidePhraseData && guidePhraseData?.what_it_is}: </b>
+                                          {catAttribute?.description}
+                                        </p>
+                                      )}
 
-                                    {catAttribute?.when_matters && (
-                                      <p className="mb-2">
-                                        <b>When it matters: </b>{" "}
-                                        {catAttribute?.when_matters}
-                                      </p>
-                                    )}
-                                  </div>
-                                )}
+                                      {catAttribute?.when_matters && (
+                                        <p className="mb-2">
+                                          <b>{guidePhraseData && guidePhraseData?.when_it_matters}: </b>{" "}
+                                          {catAttribute?.when_matters}
+                                        </p>
+                                      )}
+                                    </div>
+                                  )}
                               </div>
                             </th>
                             {addAsterisksToTopValue(
@@ -972,17 +972,17 @@ const CompareTable = React.memo(
                       })}
                     {category.attributes.length >
                       (pagination[category.name] || initialNoOfCategories) && (
-                      <tr className="text-center show_more_row">
-                        <td colSpan="6">
-                          <span
-                            className="show_more"
-                            onClick={() => handlePagination(category.name)}
-                          >
-                            {guidePhraseData && guidePhraseData?.show_all} <i className="ri-add-line"></i>
-                          </span>
-                        </td>
-                      </tr>
-                    )}
+                        <tr className="text-center show_more_row">
+                          <td colSpan="6">
+                            <span
+                              className="show_more"
+                              onClick={() => handlePagination(category.name)}
+                            >
+                              {guidePhraseData && guidePhraseData?.show_all} <i className="ri-add-line"></i>
+                            </span>
+                          </td>
+                        </tr>
+                      )}
                   </Fragment>
                 );
               })}
@@ -991,7 +991,7 @@ const CompareTable = React.memo(
         {fullTable == 2 && (
           <div className="text-center">
             <Button className="see_all_btn_outline" onClick={handleTableShow}>
-            {guidePhraseData && guidePhraseData?.see_full_table}  <i className="ri-arrow-down-s-line"></i>
+              {guidePhraseData && guidePhraseData?.see_full_table}  <i className="ri-arrow-down-s-line"></i>
             </Button>
           </div>
         )}

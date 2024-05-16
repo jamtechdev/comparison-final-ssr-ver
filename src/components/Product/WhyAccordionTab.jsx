@@ -242,6 +242,7 @@ const WhyAccordionTab = React.memo(
 
                                         <QuestionIcon
                                           attributes={item?.when_matters}
+                                          product={product}
                                         />
 
                                         <small
@@ -328,6 +329,7 @@ const WhyAccordionTab = React.memo(
 
                                     <QuestionIcon
                                       attributes={item?.when_matters}
+                                      product={product}
                                     />
 
                                     <small className="d-block tooltip-title">
@@ -405,6 +407,7 @@ const WhyAccordionTab = React.memo(
                                       </span>
                                       <QuestionIcon
                                         attributes={item?.when_matters}
+                                        product={product}
                                       />
 
                                       <small className="d-block tooltip-title invisible">
@@ -573,6 +576,7 @@ const WhyAccordionTab = React.memo(
 
                                     <QuestionIcon
                                       attributes={item?.when_matters}
+                                      product={product}
                                     />
 
                                     <small className="d-block tooltip-title">
@@ -647,6 +651,7 @@ const WhyAccordionTab = React.memo(
                                         </span>
                                         <QuestionIcon
                                           attributes={item?.when_matters}
+                                          product={product}
                                         />
 
                                         <small className="d-block tooltip-title">
@@ -725,7 +730,7 @@ const WhyAccordionTab = React.memo(
                                         </span>
                                         <QuestionIcon
                                           attributes={item?.when_matters}
-                                          style={{color:" blue"}}
+                                          product={product}
                                         />
                                         <small className="d-block tooltip-title">
                                           {item?.hover_phase && (

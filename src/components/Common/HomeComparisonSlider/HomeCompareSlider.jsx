@@ -23,7 +23,7 @@ export default function HomeCompareSlider(products) {
   const filteredComparisons = products?.products?.filter(
     (comparison) => comparison.verdict_text !== null
   );
-  //   console.log(filteredComparisons)
+  // console.log(filteredComparisons,"checking filtered data")
   return (
     <section className="comparisons-slider">
       <Swiper
@@ -76,14 +76,16 @@ export default function HomeCompareSlider(products) {
                         height={0}
                         sizes="100%"
                         alt={item?.product_first}
-                      />
+                      />  
+                      
                       {item?.product_first_overall_counted_score >
                         item?.product_second_overall_counted_score && (
-                        <div className="winner__badge">WINNER</div>
+                        <div className="winner__badge">Winnerxx</div>
                       )}
                       <div className="footer_content">
                         <span>{item?.product_first}</span>
                       </div>
+                      
                       <span
                         className="rating_count"
                         style={{

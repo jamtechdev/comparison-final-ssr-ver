@@ -1,3 +1,9 @@
+.logo {
+  width: auto;
+  /* hei/ght: 100%; */
+  max-width: 60px;
+}
+
 header.sticky {
   position: sticky;
   background: #fff;
@@ -94,9 +100,12 @@ footer .search-icon {
   padding: 40px 1.5rem;
 }
 .footer-container .footer-content img {
-  width: 155px;
-  aspect-ratio: 155 / 52;
+  /* width: 155px;
+  aspect-ratio: 155 / 52; */
+
   height: 52px;
+  width: auto;
+  min-width: 60px;
 }
 .footer-container .footer-content p {
   line-height: 26px;
@@ -775,7 +784,7 @@ footer .search-icon {
   background: var(--white-color);
   padding: 35px 0 0;
   position: relative;
-  min-height: 235px;
+  min-height: 210px;
   height: 100%;
   cursor: pointer;
 }
@@ -1028,15 +1037,17 @@ footer .search-icon {
 .flex-box .left_box .box_content {
   font-weight: 400;
   font-size: 15px;
-  line-height: 28px;
+  line-height: 20px;
   background: #fff;
   border: 1px solid #d4d6dc;
   padding: 0px 20px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
   color: #3c445f;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
+  white-space: break-spaces;
 }
 
 .flex-box .left_box {
