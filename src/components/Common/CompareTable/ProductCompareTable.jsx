@@ -237,7 +237,7 @@ const ProductCompareTable = React.memo(
                   {item?.attribute_value === "-" ||
                   item?.attribute_value === null ||
                   item?.attribute_value === "?" ? (
-                    "-"
+                    item?.attribute_value
                   ) : (
                     <>
                       {item?.attribute_value === "-" ||
