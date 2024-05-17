@@ -1991,9 +1991,7 @@ function ProductPage({
                         index={index} // Pass index as a prop to ReviewSlider
                       />
                     ) : (
-                      <span className="text-center m-2">
-                        No Alternative Products Found
-                      </span>
+                     ""
                     )}
                   </React.Fragment>
                 );
