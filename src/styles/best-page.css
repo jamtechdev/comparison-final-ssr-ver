@@ -1282,10 +1282,18 @@ body .product-listing-inner-content .score-section .score-detail h6 {
     padding: 6px 10px;
     text-align: center;
     font-size: 14px;
+    width: 50%;
   }
 
   .comparison-tool .not-availabel {
     grid-template-columns: 1fr !important;
+  }
+
+  .comparison-tool .not-availabel i{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 @media screen and (max-width: 410px) {

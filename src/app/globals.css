@@ -2187,7 +2187,7 @@ h4.attribute__title {
 }
 
 table.compare-container.table .best-price-section .not-availabel {
-  padding: 6px;
+  padding: 6px !important;
 }
 
 /* div#shortCodeText li{

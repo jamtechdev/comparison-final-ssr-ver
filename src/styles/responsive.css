@@ -906,10 +906,16 @@
 
   .mobile-product-slider .swiper-next {
     right: -16px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobile-product-slider .swiper-prev {
     left: -16px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Product Page End  */
