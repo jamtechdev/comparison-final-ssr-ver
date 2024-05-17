@@ -232,7 +232,10 @@ select {
   font-size: 18px;
   color: rgba(39, 48, 78, 0.85);
   line-height: 30px;
-  padding-bottom: 12px;
+}
+
+.para_content_text > *{
+  padding-bottom: 12px !important;
 }
 
 .para_content_text ul {
