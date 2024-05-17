@@ -1271,6 +1271,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   .flex-box .left_box .box_content {
     font-size: 14px;
     max-width: 250px;
+    padding: 4px 20px;
   }
   .correlation_svg_width,
   .base_chart_graph {
