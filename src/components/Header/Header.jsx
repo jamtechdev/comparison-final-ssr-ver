@@ -17,7 +17,7 @@ import {
 import SearchList from "../Search/SearchList";
 import CompareModal from "../Common/Comparison/CompareModal";
 export default function Header({ headerData, headerPhase, logo }) {
-  console.log(headerPhase);
+  console.log(headerPhase?.page_phases);
   const [isFocused, setIsFocused] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
