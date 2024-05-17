@@ -1,7 +1,9 @@
 /*Tab Responsive Start */
 @media screen and (max-width: 992px) {
-  section.comparisons-slider.no-before::before{display: none;}
-  
+  section.comparisons-slider.no-before::before {
+    display: none;
+  }
+
   .compare-container .best-list-item li img {
     margin: 0 !important;
   }
@@ -1138,6 +1140,9 @@
   .content-para {
     font-size: 16px;
   }
+  .content-para {
+    text-align: left;
+  }
 
   .fonzi p {
     font-size: 16px !important;
@@ -1442,8 +1447,8 @@
     column-gap: 20px !important;
     row-gap: 5px !important;
   }
-  .badge-list-section.gap_top{
-    gap: 10px !important
+  .badge-list-section.gap_top {
+    gap: 10px !important;
   }
   .similar-guides {
     margin: 20px 0 !important;

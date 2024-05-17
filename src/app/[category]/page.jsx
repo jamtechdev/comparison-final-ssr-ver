@@ -57,6 +57,23 @@ async function getSlugMetaData(category) {
   }
   return response.json();
 }
+async function getNoDataFound(category) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/page-not-found`,
+    {
+      next: { revalidate: 10 },
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      },
+    }
+  );
+  if (!response.ok) {
+  }
+  return response.json();
+}
 
 export async function generateMetadata({ params: { category } }) {
   let meta_data = { data: {} };
@@ -64,14 +81,42 @@ export async function generateMetadata({ params: { category } }) {
 
   try {
     const response = await getSlugMetaData(category);
+    console.log(response);
     if (response && response.data) {
       meta_data = response.data;
+      console.log(meta_data);
     }
   } catch (error) {
     console.error("Error fetching metadata:", error);
   }
+  const slugType = await getSlugType(category);
+  if (slugType.error === "Permalink not found") {
+    const meta_data = await getNoDataFound();
+    const siteURL = "https://mondopedia.it";
+    if (meta_data && meta_data.data) {
+      return {
+        title: meta_data.data.title,
+        description: meta_data.data.meta_description,
+        generator: "Comparison web",
+        applicationName: "Comparison web",
+        referrer: "origin-when-cross-origin",
+        lang: "en",
+        keywords: ["compare", "product"],
+        alternates: {
+          canonical: `${siteURL}/${category}`,
+        },
+        openGraph: {
+          type: "website",
+        },
+      };
+    } else {
+      console.error("Invalid meta_data response:", meta_data);
+      return "";
+    }
+  }
+
   return {
-    title: meta_data?.title || "Comparison web",
+    title: meta_data?.title || "web",
     generator: "Comparison web",
     applicationName: "Comparison web",
     referrer: "origin-when-cross-origin",

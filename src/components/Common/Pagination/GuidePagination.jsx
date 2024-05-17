@@ -20,7 +20,7 @@ const GuidePagination = ({ pagination }) => {
 
   const handlePageClick = (page) => {
     if (page === "...") {
-      return; // Ignore clicks on dots, Previous, and Next
+      return; // Ignore clicks on dots
     }
     let newPage;
 
@@ -40,54 +40,43 @@ const GuidePagination = ({ pagination }) => {
     window.history.pushState({}, "", url.toString());
     router.push(`?${currentParams.toString()}`, { scroll: false });
 
-    // Scroll to the top of the product list
     const productListElement = document.getElementById("scroll__top");
     if (productListElement) {
       productListElement.scrollIntoView({ behavior: "smooth" });
     }
   };
+
   let pagesArray = [];
 
   if (total_pages > 0) {
-    if (currentPage !== 1 && currentPage !== 9) {
-      pagesArray.push(currentPage);
-    }
-    if (currentPage == 1) {
-      pagesArray.push(currentPage);
-    }
-    if (currentPage == 9) {
-      pagesArray.push(currentPage);
-    }
-    for (let i = 1; i <= 2; i++) {
-      if (currentPage - i > 1 && currentPage - i !== 9) {
-        pagesArray.unshift(currentPage - i);
-      }
-      if (currentPage + i < total_pages && currentPage + i !== 1) {
-        pagesArray.push(currentPage + i);
-      }
-    }
-
-    if (currentPage - 3 > 1) {
-      pagesArray.unshift("...");
-    }
-
-    if (currentPage + 3 < total_pages) {
-      pagesArray.push("...");
-    }
-
     if (currentPage !== 1) {
-      pagesArray.unshift(1);
-      pagesArray.unshift("Previous");
+      pagesArray.push("Previous");
+    }
+
+    if (total_pages <= 5) {
+      for (let i = 1; i <= total_pages; i++) {
+        pagesArray.push(i);
+      }
+    } else {
+      pagesArray.push(1);
+      if (currentPage > 3) {
+        pagesArray.push("...");
+      }
+      const startPage = Math.max(2, currentPage - 1);
+      const endPage = Math.min(total_pages - 1, currentPage + 1);
+      for (let i = startPage; i <= endPage; i++) {
+        pagesArray.push(i);
+      }
+      if (currentPage < total_pages - 2) {
+        pagesArray.push("...");
+      }
+      pagesArray.push(total_pages);
     }
 
     if (currentPage !== total_pages) {
-      pagesArray.push(9);
       pagesArray.push("Next");
     }
   }
-
-  // Always include numbers 1 and 9 in the pagination array
-  // pagesArray.unshift(1);
 
   return (
     <>
@@ -106,7 +95,7 @@ const GuidePagination = ({ pagination }) => {
                 }
                 key={index}
               >
-               {item}
+                {item}
               </li>
             ))}
           </ul>

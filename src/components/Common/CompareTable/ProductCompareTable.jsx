@@ -321,7 +321,7 @@ const ProductCompareTable = React.memo(
                     {/* {console.log(product)} */}
                     {index === 0 && (
                       <span className="best-tag-product">
-                        Compared
+                      {  productPhaseData?.compare_products_text}
                         {/* {product?.assigned_title} */}
                       </span>
                     )}

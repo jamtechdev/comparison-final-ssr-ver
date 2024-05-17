@@ -5,7 +5,7 @@ import Product from "../Common/ProductListing/Product/Product";
 import ProductPage from "@/app/_components/ProductPage";
 import CompareDiv from "../Common/ComparisanComponent/CompareDiv";
 
-const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
+const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
   const [tooltipPosition, setTooltipPosition] = useState({
     top: 0,
     left: 0,
@@ -53,17 +53,19 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
         >
           {attributes?.description && (
             <p className="mb-2">
-             {
-  <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.what_it_is}{""}</b>
-  )
-}
-{
-  <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.what_it_is}{""}</b>
-  )
-}
-{/* {
+              {<Product /> && guidePhraseData && (
+                <b>
+                  {guidePhraseData.what_it_is}:
+                  {""}
+                </b>
+              )}
+              {<ProductPage /> && productPhaseData && (
+                <b>
+                  {productPhaseData.what_it_is}:
+                  {""}
+                </b>
+              )}
+              {/* {
   <CompareDiv/> && comparePhaseData &&(
     <b>{comparePhaseData.what_it_is}</b>
   )
@@ -73,30 +75,34 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
           )}
           {attributes?.when_matters && (
             <p className="mb-2">
-              {
-  <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.when_it_matters}{""}</b>
-  )
-}
-{
-  <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.when_it_matters}{""}</b>
-  )
-}
+              {<Product /> && guidePhraseData && (
+                <b>
+                  {guidePhraseData.when_it_matters}:
+                  {""}
+                </b>
+              )}
+              {<ProductPage /> && productPhaseData && (
+                <b>
+                  {productPhaseData.when_it_matters}:
+                  {""}
+                </b>
+              )}
 
               {`${" "} ${attributes?.when_matters}`}
             </p>
           )}
-        {
-  <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.score_components}{""}</b>
-  )
-}
-{
-  <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.score_components}{""}</b>
-  )
-}
+          {<Product /> && guidePhraseData && (
+            <b>
+              {guidePhraseData.score_components}
+              {""}
+            </b>
+          )}
+          {<ProductPage /> && productPhaseData && (
+            <b>
+              {productPhaseData.score_components}:
+              {""}
+            </b>
+          )}
           {attributes.score_components &&
             attributes.score_components?.map((data, index) => {
               const roundedNumber = parseFloat(data?.attribute_evaluation);
@@ -107,7 +113,6 @@ const Questiontool = ({ productPhaseData,attributes,guidePhraseData }) => {
                   : roundedNumber.toFixed(1);
               return (
                 <div className="scroe_section" key={index}>
-                  
                   <p className="text-end">{`${parseFloat(
                     data?.importance
                   ).toFixed(1)}%`}</p>

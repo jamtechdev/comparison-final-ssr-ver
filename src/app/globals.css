@@ -1290,7 +1290,7 @@ button.searchBarInner.btn.btn-primary {
 
 .comparison-tool .not-availabel {
   flex-direction: row;
-  padding: 8px;
+  padding: 8px !important;
 }
 
 table.compare-container.table.comparison-table .best-list-item li img {
