@@ -889,7 +889,62 @@ const ProductCompareTable = React.memo(
                   {" "}
                   {/* Ensure to set a unique key for each <tr> */}
                   <th className="sub-inner-padding">
-                    <div className="tooltip-title">{data?.title}</div>
+                    <div className="tooltip-title">
+                      {data?.title}
+
+                      <div className="tooltip-display-content">
+                        {
+                          <p className="mb-2">
+                            <b>
+                              {products[0] && productPhaseData?.what_it_is} :{" "}
+                            </b>
+                            {data?.hover_phase?.what_is_it}
+                          </p>
+                        }
+
+                        <p>
+                          <b>{productPhaseData?.score_components}:</b>
+                        </p>
+                        {data?.hover_phase.attributes?.map(
+                          (hoverPhaseData, index) => {
+                            return (
+                              <div className="scroe_section" key={index}>
+                                <p className="text-end">
+                                  {`${parseFloat(
+                                    hoverPhaseData?.percentage
+                                  ).toFixed(1)}%`}
+                                </p>
+                                <div
+                                  className="score-count"
+                                  style={{
+                                    background:
+                                      hoverPhaseData?.attribute_value >= 7.5
+                                        ? "#093673"
+                                        : hoverPhaseData?.attribute_value >=
+                                            5 &&
+                                          hoverPhaseData?.attribute_value < 7.5
+                                        ? "#437ECE"
+                                        : "#85B2F1",
+                                  }}
+                                >
+                                  {hoverPhaseData?.attribute_value != null
+                                    ? hoverPhaseData?.attribute_value >= 10
+                                      ? formatValue(
+                                          Math.trunc(
+                                            hoverPhaseData?.attribute_value
+                                          )
+                                        )
+                                      : hoverPhaseData?.attribute_value
+                                    : "0.0"}
+                                </div>
+                                <p>{hoverPhaseData?.attribute_name}</p>
+                              </div>
+                            );
+                          }
+                        )}
+                        {/* {console.log(product)} */}
+                      </div>
+                  </div>
                   </th>
                   {finalProducts.slice(0, defaultNo).map((product, idx) => {
                     const value =

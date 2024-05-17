@@ -279,7 +279,7 @@ function ProductPage({
   const checkVerdictText = product?.alternative_comparisons?.filter(
     (item) => item?.verdict_text === null
   );
-  console.log(checkVerdictText);
+  // console.log(checkVerdictText);
 
   return (
     <>

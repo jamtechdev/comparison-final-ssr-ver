@@ -921,31 +921,58 @@ const CompareTable = React.memo(
                   <th className="sub-inner-padding">
                     <div className="tooltip-title">
                       {data?.title}
-                      {/* <div className="tooltip-display-content">
-                        <p className="mb-2">
-                          <b>
-                            {guidePhraseData &&
-                              guidePhraseData?.when_it_matters}
-                            :{" "}
-                          </b>{" "}
-                          {
-                            products[0]?.ratio_qulitiy_points_descriptions
-                              ?.description
-                          }
-                        </p>
+                      <div className="tooltip-display-content">
+                        {
+                          <p className="mb-2">
+                            <b>
+                              {products[0] && guidePhraseData?.what_it_is} :{" "}
+                            </b>
+                            {data?.hover_phase?.what_is_it}
+                          </p>
+                        }
 
-                        <p className="mb-2">
-                          <b>
-                            {guidePhraseData &&
-                              guidePhraseData?.when_it_matters}
-                            :{" "}
-                          </b>{" "}
-                          {
-                            products[0]?.ratio_qulitiy_points_descriptions
-                              ?.when_matters
-                          }
+                        <p>
+                          <b>{guidePhraseData?.score_components}:</b>
                         </p>
-                      </div> */}
+                        {data?.hover_phase.attributes?.map(
+                          (hoverPhaseData, index) => {
+                            return (
+                              <div className="scroe_section" key={index}>
+                                <p className="text-end">
+                                  {`${parseFloat(
+                                    hoverPhaseData?.percentage
+                                  ).toFixed(1)}%`}
+                                </p>
+                                <div
+                                  className="score-count"
+                                  style={{
+                                    background:
+                                      hoverPhaseData?.attribute_value >= 7.5
+                                        ? "#093673"
+                                        : hoverPhaseData?.attribute_value >=
+                                            5 &&
+                                          hoverPhaseData?.attribute_value < 7.5
+                                        ? "#437ECE"
+                                        : "#85B2F1",
+                                  }}
+                                >
+                                  {hoverPhaseData?.attribute_value != null
+                                    ? hoverPhaseData?.attribute_value >= 10
+                                      ? formatValue(
+                                          Math.trunc(
+                                            hoverPhaseData?.attribute_value
+                                          )
+                                        )
+                                      : hoverPhaseData?.attribute_value
+                                    : "0.0"}
+                                </div>
+                                <p>{hoverPhaseData?.attribute_name}</p>
+                              </div>
+                            );
+                          }
+                        )}
+                        {/* {console.log(product)} */}
+                      </div>
                     </div>
                   </th>
                   {finalProducts.slice(0, defaultNo).map((product, idx) => {
