@@ -133,7 +133,7 @@
   padding: 0px 10px !important;
 }
 .best-price-section .best-list-item .not-availabel {
-  padding: 6px;
+  padding: 6px !important;
 }
 .compare-container .best-list-item li.compare-product-table span.price-wider a {
   font-size: 17px !important;
