@@ -917,8 +917,36 @@ const CompareTable = React.memo(
                 <tr className="" key={index}>
                   {" "}
                   {/* Ensure to set a unique key for each <tr> */}
+                 {/* { console.log(data)} */}
                   <th className="sub-inner-padding">
-                    <div className="tooltip-title">{data?.title}</div>
+                    <div className="tooltip-title">
+                      {data?.title}
+                      {/* <div className="tooltip-display-content">
+                        <p className="mb-2">
+                          <b>
+                            {guidePhraseData &&
+                              guidePhraseData?.when_it_matters}
+                            :{" "}
+                          </b>{" "}
+                          {
+                            products[0]?.ratio_qulitiy_points_descriptions
+                              ?.description
+                          }
+                        </p>
+
+                        <p className="mb-2">
+                          <b>
+                            {guidePhraseData &&
+                              guidePhraseData?.when_it_matters}
+                            :{" "}
+                          </b>{" "}
+                          {
+                            products[0]?.ratio_qulitiy_points_descriptions
+                              ?.when_matters
+                          }
+                        </p>
+                      </div> */}
+                    </div>
                   </th>
                   {finalProducts.slice(0, defaultNo).map((product, idx) => {
                     const value =
