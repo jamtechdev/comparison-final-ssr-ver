@@ -1991,7 +1991,7 @@ function ProductPage({
                         index={index} // Pass index as a prop to ReviewSlider
                       />
                     ) : (
-                     ""
+                      ""
                     )}
                   </React.Fragment>
                 );

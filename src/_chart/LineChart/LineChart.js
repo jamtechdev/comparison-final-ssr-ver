@@ -256,7 +256,7 @@ function lineChart(svgRef, lineChartData) {
           } </b>   <i style="opacity: 0.5">(${formatDate(d?.date)} )</i> </div>`
         )
         .style("background-color", "white")
-        .style("left", "250px")
+        // .style("left", "250px")
         .style("top", (e.clientY || e.touches[0].clientY) + "px")
         .style("color", "#000");
       // .text(`${d.price}`)
