@@ -917,7 +917,7 @@ const CompareTable = React.memo(
                 <tr className="" key={index}>
                   {" "}
                   {/* Ensure to set a unique key for each <tr> */}
-                 {/* { console.log(data)} */}
+                  {/* { console.log(data)} */}
                   <th className="sub-inner-padding">
                     <div className="tooltip-title">
                       {data?.title}
@@ -931,46 +931,6 @@ const CompareTable = React.memo(
                           </p>
                         }
 
-                        <p>
-                          <b>{guidePhraseData?.score_components}:</b>
-                        </p>
-                        {data?.hover_phase.attributes?.map(
-                          (hoverPhaseData, index) => {
-                            return (
-                              <div className="scroe_section" key={index}>
-                                <p className="text-end">
-                                  {`${parseFloat(
-                                    hoverPhaseData?.percentage
-                                  ).toFixed(1)}%`}
-                                </p>
-                                <div
-                                  className="score-count"
-                                  style={{
-                                    background:
-                                      hoverPhaseData?.attribute_value >= 7.5
-                                        ? "#093673"
-                                        : hoverPhaseData?.attribute_value >=
-                                            5 &&
-                                          hoverPhaseData?.attribute_value < 7.5
-                                        ? "#437ECE"
-                                        : "#85B2F1",
-                                  }}
-                                >
-                                  {hoverPhaseData?.attribute_value != null
-                                    ? hoverPhaseData?.attribute_value >= 10
-                                      ? formatValue(
-                                          Math.trunc(
-                                            hoverPhaseData?.attribute_value
-                                          )
-                                        )
-                                      : hoverPhaseData?.attribute_value
-                                    : "0.0"}
-                                </div>
-                                <p>{hoverPhaseData?.attribute_name}</p>
-                              </div>
-                            );
-                          }
-                        )}
                         {/* {console.log(product)} */}
                       </div>
                     </div>
