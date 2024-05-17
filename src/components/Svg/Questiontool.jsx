@@ -55,14 +55,12 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
             <p className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
-                  {guidePhraseData.what_it_is}:
-                  {""}
+                  {guidePhraseData.what_it_is}:{""}
                 </b>
               )}
               {<ProductPage /> && productPhaseData && (
                 <b>
-                  {productPhaseData.what_it_is}:
-                  {""}
+                  {productPhaseData.what_it_is}:{""}
                 </b>
               )}
               {/* {
@@ -70,21 +68,19 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
     <b>{comparePhaseData.what_it_is}</b>
   )
 } */}
-              {""} {attributes?.description}
+             {`${" "} ${attributes?.description}`}
             </p>
           )}
           {attributes?.when_matters && (
             <p className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
-                  {guidePhraseData.when_it_matters}:
-                  {""}
+                  {guidePhraseData.when_it_matters}:{""}
                 </b>
               )}
               {<ProductPage /> && productPhaseData && (
                 <b>
-                  {productPhaseData.when_it_matters}:
-                  {""}
+                  { productPhaseData.when_it_matters}:{""}
                 </b>
               )}
 
@@ -93,14 +89,12 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
           )}
           {<Product /> && guidePhraseData && (
             <b>
-              {guidePhraseData.score_components}
-              {""}
+              {guidePhraseData.score_components}:{""}
             </b>
           )}
           {<ProductPage /> && productPhaseData && (
             <b>
-              {productPhaseData.score_components}:
-              {""}
+              {productPhaseData.score_components}:{""}
             </b>
           )}
           {attributes.score_components &&

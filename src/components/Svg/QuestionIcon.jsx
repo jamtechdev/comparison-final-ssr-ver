@@ -5,7 +5,13 @@ import ProductPage from "@/app/_components/ProductPage";
 import CompareDiv from "../Common/ComparisanComponent/CompareDiv";
 import WhyAccordionTab from "../Product/WhyAccordionTab";
 
-const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhaseData,product}) => {
+const QuestionIcon = ({
+  attributes,
+  productPhaseData,
+  guidePhraseData,
+  comparePhaseData,
+  product,
+}) => {
   const [tooltipPosition, setTooltipPosition] = useState({
     top: 0,
     left: 0,
@@ -15,26 +21,23 @@ const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhas
   function adjustTooltipPosition() {
     const tooltip = tooltipRef.current;
     if (!tooltip) return;
-  
+
     const viewportWidth = document.documentElement.clientWidth;
     const isMobile = viewportWidth <= 768; // Example breakpoint for mobile/desktop
-  
+
     // Calculate the desired width based on screen size
     const tooltipWidth = isMobile ? 140 : 250;
-  
+
     // Calculate ideal left position for centered alignment
     const idealLeft = (viewportWidth - tooltipWidth) / 2;
-  
+
     // Calculate the final left position to ensure the tooltip stays within the screen boundaries
-    const left = Math.min(
-      Math.max(0, idealLeft),
-      viewportWidth - tooltipWidth
-    );
-  
+    const left = Math.min(Math.max(0, idealLeft), viewportWidth - tooltipWidth);
+
     setTooltipPosition({ ...tooltipPosition, left, width: tooltipWidth });
   }
-    // console.log(product,"mahima")
-  const {isMobile}=useScreenSize();
+  // console.log(product,"mahima")
+  const { isMobile } = useScreenSize();
   return (
     <div
       className="question_hover_container question-marker-icon"
@@ -45,70 +48,70 @@ const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhas
       </svg>
       {/* { console.log(attributes)} */}
       {attributes !== undefined && (
-           <div
-      className="display-content"
-      ref={tooltipRef}
-      style={{
-        left: isMobile ? "50%" : 0,
-        transform: isMobile ? "translateX(-50%)" : "translateX(-10%)",
-        width: isMobile ? "170px" : "250px",   
-      }}
-    >
+        <div
+          className="display-content"
+          ref={tooltipRef}
+          style={{
+            left: isMobile ? "50%" : 0,
+            transform: isMobile ? "translateX(-50%)" : "translateX(-10%)",
+            width: isMobile ? "170px" : "250px",
+          }}
+        >
           {attributes?.description && (
-            <p className="mb-2" >
-             {
-  <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.what_it_is}:{""}</b>
-  )
-}
-{
-  <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.what_it_is}:{""}</b>
-  )
-}
-{
-  <CompareDiv/> && comparePhaseData &&(
-    <b>{comparePhaseData.what_it_is}:{""}</b>
-  )
-}
-{
-  <WhyAccordionTab/> && product && (
-  <b>{product?.page_phases?.what_it_is}:{""}</b>
-  )
-}
+            <p className="mb-2">
+              {<Product /> && guidePhraseData && (
+                <b>
+                  {guidePhraseData.what_it_is}:{""}
+                </b>
+              )}
+              {<ProductPage /> && productPhaseData && (
+                <b>
+                  {productPhaseData.what_it_is}:{""}
+                </b>
+              )}
+              {<CompareDiv /> && comparePhaseData && (
+                <b>
+                  {comparePhaseData.what_it_is}:{""}
+                </b>
+              )}
+              {<WhyAccordionTab /> && product && (
+                <b>
+                  {product?.page_phases?.what_it_is}:{""}
+                </b>
+              )}
 
-              {attributes?.description}
+              {`${" "} ${attributes?.description}`}
             </p>
           )}
           {attributes?.when_matters && (
             <p className="mb-2">
-              {
-  <Product/> && guidePhraseData && (
-    <b>{guidePhraseData.when_it_matters}:{""}</b>
-  )
-}
-{
-  <ProductPage/> && productPhaseData && (
-    <b>{productPhaseData.when_it_matters}:{""}</b>
-  )
-}
-{
-  <CompareDiv/> && comparePhaseData &&(
-    <b>{comparePhaseData.when_it_matters}{" "}</b>
-  )
-}
-{
-  <WhyAccordionTab/> && product && (
-  <b>{product?.page_phases?.when_it_matters}:{""}</b>
-  )
-}        
+              {<Product /> && guidePhraseData && (
+                <b>
+                  {guidePhraseData.when_it_matters}:{""}
+                </b>
+              )}
+              {<ProductPage /> && productPhaseData && (
+                <b>
+                  {productPhaseData.when_it_matters}:{""}
+                </b>
+              )}
+              {<CompareDiv /> && comparePhaseData && (
+                <b>
+                  {comparePhaseData.when_it_matters}:{""}{" "}
+                </b>
+              )}
+              {<WhyAccordionTab /> && product && (
+                <b>
+                  {product?.page_phases?.when_it_matters}:{""}
+                </b>
+              )}
               {/* <b> When it matters:{""}</b> */}
-              {attributes?.when_matters}
+              {`${" "} ${attributes?.when_matters}`}
             </p>
-          )} 
-           {attributes?.importance && (
+          )}
+          {attributes?.importance && (
             <p className="mb-2">
-               <b>Importance: </b>
+              <b>Importance: </b>
               {attributes?.importance}
             </p>
           )}
@@ -118,7 +121,6 @@ const QuestionIcon = ({ attributes ,productPhaseData,guidePhraseData,comparePhas
               {attributes?.good_value}
             </p>
           )}
-         
         </div>
       )}
     </div>
