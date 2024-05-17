@@ -279,7 +279,7 @@ function ProductPage({
   const checkVerdictText = product?.alternative_comparisons?.filter(
     (item) => item?.verdict_text === null
   );
-  // console.log(checkVerdictText)
+  console.log(checkVerdictText);
 
   return (
     <>
@@ -2068,21 +2068,23 @@ function ProductPage({
 
       {/* {console.log()} */}
 
-      <section className="mt-3 mobile-popular-comparison">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                {product?.page_phases?.popular_comparison}
-              </h2>
+      {checkVerdictText?.length > 0 && (
+        <section className="mt-3 mobile-popular-comparison">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <h2 className="site-main-heading">
+                  {product?.page_phases?.popular_comparison}
+                </h2>
 
-              <ComparisonsSlider
-                products={product && product?.alternative_comparisons}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </section>
+                <ComparisonsSlider
+                  products={product && product?.alternative_comparisons}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
 
       <ProductBottomBar favSlider={product && product} />
     </>

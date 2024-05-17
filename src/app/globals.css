@@ -107,23 +107,22 @@ p {
   line-height: 30px !important;
   padding: 0 40px 12px !important;
 }
-.attribute__card__body ul li::marker{
-  font-size: 17px ;
+.attribute__card__body ul li::marker {
+  font-size: 17px;
   opacity: 0.85;
 }
-.attribute__card__body ul ol::marker{
-  font-size: 17px ;
+.attribute__card__body ul ol::marker {
+  font-size: 17px;
   opacity: 0.85;
 }
-.attribute__card__body ul{
+.attribute__card__body ul {
   list-style-type: disc !important;
-  
 }
-.attribute__card__body ol{
+.attribute__card__body ol {
   list-style-type: auto !important;
 }
 
-.para_content_text ol{
+.para_content_text ol {
   list-style: auto !important;
   padding-left: 2rem !important;
 }
@@ -131,7 +130,7 @@ p {
   padding-left: 2rem !important;
 }
 .content-para ul,
-.content-para ol{
+.content-para ol {
   list-style: auto !important;
 }
 
@@ -234,12 +233,12 @@ select {
   line-height: 30px;
 }
 
-.para_content_text > *{
+.para_content_text > * {
   padding-bottom: 12px !important;
 }
 
 .para_content_text ul {
-list-style: disc !important;
+  list-style: disc !important;
 }
 h2.site-main-heading {
   line-height: 42px;
@@ -247,7 +246,7 @@ h2.site-main-heading {
 h1.site-main-heading {
   line-height: 46px;
 }
- 
+
 .site-main-heading {
   font-weight: 400 !important;
   font-size: 30px;
@@ -1822,7 +1821,7 @@ li.color-item.selected {
   padding: 5px 10px;
   border-radius: 4px;
   font-size: 13px;
- margin-bottom: 3px;
+  margin-bottom: 3px;
 }
 .test__phrase__content {
   border-top: 1px solid #ddd;
@@ -2423,15 +2422,27 @@ a.product_link:hover {
 }
 
 .box__content__section__textarea ul,
-.box__content__section__textarea ol{
+.box__content__section__textarea ol {
   padding-left: 2rem !important;
 }
 
-.box__content__section__textarea ul{
+.box__content__section__textarea ul {
   list-style: disc !important;
-
 }
 
-.box__content__section__textarea ol{
+.box__content__section__textarea ol {
   list-style-type: decimal !important;
+}
+
+.rating__content small {
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 34px;
+  font-family: "Lato", sans-serif !important;
+  color: var(--heading-color);
+  opacity: 90%;
+}
+
+.rating__content small a {
+  color: var(--heading-color) !important;
 }

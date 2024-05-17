@@ -321,13 +321,12 @@ const ProductCompareTable = React.memo(
                     {/* {console.log(product)} */}
                     {index === 0 && (
                       <span className="best-tag-product">
-                      {  productPhaseData?.compared}
+                        {productPhaseData?.compared}
                         {/* {product?.assigned_title} */}
                       </span>
                     )}
 
                     <p className="device-name">
-                      
                       {/* <a href="">/product/${product?.permalik</a> */}
                       <a
                         href={`/${product?.category_url}/${product?.permalink}`}
@@ -360,7 +359,7 @@ const ProductCompareTable = React.memo(
                           {" "}
                           <>
                             <ul className="best-list-item d-none">
-                              {console.log(product?.currency)}
+                              {/* {console.log(product?.currency)} */}
                               {product.price_websites &&
                                 product?.price_websites?.every(
                                   (data) => data.price === null
@@ -406,7 +405,8 @@ const ProductCompareTable = React.memo(
                                                   )}`}
                                                   className="font__16__inline"
                                                 >
-                                                  {data?.price} {product?.currency}
+                                                  {data?.price}{" "}
+                                                  {product?.currency}
                                                 </a>
                                               </span>
                                             </>
@@ -505,7 +505,8 @@ const ProductCompareTable = React.memo(
                                                 className="font__16__inline"
                                               >
                                                 {/* {console.log(data?.currency)} */}
-                                                {data?.price} {product?.currency}
+                                                {data?.price}{" "}
+                                                {product?.currency}
                                               </a>
                                             </span>
                                           </>
@@ -647,16 +648,80 @@ const ProductCompareTable = React.memo(
                             }
                           </p>
                         )}
+                        {/* {console.log(products[0]?.users_rating_descriptions?.when_matters)} */}
+                        {/* {console.log(productPhaseData)} */}
+
+                        <p className="mb-2">
+                          <b>{productPhaseData?.when_it_matters}: </b>
+                          {products[0]?.users_rating_descriptions?.when_matters}
+                        </p>
+                        <p>
+                          <b>
+                            {products[0] && productPhaseData?.score_components}:
+                          </b>
+                        </p>
                         {products[0]?.users_rating_descriptions
-                          ?.when_it_matters && (
-                          <p className="mb-2">
-                            <b>When it matters: </b>
-                            {
-                              products[0]?.users_rating_descriptions
-                                ?.when_it_matters
+                          ?.score_components &&
+                          products[0]?.users_rating_descriptions?.score_components?.map(
+                            (data, index) => {
+                              return (
+                                <div className="scroe_section" key={index}>
+                                  <p className="text-end">
+                                    {`${parseFloat(data?.importance).toFixed(
+                                      1
+                                    )}%`}
+                                  </p>
+                                  <div
+                                    className="score-count"
+                                    style={{
+                                      background:
+                                        data?.attribute_evaluation >= 7.5
+                                          ? "#093673"
+                                          : data?.attribute_evaluation >= 5 &&
+                                            data?.attribute_evaluation < 7.5
+                                          ? "#437ECE"
+                                          : "#85B2F1",
+                                    }}
+                                  >
+                                    {data?.attribute_evaluation != null
+                                      ? data?.attribute_evaluation >= 10
+                                        ? Math.trunc(data?.attribute_evaluation)
+                                        : data?.attribute_evaluation.toFixed(1)
+                                      : "0.0"}
+                                  </div>
+                                  <p>{data?.attribute_category}</p>
+                                </div>
+                              );
                             }
-                          </p>
-                        )}
+                          )}
+
+                        <b>{productPhaseData?.users_ratings}</b>
+                        {products[0]?.users_rating_descriptions
+                          ?.reviews_websites &&
+                          products[0]?.users_rating_descriptions?.reviews_websites?.map(
+                            (data, index) => {
+                              return (
+                                <>
+                                  <div className="rating__section">
+                                    <img
+                                      src={`${data?.logo}`}
+                                      alt={data?.alt}
+                                    />
+                                    <div className="rating__content">
+                                      <b>{formatValue(data?.rating)}</b>
+                                      <Rating value={data?.rating} />
+                                      <small>
+                                        {" "}
+                                        <a href={`/link?p=${btoa(data.url)}`}>
+                                          ({data?.reviews})
+                                        </a>{" "}
+                                      </small>
+                                    </div>
+                                  </div>
+                                </>
+                              );
+                            }
+                          )}
                       </div>
                     )}
                 </div>

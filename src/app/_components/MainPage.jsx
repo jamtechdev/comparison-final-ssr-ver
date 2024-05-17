@@ -187,7 +187,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                   <Row key={data?.id}>
                     <Col md={12} xs={12}>
                       <a
-                        href={`/${data?.primary_archive_category?.toLowerCase()}`}
+                        href={`/${data?.permalink}`}
                         className="text-center electronics"
                       >
                         <h2
