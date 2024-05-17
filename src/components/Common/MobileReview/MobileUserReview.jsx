@@ -102,7 +102,9 @@ function MobileUserReview({ productReview }) {
             </SwiperSlide>
           );
         })} */}
-        {productReview?.length > 2 ? (
+       
+      </Swiper>
+      {productReview?.length > 2 ? (
           <>
             <span className="swiper-prev" style={{ left: "5px" }}>
               <i className="ri-arrow-left-s-line"></i>
@@ -114,7 +116,6 @@ function MobileUserReview({ productReview }) {
         ) : (
           ""
         )}
-      </Swiper>
     </>
   );
 }
