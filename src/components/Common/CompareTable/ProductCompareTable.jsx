@@ -655,73 +655,6 @@ const ProductCompareTable = React.memo(
                           <b>{productPhaseData?.when_it_matters}: </b>
                           {products[0]?.users_rating_descriptions?.when_matters}
                         </p>
-                        <p>
-                          <b>
-                            {products[0] && productPhaseData?.score_components}:
-                          </b>
-                        </p>
-                        {products[0]?.users_rating_descriptions
-                          ?.score_components &&
-                          products[0]?.users_rating_descriptions?.score_components?.map(
-                            (data, index) => {
-                              return (
-                                <div className="scroe_section" key={index}>
-                                  <p className="text-end">
-                                    {`${parseFloat(data?.importance).toFixed(
-                                      1
-                                    )}%`}
-                                  </p>
-                                  <div
-                                    className="score-count"
-                                    style={{
-                                      background:
-                                        data?.attribute_evaluation >= 7.5
-                                          ? "#093673"
-                                          : data?.attribute_evaluation >= 5 &&
-                                            data?.attribute_evaluation < 7.5
-                                          ? "#437ECE"
-                                          : "#85B2F1",
-                                    }}
-                                  >
-                                    {data?.attribute_evaluation != null
-                                      ? data?.attribute_evaluation >= 10
-                                        ? Math.trunc(data?.attribute_evaluation)
-                                        : data?.attribute_evaluation.toFixed(1)
-                                      : "0.0"}
-                                  </div>
-                                  <p>{data?.attribute_category}</p>
-                                </div>
-                              );
-                            }
-                          )}
-
-                        <b>{productPhaseData?.users_ratings}</b>
-                        {products[0]?.users_rating_descriptions
-                          ?.reviews_websites &&
-                          products[0]?.users_rating_descriptions?.reviews_websites?.map(
-                            (data, index) => {
-                              return (
-                                <>
-                                  <div className="rating__section">
-                                    <img
-                                      src={`${data?.logo}`}
-                                      alt={data?.alt}
-                                    />
-                                    <div className="rating__content">
-                                      <b>{formatValue(data?.rating)}</b>
-                                      <Rating value={data?.rating} />
-                                      <small>
-                                        {" "}
-                                        <a href={`/link?p=${btoa(data.url)}`}>
-                                          ({data?.reviews})
-                                        </a>{" "}
-                                      </small>
-                                    </div>
-                                  </div>
-                                </>
-                              );
-                            }
-                          )}
                       </div>
                     )}
                 </div>
@@ -759,77 +692,69 @@ const ProductCompareTable = React.memo(
                           }
                         </p>
                       )}
-                      {products[0]?.expert_reviews_descriptions
-                        ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.expert_reviews_descriptions
-                              ?.when_it_matters
-                          }
-                          {products[0]?.expert_reviews_websites?.map(
-                            (data, index) => {
-                              return (
-                                <div
-                                  className="user__rating__popup"
-                                  key={index}
-                                >
-                                  <div className="user__rating__popup__list">
-                                    <span
-                                      className="user__rating__popup__rating"
-                                      style={{
-                                        background: getColorBasedOnScore(
-                                          data?.evaluation
-                                        ),
-                                      }}
-                                    >
-                                      {formatValue(data?.evaluation)}
-                                    </span>
-                                    <div className="user__rating__popup__content">
-                                      {data?.image !== null && (
+
+                      <p className="mb-2">
+                        <b>When it matters: </b>{" "}
+                        {products[0]?.expert_reviews_descriptions?.when_matters}
+                        {products[0]?.expert_reviews_websites?.map(
+                          (data, index) => {
+                            return (
+                              <div className="user__rating__popup" key={index}>
+                                <div className="user__rating__popup__list">
+                                  <span
+                                    className="user__rating__popup__rating"
+                                    style={{
+                                      background: getColorBasedOnScore(
+                                        data?.evaluation
+                                      ),
+                                    }}
+                                  >
+                                    {formatValue(data?.evaluation)}
+                                  </span>
+                                  <div className="user__rating__popup__content">
+                                    {data?.image !== null && (
+                                      <a
+                                        href={`/link?p=${btoa(
+                                          data?.website_name
+                                        )}`}
+                                      >
+                                        <img src={`${data?.image}`} />
+                                      </a>
+                                    )}
+
+                                    <p>
+                                      {" "}
+                                      {data?.name !== null ? (
                                         <a
                                           href={`/link?p=${btoa(
                                             data?.website_name
                                           )}`}
+                                          style={{ color: "inherit" }}
                                         >
-                                          <img src={`${data?.image}`} />
+                                          {" "}
+                                          {data?.name}
+                                        </a>
+                                      ) : (
+                                        <a
+                                          href={`/link?p=${btoa(
+                                            data?.website_name
+                                          )}`}
+                                          style={{ color: "inherit" }}
+                                        >
+                                          {" "}
+                                          {extractDomainName(
+                                            data?.website_name
+                                          )}
                                         </a>
                                       )}
-
-                                      <p>
-                                        {" "}
-                                        {data?.name !== null ? (
-                                          <a
-                                            href={`/link?p=${btoa(
-                                              data?.website_name
-                                            )}`}
-                                            style={{ color: "inherit" }}
-                                          >
-                                            {" "}
-                                            {data?.name}
-                                          </a>
-                                        ) : (
-                                          <a
-                                            href={`/link?p=${btoa(
-                                              data?.website_name
-                                            )}`}
-                                            style={{ color: "inherit" }}
-                                          >
-                                            {" "}
-                                            {extractDomainName(
-                                              data?.website_name
-                                            )}
-                                          </a>
-                                        )}
-                                      </p>
-                                    </div>
+                                    </p>
                                   </div>
                                 </div>
-                              );
-                            }
-                          )}
-                        </p>
-                      )}
+                              </div>
+                            );
+                          }
+                        )}
+                      </p>
                     </div>
                   </div>
                 </th>
@@ -867,15 +792,11 @@ const ProductCompareTable = React.memo(
                           {products[0]?.popularity_descriptions?.description}
                         </p>
                       )}
-                      {products[0]?.popularity_points?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.popularity_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+
+                      <p className="mb-2">
+                        <b>{productPhaseData?.when_it_matters}: </b>{" "}
+                        {products[0]?.popularity_descriptions?.when_matters}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -915,16 +836,14 @@ const ProductCompareTable = React.memo(
                           }
                         </p>
                       )}
-                      {products[0]?.technical_score_descriptions
-                        ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>When it matters: </b>{" "}
-                          {
-                            products[0]?.technical_score_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+
+                      <p className="mb-2">
+                        <b>When it matters: </b>{" "}
+                        {
+                          products[0]?.ratio_qulitiy_points_descriptions
+                            ?.when_matters
+                        }
+                      </p>
                     </div>
                   )}
                 </div>

@@ -630,7 +630,7 @@ export default function ComparisonTable({
           <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
-                Popularity
+                {comparisonPhaseData && comparisonPhaseData?.popularity}
                 {products && products[0]?.popularity_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.popularity_descriptions?.description && (
@@ -643,16 +643,15 @@ export default function ComparisonTable({
                         {products[0]?.popularity_descriptions?.description}
                       </p>
                     )}
-                    {products[0]?.popularity_points?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>
-                          {comparisonPhaseData &&
-                            comparisonPhaseData?.when_it_matters}
-                          :{" "}
-                        </b>{" "}
-                        {products[0]?.popularity_descriptions?.when_it_matters}
-                      </p>
-                    )}
+
+                    <p className="mb-2">
+                      <b>
+                        {comparisonPhaseData &&
+                          comparisonPhaseData?.when_it_matters}
+                        :{" "}
+                      </b>{" "}
+                      {products[0]?.popularity_descriptions?.when_matters}
+                    </p>
                   </div>
                 )}
               </div>
@@ -696,71 +695,6 @@ export default function ComparisonTable({
                         <b>{comparisonPhaseData?.when_it_matters}: </b>
                         {products[0]?.users_rating_descriptions?.when_matters}
                       </p>
-                      <p>
-                        <b>
-                          {products[0] && comparisonPhaseData?.score_components}
-                          :
-                        </b>
-                      </p>
-                      {products[0]?.users_rating_descriptions
-                        ?.score_components &&
-                        products[0]?.users_rating_descriptions?.score_components?.map(
-                          (data, index) => {
-                            return (
-                              <div className="scroe_section" key={index}>
-                                <p className="text-end">
-                                  {`${parseFloat(data?.importance).toFixed(
-                                    1
-                                  )}%`}
-                                </p>
-                                <div
-                                  className="score-count"
-                                  style={{
-                                    background:
-                                      data?.attribute_evaluation >= 7.5
-                                        ? "#093673"
-                                        : data?.attribute_evaluation >= 5 &&
-                                          data?.attribute_evaluation < 7.5
-                                        ? "#437ECE"
-                                        : "#85B2F1",
-                                  }}
-                                >
-                                  {data?.attribute_evaluation != null
-                                    ? data?.attribute_evaluation >= 10
-                                      ? Math.trunc(data?.attribute_evaluation)
-                                      : data?.attribute_evaluation.toFixed(1)
-                                    : "0.0"}
-                                </div>
-                                <p>{data?.attribute_category}</p>
-                              </div>
-                            );
-                          }
-                        )}
-
-                      <b>{comparisonPhaseData?.users_ratings}</b>
-                      {products[0]?.users_rating_descriptions
-                        ?.reviews_websites &&
-                        products[0]?.users_rating_descriptions?.reviews_websites?.map(
-                          (data, index) => {
-                            return (
-                              <>
-                                <div className="rating__section">
-                                  <img src={`${data?.logo}`} alt={data?.alt} />
-                                  <div className="rating__content">
-                                    <b>{formatValue(data?.rating)}</b>
-                                    <Rating value={data?.rating} />
-                                    <small>
-                                      {" "}
-                                      <a href={`/link?p=${btoa(data.url)}`}>
-                                        ({data?.reviews})
-                                      </a>{" "}
-                                    </small>
-                                  </div>
-                                </div>
-                              </>
-                            );
-                          }
-                        )}
                     </div>
                   )}
               </div>
@@ -802,20 +736,15 @@ export default function ComparisonTable({
                         }
                       </p>
                     )}
-                    {products[0]?.technical_score_descriptions
-                      ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>
-                          {comparisonPhaseData &&
-                            comparisonPhaseData?.when_it_matters}
-                          :{" "}
-                        </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+
+                    <p className="mb-2">
+                      <b>
+                        {comparisonPhaseData &&
+                          comparisonPhaseData?.when_it_matters}
+                        :{" "}
+                      </b>{" "}
+                      {products[0]?.technical_score_descriptions?.when_matters}
+                    </p>
                   </div>
                 )}
               </div>
@@ -856,20 +785,15 @@ export default function ComparisonTable({
                         {products[0]?.expert_reviews_descriptions?.description}
                       </p>
                     )}
-                    {products[0]?.expert_reviews_descriptions
-                      ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>
-                          {comparisonPhaseData &&
-                            comparisonPhaseData?.when_it_matters}
-                          :{" "}
-                        </b>{" "}
-                        {
-                          products[0]?.expert_reviews_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+
+                    <p className="mb-2">
+                      <b>
+                        {comparisonPhaseData &&
+                          comparisonPhaseData?.when_it_matters}
+                        :{" "}
+                      </b>{" "}
+                      {products[0]?.expert_reviews_descriptions?.when_matters}
+                    </p>
                   </div>
                 </div>
               </th>

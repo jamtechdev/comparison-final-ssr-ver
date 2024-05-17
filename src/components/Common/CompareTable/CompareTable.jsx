@@ -657,7 +657,7 @@ const CompareTable = React.memo(
                           {products[0]?.users_rating_descriptions?.when_matters}
                         </p>
 
-                        <p>
+                        {/* <p>
                           <b>
                             {products[0] && guidePhraseData?.score_components}:
                           </b>
@@ -695,9 +695,9 @@ const CompareTable = React.memo(
                                 </div>
                               );
                             }
-                          )}
+                          )} */}
 
-                        <b>{guidePhraseData?.users_ratings}</b>
+                        {/* <b>{guidePhraseData?.users_ratings}</b>
                         {products[0]?.users_rating_descriptions
                           ?.reviews_websites &&
                           products[0]?.users_rating_descriptions?.reviews_websites?.map(
@@ -723,7 +723,7 @@ const CompareTable = React.memo(
                                 </>
                               );
                             }
-                          )}
+                          )} */}
                       </div>
                     )}
                 </div>
@@ -765,20 +765,13 @@ const CompareTable = React.memo(
                           }
                         </p>
                       )}
-                      {products[0]?.expert_reviews_descriptions
-                        ?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>
-                            {guidePhraseData &&
-                              guidePhraseData?.when_it_matters}
-                            :{" "}
-                          </b>{" "}
-                          {
-                            products[0]?.expert_reviews_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+
+                      <p className="mb-2">
+                        <b>
+                          {guidePhraseData && guidePhraseData?.when_it_matters}:{" "}
+                        </b>{" "}
+                        {products[0]?.expert_reviews_descriptions?.when_matters}
+                      </p>
                     </div>
                   </div>
                 </th>
@@ -817,19 +810,13 @@ const CompareTable = React.memo(
                           {products[0]?.popularity_descriptions?.description}
                         </p>
                       )}
-                      {products[0]?.popularity_points?.when_it_matters && (
-                        <p className="mb-2">
-                          <b>
-                            {guidePhraseData &&
-                              guidePhraseData?.when_it_matters}
-                            :{" "}
-                          </b>{" "}
-                          {
-                            products[0]?.popularity_descriptions
-                              ?.when_it_matters
-                          }
-                        </p>
-                      )}
+
+                      <p className="mb-2">
+                        <b>
+                          {guidePhraseData && guidePhraseData?.when_it_matters}:{" "}
+                        </b>{" "}
+                        {products[0]?.popularity_descriptions?.when_matters}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -873,8 +860,8 @@ const CompareTable = React.memo(
                           }
                         </p>
                       )}
-                      {products[0]?.technical_score_descriptions
-                        ?.when_it_matters && (
+                      {products[0]?.ratio_qulitiy_points_descriptions
+                        ?.when_matters && (
                         <p className="mb-2">
                           <b>
                             {guidePhraseData &&
@@ -882,8 +869,8 @@ const CompareTable = React.memo(
                             :{" "}
                           </b>{" "}
                           {
-                            products[0]?.technical_score_descriptions
-                              ?.when_it_matters
+                            products[0]?.ratio_qulitiy_points_descriptions
+                              ?.when_matters
                           }
                         </p>
                       )}
