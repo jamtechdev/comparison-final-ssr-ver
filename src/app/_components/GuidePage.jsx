@@ -139,7 +139,7 @@
 
     function removeQueryParamAndNavigate(url, paramToRemove) {
       // delete searchParams[`${paramToRemove}`];
-      // console.log(paramToRemove);
+       console.log(paramToRemove,"check mahima");
       if (paramToRemove != "sort") {
         setparams(() => {
           return {
@@ -712,6 +712,7 @@
                           categoryName === "page" ? (
                             ""
                           ) : (
+                  
                             <li key={index}>
                               {categoryName === "variant"
                                 ? `Show all variants: Yes`
