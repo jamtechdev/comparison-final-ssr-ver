@@ -10,7 +10,6 @@ export default function ProductSliderBlog({ favSlider }) {
 
   return (
     <section className="product-slider single-blog">
-      
       {favSlider &&
         favSlider
           ?.slice(0, showFullData ? favSlider?.length : 2)

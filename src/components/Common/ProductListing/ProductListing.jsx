@@ -43,7 +43,6 @@ export default React.forwardRef(function ProductListing(
       <span className="testing__text">
         <i>{text_before_listing}</i>
       </span>
-
       {products?.map((product, index) => (
         <Product
           guidePhraseData={guidePhraseData}

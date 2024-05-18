@@ -84,7 +84,7 @@ const MultiRangeMobileSlider = ({
   return (
     <div className="multi-range-slider-container">
 
-      <input
+      {/* <input
         type="range"
         min={min}
         max={max}
@@ -93,6 +93,22 @@ const MultiRangeMobileSlider = ({
         onTouchStart={handleTouchMove}
         onTouchMove={handleTouchMove}
         onTouchEnd={() => onChange({ min: minVal, max: maxVal })}
+        id={`thumb thumb--left ${classForSlider}`}
+        className={`thumb thumb--left ${classForSlider}`}
+        style={{ zIndex: minVal > max - step && "5" }}
+      /> */}
+        <input
+        type="range"
+        min={min}
+        max={max}
+        value={minVal}
+        step={step}
+        onChange={(event) => {
+          const value = Math.min(Number(event.target.value), maxVal);
+          setMinVal(Math.round(value)); // Round to nearest integer
+          minValRef.current = Math.round(value);
+        }}
+        onMouseUp={() => onChange({ min: minVal, max: maxVal })}
         id={`thumb thumb--left ${classForSlider}`}
         className={`thumb thumb--left ${classForSlider}`}
         style={{ zIndex: minVal > max - step && "5" }}
@@ -109,23 +125,37 @@ const MultiRangeMobileSlider = ({
           maxValRef.current = Number(value.toFixed(1));
         }}
         onMouseUp={() => onChange({ min: minVal, max: maxVal })}
-        onTouchStart={(event) => {
-          const rect = range.current.getBoundingClientRect();
-          const touch = event.touches[0];
-          let newValue =
-            ((touch.clientX - rect.left) / rect.width) * (max - min) + min;
-          newValue = Math.min(Math.max(newValue, min), max);
-          setMaxVal(newValue);
-          maxValRef.current = newValue;
-        }}
-        onTouchMove={(event) => {
-          handleTouchMove(event);
-        }}
-        onTouchEnd={() => onChange({ min: minVal, max: maxVal })}
+        // onTouchStart={(event) => {
+        //   const rect = range.current.getBoundingClientRect();
+        //   const touch = event.touches[0];
+        //   let newValue =
+        //     ((touch.clientX - rect.left) / rect.width) * (max - min) + min;
+        //   newValue = Math.min(Math.max(newValue, min), max);
+        //   setMaxVal(newValue);
+        //   maxValRef.current = newValue;
+        // }}
+        // onTouchMove={(event) => {
+        //   handleTouchMove(event);
+        // }}
+        // onTouchEnd={() => onChange({ min: minVal, max: maxVal })}
         id={`thumb thumb--right ${classForSlider}`}
         className={`thumb thumb--right ${classForSlider}`}
       />
-
+ {/* <input
+        type="range"
+        min={min}
+        max={max}
+        value={maxVal}
+        step={step}
+        onChange={(event) => {
+          const value = Math.max(Number(event.target.value), minVal);
+          setMaxVal(Math.round(value)); // Round to nearest integer
+          maxValRef.current = Math.round(value);
+        }}
+        onMouseUp={() => onChange({ min: minVal, max: maxVal })}
+        id={`thumb thumb--right ${classForSlider}`}
+        className={`thumb thumb--right ${classForSlider}`}
+      /> */}
       <div className="slider">
         <div className="slider__track" />
         <div ref={range} className="slider__range" />

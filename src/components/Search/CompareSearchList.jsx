@@ -140,5 +140,4 @@ function CompareSearchList({
     </>
   );
 }
-
 export default CompareSearchList;
