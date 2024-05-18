@@ -96,7 +96,7 @@ function lineChart(svgRef, lineChartData) {
   // console.log(maxY);
   const maxDifference = maxY / 15;
   // console.log(maxDifference);
-  const maxPlusDifference = Math.round(maxY) + Math.round(maxDifference) ;
+  const maxPlusDifference = Math.round(maxY) + Math.round(maxDifference);
   // console.log(maxPlusDifference);
 
   const maxInterval = Math.round(maxPlusDifference);
@@ -236,15 +236,17 @@ function lineChart(svgRef, lineChartData) {
     .enter()
     .append("g")
     .attr("class", "circle")
-    .on("mouseover", function (_e, d) {
+    .on("mouseover touchstart", function (e, d) {
       d3.select(this)
         .style("cursor", "pointer")
         .append("text")
         .attr("class", "text");
       // .attr("x", (d) => xScale(d.date) + 5)
       // .attr("y", (d) => yScale(d.price) - 10);
+
       const formatDate = d3.timeFormat(europeanDateFormat);
       // const formatDate = d3.timeFormat("%d.%m.%y");
+
       tooltip
         .style("display", "block")
         .style("opacity", 1)
@@ -254,12 +256,12 @@ function lineChart(svgRef, lineChartData) {
           } </b>   <i style="opacity: 0.5">(${formatDate(d?.date)} )</i> </div>`
         )
         .style("background-color", "white")
-        .style("left", event.clientX + "px")
-        .style("top", event.clientY + "px")
+        // .style("left", "250px")
+        .style("top", (e.clientY || e.touches[0].clientY) + "px")
         .style("color", "#000");
       // .text(`${d.price}`)
     })
-    .on("mouseout", function () {
+    .on("mouseout touchend", function () {
       d3.select(this)
         .style("cursor", "none")
         .transition()
@@ -272,13 +274,13 @@ function lineChart(svgRef, lineChartData) {
     .attr("cy", (d) => yScale(d.price))
     .attr("r", circleRadius)
     // .style("opacity", circleOpacity)
-    .on("mouseover", function () {
+    .on("mouseover touchstart", function () {
       d3.select(this)
         .transition()
         .duration(duration)
         .attr("r", circleRadiusHover);
     })
-    .on("mouseout", function () {
+    .on("mouseout touchend", function () {
       d3.select(this).transition().duration(duration).attr("r", circleRadius);
     });
 }

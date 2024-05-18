@@ -89,8 +89,8 @@
 }
 
 .compare-container .compare_image {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
   margin: auto;
   display: block;
@@ -133,7 +133,7 @@
   padding: 0px 10px !important;
 }
 .best-price-section .best-list-item .not-availabel {
-  padding: 6px;
+  padding: 6px !important;
 }
 .compare-container .best-list-item li.compare-product-table span.price-wider a {
   font-size: 17px !important;
@@ -1271,6 +1271,7 @@ body .product-listing-inner-content .score-section .score-detail h6 {
   .flex-box .left_box .box_content {
     font-size: 14px;
     max-width: 250px;
+    padding: 4px 20px;
   }
   .correlation_svg_width,
   .base_chart_graph {
@@ -1282,10 +1283,18 @@ body .product-listing-inner-content .score-section .score-detail h6 {
     padding: 6px 10px;
     text-align: center;
     font-size: 14px;
+    width: 50%;
   }
 
   .comparison-tool .not-availabel {
     grid-template-columns: 1fr !important;
+  }
+
+  .comparison-tool .not-availabel i{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 @media screen and (max-width: 410px) {

@@ -17,6 +17,7 @@ import {
 import SearchList from "../Search/SearchList";
 import CompareModal from "../Common/Comparison/CompareModal";
 export default function Header({ headerData, headerPhase, logo }) {
+  console.log(headerPhase?.page_phases);
   const [isFocused, setIsFocused] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -146,18 +147,18 @@ export default function Header({ headerData, headerPhase, logo }) {
                       role="button"
                       onClick={openCompareModel}
                     >
-                      {headerPhase && headerPhase?.compare}
+                      {headerPhase && headerPhase?.page_phases?.compare}
                     </Navbar.Brand>
                     <Navbar.Brand href="">
-                      {headerPhase && headerPhase?.how_we_rank}
+                      {headerPhase?.page_phases && headerPhase?.page_phases?.how_we_rank}
                     </Navbar.Brand>
                     <Navbar.Brand
-                      href={`${headerPhase?.about_us_url}/${headerPhase?.about_us_permalink}`}
+                      href={`${headerPhase?.page_phases?.about_us_url}/${headerPhase?.page_phases?.about_us_permalink}`}
                     >
-                      {headerPhase && headerPhase?.about_us}
+                      {headerPhase?.page_phases && headerPhase?.page_phases?.about_us}
                     </Navbar.Brand>
                     <Navbar.Brand href="#">
-                      {headerData && headerData?.contact}
+                      {headerData && headerData?.page_phases?.contact}
                     </Navbar.Brand>
                   </Navbar>
                 </Modal.Body>
@@ -183,7 +184,7 @@ export default function Header({ headerData, headerPhase, logo }) {
                     type="search"
                     onFocus={() => setIsFocused(true)}
                     onBlur={handleBlur}
-                    placeholder={headerPhase?.search_header_text}
+                    placeholder={headerPhase?.page_phases?.search_header_text}
                     aria-label="Search"
                     value={search}
                     onChange={handleSearch}
@@ -210,18 +211,18 @@ export default function Header({ headerData, headerPhase, logo }) {
           <Col lg={5} md={6} className="hide-header-list">
             <ul className={styles.navitem}>
               <li onClick={openCompareModel} role="button">
-                {headerPhase && headerPhase?.compare}
+                {headerPhase && headerPhase?.page_phases?.compare}
               </li>
               <li>
-                <a href={`/${headerPhase?.how_we_rank_url}`}>
+                <a href={`/${headerPhase?.page_phases?.how_we_rank_url}`}>
                   {" "}
-                  {headerPhase && headerPhase?.how_we_rank}
+                  {headerPhase?.page_phases && headerPhase?.page_phases?.how_we_rank}
                 </a>
               </li>
               {/* {console.log(headerPhase)} */}
               <li>
-                <a href={`/${headerPhase?.about_us_url}`}>
-                  {headerPhase && headerPhase?.about_us}
+                <a href={`/${headerPhase?.page_phases?.about_us_url}`}>
+                  {headerPhase?.page_phases && headerPhase?.page_phases?.about_us}
                 </a>
               </li>
               <li>

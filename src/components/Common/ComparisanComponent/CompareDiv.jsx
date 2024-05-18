@@ -36,6 +36,7 @@ import OutlineGenerator from "../OutlineGenerator/OutlineGenerator";
 import ProductSliderBlog from "../ProductSliderBlog/ProductSliderBlog";
 import ComparisionOutlineGenerator from "../OutlineGenerator/ComparisionOutlineGenerator";
 import MobileComparisonTool from "../MobileComparisonTool/MobileComparisonTool";
+import MobileCompareTable from "../MobileCompareTable/MobileCompareTable";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -544,10 +545,16 @@ function CompareDiv({
                 productAttributes={productAttributes}
               />
             </Col>
-            {/* <Col md={12} className="table-section-desktop">
-              isko baad me krna h hai
-              <MobileCompareTable />
-            </Col> */}
+            <Col md={12} className="table-section-desktop">
+              <MobileCompareTable
+                productPhaseData={
+                  bestAlternative && bestAlternative?.page_phases
+                }
+                products={comparisonProductData}
+                categoryAttributes={categroyAttributes}
+                slug={slug}
+              />
+            </Col>
           </Row>
         </Container>
       </section>
@@ -580,7 +587,10 @@ function CompareDiv({
         <Container>
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">Best Alternatives</h2>
+              <h2 className="site-main-heading">
+                {bestAlternative &&
+                  bestAlternative?.page_phases?.best_alternative}
+              </h2>
               {bestAlternative?.alternative_products ? (
                 <ReviewSlider
                   favSlider={bestAlternative?.alternative_products}

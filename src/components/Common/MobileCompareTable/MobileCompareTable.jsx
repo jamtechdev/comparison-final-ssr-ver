@@ -596,7 +596,11 @@ export default function MobileCompareTable({
                                   {products[0]?.overall_score_descriptions
                                     ?.description && (
                                     <p className="mb-2">
-                                      <b>{productPhaseData && productPhaseData?.what_it_is}: </b>{" "}
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.what_it_is}
+                                        :{" "}
+                                      </b>{" "}
                                       {
                                         products[0]?.overall_score_descriptions
                                           ?.description
@@ -606,7 +610,11 @@ export default function MobileCompareTable({
                                   {products[0]?.overall_score_descriptions
                                     ?.when_it_matters && (
                                     <p className="mb-2">
-                                      <b>{productPhaseData && productPhaseData?.when_it_matters}: </b>{" "}
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.when_it_matters}
+                                        :{" "}
+                                      </b>{" "}
                                       {
                                         products[0]?.overall_score_descriptions
                                           ?.when_it_matters
@@ -663,7 +671,11 @@ export default function MobileCompareTable({
                                   {products[0]?.technical_score_descriptions
                                     ?.description && (
                                     <p className="mb-2">
-                                      <b>{productPhaseData && productPhaseData?.what_it_is}: </b>{" "}
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.what_it_is}
+                                        :{" "}
+                                      </b>{" "}
                                       {
                                         products[0]
                                           ?.technical_score_descriptions
@@ -674,7 +686,11 @@ export default function MobileCompareTable({
                                   {products[0]?.technical_score_descriptions
                                     ?.when_it_matters && (
                                     <p className="mb-2">
-                                      <b>{productPhaseData && productPhaseData?.when_it_matters}: </b>{" "}
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.when_it_matters}
+                                        :{" "}
+                                      </b>{" "}
                                       {
                                         products[0]
                                           ?.technical_score_descriptions
@@ -731,7 +747,11 @@ export default function MobileCompareTable({
                                       {products[0]?.users_rating_descriptions
                                         ?.description && (
                                         <p className="mb-2">
-                                          <b>{productPhaseData && productPhaseData?.what_it_is}: </b>{" "}
+                                          <b>
+                                            {productPhaseData &&
+                                              productPhaseData?.what_it_is}
+                                            :{" "}
+                                          </b>{" "}
                                           {
                                             products[0]
                                               ?.users_rating_descriptions
@@ -742,7 +762,11 @@ export default function MobileCompareTable({
                                       {products[0]?.users_rating_descriptions
                                         ?.when_matters && (
                                         <p className="mb-2">
-                                          <b>{productPhaseData && productPhaseData?.when_it_matters}: </b>{" "}
+                                          <b>
+                                            {productPhaseData &&
+                                              productPhaseData?.when_it_matters}
+                                            :{" "}
+                                          </b>{" "}
                                           {
                                             products[0]
                                               ?.users_rating_descriptions
@@ -797,7 +821,11 @@ export default function MobileCompareTable({
                                     ?.ratio_qulitiy_points_descriptions
                                     ?.description && (
                                     <p className="mb-2">
-                                      <b>{productPhaseData && productPhaseData?.what_it_is}: </b>{" "}
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.what_it_is}
+                                        :{" "}
+                                      </b>{" "}
                                       {
                                         products[0]
                                           ?.ratio_qulitiy_points_descriptions
@@ -808,7 +836,11 @@ export default function MobileCompareTable({
                                   {products[0]?.technical_score_descriptions
                                     ?.when_it_matters && (
                                     <p className="mb-2">
-                                      <b>{productPhaseData && productPhaseData?.when_it_matters}: </b>{" "}
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.when_it_matters}
+                                        :{" "}
+                                      </b>{" "}
                                       {
                                         products[0]
                                           ?.technical_score_descriptions
@@ -871,60 +903,77 @@ export default function MobileCompareTable({
                             <td colSpan="2">
                               <div className="table-inner-heading">
                                 {data?.title}
-                                 <span className="question-marker-icon">
+                                <span className="question-marker-icon">
                                   <div className="tooltip-title">
-                                  <div className="tooltip-display-content" style={{ transform: "translateX(-65%)" }}>
-                       {
-                                <p className="mb-2">
-                                  <b>{productPhaseData && productPhaseData?.what_it_is}  : </b>
-                                  {data?.hover_phase?.what_is_it}
-                                </p>
-                              }
+                                    <div
+                                      className="tooltip-display-content"
+                                      style={{ transform: "translateX(-65%)" }}
+                                    >
+                                      {
+                                        <p className="mb-2">
+                                          <b>
+                                            {productPhaseData &&
+                                              productPhaseData?.what_it_is}{" "}
+                                            :{" "}
+                                          </b>
+                                          {data?.hover_phase?.what_is_it}
+                                        </p>
+                                      }
 
-                              <p>
-                                <b>{productPhaseData && productPhaseData?.score_components} :</b>
-                              </p>
-                              {data?.hover_phase.attributes?.map(
-                                (hoverPhaseData, index) => {
-                                  return (
-                                    <div className="scroe_section" key={index}>
-                                      <p className="text-end">
-                                        {`${parseFloat(
-                                          hoverPhaseData?.percentage
-                                        ).toFixed(1)}%`}
+                                      <p>
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.score_components}{" "}
+                                          :
+                                        </b>
                                       </p>
-                                      <div
-                                        className="score-count"
-                                        style={{
-                                          background:
-                                            hoverPhaseData?.attribute_value >=
-                                            7.5
-                                              ? "#093673"
-                                              : hoverPhaseData?.attribute_value >=
-                                                  5 &&
-                                                hoverPhaseData?.attribute_value <
-                                                  7.5
-                                              ? "#437ECE"
-                                              : "#85B2F1",
-                                        }}
-                                      >
-                                        {hoverPhaseData?.attribute_value != null
-                                          ? hoverPhaseData?.attribute_value >=
-                                            10
-                                            ? formatValue(
-                                                Math.trunc(
-                                                  hoverPhaseData?.attribute_value
-                                                )
-                                              )
-                                            : hoverPhaseData?.attribute_value
-                                          : "0.0"}
-                                      </div>
-                                      <p>{hoverPhaseData?.attribute_name}</p>
+                                      {data?.hover_phase.attributes?.map(
+                                        (hoverPhaseData, index) => {
+                                          return (
+                                            <div
+                                              className="scroe_section"
+                                              key={index}
+                                            >
+                                              <p className="text-end">
+                                                {`${parseFloat(
+                                                  hoverPhaseData?.percentage
+                                                ).toFixed(1)}%`}
+                                              </p>
+                                              <div
+                                                className="score-count"
+                                                style={{
+                                                  background:
+                                                    hoverPhaseData?.attribute_value >=
+                                                    7.5
+                                                      ? "#093673"
+                                                      : hoverPhaseData?.attribute_value >=
+                                                          5 &&
+                                                        hoverPhaseData?.attribute_value <
+                                                          7.5
+                                                      ? "#437ECE"
+                                                      : "#85B2F1",
+                                                }}
+                                              >
+                                                {hoverPhaseData?.attribute_value !=
+                                                null
+                                                  ? hoverPhaseData?.attribute_value >=
+                                                    10
+                                                    ? formatValue(
+                                                        Math.trunc(
+                                                          hoverPhaseData?.attribute_value
+                                                        )
+                                                      )
+                                                    : hoverPhaseData?.attribute_value
+                                                  : "0.0"}
+                                              </div>
+                                              <p>
+                                                {hoverPhaseData?.attribute_name}
+                                              </p>
+                                            </div>
+                                          );
+                                        }
+                                      )}
                                     </div>
-                                  );
-                                }
-                              )}
-                              </div>
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
                                       viewBox="0 0 24 24"
@@ -980,7 +1029,7 @@ export default function MobileCompareTable({
                               <tr className="tr-bg-color">
                                 <td colSpan="2">
                                   <p className="table-main-heading">
-                                  {product?.name}
+                                    {product?.name}
                                   </p>
                                 </td>
                               </tr>
@@ -1088,7 +1137,7 @@ export default function MobileCompareTable({
                                           product,
                                           data
                                         )
-                                          ?.slice(0, defaultNo)
+                                          ?.slice(0, 2)
                                           ?.map((chunk, chunkIndex) => {
                                             return chunk
                                               ?.slice(
@@ -1192,7 +1241,9 @@ export default function MobileCompareTable({
                                         handlePagination(product.name)
                                       }
                                     >
-                                      {productPhaseData && productPhaseData?.show_all}   <i className="ri-add-line"></i>
+                                      {productPhaseData &&
+                                        productPhaseData?.show_all}{" "}
+                                      <i className="ri-add-line"></i>
                                     </span>
                                   </td>
                                 </tr>

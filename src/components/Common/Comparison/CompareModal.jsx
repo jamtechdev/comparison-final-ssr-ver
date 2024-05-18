@@ -151,7 +151,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
           {/* {console.log(favSlider)} */}
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">{favSlider?.often_compared}</h2>
+              <h2 className="site-main-heading">{favSlider?.page_phases?.often_compared}</h2>
             </Col>
           </Row>
           {reduxData?.productFirst !== null && (

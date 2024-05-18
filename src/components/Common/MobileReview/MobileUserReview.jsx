@@ -13,7 +13,7 @@ function MobileUserReview({ productReview }) {
   // console.log(productReview?.length);
   return (
     <>
-      {" "}
+      <div className="mobile-product-slider">
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}
@@ -102,19 +102,21 @@ function MobileUserReview({ productReview }) {
             </SwiperSlide>
           );
         })} */}
-        {productReview?.length > 2 ? (
+       
+      </Swiper>
+      {productReview?.length > 2 ? (
           <>
-            <span className="swiper-prev" style={{ left: "5px" }}>
+            <span className="swiper-prev">
               <i className="ri-arrow-left-s-line"></i>
             </span>
-            <span className="swiper-next" style={{ right: "5px" }}>
+            <span className="swiper-next">
               <i className="ri-arrow-right-s-line"></i>
             </span>
           </>
         ) : (
           ""
         )}
-      </Swiper>
+      </div>
     </>
   );
 }

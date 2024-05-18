@@ -11,14 +11,14 @@ function MobileVideoReview({ videoReview }) {
   // console.log(videoReview?.length);
   return (
     <>
-      {" "}
-      <Swiper
+  <section className="mobile-product-slider">
+  <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}
         loop={true}
         navigation={{
-          nextEl: ".video_review_slider .swiper-next",
-          prevEl: ".video_review_slider .swiper-prev",
+          nextEl: ".video_review_slider.swiper-next",
+          prevEl: ".video_review_slider.swiper-prev",
         }}
         pagination={true}
         breakpoints={{
@@ -91,19 +91,21 @@ function MobileVideoReview({ videoReview }) {
             </SwiperSlide>
           );
         })} */}
-        {videoReview?.length > 3 ? (
+       
+      </Swiper>
+      {videoReview?.length > 3 ? (
           <>
-            <span className="swiper-prev">
+            <span className="video_review_slider swiper-prev">
               <i className="ri-arrow-left-s-line"></i>
             </span>
-            <span className="swiper-next">
+            <span className="video_review_slider swiper-next">
               <i className="ri-arrow-right-s-line"></i>
             </span>
           </>
         ) : (
           ""
         )}
-      </Swiper>
+  </section>
     </>
   );
 }

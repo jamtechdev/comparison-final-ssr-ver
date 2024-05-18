@@ -71,7 +71,6 @@ function ProductPage({
   productsWithAttributeGroup[productData[0]?.data?.name] = { ...productCopy }; // Create a shallow copy of productCopy
   const finalProducts = Object.values(productsWithAttributeGroup);
 
-  
   let product = finalProducts[0];
   let loading = false;
   let displayedAttributesCount = {};
@@ -280,7 +279,7 @@ function ProductPage({
   const checkVerdictText = product?.alternative_comparisons?.filter(
     (item) => item?.verdict_text === null
   );
-  // console.log(checkVerdictText)
+  // console.log(checkVerdictText);
 
   return (
     <>
@@ -331,7 +330,7 @@ function ProductPage({
                 <span>
                   {product && product?.page_phases?.updated}
                   <i>
-                    {""}   {product?.updated_at.split('/').reverse().join('-')}
+                    {""} {product?.updated_at.split("/").reverse().join("-")}
                   </i>
                 </span>
               </div>
@@ -390,7 +389,7 @@ function ProductPage({
               <div className="score-detail ">
                 <div className="tooltip-title removeUnderlineFrom">
                   <p>
-                   {product && product?.page_phases?.overall_score}
+                    {product && product?.page_phases?.overall_score}
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -410,7 +409,6 @@ function ProductPage({
                       width: isMobile ? "230px" : "250px",
                     }}
                   >
-                  
                     {product?.overall_score_descriptions?.description && (
                       <p className="mb-2">
                         <b>{product && product?.page_phases?.what_it_is}: </b>
@@ -474,11 +472,9 @@ function ProductPage({
                 </div>
                 {resultOverallScore && (
                   <small>
-{/* {product?.page_phases?.evaluation}{" "} */}
+                    {/* {product?.page_phases?.evaluation}{" "} */}
                     {resultOverallScore}{" "}
-                 
                   </small>
-                 
                 )}
               </div>
             </div>
@@ -733,7 +729,11 @@ function ProductPage({
                             <div className="tooltip-display-content">
                               {
                                 <p className="mb-2">
-                                  <b>{product && product?.page_phases?.what_it_is} : </b>
+                                  <b>
+                                    {product &&
+                                      product?.page_phases?.what_it_is}{" "}
+                                    :{" "}
+                                  </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
@@ -748,7 +748,7 @@ function ProductPage({
                                       <p className="text-end">
                                         {`${parseFloat(
                                           hoverPhaseData?.percentage
-                                      ).toFixed(1)}%`}
+                                        ).toFixed(1)}%`}
                                       </p>
                                       <div
                                         className="score-count"
@@ -869,7 +869,7 @@ function ProductPage({
                     className="see_all_btn"
                     onClick={handleShowAllRanking}
                   >
-                   See All <i className="ri-arrow-down-s-line"></i>
+                    See All <i className="ri-arrow-down-s-line"></i>
                   </Button>
                 )}
               </div>
@@ -920,7 +920,8 @@ function ProductPage({
                     className="see_all_btn"
                     onClick={handleShowAllRanking}
                   >
-                   {product?.page_phases?.show_all} <i className="ri-arrow-down-s-line"></i>
+                    {product?.page_phases?.show_all}{" "}
+                    <i className="ri-arrow-down-s-line"></i>
                   </Button>
                 )}
                 {showFullRanking && product?.guide_ratings?.length > 5 && (
@@ -928,7 +929,7 @@ function ProductPage({
                     className="see_all_btn"
                     onClick={handleShowAllRanking}
                   >
-                   {product?.page_phases?.hide_all}{" "}
+                    {product?.page_phases?.hide_all}{" "}
                     <i
                       className={
                         showFullRanking
@@ -1890,7 +1891,10 @@ function ProductPage({
           )}
           {/* {console.log(product?.top_pros)} */}
           {product?.top_pros !== null && (
-            <Row className="" style={{marginTop:"30px",marginBottom:"20px"}}>
+            <Row
+              className=""
+              style={{ marginTop: "30px", marginBottom: "20px" }}
+            >
               <Col md={6}>
                 <div className="pros-corns-section pros light-background">
                   <h3 className="pros-header">
@@ -1987,9 +1991,7 @@ function ProductPage({
                         index={index} // Pass index as a prop to ReviewSlider
                       />
                     ) : (
-                      <span className="text-center m-2">
-                        No Alternative Products Found
-                      </span>
+                      ""
                     )}
                   </React.Fragment>
                 );
@@ -2064,21 +2066,23 @@ function ProductPage({
 
       {/* {console.log()} */}
 
-      <section className="mt-3 mobile-popular-comparison">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">
-                {product?.page_phases?.popular_comparison}
-              </h2>
+      {checkVerdictText?.length > 0 && (
+        <section className="mt-3 mobile-popular-comparison">
+          <Container>
+            <Row>
+              <Col md={12}>
+                <h2 className="site-main-heading">
+                  {product?.page_phases?.popular_comparison}
+                </h2>
 
-              <ComparisonsSlider
-                products={product && product?.alternative_comparisons}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </section>
+                <ComparisonsSlider
+                  products={product && product?.alternative_comparisons}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
 
       <ProductBottomBar favSlider={product && product} />
     </>

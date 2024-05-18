@@ -336,7 +336,7 @@ const CompareAccordionTab = React.memo(
                                                 : item?.phrase
                                               : typeof item?.difference_value ==
                                                 "number"
-                                              ? item?.phrase
+                                              ? item?.difference
                                               : item?.phrase}
 
                                             {item?.hover_phase && (

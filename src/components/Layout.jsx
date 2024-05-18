@@ -15,7 +15,7 @@ export default async function Layout({ children, footerData, headerData }) {
       <Provider store={store}>
         <Header
           headerData={headerData}
-          headerPhase={footerData?.header_page_phases}
+          headerPhase={footerData}
           logo={footerData && footerData?.logo}
           favicon={footerData?.favicon}
         />

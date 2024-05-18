@@ -87,8 +87,8 @@ export default function MobileExpertReview({ expertReview }) {
         spaceBetween={30}
         loop={true}
         navigation={{
-          nextEl: ".expert_reviews_slider .swiper-next",
-          prevEl: ".expert_reviews_slider .swiper-prev",
+          nextEl: ".expert_reviews_slider.swiper-next",
+          prevEl: ".expert_reviews_slider.swiper-prev",
         }}
         pagination={true}
         breakpoints={{
@@ -265,19 +265,19 @@ export default function MobileExpertReview({ expertReview }) {
             </SwiperSlide>
           );
         })}
-        {expertReview?.length > 3 ? (
+      </Swiper>
+      {expertReview?.length > 3 ? (
           <>
-            <span className="swiper-prev" style={{ left: "0px" }}>
+            <span className="expert_reviews_slider swiper-prev">
               <i className="ri-arrow-left-s-line"></i>
             </span>
-            <span className="swiper-next" style={{ right: "0px" }}>
+            <span className="expert_reviews_slider swiper-next">
               <i className="ri-arrow-right-s-line"></i>
             </span>
           </>
         ) : (
           ""
         )}
-      </Swiper>
     </section>
   );
 }

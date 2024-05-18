@@ -166,7 +166,18 @@ export default function MobileComparisonTool({
                             alt="price"
                           />
                           {item?.price_websites[0]?.price != null && (
-                            <span>{item?.price_websites[0]?.price} €</span>
+                            <span>
+                              {" "}
+                              <a
+                                href={`/link?p=${btoa(
+                                  item?.price_websites[0]?.url
+                                )}`}
+                                style={{ color: "#fff" }}
+                              >
+                                {" "}
+                                {item?.price_websites[0]?.price} €{" "}
+                              </a>
+                            </span>
                           )}
                         </div>
                         {/* <div className="comparison-product-item">

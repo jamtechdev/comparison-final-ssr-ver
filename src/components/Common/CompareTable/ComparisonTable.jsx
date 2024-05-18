@@ -8,6 +8,7 @@ import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
 import Link from "next/link";
+import Rating from "../Rating/Rating";
 
 export default function ComparisonTable({
   products,
@@ -403,7 +404,8 @@ export default function ComparisonTable({
                                                 )}`}
                                                 className="font__16__inline"
                                               >
-                                                {data?.price} {product?.currency}
+                                                {data?.price}{" "}
+                                                {product?.currency}
                                               </a>
                                             </span>
                                           </>
@@ -628,21 +630,28 @@ export default function ComparisonTable({
           <tr className="">
             <th className="sub-inner-padding">
               <div className="tooltip-title">
-                Popularity
+                {comparisonPhaseData && comparisonPhaseData?.popularity}
                 {products && products[0]?.popularity_descriptions && (
                   <div className="tooltip-display-content">
                     {products[0]?.popularity_descriptions?.description && (
                       <p className="mb-2">
-                        <b>{comparisonPhaseData && comparisonPhaseData?.what_it_is}: </b>{" "}
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.what_it_is}
+                          :{" "}
+                        </b>{" "}
                         {products[0]?.popularity_descriptions?.description}
                       </p>
                     )}
-                    {products[0]?.popularity_points?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>{comparisonPhaseData && comparisonPhaseData?.when_it_matters}: </b>{" "}
-                        {products[0]?.popularity_descriptions?.when_it_matters}
-                      </p>
-                    )}
+
+                    <p className="mb-2">
+                      <b>
+                        {comparisonPhaseData &&
+                          comparisonPhaseData?.when_it_matters}
+                        :{" "}
+                      </b>{" "}
+                      {products[0]?.popularity_descriptions?.when_matters}
+                    </p>
                   </div>
                 )}
               </div>
@@ -669,33 +678,25 @@ export default function ComparisonTable({
             <th className="sub-inner-padding">
               <div className="tooltip-title">
                 {comparisonPhaseData && comparisonPhaseData?.users_ratings}
-                {products[0]?.users_rating_descriptions && (
-                  <div className="tooltip-display-content">
-                    {products[0]?.users_rating_descriptions?.description && (
+                {products &&
+                  products.length > 0 &&
+                  products[0]?.users_rating_descriptions && (
+                    <div className="tooltip-display-content">
+                      {products[0]?.users_rating_descriptions?.description && (
+                        <p className="mb-2">
+                          <b>{comparisonPhaseData?.what_it_is} : </b>
+                          {products[0]?.users_rating_descriptions?.description}
+                        </p>
+                      )}
+                      {/* {console.log(products[0]?.users_rating_descriptions?.when_matters)} */}
+                      {/* {console.log(productPhaseData)} */}
+
                       <p className="mb-2">
-                        <b>
-                          {comparisonPhaseData &&
-                            comparisonPhaseData?.what_it_is}{" "}
-                        </b>
-                        {products[0]?.users_rating_descriptions?.description}
+                        <b>{comparisonPhaseData?.when_it_matters}: </b>
+                        {products[0]?.users_rating_descriptions?.when_matters}
                       </p>
-                    )}
-                    {products[0]?.users_rating_descriptions
-                      ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>
-                          {comparisonPhaseData &&
-                            comparisonPhaseData?.when_it_matters}
-                          :{" "}
-                        </b>
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
-                  </div>
-                )}
+                    </div>
+                  )}
               </div>
             </th>
             {finalProducts.slice(0, defaultNo).map((product, userIndex) => {
@@ -735,20 +736,15 @@ export default function ComparisonTable({
                         }
                       </p>
                     )}
-                    {products[0]?.technical_score_descriptions
-                      ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>
-                          {comparisonPhaseData &&
-                            comparisonPhaseData?.when_it_matters}
-                          :{" "}
-                        </b>{" "}
-                        {
-                          products[0]?.technical_score_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+
+                    <p className="mb-2">
+                      <b>
+                        {comparisonPhaseData &&
+                          comparisonPhaseData?.when_it_matters}
+                        :{" "}
+                      </b>{" "}
+                      {products[0]?.technical_score_descriptions?.when_matters}
+                    </p>
                   </div>
                 )}
               </div>
@@ -781,20 +777,23 @@ export default function ComparisonTable({
                   <div className="tooltip-display-content">
                     {products[0]?.expert_reviews_descriptions?.description && (
                       <p className="mb-2">
-                        <b>{comparisonPhaseData && comparisonPhaseData?.what_it_is}: </b>{" "}
+                        <b>
+                          {comparisonPhaseData &&
+                            comparisonPhaseData?.what_it_is}
+                          :{" "}
+                        </b>{" "}
                         {products[0]?.expert_reviews_descriptions?.description}
                       </p>
                     )}
-                    {products[0]?.expert_reviews_descriptions
-                      ?.when_it_matters && (
-                      <p className="mb-2">
-                        <b>{comparisonPhaseData  && comparisonPhaseData?.when_it_matters}: </b>{" "}
-                        {
-                          products[0]?.expert_reviews_descriptions
-                            ?.when_it_matters
-                        }
-                      </p>
-                    )}
+
+                    <p className="mb-2">
+                      <b>
+                        {comparisonPhaseData &&
+                          comparisonPhaseData?.when_it_matters}
+                        :{" "}
+                      </b>{" "}
+                      {products[0]?.expert_reviews_descriptions?.when_matters}
+                    </p>
                   </div>
                 </div>
               </th>
@@ -841,7 +840,20 @@ export default function ComparisonTable({
                 {" "}
                 {/* Ensure to set a unique key for each <tr> */}
                 <th className="sub-inner-padding">
-                  <div className="tooltip-title">{data?.title}</div>
+                  <div className="tooltip-title">
+                    {data?.title}
+
+                    <div className="tooltip-display-content">
+                      {
+                        <p className="mb-2">
+                          <b>
+                            {products[0] && comparisonPhaseData?.what_it_is} :{" "}
+                          </b>
+                          {data?.hover_phase?.what_is_it}
+                        </p>
+                      }
+                    </div>
+                  </div>
                 </th>
                 {finalProducts.slice(0, defaultNo).map((product, idx) => {
                   const value =
@@ -994,7 +1006,8 @@ export default function ComparisonTable({
                           className="show_more"
                           onClick={() => handlePagination(category.name)}
                         >
-                         {comparisonPhaseData && comparisonPhaseData?.show_all} <i className="ri-add-line"></i>
+                          {comparisonPhaseData && comparisonPhaseData?.show_all}{" "}
+                          <i className="ri-add-line"></i>
                         </span>
                       </td>
                     </tr>

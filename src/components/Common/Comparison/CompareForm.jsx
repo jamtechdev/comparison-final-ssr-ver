@@ -116,7 +116,7 @@ export default function CompareForm({
   };
   const handelComparison = () => {
     const isValidObject = (fieldValue) =>
-      typeof fieldValue === "object" && Object.keys(fieldValue).length > 0;
+      typeof fieldValue === "object" && Object?.keys(fieldValue).length > 0;
     const isProductFieldsValid =
       isValidObject(formFields.productFirst) &&
       isValidObject(formFields.productSecond);

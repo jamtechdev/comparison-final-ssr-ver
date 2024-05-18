@@ -1,7 +1,9 @@
 /*Tab Responsive Start */
 @media screen and (max-width: 992px) {
-  section.comparisons-slider.no-before::before{display: none;}
-  
+  section.comparisons-slider.no-before::before {
+    display: none;
+  }
+
   .compare-container .best-list-item li img {
     margin: 0 !important;
   }
@@ -904,10 +906,16 @@
 
   .mobile-product-slider .swiper-next {
     right: -16px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobile-product-slider .swiper-prev {
     left: -16px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Product Page End  */
@@ -1137,6 +1145,9 @@
 
   .content-para {
     font-size: 16px;
+  }
+  .content-para {
+    text-align: left;
   }
 
   .fonzi p {
@@ -1442,8 +1453,8 @@
     column-gap: 20px !important;
     row-gap: 5px !important;
   }
-  .badge-list-section.gap_top{
-    gap: 10px !important
+  .badge-list-section.gap_top {
+    gap: 10px !important;
   }
   .similar-guides {
     margin: 20px 0 !important;

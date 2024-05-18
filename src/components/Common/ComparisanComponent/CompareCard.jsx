@@ -157,7 +157,18 @@ const CompareCard = ({
                       alt="price"
                     />
                     {compareProduct?.price_websites[1]?.price != null && (
-                      <span>{compareProduct?.price_websites[1]?.price} €</span>
+                      <span>
+                      {" "}
+                      <a
+                        href={`/link?p=${btoa(
+                          compareProduct?.price_websites[1]?.url
+                        )}`}
+                        style={{ color: "#fff" }}
+                      >
+                        {" "}
+                        {compareProduct?.price_websites[1]?.price} €{" "}
+                      </a>
+                    </span>
                     )}
                   </div>
                 )}
