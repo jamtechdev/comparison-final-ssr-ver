@@ -129,7 +129,7 @@ const TechnicalAccordion = React.memo(
                 {productPhaseData && productPhaseData?.overall}
               </div>
               <span className="count" style={{ background: overallScoreColor }}>
-                {formatValue(product?.overall_score)}
+               {formatValue(product?.overall_score)}
               </span>
               <div className="show-btn">
               {productPhaseData && productPhaseData?.show_all} <i className="ri-arrow-down-s-line"></i>
@@ -247,7 +247,7 @@ const TechnicalAccordion = React.memo(
                         textUnderlineOffset: "5px",
                       }}
                     >
-                      {formatValue(product.technical_score)}
+                 {formatValue(product.technical_score)}
                       <ProsConsToolTip
                         hover_phrase={product.technical_score_phase}
                       />
@@ -360,7 +360,7 @@ const TechnicalAccordion = React.memo(
                         textUnderlineOffset: "5px",
                       }}
                     >
-                      {formatValue(product.reviews)}
+         {formatValue(product.reviews)}
                       <ProsConsToolTip hover_phrase={product.reviews_phase} />
                     </span>
                   </div>
@@ -443,7 +443,7 @@ const TechnicalAccordion = React.memo(
                                           ),
                                         }}
                                       >
-                                        {formatValue(data?.evaluation)}
+                                   {formatValue(data?.evaluation)}
                                       </span>
                                       <div className="user__rating__popup__content">
                                         {data?.image !== null && (
@@ -641,6 +641,7 @@ const TechnicalAccordion = React.memo(
                             
                           />
                         </div>
+                
                         <span
                           className="count dark-color"
                           style={{
@@ -656,9 +657,15 @@ const TechnicalAccordion = React.memo(
                                 : "#85B2F1",
                           }}
                         >
-                          {product?.attributes[
+                  
+                          {/* {product?.attributes[
                             attribute
-                          ][0].attribute_evaluation.toFixed(1)}
+                          ][0].attribute_evaluation.toFixed(1)} */}
+                          {product?.attributes[attribute][0].attribute_evaluation === 10 ?
+  10 :
+  product?.attributes[attribute][0].attribute_evaluation.toFixed(1)
+}
+
                         </span>
                         <div className="show-btn" onClick={() => {}}>
                         {productPhaseData && productPhaseData?.show_all}  <i className="ri-arrow-down-s-line"></i>
@@ -993,7 +1000,7 @@ const TechnicalAccordion = React.memo(
                       <div className="table-accordion-header">
                         {/* {console.log(product,"test")} */}
                         {attribute}
-                        <Questiontool
+                    <Questiontool
                           attributes={
                             product.attributes[attribute][0]?.attribute_category
                           }
@@ -1015,9 +1022,12 @@ const TechnicalAccordion = React.memo(
                               : "#85B2F1",
                         }}
                       >
-                        {product?.attributes[
-                          attribute
-                        ][0].attribute_evaluation.toFixed(1)}
+                       
+                       {product?.attributes[attribute][0].attribute_evaluation === 10 ?
+  10 :
+  product?.attributes[attribute][0].attribute_evaluation.toFixed(1)
+}
+
                       </span>
                       <div className="show-btn">
                       {productPhaseData && productPhaseData?.show_all}  <i className="ri-arrow-down-s-line"></i>

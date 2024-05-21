@@ -139,7 +139,7 @@
 
     function removeQueryParamAndNavigate(url, paramToRemove) {
       // delete searchParams[`${paramToRemove}`];
-       console.log(paramToRemove,"check mahima");
+      //  console.log(paramToRemove,"check mahima");
       if (paramToRemove != "sort") {
         setparams(() => {
           return {
