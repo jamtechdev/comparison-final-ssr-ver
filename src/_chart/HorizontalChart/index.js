@@ -122,7 +122,7 @@ function HorizontalChart(props) {
         return yScale(d.label) + 5 + yScale.bandwidth() / 2; // Adjust vertical positioning 
       })
       .text(function (d) {
-        return d.value ? `${d.value} ${xUnit}` : "";
+        return d.value ? `${Math.round(d.value)} ${xUnit}` : "";
       });
 
     svg.select("path").style("display", "none");

@@ -77,6 +77,12 @@ export default async function PageSwitch({
         product?.category_id,
         slug
       );
+
+      const getProConsForAccordion = await getProsConsForAccidion(
+        categorySlug,
+        slug
+      );
+      // console.log(getProConsForAccordion?.data);
       PageToRender = (
         <ProductPage
           slug={slug}
@@ -84,6 +90,7 @@ export default async function PageSwitch({
           productData={pageData}
           productCatAttributes={productCatAttribute}
           compareByCatID={getProductCompare}
+          prosConsAccordion={getProConsForAccordion?.data}
         />
       );
       break;
@@ -98,6 +105,8 @@ export default async function PageSwitch({
       break;
     case "Compare":
       const compareData = pageData[0]?.data;
+      console.log(pageData[0], "compareData");
+      console.log(pageData[1], "xxx");
 
       // console.log(compareData?.category_url)
 
@@ -116,6 +125,7 @@ export default async function PageSwitch({
           comparisonData={pageData}
           categroyAttributes={compareDataCatAttribute}
           graphComparisonProsCons={graphComparisonProsCons}
+          pro
         />
       );
       break;
@@ -254,4 +264,22 @@ async function getGraphComparisonProsCons(data, categorySlug) {
     }
     return response.json();
   }
+}
+
+async function getProsConsForAccidion(categorySlug, slug) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/generate-chart/${categorySlug}?permalink2=${slug}&permalink1=average`,
+    {
+      next: { revalidate: 10 },
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      },
+    }
+  );
+  if (!response.ok) {
+  }
+  return response.json();
 }

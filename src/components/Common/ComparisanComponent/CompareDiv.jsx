@@ -545,7 +545,7 @@ function CompareDiv({
                 productAttributes={productAttributes}
               />
             </Col>
-            <Col md={12} className="table-section-desktop">
+            {/* <Col md={12} className="table-section-desktop">
               <MobileCompareTable
                 productPhaseData={
                   bestAlternative && bestAlternative?.page_phases
@@ -554,7 +554,7 @@ function CompareDiv({
                 categoryAttributes={categroyAttributes}
                 slug={slug}
               />
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </section>
