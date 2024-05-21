@@ -129,13 +129,13 @@ const TechnicalAccordion = React.memo(
                 {productPhaseData && productPhaseData?.overall}
               </div>
               <span className="count" style={{ background: overallScoreColor }}>
-               {formatValue(product?.overall_score)}
+                {formatValue(product?.overall_score)}
               </span>
               <div className="show-btn">
-              {productPhaseData && productPhaseData?.show_all} <i className="ri-arrow-down-s-line"></i>
+                {productPhaseData && productPhaseData?.show_all} <i className="ri-arrow-down-s-line"></i>
               </div>
               <div className="hide-btn">
-              {productPhaseData && productPhaseData?.hide_all} <i className="ri-arrow-up-s-line"></i>
+                {productPhaseData && productPhaseData?.hide_all} <i className="ri-arrow-up-s-line"></i>
               </div>
             </Accordion.Header>
             <Accordion.Body>
@@ -199,8 +199,8 @@ const TechnicalAccordion = React.memo(
                                             ? "#093673"
                                             : data?.attribute_evaluation >= 5 &&
                                               data?.attribute_evaluation < 7.5
-                                            ? "#437ECE"
-                                            : "#85B2F1",
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                       }}
                                     >
                                       {`${parseFloat(
@@ -218,18 +218,17 @@ const TechnicalAccordion = React.memo(
                   </div>
                   <div className="spec-col">
                     <span
-                      className={`${
-                        product.technical_score_phase !== ""
+                      className={`${product.technical_score_phase !== ""
                           ? "tooltip-title"
                           : ""
-                      }`}
+                        }`}
                       style={{
                         color:
                           product.technical_score_is_better_than * 100 >= 70
                             ? "#437ece"
                             : product.technical_score_is_worse_than * 100 > 70
-                            ? "#ce434b"
-                            : "#27304e",
+                              ? "#ce434b"
+                              : "#27304e",
                         fontSize: "15px",
                         textDecoration:
                           product.technical_score_phase !== ""
@@ -242,12 +241,12 @@ const TechnicalAccordion = React.memo(
                           product.technical_score_is_better_than * 100 >= 70
                             ? "#437ece"
                             : product.technical_score_is_worse_than * 100 > 70
-                            ? "#ce434b"
-                            : "#27304e",
+                              ? "#ce434b"
+                              : "#27304e",
                         textUnderlineOffset: "5px",
                       }}
                     >
-                 {formatValue(product.technical_score)}
+                      {formatValue(product.technical_score)}
                       <ProsConsToolTip
                         hover_phrase={product.technical_score_phase}
                       />
@@ -316,8 +315,8 @@ const TechnicalAccordion = React.memo(
                                             ? "#093673"
                                             : data?.attribute_evaluation >= 5 &&
                                               data?.attribute_evaluation < 7.5
-                                            ? "#437ECE"
-                                            : "#85B2F1",
+                                              ? "#437ECE"
+                                              : "#85B2F1",
                                       }}
                                     >
                                       {`${parseFloat(
@@ -335,16 +334,15 @@ const TechnicalAccordion = React.memo(
                   </div>
                   <div className="spec-col">
                     <span
-                      className={`${
-                        product?.reviews_phase !== "" ? "tooltip-title" : ""
-                      }`}
+                      className={`${product?.reviews_phase !== "" ? "tooltip-title" : ""
+                        }`}
                       style={{
                         color:
                           product.reviews_is_better_than * 100 >= 70
                             ? "#437ece"
                             : product.reviews_is_worse_than * 100 > 70
-                            ? "#ce434b"
-                            : "#27304e",
+                              ? "#ce434b"
+                              : "#27304e",
                         fontSize: "15px",
                         textDecoration:
                           product.reviews_phase !== "" ? "underline" : "",
@@ -355,12 +353,12 @@ const TechnicalAccordion = React.memo(
                           product.reviews_is_better_than * 100 >= 70
                             ? "#437ece"
                             : product.reviews_is_worse_than * 100 > 70
-                            ? "#ce434b"
-                            : "#27304e",
+                              ? "#ce434b"
+                              : "#27304e",
                         textUnderlineOffset: "5px",
                       }}
                     >
-         {formatValue(product.reviews)}
+                      {formatValue(product.reviews)}
                       <ProsConsToolTip hover_phrase={product.reviews_phase} />
                     </span>
                   </div>
@@ -382,18 +380,17 @@ const TechnicalAccordion = React.memo(
                     </div>
                     <div className="spec-col">
                       <div
-                        className={`${
-                          product?.expert_reviews_rating_phase !== ""
+                        className={`${product?.expert_reviews_rating_phase !== ""
                             ? "tooltip-title"
                             : ""
-                        }`}
+                          }`}
                         style={{
                           color:
                             product.expert_reviews_is_better_than * 100 >= 70
                               ? "#437ece"
                               : product.expert_reviews_is_worse_than * 100 > 70
-                              ? "#ce434b"
-                              : "#27304e",
+                                ? "#ce434b"
+                                : "#27304e",
                           fontSize: "15px",
 
                           textDecoration:
@@ -409,8 +406,8 @@ const TechnicalAccordion = React.memo(
                             product.expert_reviews_is_better_than * 100 >= 70
                               ? "#437ece"
                               : product.expert_reviews_is_worse_than * 100 > 70
-                              ? "#ce434b"
-                              : "#27304e",
+                                ? "#ce434b"
+                                : "#27304e",
                           textUnderlineOffset: "5px",
                         }}
                       >
@@ -443,7 +440,7 @@ const TechnicalAccordion = React.memo(
                                           ),
                                         }}
                                       >
-                                   {formatValue(data?.evaluation)}
+                                        {formatValue(data?.evaluation)}
                                       </span>
                                       <div className="user__rating__popup__content">
                                         {data?.image !== null && (
@@ -517,18 +514,17 @@ const TechnicalAccordion = React.memo(
                   </div>
                   <div className="spec-col">
                     <div
-                      className={`${
-                        product?.popularity_points_phase !== ""
+                      className={`${product?.popularity_points_phase !== ""
                           ? "tooltip-title"
                           : ""
-                      }`}
+                        }`}
                       style={{
                         color:
                           product.popularity_points_better_then * 100 >= 70
                             ? "#437ece"
                             : product.popularity_points_worse_then * 100 > 70
-                            ? "#ce434b"
-                            : "#27304e",
+                              ? "#ce434b"
+                              : "#27304e",
                         fontSize: "15px",
                         textDecoration:
                           product.popularity_points_phase !== ""
@@ -543,8 +539,8 @@ const TechnicalAccordion = React.memo(
                           product.popularity_points_better_then * 100 >= 70
                             ? "#437ece"
                             : product.popularity_points_worse_then * 100 > 70
-                            ? "#ce434b"
-                            : "#27304e",
+                              ? "#ce434b"
+                              : "#27304e",
                         textUnderlineOffset: "5px",
                       }}
                     >
@@ -573,22 +569,21 @@ const TechnicalAccordion = React.memo(
                   </div>
                   <div className="spec-col ">
                     <div
-                      className={`${
-                        product?.ratio_quality_price_points_phase !== ""
+                      className={`${product?.ratio_quality_price_points_phase !== ""
                           ? "tooltip-title"
                           : ""
-                      }`}
+                        }`}
                       style={{
                         color:
                           product.ratio_quality_price_points_better_then *
                             100 >=
-                          70
+                            70
                             ? "#437ece"
                             : product.ratio_quality_price_points_worse_then *
-                                100 >
+                              100 >
                               70
-                            ? "#ce434b"
-                            : "#27304e",
+                              ? "#ce434b"
+                              : "#27304e",
                         fontSize: "15px",
                         textDecoration:
                           product.ratio_quality_price_points_phase !== ""
@@ -602,13 +597,13 @@ const TechnicalAccordion = React.memo(
                         textDecorationColor:
                           product.ratio_quality_price_points_better_then *
                             100 >=
-                          70
+                            70
                             ? "#437ece"
                             : product.ratio_quality_price_points_worse_then *
-                                100 >
+                              100 >
                               70
-                            ? "#ce434b"
-                            : "#27304e",
+                              ? "#ce434b"
+                              : "#27304e",
                         textUnderlineOffset: "5px",
                       }}
                     >
@@ -638,10 +633,10 @@ const TechnicalAccordion = React.memo(
                                 ?.attribute_category
                             }
                             productPhaseData={productPhaseData}
-                            
+
                           />
                         </div>
-                
+
                         <span
                           className="count dark-color"
                           style={{
@@ -650,28 +645,28 @@ const TechnicalAccordion = React.memo(
                                 .attribute_evaluation >= 7.5
                                 ? "#093673"
                                 : product?.attributes[attribute][0]
-                                    .attribute_evaluation >= 5 &&
+                                  .attribute_evaluation >= 5 &&
                                   product?.attributes[attribute][0]
                                     .attribute_evaluation < 7.5
-                                ? "#437ECE"
-                                : "#85B2F1",
+                                  ? "#437ECE"
+                                  : "#85B2F1",
                           }}
                         >
-                  
+
                           {/* {product?.attributes[
                             attribute
                           ][0].attribute_evaluation.toFixed(1)} */}
                           {product?.attributes[attribute][0].attribute_evaluation === 10 ?
-  10 :
-  product?.attributes[attribute][0].attribute_evaluation.toFixed(1)
-}
+                            10 :
+                            product?.attributes[attribute][0].attribute_evaluation.toFixed(1)
+                          }
 
                         </span>
-                        <div className="show-btn" onClick={() => {}}>
-                        {productPhaseData && productPhaseData?.show_all}  <i className="ri-arrow-down-s-line"></i>
+                        <div className="show-btn" onClick={() => { }}>
+                          {productPhaseData && productPhaseData?.show_all}  <i className="ri-arrow-down-s-line"></i>
                         </div>
-                        <div className="hide-btn" onClick={() => {}}>
-                        {productPhaseData && productPhaseData?.hide_all}  <i className="ri-arrow-up-s-line"></i>
+                        <div className="hide-btn" onClick={() => { }}>
+                          {productPhaseData && productPhaseData?.hide_all}  <i className="ri-arrow-up-s-line"></i>
                         </div>
                       </Accordion.Header>
                       <Accordion.Body>
@@ -681,11 +676,11 @@ const TechnicalAccordion = React.memo(
                               0,
                               displayedAttributesCount[product.name] &&
                                 displayedAttributesCount[product.name][
-                                  attribute
+                                attribute
                                 ]
                                 ? displayedAttributesCount[product.name][
-                                    attribute
-                                  ]
+                                attribute
+                                ]
                                 : initialDisplay
                             )
                             .map((attributeValues, valueIndex) => (
@@ -708,35 +703,34 @@ const TechnicalAccordion = React.memo(
                                         {attributeValues.attribute_value !=
                                           "yes" &&
                                           attributeValues.attribute_value !=
-                                            "no" && (
+                                          "no" && (
                                             <>
                                               <div
-                                                className={`${
-                                                  attributeValues?.hover_phase !==
-                                                  ""
+                                                className={`${attributeValues?.hover_phase !==
+                                                    ""
                                                     ? "tooltip-title"
                                                     : ""
-                                                }`}
+                                                  }`}
                                                 style={{
                                                   color:
                                                     attributeValues.is_better_than *
                                                       100 >=
-                                                    70
+                                                      70
                                                       ? "#437ece"
                                                       : attributeValues.is_worse_than *
-                                                          100 >
+                                                        100 >
                                                         70
-                                                      ? "#ce434b"
-                                                      : "#27304e",
+                                                        ? "#ce434b"
+                                                        : "#27304e",
                                                   fontSize: "15px",
                                                   textDecoration:
                                                     attributeValues?.hover_phase !==
-                                                    ""
+                                                      ""
                                                       ? "underline"
                                                       : "",
                                                   textDecorationStyle:
                                                     attributeValues?.hover_phase !==
-                                                    ""
+                                                      ""
                                                       ? "dotted"
                                                       : "",
                                                   textDecorationThickness:
@@ -744,13 +738,13 @@ const TechnicalAccordion = React.memo(
                                                   textDecorationColor:
                                                     attributeValues.is_better_than *
                                                       100 >=
-                                                    70
+                                                      70
                                                       ? "#437ece"
                                                       : attributeValues.is_worse_than *
-                                                          100 >
+                                                        100 >
                                                         70
-                                                      ? "#ce434b"
-                                                      : "#27304e",
+                                                        ? "#ce434b"
+                                                        : "#27304e",
                                                   textUnderlineOffset: "5px",
                                                 }}
                                               >
@@ -760,45 +754,45 @@ const TechnicalAccordion = React.memo(
                                                       color:
                                                         attributeValues.is_better_than *
                                                           100 >=
-                                                        70
+                                                          70
                                                           ? "#437ece"
                                                           : attributeValues.is_worse_than *
-                                                              100 >
+                                                            100 >
                                                             70
-                                                          ? "#ce434b"
-                                                          : "#27304e",
+                                                            ? "#ce434b"
+                                                            : "#27304e",
                                                       fontSize: "15px",
                                                     }}
                                                   >
                                                     {(attributeValues.attribute_value !=
-                                                    null
+                                                      null
                                                       ? attributeValues.attribute_value
                                                       : "") +
                                                       " " +
                                                       (attributeValues.attribute_value ===
                                                         "?" ||
-                                                      attributeValues.attribute_value ===
+                                                        attributeValues.attribute_value ===
                                                         "-"
                                                         ? ""
                                                         : attributeValues.unit !=
                                                           null
-                                                        ? attributeValues.unit
-                                                        : "")}
+                                                          ? attributeValues.unit
+                                                          : "")}
                                                   </span>
                                                 }
 
                                                 {attributeValues.attribute_value !==
                                                   "?" && (
-                                                  <ProsConsToolTip
-                                                    comment={
-                                                      attributeValues?.commnet
-                                                    }
-                                                    hover_phrase={
-                                                      attributeValues &&
-                                                      attributeValues.hover_phase
-                                                    }
-                                                  />
-                                                )}
+                                                    <ProsConsToolTip
+                                                      comment={
+                                                        attributeValues?.commnet
+                                                      }
+                                                      hover_phrase={
+                                                        attributeValues &&
+                                                        attributeValues.hover_phase
+                                                      }
+                                                    />
+                                                  )}
                                               </div>{" "}
                                               {attributeValues?.info_not_verified && (
                                                 <div
@@ -816,7 +810,7 @@ const TechnicalAccordion = React.memo(
                                                   </i>
                                                   <div
                                                     className="tooltip-display-content"
-                                                  
+
                                                   >
                                                     Information is not verified.
                                                     If you believe this is a
@@ -832,104 +826,103 @@ const TechnicalAccordion = React.memo(
                                         {(attributeValues.attribute_value ==
                                           "yes" ||
                                           attributeValues.attribute_value ==
-                                            "no") && (
-                                          <div
-                                            className={`${
-                                              attributeValues?.hover_phase !==
-                                              ""
-                                                ? "tooltip-title"
-                                                : ""
-                                            }`}
-                                            style={{
-                                              color:
-                                                attributeValues.attribute_value ==
-                                                  "yes" &&
-                                                attributeValues.attribute_is_same_as *
-                                                  100 <
-                                                  40
-                                                  ? "#0066b2"
-                                                  : attributeValues.attribute_value ==
-                                                      "no" &&
-                                                    attributeValues.attribute_is_worse_than *
-                                                      100 >
-                                                      60
-                                                  ? "red"
-                                                  : "#27304e",
-                                              fontSize: "15px",
-                                              textDecoration:
-                                                attributeValues?.hover_phase !==
-                                                ""
-                                                  ? "underline"
-                                                  : "",
-                                              textDecorationStyle:
-                                                attributeValues?.hover_phase !==
-                                                ""
-                                                  ? "dotted"
-                                                  : "",
-                                              textDecorationThickness: "1.5px",
-                                              textDecorationColor:
-                                                attributeValues.attribute_value ==
-                                                  "yes" &&
-                                                // here I change attribute_is_better_than to attribute_is_same_as
-                                                attributeValues.attribute_is_same_as *
-                                                  100 <
-                                                  40
-                                                  ? "#0066b2"
-                                                  : attributeValues.attribute_value ==
-                                                      "no" &&
-                                                    attributeValues.attribute_is_worse_than *
-                                                      100 >
-                                                      60
-                                                  ? "red"
-                                                  : "#27304e",
-                                              textUnderlineOffset: "5px",
-                                            }}
-                                          >
-                                            {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
-                                            {
-                                              <span
-                                                style={{
-                                                  color:
-                                                    attributeValues.attribute_value ==
-                                                      "yes" &&
+                                          "no") && (
+                                            <div
+                                              className={`${attributeValues?.hover_phase !==
+                                                  ""
+                                                  ? "tooltip-title"
+                                                  : ""
+                                                }`}
+                                              style={{
+                                                color:
+                                                  attributeValues.attribute_value ==
+                                                    "yes" &&
                                                     attributeValues.attribute_is_same_as *
-                                                      100 <
-                                                      40
-                                                      ? "#0066b2"
-                                                      : attributeValues.attribute_value ==
-                                                          "no" &&
-                                                        attributeValues.attribute_is_worse_than *
-                                                          100 >
-                                                          60
+                                                    100 <
+                                                    40
+                                                    ? "#0066b2"
+                                                    : attributeValues.attribute_value ==
+                                                      "no" &&
+                                                      attributeValues.attribute_is_worse_than *
+                                                      100 >
+                                                      60
                                                       ? "red"
                                                       : "#27304e",
-                                                }}
-                                              >
-                                                {(attributeValues.attribute_value !=
-                                                null
-                                                  ? attributeValues.attribute_value
-                                                  : "") +
-                                                  " " +
-                                                  (attributeValues.attribute_value ===
-                                                    "?" ||
-                                                  attributeValues.attribute_value ===
-                                                    "-"
-                                                    ? ""
-                                                    : attributeValues.unit !=
-                                                      null
-                                                    ? attributeValues.unit
-                                                    : "")}
-                                              </span>
-                                            }
-                                            {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
-                                            <ProsConsToolTip
-                                              hover_phrase={
-                                                attributeValues &&
-                                                attributeValues.hover_phase
+                                                fontSize: "15px",
+                                                textDecoration:
+                                                  attributeValues?.hover_phase !==
+                                                    ""
+                                                    ? "underline"
+                                                    : "",
+                                                textDecorationStyle:
+                                                  attributeValues?.hover_phase !==
+                                                    ""
+                                                    ? "dotted"
+                                                    : "",
+                                                textDecorationThickness: "1.5px",
+                                                textDecorationColor:
+                                                  attributeValues.attribute_value ==
+                                                    "yes" &&
+                                                    // here I change attribute_is_better_than to attribute_is_same_as
+                                                    attributeValues.attribute_is_same_as *
+                                                    100 <
+                                                    40
+                                                    ? "#0066b2"
+                                                    : attributeValues.attribute_value ==
+                                                      "no" &&
+                                                      attributeValues.attribute_is_worse_than *
+                                                      100 >
+                                                      60
+                                                      ? "red"
+                                                      : "#27304e",
+                                                textUnderlineOffset: "5px",
+                                              }}
+                                            >
+                                              {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                              {
+                                                <span
+                                                  style={{
+                                                    color:
+                                                      attributeValues.attribute_value ==
+                                                        "yes" &&
+                                                        attributeValues.attribute_is_same_as *
+                                                        100 <
+                                                        40
+                                                        ? "#0066b2"
+                                                        : attributeValues.attribute_value ==
+                                                          "no" &&
+                                                          attributeValues.attribute_is_worse_than *
+                                                          100 >
+                                                          60
+                                                          ? "red"
+                                                          : "#27304e",
+                                                  }}
+                                                >
+                                                  {(attributeValues.attribute_value !=
+                                                    null
+                                                    ? attributeValues.attribute_value
+                                                    : "") +
+                                                    " " +
+                                                    (attributeValues.attribute_value ===
+                                                      "?" ||
+                                                      attributeValues.attribute_value ===
+                                                      "-"
+                                                      ? ""
+                                                      : attributeValues.unit !=
+                                                        null
+                                                        ? attributeValues.unit
+                                                        : "")}
+                                                </span>
                                               }
-                                            />
-                                          </div>
-                                        )}
+                                              {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
+                                              <ProsConsToolTip
+                                                hover_phrase={
+                                                  attributeValues &&
+                                                  attributeValues.hover_phase
+                                                }
+                                              />
+                                            </div>
+                                          )}
                                       </div>
                                     </div>
                                   </div>
@@ -941,47 +934,46 @@ const TechnicalAccordion = React.memo(
                             height={35}
                             count={
                               displayedAttributesCount[product.name] &&
-                              displayedAttributesCount[product.name][attribute]
+                                displayedAttributesCount[product.name][attribute]
                                 ? displayedAttributesCount[product.name][
-                                    attribute
-                                  ]
+                                attribute
+                                ]
                                 : initialDisplay
                             }
                           />
                         )}
                         {loading == false
                           ? product.attributes[attribute].length >
-                              (displayedAttributesCount[product.name] &&
-                              displayedAttributesCount[product.name][attribute]
-                                ? displayedAttributesCount[product.name][
+                          (displayedAttributesCount[product.name] &&
+                            displayedAttributesCount[product.name][attribute]
+                            ? displayedAttributesCount[product.name][
+                            attribute
+                            ]
+                            : initialDisplay) && (
+                            <span
+                              className="show_more"
+                              onClick={() => {
+                                setloading(true),
+                                  handleDisplayedAttributesCount(
+                                    product.name,
                                     attribute
-                                  ]
-                                : initialDisplay) && (
-                              <span
-                                className="show_more"
-                                onClick={() => {
-                                  setloading(true),
-                                    handleDisplayedAttributesCount(
-                                      product.name,
-                                      attribute
-                                    );
-                                  setTimeout(() => {
-                                    setloading(false);
-                                  }, 600);
-                                }}
-                              >
-                                {/* {"SHOW MORE "} */}
-                                {productPhaseData && productPhaseData?.show_all}
-                                <i
-                                  className={`ri-${
-                                    initialDisplay <
+                                  );
+                                setTimeout(() => {
+                                  setloading(false);
+                                }, 600);
+                              }}
+                            >
+                              {/* {"SHOW MORE "} */}
+                              {productPhaseData && productPhaseData?.show_all}
+                              <i
+                                className={`ri-${initialDisplay <
                                     product.attributes[attribute].length
-                                      ? "add"
-                                      : "subtract"
+                                    ? "add"
+                                    : "subtract"
                                   }-line`}
-                                ></i>
-                              </span>
-                            )
+                              ></i>
+                            </span>
+                          )
                           : ""}
                       </Accordion.Body>
                     </Accordion.Item>
@@ -1000,7 +992,7 @@ const TechnicalAccordion = React.memo(
                       <div className="table-accordion-header">
                         {/* {console.log(product,"test")} */}
                         {attribute}
-                    <Questiontool
+                        <Questiontool
                           attributes={
                             product.attributes[attribute][0]?.attribute_category
                           }
@@ -1015,25 +1007,23 @@ const TechnicalAccordion = React.memo(
                               .attribute_evaluation >= 7.5
                               ? "#093673"
                               : product.attributes[attribute][0]
-                                  .attribute_evaluation >= 5 &&
+                                .attribute_evaluation >= 5 &&
                                 product.attributes[attribute][0]
                                   .attribute_evaluation < 7.5
-                              ? "#437ECE"
-                              : "#85B2F1",
+                                ? "#437ECE"
+                                : "#85B2F1",
                         }}
                       >
-                       
-                       {product?.attributes[attribute][0].attribute_evaluation === 10 ?
-  10 :
-  product?.attributes[attribute][0].attribute_evaluation.toFixed(1)
-}
-
+                        {product?.attributes[attribute][0].attribute_evaluation === 10 ?
+                          10 :
+                          product?.attributes[attribute][0].attribute_evaluation.toFixed(1)
+                        }
                       </span>
                       <div className="show-btn">
-                      {productPhaseData && productPhaseData?.show_all}  <i className="ri-arrow-down-s-line"></i>
+                        {productPhaseData && productPhaseData?.show_all}  <i className="ri-arrow-down-s-line"></i>
                       </div>
                       <div className="hide-btn">
-                      {productPhaseData && productPhaseData?.hide_all}  <i className="ri-arrow-up-s-line"></i>
+                        {productPhaseData && productPhaseData?.hide_all}  <i className="ri-arrow-up-s-line"></i>
                       </div>
                     </Accordion.Header>
                     <Accordion.Body>
@@ -1044,8 +1034,8 @@ const TechnicalAccordion = React.memo(
                             displayedAttributesCount[product.name] &&
                               displayedAttributesCount[product.name][attribute]
                               ? displayedAttributesCount[product.name][
-                                  attribute
-                                ]
+                              attribute
+                              ]
                               : initialDisplay
                           )
                           .map((attributeValues, valueIndex) => (
@@ -1070,42 +1060,41 @@ const TechnicalAccordion = React.memo(
                                       {attributeValues.attribute_value !=
                                         "yes" &&
                                         attributeValues.attribute_value !=
-                                          "no" && (
+                                        "no" && (
                                           <>
                                             <div
-                                              className={`${
-                                                attributeValues.attribute_value !==
-                                                  "?" &&
+                                              className={`${attributeValues.attribute_value !==
+                                                "?" &&
                                                 !attributeValues.attribute_value.includes(
                                                   "-"
                                                 ) &&
                                                 attributeValues.hover_phase !==
-                                                  "" &&
+                                                "" &&
                                                 "tooltip-title"
-                                              }`}
+                                                }`}
                                               style={{
                                                 color:
                                                   attributeValues.is_better_than *
                                                     100 >=
-                                                  70
+                                                    70
                                                     ? "#437ece"
                                                     : attributeValues.is_worse_than *
-                                                        100 >
+                                                      100 >
                                                       70
-                                                    ? "#ce434b"
-                                                    : "#27304e",
+                                                      ? "#ce434b"
+                                                      : "#27304e",
                                                 fontSize: "15px",
                                                 textDecoration:
                                                   attributeValues.attribute_value !==
                                                     "?" &&
-                                                  attributeValues?.hover_phase !==
+                                                    attributeValues?.hover_phase !==
                                                     ""
                                                     ? "underline"
                                                     : "",
                                                 textDecorationStyle:
                                                   attributeValues.attribute_value !==
                                                     "?" &&
-                                                  attributeValues?.hover_phase !==
+                                                    attributeValues?.hover_phase !==
                                                     ""
                                                     ? "dotted"
                                                     : "",
@@ -1114,13 +1103,13 @@ const TechnicalAccordion = React.memo(
                                                 textDecorationColor:
                                                   attributeValues.is_better_than *
                                                     100 >=
-                                                  70
+                                                    70
                                                     ? "#437ece"
                                                     : attributeValues.is_worse_than *
-                                                        100 >
+                                                      100 >
                                                       70
-                                                    ? "#ce434b"
-                                                    : "#27304e",
+                                                      ? "#ce434b"
+                                                      : "#27304e",
                                                 textUnderlineOffset: "5px",
                                               }}
                                             >
@@ -1130,30 +1119,30 @@ const TechnicalAccordion = React.memo(
                                                     color:
                                                       attributeValues.is_better_than *
                                                         100 >=
-                                                      70
+                                                        70
                                                         ? "#437ece"
                                                         : attributeValues.is_worse_than *
-                                                            100 >
+                                                          100 >
                                                           70
-                                                        ? "#ce434b"
-                                                        : "#27304e",
+                                                          ? "#ce434b"
+                                                          : "#27304e",
                                                     fontSize: "15px",
                                                   }}
                                                 >
                                                   {(attributeValues.attribute_value !=
-                                                  null
+                                                    null
                                                     ? attributeValues.attribute_value
                                                     : "") +
                                                     " " +
                                                     (attributeValues.attribute_value ===
                                                       "?" ||
-                                                    attributeValues.attribute_value ===
+                                                      attributeValues.attribute_value ===
                                                       "-"
                                                       ? ""
                                                       : attributeValues.unit !=
                                                         null
-                                                      ? attributeValues.unit
-                                                      : "")}
+                                                        ? attributeValues.unit
+                                                        : "")}
                                                 </span>
                                               }
                                               {/* {console.log(
@@ -1162,24 +1151,24 @@ const TechnicalAccordion = React.memo(
 
                                               {attributeValues.attribute_value !==
                                                 "?" && (
-                                                <ProsConsToolTip
-                                                  comment={
-                                                    attributeValues?.comment
-                                                  }
-                                                  hover_phrase={
-                                                    attributeValues &&
-                                                    attributeValues.hover_phase
-                                                  }
-                                                  info_not_verified={
-                                                    attributeValues &&
-                                                    attributeValues?.info_not_verified
-                                                  }
-                                                  info_not_verified_text={
-                                                    attributeValues &&
-                                                    attributeValues?.info_not_verified_text
-                                                  }
-                                                />
-                                              )}
+                                                  <ProsConsToolTip
+                                                    comment={
+                                                      attributeValues?.comment
+                                                    }
+                                                    hover_phrase={
+                                                      attributeValues &&
+                                                      attributeValues.hover_phase
+                                                    }
+                                                    info_not_verified={
+                                                      attributeValues &&
+                                                      attributeValues?.info_not_verified
+                                                    }
+                                                    info_not_verified_text={
+                                                      attributeValues &&
+                                                      attributeValues?.info_not_verified_text
+                                                    }
+                                                  />
+                                                )}
                                             </div>{" "}
                                             {/* {comment && <div className="test__phrase__content ">{comment}</div>} */}
                                             {attributeValues?.info_not_verified && (
@@ -1209,7 +1198,7 @@ const TechnicalAccordion = React.memo(
                                                     opacity: "100%",
                                                   }}
                                                 >
-                                                 {attributeValues?.info_not_verified_text}
+                                                  {attributeValues?.info_not_verified_text}
                                                 </div>
                                               </div>
                                             )}
@@ -1220,102 +1209,101 @@ const TechnicalAccordion = React.memo(
                                       {(attributeValues.attribute_value ==
                                         "yes" ||
                                         attributeValues.attribute_value ==
-                                          "no") && (
-                                        <div
-                                          className={`${
-                                            attributeValues?.hover_phase !== ""
-                                              ? "tooltip-title"
-                                              : ""
-                                          }`}
-                                          style={{
-                                            color:
-                                              attributeValues.attribute_value ==
-                                                "yes" &&
-                                              attributeValues.attribute_is_same_as *
-                                                100 <
-                                                40
-                                                ? "#0066b2"
-                                                : attributeValues.attribute_value ==
-                                                    "no" &&
-                                                  attributeValues.attribute_is_worse_than *
-                                                    100 >
-                                                    60
-                                                ? "red"
-                                                : "#27304e",
-                                            fontSize: "15px",
-                                            textDecoration:
-                                              attributeValues?.hover_phase !==
-                                              ""
-                                                ? "underline"
-                                                : "",
-                                            textDecorationStyle:
-                                              attributeValues?.hover_phase !==
-                                              ""
-                                                ? "dotted"
-                                                : "",
-                                            textDecorationThickness: "1.5px",
-                                            textDecorationColor:
-                                              attributeValues.attribute_value ==
-                                                "yes" &&
-                                              // here I change attribute_is_better_than to attribute_is_same_as
-                                              attributeValues.attribute_is_same_as *
-                                                100 <
-                                                40
-                                                ? "#0066b2"
-                                                : attributeValues.attribute_value ==
-                                                    "no" &&
-                                                  attributeValues.attribute_is_worse_than *
-                                                    100 >
-                                                    60
-                                                ? "red"
-                                                : "#27304e",
-                                            textUnderlineOffset: "5px",
-                                          }}
-                                        >
-                                          {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
-                                          {
-                                            <span
-                                              style={{
-                                                color:
-                                                  attributeValues.attribute_value ==
-                                                    "yes" &&
+                                        "no") && (
+                                          <div
+                                            className={`${attributeValues?.hover_phase !== ""
+                                                ? "tooltip-title"
+                                                : ""
+                                              }`}
+                                            style={{
+                                              color:
+                                                attributeValues.attribute_value ==
+                                                  "yes" &&
                                                   attributeValues.attribute_is_same_as *
-                                                    100 <
-                                                    40
-                                                    ? "#0066b2"
-                                                    : attributeValues.attribute_value ==
-                                                        "no" &&
-                                                      attributeValues.attribute_is_worse_than *
-                                                        100 >
-                                                        60
+                                                  100 <
+                                                  40
+                                                  ? "#0066b2"
+                                                  : attributeValues.attribute_value ==
+                                                    "no" &&
+                                                    attributeValues.attribute_is_worse_than *
+                                                    100 >
+                                                    60
                                                     ? "red"
                                                     : "#27304e",
-                                              }}
-                                            >
-                                              {(attributeValues.attribute_value !=
-                                              null
-                                                ? attributeValues.attribute_value
-                                                : "") +
-                                                " " +
-                                                (attributeValues.attribute_value ===
-                                                  "?" ||
-                                                attributeValues.attribute_value ===
-                                                  "-"
-                                                  ? ""
-                                                  : attributeValues.unit != null
-                                                  ? attributeValues.unit
-                                                  : "")}
-                                            </span>
-                                          }
-                                          {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
-                                          <ProsConsToolTip
-                                            hover_phrase={
-                                              attributeValues &&
-                                              attributeValues.hover_phase
+                                              fontSize: "15px",
+                                              textDecoration:
+                                                attributeValues?.hover_phase !==
+                                                  ""
+                                                  ? "underline"
+                                                  : "",
+                                              textDecorationStyle:
+                                                attributeValues?.hover_phase !==
+                                                  ""
+                                                  ? "dotted"
+                                                  : "",
+                                              textDecorationThickness: "1.5px",
+                                              textDecorationColor:
+                                                attributeValues.attribute_value ==
+                                                  "yes" &&
+                                                  // here I change attribute_is_better_than to attribute_is_same_as
+                                                  attributeValues.attribute_is_same_as *
+                                                  100 <
+                                                  40
+                                                  ? "#0066b2"
+                                                  : attributeValues.attribute_value ==
+                                                    "no" &&
+                                                    attributeValues.attribute_is_worse_than *
+                                                    100 >
+                                                    60
+                                                    ? "red"
+                                                    : "#27304e",
+                                              textUnderlineOffset: "5px",
+                                            }}
+                                          >
+                                            {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
+                                            {
+                                              <span
+                                                style={{
+                                                  color:
+                                                    attributeValues.attribute_value ==
+                                                      "yes" &&
+                                                      attributeValues.attribute_is_same_as *
+                                                      100 <
+                                                      40
+                                                      ? "#0066b2"
+                                                      : attributeValues.attribute_value ==
+                                                        "no" &&
+                                                        attributeValues.attribute_is_worse_than *
+                                                        100 >
+                                                        60
+                                                        ? "red"
+                                                        : "#27304e",
+                                                }}
+                                              >
+                                                {(attributeValues.attribute_value !=
+                                                  null
+                                                  ? attributeValues.attribute_value
+                                                  : "") +
+                                                  " " +
+                                                  (attributeValues.attribute_value ===
+                                                    "?" ||
+                                                    attributeValues.attribute_value ===
+                                                    "-"
+                                                    ? ""
+                                                    : attributeValues.unit != null
+                                                      ? attributeValues.unit
+                                                      : "")}
+                                              </span>
                                             }
-                                          />
-                                        </div>
-                                      )}
+                                            {/* here we use attributeValues.is_better_than and  attributeValues.is_worse_than  */}
+                                            <ProsConsToolTip
+                                              hover_phrase={
+                                                attributeValues &&
+                                                attributeValues.hover_phase
+                                              }
+                                            />
+                                          </div>
+                                        )}
                                     </div>
                                   </div>
                                 </div>
@@ -1327,47 +1315,46 @@ const TechnicalAccordion = React.memo(
                           height={35}
                           count={
                             displayedAttributesCount[product.name] &&
-                            displayedAttributesCount[product.name][attribute]
+                              displayedAttributesCount[product.name][attribute]
                               ? displayedAttributesCount[product.name][
-                                  attribute
-                                ]
+                              attribute
+                              ]
                               : initialDisplay
                           }
                         />
                       )}
                       {loading == false
                         ? product.attributes[attribute].length >
-                            (displayedAttributesCount[product.name] &&
-                            displayedAttributesCount[product.name][attribute]
-                              ? displayedAttributesCount[product.name][
+                        (displayedAttributesCount[product.name] &&
+                          displayedAttributesCount[product.name][attribute]
+                          ? displayedAttributesCount[product.name][
+                          attribute
+                          ]
+                          : initialDisplay) && (
+                          <span
+                            className="show_more"
+                            onClick={() => {
+                              setloading(true),
+                                handleDisplayedAttributesCount(
+                                  product.name,
                                   attribute
-                                ]
-                              : initialDisplay) && (
-                            <span
-                              className="show_more"
-                              onClick={() => {
-                                setloading(true),
-                                  handleDisplayedAttributesCount(
-                                    product.name,
-                                    attribute
-                                  );
-                                setTimeout(() => {
-                                  setloading(false);
-                                }, 600);
-                              }}
-                            >
-                              {/* {"SHOW MORE "} */}
-                              {productPhaseData && productPhaseData?.show_all}
-                              <i
-                                className={`ri-${
-                                  initialDisplay <
+                                );
+                              setTimeout(() => {
+                                setloading(false);
+                              }, 600);
+                            }}
+                          >
+                            {/* {"SHOW MORE "} */}
+                            {productPhaseData && productPhaseData?.show_all}
+                            <i
+                              className={`ri-${initialDisplay <
                                   product.attributes[attribute].length
-                                    ? "add"
-                                    : "subtract"
+                                  ? "add"
+                                  : "subtract"
                                 }-line`}
-                              ></i>
-                            </span>
-                          )
+                            ></i>
+                          </span>
+                        )
                         : ""}
                     </Accordion.Body>
                   </Accordion.Item>

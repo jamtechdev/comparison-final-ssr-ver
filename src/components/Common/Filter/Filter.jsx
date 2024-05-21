@@ -217,7 +217,7 @@ export default function Filter({
           if (brandValues) {
             brandValues.map((item) => {
               handelFilterActions("brand", "brand", { brand: item }, false);
-              console.log(item);
+              // console.log(item);
               document.getElementById(`${item}`).checked = false;
             });
           }
@@ -605,57 +605,138 @@ export default function Filter({
           <div className="filter-section" key={index}>
             <div className="tech-features">{category.name}</div>
             <Accordion className="filter-accordion">
-              
               {/* {console.log(category?.attributes, "checking attributes")} */}
-              {category?.attributes?.sort((a,b)=>a.position - b.position)?.map((attribute, attrIndex) => {
-                if (
-                  countAttribute <=
-                  (pagination[category.name] || initialNoOfCategories)
-                ) {
-                  let filteredArrayOfAttributeValues =
-                    getFilteredAttributeValues(attribute);
-                  // console.log(filteredArrayOfAttributeValues, "Checking");
-                  // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
-                  // const uniqueValues = Array.from(uniqueValuesSet);
-                  // console.log(uniqueValues,"uniqueValues")
+              {category?.attributes
+                ?.sort((a, b) => a.position - b.position)
+                ?.map((attribute, attrIndex) => {
+                  if (
+                    countAttribute <=
+                    (pagination[category.name] || initialNoOfCategories)
+                  ) {
+                    let filteredArrayOfAttributeValues =
+                      getFilteredAttributeValues(attribute);
+                    // console.log(filteredArrayOfAttributeValues, "Checking");
+                    // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
+                    // const uniqueValues = Array.from(uniqueValuesSet);
+                    // console.log(uniqueValues,"uniqueValues")
 
-                  if (filteredArrayOfAttributeValues?.type == "dropdown") {
-                    countAttribute++;
-                    // check if values contain only yes then Toggle Switch
-                    if (
-                      filteredArrayOfAttributeValues.values.length == 1 &&
-                      filteredArrayOfAttributeValues.values[0] == "yes"
-                    ) {
-                      const value = filteredArrayOfAttributeValues.values[0];
-                      // console.log(value);
-                      const groupName = `${category.name}-${attribute.name}`;
-                      return (
-                        <Accordion.Item eventKey={attrIndex} key={attrIndex}>
-                          <Accordion.Header
-                            as="div"
-                            className="accordion-header"
-                          >
-                            {attribute.name}
-                            <Form.Check
-                              required
-                              className="custom-switch"
-                              type="switch"
-                              id={`${attribute.name}`}
-                              onChange={(e) =>
-                                handelFilterActions(
-                                  "radioSwitch",
-                                  attribute.name,
-                                  value,
-                                  e.target.checked
+                    if (filteredArrayOfAttributeValues?.type == "dropdown") {
+                      countAttribute++;
+                      // check if values contain only yes then Toggle Switch
+                      if (
+                        filteredArrayOfAttributeValues.values.length == 1 &&
+                        filteredArrayOfAttributeValues.values[0] == "yes"
+                      ) {
+                        const value = filteredArrayOfAttributeValues.values[0];
+                        // console.log(value);
+                        const groupName = `${category.name}-${attribute.name}`;
+                        return (
+                          <Accordion.Item eventKey={attrIndex} key={attrIndex}>
+                            <Accordion.Header
+                              as="div"
+                              className="accordion-header"
+                            >
+                              {attribute.name}
+                              <Form.Check
+                                required
+                                className="custom-switch"
+                                type="switch"
+                                id={`${attribute.name}`}
+                                onChange={(e) =>
+                                  handelFilterActions(
+                                    "radioSwitch",
+                                    attribute.name,
+                                    value,
+                                    e.target.checked
+                                  )
+                                }
+                              />
+                            </Accordion.Header>
+                          </Accordion.Item>
+                        );
+                      }
+                      // if not toggle show dropdown
+                      else {
+                        return (
+                          <Accordion.Item eventKey={attrIndex} key={attrIndex}>
+                            <Accordion.Header
+                              as="div"
+                              className="accordion-header"
+                            >
+                              {attribute.name}{" "}
+                              <i className="ri-arrow-down-s-fill"></i>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                              {filteredArrayOfAttributeValues?.values
+                                ?.slice()
+                                .sort((a, b) =>
+                                  a[0]
+                                    ?.toString()
+                                    .localeCompare(b[0]?.toString())
                                 )
-                              }
-                            />
-                          </Accordion.Header>
-                        </Accordion.Item>
-                      );
-                    }
-                    // if not toggle show dropdown
-                    else {
+                                ?.map((value, valIndex) => {
+                                  const groupName = `${category.attribute}-${attribute.values[0]}`;
+                                  const uniqueValues = Array.isArray(value)
+                                    ? [...new Set(value.flat())]
+                                    : [value];
+                                  // console.log(value, "next");
+
+                                  return (
+                                    <div
+                                      key={valIndex}
+                                      className="d-flex flex-row justify-content-between"
+                                    >
+                                      <div className="d-flex flex-row curser-pointer">
+                                        <Form.Check
+                                          required
+                                          label={
+                                            <span style={{ cursor: "pointer" }}>
+                                              {value.toString()}{" "}
+                                              {filteredArrayOfAttributeValues?.unit ==
+                                                "-" ||
+                                              filteredArrayOfAttributeValues?.unit ==
+                                                "?"
+                                                ? ""
+                                                : filteredArrayOfAttributeValues?.unit}
+                                            </span>
+                                          }
+                                          key={valIndex}
+                                          id={`${attribute.name}${value}`}
+                                          onChange={(e) =>
+                                            handelFilterActions(
+                                              "dropdown",
+                                              attribute.name,
+                                              { key: value },
+                                              e.target.checked
+                                            )
+                                          }
+                                        />
+                                      </div>
+                                      <span
+                                        dangerouslySetInnerHTML={{
+                                          __html: `<p>(${
+                                            filteredArrayOfAttributeValues.values &&
+                                            filteredArrayOfAttributeValues.product_count &&
+                                            filteredArrayOfAttributeValues
+                                              .product_count[valIndex] !==
+                                              undefined
+                                              ? filteredArrayOfAttributeValues
+                                                  .product_count[valIndex]
+                                              : "0"
+                                          })</p>`,
+                                        }}
+                                      />
+                                    </div>
+                                  );
+                                })}
+                            </Accordion.Body>
+                          </Accordion.Item>
+                        );
+                      }
+                    } else if (
+                      filteredArrayOfAttributeValues?.type === "range"
+                    ) {
+                      countAttribute++;
                       return (
                         <Accordion.Item eventKey={attrIndex} key={attrIndex}>
                           <Accordion.Header
@@ -666,126 +747,11 @@ export default function Filter({
                             <i className="ri-arrow-down-s-fill"></i>
                           </Accordion.Header>
                           <Accordion.Body>
-                            {filteredArrayOfAttributeValues?.values
-                              ?.slice()
-                              .sort((a, b) =>
-                                a[0]?.toString().localeCompare(b[0]?.toString())
-                              )
-                              ?.map((value, valIndex) => {
-                                const groupName = `${category.attribute}-${attribute.values[0]}`;
-                                const uniqueValues = Array.isArray(value)
-                                  ? [...new Set(value.flat())]
-                                  : [value];
-                                // console.log(value, "next");
-
-                                return (
-                                  <div
-                                    key={valIndex}
-                                    className="d-flex flex-row justify-content-between"
-                                  >
-                                    <div className="d-flex flex-row curser-pointer">
-                                      <Form.Check
-                                        required
-                                        label={
-                                          <span style={{ cursor: "pointer" }}>
-                                            {value.toString()}{" "}
-                                            {filteredArrayOfAttributeValues?.unit ==
-                                              "-" ||
-                                            filteredArrayOfAttributeValues?.unit ==
-                                              "?"
-                                              ? ""
-                                              : filteredArrayOfAttributeValues?.unit}
-                                          </span>
-                                        }
-                                        key={valIndex}
-                                        id={`${attribute.name}${value}`}
-                                        onChange={(e) =>
-                                          handelFilterActions(
-                                            "dropdown",
-                                            attribute.name,
-                                            { key: value },
-                                            e.target.checked
-                                          )
-                                        }
-                                      />
-                                    </div>
-                                    <span
-                                      dangerouslySetInnerHTML={{
-                                        __html: `<p>(${
-                                          filteredArrayOfAttributeValues.values &&
-                                          filteredArrayOfAttributeValues.product_count &&
-                                          filteredArrayOfAttributeValues
-                                            .product_count[valIndex] !==
-                                            undefined
-                                            ? filteredArrayOfAttributeValues
-                                                .product_count[valIndex]
-                                            : "0"
-                                        })</p>`,
-                                      }}
-                                    />
-                                  </div>
-                                );
-                              })}
-                          </Accordion.Body>
-                        </Accordion.Item>
-                      );
-                    }
-                  } else if (filteredArrayOfAttributeValues?.type === "range") {
-                    countAttribute++;
-                    return (
-                      <Accordion.Item eventKey={attrIndex} key={attrIndex}>
-                        <Accordion.Header as="div" className="accordion-header">
-                         {attribute.name}{" "}
-                           <i className="ri-arrow-down-s-fill"></i>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                          {/* {console.log(filteredArrayOfAttributeValues,"neext")} */}
-                          {isMobile ? (
-                            <MultiRangeMobileSlider
-                              // value={filters[filter.id] ? filters[filter.id].min : filter.min}
-                              rangeVal={sliderValues}
-                              classForSlider={attribute.name}
-                              min={
-                                filteredArrayOfAttributeValues.maxValue -
-                                  filteredArrayOfAttributeValues.minValue >=
-                                1
-                                  ? filteredArrayOfAttributeValues.minValue
-                                  : 0
-                              }
-                              max={
-                                filteredArrayOfAttributeValues.maxValue -
-                                  filteredArrayOfAttributeValues.minValue >=
-                                1
-                                  ? filteredArrayOfAttributeValues.maxValue
-                                  : 100
-                              }
-                              unit={filteredArrayOfAttributeValues.unit}
-                              onChange={({ min, max }) => {
-                                handelFilterActions(
-                                  "range",
-                                  attribute.name,
-                                  `${min},${max}`,
-                                  true
-                                );
-                              }}
-                            />
-                          ) : (
-                            <>
-                              {/* {console.log(sliderValues[attribute.name].min)} */}
-                              <MultiRangeSliderAttributes
-                                rangeVal={
-                                  sliderValues[attribute.name]
-                                    ? filteredArrayOfAttributeValues.maxValue -
-                                        filteredArrayOfAttributeValues.minValue >=
-                                      1
-                                      ? filteredArrayOfAttributeValues.minValue
-                                      : 0
-                                    : filteredArrayOfAttributeValues.maxValue -
-                                        filteredArrayOfAttributeValues.minValue >=
-                                      1
-                                    ? filteredArrayOfAttributeValues.maxValue
-                                    : 100
-                                }
+                            {/* {console.log(filteredArrayOfAttributeValues,"neext")} */}
+                            {isMobile ? (
+                              <MultiRangeMobileSlider
+                                // value={filters[filter.id] ? filters[filter.id].min : filter.min}
+                                rangeVal={sliderValues}
                                 classForSlider={attribute.name}
                                 min={
                                   filteredArrayOfAttributeValues.maxValue -
@@ -811,14 +777,56 @@ export default function Filter({
                                   );
                                 }}
                               />
-                            </>
-                          )}
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    );
+                            ) : (
+                              <>
+                                {/* {console.log(sliderValues[attribute.name].min)} */}
+                                <MultiRangeSliderAttributes
+                                  rangeVal={
+                                    sliderValues[attribute.name]
+                                      ? filteredArrayOfAttributeValues.maxValue -
+                                          filteredArrayOfAttributeValues.minValue >=
+                                        1
+                                        ? filteredArrayOfAttributeValues.minValue
+                                        : 0
+                                      : filteredArrayOfAttributeValues.maxValue -
+                                          filteredArrayOfAttributeValues.minValue >=
+                                        1
+                                      ? filteredArrayOfAttributeValues.maxValue
+                                      : 100
+                                  }
+                                  classForSlider={attribute.name}
+                                  min={
+                                    filteredArrayOfAttributeValues.maxValue -
+                                      filteredArrayOfAttributeValues.minValue >=
+                                    1
+                                      ? filteredArrayOfAttributeValues.minValue
+                                      : 0
+                                  }
+                                  max={
+                                    filteredArrayOfAttributeValues.maxValue -
+                                      filteredArrayOfAttributeValues.minValue >=
+                                    1
+                                      ? filteredArrayOfAttributeValues.maxValue
+                                      : 100
+                                  }
+                                  unit={filteredArrayOfAttributeValues.unit}
+                                  onChange={({ min, max }) => {
+                                    handelFilterActions(
+                                      "range",
+                                      attribute.name,
+                                      `${min},${max}`,
+                                      true
+                                    );
+                                  }}
+                                />
+                              </>
+                            )}
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      );
+                    }
                   }
-                }
-              })}
+                })}
             </Accordion>
             {countAttribute >
               (pagination[category.name] || initialNoOfCategories) && (
@@ -826,7 +834,8 @@ export default function Filter({
                 className="show_more"
                 onClick={() => handlePagination(category.name)}
               >
-              {guidePhraseData && guidePhraseData?.show_all}<i className="ri-add-line"></i>
+                {guidePhraseData && guidePhraseData?.show_all}
+                <i className="ri-add-line"></i>
               </span>
             )}
           </div>

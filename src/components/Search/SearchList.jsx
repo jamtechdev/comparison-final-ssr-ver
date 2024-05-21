@@ -66,6 +66,7 @@ const SearchList = ({ search, isFocused }) => {
                 </ul>
               </div>
             ))}
+            
           {!filteredData && search !== "" && (
             <div className="search-data-list">
               <span className="no-result-found">No results found</span>

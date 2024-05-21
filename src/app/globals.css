@@ -2446,3 +2446,20 @@ a.product_link:hover {
 .rating__content small a {
   color: var(--heading-color) !important;
 }
+
+/* Hide all but the first 3 list items */
+ul.pros-list li:nth-child(n + 4) {
+  display: none;
+}
+
+/* Show all list items when the 'show-all' class is added to the ul */
+ul.pros-list.show-all li {
+  display: list-item;
+}
+
+/* Style for the 'Show More' button */
+.show-more-button {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
