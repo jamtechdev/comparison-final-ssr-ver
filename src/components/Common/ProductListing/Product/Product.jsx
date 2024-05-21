@@ -1009,37 +1009,33 @@ export default function Product({
                       {" "}
                       {guidePhraseData && guidePhraseData?.why_to_avoid}
                     </p>
-                    <ul>
+                    <ul
+                      className={`pros-list ${showFullData ? "show-all" : ""}`}
+                    >
                       {product &&
-                        product?.top_cons
-                          ?.slice(
-                            0,
-                            showFullData ? product?.top_cons?.length : 3
-                          )
-
-                          ?.map((data, index) => {
-                            return (
-                              <React.Fragment key={index}>
-                                <li
-                                  className={`${
-                                    data?.hover_phrase !== "" && "tooltip-title"
-                                  }`}
-                                >
-                                  <span className="pros-crons-text">
-                                    {data?.name} {renderValue(data).trim()}
-                                  </span>
-                                  <ProsConsToolTip
-                                    comment={data.comment}
-                                    hover_phrase={data.hover_phrase}
-                                    info_not_verified={data.info_not_verified}
-                                    data={data}
-                                    typeComp={`cons`}
-                                    finalvalue={finalvalue}
-                                  />
-                                </li>
-                              </React.Fragment>
-                            );
-                          })}
+                        product?.top_cons?.map((data, index) => {
+                          return (
+                            <React.Fragment key={index}>
+                              <li
+                                className={`${
+                                  data?.hover_phrase !== "" && "tooltip-title"
+                                }`}
+                              >
+                                <span className="pros-crons-text">
+                                  {data?.name} {renderValue(data).trim()}
+                                </span>
+                                <ProsConsToolTip
+                                  comment={data.comment}
+                                  hover_phrase={data.hover_phrase}
+                                  info_not_verified={data.info_not_verified}
+                                  data={data}
+                                  typeComp={`cons`}
+                                  finalvalue={finalvalue}
+                                />
+                              </li>
+                            </React.Fragment>
+                          );
+                        })}
                       {product?.top_pros?.length > 0 && !showFullData && "..."}
                     </ul>
                   </div>

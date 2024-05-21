@@ -1,6 +1,6 @@
 "use client";
 import { homePage } from "@/_services";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 function CompareSearchList({
   isFocused,
@@ -16,7 +16,6 @@ function CompareSearchList({
     (state) => state.comparePro.guideCompareProduct
   );
   const [filteredProData, setFilteredProData] = useState([]);
-  const [debouncedKeyword, setDebouncedKeyword] = useState(searchedKeyWord);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const handleChange = (data, inputPostion) => {
     if (inputPostion === "productFirst") {
@@ -26,51 +25,39 @@ function CompareSearchList({
   };
   // console.log(searchedKeyWord);
 
-  // Debounce function
-  const debounce = (func, delay) => {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  };
-
-  // Debounced effect
-  const debounceSetKeyword = useCallback(
-    debounce((nextValue) => setDebouncedKeyword(nextValue), 500),
-    []
-  );
-
   useEffect(() => {
-    debounceSetKeyword(searchedKeyWord);
-  }, [searchedKeyWord]);
-
-  useEffect(() => {
-    if (typeof debouncedKeyword !== "string") {
+    if (typeof searchedKeyWord === "object") {
       return;
     }
 
-    if (debouncedKeyword.trim() !== "" && debouncedKeyword !== undefined) {
+    if (searchedKeyWord.trim() != "" && searchedKeyWord != undefined) {
       if (inputPostion === "productFirst") {
+        // console.log("XX",searchedKeyWord)
         homePage
-          .getAllSearchedProducts(debouncedKeyword)
+          .getAllSearchedProducts(searchedKeyWord)
           .then((res) => {
-            const startsWithResults = res.data.data.filter((item) =>
-              item.name.toLowerCase().startsWith(debouncedKeyword.toLowerCase())
-            );
-            const containsResults = res.data.data.filter(
-              (item) => !startsWithResults.includes(item)
-            );
-            setFilteredProData([...startsWithResults, ...containsResults]);
+            // Prioritize results starting with the entered letters
+            if (res.data.data === null) {
+              setSearchPerformed(true);
+              setFilteredProData([]);
+            } else {
+              const startsWithResults = res.data.data.filter((item) =>
+                item.name
+                  .toLowerCase()
+                  .startsWith(debouncedKeyword.toLowerCase())
+              );
+              const containsResults = res.data.data.filter(
+                (item) => !startsWithResults.includes(item)
+              );
+              setFilteredProData([...startsWithResults, ...containsResults]);
+            }
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
           });
       } else {
         homePage
-          .getAllSearchedProductsByCategory(category_id, debouncedKeyword)
+          .getAllSearchedProductsByCategory(category_id, searchedKeyWord)
           .then((res) => {
             if (res.data.data === null) {
               setSearchPerformed(true);
@@ -102,10 +89,8 @@ function CompareSearchList({
             console.error("Error fetching data:", error);
           });
       }
-    } else {
-      setFilteredProData([]);
     }
-  }, [debouncedKeyword]);
+  }, [searchedKeyWord]);
 
   const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -139,8 +124,6 @@ function CompareSearchList({
                 </h2>
               </div>
             ))}
-          {/* {console.log(searchPerformed)} */}
-
           {searchPerformed && (
             <div className="search-data-list">
               <span className="no-result-found">No results found</span>
