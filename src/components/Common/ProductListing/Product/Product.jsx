@@ -46,7 +46,7 @@ export default function Product({
   order,
   searchParams,
   productPagination,
-  productPhaseData
+  productPhaseData,
 }) {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
@@ -721,7 +721,8 @@ export default function Product({
                           <p>
                             <b>
                               {guidePhraseData &&
-                                guidePhraseData?.score_components}:
+                                guidePhraseData?.score_components}
+                              :
                             </b>
                           </p>
                           {product?.users_rating_descriptions
@@ -841,7 +842,8 @@ export default function Product({
                             <p className="mb-2">
                               <b>
                                 {guidePhraseData &&
-                                  guidePhraseData?.when_it_matters}:{" "}
+                                  guidePhraseData?.when_it_matters}
+                                :{" "}
                               </b>
                               {
                                 product?.ratio_qulitiy_points_descriptions
@@ -852,7 +854,8 @@ export default function Product({
                           <p>
                             <b>
                               {guidePhraseData &&
-                                guidePhraseData?.score_components}:
+                                guidePhraseData?.score_components}
+                              :
                             </b>
                           </p>
                           {product?.ratio_qulitiy_points_descriptions
@@ -897,7 +900,7 @@ export default function Product({
                       </div>
                     )}
                   </div>
-              {/* Popularity Ends Here */}
+                  {/* Popularity Ends Here */}
                 </div>
               </div>
               <div className="col">
@@ -968,38 +971,34 @@ export default function Product({
                     <p className="buy-avoid">
                       {guidePhraseData && guidePhraseData?.why_to_buy}
                     </p>
-                    <ul>
+                    <ul
+                      className={`pros-list ${showFullData ? "show-all" : ""}`}
+                    >
                       {product &&
-                        product?.top_pros
-                          ?.slice(
-                            0,
-                            showFullData ? product?.top_pros.length : 3
-                          )
-
-                          ?.map((data, index) => {
-                            // console.log(data, "show data")
-                            return (
-                              <React.Fragment key={index}>
-                                <li
-                                  className={`${
-                                    data?.hover_phrase !== "" && "tooltip-title"
-                                  }`}
-                                >
-                                  {/* {console.log(data?.comment)} */}
-                                  <span className="pros-crons-text">
-                                    {data?.name} {renderValue(data)}
-                                  </span>
-                                  <ProsConsToolTip
-                                    comment={data.comment}
-                                    hover_phrase={data.hover_phrase}
-                                    info_not_verified={data.info_not_verified}
-                                    data={data}
-                                    typeComp={`pros`}
-                                  />
-                                </li>
-                              </React.Fragment>
-                            );
-                          })}
+                        product?.top_pros?.map((data, index) => {
+                          // console.log(data, "show data")
+                          return (
+                            <React.Fragment key={index}>
+                              <li
+                                className={`${
+                                  data?.hover_phrase !== "" && "tooltip-title"
+                                }`}
+                              >
+                                {/* {console.log(data?.comment)} */}
+                                <span className="pros-crons-text">
+                                  {data?.name} {renderValue(data)}
+                                </span>
+                                <ProsConsToolTip
+                                  comment={data.comment}
+                                  hover_phrase={data.hover_phrase}
+                                  info_not_verified={data.info_not_verified}
+                                  data={data}
+                                  typeComp={`pros`}
+                                />
+                              </li>
+                            </React.Fragment>
+                          );
+                        })}
                       {product?.top_pros?.length > 0 && !showFullData && "..."}
                     </ul>
                   </div>
@@ -1061,7 +1060,6 @@ export default function Product({
           <Col md={12} className="p-0">
             <Row className="w-100 m-0 alternatives-border-top">
               <Col md={12}>
-
                 <div className="inline-power-section w-100">
                   {/* <img
                     src="/images/double-arrow.png"
@@ -1086,7 +1084,7 @@ export default function Product({
                                   : "#85B2F1",
                             }}
                           >
-                           {parseFloat(data?.value).toFixed(1)}
+                            {parseFloat(data?.value).toFixed(1)}
                           </span>
                           <div className="tooltip-title">
                             {" "}
@@ -1118,20 +1116,27 @@ export default function Product({
                               {/* Tooltip content */}
                               {
                                 <p className="mb-2">
-                                  <b>{guidePhraseData && guidePhraseData?.what_it_is}  : </b>
+                                  <b>
+                                    {guidePhraseData &&
+                                      guidePhraseData?.what_it_is}{" "}
+                                    :{" "}
+                                  </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
                               }
 
                               <p>
-                                <b>{guidePhraseData && guidePhraseData?.score_components }:</b>
+                                <b>
+                                  {guidePhraseData &&
+                                    guidePhraseData?.score_components}
+                                  :
+                                </b>
                               </p>
                               {data?.hover_phase.attributes?.map(
                                 (hoverPhaseData, index) => {
                                   return (
                                     <div className="scroe_section" key={index}>
                                       <p className="text-end">
-                              
                                         {`${parseFloat(
                                           hoverPhaseData?.percentage
                                         ).toFixed(1)}%`}
@@ -1428,7 +1433,7 @@ export default function Product({
             <Row className="m-0">
               <Accordion className="table-accordion product-listing-inner-content-table-accordion p-0 ">
                 <Accordion.Item eventKey="1" className="inner-accordion">
-                 <Accordion.Header
+                  <Accordion.Header
                     as="div"
                     className="product-listing-inner-content-table-accordion-btn"
                     onClick={toggleHidden}
@@ -1501,7 +1506,7 @@ export default function Product({
                               <Accordion.Header as="div">
                                 <div className="table-accordion-header">
                                   {guidePhraseData && guidePhraseData?.overall}
-                                <Questiontool
+                                  <Questiontool
                                     attributes={
                                       product?.overall_score_descriptions
                                     }
@@ -1543,7 +1548,8 @@ export default function Product({
                                             <p className="mb-2">
                                               <b>
                                                 {guidePhraseData &&
-                                                  guidePhraseData?.what_it_is}:{" "}
+                                                  guidePhraseData?.what_it_is}
+                                                :{" "}
                                               </b>
                                               {
                                                 product
@@ -1570,7 +1576,8 @@ export default function Product({
                                           <p>
                                             <b>
                                               {guidePhraseData &&
-                                                guidePhraseData?.score_components}:
+                                                guidePhraseData?.score_components}
+                                              :
                                             </b>
                                           </p>
                                           {product?.technical_score_descriptions
@@ -1694,7 +1701,8 @@ export default function Product({
                                             <p className="mb-2">
                                               <b>
                                                 {guidePhraseData &&
-                                                  guidePhraseData?.what_it_is}:{" "}
+                                                  guidePhraseData?.what_it_is}
+                                                :{" "}
                                               </b>
                                               {
                                                 product
@@ -1721,7 +1729,8 @@ export default function Product({
                                           <p>
                                             <b>
                                               {guidePhraseData &&
-                                                guidePhraseData?.score_components}:
+                                                guidePhraseData?.score_components}
+                                              :
                                             </b>
                                           </p>
                                           {product?.users_rating_descriptions
@@ -2238,7 +2247,9 @@ export default function Product({
                                                                 attributeValues &&
                                                                 attributeValues
                                                               }
-                                                              guidePhraseData={guidePhraseData}
+                                                              guidePhraseData={
+                                                                guidePhraseData
+                                                              }
                                                             />
                                                           </div>
                                                         </div>
@@ -2528,7 +2539,8 @@ export default function Product({
                                                 }}
                                               >
                                                 {/* {"SHOW MORE "} */}
-                                                {guidePhraseData && guidePhraseData?.show_all}
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.show_all}
                                                 <i
                                                   className={`ri-${
                                                     initialDisplay <
@@ -2659,7 +2671,9 @@ export default function Product({
                                                                 attributeValues &&
                                                                 attributeValues
                                                               }
-                                                              guidePhraseData={guidePhraseData}
+                                                              guidePhraseData={
+                                                                guidePhraseData
+                                                              }
                                                             />
                                                           </div>
                                                         </div>
@@ -2957,7 +2971,8 @@ export default function Product({
                                                 }}
                                               >
                                                 {/* {"SHOW MORE "} */}
-                                                {guidePhraseData && guidePhraseData?.show_all}
+                                                {guidePhraseData &&
+                                                  guidePhraseData?.show_all}
                                                 <i
                                                   className={`ri-${
                                                     initialDisplay <

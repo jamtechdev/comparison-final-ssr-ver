@@ -902,10 +902,9 @@ const ProductCompareTable = React.memo(
                           </p>
                         }
 
-                       
                         {/* {console.log(product)} */}
                       </div>
-                  </div>
+                    </div>
                   </th>
                   {finalProducts.slice(0, defaultNo).map((product, idx) => {
                     const value =
