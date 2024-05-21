@@ -16,7 +16,7 @@ function CompareSearchList({
     (state) => state.comparePro.guideCompareProduct
   );
   const [filteredProData, setFilteredProData] = useState([]);
-  const [searchPerformed, setSearchPerformed] = useState(false);
+
   const handleChange = (data, inputPostion) => {
     if (inputPostion === "productFirst") {
       handelCategoryUpdate(data.category_id);
@@ -38,19 +38,17 @@ function CompareSearchList({
           .then((res) => {
             // Prioritize results starting with the entered letters
             if (res.data.data === null) {
-              setSearchPerformed(true);
-              setFilteredProData([]);
-            } else {
-              const startsWithResults = res.data.data.filter((item) =>
-                item.name
-                  .toLowerCase()
-                  .startsWith(debouncedKeyword.toLowerCase())
-              );
-              const containsResults = res.data.data.filter(
-                (item) => !startsWithResults.includes(item)
-              );
-              setFilteredProData([...startsWithResults, ...containsResults]);
+              setFilteredProData(null);
             }
+            const startsWithResults = res.data.data.filter((item) =>
+              item.name.toLowerCase().startsWith(searchedKeyWord.toLowerCase())
+            );
+
+            // Include other results that contain the entered letters
+            const containsResults = res.data.data.filter(
+              (item) => !startsWithResults.includes(item)
+            );
+            setFilteredProData([...startsWithResults, ...containsResults]);
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
@@ -60,29 +58,47 @@ function CompareSearchList({
           .getAllSearchedProductsByCategory(category_id, searchedKeyWord)
           .then((res) => {
             if (res.data.data === null) {
-              setSearchPerformed(true);
-              setFilteredProData([]);
-            } else {
-              let filteredProducts = res.data.data;
-              if (inputPostion === "productSecond") {
-                filteredProducts = res.data.data.filter(
+              setFilteredProData(null);
+            }
+            if (inputPostion === "productSecond") {
+              if (res.data.data.length > 0) {
+                const filteredProducts = res.data.data.filter(
+                  (item) =>
+                    item.name !== reduxData?.productSecond?.name &&
+                    item.name !== reduxData?.productThird?.name &&
+                    item?.name !== getGuideCompareReduxData[1]?.name &&
+                    item?.name !== getGuideCompareReduxData[2]?.name
+                );
+
+                setFilteredProData(filteredProducts);
+              }
+            }
+
+            if (inputPostion === "productSecond") {
+              if (res.data.data.length > 0) {
+                const filteredProducts = res.data.data.filter(
                   (item) =>
                     item.name !== reduxData?.productFirst?.name &&
                     item.name !== reduxData?.productThird?.name &&
                     item?.name !== getGuideCompareReduxData[0]?.name &&
                     item?.name !== getGuideCompareReduxData[2]?.name
                 );
+
+                setFilteredProData(filteredProducts);
               }
-              if (inputPostion === "productThird") {
-                filteredProducts = res.data.data.filter(
+            }
+            if (inputPostion === "productThird") {
+              if (res.data.data.length > 0) {
+                const filteredProducts = res.data.data.filter(
                   (item) =>
                     item.name !== reduxData?.productFirst?.name &&
                     item.name !== reduxData?.productSecond?.name &&
                     item?.name !== getGuideCompareReduxData[0]?.name &&
                     item?.name !== getGuideCompareReduxData[1]?.name
                 );
+
+                setFilteredProData(filteredProducts);
               }
-              setFilteredProData(filteredProducts);
             }
           })
           .catch((error) => {
@@ -102,7 +118,7 @@ function CompareSearchList({
         <div className="search-dropdown-list">
           {/* compare home page */}
           {filteredProData &&
-            filteredProData.slice(0, 10).map((item, index) => (
+            filteredProData?.map((item, index) => (
               <div className="search-data-list" key={index}>
                 <h2
                   className="search-data-heading compare-search-list"
@@ -124,7 +140,7 @@ function CompareSearchList({
                 </h2>
               </div>
             ))}
-          {searchPerformed && (
+          {filteredProData === null && (
             <div className="search-data-list">
               <span className="no-result-found">No results found</span>
             </div>
