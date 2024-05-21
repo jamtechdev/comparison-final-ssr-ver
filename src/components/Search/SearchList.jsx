@@ -3,6 +3,7 @@ import { homePage } from "../../_services/homepage.service";
 import Link from "next/link";
 const SearchList = ({ search, isFocused }) => {
   const [filteredData, setFilteredData] = useState([]);
+  console.log(filteredData,"xxx")
   useEffect(() => {
     if (search !== "" && search !== undefined) {
       homePage
@@ -66,6 +67,7 @@ const SearchList = ({ search, isFocused }) => {
                 </ul>
               </div>
             ))}
+            
           {!filteredData && search !== "" && (
             <div className="search-data-list">
               <span className="no-result-found">No results found</span>

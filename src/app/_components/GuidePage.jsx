@@ -31,7 +31,7 @@ export default function GuidePage({
   filters,
   searchParams,
 }) {
-  useChart("guide");
+  // useChart("guide");
   // console.log(guideData, "Abhay");
   const router = useRouter();
   const currentParams = new URLSearchParams(searchParams.toString());
