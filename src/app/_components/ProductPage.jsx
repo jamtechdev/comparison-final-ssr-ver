@@ -85,6 +85,7 @@ function ProductPage({
   };
   // rating texr
   const getEvaluation = (score) => {
+    // these pharse will change in future
     if (score >= 9) {
       return "Outstandingx";
     } else if (score >= 8) {
@@ -2000,7 +2001,7 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {/* {console.log(compareByCatID?.data?.length)} */}
+      {/* {console.log(product?.page_phases?.table_compare_title)} */}
       {compareByCatID?.data?.length > 1 && (
         <section>
           <Container>
@@ -2026,6 +2027,9 @@ function ProductPage({
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
+            <h2 className="site-main-heading pt-5">
+                  {product?.page_phases?.table_compare_title}
+                </h2>
               {/* {console.log(compareByCatID?.data?.length)} */}
               {
                 compareByCatID?.data?.length > 1 &&

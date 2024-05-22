@@ -132,10 +132,12 @@ const TechnicalAccordion = React.memo(
                 {formatValue(product?.overall_score)}
               </span>
               <div className="show-btn">
-              {productPhaseData && productPhaseData?.show_all} <i className="ri-arrow-down-s-line"></i>
+                {productPhaseData && productPhaseData?.show_all}{" "}
+                <i className="ri-arrow-down-s-line"></i>
               </div>
               <div className="hide-btn">
-              {productPhaseData && productPhaseData?.hide_all} <i className="ri-arrow-up-s-line"></i>
+                {productPhaseData && productPhaseData?.hide_all}{" "}
+                <i className="ri-arrow-up-s-line"></i>
               </div>
             </Accordion.Header>
             <Accordion.Body>
@@ -172,12 +174,16 @@ const TechnicalAccordion = React.memo(
                         </p>
 
                         <p className="mb-2">
-                          <b>{product && product?.page_phases?.when_it_matters}: </b>
+                          <b>
+                            {product && product?.page_phases?.when_it_matters}:{" "}
+                          </b>
                           {product?.technical_score_descriptions?.when_matters}
                         </p>
 
                         <p>
-                          <b>{product && product?.page_phases?.score_components}:</b>
+                          <b>
+                            {product && product?.page_phases?.score_components}:
+                          </b>
                         </p>
                         {product?.technical_score_descriptions
                           .score_components &&
@@ -284,18 +290,25 @@ const TechnicalAccordion = React.memo(
                       >
                         {product?.users_rating_descriptions.description && (
                           <p className="mb-2">
-                            <b>{product && product?.page_phases?.what_it_is}: </b>
+                            <b>
+                              {product && product?.page_phases?.what_it_is}:{" "}
+                            </b>
                             {product?.users_rating_descriptions?.description}
                           </p>
                         )}
                         {product?.users_rating_descriptions.when_matters && (
                           <p className="mb-2">
-                            <b>{product && product?.page_phases?.when_it_matters}: </b>
+                            <b>
+                              {product && product?.page_phases?.when_it_matters}
+                              :{" "}
+                            </b>
                             {product?.users_rating_descriptions?.when_matters}
                           </p>
                         )}
                         <p>
-                          <b>{product && product?.page_phases?.score_components}:</b>
+                          <b>
+                            {product && product?.page_phases?.score_components}:
+                          </b>
                         </p>
                         {product?.users_rating_descriptions.score_components &&
                           product?.users_rating_descriptions.score_components?.map(
@@ -638,7 +651,6 @@ const TechnicalAccordion = React.memo(
                                 ?.attribute_category
                             }
                             productPhaseData={productPhaseData}
-                            
                           />
                         </div>
                         <span
@@ -661,10 +673,12 @@ const TechnicalAccordion = React.memo(
                           ][0].attribute_evaluation.toFixed(1)}
                         </span>
                         <div className="show-btn" onClick={() => {}}>
-                        {productPhaseData && productPhaseData?.show_all}  <i className="ri-arrow-down-s-line"></i>
+                          {productPhaseData && productPhaseData?.show_all}{" "}
+                          <i className="ri-arrow-down-s-line"></i>
                         </div>
                         <div className="hide-btn" onClick={() => {}}>
-                        {productPhaseData && productPhaseData?.hide_all}  <i className="ri-arrow-up-s-line"></i>
+                          {productPhaseData && productPhaseData?.hide_all}{" "}
+                          <i className="ri-arrow-up-s-line"></i>
                         </div>
                       </Accordion.Header>
                       <Accordion.Body>
@@ -807,10 +821,7 @@ const TechnicalAccordion = React.memo(
                                                     {" "}
                                                     (?){" "}
                                                   </i>
-                                                  <div
-                                                    className="tooltip-display-content"
-                                                  
-                                                  >
+                                                  <div className="tooltip-display-content">
                                                     Information is not verified.
                                                     If you believe this is a
                                                     mistake, please, contact our
@@ -1015,15 +1026,17 @@ const TechnicalAccordion = React.memo(
                               : "#85B2F1",
                         }}
                       >
-                        {product?.attributes[
+                        {formatValue(product?.attributes[
                           attribute
-                        ][0].attribute_evaluation.toFixed(1)}
+                        ][0].attribute_evaluation)}
                       </span>
                       <div className="show-btn">
-                      {productPhaseData && productPhaseData?.show_all}  <i className="ri-arrow-down-s-line"></i>
+                        {productPhaseData && productPhaseData?.show_all}{" "}
+                        <i className="ri-arrow-down-s-line"></i>
                       </div>
                       <div className="hide-btn">
-                      {productPhaseData && productPhaseData?.hide_all}  <i className="ri-arrow-up-s-line"></i>
+                        {productPhaseData && productPhaseData?.hide_all}{" "}
+                        <i className="ri-arrow-up-s-line"></i>
                       </div>
                     </Accordion.Header>
                     <Accordion.Body>
@@ -1199,7 +1212,9 @@ const TechnicalAccordion = React.memo(
                                                     opacity: "100%",
                                                   }}
                                                 >
-                                                 {attributeValues?.info_not_verified_text}
+                                                  {
+                                                    attributeValues?.info_not_verified_text
+                                                  }
                                                 </div>
                                               </div>
                                             )}

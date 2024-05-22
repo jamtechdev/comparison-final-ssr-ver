@@ -53,8 +53,8 @@ function HorizontalChart(props) {
         "viewBox",
         `${
           isMobileScreen
-            ? `219 0 340 ${newHeight + margin.top + margin.bottom}`
-            : `310 0 340 ${newHeight + margin.top + margin.bottom}`
+            ? `320  0 340 ${newHeight + margin.top + margin.bottom}`
+            : `320  0 340 ${newHeight + margin.top + margin.bottom}`
         }`
       )
 

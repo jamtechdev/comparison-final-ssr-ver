@@ -13,6 +13,7 @@ import { deleteCompareProduct } from "@/redux/features/compareProduct/comparePro
 export default function MobileComparisonTool({
   compareProduct,
   handelRemoveProductFormComparison,
+  productPhaseData
 }) {
   const [swiperRef, setSwiperRef] = useState();
 
@@ -236,7 +237,7 @@ export default function MobileComparisonTool({
           </Button>
         </Col>
       </Row>
-      {isOpen && <CompareModal setIsOpen={setIsOpen} />}
+      {isOpen && <CompareModal setIsOpen={setIsOpen} location={""} favSlider={productPhaseData} />}
     </>
   );
 }

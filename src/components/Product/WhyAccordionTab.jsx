@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import {
   Accordion,
@@ -21,35 +22,34 @@ import useScreenSize from "@/_helpers/useScreenSize";
 import { color } from "d3";
 
 const WhyAccordionTab = React.memo(
-  ({ categorySlug, product, pageType, slug, prosConsAccordion }) => {
+  ({ categorySlug, product, pageType, slug }) => {
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
     const [activetab, setActiveTab] = useState("tab-1");
     const { isMobile } = useScreenSize();
-    // console.log(prosConsAccordion);
-    // const [apiData, setApiData] = useState(null);
+    const [apiData, setApiData] = useState(null);
     // console.log(apiData);
     // console.log(categorySlug)
 
-    // useEffect(() => {
-    //   const headers = {
-    //     Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-    //   };
+    useEffect(() => {
+      const headers = {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      };
 
-    //   const secondApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/generate-chart/${categorySlug}?permalink2=${slug}&permalink1=average`;
+      const secondApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/generate-chart/${categorySlug}?permalink2=${slug}&permalink1=average`;
 
-    //   fetch(secondApiUrl, {
-    //     method: "GET",
-    //     headers: headers,
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       // console.log(data);
-    //       setApiData(data?.data); // Assuming data from the second API call is directly usable
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching data from second API:", error);
-    //     });
-    // }, []);
+      fetch(secondApiUrl, {
+        method: "GET",
+        headers: headers,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data);
+          setApiData(data?.data); // Assuming data from the second API call is directly usable
+        })
+        .catch((error) => {
+          console.error("Error fetching data from second API:", error);
+        });
+    }, []);
 
     // console.log(apiData && apiData?.sets);
     const handleTabChange = (key) => {
@@ -136,12 +136,9 @@ const WhyAccordionTab = React.memo(
               {activetab === "tab-1" && (
                 <div className="graph-tab-content" id="productGraph">
                   {/* {console.log(apiData?.sets, "checking")} */}
-                  {prosConsAccordion && (
+                  {apiData && (
                     <div class="shortcode_table_scroll">
-                      <ProductPageGraph
-                        data={prosConsAccordion?.sets}
-                        activeTab={0}
-                      />
+                      <ProductPageGraph data={apiData?.sets} activeTab={0} />
                     </div>
                   )}
                 </div>
@@ -151,12 +148,9 @@ const WhyAccordionTab = React.memo(
             <Tab eventKey="tab-2" title={product?.average_title}>
               {activetab === "tab-2" && (
                 <div className="graph-tab-content" id="productGraph">
-                  {prosConsAccordion && (
+                  {apiData && (
                     <div class="shortcode_table_scroll">
-                      <ProductPageGraph
-                        data={prosConsAccordion?.sets}
-                        activeTab={1}
-                      />
+                      <ProductPageGraph data={apiData?.sets} activeTab={1} />
                     </div>
                   )}
                 </div>
