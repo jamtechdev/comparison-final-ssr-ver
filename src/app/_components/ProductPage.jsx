@@ -654,7 +654,9 @@ function ProductPage({
                           );
                         }
                       )}
-                    {product?.users_rating_descriptions?.reviews_websites && (
+
+                    {product?.users_rating_descriptions?.reviews_websites
+                      ?.length > 0 && (
                       <b>{product?.page_phases?.users_ratings}:</b>
                     )}
 
