@@ -31,7 +31,7 @@ export default function MobileCompareTable({
   const defaultNo = 5;
 
   const [fullTable, setFullTable] = useState(2);
-  console.log(type)
+  console.log(type);
 
   if (typeof window !== "undefined") {
     // Access the window object here
@@ -462,12 +462,16 @@ export default function MobileCompareTable({
             </span>
           ) : (
             <>
-              <span className="swiper-prev" onClick={handlePrevious}>
-                <i className="ri-arrow-left-s-line"></i>
-              </span>
-              <span className="swiper-next" onClick={handleNext}>
-                <i className="ri-arrow-right-s-line"></i>
-              </span>
+              {chunkedData?.length > 1 && (
+                <>
+                  <span className="swiper-prev" onClick={handlePrevious}>
+                    <i className="ri-arrow-left-s-line"></i>
+                  </span>
+                  <span className="swiper-next" onClick={handleNext}>
+                    <i className="ri-arrow-right-s-line"></i>
+                  </span>
+                </>
+              )}
             </>
           )}
         </div>

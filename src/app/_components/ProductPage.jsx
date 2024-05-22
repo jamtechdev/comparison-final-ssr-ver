@@ -654,7 +654,8 @@ function ProductPage({
                           );
                         }
                       )}
-                    <b>User's Ratings:</b>
+                        {product?.users_rating_descriptions?.reviews_websites &&( <b>{product?.page_phases?.users_ratings}:</b>)}
+                   
                     {product?.users_rating_descriptions?.reviews_websites &&
                       product?.users_rating_descriptions?.reviews_websites?.map(
                         (data, index) => {
