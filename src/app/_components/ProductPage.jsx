@@ -2027,9 +2027,9 @@ function ProductPage({
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-            <h2 className="site-main-heading pt-5 m-3">
-                  {product?.page_phases?.table_compare_title}
-                </h2>
+              <h2 className="site-main-heading pt-5 m-3">
+                {product?.page_phases?.table_compare_title}
+              </h2>
               {/* {console.log(compareByCatID?.data?.length)} */}
               {
                 compareByCatID?.data?.length > 1 &&

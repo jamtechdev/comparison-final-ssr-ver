@@ -307,13 +307,21 @@ export default function MobileCompareTable({
                   return (
                     <th key={tIndex}>
                       <p className="device-name">
-                        {/* <span>{productIndex}</span> */}
-                       
+                        <span>
+                          <span>
+                            <span>
+                              {tIndex + currentIndex + 1 + currentIndex}
+                            </span>
+                          </span>
+                        </span>
+
                         <small className="product-name-small">
-                        <a href={`/${data?.category_url}/${data?.permalink}`} style={{display:"block"}}>
-                        {data?.name}
-                        </a>
-                          
+                          <a
+                            href={`/${data?.category_url}/${data?.permalink}`}
+                            style={{ display: "block" }}
+                          >
+                            {data?.name}
+                          </a>
                         </small>
 
                         <img
@@ -431,6 +439,7 @@ export default function MobileCompareTable({
             : "compare-container-wrapper no-before"
         }
       >
+        {/* {console.log(chunkedData?.length, "chunkedData")} */}
         <div
           className={
             winPos == true
@@ -442,11 +451,11 @@ export default function MobileCompareTable({
               : "slider-controls table__arrow"
           }
         >
-          {currentIndex === 0 ? (
+          {currentIndex === 0 && chunkedData?.length > 1 ? (
             <span className="swiper-next" onClick={handleNext}>
               <i className="ri-arrow-right-s-line"></i>
             </span>
-          ) : currentIndex === chunkedData.length - 1 ? (
+          ) : currentIndex === chunkedData.length - 1 && chunkedData?.length > 1 ? (
             <span className="swiper-prev" onClick={handlePrevious}>
               <i className="ri-arrow-left-s-line"></i>
             </span>
@@ -498,6 +507,9 @@ export default function MobileCompareTable({
                         return (
                           <th key={dIndex}>
                             <p className="device-name">
+                              <span>
+                                {dIndex + currentIndex + 1 + currentIndex}
+                              </span>
                               <a
                                 href={`/${data?.category_url}/${data?.permalink}`}
                               >

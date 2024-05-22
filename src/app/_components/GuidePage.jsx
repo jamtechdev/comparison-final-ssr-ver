@@ -988,10 +988,13 @@ export default function GuidePage({
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-            <h2 className="site-main-heading pt-5">
               {/* {console.log(guide?.page_phrases)} */}
-                  {guide?.page_phrases?.table_compare_title}
-                </h2>
+              <h2 className="site-main-heading pt-5 m-2">
+                {guideData[0]?.data?.big_table_subtitle
+                  ? guideData[0]?.data?.big_table_subtitle
+                  : "No title found"}
+              </h2>
+
               {/* {console.log(compareByCatID?.data?.length)} */}
               {
                 isMobile ? (
@@ -1009,7 +1012,7 @@ export default function GuidePage({
           </Row>
         </Container>
       </section>
-     
+
       <section>
         <Container>
           <Row>
