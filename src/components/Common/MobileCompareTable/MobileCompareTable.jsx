@@ -19,6 +19,7 @@ export default function MobileCompareTable({
   categoryAttributes,
   slug,
   productPhaseData,
+  type,
 }) {
   const [swiperRef, setSwiperRef] = useState();
   const [winPos, setWinPos] = useState(false);
@@ -30,6 +31,7 @@ export default function MobileCompareTable({
   const defaultNo = 5;
 
   const [fullTable, setFullTable] = useState(2);
+  console.log(type)
 
   if (typeof window !== "undefined") {
     // Access the window object here
@@ -307,13 +309,11 @@ export default function MobileCompareTable({
                   return (
                     <th key={tIndex}>
                       <p className="device-name">
-                        <span>
+                        {type === "guide" && (
                           <span>
-                            <span>
-                              {tIndex + currentIndex + 1 + currentIndex}
-                            </span>
+                            {tIndex + currentIndex + 1 + currentIndex}
                           </span>
-                        </span>
+                        )}
 
                         <small className="product-name-small">
                           <a
@@ -455,7 +455,8 @@ export default function MobileCompareTable({
             <span className="swiper-next" onClick={handleNext}>
               <i className="ri-arrow-right-s-line"></i>
             </span>
-          ) : currentIndex === chunkedData.length - 1 && chunkedData?.length > 1 ? (
+          ) : currentIndex === chunkedData.length - 1 &&
+            chunkedData?.length > 1 ? (
             <span className="swiper-prev" onClick={handlePrevious}>
               <i className="ri-arrow-left-s-line"></i>
             </span>
@@ -507,9 +508,12 @@ export default function MobileCompareTable({
                         return (
                           <th key={dIndex}>
                             <p className="device-name">
-                              <span>
-                                {dIndex + currentIndex + 1 + currentIndex}
-                              </span>
+                              {type === "guide" && (
+                                <span>
+                                  {dIndex + currentIndex + 1 + currentIndex}
+                                </span>
+                              )}
+
                               <a
                                 href={`/${data?.category_url}/${data?.permalink}`}
                               >

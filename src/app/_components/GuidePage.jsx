@@ -1005,6 +1005,7 @@ export default function GuidePage({
                       attributesForTable && attributesForTable
                     }
                     slug={slug}
+                    type={"guide"}
                   />
                 ) : null // or any other fallback content for non-mobile
               }
