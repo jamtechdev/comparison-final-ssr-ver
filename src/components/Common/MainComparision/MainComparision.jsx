@@ -161,7 +161,7 @@ export default function MainComparision(products) {
         <>
           {" "}
           <span className="swiper-prev">
-            <i className="ri-arrow-left-s-line"></i>
+            <i className="ri-arrow-left-s-line">hwllo</i>
           </span>
           <span className="swiper-next">
             <i className="ri-arrow-right-s-line"></i>

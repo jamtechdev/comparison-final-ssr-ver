@@ -594,7 +594,7 @@ export default function ComparisonTable({
                       ?.when_matters && (
                       <p className="mb-2">
                         <b>
-                          {" "}
+                          {" "}.
                           {comparisonPhaseData &&
                             comparisonPhaseData?.when_it_matters}
                           :{" "}

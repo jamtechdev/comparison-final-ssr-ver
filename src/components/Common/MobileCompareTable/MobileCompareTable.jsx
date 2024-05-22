@@ -90,7 +90,7 @@ export default function MobileCompareTable({
 
   const handleNext = useCallback(() => {
     setTabData(true);
-    if (currentIndex < chunkedData.length - 2) {
+    if (currentIndex < chunkedData.length - 3) {
       setCurrentIndex(currentIndex + 1);
     }
     swiperRef?.slideNext();
@@ -160,7 +160,7 @@ export default function MobileCompareTable({
     // Adding logic for String case
     if (numericValues.length === 0) {
       const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
-
+  
       if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
         const targetString =
           stringArray[0] === "yes"
@@ -268,7 +268,7 @@ export default function MobileCompareTable({
     removeLastObjectFromCategory,
     2
   );
-
+  const itemsPerPage = 2; 
   // console.log(categoryChunkedData, "neetxy");
   // let storeSwiperIndex = 0; // Declare a variable outside the map function
   // console.log(storeSwiperIndex,"neetxy")
@@ -290,27 +290,31 @@ export default function MobileCompareTable({
       >
         <thead>
           <tr>
-            {chunkedData
-              ?.slice(currentIndex, currentIndex + 1)
-              .map((product, index) => {
+            {chunkedData?.slice(currentIndex, currentIndex + 1).map((product, index) => {
                 // console.log(index, "sticky index");
-                // const productIndex=index+1
-                // console.log(productIndex,"checking product index for images")
+                //console.log(currentIndex,"checking currentindex")
+                // const productIndex = currentIndex + index + 1;
+                 //console.log(productIndex,"checking product index for images")
                 // return product?.slice( currentIndex).map((data,tIndex) => {
                 return product?.map((data, tIndex) => {
                   // console.log(currentIndex, "check currentIndex");
                   // console.log(product, "check products");
+                  const finalindex = currentIndex * itemsPerPage + index * product.length + tIndex + 1; 
+                  //  console.log(index,"checking index")
                   return (
                     <th key={tIndex}>
                       <p className="device-name">
-                        {/* <span>{productIndex}</span> */}
-                        <a href={`/${data?.category_url}/${data?.permalink}`}>
+                          <span>{finalindex}</span>
+                        {/* <a href={`/${data?.category_url}/${data?.permalink}`}>
                           {" "}
                         </a>
                         <small className="product-name-small">
                           {data?.name}
-                        </small>
-
+                        </small> */}
+                        <a
+                href={`/${data?.category_url}/${data?.permalink}`} className="product-name-small" >
+                {data?.name}
+              </a>
                         <img
                           className="compare_image"
                           src={
@@ -426,25 +430,34 @@ export default function MobileCompareTable({
             : "compare-container-wrapper no-before"
         }
       >
-        <div
-          className={
-            winPos == true
-              ? currentIndex === 0
-                ? "slider-controls table__arrow arrow__fixed justify-content-end"
-                : "slider-controls table__arrow arrow__fixed justify-content-start"
-              : "slider-controls table__arrow"
-          }
-        >
-          {currentIndex === 0 ? (
-            <span className="swiper-next" onClick={handleNext}>
-              <i className="ri-arrow-right-s-line"></i>
-            </span>
-          ) : (
-            <span className="swiper-prev" onClick={handlePrevious}>
-              <i className="ri-arrow-left-s-line"></i>
-            </span>
-          )}
-        </div>
+     <div
+  className={
+    winPos === true
+      ? currentIndex === 0
+        ? "slider-controls table__arrow arrow__fixed justify-content-end"
+        : "slider-controls table__arrow arrow__fixed justify-content-start"
+      : "slider-controls table__arrow"
+  }
+>
+  {currentIndex === 0 ? (
+    <span className="swiper-next" onClick={handleNext}>
+      <i className="ri-arrow-right-s-line"></i>
+    </span>
+  ) : currentIndex === chunkedData.length-1 ? (
+    <span className="swiper-prev" onClick={handlePrevious}>
+      <i className="ri-arrow-left-s-line"></i>
+    </span>
+  ) : (
+    <>
+      <span className="swiper-prev" onClick={handlePrevious}>
+        <i className="ri-arrow-left-s-line"></i>
+      </span>
+      <span className="swiper-next " onClick={handleNext} style={{marginLeft:"72vw"}} > 
+        <i className="ri-arrow-right-s-line"></i>
+      </span>
+    </>
+  )}
+</div>
         <Swiper
           onSlideChange={handleSlideChange}
           id="mobile-compare-table"
@@ -479,10 +492,12 @@ export default function MobileCompareTable({
                   <thead data-sticky-header-offset-y ref={ref}>
                     <tr>
                       {slider_data?.map((data, dIndex) => {
+                        const finindex = swiperIndex * itemsPerPage + dIndex + 1;
                         return (
                           <th key={dIndex}>
                             <p className="device-name">
-                              <a
+                              <span>{finindex}</span>
+                            <a
                                 href={`/${data?.category_url}/${data?.permalink}`}
                               >
                                 {" "}
