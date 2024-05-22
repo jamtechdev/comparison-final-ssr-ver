@@ -654,8 +654,10 @@ function ProductPage({
                           );
                         }
                       )}
-                        {product?.users_rating_descriptions?.reviews_websites &&( <b>{product?.page_phases?.users_ratings}:</b>)}
-                   
+                    {product?.users_rating_descriptions?.reviews_websites && (
+                      <b>{product?.page_phases?.users_ratings}:</b>
+                    )}
+
                     {product?.users_rating_descriptions?.reviews_websites &&
                       product?.users_rating_descriptions?.reviews_websites?.map(
                         (data, index) => {
@@ -2025,12 +2027,17 @@ function ProductPage({
       )}
 
       <section className="mobile-table-section">
-        <Container>
+        {isMobile ? (
+          <Container>
+            <h2 className="site-main-heading pt-5 m-3">
+              {product?.page_phases?.table_compare_title}
+            </h2>
+          </Container>
+        ) : null}
+
+        <Container className="p-0">
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              <h2 className="site-main-heading pt-5 m-3">
-                {product?.page_phases?.table_compare_title}
-              </h2>
               {/* {console.log(compareByCatID?.data?.length)} */}
               {
                 compareByCatID?.data?.length > 1 &&
