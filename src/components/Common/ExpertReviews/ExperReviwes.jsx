@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import formatValue from "@/_helpers/formatValue";
 
-function ExperReviwes({ expertReview }) {
+function ExperReviwes({ expertReview,page_phase }) {
   const [expandedId, setExpandedId] = useState(null);
 
   const toggleExpand = (id, event) => {
@@ -207,7 +207,7 @@ function ExperReviwes({ expertReview }) {
                               cursor: "pointer",
                             }}
                           >
-                            {isTranslateExpanded ? "Read less" : "Read more"}
+                            {isTranslateExpanded ?`${page_phase?.read_less}` : `${page_phase?.read_more}`}
                           </span>
                         )}
                       </p>
@@ -241,7 +241,7 @@ function ExperReviwes({ expertReview }) {
                       onClick={toggleTranslate}
                       style={{ cursor: "pointer" }}
                     >
-                      {isTranslating ? "Show original" : "Translate"}
+                      {isTranslating ? `${page_phase?.show_original}` : `${page_phase?.translate}`}
                     </span>
                   )}
 

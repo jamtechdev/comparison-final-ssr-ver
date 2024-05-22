@@ -7,9 +7,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
 
-export default function HomeCompareSlider(products) {
+export default function HomeCompareSlider({products,page_phase}) {
   const router = useRouter();
-
+console.log(page_phase)
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -20,7 +20,7 @@ export default function HomeCompareSlider(products) {
     }
   };
 
-  const filteredComparisons = products?.products?.filter(
+  const filteredComparisons = products?.filter(
     (comparison) => comparison.verdict_text !== null
   );
   // console.log(filteredComparisons,"checking filtered data")
@@ -80,7 +80,7 @@ export default function HomeCompareSlider(products) {
                       
                       {item?.product_first_overall_counted_score >
                         item?.product_second_overall_counted_score && (
-                        <div className="winner__badge">Winnerxx</div>
+                        <div className="winner__badge">{page_phase?.winner}</div>
                       )}
                       <div className="footer_content">
                         <span>{item?.product_first}</span>
@@ -145,7 +145,7 @@ export default function HomeCompareSlider(products) {
 
                       <span style={{ cursor: "pointer" }}>
                         <a href={`/${item?.category_url}/${item?.permalink}`}>
-                          See full comparsion
+                         {page_phase?.comparison_see_full}
                         </a>
                       </span>
                     </div>

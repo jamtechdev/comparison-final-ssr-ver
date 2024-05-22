@@ -58,7 +58,8 @@ export default function MainPage({ bannerCounts, favSlider }) {
                 <Button className="search-btn">
                   {favSlider && favSlider?.search_button}
                 </Button>
-                <SearchList search={search} isFocused={isFocused} />
+                {/* {console.log(favSlider?.no_data_found, "favSlider")} */}
+                <SearchList search={search} isFocused={isFocused} noDataFoundPhase={favSlider?.no_results_found} />
               </Form>
             </Col>
           </Row>
@@ -320,12 +321,13 @@ export default function MainPage({ bannerCounts, favSlider }) {
                 <Row>
                   <Col md={12}>
                     <h3 className="site-main-heading">
-                      COMPARISONS
-                      {/* {favSlider && favSlider?.review_text} */}
+                      {favSlider && favSlider?.comparison_heading_homepage}
+                      {/* {favSlider && favSlider?.comparison_heading_homepage} */}
                     </h3>
                     {/* {console.log(data?.comparison)} */}
+                   {/* { console.log(favSlider?.see)} */}
 
-                    <HomeCompareSlider products={data?.comparison} />
+                    <HomeCompareSlider products={data?.comparison} page_phase={favSlider} />
                   </Col>
                 </Row>
               </Container>
