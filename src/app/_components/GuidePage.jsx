@@ -984,11 +984,15 @@ export default function GuidePage({
           </Row>
         </Container>
       </section>
-      <section>
+      <section className="mobile-table-section">
         <Container>
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              {console.log(productForTable)}
+            <h2 className="site-main-heading pt-5">
+              {/* {console.log(guide?.page_phrases)} */}
+                  {guide?.page_phrases?.table_compare_title}
+                </h2>
+              {/* {console.log(compareByCatID?.data?.length)} */}
               {
                 isMobile ? (
                   <MobileCompareTable
@@ -1001,12 +1005,11 @@ export default function GuidePage({
                   />
                 ) : null // or any other fallback content for non-mobile
               }
-
-              {/* <MobileCompareTable /> */}
             </Col>
           </Row>
         </Container>
       </section>
+     
       <section>
         <Container>
           <Row>

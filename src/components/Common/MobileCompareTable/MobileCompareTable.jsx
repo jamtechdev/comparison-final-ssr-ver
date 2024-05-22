@@ -257,8 +257,6 @@ export default function MobileCompareTable({
     }
     return chunks;
   }
-
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const chunkedData = chunkArray(finalProducts, 2);
 
   // make categoryAttribute chunk Array
@@ -310,11 +308,12 @@ export default function MobileCompareTable({
                     <th key={tIndex}>
                       <p className="device-name">
                         {/* <span>{productIndex}</span> */}
-                        <a href={`/${data?.category_url}/${data?.permalink}`}>
-                          {" "}
-                        </a>
+                       
                         <small className="product-name-small">
-                          {data?.name}
+                        <a href={`/${data?.category_url}/${data?.permalink}`} style={{display:"block"}}>
+                        {data?.name}
+                        </a>
+                          
                         </small>
 
                         <img
@@ -437,7 +436,9 @@ export default function MobileCompareTable({
             winPos == true
               ? currentIndex === 0
                 ? "slider-controls table__arrow arrow__fixed justify-content-end"
-                : "slider-controls table__arrow arrow__fixed justify-content-start"
+                : currentIndex === chunkedData.length - 1
+                ? "slider-controls table__arrow arrow__fixed justify-content-start"
+                : "slider-controls table__arrow arrow__fixed justify-content-between"
               : "slider-controls table__arrow"
           }
         >
@@ -445,10 +446,19 @@ export default function MobileCompareTable({
             <span className="swiper-next" onClick={handleNext}>
               <i className="ri-arrow-right-s-line"></i>
             </span>
-          ) : (
+          ) : currentIndex === chunkedData.length - 1 ? (
             <span className="swiper-prev" onClick={handlePrevious}>
               <i className="ri-arrow-left-s-line"></i>
             </span>
+          ) : (
+            <>
+              <span className="swiper-prev" onClick={handlePrevious}>
+                <i className="ri-arrow-left-s-line"></i>
+              </span>
+              <span className="swiper-next" onClick={handleNext}>
+                <i className="ri-arrow-right-s-line"></i>
+              </span>
+            </>
           )}
         </div>
         <Swiper
