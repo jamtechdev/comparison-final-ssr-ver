@@ -23,7 +23,7 @@ export default function CompareForm({
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
 
-   console.log(favSlider,"checking favslider");
+  //  console.log(favSlider,"checking favslider");
   const ProductPage = {
     category_id: product_name?.category_id,
     permalink: product_name?.permalink,

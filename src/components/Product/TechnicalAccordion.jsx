@@ -381,10 +381,10 @@ const TechnicalAccordion = React.memo(
                     <div className="spec-col">
                       <div className="query text-ellipse ranking-tooltip-title">
                         Expert reviews
-                        <QuestionIcon
+                        {/* <QuestionIcon
                           attributes={product?.expert_reviews_descriptions}
                           productPhaseData={productPhaseData}
-                        />
+                        /> */}
                       </div>
                     </div>
                     <div className="spec-col">
@@ -515,10 +515,10 @@ const TechnicalAccordion = React.memo(
                   <div className="spec-col">
                     <div className="query text-ellipse">
                       {productPhaseData && productPhaseData?.popularity}
-                      <QuestionIcon
+                      {/* <QuestionIcon
                         attributes={product?.popularity_descriptions}
                         productPhaseData={productPhaseData}
-                      />
+                      /> */}
                     </div>
                   </div>
                   <div className="spec-col">
@@ -570,10 +570,10 @@ const TechnicalAccordion = React.memo(
                     >
                       {productPhaseData &&
                         productPhaseData?.ratio_quality_price_points}
-                      <QuestionIcon
+                      {/* <QuestionIcon
                         attributes={product?.ratio_qulitiy_points_descriptions}
                         productPhaseData={productPhaseData}
-                      />
+                      /> */}
                     </div>
                   </div>
                   <div className="spec-col ">
@@ -699,12 +699,12 @@ const TechnicalAccordion = React.memo(
                                     <div className="spec-col">
                                       <div className="query">
                                         {attributeValues?.attribute}
-                                        <QuestionIcon
+                                        {/* <QuestionIcon
                                           attributes={
                                             attributeValues && attributeValues
                                           }
                                           productPhaseData={productPhaseData}
-                                        />
+                                        /> */}
                                       </div>
                                     </div>
                                     <div className="spec-col">
@@ -1056,12 +1056,12 @@ const TechnicalAccordion = React.memo(
                                     <div className="query">
                                       {attributeValues?.attribute}
 
-                                      <QuestionIcon
+                                      {/* <QuestionIcon
                                         attributes={
                                           attributeValues && attributeValues
                                         }
                                         productPhaseData={productPhaseData}
-                                      />
+                                      /> */}
                                     </div>
                                   </div>
                                   <div className="spec-col ">
