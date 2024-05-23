@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 const initialState = {
   compareProduct: [],
   guideCompareProduct: [],
+  text_part_main: "",
 };
 export const compareProSlice = createSlice({
   name: "compareProduct",
@@ -73,6 +74,9 @@ export const compareProSlice = createSlice({
       state.compareProduct = [];
       // ... reset other state properties if needed
     },
+    storeTextPartShortCode: (state, action) => {
+      state.text_part_main = action.payload;
+    },
   },
 });
 
@@ -83,6 +87,7 @@ export const {
   resetGuideCompareProduct,
   updateCompareProduct,
   deleteCompareProduct,
+  storeTextPartShortCode
 } = compareProSlice.actions;
 
 export default compareProSlice.reducer;

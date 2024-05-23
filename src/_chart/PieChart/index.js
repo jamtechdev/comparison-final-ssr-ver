@@ -105,7 +105,11 @@ function PieChart(props) {
       .style("stroke-width", 2)
       .on("mouseover", (e, data) => {
         d3.select(this).transition().duration(300).attr("e", arcHover);
-        tooltip.transition().duration(300).style("opacity", 1);
+        tooltip
+          .transition()
+          .duration(300)
+          .style("opacity", 1)
+          .style("display", "flex");
         tooltip
           .html(
             `<div style="height:20px; width:20px;margin-right:6px; border-radius:100%;background-color:${customColorScale(
@@ -121,7 +125,11 @@ function PieChart(props) {
       })
       .on("mouseout", (d, data) => {
         d3.select(this).transition().duration(300).attr("d", arcGeneral);
-        tooltip.transition().duration(300).style("opacity", 0);
+        tooltip
+          .transition()
+          .duration(300)
+          .style("opacity", 0)
+          .style("display", "none");
       });
 
     const legendMainContainer = d3.select(`#${containerId}`);

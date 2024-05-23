@@ -31,7 +31,7 @@ export default function GuidePage({
   filters,
   searchParams,
 }) {
-  useChart("guide");
+  // useChart("guide");
   // console.log(guideData, "Abhay");
   const router = useRouter();
   const currentParams = new URLSearchParams(searchParams.toString());
@@ -307,7 +307,7 @@ export default function GuidePage({
     const currentParams = new URLSearchParams(searchParams.toString());
     // console.log(order.value);
 
-    // console.log(splitData[0] === "available");
+    // console.log(splitData[0]);
     if (splitData[0] === "available") {
       const sortedData = data.sort((a, b) => b.overall_score - a.overall_score);
       return [...sortedData];
@@ -969,7 +969,7 @@ export default function GuidePage({
                   ? guideData[0]?.data?.big_table_subtitle
                   : "No title found"}
               </h2>
-              {/* {console.log(productForTable?.products?.length)} */}
+
               {guide && productForTable?.length > 1 && (
                 <CompareTable
                   guidePhraseData={guide?.page_phrases}

@@ -10,7 +10,7 @@ import { ChartName } from "../_chart/data/enums/ChartName.ts";
 
 export const searchForPatternAndReplace = (data) => {
   const shortCodePatternsRE =
-    /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)[^\]]*\]/g;
+    /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)-\d+\]/g;
 
   const updatedData = data?.replace(shortCodePatternsRE, (match) => {
     return `<h6 class="addClassData">${match}</h6>`;
@@ -309,12 +309,9 @@ const useChart = () => {
   }
 
   function getTheChartTypeFromShortCodePattern(shortCodestr) {
-    const semicolonIndex = shortCodestr.indexOf(";");
-    let chartType = "";
-    if (semicolonIndex !== -1) {
-      chartType = shortCodestr.substring(1, semicolonIndex);
-    }
-    return chartType;
+    const typePattern = /\[(\w+-chart)-\d+\]/;
+    const match = shortCodestr.match(typePattern);
+    return match ? match[1] : null;
   }
 
   function getChartTitle(shortCodestr) {
