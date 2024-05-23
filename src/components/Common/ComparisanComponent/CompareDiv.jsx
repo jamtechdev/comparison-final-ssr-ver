@@ -235,6 +235,7 @@ function CompareDiv({
 
   let contentWithIds;
   if (bestAlternative?.text_part) {
+    // console.log(bestAlternative,"check alternative")
     contentWithIds = addIdsToHeadings(bestAlternative.text_part);
   } else {
     // Handle the case where bestAlternative.text_part is undefined
@@ -336,15 +337,17 @@ function CompareDiv({
               />
             </Col>
           </Row>
-          {/* {console.log(bestAlternative?.verdict_text)} */}
+          {/* {console.log(bestAlternative,"hello mahi")} */}
           {bestAlternative?.verdict_text &&
             bestAlternative?.verdict_text &&
             bestAlternative?.verdict_text !== "" &&
-            bestAlternative?.verdict_text !== null && (
+            bestAlternative?.verdict_text !== null && 
+            (
               <Row>
                 <div className="box__content__section">
                   <h2 class="site-main-heading">
-                    {bestAlternative?.page_phases?.verdict_text_heading}
+            {bestAlternative?.page_phases?.verdict_text_heading}
+              
                   </h2>
                   <div
                     className="box__content__section__textarea"
@@ -566,14 +569,16 @@ function CompareDiv({
         </Container>
       </section>
       <section className="mobile-table-section">
-        {isMobile ? (
+        {/* {isMobile ? (
           <Container>
+            <h2 className="site-main-heading pt-5 m-3">
+            {bestAlternative &&
             {/* <h2 className="site-main-heading pt-5 m-3">
               {bestAlternative &&
                 bestAlternative?.page_phases?.table_compare_title}
-            </h2> */}
+            </h2>
           </Container>
-        ) : null}
+        ) : null} */}
         <Container className="p-0">
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">

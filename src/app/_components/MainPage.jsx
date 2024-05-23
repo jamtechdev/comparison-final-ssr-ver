@@ -120,7 +120,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
               <CompareForm
                 favSlider={favSlider && favSlider}
                 location="ON_MAIN_PAGE"
-                handelCloseCompareModel={() => {}}
+                handelCloseCompareModel={() => { }}
               />
             </Col>
           </Row>
@@ -259,9 +259,8 @@ export default function MainPage({ bannerCounts, favSlider }) {
                     >
                       <Tab
                         eventKey="tab-1"
-                        title={`${
-                          favSlider && favSlider?.most_popular_guides_text
-                        }`}
+                        title={`${favSlider && favSlider?.most_popular_guides_text
+                          }`}
                       >
                         <ProductSlider favSlider={data?.popular_guides} />
                       </Tab>
@@ -289,9 +288,8 @@ export default function MainPage({ bannerCounts, favSlider }) {
                     >
                       <Tab
                         eventKey="tab-1"
-                        title={`${
-                          favSlider && favSlider?.most_popular_review_text
-                        }`}
+                        title={`${favSlider && favSlider?.most_popular_review_text
+                          }`}
                       >
                         {data?.popular_reviews.length > 0 ? (
                           <ReviewSlider favSlider={data?.popular_reviews} />

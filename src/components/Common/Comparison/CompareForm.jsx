@@ -8,7 +8,7 @@ import {
   addCompareProduct,
   deleteCompareProduct,
 } from "@/redux/features/compareProduct/compareProSlice";
-import CompareSearchList from "@/components/Search/CompareSearchList";
+import CompareSearchList from "@/components/Search/CompareSearchList";          
 import { useSelector, useDispatch } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
 export default function CompareForm({
@@ -23,7 +23,7 @@ export default function CompareForm({
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
 
-  // console.log(favSlider);
+   console.log(favSlider,"checking favslider");
   const ProductPage = {
     category_id: product_name?.category_id,
     permalink: product_name?.permalink,
@@ -116,7 +116,7 @@ export default function CompareForm({
   };
   const handelComparison = () => {
     const isValidObject = (fieldValue) =>
-      typeof fieldValue === "object" && Object?.keys(fieldValue).length > 0;
+      typeof fieldValue === "object" && Object.keys(fieldValue).length > 0;
     const isProductFieldsValid =
       isValidObject(formFields.productFirst) &&
       isValidObject(formFields.productSecond);
@@ -209,7 +209,8 @@ export default function CompareForm({
             <div className="position-relative">
               <Form.Control
                 type="text"
-                placeholder={`${favSlider && favSlider?.product_first_text}`}
+                 placeholder={`${favSlider && favSlider?.product_first_text}`}
+                // placeholder="mahima"
                 onBlur={handleBlur}
                 value={
                   typeof formFields.productFirst === "string"
@@ -218,7 +219,7 @@ export default function CompareForm({
                 }
                 onFocus={() => setFocusedProductFirst(true)}
                 onChange={(e) =>
-                  handleFieldChange("productFirst", e.target.value)
+                  handleFieldChange("productFirst", e.target.value.trim())
                 }
               />
 
@@ -262,7 +263,7 @@ export default function CompareForm({
                 }
                 onFocus={() => setFocusedProductSecond(true)}
                 onChange={(e) =>
-                  handleFieldChange("productSecond", e.target.value)
+                  handleFieldChange("productSecond", e.target.value.trim())
                 }
                 disabled={formFields.productFirst ? false : true}
               />
@@ -303,7 +304,7 @@ export default function CompareForm({
                     : formFields.productThird?.name || ""
                 }
                 onChange={(e) =>
-                  handleFieldChange("productThird", e.target.value)
+                  handleFieldChange("productThird", e.target.value.trim())
                 }
                 disabled={formFields.productSecond ? false : true}
               />

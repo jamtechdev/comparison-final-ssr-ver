@@ -47,7 +47,7 @@ function GuidePageTextArea({ guide }) {
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
-          console.log(innerHTML);
+          // console.log(innerHTML);
 
           element.innerHTML = innerHTML;
           dispatch(storeTextPartShortCode({ content: innerHTML }));

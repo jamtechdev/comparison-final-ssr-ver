@@ -577,7 +577,7 @@ comparePhaseData={comparePhaseData}
                                   handleAccordionChange("total", "pros")
                                 }
                               >
-                                TOTAL
+                              {comparePhaseData && comparePhaseData?.total}
                               </Nav.Link>
                             </Nav.Item>
                             {apiData?.general?.pros?.length > 0 && (
@@ -587,7 +587,7 @@ comparePhaseData={comparePhaseData}
                                   onClick={() =>
                                     handleAccordionChange("general", "pros")
                                   }
-                                >{comparePhaseData && comparePhaseData?.page_phases?.general}
+                                >{comparePhaseData && comparePhaseData?.general}
                                 </Nav.Link>
                               </Nav.Item>
                             )}
@@ -923,7 +923,7 @@ comparePhaseData={comparePhaseData}
                                   handleAccordionChange("total", "cons")
                                 }
                               >
-                                TOTAL
+                               {comparePhaseData && comparePhaseData?.total}
                               </Nav.Link>
                             </Nav.Item>
                             {apiData?.general?.cons?.length > 0 && (

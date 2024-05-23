@@ -1118,7 +1118,7 @@ export default function Product({
                                 <p className="mb-2">
                                   <b>
                                     {guidePhraseData &&
-                                      guidePhraseData?.what_it_is}{" "}
+                                      guidePhraseData?.what_it_is}
                                     :{" "}
                                   </b>
                                   {data?.hover_phase?.what_is_it}

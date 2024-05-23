@@ -321,7 +321,7 @@ const ProductCompareTable = React.memo(
                     {/* {console.log(product)} */}
                     {index === 0 && (
                       <span className="best-tag-product">
-                        {productPhaseData?.compared}
+             {productPhaseData?.compared}
                         {/* {product?.assigned_title} */}
                       </span>
                     )}
@@ -334,7 +334,7 @@ const ProductCompareTable = React.memo(
                         {" "}
                       </a>
                       <small className="product-name-small">
-                        {product?.name}
+                       {product?.name}
                       </small>
 
                       <img
@@ -344,6 +344,7 @@ const ProductCompareTable = React.memo(
                             ? product?.mini_image
                             : "/images/nofound.png"
                         }
+                        
                         width={0}
                         height={0}
                         alt={`${product?.permalink}`}
@@ -1058,7 +1059,8 @@ const ProductCompareTable = React.memo(
                             className="show_more"
                             onClick={() => handlePagination(category.name)}
                           >
-                            SHOW MORE <i className="ri-add-line"></i>
+                            {productPhaseData &&
+                                        productPhaseData?.show_all}{" "} <i className="ri-add-line"></i>
                           </span>
                         </td>
                       </tr>

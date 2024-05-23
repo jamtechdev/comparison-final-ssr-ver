@@ -114,7 +114,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   </div>
                 )}
                 <span>
-                  {blogData[0]?.data?.page_phases?.updated} :{""}
+                {blogData[0]?.data?.page_phases?.updated} {""}
                   {""}{" "}
                   <i>
                     {""}

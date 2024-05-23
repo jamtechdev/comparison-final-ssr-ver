@@ -93,7 +93,7 @@ function CompareDropDown({
             <Col md={4} lg={4}>
               <div className="filtered-data-select justify-content-start">
                 <span>
-                  {product && product?.page_phases?.attribute_category}:
+                  {product && product?.page_phases?.attribute_category}
                 </span>
                 <Form.Select
                   aria-label="Category select"
@@ -110,7 +110,7 @@ function CompareDropDown({
                 </Form.Select>
               </div>
               <div className="filtered-data-select justify-content-start mt-3">
-                <span>{product && product?.page_phases?.attribute} : </span>
+                <span>{product && product?.page_phases?.attribute}  </span>
                 {selectedItem && (
                   <Form.Select
                     aria-label="Attribute select"

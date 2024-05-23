@@ -333,6 +333,13 @@ export default function MobileCompareTable({
                   // console.log(product, "check products");
                   return (
                     <th key={tIndex}>
+                      
+                        {tIndex === 0 && (
+                      <span className="best-tag-product">
+             {/* {productPhaseData?.compared} */}
+                        {product?.assigned_title}
+                      </span>
+                    )}
                       <p className="device-name">
                         {type === "guide" && (
                           <span>
@@ -551,6 +558,13 @@ export default function MobileCompareTable({
                       {slider_data?.map((data, dIndex) => {
                         return (
                           <th key={dIndex}>
+                              {/* {console.log(product)} */}
+                              {dIndex === 0 && (
+                      <span className="best-tag-product">
+             {/* {productPhaseData?.compared} */}
+                        {data?.assigned_title}
+                      </span>
+                    )}
                             <p className="device-name">
                               {type === "guide" && (
                                 <span>
@@ -831,7 +845,8 @@ export default function MobileCompareTable({
                     <tr>
                       <td colSpan="2">
                         <div className="table-inner-heading">
-                          Ratio Qlt/Price{" "}
+                        {productPhaseData &&
+                                          productPhaseData?.ratio_quality_price_points} {" "}
                           <span className="question-marker-icon">
                             <div className="tooltip-title">
                               {products[0]
