@@ -969,7 +969,7 @@ export default function GuidePage({
                   ? guideData[0]?.data?.big_table_subtitle
                   : "No title found"}
               </h2>
-            
+
               {guide && productForTable?.length > 1 && (
                 <CompareTable
                   guidePhraseData={guide?.page_phrases}

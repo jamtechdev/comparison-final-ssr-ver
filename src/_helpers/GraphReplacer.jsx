@@ -30,6 +30,21 @@ const GraphReplacer = () => {
           );
           const chartData = response?.data?.data;
           if (chartData && chartData.data && chartData.data.length > 0) {
+            const xAixsLabel = chartData.x_axis_label ?? "";
+
+            // console.log(xAixsLabel)
+            const yAixsLabel = chartData.y_axis_label ?? "";
+            const xAxisTitle = chartData.x_title ?? "";
+            const yAxisTitle = chartData.y_title ?? "";
+
+            const isGeneralAttributesOfCorrelationChart_x =
+              chartData.is_general_attribute_x ?? false;
+            const isGeneralAttributesOfCorrelationChart_y =
+              chartData.is_general_attribute_y ?? false;
+            const correlation_minX = Number(chartData.rang_min_x) ?? null;
+            const correlation_maxX = Number(chartData.rang_max_x) ?? null;
+            const correlation_minY = Number(chartData.rang_min_y) ?? null;
+            const correlation_maxY = Number(chartData.rang_max_y) ?? null;
             const chartTitle = chartData.title ?? "";
             const yAxisUnit = chartData.unitY ?? "";
             const xAxisUnit = chartData.unit ?? "";
@@ -40,8 +55,10 @@ const GraphReplacer = () => {
               container.setAttribute("class", `chart_Append${idx}`);
               parentDiv.insertAdjacentElement("beforeend", container);
               const root = createRoot(container);
+              // console.log(plotData);
+              // console.log(shortCode[idx]);
 
-              if (shortCode[idx].pattern == ChartName.PieChart) {
+              if (shortCode[idx].pattern === ChartName.PieChart) {
                 root.render(
                   <PieChart
                     data={plotData}
@@ -51,6 +68,83 @@ const GraphReplacer = () => {
                     containerId={`pie${uuidv4()}`}
                     chartTitle={chartTitle}
                     xUnit={xAxisUnit}
+                  />
+                );
+              }
+              if (shortCode[idx].pattern == ChartName.VerticalChart) {
+                root.render(
+                  <VerticalChart
+                    svgProps={{
+                      margin: {
+                        top: 80,
+                        bottom: 80,
+                        left: 80,
+                        right: 80,
+                      },
+                      width: 478,
+                      height: 180,
+                    }}
+                    axisProps={{
+                      xLabel: { xAixsLabel },
+                      yLabel: { yAixsLabel },
+                      xUnit: { xAxisUnit },
+                      yUnit: { yAxisUnit },
+                      drawXGridlines: true,
+                      tick: 6,
+                      isTextOrientationOblique:
+                        plotData[0].label.length > 3 ? true : false,
+                    }}
+                    chartTitle={chartTitle}
+                    data={plotData}
+                    strokeWidth={4}
+                  />
+                );
+              }
+
+              if (
+                shortCode[idx].pattern == ChartName.HorizontalChart
+              ) {
+                root.render(
+                  <HorizontalChart
+                    data={plotData}
+                    height={220}
+                    width={650}
+                    chartTitle={shortCode[idx].chartTitle}
+                    xUnit={xAxisUnit}
+                    yUnit={yAxisUnit}
+                    rectBarWidth={27}
+                    rectBarPadding={10}
+                  />
+                );
+              }
+
+              if (
+                shortCode[idx].pattern == ChartName.CorrelationChart
+              ) {
+                root.render(
+                  <CorrelationChart
+                    data={chartData?.data}
+                    height={300}
+                    width={478}
+                    chartTitle={shortCode[idx].chartTitle}
+                    xLabel={chartData?.x_labels}
+                    yLabel={chartData?.y_labels}
+                    xTick={9}
+                    yTick={7}
+                    xUnit={chartData?.x_unit}
+                    yUnit={chartData?.y_unit}
+                    xTitle={chartData?.x_title}
+                    yTitle={chartData?.y_title}
+                    isGeneralAttribute_x={
+                      isGeneralAttributesOfCorrelationChart_x
+                    }
+                    isGeneralAttribute_y={
+                      isGeneralAttributesOfCorrelationChart_y
+                    }
+                    rangeMinX={correlation_minX}
+                    rangeMaxX={correlation_maxX}
+                    rangeMinY={correlation_minY}
+                    rangeMaxY={correlation_maxY}
                   />
                 );
               }
@@ -124,10 +218,12 @@ const GraphReplacer = () => {
 
   const matchShortCodePatternsAgainstText = (str) => {
     const shortCodepatternsRE =
-      /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart);.*\]/;
+      /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)-\d+\]/g;
+
     const results = [];
     const patternRE = /\[[^\]]*]/g;
     const patterns = str.match(patternRE);
+    // console.log(patterns);
 
     if (patterns) {
       patterns.forEach((matchedPattern) => {
@@ -135,7 +231,7 @@ const GraphReplacer = () => {
         if (regex.test(matchedPattern)) {
           results.push({
             isMatch: true,
-            pattern: getTheChartTypeFromShortCodePattern(matchedPattern),
+            pattern: getChartTypeFromShortCodePattern(matchedPattern),
             matchedString: matchedPattern,
             chartTitle: getChartTitle(matchedPattern),
           });
@@ -145,13 +241,10 @@ const GraphReplacer = () => {
     return results;
   };
 
-  const getTheChartTypeFromShortCodePattern = (shortCodestr) => {
-    const semicolonIndex = shortCodestr.indexOf(";");
-    let chartType = "";
-    if (semicolonIndex !== -1) {
-      chartType = shortCodestr.substring(1, semicolonIndex);
-    }
-    return chartType;
+  const getChartTypeFromShortCodePattern = (matchedPattern) => {
+    const typePattern = /\[(\w+-chart)-\d+\]/;
+    const match = matchedPattern.match(typePattern);
+    return match ? match[1] : null;
   };
 
   const getChartTitle = (shortCodestr) => {

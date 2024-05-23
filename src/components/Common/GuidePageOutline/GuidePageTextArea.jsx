@@ -13,7 +13,7 @@ function GuidePageTextArea({ guide }) {
   const getGuideTextPartShortcode = useSelector(
     (state) => state.comparePro.text_part_main?.content
   );
-  console.log(getGuideTextPartShortcode);
+  // console.log(getGuideTextPartShortcode);
 
   const [activeOutlineId, setActiveOutlineId] = useState("");
   const contentRef = useRef(null);
@@ -42,7 +42,8 @@ function GuidePageTextArea({ guide }) {
           element.classList.add("observed");
           let innerHTML = element.innerHTML;
           const shortCodepatternsRE =
-            /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart);.*\]/g;
+            /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)-\d+\]/g;
+
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
@@ -73,6 +74,16 @@ function GuidePageTextArea({ guide }) {
   return (
     <>
       <Row className="mt-3">
+        <Col md={4} lg={2}>
+          <div className="outline-section">
+            <p>{guide && guide?.page_phrases?.outline}</p>
+            <OutlineGenerator
+              currentIndexId={activeOutlineId}
+              blogData={guide?.text_third_part_main}
+            />
+          </div>
+        </Col>
+
         <Col md={8} lg={8}>
           {getGuideTextPartShortcode !== undefined ? (
             <div

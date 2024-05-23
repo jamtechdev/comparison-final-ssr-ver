@@ -258,7 +258,11 @@ function CorrelationChart(props) {
       .attr("class", "hover-effect")
       .style("fill", "#437ECE")
       .on("mouseover", (e, data) => {
-        tooltip.transition().duration(300).style("opacity", 1);
+        tooltip
+          .transition()
+          .duration(300)
+          .style("opacity", 1)
+          .style("display", "inline-block");
         tooltip
           .html(
             `<div class="tooltip-font">
@@ -271,7 +275,11 @@ function CorrelationChart(props) {
           .style("top", e.clientY - 50 + "px");
       })
       .on("mouseout", () => {
-        tooltip.transition().duration(300).style("opacity", 0);
+        tooltip
+          .transition()
+          .duration(300)
+          .style("opacity", 0)
+          .style("display", "none");
       });
 
     function customTickFormaYaxis(d) {
