@@ -878,7 +878,7 @@ function ProductPage({
                 </ul>
                 {product?.price_websites?.length > 4 && (
                   <Button
-                    className="see_all_btn"
+                    className="see_all_btn px-5"
                     onClick={handleShowAllRanking}
                   >
                     See All <i className="ri-arrow-down-s-line"></i>
@@ -938,7 +938,7 @@ function ProductPage({
                 )}
                 {showFullRanking && product?.guide_ratings?.length > 5 && (
                   <Button
-                    className="see_all_btn"
+                    className="see_all_btn "
                     onClick={handleShowAllRanking}
                   >
                     {product?.page_phases?.hide_all}{" "}

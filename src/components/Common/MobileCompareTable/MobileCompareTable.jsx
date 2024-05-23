@@ -295,6 +295,31 @@ export default function MobileCompareTable({
         }
       >
         <thead>
+          <tr class="catchy-title-mobile-view">
+            {chunkedData
+              ?.slice(currentIndex, currentIndex + 1)
+              .map((product, index) => {
+                // console.log(index, "sticky index");
+                // const productIndex=index+1
+                // console.log(productIndex,"checking product index for images")
+                // return product?.slice( currentIndex).map((data,tIndex) => {
+                return product?.map((data, tIndex) => {
+                  // console.log(currentIndex, "check currentIndex");
+                  // console.log(product, "check products");
+                  return (
+                    data?.assigned_title && (
+                      <th>
+                        <span class="best-tag-product">
+                          {data?.assigned_title}
+                        </span>
+                      </th>
+                    )
+                  );
+                });
+              })}
+
+            <th></th>
+          </tr>
           <tr>
             {chunkedData
               ?.slice(currentIndex, currentIndex + 1)
@@ -507,6 +532,21 @@ export default function MobileCompareTable({
               <SwiperSlide key={swiperIndex}>
                 <Table className="compare-container">
                   <thead data-sticky-header-offset-y ref={ref}>
+                    <tr className="catchy-title-mobile-view">
+                      {slider_data?.map((data, dIndex) => {
+                        return (
+                          data?.assigned_title && (
+                            <th>
+                              <span class="best-tag-product">
+                                {data?.assigned_title}
+                              </span>
+                            </th>
+                          )
+                        );
+                      })}
+
+                      <th></th>
+                    </tr>
                     <tr>
                       {slider_data?.map((data, dIndex) => {
                         return (
@@ -634,7 +674,8 @@ export default function MobileCompareTable({
                                     <p className="mb-2">
                                       <b>
                                         {productPhaseData &&
-                                          productPhaseData?.what_it_is}:{" "}
+                                          productPhaseData?.what_it_is}
+                                        :{" "}
                                       </b>{" "}
                                       {
                                         products[0]?.overall_score_descriptions
@@ -691,7 +732,7 @@ export default function MobileCompareTable({
                         );
                       })}
                     </tr>
-                   
+
                     <tr>
                       {slider_data.map((product, technicalIndex) => {
                         const values = slider_data.map(
@@ -715,7 +756,8 @@ export default function MobileCompareTable({
                       <td colSpan="2">
                         <div className="table-inner-heading">
                           <div className="table-inner-heading">
-                            {productPhaseData && productPhaseData?.users_ratings}
+                            {productPhaseData &&
+                              productPhaseData?.users_ratings}
                             <span className="question-marker-icon">
                               <div className="tooltip-title">
                                 {products &&

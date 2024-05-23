@@ -191,6 +191,7 @@ thead.nonSticky tr th:first-child,
   position: static !important;
   display: none;
   color: rgb(39 48 78 / 90%);
+  max-width: 110px;
 }
 .compare-container thead tr th:hover .device-name a {
   color: #437ece !important;
