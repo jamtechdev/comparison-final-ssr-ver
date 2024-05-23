@@ -7,6 +7,7 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import formatValue from "@/_helpers/formatValue";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
+  // console.log(categoryData[0]?.data?.page_phases)
   return (
     <div>
       {categoryData != null && (
@@ -16,7 +17,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
               <Row>
                 <Col md={12}>
                   <BreadCrumb
-                    productPhaseData={categoryData?.page_phases}
+                    productPhaseData={categoryData[0]?.data?.page_phases}
                     firstPageName={""}
                     secondPageName={{
                       name:
@@ -39,7 +40,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
               {/*-------------POPULAR GUIDE -------------------*/}
               <Row className="py-3">
                 <Col md={12}>
-                  <h2 className="heading-primary secondary">Popular guides</h2>
+                  <h2 className="heading-primary secondary">{categoryData[0]?.data?.page_phases?.popular_guide_heading}</h2>
                 </Col>
                 {/* if data found */}
                 {categoryData[0]?.data?.popular_guides?.length > 0 && (
@@ -97,7 +98,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 <Row className="py-3">
                   <Col md={12}>
                     <h2 className="heading-primary secondary">
-                      Popular reviews
+                    {categoryData[0]?.data?.page_phases?.popular_review_heading}
                     </h2>
                   </Col>
                   {/* if data found */}
@@ -175,7 +176,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
               {categoryData[0]?.data?.tested_blogs?.length > 0 && (
                 <Row className="py-3">
                   <Col md={12}>
-                    <h2 className="heading-primary secondary">Test logs</h2>
+                    <h2 className="heading-primary secondary">{categoryData[0]?.data?.page_phases?.popular_article_heading}</h2>
                   </Col>
                   {/* if data found */}
 
@@ -239,7 +240,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 <Row className="py-3">
                   <Col md={12}>
                     <h2 className="heading-primary secondary">
-                      Popular articles
+                    {categoryData[0]?.data?.page_phases?.popular_article_heading}
                     </h2>
                   </Col>
                   {/* if data found */}

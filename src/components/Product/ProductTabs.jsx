@@ -13,6 +13,7 @@ function ProductTabs({
   productPhaseData,
   expertReview,
   videoReview,
+  page_phase,
 }) {
   // console.log(productReview, expertReview, videoReview);
   return (
@@ -33,19 +34,28 @@ function ProductTabs({
                   className="mb-3 site_tabs site_tabs_hide"
                 >
                   {productReview && productReview.length > 0 && (
-                    <Tab eventKey="tab-1" title="User’s Reviews">
+                    <Tab
+                      eventKey="tab-1"
+                      title={`${page_phase?.users_reviews}`}
+                    >
                       <ProductReviewTab productReview={productReview} />
                     </Tab>
                   )}
 
                   {expertReview && expertReview.length > 0 && (
-                    <Tab eventKey="tab-2" title="Expert Reviews">
-                      <ExperReviwes expertReview={expertReview} />
+                    <Tab
+                      eventKey="tab-2"
+                      title={`${page_phase?.expert_review}`}
+                    >
+                      <ExperReviwes expertReview={expertReview}  page_phase={page_phase}/>
                     </Tab>
                   )}
 
                   {videoReview && videoReview.length > 0 && (
-                    <Tab eventKey="tab-3" title="Video Reviews">
+                    <Tab
+                      eventKey="tab-3"
+                      title={`${page_phase?.video_review}`}
+                    >
                       <VideoReviews videoReview={videoReview} />
                     </Tab>
                   )}

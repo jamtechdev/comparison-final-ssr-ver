@@ -343,7 +343,9 @@ function CompareDiv({
             bestAlternative?.verdict_text !== null && (
               <Row>
                 <div className="box__content__section">
-                  <h2 class="site-main-heading">Verdict</h2>
+                  <h2 class="site-main-heading">
+                    {bestAlternative?.page_phases?.verdict_text_heading}
+                  </h2>
                   <div
                     className="box__content__section__textarea"
                     dangerouslySetInnerHTML={{
@@ -567,7 +569,8 @@ function CompareDiv({
         {isMobile ? (
           <Container>
             <h2 className="site-main-heading pt-5 m-3">
-              { bestAlternative && bestAlternative?.page_phases?.table_compare_title}
+              {bestAlternative &&
+                bestAlternative?.page_phases?.table_compare_title}
             </h2>
           </Container>
         ) : null}

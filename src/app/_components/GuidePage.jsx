@@ -579,8 +579,7 @@ export default function GuidePage({
                         rangeAttributes: "Overall",
                       })}
                     >
-                      {/* {guide && guide?.page_phrases?.overall} */}
-                      Overall (Available)
+                      {guide && guide?.page_phrases?.overall_available}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -588,8 +587,7 @@ export default function GuidePage({
                         rangeAttributes: "false",
                       })}
                     >
-                      {/* {guide && guide?.page_phrases?.overall} */}
-                      Overall (All)
+                      {guide && guide?.page_phrases?.overall_available}
                     </option>
                     {/* <option
                             value={JSON.stringify({
@@ -788,7 +786,7 @@ export default function GuidePage({
                       })}
                     >
                       {/* {guide && guide?.page_phrases?.overall} */}
-                      Overall (Available)
+                      {guide && guide?.page_phrases?.overall_available}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -797,7 +795,7 @@ export default function GuidePage({
                       })}
                     >
                       {/* {guide && guide?.page_phrases?.overall} */}
-                      Overall (All)
+                      {guide && guide?.page_phrases?.overall_all}
                     </option>
                     {/* <option
                             value={JSON.stringify({
@@ -988,9 +986,9 @@ export default function GuidePage({
         {isMobile ? (
           <Container>
             <h2 className="site-main-heading pt-5 m-3">
-            {guideData[0]?.data?.big_table_subtitle
-                  ? guideData[0]?.data?.big_table_subtitle
-                  : "No title found"}
+              {guideData[0]?.data?.big_table_subtitle
+                ? guideData[0]?.data?.big_table_subtitle
+                : "No title found"}
             </h2>
           </Container>
         ) : null}

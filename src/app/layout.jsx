@@ -13,7 +13,7 @@ export default async function RootLayout({ children }) {
   // Function to construct the canonical URL dynamically
   // console.log(footerData);
   // console.log(footerData?.footer_tag_code);
-  // console.log(footerData?.favicon)
+  console.log(footerData?.favicon)
 
   return (
     <html lang={footerData?.website_language?.toLowerCase()}>

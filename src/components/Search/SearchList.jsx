@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { homePage } from "../../_services/homepage.service";
 import Link from "next/link";
-const SearchList = ({ search, isFocused }) => {
+const SearchList = ({ search, isFocused,noDataFoundPhase }) => {
   const [filteredData, setFilteredData] = useState([]);
   useEffect(() => {
     if (search !== "" && search !== undefined) {
@@ -69,7 +69,7 @@ const SearchList = ({ search, isFocused }) => {
             
           {!filteredData && search !== "" && (
             <div className="search-data-list">
-              <span className="no-result-found">No results found</span>
+              <span className="no-result-found">{noDataFoundPhase}</span>
             </div>
           )}
         </div>

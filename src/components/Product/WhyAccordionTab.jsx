@@ -22,7 +22,7 @@ import useScreenSize from "@/_helpers/useScreenSize";
 import { color } from "d3";
 
 const WhyAccordionTab = React.memo(
-  ({ categorySlug, product, pageType, slug }) => {
+  ({ categorySlug, product, pageType, slug , page_phase }) => {
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
     const [activetab, setActiveTab] = useState("tab-1");
     const { isMobile } = useScreenSize();
@@ -763,11 +763,11 @@ const WhyAccordionTab = React.memo(
                                     );
                                   })
                               ) : (
-                                <p>No Data Found</p>
+                                <p>{page_phase?.no_cons_found}</p>
                               )
                             ) : (
                               <p className="text-center pt-2 pb-2 font-5 font-bold">
-                                No Data Found
+                               {page_phase?.no_cons_found}
                               </p>
                             )}
                           </ul>

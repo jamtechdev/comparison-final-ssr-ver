@@ -83,23 +83,29 @@ function ProductPage({
       return "#85B2F1";
     }
   };
-  // rating texr
+  // rating text
+  // get pproduct phase and split with |
+  const getProductPhase = (phase) => {
+    return phase?.split("|");
+  };
+  const getEvaluationPhase = getProductPhase(product?.page_phases?.evaluation);
+  // console.log(getEvaluationPhase)
   const getEvaluation = (score) => {
     // these pharse will change in future
     if (score >= 9) {
-      return "Outstandingx";
+      return getEvaluationPhase[0];
     } else if (score >= 8) {
-      return "Excellentx";
+      return getEvaluationPhase[1];
     } else if (score >= 7) {
-      return "Very goodx";
+      return getEvaluationPhase[2];
     } else if (score >= 5) {
-      return "Goodx";
+      return getEvaluationPhase[3];
     } else if (score >= 3) {
-      return "Fairx";
+      return getEvaluationPhase[4];
     } else if (score >= 1) {
-      return "Poorx";
+      return getEvaluationPhase[5];
     }
-    return "Poorx"; // Handle other cases as needed
+    return getEvaluationPhase[5]; // Handle other cases as needed
   };
 
   let showFullPrice = false;
@@ -1130,7 +1136,7 @@ function ProductPage({
           {product?.vedict_text !== null && (
             <Row>
               <div className="box__content__section">
-                <h2 class="site-main-heading">Verdict</h2>
+                <h2 class="site-main-heading">{product?.page_phases?.verdict_text_heading}</h2>
                 <div
                   className="box__content__section__textarea"
                   dangerouslySetInnerHTML={{ __html: product?.vedict_text }}
@@ -1240,6 +1246,7 @@ function ProductPage({
             categorySlug={categorySlug}
             product={product}
             slug={slug}
+            page_phase={product?.page_phases}
           />
         </Container>
       </section>
@@ -1258,7 +1265,7 @@ function ProductPage({
           <Container>
             <Row>
               <Col md={12}>
-                <h2 className="site-main-heading">Main Comparision</h2>
+                <h2 className="site-main-heading"> {product?.page_phases?.comparison_heading_productpage}</h2>
                 <MainComparision
                   products={product && product?.alternative_comparisons}
                 />
@@ -1274,7 +1281,7 @@ function ProductPage({
             <Row>
               <Col md={12}>
                 <h2 className="site-main-heading">
-                  Price trend in the past 6 months
+                 {product?.page_phases?.old_price_graph_heading}
                 </h2>
                 <div
                   className="draw-chart-container"
@@ -1292,7 +1299,7 @@ function ProductPage({
                         Lowest price
                       </p>
                     </div>
-                    <DrawChart lineChartData={product?.line_chart_data} />
+                    <DrawChart lineChartData={product?.line_chart_data} page_phase={product?.page_phases?.old_price_graph_heading} />
                   </Container>
                 </div>
               </Col>
@@ -1955,6 +1962,7 @@ function ProductPage({
         productPhaseData={product?.page_phases?.third_party_reviews}
         productReview={product && product?.reviews_websites}
         expertReview={product?.expert_reviews_websites}
+        page_phase={product?.page_phases}
       />
       {/* <section className="ptb-80">
         <Container>
