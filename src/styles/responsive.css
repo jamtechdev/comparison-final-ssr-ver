@@ -565,7 +565,7 @@
   }
   .pros-corns-section.pros ul li:before,
   .pros-corns-section.corns ul.cross li:before {
-    top: 5px !important;
+    top: 8px !important;
   }
   .footer-container > .row {
     row-gap: 20px;
@@ -586,6 +586,7 @@
     display: block !important;
     z-index: 9999;
     background: #ffffff;
+    left: 0;
   }
   .row {
     margin-left: 0 !important;
@@ -1942,6 +1943,10 @@
     display: block !important;
     z-index: 9999;
     background: #f5f8fb;
+    left: 0;
+  }
+  .compare-container.isSticky thead tr th, .compare-container.isSticky thead tr th ul.best-list-item li{
+    background: #fff !important;
   }
   .breadcrumb {
     padding-bottom: 8px !important;
@@ -2085,9 +2090,6 @@
     margin: 5px auto !important;
     width: 100px !important;
     height: 100px !important;
-  }
-  .mobile-table-section .container {
-    padding: 0px;
   }
   .mobile-table-section .table-section-desktop .comparisons-slider > .row {
     padding: 10px 10px;

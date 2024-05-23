@@ -37,6 +37,8 @@ import ProductSliderBlog from "../ProductSliderBlog/ProductSliderBlog";
 import ComparisionOutlineGenerator from "../OutlineGenerator/ComparisionOutlineGenerator";
 import MobileComparisonTool from "../MobileComparisonTool/MobileComparisonTool";
 import MobileCompareTable from "../MobileCompareTable/MobileCompareTable";
+import CompareRealtedGuide from "@/components/Product/CompareRealtedGuide";
+import useScreenSize from "@/_helpers/useScreenSize";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -240,6 +242,8 @@ function CompareDiv({
   }
   // const contentWithIds = addIdsToHeadings(bestAlternative?.text_part);
 
+  const { isMobile } = useScreenSize();
+
   return (
     <>
       <section className="product-header">
@@ -328,6 +332,7 @@ function CompareDiv({
                 handelRemoveProductFormComparison={
                   handelRemoveProductFormComparison
                 }
+                productPhaseData={bestAlternative && bestAlternative}
               />
             </Col>
           </Row>
@@ -558,6 +563,34 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
+      <section className="mobile-table-section">
+        {isMobile ? (
+          <Container>
+            <h2 className="site-main-heading pt-5 m-3">
+              { bestAlternative && bestAlternative?.page_phases?.table_compare_title}
+            </h2>
+          </Container>
+        ) : null}
+        <Container className="p-0">
+          <Row className="table-section-desktop p-0">
+            <Col md={12} className="p-0">
+              {/* {console.log(compareByCatID?.data?.length)} */}
+              {
+                isMobile ? (
+                  <MobileCompareTable
+                    productPhaseData={
+                      bestAlternative && bestAlternative?.page_phases
+                    }
+                    products={comparisonProductData}
+                    categoryAttributes={categroyAttributes}
+                    slug={slug}
+                  />
+                ) : null // or any other fallback content for non-mobile
+              }
+            </Col>
+          </Row>
+        </Container>
+      </section>
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -612,7 +645,9 @@ function CompareDiv({
               </h2>
             </Col>
             <Col md={12}>
-              <ProductSlider favSlider={bestAlternative?.related_guides} />
+              <CompareRealtedGuide
+                favSlider={bestAlternative?.related_guides}
+              />
             </Col>
           </Row>
         </Container>

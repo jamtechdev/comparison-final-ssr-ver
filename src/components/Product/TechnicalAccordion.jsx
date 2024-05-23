@@ -172,12 +172,16 @@ const TechnicalAccordion = React.memo(
                         </p>
 
                         <p className="mb-2">
-                          <b>{product && product?.page_phases?.when_it_matters}: </b>
+                          <b>
+                            {product && product?.page_phases?.when_it_matters}:{" "}
+                          </b>
                           {product?.technical_score_descriptions?.when_matters}
                         </p>
 
                         <p>
-                          <b>{product && product?.page_phases?.score_components}:</b>
+                          <b>
+                            {product && product?.page_phases?.score_components}:
+                          </b>
                         </p>
                         {product?.technical_score_descriptions
                           .score_components &&
@@ -283,18 +287,25 @@ const TechnicalAccordion = React.memo(
                       >
                         {product?.users_rating_descriptions.description && (
                           <p className="mb-2">
-                            <b>{product && product?.page_phases?.what_it_is}: </b>
+                            <b>
+                              {product && product?.page_phases?.what_it_is}:{" "}
+                            </b>
                             {product?.users_rating_descriptions?.description}
                           </p>
                         )}
                         {product?.users_rating_descriptions.when_matters && (
                           <p className="mb-2">
-                            <b>{product && product?.page_phases?.when_it_matters}: </b>
+                            <b>
+                              {product && product?.page_phases?.when_it_matters}
+                              :{" "}
+                            </b>
                             {product?.users_rating_descriptions?.when_matters}
                           </p>
                         )}
                         <p>
-                          <b>{product && product?.page_phases?.score_components}:</b>
+                          <b>
+                            {product && product?.page_phases?.score_components}:
+                          </b>
                         </p>
                         {product?.users_rating_descriptions.score_components &&
                           product?.users_rating_descriptions.score_components?.map(
@@ -1198,6 +1209,9 @@ const TechnicalAccordion = React.memo(
                                                     opacity: "100%",
                                                   }}
                                                 >
+                                                  {
+                                                    attributeValues?.info_not_verified_text
+                                                  }
                                                   {attributeValues?.info_not_verified_text}
                                                 </div>
                                               </div>

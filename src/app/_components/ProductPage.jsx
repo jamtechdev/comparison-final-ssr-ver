@@ -85,6 +85,7 @@ function ProductPage({
   };
   // rating texr
   const getEvaluation = (score) => {
+    // these pharse will change in future
     if (score >= 9) {
       return "Outstandingx";
     } else if (score >= 8) {
@@ -653,7 +654,12 @@ function ProductPage({
                           );
                         }
                       )}
-                    <b>User's Ratings:</b>
+
+                    {product?.users_rating_descriptions?.reviews_websites
+                      ?.length > 0 && (
+                      <b>{product?.page_phases?.users_ratings}:</b>
+                    )}
+
                     {product?.users_rating_descriptions?.reviews_websites &&
                       product?.users_rating_descriptions?.reviews_websites?.map(
                         (data, index) => {
@@ -2000,13 +2006,13 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {/* {console.log(compareByCatID?.data?.length)} */}
+      {/* {console.log(product?.page_phases?.table_compare_title)} */}
       {compareByCatID?.data?.length > 1 && (
         <section>
           <Container>
             <Row className="table-section-mobile">
               <Col md={12}>
-                <h2 className="site-main-heading pt-5">
+                <h2 className="site-main-heading pt-5 ">
                   {product?.page_phases?.table_compare_title}
                 </h2>
                 <ProductCompareTable
@@ -2023,7 +2029,15 @@ function ProductPage({
       )}
 
       <section className="mobile-table-section">
-        <Container>
+        {isMobile ? (
+          <Container>
+            <h2 className="site-main-heading pt-5 m-3">
+              {product?.page_phases?.table_compare_title}
+            </h2>
+          </Container>
+        ) : null}
+
+        <Container className="p-0">
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
               {/* {console.log(compareByCatID?.data?.length)} */}

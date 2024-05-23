@@ -19,6 +19,7 @@ export default function MobileCompareTable({
   categoryAttributes,
   slug,
   productPhaseData,
+  type,
 }) {
   const [swiperRef, setSwiperRef] = useState();
   const [winPos, setWinPos] = useState(false);
@@ -30,6 +31,7 @@ export default function MobileCompareTable({
   const defaultNo = 5;
 
   const [fullTable, setFullTable] = useState(2);
+  console.log(type);
 
   if (typeof window !== "undefined") {
     // Access the window object here
@@ -139,23 +141,23 @@ export default function MobileCompareTable({
       );
 
     const arrayOfObjects = [...filterData];
-    let numericValues = [];
+    // let numericValues = [];
 
-    numericValues = arrayOfObjects
-      .map((obj) => {
-        if (!isNaN(parseFloat(obj?.attribute_value))) {
-          return parseFloat(obj?.attribute_value);
-        } else {
-          return obj?.attribute_value;
-        }
-      })
-      .filter((value) => !isNaN(value));
+    // numericValues = arrayOfObjects
+    //   .map((obj) => {
+    //     if (!isNaN(parseFloat(obj?.attribute_value))) {
+    //       return parseFloat(obj?.attribute_value);
+    //     } else {
+    //       return obj?.attribute_value;
+    //     }
+    //   })
+    //   .filter((value) => !isNaN(value));
 
-    if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
-      numericValues.sort((a, b) => b - a);
-    } else {
-      numericValues.sort((a, b) => a - b);
-    }
+    // if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
+    //   numericValues.sort((a, b) => b - a);
+    // } else {
+    //   numericValues.sort((a, b) => a - b);
+    // }
 
     // Adding logic for String case
     if (numericValues.length === 0) {
@@ -172,26 +174,32 @@ export default function MobileCompareTable({
       }
     }
 
-    const topValue = numericValues[0];
-    const occurrences = numericValues?.filter(
-      (value) => value === topValue
-    ).length;
+    // const topValue = numericValues[0];
+    // const occurrences = numericValues?.filter(
+    //   (value) => value === topValue
+    // ).length;
 
-    if (occurrences === 1) {
-      arrayOfObjects.forEach((obj) => {
-        const numericValue =
-          typeof topValue === "string"
-            ? obj.attribute_value
-            : parseFloat(obj.attribute_value);
-        if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
-          obj.attribute_value += "⭐";
-        }
-      });
-    }
+    // if (occurrences === 1) {
+    //   arrayOfObjects.forEach((obj) => {
+    //     const numericValue =
+    //       typeof topValue === "string"
+    //         ? obj.attribute_value
+    //         : parseFloat(obj.attribute_value);
+    //     if (numericValue === topValue && !obj.attribute_value?.includes("⭐")) {
+    //       obj.attribute_value += "⭐";
+    //     }
+    //   });
+    // }
 
     // const chunkArrayOfObjects = chunk(arrayOfObjects, 2);
     // Adjust this function according to your context as I don't have the complete code
     // It would be good to ensure that you have the required variables (finalProducts) in scope.
+    arrayOfObjects.forEach((obj) => {
+      obj.star &&
+        obj.attribute_value !== "?" &&
+        obj.attribute_value !== "-" &&
+        (obj.attribute_value = obj?.attribute_value + "⭐");
+    });
     const value__data = [];
     function chunkArray(array, chunkSize) {
       const chunks = [];
@@ -251,8 +259,6 @@ export default function MobileCompareTable({
     }
     return chunks;
   }
-
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const chunkedData = chunkArray(finalProducts, 2);
 
   // make categoryAttribute chunk Array
@@ -1152,12 +1158,17 @@ export default function MobileCompareTable({
                                           product,
                                           data
                                         )
-                                          ?.slice(0, 2)
+                                          ?.slice(swiperIndex, swiperIndex + 1)
                                           ?.map((chunk, chunkIndex) => {
+                                            // console.log(
+                                            //   swiperIndex,
+                                            //   "swiper index"
+                                            // );
+                                            // console.log(chunk)
                                             return chunk
                                               ?.slice(
-                                                swiperIndex,
-                                                swiperIndex + 1
+                                                chunkIndex,
+                                                chunkIndex + 2
                                               )
                                               .map((item, attrIndex) => {
                                                 return (

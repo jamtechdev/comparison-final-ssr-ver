@@ -764,9 +764,13 @@ export default function Product({
                               }
                             )}
                           {/* {console.log(product)} */}
-                          <p>
-                            <b>User's Rating :</b>
-                          </p>
+                          {product?.users_rating_descriptions?.reviews_websites
+                            ?.length > 0 && (
+                            <p>
+                              <b>{guidePhraseData?.users_ratings}:</b>
+                            </p>
+                          )}
+
                           {product?.users_rating_descriptions
                             ?.reviews_websites &&
                             product?.users_rating_descriptions?.reviews_websites?.map(
