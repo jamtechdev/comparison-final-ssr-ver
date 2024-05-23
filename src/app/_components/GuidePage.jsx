@@ -773,7 +773,7 @@ export default function GuidePage({
                 </div>
 
                 <div className="filtered-data-select">
-                  <span>{guide && guide?.page_phrases?.order_by} :</span>
+                  <span>{guide && guide?.page_phrases?.order_by} </span>
                   <Form.Select
                     aria-label="Default select example"
                     onChange={(e) => handleSort(e.target.value)}

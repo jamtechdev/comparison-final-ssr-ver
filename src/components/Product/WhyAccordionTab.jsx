@@ -455,7 +455,7 @@ const WhyAccordionTab = React.memo(
                                 handleAccordionChange("total", "pros")
                               }
                             >
-                              TOTAL
+                               {product && product?.page_phases?.total}
                             </Nav.Link>
                           </Nav.Item>
                           {product?.general?.pros?.length > 0 && (
@@ -783,8 +783,8 @@ const WhyAccordionTab = React.memo(
                               onClick={() =>
                                 handleAccordionChange("total", "cons")
                               }
-                            >
-                              TOTAL
+                            > 
+                             {product && product?.page_phases?.total}
                             </Nav.Link>
                           </Nav.Item>
                           {product?.general?.cons?.length > 0 && (

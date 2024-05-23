@@ -92,7 +92,7 @@ export default function MobileCompareTable({
 
   const handleNext = useCallback(() => {
     setTabData(true);
-    if (currentIndex < chunkedData.length - 3) {
+    if (currentIndex < chunkedData.length - 2) {
       setCurrentIndex(currentIndex + 1);
     }
     swiperRef?.slideNext();
@@ -159,20 +159,20 @@ export default function MobileCompareTable({
     //   numericValues.sort((a, b) => a - b);
     // }
 
-    // Adding logic for String case
-    if (numericValues.length === 0) {
-      const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
-  
-      if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-        const targetString =
-          stringArray[0] === "yes"
-            ? "yes"
-            : "no" || stringArray[0] === "no"
-            ? "yes"
-            : "yes";
-        numericValues = stringArray.filter((value) => value === targetString);
-      }
-    }
+    // // Adding logic for String case
+    // if (numericValues.length === 0) {
+    //   const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
+
+    //   if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
+    //     const targetString =
+    //       stringArray[0] === "yes"
+    //         ? "yes"
+    //         : "no" || stringArray[0] === "no"
+    //         ? "yes"
+    //         : "yes";
+    //     numericValues = stringArray.filter((value) => value === targetString);
+    //   }
+    // }
 
     // const topValue = numericValues[0];
     // const occurrences = numericValues?.filter(
@@ -274,7 +274,7 @@ export default function MobileCompareTable({
     removeLastObjectFromCategory,
     2
   );
-  const itemsPerPage = 2; 
+
   // console.log(categoryChunkedData, "neetxy");
   // let storeSwiperIndex = 0; // Declare a variable outside the map function
   // console.log(storeSwiperIndex,"neetxy")
@@ -296,31 +296,41 @@ export default function MobileCompareTable({
       >
         <thead>
           <tr>
-            {chunkedData?.slice(currentIndex, currentIndex + 1).map((product, index) => {
+            {chunkedData
+              ?.slice(currentIndex, currentIndex + 1)
+              .map((product, index) => {
                 // console.log(index, "sticky index");
-                //console.log(currentIndex,"checking currentindex")
-                // const productIndex = currentIndex + index + 1;
-                 //console.log(productIndex,"checking product index for images")
+                // const productIndex=index+1
+                // console.log(productIndex,"checking product index for images")
                 // return product?.slice( currentIndex).map((data,tIndex) => {
                 return product?.map((data, tIndex) => {
                   // console.log(currentIndex, "check currentIndex");
-                  // console.log(product, "check products");
-                  const finalindex = currentIndex * itemsPerPage + index * product.length + tIndex + 1; 
-                  //  console.log(index,"checking index")
+                   console.log(tIndex, "check index");
                   return (
                     <th key={tIndex}>
+                      
+                        {tIndex === 0 && (
+                      <span className="best-tag-product">
+             {/* {productPhaseData?.compared} */}
+                        {product?.assigned_title}
+                      </span>
+                    )}
                       <p className="device-name">
-                          <span>{finalindex}</span>
-                        {/* <a href={`/${data?.category_url}/${data?.permalink}`}>
-                          {" "}
-                        </a>
+                        {type === "guide" && (
+                          <span>
+                            {tIndex + currentIndex + 1 + currentIndex}
+                          </span>
+                        )}
+
                         <small className="product-name-small">
-                          {data?.name}
-                        </small> */}
-                        <a
-                href={`/${data?.category_url}/${data?.permalink}`} className="product-name-small" >
-                {data?.name}
-              </a>
+                          <a
+                            href={`/${data?.category_url}/${data?.permalink}`}
+                            style={{ display: "block" }}
+                          >
+                            {data?.name}
+                          </a>
+                        </small>
+
                         <img
                           className="compare_image"
                           src={
@@ -436,34 +446,42 @@ export default function MobileCompareTable({
             : "compare-container-wrapper no-before"
         }
       >
-     <div
-  className={
-    winPos === true
-      ? currentIndex === 0
-        ? "slider-controls table__arrow arrow__fixed justify-content-end"
-        : "slider-controls table__arrow arrow__fixed justify-content-start"
-      : "slider-controls table__arrow"
-  }
->
-  {currentIndex === 0 ? (
-    <span className="swiper-next" onClick={handleNext}>
-      <i className="ri-arrow-right-s-line"></i>
-    </span>
-  ) : currentIndex === chunkedData.length-1 ? (
-    <span className="swiper-prev" onClick={handlePrevious}>
-      <i className="ri-arrow-left-s-line"></i>
-    </span>
-  ) : (
-    <>
-      <span className="swiper-prev" onClick={handlePrevious}>
-        <i className="ri-arrow-left-s-line"></i>
-      </span>
-      <span className="swiper-next " onClick={handleNext} style={{marginLeft:"72vw"}} > 
-        <i className="ri-arrow-right-s-line"></i>
-      </span>
-    </>
-  )}
-</div>
+        {/* {console.log(chunkedData?.length, "chunkedData")} */}
+        <div
+          className={
+            winPos == true
+              ? currentIndex === 0
+                ? "slider-controls table__arrow arrow__fixed justify-content-end"
+                : currentIndex === chunkedData.length - 1
+                ? "slider-controls table__arrow arrow__fixed justify-content-start"
+                : "slider-controls table__arrow arrow__fixed justify-content-between"
+              : "slider-controls table__arrow"
+          }
+        >
+          {currentIndex === 0 && chunkedData?.length > 1 ? (
+            <span className="swiper-next" onClick={handleNext}>
+              <i className="ri-arrow-right-s-line"></i>
+            </span>
+          ) : currentIndex === chunkedData.length - 1 &&
+            chunkedData?.length > 1 ? (
+            <span className="swiper-prev" onClick={handlePrevious}>
+              <i className="ri-arrow-left-s-line"></i>
+            </span>
+          ) : (
+            <>
+              {chunkedData?.length > 1 && (
+                <>
+                  <span className="swiper-prev" onClick={handlePrevious}>
+                    <i className="ri-arrow-left-s-line"></i>
+                  </span>
+                  <span className="swiper-next" onClick={handleNext}>
+                    <i className="ri-arrow-right-s-line"></i>
+                  </span>
+                </>
+              )}
+            </>
+          )}
+        </div>
         <Swiper
           onSlideChange={handleSlideChange}
           id="mobile-compare-table"
@@ -498,12 +516,23 @@ export default function MobileCompareTable({
                   <thead data-sticky-header-offset-y ref={ref}>
                     <tr>
                       {slider_data?.map((data, dIndex) => {
-                        const finindex = swiperIndex * itemsPerPage + dIndex + 1;
                         return (
                           <th key={dIndex}>
+                              {/* {console.log(product)} */}
+                              {dIndex === 0 && (
+                      <span className="best-tag-product">
+             {/* {productPhaseData?.compared} */}
+                        {data?.assigned_title}
+                      </span>
+                    )}
                             <p className="device-name">
-                              <span>{finindex}</span>
-                            <a
+                              {type === "guide" && (
+                                <span>
+                                  {dIndex + currentIndex + 1 + currentIndex}
+                                </span>
+                              )}
+
+                              <a
                                 href={`/${data?.category_url}/${data?.permalink}`}
                               >
                                 {" "}
@@ -605,7 +634,8 @@ export default function MobileCompareTable({
                     <tr className="tr-bg-color">
                       <td colSpan="2">
                         <div className="table-main-heading">
-                          Overall Score{" "}
+                        {productPhaseData &&
+                                          productPhaseData?.overall_score}  {" "}
                           <span className="question-marker-icon">
                             <div className="tooltip-title">
                               {products[0]
@@ -680,7 +710,8 @@ export default function MobileCompareTable({
                     <tr>
                       <td colSpan="2">
                         <div className="table-main-heading">
-                          Overall Score{" "}
+                        {productPhaseData &&
+                                          productPhaseData?.technical_score}{" "}
                           <span className="question-marker-icon">
                             <div className="tooltip-title">
                               {products[0]
@@ -755,7 +786,8 @@ export default function MobileCompareTable({
                       <td colSpan="2">
                         <div className="table-inner-heading">
                           <div className="table-inner-heading">
-                            User’s Ratings{" "}
+                          {productPhaseData &&
+                                              productPhaseData?.users_ratings}{" "}
                             <span className="question-marker-icon">
                               <div className="tooltip-title">
                                 {products &&
@@ -829,7 +861,8 @@ export default function MobileCompareTable({
                     <tr>
                       <td colSpan="2">
                         <div className="table-inner-heading">
-                          Ratio Qlt/Price{" "}
+                        {productPhaseData &&
+                                          productPhaseData?.ratio_quality_price_points} {" "}
                           <span className="question-marker-icon">
                             <div className="tooltip-title">
                               {products[0]

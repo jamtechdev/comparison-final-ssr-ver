@@ -190,7 +190,7 @@ export default function BottomBar({
             </div>
           </section>
         )}
-      {isOpen && <CompareModal location="ON_GUIDE" setIsOpen={setIsOpen} />}
+      {isOpen && <CompareModal location="ON_GUIDE" setIsOpen={setIsOpen} favSlider={guidePhraseData} />}
     </>
   );
 }

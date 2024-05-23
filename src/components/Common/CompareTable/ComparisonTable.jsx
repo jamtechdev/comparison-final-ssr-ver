@@ -318,7 +318,7 @@ export default function ComparisonTable({
                   {productScoreLabelIndex !== "" &&
                     productScoreLabelIndex === index && (
                       <span className="best-tag-product">
-                        {comparisonPhaseData && comparisonPhaseData?.winner}
+                   {comparisonPhaseData && comparisonPhaseData?.winner}
                         {/* {data?.winner} */}
                       </span>
                     )}

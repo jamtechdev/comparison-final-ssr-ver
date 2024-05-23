@@ -18,6 +18,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
   const [categoryId, setCategoryId] = useState(
     reduxData?.category ? reduxData?.category : undefined
   );
+  console.log(favSlider,"check favslider")
 
   const handelCloseCompareModel = () => {
     setIsOpen(false);

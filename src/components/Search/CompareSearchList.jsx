@@ -16,7 +16,6 @@ function CompareSearchList({
     (state) => state.comparePro.guideCompareProduct
   );
   const [filteredProData, setFilteredProData] = useState([]);
-
   const handleChange = (data, inputPostion) => {
     if (inputPostion === "productFirst") {
       handelCategoryUpdate(data.category_id);
@@ -37,9 +36,6 @@ function CompareSearchList({
           .getAllSearchedProducts(searchedKeyWord)
           .then((res) => {
             // Prioritize results starting with the entered letters
-            if (res.data.data === null) {
-              setFilteredProData(null);
-            }
             const startsWithResults = res.data.data.filter((item) =>
               item.name.toLowerCase().startsWith(searchedKeyWord.toLowerCase())
             );
@@ -57,9 +53,6 @@ function CompareSearchList({
         homePage
           .getAllSearchedProductsByCategory(category_id, searchedKeyWord)
           .then((res) => {
-            if (res.data.data === null) {
-              setFilteredProData(null);
-            }
             if (inputPostion === "productSecond") {
               if (res.data.data.length > 0) {
                 const filteredProducts = res.data.data.filter(
@@ -118,7 +111,7 @@ function CompareSearchList({
         <div className="search-dropdown-list">
           {/* compare home page */}
           {filteredProData &&
-            filteredProData?.map((item, index) => (
+            filteredProData.slice(0,10).map((item, index) => (
               <div className="search-data-list" key={index}>
                 <h2
                   className="search-data-heading compare-search-list"
@@ -140,11 +133,8 @@ function CompareSearchList({
                 </h2>
               </div>
             ))}
-          {filteredProData === null && (
-            <div className="search-data-list">
-              <span className="no-result-found">No results found</span>
-            </div>
-          )}
+          {filteredProData?.length < 0 ||
+            (!filteredProData && <p>NO MATCH FOUND</p>)}
         </div>
       </div>
     </>

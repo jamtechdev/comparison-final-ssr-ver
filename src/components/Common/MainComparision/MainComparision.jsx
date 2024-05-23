@@ -146,7 +146,7 @@ export default function MainComparision(products) {
 
                       <span style={{ cursor: "pointer" }}>
                         <a href={`/${item?.category_url}/${item?.permalink}`}>
-                          See full comparsion
+                          {page_phase?.comparison_see_full}
                         </a>
                       </span>
                     </div>

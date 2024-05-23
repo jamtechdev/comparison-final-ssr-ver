@@ -109,6 +109,75 @@ const QuestionIcon = ({
               {`${" "} ${attributes?.when_matters}`}
             </p>
           )}
+          {attributes?.score_components && (
+            <p className="mb-2">
+              {<Product /> && guidePhraseData && (
+                <b>
+                  {guidePhraseData.score_components}:{""}
+                </b>
+              )}
+              {<ProductPage /> && productPhaseData && (
+                <b>
+                  {productPhaseData.score_components}:{""}
+                </b>
+              )}
+              {<CompareDiv /> && comparePhaseData && (
+                <b>
+                  {comparePhaseData.score_components}:{""}{" "}
+                </b>
+              )}
+              {<WhyAccordionTab /> && product && (
+                <b>
+                  {product?.page_phases?.score_components}:{""}
+                </b>
+              )}
+           {attributes.score_components &&
+            attributes.score_components?.map((data, index) => {
+              const roundedNumber = parseFloat(data?.attribute_evaluation);
+              // {console.log(data?.attribute_evaluation)}
+              const formattedNumber =
+                roundedNumber > 9
+                  ? Math.floor(roundedNumber)
+                  : roundedNumber.toFixed(1);
+              return (
+                <div className="scroe_section" key={index}>
+                  <p className="text-end">{`${parseFloat(
+                    data?.importance
+                  ).toFixed(1)}%`}</p>
+                  <span
+                    className="score-count"
+                    style={{
+                      background:
+                        data?.attribute_evaluation >= 7.5
+                          ? "#093673"
+                          : data?.attribute_evaluation >= 5 &&
+                            data?.attribute_evaluation < 7.5
+                          ? "#437ECE"
+                          : "#85B2F1",
+                         
+                    }}
+                  >
+                   {/* { console.log(data?.attribute_evaluation)} */}
+                    {formattedNumber != "NaN"
+                      ? formattedNumber
+                      : data?.attribute_evaluation}
+                  </span>
+                  <p style={{ textTransform: "none",color:"wh" }}>
+                    {" "}
+                    {data?.attribute_category
+                      ?.replace(/-/g, " ")
+                      .charAt(0)
+                      .toUpperCase() +
+                      data?.attribute_category
+                        ?.replace(/-/g, " ")
+                        .slice(1)
+                        .toLowerCase()}
+                  </p>
+                </div>
+              );
+            })}
+            </p>
+          )}
           {attributes?.importance && (
             <p className="mb-2">
               <b>Importance: </b>

@@ -396,7 +396,7 @@ function ProductPage({
               <div className="score-detail ">
                 <div className="tooltip-title removeUnderlineFrom">
                   <p>
-                    {product && product?.page_phases?.overall_score}
+                 {product && product?.page_phases?.overall_score}
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
