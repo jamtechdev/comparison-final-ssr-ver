@@ -81,10 +81,10 @@ export async function generateMetadata({ params: { category } }) {
 
   try {
     const response = await getSlugMetaData(category);
-    console.log(response);
+    // console.log(response);
     if (response && response.data) {
       meta_data = response.data;
-      console.log(meta_data);
+      // console.log(meta_data);
     }
   } catch (error) {
     console.error("Error fetching metadata:", error);

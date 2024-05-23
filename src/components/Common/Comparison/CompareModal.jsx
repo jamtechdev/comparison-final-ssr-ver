@@ -10,7 +10,7 @@ import {
 } from "@/redux/features/compareProduct/compareProSlice";
 import toast, { Toaster } from "react-hot-toast";
 import formatValue from "@/_helpers/formatValue";
-const CompareModal = ({ setIsOpen, location, favSlider }) => {
+const CompareModal = ({ setIsOpen, location, favSlider  }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   // console.log(reduxData);
@@ -136,7 +136,7 @@ const CompareModal = ({ setIsOpen, location, favSlider }) => {
               </span>
             </Col>
             <Col md={12}>
-              <h2 className="site-main-heading">Add to Comparison</h2>
+              <h2 className="site-main-heading">{favSlider&&favSlider?.page_phases?.add_to_comparison}</h2>
               <CompareForm
                 location="ON_MODEL"
                 favSlider={favSlider && favSlider?.page_phases}

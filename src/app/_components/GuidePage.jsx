@@ -375,7 +375,7 @@ export default function GuidePage({
               <BreadCrumb
                 firstPageName={categorySlug}
                 secondPageName={guide}
-                productPhaseData={guide && guide?.page_phrases}
+                productPhaseData={guide && guide?.page_phases}
               />
             </Col>
             <Col md={12} lg={12} xl={9}>
@@ -411,7 +411,7 @@ export default function GuidePage({
                   </div>
                 )}
                 <span>
-                  {guide && guide?.page_phrases?.updated}
+                  {guide && guide?.page_phases?.updated}
                   <i> {guide?.updated_at.split("/").reverse().join("-")}</i>
                 </span>
               </div>
@@ -515,7 +515,7 @@ export default function GuidePage({
               </div>
             </div>
             <Filter
-              guidePhraseData={guide && guide?.page_phrases}
+              guidePhraseData={guide && guide?.page_phases}
               categoryAttributes={filters}
               searchParam={searchParams}
               removedParam={removedParam}
@@ -566,7 +566,7 @@ export default function GuidePage({
                     </div>
                   </span> */}
                 <div className="filtered-data-select">
-                  {/* <span>{guide && guide?.page_phrases?.order_by} :</span> */}
+                  {/* <span>{guide && guide?.page_phases?.order_by} :</span> */}
                   <Form.Select
                     aria-label="Default select example"
                     className="mobile__filter"
@@ -579,7 +579,7 @@ export default function GuidePage({
                         rangeAttributes: "Overall",
                       })}
                     >
-                      {guide && guide?.page_phrases?.overall_available}
+                      {guide && guide?.page_phases?.overall_available}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -587,7 +587,7 @@ export default function GuidePage({
                         rangeAttributes: "false",
                       })}
                     >
-                      {guide && guide?.page_phrases?.overall_available}
+                      {guide && guide?.page_phases?.overall_available}
                     </option>
                     {/* <option
                             value={JSON.stringify({
@@ -604,7 +604,7 @@ export default function GuidePage({
                         rangeAttributes: "technical_score",
                       })}
                     >
-                      {guide && guide?.page_phrases?.technical_score}
+                      {guide && guide?.page_phases?.technical_score}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -612,7 +612,7 @@ export default function GuidePage({
                         rangeAttributes: "price",
                       })}
                     >
-                      {guide && guide?.page_phrases?.price_lowest_to_highest}
+                      {guide && guide?.page_phases?.price_lowest_to_highest}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -620,7 +620,7 @@ export default function GuidePage({
                         rangeAttributes: "price",
                       })}
                     >
-                      {guide && guide?.page_phrases?.price_highest_to_lowest}
+                      {guide && guide?.page_phases?.price_highest_to_lowest}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -629,7 +629,7 @@ export default function GuidePage({
                       })}
                     >
                       {" "}
-                      {guide && guide?.page_phrases?.users_ratings}
+                      {guide && guide?.page_phases?.users_ratings}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -637,7 +637,7 @@ export default function GuidePage({
                         rangeAttributes: "ratio_quality_price_points",
                       })}
                     >
-                      {guide && guide?.page_phrases?.ratio_quality_price_points}
+                      {guide && guide?.page_phases?.ratio_quality_price_points}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -645,7 +645,7 @@ export default function GuidePage({
                         rangeAttributes: "popularity_points",
                       })}
                     >
-                      {guide && guide?.page_phrases?.popularity}
+                      {guide && guide?.page_phases?.popularity}
                     </option>
 
                     {
@@ -680,7 +680,7 @@ export default function GuidePage({
                 <div className="sidebar_filter">
                   <div className="tooltip-title">
                     {" "}
-                    {guide && guide?.page_phrases?.hide_similar}
+                    {guide && guide?.page_phases?.hide_similar}
                     {/* <div className="tooltip-display-content">
                       </div> */}
                     <div className="custom-switch form-switch">
@@ -755,9 +755,9 @@ export default function GuidePage({
                 <div className="sidebar_filter">
                   <div className="tooltip-title">
                     {" "}
-                    {guide && guide?.page_phrases?.hide_similar}
+                    {guide && guide?.page_phases?.hide_similar}
                     <div className="tooltip-display-content">
-                      <p>{guide?.page_phrases?.hide_similar_hover_phrase}</p>
+                      <p>{guide?.page_phases?.hide_similar_hover_phrase}</p>
                     </div>
                     <div className="custom-switch form-switch">
                       <input
@@ -773,7 +773,7 @@ export default function GuidePage({
                 </div>
 
                 <div className="filtered-data-select">
-                  <span>{guide && guide?.page_phrases?.order_by} </span>
+                  <span>{guide && guide?.page_phases?.order_by} :</span>
                   <Form.Select
                     aria-label="Default select example"
                     onChange={(e) => handleSort(e.target.value)}
@@ -785,8 +785,8 @@ export default function GuidePage({
                         rangeAttributes: "Overall",
                       })}
                     >
-                      {/* {guide && guide?.page_phrases?.overall} */}
-                      {guide && guide?.page_phrases?.overall_available}
+                      {/* {guide && guide?.page_phases?.overall} */}
+                      {guide && guide?.page_phases?.overall_available}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -794,8 +794,8 @@ export default function GuidePage({
                         rangeAttributes: "false",
                       })}
                     >
-                      {/* {guide && guide?.page_phrases?.overall} */}
-                      {guide && guide?.page_phrases?.overall_all}
+                      {/* {guide && guide?.page_phases?.overall} */}
+                      {guide && guide?.page_phases?.overall_all}
                     </option>
                     {/* <option
                             value={JSON.stringify({
@@ -812,7 +812,7 @@ export default function GuidePage({
                         rangeAttributes: "technical_score",
                       })}
                     >
-                      {guide && guide?.page_phrases?.technical_score}
+                      {guide && guide?.page_phases?.technical_score}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -820,7 +820,7 @@ export default function GuidePage({
                         rangeAttributes: "price",
                       })}
                     >
-                      {guide && guide?.page_phrases?.price_lowest_to_highest}
+                      {guide && guide?.page_phases?.price_lowest_to_highest}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -828,7 +828,7 @@ export default function GuidePage({
                         rangeAttributes: "price",
                       })}
                     >
-                      {guide && guide?.page_phrases?.price_highest_to_lowest}
+                      {guide && guide?.page_phases?.price_highest_to_lowest}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -837,7 +837,7 @@ export default function GuidePage({
                       })}
                     >
                       {" "}
-                      {guide && guide?.page_phrases?.users_ratings}
+                      {guide && guide?.page_phases?.users_ratings}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -845,7 +845,7 @@ export default function GuidePage({
                         rangeAttributes: "ratio_quality_price_points",
                       })}
                     >
-                      {guide && guide?.page_phrases?.ratio_quality_price_points}
+                      {guide && guide?.page_phases?.ratio_quality_price_points}
                     </option>
                     <option
                       value={JSON.stringify({
@@ -853,7 +853,7 @@ export default function GuidePage({
                         rangeAttributes: "popularity_points",
                       })}
                     >
-                      {guide && guide?.page_phrases?.popularity}
+                      {guide && guide?.page_phases?.popularity}
                     </option>
 
                     {
@@ -888,7 +888,7 @@ export default function GuidePage({
               {products?.length > 0 ? (
                 products ? (
                   <ProductListing
-                    guidePhraseData={guide?.page_phrases}
+                    guidePhraseData={guide?.page_phases}
                     text_before_listing={guide?.text_before_listing}
                     text_after_listing={guide?.text_after_listing}
                     productPositionArray={productPosition}
@@ -933,7 +933,7 @@ export default function GuidePage({
           <Row>
             <Col md={12}>
               <div className="similar-guides">
-                <p>{guide && guide?.page_phrases?.similar_guides}:</p>
+                <p>{guide && guide?.page_phases?.similar_guides}:</p>
                 <ul>
                   {guide?.recommended_guides &&
                     guide?.recommended_guides?.map((data, index) => {
@@ -972,7 +972,7 @@ export default function GuidePage({
 
               {guide && productForTable?.length > 1 && (
                 <CompareTable
-                  guidePhraseData={guide?.page_phrases}
+                  guidePhraseData={guide?.page_phases}
                   products={productForTable}
                   categoryAttributes={attributesForTable && attributesForTable}
                   slug={slug}
@@ -998,7 +998,7 @@ export default function GuidePage({
               {
                 isMobile ? (
                   <MobileCompareTable
-                    productPhaseData={guide?.page_phrases}
+                    productPhaseData={guide?.page_phases}
                     products={productForTable}
                     categoryAttributes={
                       attributesForTable && attributesForTable
@@ -1032,7 +1032,7 @@ export default function GuidePage({
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">
-                {guide && guide?.page_phrases?.see_also_guides}
+                {guide && guide?.page_phases?.see_also_guides}
               </h2>
               <ProductSlider favSlider={guide?.see_also_guides} slug={slug} />
             </Col>
@@ -1040,7 +1040,7 @@ export default function GuidePage({
         </Container>
       </section>
       <BottomBar
-        guidePhraseData={guide?.page_phrases}
+        guidePhraseData={guide}
         isCollapsed={isCollapsed}
         handleToggleCollapse={handleToggleCollapse}
         manageCollapsedDiv={manageCollapsedDiv}

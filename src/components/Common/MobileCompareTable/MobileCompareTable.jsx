@@ -305,7 +305,7 @@ export default function MobileCompareTable({
                 // return product?.slice( currentIndex).map((data,tIndex) => {
                 return product?.map((data, tIndex) => {
                   // console.log(currentIndex, "check currentIndex");
-                   console.log(tIndex, "check index");
+                  //  console.log(tIndex, "check index");
                   return (
                     <th key={tIndex}>
                       
@@ -634,8 +634,7 @@ export default function MobileCompareTable({
                     <tr className="tr-bg-color">
                       <td colSpan="2">
                         <div className="table-main-heading">
-                        {productPhaseData &&
-                                          productPhaseData?.overall_score}  {" "}
+                          {productPhaseData && productPhaseData?.overall_score}{" "}
                           <span className="question-marker-icon">
                             <div className="tooltip-title">
                               {products[0]
@@ -649,8 +648,7 @@ export default function MobileCompareTable({
                                     <p className="mb-2">
                                       <b>
                                         {productPhaseData &&
-                                          productPhaseData?.what_it_is}
-                                        :{" "}
+                                          productPhaseData?.what_it_is}:{" "}
                                       </b>{" "}
                                       {
                                         products[0]?.overall_score_descriptions

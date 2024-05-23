@@ -93,7 +93,10 @@ export default function BottomBar({
               <div className="bottom_bar_header_content">
                 <img src="/images/vs.svg" width={40} height={40} alt="" />
                 <div className="bottom_bar_heading">
-                  <div>{guidePhraseData && guidePhraseData?.comparison}</div>
+                  <div>
+                    {guidePhraseData &&
+                      guidePhraseData?.page_phases?.comparison}
+                  </div>
                   <span>
                     {
                       Object?.values(compareGuideData)
@@ -130,7 +133,7 @@ export default function BottomBar({
                           height={0}
                           alt=""
                         />
-                        {console.log(item)}
+                        {/* {console.log(item)} */}
                         <p>{item.name}</p>
                         <i
                           className="ri-close-fill"
@@ -184,13 +187,21 @@ export default function BottomBar({
                       />
                     </>
                   )}
-                  {guidePhraseData && guidePhraseData?.compare_button}
+                  {console.log(guidePhraseData?.page_phrases)}
+                  {guidePhraseData &&
+                    guidePhraseData?.page_phases?.compare_button}
                 </button>
               </div>
             </div>
           </section>
         )}
-      {isOpen && <CompareModal location="ON_GUIDE" setIsOpen={setIsOpen} favSlider={guidePhraseData} />}
+      {isOpen && (
+        <CompareModal
+          location="ON_GUIDE"
+          setIsOpen={setIsOpen}
+          favSlider={guidePhraseData}
+        />
+      )}
     </>
   );
 }
