@@ -27,7 +27,7 @@ function drawBarChart(props) {
     .attr("y", (d) => yScale(d.value))
     .attr("height", (d) => height - yScale(d.value))
     .on("mouseover", (e, data) => {
-      toolTip.transition().duration(300).style("opacity", 1);
+      toolTip.transition().duration(300).style("opacity", 1).style("display", "inline-block");
       toolTip
         .html(
           `<div style="font-size: 14px;
@@ -41,7 +41,7 @@ function drawBarChart(props) {
     })
 
     .on("mouseout", (d, data) => {
-      toolTip.transition().duration(300).style("opacity", 0);
+      toolTip.transition().duration(300).style("opacity", 0).style("display", "none");
     });
 }
 
