@@ -219,7 +219,7 @@ async function fetchDataBasedOnPageType(
       }/guide/products/${category}/${slug}?query=${JSON.stringify(
         searchParams
       )}`;
-      console.log(productApiUrl);
+      // console.log(productApiUrl);
 
       if (searchParams?.page) {
         productApiUrl += `&page=${searchParams.page}`;
