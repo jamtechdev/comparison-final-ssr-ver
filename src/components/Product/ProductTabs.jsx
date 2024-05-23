@@ -20,7 +20,7 @@ function ProductTabs({
     <>
       {" "}
       <section className="ptb-80 bg-color">
-        {productReview && productReview.length > 0 && (
+        {
           <Container>
             <Row>
               <Col md={12}>
@@ -47,15 +47,15 @@ function ProductTabs({
                       eventKey="tab-2"
                       title={`${page_phase?.expert_review}`}
                     >
-                      <ExperReviwes expertReview={expertReview}  page_phase={page_phase}/>
+                      <ExperReviwes
+                        expertReview={expertReview}
+                        page_phase={page_phase}
+                      />
                     </Tab>
                   )}
 
                   {videoReview && videoReview.length > 0 && (
-                    <Tab
-                      eventKey="tab-3"
-                      title={`${page_phase?.video_review}`}
-                    >
+                    <Tab eventKey="tab-3" title={`${page_phase?.video_review}`}>
                       <VideoReviews videoReview={videoReview} />
                     </Tab>
                   )}
@@ -70,7 +70,7 @@ function ProductTabs({
               </Col>
             </Row>
           </Container>
-        )}
+        }
       </section>
     </>
   );

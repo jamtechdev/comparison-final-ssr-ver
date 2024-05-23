@@ -138,7 +138,7 @@ function lineChart(svgRef, lineChartData) {
     .tickFormat(d3.timeFormat(europeanDateFormat))
     .tickPadding(10);
 
-  console.log(yIntervalsInt);
+  // console.log(yIntervalsInt);
   // .ticks(d3.timeWeek.every(1)) // Set the interval between ticks to 1 week
   // .tickValues([firstSunday, middleSunday2, middleSunday1, lastSunday]); // Optionally, set specific tick values
 

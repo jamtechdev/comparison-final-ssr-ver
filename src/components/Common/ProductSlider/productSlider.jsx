@@ -75,7 +75,7 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
 
                         <div className="product-name-wrapper">
                           <span>
-                         hello    {section?.short_name || section?.guide_name}
+                            {section?.short_name || section?.guide_name}
                           </span>
                         </div>
                       </div>

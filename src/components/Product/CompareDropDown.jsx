@@ -130,14 +130,14 @@ function CompareDropDown({
                 <p className="text-end para_content_text mt-3">
                   {selectedAttribute && (
                     <span style={{ fontWeight: 600, fontSize: 17 }}>
-                      {product && product?.page_phases?.what_it_is} :
+                      {product && product?.page_phases?.what_it_is}:
                     </span>
                   )}
                   {""} {selectedAttribute.description}
                   <br />
                   {selectedAttribute && (
                     <span style={{ fontWeight: 600, fontSize: 17 }}>
-                      {product && product?.page_phases?.when_it_matters} :
+                      {product && product?.page_phases?.when_it_matters}:
                     </span>
                   )}
                   {""} {selectedAttribute.when_matters}

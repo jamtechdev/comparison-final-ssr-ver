@@ -568,10 +568,10 @@ function CompareDiv({
       <section className="mobile-table-section">
         {isMobile ? (
           <Container>
-            <h2 className="site-main-heading pt-5 m-3">
+            {/* <h2 className="site-main-heading pt-5 m-3">
               {bestAlternative &&
                 bestAlternative?.page_phases?.table_compare_title}
-            </h2>
+            </h2> */}
           </Container>
         ) : null}
         <Container className="p-0">
