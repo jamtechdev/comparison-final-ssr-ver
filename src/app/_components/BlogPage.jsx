@@ -9,42 +9,16 @@ import BlogSlider from "@/components/Common/BlogSlider/blogSlider";
 import ProductSlider from "@/components/Common/ProductSlider/productSlider";
 import OutlineGenerator from "@/components/Common/OutlineGenerator/OutlineGenerator";
 import debounce from "lodash/debounce";
+import GraphReplacer from "@/_helpers/GraphReplacer";
+import { useDispatch, useSelector } from "react-redux";
+import { storeTextPartShortCode } from "@/redux/features/compareProduct/compareProSlice";
 
 export default function BlogPage({ slug, blogData, categorySlug }) {
   // console.log(blogData[0]?.data?.page_phases?.updated);
   const [activeOutlineId, setActiveOutlineId] = useState("");
   const contentRef = useRef(null);
   const lastHeadingIdRef = useRef(null);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const headings = contentRef?.current?.querySelectorAll(
-  //       "h1, h2, h3, h4, h5, h6"
-  //     );
-
-  //     let closestHeading = null;
-  //     let closestDistance = Number.MAX_VALUE;
-
-  //     headings?.forEach((heading) => {
-  //       const bounding = heading.getBoundingClientRect();
-  //       const distanceToTop = bounding.top;
-
-  //       if (distanceToTop >= 0 && distanceToTop < closestDistance) {
-  //         closestHeading = heading;
-  //         closestDistance = distanceToTop;
-  //       }
-  //     });
-
-  //     if (closestHeading) {
-  //       setActiveOutlineId(closestHeading.id);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
+  const dispatch = useDispatch();
   const addIdsToHeadings = (content) => {
     const headings = content?.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
 
@@ -61,17 +35,52 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
     return content;
   };
   const contentWithIds = addIdsToHeadings(blogData[0]?.data?.text_part);
-  // useEffect(() => {
-  //   const stickyElements = document.querySelectorAll(".sticky");
-  //   stickyElements.forEach((element) => {
-  //     element.style.top = "0";
-  //   });
-  // }, []);
+
+  const getGuideTextPartShortcode = useSelector(
+    (state) => state.comparePro.text_part_main?.content
+  );
+
+  useEffect(() => {
+    const replaceShortcodes = () => {
+      const elements = document.querySelectorAll(".addClassData");
+      elements.forEach((element) => {
+        if (!element.classList.contains("observed")) {
+          element.classList.add("observed");
+          let innerHTML = element.innerHTML;
+          const shortCodepatternsRE =
+            /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)-\d+\]/g;
+
+          innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
+            return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
+          });
+          console.log(innerHTML);
+
+          element.innerHTML = innerHTML;
+          dispatch(storeTextPartShortCode({ content: innerHTML }));
+        }
+      });
+    };
+
+    // Delay the execution of replaceShortcodes to ensure the elements are rendered
+    const timeoutId = setTimeout(replaceShortcodes, 100);
+
+    const observer = new MutationObserver(replaceShortcodes);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Cleanup function to clear timeout and disconnect observer
+    return () => {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <>
       {/* <h1>{blogData[0]?.data?.text_part}</h1> */}
-      <div>{useChart()}</div>
+      {/* <div>{useChart()}</div> */}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -114,7 +123,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                   </div>
                 )}
                 <span>
-                {blogData[0]?.data?.page_phases?.updated} {""}
+                  {blogData[0]?.data?.page_phases?.updated} {""}
                   {""}{" "}
                   <i>
                     {""}
@@ -155,28 +164,24 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
               </div>
             </div>
             <div className="center-section ">
-              <div
-                id="shortCodeText"
-                ref={contentRef}
-                className="content-para mt-1"
-                dangerouslySetInnerHTML={{
-                  __html: searchForPatternAndReplace(contentWithIds),
-                }}
-              />
-              {/* <div className="social-icon items-icon">
-                <div className="twitter">
-                  <i className="ri-twitter-fill"></i>
-                </div>
-                <div className="facebook">
-                  <i className="ri-facebook-fill"></i>
-                </div>
-                <div className="printerest">
-                  <i className="ri-pinterest-fill"></i>
-                </div>
-                <div className="linkedIn">
-                  <i className="ri-linkedin-fill"></i>
-                </div>
-              </div> */}
+              {getGuideTextPartShortcode !== undefined ? (
+                <div
+                  id="shortCodeText"
+                  ref={contentRef}
+                  className="addClassData content-para mt-1"
+                  dangerouslySetInnerHTML={{
+                    __html: getGuideTextPartShortcode,
+                  }}
+                />
+              ) : (
+                <div
+                  id="shortCodeText"
+                  ref={contentRef}
+                  className="addClassData content-para mt-1"
+                  dangerouslySetInnerHTML={{ __html: contentWithIds }}
+                />
+              )}
+             
               {blogData[0]?.data?.author && (
                 <div className="fonzi p-3 my-md-4 my-xs-0">
                   <div className="profile mb-2">
@@ -250,6 +255,8 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
           </Row>
         </Container>
       </section>
+
+      <GraphReplacer />
     </>
   );
 }

@@ -37,6 +37,9 @@ import ProductPageOutline from "@/components/Common/OutlineGenerator/ProductPage
 import MainComparision from "@/components/Common/MainComparision/MainComparision";
 import MobileCompareTable from "@/components/Common/MobileCompareTable/MobileCompareTable";
 import useScreenSize from "@/_helpers/useScreenSize";
+import { storeTextPartShortCode } from "@/redux/features/compareProduct/compareProSlice";
+import { useDispatch, useSelector } from "react-redux";
+import GraphReplacer from "@/_helpers/GraphReplacer";
 
 // import Link from "next/link";
 
@@ -48,6 +51,7 @@ function ProductPage({
   categorySlug,
 }) {
   const [activeOutlineId, setActiveOutlineId] = useState("");
+  const dispatch = useDispatch();
   const contentRef = useRef(null);
 
   let initialDisplay = 5;
@@ -287,11 +291,52 @@ function ProductPage({
     (item) => item?.verdict_text === null
   );
   // console.log(checkVerdictText);
+  // display  graph
+  useEffect(() => {
+    const replaceShortcodes = () => {
+      const elements = document.querySelectorAll(".addClassData");
+      elements.forEach((element) => {
+        if (!element.classList.contains("observed")) {
+          element.classList.add("observed");
+          let innerHTML = element.innerHTML;
+          const shortCodepatternsRE =
+            /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)-\d+\]/g;
+
+          innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
+            return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
+          });
+          // console.log(innerHTML);
+
+          element.innerHTML = innerHTML;
+          dispatch(storeTextPartShortCode({ content: innerHTML }));
+        }
+      });
+    };
+
+    // Delay the execution of replaceShortcodes to ensure the elements are rendered
+    const timeoutId = setTimeout(replaceShortcodes, 100);
+
+    const observer = new MutationObserver(replaceShortcodes);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Cleanup function to clear timeout and disconnect observer
+    return () => {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+    };
+  }, []);
+
+  const getProductTextPartShortcode = useSelector(
+    (state) => state.comparePro.text_part_main?.content
+  );
 
   return (
     <>
       {/* {console.log(product?.text_under_ranking)} */}
-      <div>{useChart()}</div>
+      {/* <div>{useChart()}</div> */}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -396,7 +441,7 @@ function ProductPage({
               <div className="score-detail ">
                 <div className="tooltip-title removeUnderlineFrom">
                   <p>
-                 {product && product?.page_phases?.overall_score}
+                    {product && product?.page_phases?.overall_score}
                     <span className="">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1136,7 +1181,9 @@ function ProductPage({
           {product?.vedict_text !== null && (
             <Row>
               <div className="box__content__section">
-                <h2 class="site-main-heading">{product?.page_phases?.verdict_text_heading}</h2>
+                <h2 class="site-main-heading">
+                  {product?.page_phases?.verdict_text_heading}
+                </h2>
                 <div
                   className="box__content__section__textarea"
                   dangerouslySetInnerHTML={{ __html: product?.vedict_text }}
@@ -1178,10 +1225,9 @@ function ProductPage({
                         </div>
                         <div className="attribute__card__body">
                           <div
+                            className="addClassData"
                             dangerouslySetInnerHTML={{
-                              __html: searchForPatternAndReplace(
-                                data?.text_part_output
-                              ),
+                              __html: data?.text_part_output,
                             }}
                           ></div>
                         </div>
@@ -1265,7 +1311,10 @@ function ProductPage({
           <Container>
             <Row>
               <Col md={12}>
-                <h2 className="site-main-heading"> {product?.page_phases?.comparison_heading_productpage}</h2>
+                <h2 className="site-main-heading">
+                  {" "}
+                  {product?.page_phases?.comparison_heading_productpage}
+                </h2>
                 <MainComparision
                   products={product && product?.alternative_comparisons}
                 />
@@ -1281,7 +1330,7 @@ function ProductPage({
             <Row>
               <Col md={12}>
                 <h2 className="site-main-heading">
-                 {product?.page_phases?.old_price_graph_heading}
+                  {product?.page_phases?.old_price_graph_heading}
                 </h2>
                 <div
                   className="draw-chart-container"
@@ -1299,7 +1348,10 @@ function ProductPage({
                         Lowest price
                       </p>
                     </div>
-                    <DrawChart lineChartData={product?.line_chart_data} page_phase={product?.page_phases?.old_price_graph_heading} />
+                    <DrawChart
+                      lineChartData={product?.line_chart_data}
+                      page_phase={product?.page_phases?.old_price_graph_heading}
+                    />
                   </Container>
                 </div>
               </Col>
@@ -1414,14 +1466,24 @@ function ProductPage({
                     </Col>
                   </Row>
 
-                  <div
-                    id="shortCodeText"
-                    ref={contentRef}
-                    className="content-para review-content"
-                    dangerouslySetInnerHTML={{
-                      __html: searchForPatternAndReplace(contentWithIds),
-                    }}
-                  />
+                  {getProductTextPartShortcode !== undefined ? (
+                    <div
+                      id="shortCodeText"
+                      ref={contentRef}
+                      className="addClassData content-para mt-1"
+                      dangerouslySetInnerHTML={{
+                        __html: getProductTextPartShortcode,
+                      }}
+                    />
+                  ) : (
+                    <div
+                      id="shortCodeText"
+                      ref={contentRef}
+                      className="addClassData content-para mt-1"
+                      dangerouslySetInnerHTML={{ __html: contentWithIds }}
+                    />
+                  )}
+                 
                   {product &&
                     getAttributeProductHalf(product, "first") &&
                     Object.keys(getAttributeProductHalf(product, "first")).map(
@@ -2105,6 +2167,8 @@ function ProductPage({
           </Container>
         </section>
       )}
+       <GraphReplacer />
+
 
       <ProductBottomBar favSlider={product && product} />
     </>
