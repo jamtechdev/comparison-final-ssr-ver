@@ -338,6 +338,7 @@ function CompareDiv({
                   handelRemoveProductFormComparison
                 }
                 productPhaseData={bestAlternative && bestAlternative}
+
               />
             </Col>
           </Row>
@@ -605,6 +606,7 @@ function CompareDiv({
                     products={comparisonProductData}
                     categoryAttributes={categroyAttributes}
                     slug={slug}
+                    type="compare"
                   />
                 ) : null // or any other fallback content for non-mobile
               }

@@ -284,6 +284,21 @@ export default function MobileCompareTable({
     // console.log(currentIndex, "ckeking current index");
   };
 
+  const findProductsScoreLabelIndex = (products) => {
+    if (products.length === 0) {
+      return "";
+    }
+    const maxScore = Math.max(...products?.map((obj) => obj.overall_score));
+    const winningProductIndex = products
+      .map((obj, index) => (obj.overall_score === maxScore ? index : undefined))
+      .filter((index) => index !== undefined);
+
+    return winningProductIndex.length === 1 ? winningProductIndex[0] : -1000;
+  };
+  const productScoreLabelIndex = findProductsScoreLabelIndex(chunkedData[0]);
+  // console.log(chunkedData)
+  // console.log(productScoreLabelIndex);
+
   return (
     <section className="comparisons-slider">
       <Table
@@ -306,14 +321,37 @@ export default function MobileCompareTable({
                 return product?.map((data, tIndex) => {
                   // console.log(currentIndex, "check currentIndex");
                   // console.log(product, "check products");
+
                   return (
-                    data?.assigned_title && (
-                      <th>
-                        <span class="best-tag-product">
-                          {data?.assigned_title}
-                        </span>
-                      </th>
-                    )
+                    <>
+                      {type === "guide" && (
+                        <th>
+                          <span class="best-tag-product">
+                            {type === "guide" && data?.assigned_title}
+                          </span>
+                        </th>
+                      )}
+                      {type === "product" && tIndex === 0 && (
+                        <th>
+                          <span class="best-tag-product">
+                            {type === "product" &&
+                              tIndex === 0 &&
+                              productPhaseData?.compared}
+                          </span>
+                        </th>
+                      )}
+                      {type === "compare" && (
+                        <th>
+                          {productScoreLabelIndex !== "" &&
+                            productScoreLabelIndex === tIndex && (
+                              <span className="best-tag-product">
+                                {productPhaseData && productPhaseData?.winner}
+                                {/* {data?.winner} */}
+                              </span>
+                            )}
+                        </th>
+                      )}
+                    </>
                   );
                 });
               })}
@@ -535,13 +573,36 @@ export default function MobileCompareTable({
                     <tr className="catchy-title-mobile-view">
                       {slider_data?.map((data, dIndex) => {
                         return (
-                          data?.assigned_title && (
-                            <th>
-                              <span class="best-tag-product">
-                                {data?.assigned_title}
-                              </span>
-                            </th>
-                          )
+                          <>
+                            {type === "guide" && (
+                              <th>
+                                <span class="best-tag-product">
+                                  {type === "guide" && data?.assigned_title}
+                                </span>
+                              </th>
+                            )}
+                            {type === "product" && dIndex === 0 && (
+                              <th>
+                                <span class="best-tag-product">
+                                  {type === "product" &&
+                                    dIndex === 0 &&
+                                    productPhaseData?.compared}
+                                </span>
+                              </th>
+                            )}
+                            {type === "compare" && (
+                              <th>
+                                {productScoreLabelIndex !== "" &&
+                                  productScoreLabelIndex === dIndex && (
+                                    <span className="best-tag-product">
+                                      {productPhaseData &&
+                                        productPhaseData?.winner}
+                                      {/* {data?.winner} */}
+                                    </span>
+                                  )}
+                              </th>
+                            )}
+                          </>
                         );
                       })}
 

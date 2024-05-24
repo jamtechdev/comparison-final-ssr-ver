@@ -2099,6 +2099,7 @@ function ProductPage({
                       products={compareByCatID?.data}
                       categoryAttributes={productCatAttributes?.data}
                       slug={slug}
+                      type="product"
                     />
                   ) : null) // or any other fallback content for non-mobile
               }
