@@ -2026,16 +2026,7 @@ function ProductPage({
         expertReview={product?.expert_reviews_websites}
         page_phase={product?.page_phases}
       />
-      {/* <section className="ptb-80">
-        <Container>
-          <Row>
-            <Col md={12}>
-              <h2 className="site-main-heading">Reviews of Our Users</h2>
-              <p className="no-review">No reviews yet.</p>
-            </Col>
-          </Row>
-        </Container>
-      </section> */}
+    
 
       <section className="mt-3 pt-4">
         <Container>

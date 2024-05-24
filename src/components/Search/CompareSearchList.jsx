@@ -135,7 +135,7 @@ function CompareSearchList({
               </div>
             ))}
           {filteredProData?.length < 0 ||
-            (!filteredProData && <p>{page_phase?.}/p>)}
+            (!filteredProData && <p>{page_phase?.no_results_found}</p>)}
         </div>
       </div>
     </>
