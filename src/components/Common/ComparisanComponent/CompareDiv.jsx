@@ -215,7 +215,6 @@ function CompareDiv({
     const replaceShortcodes = () => {
       const elements = document.querySelectorAll(".addClassData");
       elements.forEach((element) => {
-        console.log(element);
         if (!element.classList.contains("observed")) {
           element.classList.add("observed");
           let innerHTML = element.innerHTML;
@@ -408,7 +407,7 @@ function CompareDiv({
                 </div>
               </div>
               <div className="center-section ">
-                {/* {getGuideTextPartShortcode !== undefined ? (
+                {getGuideTextPartShortcode !== undefined ? (
                   <div
                     id="shortCodeText"
                     ref={contentRef}
@@ -424,13 +423,7 @@ function CompareDiv({
                     className="addClassData content-para mt-1"
                     dangerouslySetInnerHTML={{ __html: contentWithIds }}
                   />
-                )} */}
-                <div
-                  id="shortCodeText"
-                  ref={contentRef}
-                  className="addClassData content-para mt-1"
-                  dangerouslySetInnerHTML={{ __html: contentWithIds }}
-                />
+                )}
 
                 {/* <div className="social-icon items-icon">
                   <div className="twitter">

@@ -50,6 +50,9 @@ export default function Filter({
       // console.log(filterName, key, value, "neet");
       const currentParams = new URLSearchParams(searchParams.toString());
       const url = new URL(window.location.href);
+      if(key == 'page'){
+        updatedParams.page = value;
+      }
       switch (filterName) {
         case "price":
           if (!isChecked) {
@@ -73,15 +76,14 @@ export default function Filter({
             deleteQueryFormURL(key, updatedParams, currentParams, url);
           }
 
-        //   break;
-        // case "variants":
-        //   if (value) {
-        //     updatedParams.variants = value;
-        //   } else {
-        //     deleteQueryFormURL(key, updatedParams, currentParams, url);
-        //   }
+          break;
 
-        //   break;
+        case "page":
+          if (value) {
+            updatedParams.page = value;
+          } 
+console.log(url , key)
+          break;
         case "brand":
           if (isChecked) {
             if (Object.values(value).length > 0) {
@@ -152,6 +154,7 @@ export default function Filter({
         default:
           return;
       }
+      console.log(updatedParams, currentParams, url);
       Object.entries(updatedParams).forEach(([paramKey, paramValue]) => {
         currentParams.set(paramKey, paramValue);
         url.searchParams.set(paramKey, paramValue);
@@ -168,13 +171,16 @@ export default function Filter({
   );
   // console.log(sliderValues);
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
+    console.log(key, updatedParams, currentParams, url);
     delete updatedParams[key];
     currentParams.delete([key]);
     url.searchParams.delete([key]);
   };
+  console.log(removedParam);
 
   useEffect(() => {
     if (removedParam) {
+      console.log(removedParam);
       if (searchParam?.direct) {
         const filteredKeys = Object.keys(searchParam).filter(
           (key) => key !== "direct"
@@ -240,6 +246,9 @@ export default function Filter({
         }
         if (removedParam == "sort") {
           handelFilterActions("sort", "sort", ``, false);
+        }
+        if (removedParam == "page") {
+          handelFilterActions("page", "page", `2`, false);
         }
         if (
           removedParam !== "available" &&

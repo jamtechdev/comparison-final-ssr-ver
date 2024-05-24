@@ -163,7 +163,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
                 </ol> */}
               </div>
             </div>
-            <div className="center-section ">
+            <div className="center-section">
               {getGuideTextPartShortcode !== undefined ? (
                 <div
                   id="shortCodeText"

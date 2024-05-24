@@ -2471,6 +2471,7 @@ tr:first-child th {
 
 .mobile-table-section .table-section-desktop .compare-container thead tr.catchy-title-mobile-view th{
   padding: 0 !important;
+  vertical-align: bottom !important;
 }
 
 .catchy-title-mobile-view th .best-tag-product{
