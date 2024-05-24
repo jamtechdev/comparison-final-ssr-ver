@@ -927,8 +927,7 @@ const CompareAccordionTab = React.memo(
                               >
                                 {comparePhaseData && comparePhaseData?.total}
                               </Nav.Link>
-                            </Nav.Item>
-
+                            </Nav.Item> 
                             <Nav.Item>
                               <Nav.Link
                                 eventKey="general"

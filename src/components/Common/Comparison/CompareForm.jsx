@@ -18,6 +18,7 @@ export default function CompareForm({
   product_name,
   handelCategoryForOffenProduct,
   handelCloseCompareModel,
+  
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -219,7 +220,7 @@ export default function CompareForm({
                 }
                 onFocus={() => setFocusedProductFirst(true)}
                 onChange={(e) =>
-                  handleFieldChange("productFirst", e.target.value.trim())
+                  handleFieldChange("productFirst", e.target.value)
                 }
               />
 
@@ -265,7 +266,7 @@ export default function CompareForm({
                 }
                 onFocus={() => setFocusedProductSecond(true)}
                 onChange={(e) =>
-                  handleFieldChange("productSecond", e.target.value.trim())
+                  handleFieldChange("productSecond", e.target.value)
                 }
                 disabled={formFields.productFirst ? false : true}
               />
@@ -307,7 +308,7 @@ export default function CompareForm({
                     : formFields.productThird?.name || ""
                 }
                 onChange={(e) =>
-                  handleFieldChange("productThird", e.target.value.trim())
+                  handleFieldChange("productThird", e.target.value)
                 }
                 disabled={formFields.productSecond ? false : true}
               />
