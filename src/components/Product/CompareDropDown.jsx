@@ -5,6 +5,7 @@ import Image from "next/image";
 import useChart from "@/hooks/useChart";
 import axios from "axios";
 import useComparisonChart from "@/hooks/useComparisonChart";
+import ShowGraphChart from "@/hooks/ShowGraphChart";
 
 function CompareDropDown({
   categorySlug,
@@ -75,8 +76,13 @@ function CompareDropDown({
     setSelectedAttribute(selectedAttribute);
   };
   // testing
-  // console.log(chart)
-  useComparisonChart(chart, pageType, slug);
+  useEffect(() => {
+    if (chart) {
+      ShowGraphChart(chart, ".compareWithOther" , pageType ,slug);
+    }
+  }, [chart]);
+
+  // useComparisonChart(chart, pageType, slug);
   return (
     <>
       <section className="ptb-80">
@@ -110,18 +116,20 @@ function CompareDropDown({
                 </Form.Select>
               </div>
               <div className="filtered-data-select justify-content-start mt-3">
-                <span>{product && product?.page_phases?.attribute}  </span>
+                <span>{product && product?.page_phases?.attribute} </span>
                 {selectedItem && (
                   <Form.Select
                     aria-label="Attribute select"
                     onChange={handleAttributeChange}
                     value={selectedItem.attributes.indexOf(selectedAttribute)}
                   >
-                    {selectedItem.attributes.sort((a, b) => a?.position - b?.position)?.map((attribute, index) => (
-                      <option key={index} value={index}>
-                        {attribute.name}
-                      </option>
-                    ))}
+                    {selectedItem.attributes
+                      .sort((a, b) => a?.position - b?.position)
+                      ?.map((attribute, index) => (
+                        <option key={index} value={index}>
+                          {attribute.name}
+                        </option>
+                      ))}
                   </Form.Select>
                 )}
               </div>
@@ -145,7 +153,7 @@ function CompareDropDown({
               )}
             </Col>
             <Col md={8} lg={8}>
-              <span className="addClassData"></span>
+              <span className="compareWithOther"></span>
               <div className="barData"></div>
               {/* <h6 className="addClassData">
                 [pie-chart;Overall1;Robot Vacuum Cleaners;Runtime:0-300;Can mop]
