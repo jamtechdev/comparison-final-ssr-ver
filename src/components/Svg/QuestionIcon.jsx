@@ -58,7 +58,7 @@ const QuestionIcon = ({
           }}
         >
           {attributes?.description && (
-            <p className="mb-2">
+            <div className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
                   {guidePhraseData.what_it_is}:{""}
@@ -81,10 +81,10 @@ const QuestionIcon = ({
               )}
 
               {`${" "} ${attributes?.description}`}
-            </p>
+            </div>
           )}
           {attributes?.when_matters && (
-            <p className="mb-2">
+            <div className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
                   {guidePhraseData.when_it_matters}:{""}
@@ -107,10 +107,10 @@ const QuestionIcon = ({
               )}
               {/* <b> When it matters:{""}</b> */}
               {`${" "} ${attributes?.when_matters}`}
-            </p>
+            </div>
           )}
           {attributes?.score_components && (
-            <p className="mb-2">
+            <div className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
                   {guidePhraseData.score_components}:{""}
@@ -176,7 +176,7 @@ const QuestionIcon = ({
                 </div>
               );
             })}
-            </p>
+            </div>
           )}
           {attributes?.importance && (
             <p className="mb-2">

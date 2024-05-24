@@ -335,8 +335,6 @@ function ProductPage({
 
   return (
     <>
-      {/* {console.log(product?.text_under_ranking)} */}
-      {/* <div>{useChart()}</div> */}
       <section className="product-header">
         <Container>
           <Row className="align-items-center">
@@ -788,7 +786,8 @@ function ProductPage({
                                 <p className="mb-2">
                                   <b>
                                     {product &&
-                                      product?.page_phases?.what_it_is}:{" "}
+                                      product?.page_phases?.what_it_is}
+                                    :{" "}
                                   </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
@@ -1242,19 +1241,12 @@ function ProductPage({
       <section className="mb-4">
         <Container>
           <Row className="mb-3">
-            {/* <span className="testing__text">
-              <b>Updated 25/03/2024:</b> We've updated the text in the review to
-              account for the new tests and scoring methodology in Vacuum Test
-              Bench 1.0 and Vacuum Test Bench 1.1.
-            </span> */}
             <div
               className="testing__text"
               dangerouslySetInnerHTML={{
                 __html: product?.product_updates_text,
               }}
-            >
-              {/* <b>Updated 19/03/2024:</b> Product test based on methodology v1.0 */}
-            </div>
+            ></div>
           </Row>
           <Row>
             <Col md={12}>
@@ -1277,7 +1269,6 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -1295,7 +1286,6 @@ function ProductPage({
           />
         </Container>
       </section>
-
       <CompareDropDown
         categorySlug={categorySlug}
         attributeDropDown={[...productCatAttributes?.data].reverse()}
@@ -1303,8 +1293,6 @@ function ProductPage({
         product={product}
         slug={slug}
       />
-      {/* {console.log(product?.line_chart_data[0])} */}
-
       {is_found?.length > 0 && (
         <section className="mt-3 mobile-popular-comparison">
           <Container>
@@ -1316,7 +1304,7 @@ function ProductPage({
                 </h2>
                 <MainComparision
                   products={product && product?.alternative_comparisons}
-                  pages_phase = {product && product?.page_phases}
+                  pages_phase={product && product?.page_phases}
                 />
               </Col>
             </Row>
@@ -1350,7 +1338,9 @@ function ProductPage({
                     </div>
                     <DrawChart
                       lineChartData={product?.line_chart_data}
-                      page_phase={product?.page_phases?.old_price_graph_lowest_price}
+                      page_phase={
+                        product?.page_phases?.old_price_graph_lowest_price
+                      }
                     />
                   </Container>
                 </div>
@@ -1483,7 +1473,7 @@ function ProductPage({
                       dangerouslySetInnerHTML={{ __html: contentWithIds }}
                     />
                   )}
-                 
+
                   {product &&
                     getAttributeProductHalf(product, "first") &&
                     Object.keys(getAttributeProductHalf(product, "first")).map(
@@ -2026,7 +2016,6 @@ function ProductPage({
         expertReview={product?.expert_reviews_websites}
         page_phase={product?.page_phases}
       />
-    
 
       <section className="mt-3 pt-4">
         <Container>
@@ -2158,8 +2147,7 @@ function ProductPage({
           </Container>
         </section>
       )}
-       <GraphReplacer />
-
+      <GraphReplacer />
 
       <ProductBottomBar favSlider={product && product} />
     </>
