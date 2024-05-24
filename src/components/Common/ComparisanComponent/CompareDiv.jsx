@@ -18,6 +18,7 @@ import ComparisonTable from "../CompareTable/ComparisonTable";
 import {
   addCompareProduct,
   deleteCompareProduct,
+  storeTextPartShortCode,
   updateCompareProduct,
 } from "@/redux/features/compareProduct/compareProSlice";
 import CompareForm from "../Comparison/CompareForm";
@@ -39,6 +40,7 @@ import MobileComparisonTool from "../MobileComparisonTool/MobileComparisonTool";
 import MobileCompareTable from "../MobileCompareTable/MobileCompareTable";
 import CompareRealtedGuide from "@/components/Product/CompareRealtedGuide";
 import useScreenSize from "@/_helpers/useScreenSize";
+import GraphReplacer from "@/_helpers/GraphReplacer";
 function CompareDiv({
   comparisonData,
   categroyAttributes,
@@ -66,6 +68,7 @@ function CompareDiv({
   // best alternative state
   const [bestAlternative, setBestAlternative] = useState([]);
   const [activeOutlineId, setActiveOutlineId] = useState("");
+
   const contentRef = useRef(null);
 
   const router = useRouter();
@@ -175,48 +178,6 @@ function CompareDiv({
       });
   }, []);
 
-  // This code for text part and outline
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const headings = contentRef.current?.querySelectorAll(
-  //       "h1, h2, h3, h4, h5, h6"
-  //     );
-
-  //     let closestHeading = null;
-  //     let closestDistance = Number.MAX_VALUE;
-
-  //     headings?.forEach((heading) => {
-  //       const bounding = heading.getBoundingClientRect();
-  //       const distanceToTop = bounding.top;
-
-  //       if (distanceToTop >= 0 && distanceToTop < closestDistance) {
-  //         closestHeading = heading;
-  //         closestDistance = distanceToTop;
-  //       }
-  //     });
-
-  //     if (closestHeading) {
-  //       setActiveOutlineId(closestHeading.id);
-  //     }
-
-  //     const shortCodeText = document.getElementById("shortCodeText");
-  //     if (shortCodeText) {
-  //       const shortCodeTextBounding = shortCodeText.getBoundingClientRect();
-  //       if (
-  //         shortCodeTextBounding.top >= 0 &&
-  //         shortCodeTextBounding.bottom <= window.innerHeight
-  //       ) {
-  //         setActiveOutlineId("shortCodeText");
-  //       }
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
   const addIdsToHeadings = (content) => {
     const headings = content?.match(/<h[2-6][^>]*>.*?<\/h[2-6]>/g) || [];
 
@@ -244,6 +205,50 @@ function CompareDiv({
   // const contentWithIds = addIdsToHeadings(bestAlternative?.text_part);
 
   const { isMobile } = useScreenSize();
+
+  // get graph code
+
+  const getGuideTextPartShortcode = useSelector(
+    (state) => state.comparePro.text_part_main?.content
+  );
+  useEffect(() => {
+    const replaceShortcodes = () => {
+      const elements = document.querySelectorAll(".addClassData");
+      elements.forEach((element) => {
+        console.log(element);
+        if (!element.classList.contains("observed")) {
+          element.classList.add("observed");
+          let innerHTML = element.innerHTML;
+          const shortCodepatternsRE =
+            /\[(pie-chart|vertical-chart|horizontal-chart|correlation-chart)-\d+\]/g;
+
+          innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
+            return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
+          });
+          console.log(innerHTML);
+
+          element.innerHTML = innerHTML;
+          dispatch(storeTextPartShortCode({ content: innerHTML }));
+        }
+      });
+    };
+
+    // Delay the execution of replaceShortcodes to ensure the elements are rendered
+    const timeoutId = setTimeout(replaceShortcodes, 100);
+
+    const observer = new MutationObserver(replaceShortcodes);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Cleanup function to clear timeout and disconnect observer
+    return () => {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+    };
+  }, []);
+  console.log(contentWithIds);
 
   return (
     <>
@@ -338,16 +343,15 @@ function CompareDiv({
             </Col>
           </Row>
           {/* {console.log(bestAlternative,"hello mahi")} */}
+          {/* {console.log(bestAlternative?.page_phases)} */}
           {bestAlternative?.verdict_text &&
             bestAlternative?.verdict_text &&
             bestAlternative?.verdict_text !== "" &&
-            bestAlternative?.verdict_text !== null && 
-            (
+            bestAlternative?.verdict_text !== null && (
               <Row>
                 <div className="box__content__section">
                   <h2 class="site-main-heading">
-            {bestAlternative?.page_phases?.verdict_text_heading}
-              
+                    {bestAlternative?.page_phases?.verdict_text_heading}
                   </h2>
                   <div
                     className="box__content__section__textarea"
@@ -404,14 +408,30 @@ function CompareDiv({
                 </div>
               </div>
               <div className="center-section ">
+                {/* {getGuideTextPartShortcode !== undefined ? (
+                  <div
+                    id="shortCodeText"
+                    ref={contentRef}
+                    className="addClassData content-para mt-1"
+                    dangerouslySetInnerHTML={{
+                      __html: getGuideTextPartShortcode,
+                    }}
+                  />
+                ) : (
+                  <div
+                    id="shortCodeText"
+                    ref={contentRef}
+                    className="addClassData content-para mt-1"
+                    dangerouslySetInnerHTML={{ __html: contentWithIds }}
+                  />
+                )} */}
                 <div
                   id="shortCodeText"
                   ref={contentRef}
-                  className="content-para mt-1"
-                  dangerouslySetInnerHTML={{
-                    __html: searchForPatternAndReplace(contentWithIds),
-                  }}
+                  className="addClassData content-para mt-1"
+                  dangerouslySetInnerHTML={{ __html: contentWithIds }}
                 />
+
                 {/* <div className="social-icon items-icon">
                   <div className="twitter">
                     <i className="ri-twitter-fill"></i>
@@ -679,6 +699,7 @@ function CompareDiv({
           }}
         />
       )}
+      <GraphReplacer />
     </>
   );
 }

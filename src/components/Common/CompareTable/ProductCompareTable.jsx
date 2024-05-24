@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect, Fragment } from "react";
 import Image from "next/image";
 import { Button, Table } from "react-bootstrap";
-import QuestionIcon from "../../Svg/QuestionIcon";
+// import QuestionIcon from "../../Svg/QuestionIcon";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import ProsConsToolTip from "../../Svg/ProsConsToolTip";
 import { useRouter } from "next/navigation";

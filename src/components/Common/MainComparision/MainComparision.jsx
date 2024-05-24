@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
 
-export default function MainComparision(products) {
+export default function MainComparision({products,pages_phase}) {
   const router = useRouter();
   // console.log(products?.products);
   const getColorBasedOnScore = (score) => {
@@ -20,7 +20,7 @@ export default function MainComparision(products) {
     }
   };
 
-  const filteredComparisons = products?.products?.filter(
+  const filteredComparisons = products?.filter(
     (comparison) => comparison.verdict_text !== null
   );
 
@@ -79,7 +79,7 @@ export default function MainComparision(products) {
                       />
                       {item?.product_first_overall_counted_score >
                         item?.product_second_overall_counted_score && (
-                        <div className="winner__badge">WINNER</div>
+                        <div className="winner__badge">{pages_phase?.winner}</div>
                       )}
                       <div className="footer_content">
                         <span>{item?.product_first}</span>
@@ -112,7 +112,7 @@ export default function MainComparision(products) {
                       />
                       {item?.product_second_overall_counted_score >
                         item?.product_first_overall_counted_scoret && (
-                        <div className="winner__badge">WINNER</div>
+                        <div className="winner__badge">{pages_phase?.winner}</div>
                       )}
 
                       <div className="footer_content">
@@ -146,7 +146,7 @@ export default function MainComparision(products) {
 
                       <span style={{ cursor: "pointer" }}>
                         <a href={`/${item?.category_url}/${item?.permalink}`}>
-                          {page_phase?.comparison_see_full}
+                          {pages_phase.comparison_see_full}
                         </a>
                       </span>
                     </div>
@@ -161,7 +161,7 @@ export default function MainComparision(products) {
         <>
           {" "}
           <span className="swiper-prev">
-            <i className="ri-arrow-left-s-line">hwllo</i>
+            <i className="ri-arrow-left-s-line"></i>
           </span>
           <span className="swiper-next">
             <i className="ri-arrow-right-s-line"></i>

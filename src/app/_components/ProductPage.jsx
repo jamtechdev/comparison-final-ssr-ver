@@ -1317,6 +1317,7 @@ function ProductPage({
                 </h2>
                 <MainComparision
                   products={product && product?.alternative_comparisons}
+                  pages_phase = {product && product?.page_phases}
                 />
               </Col>
             </Row>
