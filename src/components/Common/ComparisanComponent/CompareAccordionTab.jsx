@@ -354,7 +354,7 @@ const CompareAccordionTab = React.memo(
                                           </span>
                                           <QuestionIcon
                                             attributes={item?.when_matters}
-comparePhaseData={comparePhaseData}
+                                            comparePhaseData={comparePhaseData}
                                           />
 
                                           <small className="d-block tooltip-title">
@@ -577,7 +577,7 @@ comparePhaseData={comparePhaseData}
                                   handleAccordionChange("total", "pros")
                                 }
                               >
-                              {comparePhaseData && comparePhaseData?.total}
+                                {comparePhaseData && comparePhaseData?.total}
                               </Nav.Link>
                             </Nav.Item>
                             {apiData?.general?.pros?.length > 0 && (
@@ -587,7 +587,9 @@ comparePhaseData={comparePhaseData}
                                   onClick={() =>
                                     handleAccordionChange("general", "pros")
                                   }
-                                >{comparePhaseData && comparePhaseData?.general}
+                                >
+                                  {comparePhaseData &&
+                                    comparePhaseData?.general}
                                 </Nav.Link>
                               </Nav.Item>
                             )}
@@ -923,21 +925,21 @@ comparePhaseData={comparePhaseData}
                                   handleAccordionChange("total", "cons")
                                 }
                               >
-                               {comparePhaseData && comparePhaseData?.total}
+                                {comparePhaseData && comparePhaseData?.total}
                               </Nav.Link>
                             </Nav.Item>
-                            {apiData?.general?.cons?.length > 0 && (
-                              <Nav.Item>
-                                <Nav.Link
-                                  eventKey="general"
-                                  onClick={() =>
-                                    handleAccordionChange("general", "cons")
-                                  }
-                                >
-                                  {comparePhaseData && comparePhaseData?.page_phases?.general}
-                                </Nav.Link>
-                              </Nav.Item>
-                            )}
+
+                            <Nav.Item>
+                              <Nav.Link
+                                eventKey="general"
+                                onClick={() =>
+                                  handleAccordionChange("general", "cons")
+                                }
+                              >
+                                {comparePhaseData &&
+                                  comparePhaseData?.page_phases?.general}
+                              </Nav.Link>
+                            </Nav.Item>
 
                             {apiData &&
                               Object.keys(apiData?.average_cons).map(

@@ -1,7 +1,8 @@
 import * as React from "react";
 import * as d3 from "d3";
 
-function lineChart(svgRef, lineChartData) {
+function lineChart(svgRef, lineChartData,page_phase) {
+  console.log(lineChartData?.page_phase)
   // console.log(lineChartData?.lineChartData[0], "xxx");
   let date_time_store = "";
   if (lineChartData?.lineChartData[0]?.format === "Y-m-d") {
@@ -285,10 +286,10 @@ function lineChart(svgRef, lineChartData) {
     });
 }
 
-const DrawChart = (lineChartData) => {
+const DrawChart = (lineChartData ,page_phase) => {
   const svg = React.useRef(null);
   React.useEffect(() => {
-    lineChart(svg, lineChartData);
+    lineChart(svg, lineChartData , page_phase);
   }, [svg]);
 
   return <svg ref={svg} />;

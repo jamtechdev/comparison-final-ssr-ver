@@ -96,7 +96,7 @@ export async function generateMetadata({ params: { category } }) {
     if (meta_data && meta_data.data) {
       return {
         title: meta_data.data.title,
-        description: meta_data.data.meta_description,
+        description: meta_data.data.meta_description || meta_data.data.title,
         generator: "Comparison web",
         applicationName: "Comparison web",
         referrer: "origin-when-cross-origin",

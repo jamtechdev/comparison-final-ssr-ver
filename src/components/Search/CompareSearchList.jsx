@@ -10,6 +10,7 @@ function CompareSearchList({
   inputPostion,
   handelCategoryUpdate,
   category_id,
+  page_phase
 }) {
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   const getGuideCompareReduxData = useSelector(
@@ -134,7 +135,7 @@ function CompareSearchList({
               </div>
             ))}
           {filteredProData?.length < 0 ||
-            (!filteredProData && <p>NO MATCH FOUND</p>)}
+            (!filteredProData && <p>{page_phase?.}/p>)}
         </div>
       </div>
     </>

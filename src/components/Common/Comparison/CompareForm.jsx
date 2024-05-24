@@ -245,8 +245,10 @@ export default function CompareForm({
                 onSendValue={handleChildValue}
                 searchedKeyWord={formFields.productFirst}
                 inputPostion={"productFirst"}
+            
                 // category_id={product_name?.category_id}
                 handelCategoryUpdate={handelCategoryUpdate}
+                page_phase={favSlider}
               />
             )}
           </div>
@@ -288,6 +290,7 @@ export default function CompareForm({
                 searchedKeyWord={formFields.productSecond}
                 inputPostion={"productSecond"}
                 category_id={formFields.category || product_name?.category_id}
+                page_phase={favSlider}
               />
             )}
           </div>
@@ -326,6 +329,7 @@ export default function CompareForm({
                 searchedKeyWord={formFields.productThird}
                 inputPostion={"productThird"}
                 category_id={formFields.category}
+                page_phase={favSlider}
               />
             )}
           </div>

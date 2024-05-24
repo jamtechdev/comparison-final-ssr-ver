@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper/modules";
 import formatValue from "@/_helpers/formatValue";
 
-function ExperReviwes({ expertReview,page_phase }) {
+function ExperReviwes({ expertReview, page_phase }) {
   const [expandedId, setExpandedId] = useState(null);
 
   const toggleExpand = (id, event) => {
@@ -16,23 +16,29 @@ function ExperReviwes({ expertReview,page_phase }) {
     // event.preventDefault();
     setExpandedId(expandedId === id ? null : id);
   };
-
-  const getEvaluation = (score) => {
-    if (score >= 9) {
-      return "Outstanding";
-    } else if (score >= 8) {
-      return "Excellent";
-    } else if (score >= 7) {
-      return "Very good";
-    } else if (score >= 5) {
-      return "Good";
-    } else if (score >= 3) {
-      return "Fair";
-    } else if (score >= 1) {
-      return "Poor";
-    }
-    return "Poor"; // Handle other cases as needed
+  const getProductPhase = (phase) => {
+    return phase?.split("|");
   };
+  const getEvaluationPhase = getProductPhase(page_phase?.evaluation);
+  // console.log(getEvaluationPhase)
+  const getEvaluation = (score) => {
+    // these pharse will change in future
+    if (score >= 9) {
+      return getEvaluationPhase[0];
+    } else if (score >= 8) {
+      return getEvaluationPhase[1];
+    } else if (score >= 7) {
+      return getEvaluationPhase[2];
+    } else if (score >= 5) {
+      return getEvaluationPhase[3];
+    } else if (score >= 3) {
+      return getEvaluationPhase[4];
+    } else if (score >= 1) {
+      return getEvaluationPhase[5];
+    }
+    return getEvaluationPhase[5]; // Handle other cases as needed
+  };
+
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -65,7 +71,7 @@ function ExperReviwes({ expertReview,page_phase }) {
     return domain;
   };
 
-  console.log(expertReview);
+  // console.log(expertReview);
   return (
     <>
       <Swiper
@@ -207,7 +213,9 @@ function ExperReviwes({ expertReview,page_phase }) {
                               cursor: "pointer",
                             }}
                           >
-                            {isTranslateExpanded ?`${page_phase?.read_less}` : `${page_phase?.read_more}`}
+                            {isTranslateExpanded
+                              ? `${page_phase?.read_less}`
+                              : `${page_phase?.read_more}`}
                           </span>
                         )}
                       </p>
@@ -228,7 +236,9 @@ function ExperReviwes({ expertReview,page_phase }) {
                               cursor: "pointer",
                             }}
                           >
-                            {isExpanded ? "Read less" : "Read more"}
+                            {isExpanded
+                              ? `${page_phase?.read_less}`
+                              : `${page_phase?.read_more}`}
                           </span>
                         )}
                       </p>
@@ -241,7 +251,9 @@ function ExperReviwes({ expertReview,page_phase }) {
                       onClick={toggleTranslate}
                       style={{ cursor: "pointer" }}
                     >
-                      {isTranslating ? `${page_phase?.show_original}` : `${page_phase?.translate}`}
+                      {isTranslating
+                        ? `${page_phase?.show_original}`
+                        : `${page_phase?.translate}`}
                     </span>
                   )}
 

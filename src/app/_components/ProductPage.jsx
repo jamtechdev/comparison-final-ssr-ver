@@ -788,8 +788,7 @@ function ProductPage({
                                 <p className="mb-2">
                                   <b>
                                     {product &&
-                                      product?.page_phases?.what_it_is}{" "}
-                                    :{" "}
+                                      product?.page_phases?.what_it_is}:{" "}
                                   </b>
                                   {data?.hover_phase?.what_is_it}
                                 </p>
@@ -1346,12 +1345,12 @@ function ProductPage({
                           fontSize: "17px",
                         }}
                       >
-                        Lowest price
+                        {product?.page_phases?.old_price_graph_lowest_price}
                       </p>
                     </div>
                     <DrawChart
                       lineChartData={product?.line_chart_data}
-                      page_phase={product?.page_phases?.old_price_graph_heading}
+                      page_phase={product?.page_phases?.old_price_graph_lowest_price}
                     />
                   </Container>
                 </div>
