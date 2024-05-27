@@ -2,7 +2,7 @@
 // import Rating from "../Rating/Rating";
 
 // function UserRating({ data }) {
-//   console.log(data);
+//   (data);
 //   return (
    
 //   )

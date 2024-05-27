@@ -31,7 +31,7 @@ export default function MobileCompareTable({
   const defaultNo = 5;
 
   const [fullTable, setFullTable] = useState(2);
-  console.log(type);
+  type;
 
   if (typeof window !== "undefined") {
     // Access the window object here
@@ -75,7 +75,7 @@ export default function MobileCompareTable({
   //     var testDiv = document.getElementById("mobile-compare-tabler-1");
   //     testDiv.getBoundingClientRect().top < 100  ? setWinPos(true)  : setWinPos(false)
   //     testDiv.getBoundingClientRect().top , 'top';
-  //     console.log(testDiv.getBoundingClientRect().top);
+  //     (testDiv.getBoundingClientRect().top);
 
   //   var tbodyDiv = document.getElementById("mobile-compare-tablerBody-1");
   //   tbodyDiv.getBoundingClientRect().top > 100  ? setWinPos(false)   : setWinPos(true)
@@ -109,7 +109,7 @@ export default function MobileCompareTable({
           observerSettings
         );
       observer?.observe(cachedRef);
-      // console.log(observerSettings);
+      // (observerSettings);
       return () => {
         observer.unobserve(cachedRef);
       };
@@ -209,7 +209,7 @@ export default function MobileCompareTable({
       return chunks;
     }
     const chunkArrayOfObjects = chunkArray(arrayOfObjects, 2);
-    // console.log(chunkArrayOfObjects, "chunk");
+    // (chunkArrayOfObjects, "chunk");
     return chunkArrayOfObjects;
   };
   // add startONTable
@@ -235,7 +235,7 @@ export default function MobileCompareTable({
                 src="/icons/star.png"
                 alt="star"
               />
-              {/* {console.log(values, "neet")} */}
+              {/* {(values, "neet")} */}
               <ProsConsToolTip hover_phrase={starPhase} />
             </span>
           </div>
@@ -250,7 +250,7 @@ export default function MobileCompareTable({
   };
   // **End**
 
-  // console.log(finalProducts, "neet");
+  // (finalProducts, "neet");
   // Make chunks Array
   function chunkArray(array, chunkSize) {
     const chunks = [];
@@ -275,13 +275,13 @@ export default function MobileCompareTable({
     2
   );
 
-  // console.log(categoryChunkedData, "neetxy");
+  // (categoryChunkedData, "neetxy");
   // let storeSwiperIndex = 0; // Declare a variable outside the map function
-  // console.log(storeSwiperIndex,"neetxy")
+  // (storeSwiperIndex,"neetxy")
 
   const handleSlideChange = (swiper) => {
     setCurrentIndex(swiper.activeIndex);
-    // console.log(currentIndex, "ckeking current index");
+    // (currentIndex, "ckeking current index");
   };
 
   const findProductsScoreLabelIndex = (products) => {
@@ -296,8 +296,8 @@ export default function MobileCompareTable({
     return winningProductIndex.length === 1 ? winningProductIndex[0] : -1000;
   };
   const productScoreLabelIndex = findProductsScoreLabelIndex(chunkedData[0]);
-  // console.log(chunkedData)
-  // console.log(productScoreLabelIndex);
+  // (chunkedData)
+  // (productScoreLabelIndex);
 
   return (
     <section className="comparisons-slider">
@@ -314,13 +314,13 @@ export default function MobileCompareTable({
             {chunkedData
               ?.slice(currentIndex, currentIndex + 1)
               .map((product, index) => {
-                // console.log(index, "sticky index");
+                // (index, "sticky index");
                 // const productIndex=index+1
-                // console.log(productIndex,"checking product index for images")
+                // (productIndex,"checking product index for images")
                 // return product?.slice( currentIndex).map((data,tIndex) => {
                 return product?.map((data, tIndex) => {
-                  // console.log(currentIndex, "check currentIndex");
-                  // console.log(product, "check products");
+                  // (currentIndex, "check currentIndex");
+                  // (product, "check products");
 
                   return (
                     <>
@@ -362,13 +362,13 @@ export default function MobileCompareTable({
             {chunkedData
               ?.slice(currentIndex, currentIndex + 1)
               .map((product, index) => {
-                // console.log(index, "sticky index");
+                // (index, "sticky index");
                 // const productIndex=index+1
-                // console.log(productIndex,"checking product index for images")
+                // (productIndex,"checking product index for images")
                 // return product?.slice( currentIndex).map((data,tIndex) => {
                 return product?.map((data, tIndex) => {
-                  // console.log(currentIndex, "check currentIndex");
-                  // console.log(product, "check products");
+                  // (currentIndex, "check currentIndex");
+                  // (product, "check products");
                   return (
                     <th key={tIndex}>
                       <p className="device-name">
@@ -502,7 +502,7 @@ export default function MobileCompareTable({
             : "compare-container-wrapper no-before"
         }
       >
-        {/* {console.log(chunkedData?.length, "chunkedData")} */}
+        {/* {(chunkedData?.length, "chunkedData")} */}
         <div
           className={
             winPos == true
@@ -612,7 +612,7 @@ export default function MobileCompareTable({
                       {slider_data?.map((data, dIndex) => {
                         return (
                           <th key={dIndex}>
-                            {/* {console.log(product)} */}
+                            {/* {(product)} */}
 
                             <p className="device-name">
                               {type === "guide" && (
@@ -795,7 +795,7 @@ export default function MobileCompareTable({
                         );
                       })}
                     </tr>
-                    <tr className="tr-bg-color">
+                    <tr>
                       <td colSpan="2">
                         <div className="table-inner-heading">
                           {productPhaseData &&
@@ -947,7 +947,7 @@ export default function MobileCompareTable({
                         );
                       })}
                     </tr>
-                    <tr className="tr-bg-color">
+                    <tr>
                       <td colSpan="2">
                         <div className="table-inner-heading">
                           <div className="table-inner-heading">
@@ -1006,7 +1006,7 @@ export default function MobileCompareTable({
                         </div>
                       </td>
                     </tr>
-                    <tr className="tr-bg-color">
+                    <tr>
                       {slider_data.map((product, userIndex) => {
                         const values = slider_data.map((p) => p.reviews);
                         return (
@@ -1023,7 +1023,7 @@ export default function MobileCompareTable({
                         );
                       })}
                     </tr>
-                    <tr>
+                    <tr className="tr-bg-color">
                       <td colSpan="2">
                         <div className="table-inner-heading">
                           {productPhaseData &&
@@ -1080,7 +1080,7 @@ export default function MobileCompareTable({
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr className="tr-bg-color">
                       {slider_data.map((product, ratioIndex) => {
                         const values = slider_data.map(
                           (p) => p.ratio_quality_price_points
@@ -1118,7 +1118,7 @@ export default function MobileCompareTable({
 
                       return (
                         <>
-                          <tr>
+                          <tr className={index % 2 != 0 ? "tr-bg-color" : ""}>
                             <td colSpan="2">
                               <div className="table-inner-heading">
                                 {data?.title}
@@ -1205,7 +1205,10 @@ export default function MobileCompareTable({
                             </td>
                           </tr>
 
-                          <tr className="" key={index}>
+                          <tr
+                            className={index % 2 != 0 ? "tr-bg-color" : ""}
+                            key={index}
+                          >
                             {slider_data.map((product, idx) => {
                               const value =
                                 product?.area_evaluation?.[index]?.value ??
@@ -1254,7 +1257,7 @@ export default function MobileCompareTable({
                               </tr>
                               <tr className="tr-bg-color">
                                 {slider_data.map((data, Sliderindex) => {
-                                  // console.log(data?.attributes[product.name]);
+                                  // (data?.attributes[product.name]);
                                   return (
                                     <td key={Sliderindex}>
                                       <span
@@ -1281,7 +1284,7 @@ export default function MobileCompareTable({
                                               : "#85B2F1",
                                         }}
                                       >
-                                        {/* {console.log(data?.attributes[category.name].unit && data?.attributes[category.name].unit )} */}
+                                        {/* {(data?.attributes[category.name].unit && data?.attributes[category.name].unit )} */}
                                         {formatValue(
                                           data?.attributes[product.name]?.[0]
                                             .attribute_evaluation
@@ -1358,11 +1361,11 @@ export default function MobileCompareTable({
                                         )
                                           ?.slice(swiperIndex, swiperIndex + 1)
                                           ?.map((chunk, chunkIndex) => {
-                                            // console.log(
+                                            // (
                                             //   swiperIndex,
                                             //   "swiper index"
                                             // );
-                                            // console.log(chunk)
+                                            // (chunk)
                                             return chunk
                                               ?.slice(
                                                 chunkIndex,
@@ -1483,11 +1486,11 @@ export default function MobileCompareTable({
           })}
         </Swiper>
 
-        {/* {console.log(fullTable)} */}
+        {/* {(fullTable)} */}
         {fullTable == 2 && (
           <div className="text-center" onClick={handleTableShow}>
             <Button className="see_all_btn_outline">
-              {/* {console.log(productPhaseData)} */}
+              {/* {(productPhaseData)} */}
               {productPhaseData && productPhaseData?.see_full_table}{" "}
               <i className="ri-arrow-down-s-line"></i>
             </Button>

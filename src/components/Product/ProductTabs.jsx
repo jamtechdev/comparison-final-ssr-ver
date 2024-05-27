@@ -15,7 +15,7 @@ function ProductTabs({
   videoReview,
   page_phase,
 }) {
-  // console.log(productReview, expertReview, videoReview);
+  // (productReview, expertReview, videoReview);
   return (
     <>
       {" "}

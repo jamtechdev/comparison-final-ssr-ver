@@ -9,11 +9,11 @@ import Head from "next/head";
 export default async function RootLayout({ children }) {
   const footerData = await getterService.getFooterData();
   const headerData = await getterService.getTopNavBarData();
-  // console.log(footerData);
+  // (footerData);
   // Function to construct the canonical URL dynamically
-  // console.log(footerData);
-  // console.log(footerData?.footer_tag_code);
-  // console.log(footerData?.favicon)
+  // (footerData);
+  // (footerData?.footer_tag_code);
+  // (footerData?.favicon)
 
   return (
     <html lang={footerData?.website_language?.toLowerCase()}>

@@ -58,7 +58,7 @@ function ProductPage({
   const productsWithAttributeGroup = {};
   const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
   const productAttributes = {};
-  // console.log( productCatAttributes?.data)
+  // ( productCatAttributes?.data)
   productData[0].data?.attributes
     ?.sort(
       (a, b) => a?.attribute_category_position - b?.attribute_category_position
@@ -93,7 +93,7 @@ function ProductPage({
     return phase?.split("|");
   };
   const getEvaluationPhase = getProductPhase(product?.page_phases?.evaluation);
-  // console.log(getEvaluationPhase)
+  // (getEvaluationPhase)
   const getEvaluation = (score) => {
     // these pharse will change in future
     if (score >= 9) {
@@ -242,7 +242,7 @@ function ProductPage({
   };
   const contentWithIds = addIdsToHeadings(product?.text_part);
 
-  // console.log(finalProducts);
+  // (finalProducts);
 
   useEffect(() => {
     const element = document.querySelector(".domain");
@@ -255,8 +255,8 @@ function ProductPage({
   const is_found = product?.alternative_comparisons?.filter(
     (comparison) => comparison.verdict_text !== null
   );
-  // console.log(is_found?.length);
-  // console.log(slug)
+  // (is_found?.length);
+  // (slug)
   const { isMobile } = useScreenSize();
   const [position, setPosition] = useState({ left: 0, right: "auto" });
 
@@ -290,7 +290,7 @@ function ProductPage({
   const checkVerdictText = product?.alternative_comparisons?.filter(
     (item) => item?.verdict_text === null
   );
-  // console.log(checkVerdictText);
+  // (checkVerdictText);
   // display  graph
   useEffect(() => {
     const replaceShortcodes = () => {
@@ -305,7 +305,7 @@ function ProductPage({
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
-          console.log(innerHTML);
+          (innerHTML);
 
           element.innerHTML = innerHTML;
           dispatch(storeTextPartShortCode({ content: innerHTML }));
@@ -345,7 +345,7 @@ function ProductPage({
                 secondPageName={product}
               />
             </Col>
-            {/* {console.log(product?.currency, "neet")} */}
+            {/* {(product?.currency, "neet")} */}
             <Col md={12} lg={12} xl={9}>
               <h1 className="site-main-heading">{product?.heading_title}</h1>
             </Col>
@@ -376,7 +376,7 @@ function ProductPage({
                     </div>
                   </div>
                 )}
-                {/* {console.log(product?.updated_at)} */}
+                {/* {(product?.updated_at)} */}
                 <span>
                   {product && product?.page_phases?.updated}
                   <i>
@@ -759,7 +759,7 @@ function ProductPage({
                     sizes="100%"
                     alt="double-arrow"
                   /> */}
-                  {/* {console.log(filteredTech_data[0]?.data)} */}
+                  {/* {(filteredTech_data[0]?.data)} */}
 
                   <ul className="badge-list-section gap_top">
                     {product?.area_evaluation?.map((data, index) => {
@@ -836,7 +836,7 @@ function ProductPage({
                                   );
                                 }
                               )}
-                              {/* {console.log(product)} */}
+                              {/* {(product)} */}
                             </div>
                           </div>
                         </li>
@@ -969,7 +969,7 @@ function ProductPage({
                         );
                       })}
                 </ul>
-                {/* {console.log(showFullPrice)} */}
+                {/* {(showFullPrice)} */}
                 {product?.guide_ratings?.length > 5 && (
                   <Button
                     className="see_all_btn"
@@ -996,7 +996,7 @@ function ProductPage({
                 )}
               </div>
             </Col>
-            {/* {console.log(product?.text_under_ranking,"neety")} */}
+            {/* {(product?.text_under_ranking,"neety")} */}
             <span className="testing__text text-end py-3">
               <i>{product?.page_phases?.text_under_ranking}</i>
             </span>
@@ -1081,8 +1081,8 @@ function ProductPage({
                 </div>
               </Col>
             )}
-            {/* {console.log(product,"neet")} */}
-            {/* {console.log(product?.available_versions, "hllo")} */}
+            {/* {(product,"neet")} */}
+            {/* {(product?.available_versions, "hllo")} */}
 
             {product?.available_versions &&
               product?.available_versions?.length !== 0 && (
@@ -1286,7 +1286,7 @@ function ProductPage({
           />
         </Container>
       </section>
-      {console.log([productCatAttributes?.data])}
+      {/* {([productCatAttributes?.data])} */}
       <CompareDropDown
         categorySlug={categorySlug}
         attributeDropDown={[...productCatAttributes?.data].reverse()}
@@ -1350,7 +1350,7 @@ function ProductPage({
           </Container>
         </section>
       )}
-      {/* {console.log(product?.should_buy?.length)} */}
+      {/* {(product?.should_buy?.length)} */}
 
       <section className="ptb-80 bg-color">
         {product?.should_buy?.length !== 0 && (
@@ -1373,7 +1373,7 @@ function ProductPage({
                           No data Found
                         </h3>
                       )}
-                      {/* {console.log(product?.should_not_buy)} */}
+                      {/* {(product?.should_not_buy)} */}
                       <ul>
                         {product &&
                           product?.should_buy?.map((item, index) => {
@@ -1430,7 +1430,7 @@ function ProductPage({
         )}
       </section>
 
-      {/* {console.log(product?.text_part !== "")} */}
+      {/* {(product?.text_part !== "")} */}
 
       <section className="ptb-80">
         <Container>
@@ -1665,7 +1665,7 @@ function ProductPage({
                       (attribute, index) => {
                         return (
                           <>
-                            {/* {console.log(
+                            {/* {(
                             product?.attributes[attribute][0]
                           )} */}
                             <Row className="attribute__card__wrapper">
@@ -1926,7 +1926,7 @@ function ProductPage({
                                         sizes="100%"
                                         alt="double-arrow"
                                       />
-                                      {/* {console.log(item)} */}
+                                      {/* {(item)} */}
                                       <p>
                                         #.{item.position} in_{" "}
                                         <a
@@ -1955,7 +1955,7 @@ function ProductPage({
               </Row>
             </>
           )}
-          {/* {console.log(product?.top_pros)} */}
+          {/* {(product?.top_pros)} */}
           {product?.top_pros !== null && (
             <Row
               className=""
@@ -2057,7 +2057,7 @@ function ProductPage({
           </Row>
         </Container>
       </section>
-      {/* {console.log(product?.page_phases?.table_compare_title)} */}
+      {/* {(product?.page_phases?.table_compare_title)} */}
       {compareByCatID?.data?.length > 1 && (
         <section>
           <Container>
@@ -2091,7 +2091,7 @@ function ProductPage({
         <Container className="p-0">
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              {/* {console.log(compareByCatID?.data?.length)} */}
+              {/* {(compareByCatID?.data?.length)} */}
               {
                 compareByCatID?.data?.length > 1 &&
                   (isMobile ? (
@@ -2115,14 +2115,14 @@ function ProductPage({
               <h2 className="site-main-heading">
                 {product?.page_phases?.compare_with_other_products}
               </h2>
-              {/* {console.log(product?.page_phases)} */}
+              {/* {(product?.page_phases)} */}
               <CompareForm
                 favSlider={product && product?.page_phases}
                 location="ON_PRODUCT_PAGE"
                 product_name={product && product}
                 handelCloseCompareModel={() => {
                   // Add your close model logic here
-                  console.log("Closing compare model");
+                  ("Closing compare model");
                 }}
               />
             </Col>
@@ -2130,7 +2130,7 @@ function ProductPage({
         </Container>
       </section>
 
-      {/* {console.log()} */}
+      {/* {()} */}
 
       {checkVerdictText?.length > 0 && (
         <section className="mt-3 mobile-popular-comparison">

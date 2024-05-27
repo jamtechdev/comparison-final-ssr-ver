@@ -36,8 +36,8 @@ const SearchList = ({ search, isFocused,noDataFoundPhase }) => {
                         href={`/${item?.category_url}/${item?.permalink}`}
                         style={{ cursor: "pointer" }}
                       >
-                        {/* {console.log(${item?.category_url}/${item?.permalink})} */}
-                        {/* {console.log(item)} */}
+                        {/* {(${item?.category_url}/${item?.permalink})} */}
+                        {/* {(item)} */}
                         <span style={{ cursor: "pointer" }}>
                           {item?.short_name || item?.title}
                         </span>

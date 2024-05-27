@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const IMAGE_ALT_TEXT = "Category Images";
 export default function Category({ categories }) {
-  // console.log
+  // 
   categories;
   return (
     <Row>
@@ -20,7 +20,7 @@ export default function Category({ categories }) {
           //   router.push(`/${section?.primary_archive_category}`);
           // }}
         >
-          {/* {console.log(section)} */}
+          {/* {(section)} */}
           <div className="category-section">
             <a href={`/${section?.permalink}`}>
               <img

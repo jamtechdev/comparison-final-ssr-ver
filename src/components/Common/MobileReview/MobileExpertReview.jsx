@@ -112,7 +112,7 @@ export default function MobileExpertReview({ expertReview }) {
         className="expert_reviews_slider"
       >
         {expertReview?.map((data, index) => {
-          // console.log(data);
+          // (data);
           const [isExpanded, setIsExpanded] = useState(false);
           const [isTranslateExpanded, setIsTranslateExpanded] = useState(false);
           const [isTranslating, setIsTranslating] = useState(false);

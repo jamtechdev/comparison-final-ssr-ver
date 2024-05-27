@@ -9,7 +9,7 @@ import formatValue from "@/_helpers/formatValue";
 
 export default function ComparisonsSlider({products}) {
   const router = useRouter();
-  console.log(products);
+  (products);
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -23,7 +23,7 @@ export default function ComparisonsSlider({products}) {
   const filteredComparisons = products?.filter(
     (comparison) => comparison.verdict_text === null
   );
-  console.log(filteredComparisons);
+  (filteredComparisons);
   return (
     <section className="comparisons-slider">
       <Swiper

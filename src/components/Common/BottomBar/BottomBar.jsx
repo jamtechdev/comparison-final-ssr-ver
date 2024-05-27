@@ -27,7 +27,7 @@ export default function BottomBar({
   const dispatch = useDispatch();
   // this function will remove item from compare list
   const removeItem = (index) => {
-    // console.log(index);
+    // (index);
     if (index === "productFirst") {
       dispatch(deleteCompareProduct({ key: "productFirst" }));
       return;
@@ -133,7 +133,7 @@ export default function BottomBar({
                           height={0}
                           alt=""
                         />
-                        {/* {console.log(item)} */}
+                        {/* {(item)} */}
                         <p>{item.name}</p>
                         <i
                           className="ri-close-fill"
@@ -187,7 +187,7 @@ export default function BottomBar({
                       />
                     </>
                   )}
-                  {console.log(guidePhraseData?.page_phrases)}
+                  {(guidePhraseData?.page_phrases)}
                   {guidePhraseData &&
                     guidePhraseData?.page_phases?.compare_button}
                 </button>

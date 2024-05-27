@@ -8,7 +8,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 
 function VideoReviews({ videoReview }) {
-  // console.log(videoReview?.length);
+  // (videoReview?.length);
   return (
     <>
       {" "}

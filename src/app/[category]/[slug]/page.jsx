@@ -7,12 +7,12 @@ export default async function Page({
 }) {
   try {
     const categoryslugType = await getSlugType(category);
-    // console.log(categoryslugType)
+    // (categoryslugType)
     if (categoryslugType.error) {
       return <NotFound />;
     }
     const slugType = await getSlugType(slug);
-    // console.log(slugType)
+    // (slugType)
     if (slugType.type) {
       const pageData = await fetchDataBasedOnPageType(
         slug,
@@ -20,7 +20,7 @@ export default async function Page({
         category,
         searchParams
       );
-      // console.log(pageData)
+      // (pageData)
       if (pageData) {
         return (
           <PageSwitch
@@ -82,7 +82,7 @@ export async function generateMetadata({ params: { slug, category } }) {
 
   const generateComparisonMetaData = (extractedUrls, category) => {
     const siteURL = "https://mondopedia.it";
-    // console.log(category);
+    // (category);
     const firstTitle = capitalizeFirstLetter(extractedUrls[0]);
     const secondTitle = capitalizeFirstLetter(extractedUrls[1]);
     const thirdTitle =
@@ -111,7 +111,7 @@ export async function generateMetadata({ params: { slug, category } }) {
 
   if (slug.includes("-vs-")) {
     const meta_data = await getSlugMetaData(slug, category);
-    // console.log(meta_data);
+    // (meta_data);
     const siteURL = "https://mondopedia.it";
     if (meta_data && meta_data.data) {
       return {
@@ -181,12 +181,12 @@ export async function generateMetadata({ params: { slug, category } }) {
         console.error("Invalid meta_data response:", meta_data);
         return "";
       }
-      // console.log("test", meta_data?.data?.meta_description);
+      // ("test", meta_data?.data?.meta_description);
     }
   }
 }
 async function getSlugType(slug) {
-  // console.log(slug)
+  // (slug)
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/check/${slug}`,
     {
@@ -210,7 +210,7 @@ async function fetchDataBasedOnPageType(
   category,
   searchParams
 ) {
-  // console.log("Abhay", pageType);
+  // ("Abhay", pageType);
   let apiUrls = [];
   switch (pageType) {
     case "Guide":
@@ -219,7 +219,7 @@ async function fetchDataBasedOnPageType(
       }/guide/products/${category}/${slug}?query=${JSON.stringify(
         searchParams
       )}`;
-      // console.log(productApiUrl);
+      // (productApiUrl);
 
       if (searchParams?.page) {
         productApiUrl += `&page=${searchParams.page}`;
@@ -229,7 +229,7 @@ async function fetchDataBasedOnPageType(
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${category}/${slug}`,
         productApiUrl,
       ];
-      // console.log(apiUrls)
+      // (apiUrls)
 
       break;
     case "Blog":
@@ -244,14 +244,14 @@ async function fetchDataBasedOnPageType(
       break;
     case "Compare":
       const permalinks = slug.split("-vs-");
-      // console.log(permalinks, "permalinks");
+      // (permalinks, "permalinks");
       const removeDuplicatePermalinks = Array.from(new Set(permalinks));
-      // console.log(removeDuplicatePermalinks);
+      // (removeDuplicatePermalinks);
       apiUrls = removeDuplicatePermalinks.map(
         (permalink) =>
           `${process.env.NEXT_PUBLIC_API_URL}/product/${category}/${permalink}?compare=${slug}`
       );
-      // console.log(apiUrls)
+      // (apiUrls)
       break;
 
     default:

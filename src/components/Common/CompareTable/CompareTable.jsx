@@ -25,7 +25,7 @@ const CompareTable = React.memo(
       const newRef = useRef();
       ref ||= newRef;
 
-      //  console.log(guidePhraseData,"check guide")
+      //  (guidePhraseData,"check guide")
       // mount
 
       useEffect(() => {
@@ -49,7 +49,7 @@ const CompareTable = React.memo(
         testDiv?.getBoundingClientRect().top < 2
           ? setWinPos(true)
           : setWinPos(false);
-        // console.log( testDiv.getBoundingClientRect().top);
+        // ( testDiv.getBoundingClientRect().top);
 
         var tbodyDiv = document.getElementById("tbody");
         tbodyDiv?.getBoundingClientRect().top > 2
@@ -84,7 +84,7 @@ const CompareTable = React.memo(
       productsWithAttributeGroup[product.name] = productCopy;
     });
     const finalProducts = Object.values(productsWithAttributeGroup);
-    // console.log(finalProducts);
+    // (finalProducts);
 
     const getValue = (arr, attribute) => {
       const foundElement = arr.find((obj) => obj.attribute === attribute);
@@ -134,7 +134,7 @@ const CompareTable = React.memo(
       } else {
         numericValues.sort((a, b) => a - b);
       }
-      // console.log(numericValues, arrayOfObjects[0]?.attribute, "numericValues");
+      // (numericValues, arrayOfObjects[0]?.attribute, "numericValues");
       // Adding logic for String case
       if (numericValues.length === 0) {
         // const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
@@ -146,8 +146,8 @@ const CompareTable = React.memo(
             return obj?.attribute_value;
           }
         });
-        // console.log(stringArray, "hello");
-        // console.log(
+        // (stringArray, "hello");
+        // (
         //   stringArray,
         //   arrayOfObjects,
         //   arrayOfObjects[0]?.attribute,
@@ -155,24 +155,24 @@ const CompareTable = React.memo(
         // );
 
         if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-          // console.log(stringArray[0], "neetx", "");
+          // (stringArray[0], "neetx", "");
           // const targetString =
           //   stringArray[0] === "yes"
           //     ? "yes"
           //     : "no" || stringArray[0] === "no"
           //     ? " "
           //     : starValue[0]?.attribute_value;
-          // // console.log(targetString, "neet");
-          // console.log(targetString);
+          // // (targetString, "neet");
+          // (targetString);
           numericValues = stringArray;
           // numericValues = stringArray.filter((value, index) => index === 0);
-          // console.log(numericValues, "neetx");
+          // (numericValues, "neetx");
 
-          // console.log(numericValues, arrayOfObjects[0]?.attribute, "neet");
+          // (numericValues, arrayOfObjects[0]?.attribute, "neet");
         }
       }
       const topValue = numericValues[0];
-      // console.log(topValue, typeof topValue === "string", arrayOfObjects[0]?.attribute,"neet");
+      // (topValue, typeof topValue === "string", arrayOfObjects[0]?.attribute,"neet");
       const occurrences = numericValues?.filter(
         (value) => value === topValue
       ).length;
@@ -190,7 +190,7 @@ const CompareTable = React.memo(
       //       typeof topValue === "string"
       //         ? obj.attribute_value
       //         : parseFloat(obj.attribute_value);
-      //     // console.log(numericValue, "neet");
+      //     // (numericValue, "neet");
       //     if (
       //       numericValue === topValue &&
       //       !obj.attribute_value?.includes("⭐")
@@ -199,7 +199,7 @@ const CompareTable = React.memo(
       //     }
       //   });
       // }
-      // console.log(arrayOfObjects,"neet")
+      // (arrayOfObjects,"neet")
 
       // Adjust this function according to your context as I don't have the complete code
       // It would be good to ensure that you have the required variables (finalProducts) in scope.
@@ -274,7 +274,7 @@ const CompareTable = React.memo(
                   src="/icons/star.png"
                   alt="star"
                 />
-                {/* {console.log(values, "neet")} */}
+                {/* {(values, "neet")} */}
                 <ProsConsToolTip hover_phrase={starPhase} />
               </span>
             </div>
@@ -313,7 +313,7 @@ const CompareTable = React.memo(
               {finalProducts.slice(0, defaultNo).map((product, index) => {
                 return (
                   <th key={index}>
-                    {/* {console.log(product)} */}
+                    {/* {(product)} */}
                     {product?.assigned_title && (
                       <span className="best-tag-product">
                       {product?.assigned_title}
@@ -321,7 +321,7 @@ const CompareTable = React.memo(
                     )}
 
                     <p className="device-name">
-                      {/* {  console.log((product))} */}
+                      {/* {  ((product))} */}
                       <span>{index + 1}</span>
                       <a
                         href={`/${product?.category_url}/${product?.permalink}`}
@@ -917,7 +917,7 @@ const CompareTable = React.memo(
                 <tr className="" key={index}>
                   {" "}
                   {/* Ensure to set a unique key for each <tr> */}
-                  {/* { console.log(data)} */}
+                  {/* { (data)} */}
                   <th className="sub-inner-padding">
                     <div className="tooltip-title">
                       {data?.title}
@@ -931,7 +931,7 @@ const CompareTable = React.memo(
                           </p>
                         }
 
-                        {/* {console.log(product)} */}
+                        {/* {(product)} */}
                       </div>
                     </div>
                   </th>
@@ -958,7 +958,7 @@ const CompareTable = React.memo(
                 </tr>
               );
             })}
-            {/* {console.log(categoryAttributes)} */}
+            {/* {(categoryAttributes)} */}
 
             {categoryAttributes
               ?.slice(0, fullTable || 2)
@@ -1027,7 +1027,7 @@ const CompareTable = React.memo(
                                       : " #85B2F1",
                                 }}
                               >
-                                {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
+                                {/* {(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
                                 {product.attributes[
                                   category.name
                                 ]?.[0]?.attribute_evaluation?.toFixed(1)}{" "}
@@ -1036,7 +1036,7 @@ const CompareTable = React.memo(
                           );
                         })}
                     </tr>
-                    {/* {console.log(category.attributes)} */}
+                    {/* {(category.attributes)} */}
                     {category.attributes
                       ?.sort((a, b) => a.position - b.position)
                       .slice(

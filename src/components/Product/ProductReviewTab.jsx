@@ -10,9 +10,9 @@ import Rating from "../Common/Rating/Rating";
 import formatValue from "@/_helpers/formatValue";
 
 function ProductReviewTab({ productReview }) {
-  // console.log(productReview);
+  // (productReview);
   return (
-    <>
+    <section>
       {" "}
       <Swiper
         modules={[Navigation, Pagination]}
@@ -59,7 +59,7 @@ function ProductReviewTab({ productReview }) {
                       <span>{formatValue(data?.rating)}</span>
                       <Rating value={data?.rating} />
                     </div>
-                    {/* {console.log(data?.url, "neet")} */}
+                    {/* {(data?.url, "neet")} */}
                     <small className="rating__review">
                       {data?.reviews} Reviews
                     </small>
@@ -117,7 +117,7 @@ function ProductReviewTab({ productReview }) {
         ) : (
           ""
         )}
-    </>
+    </section>
   );
 }
 

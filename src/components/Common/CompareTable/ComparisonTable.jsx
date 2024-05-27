@@ -53,7 +53,7 @@
         testDiv?.getBoundingClientRect().top < 2
           ? setWinPos(true)
           : setWinPos(false);
-        // console.log( testDiv.getBoundingClientRect().top);
+        // ( testDiv.getBoundingClientRect().top);
 
         var tbodyDiv = document.getElementById("tbody");
         tbodyDiv?.getBoundingClientRect().top > 2
@@ -128,10 +128,10 @@
         })
         .filter((value) => !isNaN(value));
 
-      // console.log(arrayOfObjects, "neet");
+      // (arrayOfObjects, "neet");
 
       if (arrayOfObjects?.[0]?.algorithm === "highest_to_lowest") {
-        // console.log(numericValues)
+        // (numericValues)
         numericValues.sort((a, b) => b - a);
       } else {
         numericValues.sort((a, b) => a - b);
@@ -140,7 +140,7 @@
       // Adding logic for String case
       if (numericValues.length === 0) {
         const stringArray = arrayOfObjects.map((obj) => obj?.attribute_value);
-        // console.log(stringArray, "starTesting");
+        // (stringArray, "starTesting");
 
         if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
           const targetString =
@@ -187,10 +187,10 @@
       // const array2 = ["no", "no", "yes"];
 
       // const result = addStarToUniqueItems(array1, array2);
-      // console.log(result);
+      // (result);
 
       const topValue = numericValues[0];
-      // console.log(topValue);
+      // (topValue);
       const occurrences = numericValues?.filter(
         (value) => value === topValue
       ).length;
@@ -256,7 +256,7 @@
       return winningProductIndex.length === 1 ? winningProductIndex[0] : -1000;
     };
     const productScoreLabelIndex = findProductsScoreLabelIndex(finalProducts);
-    // console.log(finalProducts);
+    // (finalProducts);
 
     const addStarOnTable = (defaultNo, type, values, starPhase) => {
       if (
@@ -280,7 +280,7 @@
                   src="/icons/star.png"
                   alt="star"
                 />
-                {/* {console.log(values, "neet")} */}
+                {/* {(values, "neet")} */}
                 <ProsConsToolTip hover_phrase={starPhase} />
               </span>
             </div>
@@ -323,7 +323,7 @@
                         </span>
                       )}
 
-                    {/* {console.log(product)} */}
+                    {/* {(product)} */}
                     {/* {product?.assigned_title && (
                       <span className="best-tag-product">Winner</span>
                     )} */}
@@ -425,7 +425,7 @@
           </thead>
           <tbody id="tbody">
             <tr className="">
-              {console.log(comparisonPhaseData)}
+              {(comparisonPhaseData)}
               <th>
                 <p>{comparisonPhaseData && comparisonPhaseData?.image}</p>
               </th>
@@ -690,8 +690,8 @@
                             {products[0]?.users_rating_descriptions?.description}
                           </p>
                         )}
-                        {/* {console.log(products[0]?.users_rating_descriptions?.when_matters)} */}
-                        {/* {console.log(productPhaseData)} */}
+                        {/* {(products[0]?.users_rating_descriptions?.when_matters)} */}
+                        {/* {(productPhaseData)} */}
 
                         <p className="mb-2">
                           <b>{comparisonPhaseData?.when_it_matters}: </b>

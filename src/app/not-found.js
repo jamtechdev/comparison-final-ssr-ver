@@ -23,7 +23,7 @@ const NotFound = () => {
       });
   }, []);
 
-  // console.log(notDataFound);
+  // (notDataFound);
 
   return <div className="text-center py-5">{notDataFound?.text}</div>;
 };

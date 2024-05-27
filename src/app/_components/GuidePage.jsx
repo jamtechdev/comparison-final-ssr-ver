@@ -32,21 +32,21 @@ export default function GuidePage({
   searchParams,
 }) {
   // useChart("guide");
-  // console.log(guideData, "Abhay");
+  // (guideData, "Abhay");
   const router = useRouter();
   const currentParams = new URLSearchParams(searchParams.toString());
   const [isShown, setIsShown] = useState(false);
   const [currentHeading, setCurrentHeading] = useState("");
 
   const guide = guideData[0]?.data;
-  // console.log(guideData[1]);
+  // (guideData[1]);
 
   const products = guideData[1]?.data?.products || [];
   const sidebarRef = useRef(null);
 
   //I introduce this new value to map the actial postion of product in guide order_values in backend.
   const productPosition = guideData[1]?.data?.product_names || [];
-  // console.log(productPosition);
+  // (productPosition);
 
   //  const sortedProducts = products.sort(
   //    (a, b) => b.overall_score - a.overall_score
@@ -75,12 +75,12 @@ export default function GuidePage({
   };
   const handelSetFilterActive = (status) => {
     setIsFilterActive(status);
-    // console.log(status,"check status")a
+    // (status,"check status")a
   };
   useEffect(() => {
     setPrevSearcParam(searchParams);
   }, []);
-  // console.log(searchParams)
+  // (searchParams)
 
   useEffect(() => {
     if (Object.keys(searchParams).length > 0) {
@@ -102,7 +102,7 @@ export default function GuidePage({
 
   // old code for skeleton
   // useEffect(() => {
-  //   // console.log(searchParams, prevSearcParam,"neetx")
+  //   // (searchParams, prevSearcParam,"neetx")
 
   //   if (isAreObjectsEqual(searchParams, prevSearcParam)) {
   //     handelSetFilterActive(true);
@@ -111,7 +111,7 @@ export default function GuidePage({
   //     handelSetFilterActive(false);
   //   }, 1000);
   // }, [searchParams]);
-  // console.log(searchParams);
+  // (searchParams);
 
   // const removeFilters = () => {
   //   window.history.replaceState(null, "", window.location.pathname);
@@ -139,7 +139,7 @@ export default function GuidePage({
 
   function removeQueryParamAndNavigate(url, paramToRemove) {
     // delete searchParams[`${paramToRemove}`];
-    // console.log(paramToRemove);
+    // (paramToRemove);
     if (paramToRemove != "sort") {
       setparams(() => {
         return {
@@ -186,16 +186,16 @@ export default function GuidePage({
     });
   }, [searchParams]);
   const handleSort = (sortAttribute) => {
-    // console.log(sortAttribute, "neet");
+    // (sortAttribute, "neet");
     let param = JSON.parse(sortAttribute);
 
-    // console.log(param.rangeAttributes);
+    // (param.rangeAttributes);
     if (param.algo) {
       const currentUrl = new URL(window.location.href);
-      // console.log(currentUrl);
+      // (currentUrl);
       const searchParam = new URLSearchParams(currentUrl.search);
       const sortValue = `${param.algo},${param.rangeAttributes}`;
-      // console.log(sortValue);
+      // (sortValue);
       setorder((prev) => {
         return {
           value: sortValue,
@@ -234,7 +234,7 @@ export default function GuidePage({
     }
     setShowModal(false);
   };
-  // console.log(products, "hello");
+  // (products, "hello");
   // Testing purpose
   const [isChecked, setIsChecked] = useState(
     products?.length < 12 ? false : true
@@ -248,7 +248,7 @@ export default function GuidePage({
 
   const handelFilterActions = (filterName, key, value, isChecked = false) => {
     const currentParams = new URLSearchParams(searchParams.toString());
-    // console.log(value);
+    // (value);
     const url = new URL(window.location.href);
     switch (filterName) {
       case "variant":
@@ -279,7 +279,7 @@ export default function GuidePage({
     // Update the URL without triggering a page reload (hack)
     window.history.pushState({}, "", url.toString());
     //call the next router for srr
-    // console.log(url.searchParams.toString());
+    // (url.searchParams.toString());
     router.push(`?${url.searchParams.toString()}`, { scroll: false });
   };
 
@@ -298,16 +298,16 @@ export default function GuidePage({
     setHideSmiliar(checked);
     handelFilterActions("variant", "variant", checked);
   };
-  // console.log(order)
+  // (order)
 
-  // console.log(products,"neet");
+  // (products,"neet");
   const swapPriceWebsites = (data) => {
     // Similar logic to sort elements based on price_websites
     const splitData = order?.value.split(",");
     const currentParams = new URLSearchParams(searchParams.toString());
-    // console.log(order.value);
+    // (order.value);
 
-    // console.log(splitData[0]);
+    // (splitData[0]);
     if (splitData[0] === "available") {
       const sortedData = data.sort((a, b) => b.overall_score - a.overall_score);
       return [...sortedData];
@@ -321,7 +321,7 @@ export default function GuidePage({
   };
   const sortedData = swapPriceWebsites(products);
 
-  // console.log(sortedData);
+  // (sortedData);
 
   // toggle mobile filter
   const openClick = (event) => {
@@ -346,8 +346,8 @@ export default function GuidePage({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  // console.log(isFilterActive)
-  // console.log(isFilterActive, "neetx");
+  // (isFilterActive)
+  // (isFilterActive, "neetx");
 
   useEffect(() => {
     function showTooltip(event, content) {
@@ -401,7 +401,7 @@ export default function GuidePage({
                     )}
 
                     <div className="user-detail">
-                      {/* {   console.log(guide)} */}
+                      {/* {   (guide)} */}
                       <p>
                         <a href={`/author/${guide?.author?.id}`}>
                           {guide?.author?.name}
@@ -427,7 +427,7 @@ export default function GuidePage({
           </Row>
 
           <Row className="pt-3 best-page-card">
-            {/* {console.log(guide)} */}
+            {/* {(guide)} */}
             {Object?.values(guide?.top_guide_counts).map(function (
               item,
               index
@@ -461,7 +461,7 @@ export default function GuidePage({
                           {item.title}:
                         </span>
                         <span className="catchy_titles_section_product_name">
-                          {/* {console.log(item)} */}
+                          {/* {(item)} */}
                           {item?.product?.url !== null ? (
                             <a
                               rel="noopener noreferrer"
@@ -523,7 +523,7 @@ export default function GuidePage({
               setremovedParam={setremovedParam}
             />
             <div className="desktop-hide">
-              {/* {console.log(Object.keys(searchParams).length)} */}
+              {/* {(Object.keys(searchParams).length)} */}
 
               <Button
                 className="site_main_btn w-100 d-block btn-icon mb-4"
@@ -700,7 +700,7 @@ export default function GuidePage({
             <Row className="m-0">
               <Col md={6}>
                 <div className="filtered-data">
-                  {/* {console.log(Object.keys(params)?.length)} */}
+                  {/* {(Object.keys(params)?.length)} */}
                   <ul>
                     {Object.keys(params)
                       .filter((key) => key !== "direct" && key !== "sort")
@@ -927,6 +927,7 @@ export default function GuidePage({
           </Col>
         </Row>
       </Container>
+      {console.log(guide?.page_phases?.similar_guides)}
 
       <section className="ptb-25">
         <Container>

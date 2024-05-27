@@ -13,12 +13,12 @@ import formatValue from "@/_helpers/formatValue";
 const CompareModal = ({ setIsOpen, location, favSlider  }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
-  // console.log(reduxData);
+  // (reduxData);
   const [oftenProducts, setOftenProducts] = useState();
   const [categoryId, setCategoryId] = useState(
     reduxData?.category ? reduxData?.category : undefined
   );
-  // console.log(favSlider,"check favslider")
+  // (favSlider,"check favslider")
 
   const handelCloseCompareModel = () => {
     setIsOpen(false);
@@ -27,10 +27,10 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
   const handelCategoryForOffenProduct = (id) => {
     setCategoryId(id);
   };
-  // console.log(reduxData);
+  // (reduxData);
   const handelOffenProductClick = (product, index) => {
-    // console.log(reduxData?.productFirst?.name);
-    // console.log(product);
+    // (reduxData?.productFirst?.name);
+    // (product);
     if (
       reduxData?.productFirst === undefined ||
       reduxData?.productFirst === null
@@ -92,11 +92,11 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
       return;
     }
   };
-  // console.log(reduxData?.productSecond?.name);
+  // (reduxData?.productSecond?.name);
 
   useEffect(() => {
     if (categoryId) {
-      // console.log(categoryId, "NEET");
+      // (categoryId, "NEET");
       productService
         .getComparedoftenProduct(categoryId)
         .then((res) => {
@@ -108,18 +108,18 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
                 item.name !== reduxData?.productFirst?.name
             );
 
-            // console.log(reduxData);
+            // (reduxData);
 
-            // console.log(filteredProducts?.length);
+            // (filteredProducts?.length);
             setOftenProducts(filteredProducts);
           }
         })
         .catch((error) => {
-          //console.log(error);
+          //(error);
         });
     }
   }, [categoryId]);
-  // console.log(reduxData?.productFirst);
+  // (reduxData?.productFirst);
 
   return (
     <section className="add-product-modal">
@@ -135,7 +135,7 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
                 <i className="ri-close-circle-line close_icon"></i>
               </span>
             </Col>
-            {/* {console.log(favSlider&&favSlider?.page_phases?.add_to_comparison)} */}
+            {/* {(favSlider&&favSlider?.page_phases?.add_to_comparison)} */}
             <Col md={12}>
               <h2 className="site-main-heading">{favSlider&&favSlider?.page_phases?.add_to_comparison}</h2>
               <CompareForm
@@ -150,7 +150,7 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
       </div>
       {oftenProducts?.length > 0 && (
         <Container className="mt-4">
-          {/* {console.log(favSlider)} */}
+          {/* {(favSlider)} */}
           <Row>
             <Col md={12}>
               <h2 className="site-main-heading">{favSlider?.page_phases?.often_compared}</h2>

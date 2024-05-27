@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 
 function SinglePage({ singlePageData }) {
-  // console.log(singlePageData?.page_phases);
+  // (singlePageData?.page_phases);
 
   useEffect(() => {
     const stickyElements = document.querySelectorAll(".sticky");

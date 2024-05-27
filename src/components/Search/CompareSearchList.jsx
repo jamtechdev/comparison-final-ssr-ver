@@ -24,7 +24,7 @@ function CompareSearchList({
     }
     onSendValue(inputPostion, data);
   };
-  // console.log(searchedKeyWord);
+  // (searchedKeyWord);
 
   useEffect(() => {
     if (typeof searchedKeyWord === "object") {
@@ -33,7 +33,7 @@ function CompareSearchList({
 
     if (searchedKeyWord.trim() != "" && searchedKeyWord != undefined) {
       if (inputPostion === "productFirst") {
-        // console.log("XX",searchedKeyWord)
+        // ("XX",searchedKeyWord)
         homePage
           .getAllSearchedProducts(searchedKeyWord)
           .then((res) => {

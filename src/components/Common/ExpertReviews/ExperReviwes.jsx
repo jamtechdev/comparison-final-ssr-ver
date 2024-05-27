@@ -20,7 +20,7 @@ function ExperReviwes({ expertReview, page_phase }) {
     return phase?.split("|");
   };
   const getEvaluationPhase = getProductPhase(page_phase?.evaluation);
-  // console.log(getEvaluationPhase)
+  // (getEvaluationPhase)
   const getEvaluation = (score) => {
     // these pharse will change in future
     if (score >= 9) {
@@ -71,7 +71,7 @@ function ExperReviwes({ expertReview, page_phase }) {
     return domain;
   };
 
-  // console.log(expertReview);
+  // (expertReview);
   return (
     <>
       <Swiper
@@ -104,7 +104,7 @@ function ExperReviwes({ expertReview, page_phase }) {
         className="expert_reviews_slider"
       >
         {expertReview?.map((data, index) => {
-          // console.log(data);
+          // (data);
           const [isExpanded, setIsExpanded] = useState(false);
           const [isTranslateExpanded, setIsTranslateExpanded] = useState(false);
           const [isTranslating, setIsTranslating] = useState(false);

@@ -8,7 +8,7 @@ import Link from "next/link";
 import useScreenSize from "@/_helpers/useScreenSize";
 
 export default function ReviewSlider({ favSlider, index }) {
-  // console.log(favSlider);
+  // (favSlider);
   // if value is an integer and not equal to 10, add decimal that value
   const formatValue = (value) => {
     if (value % 1 === 0 && value !== 10) {

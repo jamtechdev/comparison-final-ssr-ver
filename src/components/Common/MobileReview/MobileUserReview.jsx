@@ -10,7 +10,7 @@ import formatValue from "@/_helpers/formatValue";
 import Rating from "../Rating/Rating";
 
 function MobileUserReview({ productReview }) {
-  // console.log(productReview?.length);
+  // (productReview?.length);
   return (
     <>
       <div className="mobile-product-slider">
@@ -58,7 +58,7 @@ function MobileUserReview({ productReview }) {
                       <span>{formatValue(data?.rating)}</span>
                       <Rating value={data?.rating} />
                     </div>
-                    {/* {console.log(data?.url, "neet")} */}
+                    {/* {(data?.url, "neet")} */}
                     <small className="rating__review">
                       {data?.reviews} Reviews
                     </small>

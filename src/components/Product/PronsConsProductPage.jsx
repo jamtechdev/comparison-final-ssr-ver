@@ -7,7 +7,7 @@ function PronsConsProductPage({ product, tabvalue,handleAccordionChange }) {
   const { isMobile } = useScreenSize();
   const splitVsValue = (value) => {
     const splitValue = value && value.trim().split("vs");
-    // console.log(splitValue[0])
+    // (splitValue[0])
     const boldedPart = `<strong>${splitValue[0]}</strong>`;
     if (splitValue?.length > 2) {
       return `${boldedPart} vs ${splitValue[1]} vs ${splitValue[2]}`;
@@ -51,7 +51,7 @@ function PronsConsProductPage({ product, tabvalue,handleAccordionChange }) {
                             ?.map((item, index) => {
                               return (
                                 <li key={index}>
-                                  {/* {console.log(item?.hover_phase)} */}
+                                  {/* {(item?.hover_phase)} */}
                                   <span
                                     className={`${
                                       item?.hover_phase !== null
@@ -146,7 +146,7 @@ function PronsConsProductPage({ product, tabvalue,handleAccordionChange }) {
                         product?.general?.pros?.map((item, index) => {
                           return (
                             <li key={index}>
-                              {/* {console.log(item)} */}
+                              {/* {(item)} */}
                               <span
                                 className={`${
                                   item?.hover_phase !== null
@@ -387,7 +387,7 @@ function PronsConsProductPage({ product, tabvalue,handleAccordionChange }) {
                         product?.general?.cons?.map((item, index) => {
                           return (
                             <li key={index}>
-                              {/* {console.log(item)} */}
+                              {/* {(item)} */}
                               <span
                                 className={`${
                                   item?.hover_phase !== null

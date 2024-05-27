@@ -1,7 +1,7 @@
 //Updated
 export const getFilteredAttributeValues = (obj) => {
   let uniq = [];
-  // console.log(obj)
+  // (obj)
   let product = [];
   const uniqueValues = obj.values.reduce((acc, currentValue) => {
     if (!acc.includes(currentValue.name)) {
@@ -65,7 +65,7 @@ export const getFilteredAttributeValues = (obj) => {
     });
     // exract productCount
     let countProduct = [];
-    // console.log(uniq);
+    // (uniq);
     for (let i = 0; i < obj.values.length; i++) {
       // Check if the name is not blank or "-"
       const name = obj.values[i].name;
@@ -79,14 +79,14 @@ export const getFilteredAttributeValues = (obj) => {
         countProduct.push(obj.values[i].product_count);
       }
     }
-    // console.log(countProduct, "productCount");
+    // (countProduct, "productCount");
     let numberProductCount = countProduct
       .map((ele) => Number(ele))
       .filter((element) => !isNaN(element));
     let sortedProductCountArray = numberProductCount.sort(function (a, b) {
       return a - b;
     });
-    // console.log(sortedProductCountArray);
+    // (sortedProductCountArray);
 
     if (sortedArray.length <= 4) {
       if (sortedArray.length > 0)
@@ -145,7 +145,7 @@ export const getAttributeHalf = (product, half) => {
     firstHalfKeys.forEach((key) => {
       firstHalfAttributes[key] = product.attributes_new[key];
     });
-    // console.log(firstHalfAttributes)
+    // (firstHalfAttributes)
     return firstHalfAttributes;
     
   } else if (half === "second") {
@@ -168,13 +168,13 @@ export const getAttributeProductHalf = (product, half) => {
   }
   const attributeKeys = Object.keys(product.attributes);
   // attributeKeys.push('Overall')
-  // console.log(attributeKeys)
-  // console.log(...attributeKeys)
+  // (attributeKeys)
+  // (...attributeKeys)
   const halfLength = Math.ceil(attributeKeys.length / 2);
-  // console.log(halfLength)
+  // (halfLength)
   if (half === "first") {
     const firstHalfKeys = attributeKeys.slice(0, halfLength);
-    // console.log(firstHalfKeys)
+    // (firstHalfKeys)
     const firstHalfAttributes = {};
     firstHalfKeys.forEach((key) => {
       firstHalfAttributes[key] = product.attributes[key];
@@ -182,7 +182,7 @@ export const getAttributeProductHalf = (product, half) => {
     return firstHalfAttributes;
   } else if (half === "second") {
     const secondHalfKeys = attributeKeys.slice(halfLength);
-    // console.log(secondHalfKeys)
+    // (secondHalfKeys)
     const secondHalfAttributes = {};
     secondHalfKeys.forEach((key) => {
       secondHalfAttributes[key] = product.attributes[key];
@@ -238,7 +238,7 @@ export const handleFilterValueChange = (
     }
   }
   setFilterObj({ ...obj });
-  // console.log(obj);
+  // (obj);
 };
 
 export const isCheckboxChecked = (filterObj, category, attribute, value) => {
@@ -281,7 +281,7 @@ export const filterProducts = (
           );
 
           if (attribute) {
-            // console.log(attribute.attribute_value)
+            // (attribute.attribute_value)
             // Check if the attribute value matches any of the filter values
             if (typeof attributeValues[0] == "object") {
               if (
@@ -310,7 +310,7 @@ export const filterProducts = (
   if (sortBy.algo == "") {
     return [...filterdProducts];
   } else {
-    // console.log(sortBy.algo)
+    // (sortBy.algo)
     const sortedProducts = [...filterdProducts];
     if (sortBy.algo == "highest_to_lowest") {
       sortedProducts.sort((a, b) => {
@@ -339,7 +339,7 @@ export const filterProducts = (
         const productBattr = b.attributes.find(
           (attribute) => attribute.attribute == sortBy.rangeAttributes
         );
-        // console.log(productAattr)
+        // (productAattr)
         if (productAattr && productBattr) {
           const valueA = Number(productAattr.attribute_value);
           const valueB = Number(productBattr.attribute_value);
@@ -402,7 +402,7 @@ export const arrangeCategories = (apiCategoryData, setCategoryAttributes) => {
   const sortedCategoryData = [...apiCategoryData].sort(
     (a, b) => a.position - b.position
   );
-  // console.log(sortedCategoryData)
+  // (sortedCategoryData)
   setCategoryAttributes(sortedCategoryData);
 };
 

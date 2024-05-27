@@ -30,9 +30,9 @@ const useChart = () => {
         document.body.querySelectorAll(".addClassData");
       elementsWithNodeType1.forEach(async (element, index) => {
         const shortCode = element.textContent;
-        // console.log(shortCode);
+        // (shortCode);
         const shortCodesMatched = matchShortCodePatternsAgainstText(shortCode);
-        // console.log(shortCodesMatched, "checking");
+        // (shortCodesMatched, "checking");
         if (
           shortCodesMatched &&
           shortCodesMatched.length > 0 &&
@@ -55,7 +55,7 @@ const useChart = () => {
     shortCodesMatched,
     index
   ) {
-    // console.log(shortCodesMatched)
+    // (shortCodesMatched)
     const parentDiv = document.createElement("div");
     parentDiv.classList.add("container-div");
     element.insertAdjacentElement("afterend", parentDiv);
@@ -70,10 +70,10 @@ const useChart = () => {
         const chartData = await res.data.data;
 
         if (chartData && chartData.data && chartData.data.length > 0) {
-          // console.log(xAixsLabel)
+          // (xAixsLabel)
           const xAixsLabel = chartData.x_axis_label ?? "";
 
-          // console.log(xAixsLabel)
+          // (xAixsLabel)
           const yAixsLabel = chartData.y_axis_label ?? "";
           const xAxisTitle = chartData.x_title ?? "";
           const yAxisTitle = chartData.y_title ?? "";
@@ -101,11 +101,11 @@ const useChart = () => {
               ".chart_Append" + index
             );
             const numberOfChartAppends = chartAppendElements.length;
-            // console.log(
+            // (
             //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
             // );
-            // console.log(shortCodesMatched[indx].pattern);
-            // console.log(chartData?.data);
+            // (shortCodesMatched[indx].pattern);
+            // (chartData?.data);
             // const data = [
             //   {
             //     data: {

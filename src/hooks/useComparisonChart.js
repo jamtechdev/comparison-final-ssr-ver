@@ -11,10 +11,10 @@ import ComparisonVerticalChart from "../_chart/ComparisonVerticalChart/index.js"
 // import { ChartName } from "../_chart/data/enums/ChartName.js";
 
 const useComparisonChart = (chartData, pageType, slug) => {
-  // console.log(chartData);
+  // (chartData);
 
   const shortCodepatternsRE = chartData;
-  // console.log(shortCodepatternsRE?.type);
+  // (shortCodepatternsRE?.type);
 
   useEffect(() => {
     // Function to search for the pattern
@@ -23,10 +23,10 @@ const useComparisonChart = (chartData, pageType, slug) => {
         document.body.querySelectorAll(".addClassData");
       elementsWithNodeType1.forEach(async (element, index) => {
         const shortCode = element.textContent;
-        // console.log(shortCode);
+        // (shortCode);
         const shortCodesMatched = chartData?.type;
 
-        // console.log(shortCodesMatched, "checking");
+        // (shortCodesMatched, "checking");
         await renderGraphForMatchedShortCodePattern(
           element,
           shortCodesMatched,
@@ -72,7 +72,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
         const correlation_maxX = Number(chartData.rang_max_x) ?? null;
         const correlation_minY = Number(chartData.rang_min_y) ?? null;
         const correlation_maxY = Number(chartData.rang_max_y) ?? null;
-        // console.log(chartData);
+        // (chartData);
         const chartDatas = {
           data: [
             { label: "no", value: 66.7 },
@@ -87,7 +87,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
         };
         const plotData = await regenerateData(chartData);
 
-        // console.log(chartDatas?.color, "plotData");
+        // (chartDatas?.color, "plotData");
 
         if (plotData && plotData.length > 0) {
           const container = document.createElement("div");
@@ -99,9 +99,9 @@ const useComparisonChart = (chartData, pageType, slug) => {
             ".chart_Append" + index
           );
           const numberOfChartAppends = chartAppendElements.length;
-          // console.log(chartData);
+          // (chartData);
           if (numberOfChartAppends == 1) {
-            // console.log(chartData?.type);
+            // (chartData?.type);
             if (chartData?.type === "pie-chart") {
               root.render(
                 <ComparisonPieChart
@@ -161,7 +161,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
       //       graph_shortcode: shortCodesMatched[indx].matchedString,
       //     });
       //     // const chartData = await res.data.data;
-      //     console.log(first);
+      //     (first);
 
       //     if (chartData) {
       //       const xAixsLabel = chartData.x_axis_label ?? "";
@@ -180,7 +180,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
       //       const correlation_minY = Number(chartData.rang_min_y) ?? null;
       //       const correlation_maxY = Number(chartData.rang_max_y) ?? null;
       //       const plotData = await regenerateData(chartData);
-      //       console.log(plotData, "dataHai");
+      //       (plotData, "dataHai");
 
       //       if (plotData && plotData.length > 0) {
       //         const container = document.createElement("div");
@@ -193,7 +193,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
       //           ".chart_Append" + index
       //         );
       //         const numberOfChartAppends = chartAppendElements.length;
-      //         // console.log(
+      //         // (
       //         //   `Number of elements with class "chart_Append": ${numberOfChartAppends}`
       //         // );
       //         if (numberOfChartAppends == 1) {
@@ -301,7 +301,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
 
   //   if (chartData && chartData.data && chartData.data.length > 0) {
   //     chartData.data.forEach((val, index) => {
-  //       // console.log(val, "result");
+  //       // (val, "result");
   //       dataForChart.push({
   //         label: val.label,
   //         value: Number(val?.value),
@@ -313,7 +313,7 @@ const useComparisonChart = (chartData, pageType, slug) => {
   //       });
   //       // if (chartData.produt_name)
   //       //   dataForChart[index]["productName"] = chartData.produt_name[index];
-  //       // console.log(dataForChart, "ttt");
+  //       // (dataForChart, "ttt");
   //       // if (chartData.product_count) {
   //       //   dataForChart[index]["productCount"] = chartData.product_count[index];
   //       // }

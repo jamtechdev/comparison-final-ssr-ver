@@ -9,7 +9,7 @@ import formatValue from "@/_helpers/formatValue";
 
 export default function MainComparision({products,pages_phase}) {
   const router = useRouter();
-  // console.log(products?.products);
+  // (products?.products);
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -156,7 +156,7 @@ export default function MainComparision({products,pages_phase}) {
             );
           })}
       </Swiper>
-      {/* {console.log(filteredComparisons?.length)} */}
+      {/* {(filteredComparisons?.length)} */}
       {filteredComparisons?.length > 3 && (
         <>
           {" "}

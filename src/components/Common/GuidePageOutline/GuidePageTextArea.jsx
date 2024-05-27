@@ -13,7 +13,7 @@ function GuidePageTextArea({ guide }) {
   const getGuideTextPartShortcode = useSelector(
     (state) => state.comparePro.text_part_main?.content
   );
-  // console.log(getGuideTextPartShortcode);
+  // (getGuideTextPartShortcode);
 
   const [activeOutlineId, setActiveOutlineId] = useState("");
   const contentRef = useRef(null);
@@ -47,7 +47,7 @@ function GuidePageTextArea({ guide }) {
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
-          // console.log(innerHTML);
+          // (innerHTML);
 
           element.innerHTML = innerHTML;
           dispatch(storeTextPartShortCode({ content: innerHTML }));
@@ -106,7 +106,7 @@ function GuidePageTextArea({ guide }) {
         <Col className="mobile-hide" md={12} lg={2}>
           <div className="ranking-section">
             <div className="site-main-heading">
-              {guide && guide?.page_phrases?.in_rankings}
+              {guide && guide?.page_phases?.similar_guides}
             </div>
             {guide?.recommended_guides &&
               guide?.recommended_guides.slice(0, 3)?.map((data, index) => {

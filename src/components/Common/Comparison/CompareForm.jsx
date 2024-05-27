@@ -24,7 +24,7 @@ export default function CompareForm({
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
 
-  //  console.log(favSlider,"checking favslider");
+  //  (favSlider,"checking favslider");
   const ProductPage = {
     category_id: product_name?.category_id,
     permalink: product_name?.permalink,
@@ -136,7 +136,7 @@ export default function CompareForm({
         }
         return 0;
       });
-      // console.log(sortedPermalinksArray);
+      // (sortedPermalinksArray);
       const permalinks = sortedPermalinksArray.map((item) => item.permalink);
       const permalinkSlug = permalinks.join("-vs-");
       dispatch(addCompareProduct(formFields));
@@ -167,7 +167,7 @@ export default function CompareForm({
       setFocusedProductThird(false);
     }, 200);
   };
-  // console.log(formFields);
+  // (formFields);
   useEffect(() => {
     if (product_name) {
       dispatch(addCompareProduct(formFields));
@@ -189,11 +189,11 @@ export default function CompareForm({
       ...reduxData,
     }));
   }, [reduxData]);
-  // console.log(formFields.productFirst)
+  // (formFields.productFirst)
   // remove select product from searhList
   const removeSelectedProduct = (product, fieldName) => {
     dispatch(deleteCompareProduct({ key: product }));
-    // console.log(product, fieldName);
+    // (product, fieldName);
   };
   return (
     <>
@@ -238,7 +238,7 @@ export default function CompareForm({
               )}
               {/*  */}
             </div>
-            {/* {console.log(formFields.productFirst && formFields.productFirst)} */}
+            {/* {(formFields.productFirst && formFields.productFirst)} */}
             {formFields.productFirst && (
               <CompareSearchList
                 isFocused={isFocusedProductFirst}

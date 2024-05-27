@@ -71,7 +71,7 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
 
     setOutline(newOutline);
   }, []);
-  // console.log(outline);
+  // (outline);
 
   const handleClick = (attribute) => {
     setActiveParentIndex(attribute);
@@ -99,7 +99,7 @@ function ComparisionOutlineGenerator({ blogData, currentIndexId }) {
                 handleClick(section?.id);
               }}
             >
-              {/* {console.log(section.text)} */}
+              {/* {(section.text)} */}
               <Link
                 href={`#${section?.id}`}
                 className={`outlineLink ${

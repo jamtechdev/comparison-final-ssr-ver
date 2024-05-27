@@ -44,10 +44,10 @@ const ProductCompareTable = React.memo(
         }, observerSettings);
 
         observer.observe(cachedRef);
-        // // console.log(observerSettings);
+        // // (observerSettings);
         return () => {
           observer.unobserve(cachedRef);
-          // console.log(observerSettings);
+          // (observerSettings);
         };
       }, []);
 
@@ -61,7 +61,7 @@ const ProductCompareTable = React.memo(
         testDiv?.getBoundingClientRect().top < 2
           ? setWinPos(true)
           : setWinPos(false);
-        // console.log( testDiv.getBoundingClientRect().top);
+        // ( testDiv.getBoundingClientRect().top);
 
         var tbodyDiv = document.getElementById("tbody");
         tbodyDiv?.getBoundingClientRect().top > 2
@@ -73,7 +73,7 @@ const ProductCompareTable = React.memo(
           ? setStickyWidth(false)
           : setStickyWidth(true);
 
-        // console.log(nextHeadingDiv?.getBoundingClientRect().bottom > 0);
+        // (nextHeadingDiv?.getBoundingClientRect().bottom > 0);
 
         setAfterTableSticky(true);
       };
@@ -153,13 +153,13 @@ const ProductCompareTable = React.memo(
       //   numericValues.sort((a, b) => a - b);
       // }
 
-      // console.log(
+      // (
       //   filterData[0]?.absolute_value_data,
       //   filterData[0]?.attribute,
       //   "test"
       // );
 
-      // console.log(numericValues, arrayOfObjects[0]?.attribute, "numericValues");
+      // (numericValues, arrayOfObjects[0]?.attribute, "numericValues");
 
       // Adding logic for String case
       // if (numericValues.length === 0) {
@@ -173,10 +173,10 @@ const ProductCompareTable = React.memo(
       //       return obj?.attribute_value;
       //     }
       //   });
-      //   console.log(stringArray);
+      //   (stringArray);
 
-      // console.log(stringArray, "hello");
-      // console.log(
+      // (stringArray, "hello");
+      // (
       //   stringArray,
       //   arrayOfObjects,
       //   arrayOfObjects[0]?.attribute,
@@ -184,20 +184,20 @@ const ProductCompareTable = React.memo(
       // );
 
       // if (arrayOfObjects?.[0]?.algorithm === "absolute_value") {
-      // console.log(stringArray[0], "neetx", "");
+      // (stringArray[0], "neetx", "");
       // const targetString =
       //   stringArray[0] === "yes"
       //     ? "yes"
       //     : "no" || stringArray[0] === "no"
       //     ? " "
       //     : starValue[0]?.attribute_value;
-      // // console.log(targetString, "neet");
-      // console.log(targetString);
+      // // (targetString, "neet");
+      // (targetString);
       // numericValues = stringArray;
       // numericValues = stringArray.filter((value, index) => index === 0);
-      // console.log(numericValues, "neetx");
+      // (numericValues, "neetx");
 
-      // console.log(numericValues, arrayOfObjects[0]?.attribute, "neet");
+      // (numericValues, arrayOfObjects[0]?.attribute, "neet");
       // }
       // }
 
@@ -282,7 +282,7 @@ const ProductCompareTable = React.memo(
                   src="/icons/star.png"
                   alt="star"
                 />
-                {/* {console.log(values, "neet")} */}
+                {/* {(values, "neet")} */}
                 <ProsConsToolTip hover_phrase={starPhase} />
               </span>
             </div>
@@ -318,7 +318,7 @@ const ProductCompareTable = React.memo(
                 return (
                   <th key={index}>
                     {/* <span className="best-tag-product">Best From All</span> */}
-                    {/* {console.log(product)} */}
+                    {/* {(product)} */}
                     {index === 0 && (
                       <span className="best-tag-product">
              {productPhaseData?.compared}
@@ -360,7 +360,7 @@ const ProductCompareTable = React.memo(
                           {" "}
                           <>
                             <ul className="best-list-item d-none">
-                              {/* {console.log(product?.currency)} */}
+                              {/* {(product?.currency)} */}
                               {product.price_websites &&
                                 product?.price_websites?.every(
                                   (data) => data.price === null
@@ -505,7 +505,7 @@ const ProductCompareTable = React.memo(
                                                 )}`}
                                                 className="font__16__inline"
                                               >
-                                                {/* {console.log(data?.currency)} */}
+                                                {/* {(data?.currency)} */}
                                                 {data?.price}{" "}
                                                 {product?.currency}
                                               </a>
@@ -649,8 +649,8 @@ const ProductCompareTable = React.memo(
                             }
                           </p>
                         )}
-                        {/* {console.log(products[0]?.users_rating_descriptions?.when_matters)} */}
-                        {/* {console.log(productPhaseData)} */}
+                        {/* {(products[0]?.users_rating_descriptions?.when_matters)} */}
+                        {/* {(productPhaseData)} */}
 
                         <p className="mb-2">
                           <b>{productPhaseData?.when_it_matters}: </b>
@@ -676,7 +676,7 @@ const ProductCompareTable = React.memo(
                 );
               })}
             </tr>
-            {/* {console.log(products,"xxx")} */}
+            {/* {(products,"xxx")} */}
             {products[0]?.expert_reviews_rating > 0 && (
               <tr className="">
                 <th className="sub-inner-padding">
@@ -855,7 +855,7 @@ const ProductCompareTable = React.memo(
                 );
                 return (
                   <td key={ratioIndex}>
-                    {/* {console.log(values, "neetxy")} */}
+                    {/* {(values, "neetxy")} */}
                     {
                       addStarOnTable(
                         defaultNo,
@@ -903,7 +903,7 @@ const ProductCompareTable = React.memo(
                           </p>
                         }
 
-                        {/* {console.log(product)} */}
+                        {/* {(product)} */}
                       </div>
                     </div>
                   </th>
@@ -994,7 +994,7 @@ const ProductCompareTable = React.memo(
                                       : "#85B2F1",
                                 }}
                               >
-                                {/* {console.log(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
+                                {/* {(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
                                 {product.attributes[
                                   category.name
                                 ]?.[0].attribute_evaluation?.toFixed(1)}{" "}
@@ -1074,7 +1074,7 @@ const ProductCompareTable = React.memo(
         {fullTable == 2 && (
           <div className="text-center">
             <Button className="see_all_btn_outline" onClick={handleTableShow}>
-              {/* {console.log(productPhaseData)} */}
+              {/* {(productPhaseData)} */}
               {productPhaseData && productPhaseData?.see_full_table}{" "}
               <i className="ri-arrow-down-s-line"></i>
             </Button>

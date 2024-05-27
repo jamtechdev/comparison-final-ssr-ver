@@ -4,8 +4,8 @@ import * as d3 from "d3";
 import "./index.css";
 
 function Radar({ data, activeTab }) {
-  // console.log(props, "neet");
-  // console.log(data);
+  // (props, "neet");
+  // (data);
 
   const margin = { top: 20, right: 10, bottom: 60, left: 10 };
   const width = 490 - margin.left - margin.right;
@@ -68,7 +68,7 @@ function Radar({ data, activeTab }) {
     for (let i = 0; i < attributes.length; i++) {
       const slice = Math.PI / 2 + (2 * Math.PI * i) / attributes.length;
       const key = attributes[i];
-      // console.log(key)
+      // (key)
       const { x, y } = cordForAngle(slice, radius);
       // Calculate the center position of the line
       const lineCenterX = x + width / 2;
@@ -155,9 +155,9 @@ function Radar({ data, activeTab }) {
 
     for (let i = 0; i < data.length; i++) {
       const d = data[i];
-      // console.log(i);
+      // (i);
       const cord = getCoordPath(d);
-      // console.log(activeTab, i, "neetxy");
+      // (activeTab, i, "neetxy");
 
       svg
         .append("path")

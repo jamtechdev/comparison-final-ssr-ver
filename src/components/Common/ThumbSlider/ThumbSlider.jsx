@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 export default function ThumbSlider({ productData, is_tested, slug }) {
-  // console.log(slug)
+  // (slug)
   const product = [
     {
       image: "/images/nofound.png",
@@ -32,7 +32,7 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
   const setSwiperRef = (swiper) => {
     setSwiper(swiper);
   };
-  // console.log(activeThumb);
+  // (activeThumb);
   const handleThumbClick = (index) => {
     if (index === productData?.all_images?.length - 1) {
       setActiveThumb(0); // Reset activeThumb to 0
@@ -52,7 +52,7 @@ export default function ThumbSlider({ productData, is_tested, slug }) {
   };
 
   const handleNext = () => {
-    // console.log(activeThumb);
+    // (activeThumb);
     if (activeThumb === productData?.all_images?.length - 1) {
       setActiveThumb(0); // Reset activeThumb to 0
     } else {

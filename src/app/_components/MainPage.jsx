@@ -32,7 +32,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
     setsearch(e.target.value);
   };
   const router = useRouter();
-  // {console.log(favSlider,"neet")}
+  // {(favSlider,"neet")}
   return (
     <>
       <section className="hero_section home">
@@ -58,7 +58,7 @@ export default function MainPage({ bannerCounts, favSlider }) {
                 <Button className="search-btn">
                   {favSlider && favSlider?.search_button}
                 </Button>
-                {/* {console.log(favSlider?.no_data_found, "favSlider")} */}
+                {/* {(favSlider?.no_data_found, "favSlider")} */}
                 <SearchList
                   search={search}
                   isFocused={isFocused}
@@ -326,8 +326,8 @@ export default function MainPage({ bannerCounts, favSlider }) {
                       {favSlider && favSlider?.comparison_heading_homepage}
                       {/* {favSlider && favSlider?.comparison_heading_homepage} */}
                     </h3>
-                    {/* {console.log(data?.comparison)} */}
-                    {/* { console.log(favSlider?.see)} */}
+                    {/* {(data?.comparison)} */}
+                    {/* { (favSlider?.see)} */}
 
                     <HomeCompareSlider
                       products={data?.comparison}

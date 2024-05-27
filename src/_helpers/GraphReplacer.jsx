@@ -32,7 +32,7 @@ const GraphReplacer = () => {
           if (chartData && chartData.data && chartData.data.length > 0) {
             const xAixsLabel = chartData.x_axis_label ?? "";
 
-            // console.log(xAixsLabel)
+            // (xAixsLabel)
             const yAixsLabel = chartData.y_axis_label ?? "";
             const xAxisTitle = chartData.x_title ?? "";
             const yAxisTitle = chartData.y_title ?? "";
@@ -55,8 +55,8 @@ const GraphReplacer = () => {
               container.setAttribute("class", `chart_Append${idx}`);
               parentDiv.insertAdjacentElement("beforeend", container);
               const root = createRoot(container);
-              // console.log(plotData);
-              // console.log(shortCode[idx]);
+              // (plotData);
+              // (shortCode[idx]);
 
               if (shortCode[idx].pattern === ChartName.PieChart) {
                 root.render(
@@ -223,7 +223,7 @@ const GraphReplacer = () => {
     const results = [];
     const patternRE = /\[[^\]]*]/g;
     const patterns = str.match(patternRE);
-    // console.log(patterns);
+    // (patterns);
 
     if (patterns) {
       patterns.forEach((matchedPattern) => {
@@ -279,14 +279,14 @@ const GraphReplacer = () => {
     setTimeout(() => {
       const elementsWithNodeType =
         document.querySelectorAll("[data-shortcode]");
-      console.log("Observed elements:", elementsWithNodeType);
+      ("Observed elements:", elementsWithNodeType);
       elementsWithNodeType.forEach((element) => {
         observer.current.observe(element);
       });
     }, 3000);
 
     // const elementsWithNodeType1 = document.querySelectorAll(".chart-placeholder");
-    // console.log('Observed elements:', elementsWithNodeType1);
+    // ('Observed elements:', elementsWithNodeType1);
     // elementsWithNodeType1.forEach((element) => {
     //   observer.current.observe(element);
     // });

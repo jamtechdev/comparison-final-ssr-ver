@@ -14,8 +14,8 @@ function CompareDropDown({
   slug,
   pageType,
 }) {
-  // console.log(product);
-  console.log(attributeDropDown);
+  // (product);
+
 
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null
@@ -24,7 +24,7 @@ function CompareDropDown({
   const [selectedAttribute, setSelectedAttribute] = useState(
     (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
   );
-  console.log(selectedItem)
+
 
   useEffect(() => {
     const containerDivs = document.querySelectorAll(".container-divs");
@@ -133,7 +133,7 @@ function CompareDropDown({
                   </Form.Select>
                 )}
               </div>
-              {/* {console.log(selectedAttribute)} */}
+              {/* {(selectedAttribute)} */}
               {selectedAttribute?.name !== "Price" && (
                 <p className="text-end para_content_text mt-3">
                   {selectedAttribute && (

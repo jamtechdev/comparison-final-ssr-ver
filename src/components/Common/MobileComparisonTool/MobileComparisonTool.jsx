@@ -48,7 +48,7 @@ export default function MobileComparisonTool({
       typeof item !== "undefined" &&
       Object.keys(item).length !== 0
   );
-  // console.log(comparisonProductData?.length);
+  // (comparisonProductData?.length);
   const highestScore = Math.max(
     ...comparisonProductData.map((item) => item.overall_score)
   );
@@ -113,7 +113,7 @@ export default function MobileComparisonTool({
                 <SwiperSlide key={index}>
                   <div className="comparison-wrapper">
                     {isWinner && <div className="comparison-tag">{productPhaseData?.page_phases?.winner}</div>}
-                    {/* {console.log(item)} */}
+                    {/* {(item)} */}
                     <div className="comparison-card">
                       <img
                         src={

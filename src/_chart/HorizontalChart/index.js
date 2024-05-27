@@ -32,7 +32,7 @@ function HorizontalChart(props) {
     rectBarPadding,
     data.length
   );
-  // console.log(data)
+  // (data)
   const barpadding = rectBarPadding / (rectBarWidth + rectBarPadding) ?? 0.5;
   const minValue = d3.min(data, (d) => d.value);
   const maxValue = d3.max(data, (d) => d.value);

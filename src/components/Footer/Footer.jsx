@@ -12,7 +12,7 @@ import {
 import NewsLetter from "../Common/NewsLetter/newsLetter.jsx";
 import { useEffect, useState } from "react";
 export default function Footer({ footerData }) {
-  // console.log(footerData);
+  // (footerData);
   // news letter pop up
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -199,7 +199,7 @@ export default function Footer({ footerData }) {
                     cat?.title && (
                       <li key={index}>
                         <a href={`/${cat?.permalink}`}>{cat?.title}</a>
-                        {/* {console.log(cat)} */}
+                        {/* {(cat)} */}
                       </li>
                     )
                   );

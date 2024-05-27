@@ -137,7 +137,7 @@ export default function Product({
     }
   };
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
-  // console.log(guideComparePro?.length, "checkRedux");
+  // (guideComparePro?.length, "checkRedux");
   const handleComparedProduct = (product, position) => {
     if (
       reduxData === undefined ||
@@ -235,7 +235,7 @@ export default function Product({
     }
     return value;
   };
-  // console.log(product)
+  // (product)
   const filteredTech_data = incomingProduct?.tech_data?.filter(
     (item) => item?.permalink === slug
   );
@@ -269,7 +269,7 @@ export default function Product({
 
   let result = width - 250;
   let finalvalue = result / 2 - 250;
-  // console.log(finalvalue, "test")
+  // (finalvalue, "test")
 
   // useEffect(() => {
   //   const currentUrl = new URL(window.location.href);
@@ -277,10 +277,10 @@ export default function Product({
   //   const variantValue = searchParam.get("variant");
   //   const sortValue = searchParam.get("sort");
 
-  //   // console.log(splitData);
+  //   // (splitData);
   // });
-  // console.log(splitData);
-  // console.log(text_before_listing, "neet");
+  // (splitData);
+  // (text_before_listing, "neet");
   const extractDomainName = (url) => {
     const domain = url
       .replace("https://", "")
@@ -296,7 +296,7 @@ export default function Product({
   const [productID, setProductID] = useState(null);
   const [categoryID, setCategoryID] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  // console.log(productData, "neet");
+  // (productData, "neet");
 
   const generateProductsWithAttributes = () => {
     const productAttributes = {};
@@ -323,9 +323,9 @@ export default function Product({
   };
 
   const attributesClearly = generateProductsWithAttributes();
-  // console.log(attributesClearly, "neet");
+  // (attributesClearly, "neet");
   const fetchProductData = async (productId, productCategory) => {
-    // console.log(producnctId, productCategory);
+    // (producnctId, productCategory);
     setIsLoading(true);
     try {
       const res = await axios.get(
@@ -352,16 +352,16 @@ export default function Product({
   };
 
   const handleShowAllClick = async (productId, productCategory) => {
-    // console.log(productId, productCategory, "dataID");
+    // (productId, productCategory, "dataID");
 
     await fetchProductData(productId, productCategory);
   };
   // const decoratedOnClick = useAccordionButton(1, () =>
-  //   console.log('totally custom!'),
+  //   ('totally custom!'),
   // );
-  // console.log(productData, "neet");
+  // (productData, "neet");
   useEffect(() => {
-    // console.log(searchParams, "change alert");
+    // (searchParams, "change alert");
     setProductData(null);
     document
       .querySelectorAll(".accordion-button:not(.collapsed)")
@@ -373,8 +373,8 @@ export default function Product({
     // });
   }, [searchParams]);
 
-  // console.log(productPhaseData,"check");
-  // console.log(productPagination)
+  // (productPhaseData,"check");
+  // (productPagination)
   return (
     <Fragment>
       <Toaster position="top-center" reverseOrder={false} />
@@ -382,7 +382,7 @@ export default function Product({
         <div className="flex-box">
           <div className="left_box">
             <span className="ribbon-number">
-              {/* {console.log(product?.price_websites?.length)} */}
+              {/* {(product?.price_websites?.length)} */}
               {/* {product?.price_websites?.length > 0 ? <p>{KeyIndex + 1}</p> : ""} */}
               {splitData?.[0] === "available" ||
               (product?.price_websites?.length > 0 && KeyIndex !== null) ? (
@@ -407,7 +407,7 @@ export default function Product({
               </a>
             </h2>
           </div>
-          {/* {console.log(product?.assigned_title)} */}
+          {/* {(product?.assigned_title)} */}
           {product?.assigned_title && (
             <span className="best-tag-product">{product?.assigned_title}</span>
           )}
@@ -465,7 +465,7 @@ export default function Product({
                           className="overall"
                           style={{ color: "rgb(39 48 78 / 90%)" }}
                         >
-                          {/* {console.log(guidePhraseData)} */}
+                          {/* {(guidePhraseData)} */}
                           {guidePhraseData && guidePhraseData?.overall_score}
                         </span>
                         <div
@@ -763,7 +763,7 @@ export default function Product({
                                 );
                               }
                             )}
-                          {/* {console.log(product)} */}
+                          {/* {(product)} */}
                           {product?.users_rating_descriptions?.reviews_websites
                             ?.length > 0 && (
                             <p>
@@ -980,7 +980,7 @@ export default function Product({
                     >
                       {product &&
                         product?.top_pros?.map((data, index) => {
-                          // console.log(data, "show data")
+                          // (data, "show data")
                           return (
                             <React.Fragment key={index}>
                               <li
@@ -988,7 +988,7 @@ export default function Product({
                                   data?.hover_phrase !== "" && "tooltip-title"
                                 }`}
                               >
-                                {/* {console.log(data?.comment)} */}
+                                {/* {(data?.comment)} */}
                                 <span className="pros-crons-text">
                                   {data?.name} {renderValue(data)}
                                 </span>
@@ -1068,7 +1068,7 @@ export default function Product({
                     sizes="100%"
                     alt="double-arrow"
                   /> */}
-                  {/* {console.log(filteredTech_data[0]?.data)} */}
+                  {/* {(filteredTech_data[0]?.data)} */}
 
                   <ul className="badge-list-section">
                     {product?.area_evaluation?.map((data) => {
@@ -1172,7 +1172,7 @@ export default function Product({
                                   );
                                 }
                               )}
-                              {/* {console.log(product)} */}
+                              {/* {(product)} */}
                             </div>
                           </div>
                         </li>
@@ -1199,13 +1199,13 @@ export default function Product({
                       sizes="100%"
                       alt="double-arrow"
                     />
-                    {/* {console.log(filteredTech_data[0]?.data)} */}
+                    {/* {(filteredTech_data[0]?.data)} */}
 
                     <ul>
                       {filteredTech_data[0]?.data.map((data, key) => {
                         return (
                           <li key={key}>
-                            {/* {console.log(data[0])} */}
+                            {/* {(data[0])} */}
                             {data && data?.name}:
                             <i>
                               {" "}
@@ -1232,7 +1232,7 @@ export default function Product({
                     </span>
                     <div className="color-section">
                       {product?.available_colors?.map((data, key) => {
-                        // console.log(data);
+                        // (data);
                         // const isCurrentVersion = data.permalink === slug;
                         return (
                           <>
@@ -1310,7 +1310,7 @@ export default function Product({
               product?.available_versions?.length !== 0 && (
                 <Row className="w-100 m-0 alternatives-border-top">
                   <Col lg={12} md={12} xl={12}>
-                    {/* {console.log(guidePhraseData)} */}
+                    {/* {(guidePhraseData)} */}
                     <div className="alternatives mt-2">
                       <span>
                         {guidePhraseData && guidePhraseData?.versions_available}
@@ -1322,7 +1322,7 @@ export default function Product({
                             a.permalink === product?.permalink ? -1 : 1
                           )
                           .map((data, key) => {
-                            // console.log(data);
+                            // (data);
                             return (
                               <>
                                 {data?.short_name !== null && (
@@ -1903,7 +1903,7 @@ export default function Product({
                                                   product.expert_reviews_rating_phase,
                                               }}
                                             ></div>
-                                            {/* {console.log(
+                                            {/* {(
                                              product?.expert_reviews_websites
                                            )} */}
 
@@ -2242,8 +2242,8 @@ export default function Product({
                                       <Accordion.Header as="div">
                                         <div className="table-accordion-header">
                                           {attribute}
-                                          {/* {console.log(attribute,"hellow")} */}
-                                          {/* {console.log(
+                                          {/* {(attribute,"hellow")} */}
+                                          {/* {(
                                            product.attributes_new[attribute][0]
                                              ?.attribute_evaluation,
                                            product.attributes_new[attribute][0]
@@ -2294,7 +2294,7 @@ export default function Product({
                                           <i className="ri-arrow-up-s-line"></i>
                                         </div>
                                       </Accordion.Header>
-                                      {/* {console.log(
+                                      {/* {(
                                         attributesClearly?.attributes_new[
                                           attribute
                                         ].sort(
@@ -2358,7 +2358,7 @@ export default function Product({
                                                             attributeValues.attribute_value !=
                                                               "no" && (
                                                               <>
-                                                                {/* {console.log(attributeValues.hover_phase,"neets")} */}
+                                                                {/* {(attributeValues.hover_phase,"neets")} */}
                                                                 <div
                                                                   className={`${
                                                                     attributeValues.hover_phase !==
@@ -2437,7 +2437,7 @@ export default function Product({
                                                                           : "")}
                                                                     </span>
                                                                   }
-                                                                  {/* {console.log(attributeValues)} */}
+                                                                  {/* {(attributeValues)} */}
 
                                                                   {attributeValues.attribute_value !==
                                                                     "?" && (
@@ -2545,7 +2545,7 @@ export default function Product({
                                                                   "5px",
                                                               }}
                                                             >
-                                                              {/* {console.log(
+                                                              {/* {(
                                                                attributeValues
                                                              )} */}
                                                               {/* here we use attribute_is_same_as and attribute_is_worse_than  */}
@@ -2676,8 +2676,8 @@ export default function Product({
                                       <Accordion.Header as="div">
                                         <div className="table-accordion-header">
                                           {attribute}
-                                          {/* {console.log(attribute,"hellow")} */}
-                                          {/* {console.log(
+                                          {/* {(attribute,"hellow")} */}
+                                          {/* {(
                                            product.attributes_new[attribute][0]
                                              ?.attribute_evaluation,
                                            product.attributes_new[attribute][0]
@@ -2782,7 +2782,7 @@ export default function Product({
                                                             attributeValues.attribute_value !=
                                                               "no" && (
                                                               <>
-                                                                {/* {console.log(attributeValues.hover_phase,"neets")} */}
+                                                                {/* {(attributeValues.hover_phase,"neets")} */}
                                                                 <div
                                                                   className={`${
                                                                     attributeValues.hover_phase !==
@@ -2861,7 +2861,7 @@ export default function Product({
                                                                           : "")}
                                                                     </span>
                                                                   }
-                                                                  {/* {console.log(
+                                                                  {/* {(
                                                                     attributeValues?.comment
                                                                   )} */}
 
@@ -2886,7 +2886,7 @@ export default function Product({
                                                                     />
                                                                   )}
                                                                 </div>{" "}
-                                                                {/* {console.log(attributeValues?.info_not_verified)} */}
+                                                                {/* {(attributeValues?.info_not_verified)} */}
                                                                 {attributeValues?.info_not_verified && (
                                                                   <div
                                                                     className="tooltip-title"
@@ -2984,7 +2984,7 @@ export default function Product({
                                                                   "5px",
                                                               }}
                                                             >
-                                                              {/* {console.log(
+                                                              {/* {(
                                                                attributeValues
                                                              )} */}
                                                               {/* here we use attribute_is_same_as and attribute_is_worse_than  */}

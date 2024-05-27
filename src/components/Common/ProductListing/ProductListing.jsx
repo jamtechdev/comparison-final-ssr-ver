@@ -27,7 +27,7 @@ export default React.forwardRef(function ProductListing(
       productListRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [products]); // Scroll when products change
-  // console.log(productPagination);
+  // (productPagination);
   function findProductPosition(name) {
     const index = Object.values(productPositionArray).indexOf(name);
 

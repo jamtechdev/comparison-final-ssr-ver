@@ -17,7 +17,7 @@
   import SearchList from "../Search/SearchList";
   import CompareModal from "../Common/Comparison/CompareModal";
   export default function Header({ headerData, headerPhase, logo }) {
-    // console.log(headerPhase?.page_phases);
+    // (headerPhase?.page_phases);
     const [isFocused, setIsFocused] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
@@ -32,7 +32,7 @@
 
     function useScrollDirection() {
       const [scrollDirection, setScrollDirection] = useState(null);
-      // console.log(headerPhase);
+      // (headerPhase);
 
       useEffect(() => {
         let lastScrollY = window.pageYOffset;
@@ -61,7 +61,7 @@
         setIsFocused(false);
       }, 200);
     };
-    // console.log(headerPhase);
+    // (headerPhase);
     const openCompareModel = () => {
       setIsOpen(true);
       setShow(false);
@@ -77,7 +77,7 @@
           scrollDirection === "down" ? "top-sticky-not" : "top-sticky"
         }`}
       >
-        {/* {console.log(headerPhase)} */}
+        {/* {(headerPhase)} */}
         <Container>
           <Row className="py-2 align-items-center logo-header">
             <Col lg={2} md={4} xs={4} className="hidden">
@@ -223,7 +223,7 @@
                       headerPhase?.page_phases?.how_we_rank}
                   </a>
                 </li>
-                {/* {console.log(headerPhase)} */}
+                {/* {(headerPhase)} */}
                 <li>
                   <a href={`/${headerPhase?.page_phases?.about_us_url}`}>
                     {headerPhase?.page_phases &&
@@ -283,7 +283,7 @@
             </div>
           </nav>
         </nav>
-        {/* {console.log(headerPhase)} */}
+        {/* {(headerPhase)} */}
         {isOpen && <CompareModal favSlider={headerPhase} setIsOpen={setIsOpen} />}
       </header>
     );

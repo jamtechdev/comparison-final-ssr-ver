@@ -26,7 +26,7 @@ function CorrelationChart(props) {
     rangeMaxY,
   } = props;
 
-  // console.log(correlationChartData);
+  // (correlationChartData);
 
   const svgContainer = useRef();
   let maxY = rangeMaxY ?? d3.max(correlationChartData.map((d) => Number(d.y)));

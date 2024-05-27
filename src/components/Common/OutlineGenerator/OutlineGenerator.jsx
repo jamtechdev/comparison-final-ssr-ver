@@ -79,8 +79,8 @@ function OutlineGenerator({ blogData, currentIndexId }) {
 
     setOutline(newOutline);
   }, []);
-  // console.log(outline);
-  // console.log(activeParentIndex);
+  // (outline);
+  // (activeParentIndex);
 
   const handleClick = (attribute) => {
     setActiveParentIndex(attribute);
@@ -108,7 +108,7 @@ function OutlineGenerator({ blogData, currentIndexId }) {
                 handleClick(section?.id);
               }}
             >
-              {/* {console.log(section.text)} */}
+              {/* {(section.text)} */}
               <Link
                 href={`#${section?.id}`}
                 className={`outlineLink ${

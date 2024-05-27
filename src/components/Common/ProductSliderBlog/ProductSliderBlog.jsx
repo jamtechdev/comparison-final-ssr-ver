@@ -2,7 +2,7 @@
 import { useState } from "react";
 export default function ProductSliderBlog({ favSlider }) {
   const [showFullData, setShowFullData] = useState(false);
-  // console.log(favSlider);
+  // (favSlider);
 
   const toggleShowFullData = () => {
     setShowFullData(!showFullData);
@@ -14,7 +14,7 @@ export default function ProductSliderBlog({ favSlider }) {
         favSlider
           ?.slice(0, showFullData ? favSlider?.length : 2)
           .map(function (item, index) {
-            // console.log(favSlider,"checking sidebar")
+            // (favSlider,"checking sidebar")
             return (
               <div className="product-card mb-3" key={index}>  
                 <img

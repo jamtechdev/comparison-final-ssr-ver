@@ -16,10 +16,10 @@ const ProsConsToolTip = (props) => {
   } = props;
 
   const { isMobile } = useScreenSize();
-  // console.log(info_not_verified)
+  // (info_not_verified)
 
   let tooltipStyles = {};
-  // console.log(expert_reviews&&expert_reviews);
+  // (expert_reviews&&expert_reviews);
   // const [width, setWidth] = useState(0);
   // useEffect(() => {
   //   const handleResize = () => {
@@ -37,7 +37,7 @@ const ProsConsToolTip = (props) => {
 
   // let result = width - 250
   // let finalvalue = result / 2 -250
-  // console.log(finalvalue, "test")
+  // (finalvalue, "test")
 
   // if (typeComp === "cons") {
   //   tooltipStyles = {

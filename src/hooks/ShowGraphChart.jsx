@@ -33,7 +33,7 @@ const ShowGraphChart = async (chartData, containerSelector , pageType , slug) =>
     const correlation_maxY = Number(chartData.rang_max_y) ?? null;
     const plotData = await regenerateData(chartData);
 
-    // console.log(plotData);
+    // (plotData);
 
     const chartContainer = document.createElement("div");
     chartContainer.style.padding = "10px";

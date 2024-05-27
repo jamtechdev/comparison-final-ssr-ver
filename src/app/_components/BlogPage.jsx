@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { storeTextPartShortCode } from "@/redux/features/compareProduct/compareProSlice";
 
 export default function BlogPage({ slug, blogData, categorySlug }) {
-  // console.log(blogData[0]?.data?.page_phases?.updated);
+  // (blogData[0]?.data?.page_phases?.updated);
   const [activeOutlineId, setActiveOutlineId] = useState("");
   const contentRef = useRef(null);
   const lastHeadingIdRef = useRef(null);
@@ -53,7 +53,7 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
-          console.log(innerHTML);
+          (innerHTML);
 
           element.innerHTML = innerHTML;
           dispatch(storeTextPartShortCode({ content: innerHTML }));

@@ -7,7 +7,7 @@ import BreadCrumb from "@/components/Common/BreadCrumb/breadcrum";
 import formatValue from "@/_helpers/formatValue";
 
 const ProductCategoryArchivePage = ({ slug, categoryData }) => {
-  // console.log(categoryData[0]?.data?.page_phases)
+  // (categoryData[0]?.data?.page_phases)
   return (
     <div>
       {categoryData != null && (
@@ -49,7 +49,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                       {categoryData[0]?.data?.popular_guides?.length > 0 &&
                         categoryData[0]?.data?.popular_guides?.map(
                           (item, index) => {
-                            // console.log(categoryData,"check category")
+                            // (categoryData,"check category")
                             return (
                               <Col
                                 lg={2}
@@ -105,7 +105,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
 
                   <Col md={12}>
                     <Row>
-                      {/* {console.log(categoryData[0]?.data?.popular_reviews?.length)} */}
+                      {/* {(categoryData[0]?.data?.popular_reviews?.length)} */}
                       {categoryData[0]?.data?.popular_reviews?.length > 0 &&
                         // categoryData[0]?.data?.popular_reviews?.slice(0, 12)?.map(
                         categoryData[0]?.data?.popular_reviews

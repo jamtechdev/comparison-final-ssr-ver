@@ -52,7 +52,7 @@ function CompareDiv({
   const dispatch = useDispatch();
   const products = comparisonData.map((item) => item.data);
 
-  // console.log(products);
+  // (products);
   const [isOpen, setIsOpen] = useState(false);
   const [compareProDataFirst, setCompareProDataFirst] = useState(
     (products[0] && products[0]) || []
@@ -76,7 +76,7 @@ function CompareDiv({
   // check slug have duplicate product have or not
   const isDuplicateProduct =
     slug.split("-vs-").length !== new Set(slug.split("-vs-")).size;
-  // console.log(isDuplicateProduct);
+  // (isDuplicateProduct);
   useEffect(() => {
     const uniqueProducts = [...new Set(slug.split("-vs-"))];
     slug = uniqueProducts.join("-vs-");
@@ -139,7 +139,7 @@ function CompareDiv({
       typeof item !== "undefined" &&
       Object.keys(item).length !== 0
   );
-  // console.log(comparisonProductData?.length);
+  // (comparisonProductData?.length);
 
   const productCopy = comparisonProductData;
   const productAttributes = {};
@@ -156,8 +156,8 @@ function CompareDiv({
     productAttributes[categoryName]?.push(attribute);
   });
   productCopy["attributes"] = productAttributes;
-  // console.log(comparisonTableProductData)
-  // console.log(productAttributes);
+  // (comparisonTableProductData)
+  // (productAttributes);
 
   // best alternative api call
   useEffect(() => {
@@ -171,10 +171,10 @@ function CompareDiv({
       )
       .then((res) => {
         setBestAlternative(res.data?.data);
-        // console.log(res?.data?.data);
+        // (res?.data?.data);
       })
       .catch((err) => {
-        console.log(err);
+        (err);
       });
   }, []);
 
@@ -196,7 +196,7 @@ function CompareDiv({
 
   let contentWithIds;
   if (bestAlternative?.text_part) {
-    // console.log(bestAlternative,"check alternative")
+    // (bestAlternative,"check alternative")
     contentWithIds = addIdsToHeadings(bestAlternative.text_part);
   } else {
     // Handle the case where bestAlternative.text_part is undefined
@@ -224,7 +224,7 @@ function CompareDiv({
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
-          console.log(innerHTML);
+          (innerHTML);
 
           element.innerHTML = innerHTML;
           dispatch(storeTextPartShortCode({ content: innerHTML }));
@@ -247,7 +247,7 @@ function CompareDiv({
       observer.disconnect();
     };
   }, []);
-  // console.log(contentWithIds);
+  // (contentWithIds);
 
   return (
     <>
@@ -269,7 +269,7 @@ function CompareDiv({
               />
             </Col>
             <Col md={12}>
-              {console.log(bestAlternative?.page_phases)}
+              {(bestAlternative?.page_phases)}
               <h1 className="site-main-heading">
                 {compareProDataFirst?.name} vs {compareProDataSec?.name}{" "}
                 {compareProDataThird?.name && `vs ${compareProDataThird?.name}`}
@@ -289,7 +289,7 @@ function CompareDiv({
             <Col md={12} className="table-section-mobile">
               <div className="comparison-tool">
                 {/* First Crd */}
-                {/* {console.log(bestAlternative?.page_phases)} */}
+                {/* {(bestAlternative?.page_phases)} */}
                 <CompareCard
                   productPhaseData={
                     bestAlternative && bestAlternative?.page_phases
@@ -306,7 +306,7 @@ function CompareDiv({
                   <Image src="/images/vs.svg" width={118} height={40} alt="" />
                 </div>
                 {/* second  Card*/}
-                {/* {console.log(bestAlternative,"hello")} */}
+                {/* {(bestAlternative,"hello")} */}
                 <CompareCard
                   productPhaseData={
                     bestAlternative && bestAlternative?.page_phases
@@ -347,8 +347,8 @@ function CompareDiv({
               />
             </Col>
           </Row>
-          {/* {console.log(bestAlternative,"hello mahi")} */}
-          {/* {console.log(bestAlternative?.page_phases)} */}
+          {/* {(bestAlternative,"hello mahi")} */}
+          {/* {(bestAlternative?.page_phases)} */}
           {bestAlternative?.verdict_text &&
             bestAlternative?.verdict_text &&
             bestAlternative?.verdict_text !== "" &&
@@ -394,7 +394,7 @@ function CompareDiv({
         </Container>
       </section>
 
-      {/* {console.log(bestAlternative?.text_part)} */}
+      {/* {(bestAlternative?.text_part)} */}
       {bestAlternative && bestAlternative?.text_part !== null && (
         <section className="contentSec my-3">
           <Container>
@@ -466,7 +466,7 @@ function CompareDiv({
           </Container>
         </section>
       )}
-      {/* {console.log(bestAlternative?.should_buy_product_one)} */}
+      {/* {(bestAlternative?.should_buy_product_one)} */}
       {bestAlternative &&
         bestAlternative?.should_buy_product_one?.length > 0 && (
           <section className="ptb-80 bg-color">
@@ -495,7 +495,7 @@ function CompareDiv({
                         No data Found
                       </h3>
                     )}
-                    {/* {console.log(product?.should_not_buy)} */}
+                    {/* {(product?.should_not_buy)} */}
                     <ul>
                       {bestAlternative &&
                         bestAlternative?.should_buy_product_one?.map(
@@ -601,7 +601,7 @@ function CompareDiv({
         <Container className="p-0">
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
-              {/* {console.log(compareByCatID?.data?.length)} */}
+              {/* {(compareByCatID?.data?.length)} */}
               {
                 isMobile ? (
                   <MobileCompareTable
@@ -627,7 +627,7 @@ function CompareDiv({
                 {bestAlternative &&
                   bestAlternative?.page_phases?.compare_with_other_products}
               </h2>
-              {/* {console.log(bestAlternative?.page_phases)} */}
+              {/* {(bestAlternative?.page_phases)} */}
               <CompareForm
                 favSlider={bestAlternative && bestAlternative?.page_phases}
                 location="ON_MAIN_PAGE"

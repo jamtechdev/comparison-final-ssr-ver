@@ -14,9 +14,9 @@ export default async function Page(props) {
 
 export async function generateMetadata(props) {
   const { params } = props;
-  // console.log(params)
+  // (params)
   const authorData = await aboutUsService.getAuthorById(params?.author);
-  // console.log(authorData)
+  // (authorData)
 
   const siteURL = "https://mondopedia.it";
   return {

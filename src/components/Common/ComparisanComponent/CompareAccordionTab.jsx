@@ -29,7 +29,7 @@ const CompareAccordionTab = React.memo(
 
     // extract the permalink from the sendProductProps
     const extractedUrls = sendProductProps.map((entry) => entry?.permalink);
-    // console.log(sendProductProps?.length)
+    // (sendProductProps?.length)
 
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
 
@@ -51,7 +51,7 @@ const CompareAccordionTab = React.memo(
       }
     };
     const handleTabChange = (eventKey) => {
-      // console.log(eventKey);
+      // (eventKey);
       setActiveTab(eventKey);
       setIsLoading(false);
     };
@@ -60,7 +60,7 @@ const CompareAccordionTab = React.memo(
       const index = parseInt(activatab.split("-")[1], 10);
       // Swap the order of extractedUrls when the active tab changes
       const updatedUrls = [...extractedUrls];
-      // console.log(updatedUrls);
+      // (updatedUrls);
       const temp = updatedUrls[index - 1];
       updatedUrls[index - 1] = updatedUrls[0];
       updatedUrls[0] = temp;
@@ -82,7 +82,7 @@ const CompareAccordionTab = React.memo(
         .then((response) => response.json())
         .then((data) => {
           setApiData(data.data);
-          // console.log(data.data,"Check")
+          // (data.data,"Check")
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
@@ -97,7 +97,7 @@ const CompareAccordionTab = React.memo(
       })
         .then((response) => response.json())
         .then((data) => {
-          // console.log(data.data?.sets);
+          // (data.data?.sets);
           setGraphData(data.data?.sets); // Assuming data from the second API call is directly usable
         })
         .catch((error) => {
@@ -108,12 +108,12 @@ const CompareAccordionTab = React.memo(
         setIsLoading(true);
       }, 1000);
     }, [activatab]);
-    // console.log(graphData?.data);
+    // (graphData?.data);
 
     // this funcation spilt the vs value from ApiData
     const splitVsValue = (value) => {
       const splitValue = value && value.trim().split("vs");
-      // console.log(splitValue[0])
+      // (splitValue[0])
       const boldedPart = `<strong>${splitValue[0]}</strong>`;
       if (splitValue?.length > 2) {
         return `${boldedPart} vs ${splitValue[1]} vs ${splitValue[2]}`;
@@ -188,7 +188,7 @@ const CompareAccordionTab = React.memo(
       );
     };
 
-    // console.log(graphData);
+    // (graphData);
 
     const chartData = {
       variables: [
@@ -232,7 +232,7 @@ const CompareAccordionTab = React.memo(
       if (highlighted && hovered && hovered.key === highlighted.key) return;
       setHighlighted(hovered);
     };
-    // console.log(comparePhaseData)
+    // (comparePhaseData)
     useEffect(() => {
       handleAccordionChange("total", "pros");
     }, [activatab]);
@@ -300,7 +300,7 @@ const CompareAccordionTab = React.memo(
                   >
                     <Row>
                       {!isLoading && <Loader pageType={"comparison"} />}
-                      {/* {console.log(apiData)} */}
+                      {/* {(apiData)} */}
                       <Col md={8} xl={8} className="dividers">
                         <Tab.Content className="compare-tab-content">
                           <Tab.Pane eventKey={tabvalue?.pros}>
@@ -311,7 +311,7 @@ const CompareAccordionTab = React.memo(
                                     ?.map((item, index) => {
                                       return (
                                         <li key={index}>
-                                          {/* {console.log(item?.difference)} */}
+                                          {/* {(item?.difference)} */}
                                           <span
                                             className={`${
                                               item?.hover_phase !== null
@@ -398,7 +398,7 @@ const CompareAccordionTab = React.memo(
                                 apiData?.general?.pros?.map((item, index) => {
                                   return (
                                     <li key={index}>
-                                      {/* {console.log(item)} */}
+                                      {/* {(item)} */}
                                       <span
                                         className={`${
                                           item?.hover_phase !== null
@@ -655,7 +655,7 @@ const CompareAccordionTab = React.memo(
                                 apiData?.general?.cons?.map((item, index) => {
                                   return (
                                     <li key={index}>
-                                      {/* {console.log(item)} */}
+                                      {/* {(item)} */}
                                       <span
                                         className={`${
                                           item?.hover_phase !== null
@@ -927,7 +927,7 @@ const CompareAccordionTab = React.memo(
                                 {comparePhaseData && comparePhaseData?.total}
                               </Nav.Link>
                             </Nav.Item>
-                            {/* {console.log(
+                            {/* {(
                               comparePhaseData && comparePhaseData?.general
                             )} */}
                             {apiData?.general?.cons?.length > 0 && (

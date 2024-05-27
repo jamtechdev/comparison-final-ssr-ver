@@ -21,7 +21,7 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
     const viewportWidth = document.documentElement.clientWidth;
 
     const tooltipWidth = tooltipRect.width;
-    // console.log(viewportWidth - tooltipWidth / 2 - viewportWidth + 120);
+    // (viewportWidth - tooltipWidth / 2 - viewportWidth + 120);
 
     // Calculate ideal left position for centered alignment
     const idealLeft = (viewportWidth - tooltipWidth) / 2;
@@ -100,7 +100,7 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
           {attributes.score_components &&
             attributes.score_components?.map((data, index) => {
               const roundedNumber = parseFloat(data?.attribute_evaluation);
-              // {console.log(data?.attribute_evaluation)}
+              // {(data?.attribute_evaluation)}
               const formattedNumber =
                 roundedNumber > 9
                   ? Math.floor(roundedNumber)
@@ -122,7 +122,7 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
                           : "#85B2F1",
                     }}
                   >
-                    {/* { console.log(data?.attribute_evaluation)} */}
+                    {/* { (data?.attribute_evaluation)} */}
                     {formattedNumber != "NaN"
                       ? formattedNumber
                       : data?.attribute_evaluation}

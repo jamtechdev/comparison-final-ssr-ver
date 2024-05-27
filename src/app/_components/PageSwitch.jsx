@@ -14,7 +14,7 @@ export default async function PageSwitch({
   searchParams,
 }) {
   let PageToRender;
-  // console.log(PageType,slug);
+  // (PageType,slug);
   // decode html string
   function searchCharts(text) {
     const regex = /\[(.*?)\]/g;
@@ -37,17 +37,17 @@ export default async function PageSwitch({
     case "Guide":
       const guide = pageData[0]?.data;
 
-      // console.log(pageData[0],"neetx")
-      // console.log(pageData[1]?.data,"neets");
+      // (pageData[0],"neetx")
+      // (pageData[1]?.data,"neets");
       const attributes = await getCategoryAttributes(guide?.category_id, slug);
       const productTable = await getProductForTable(guide?.category_url, slug);
       const third_text = pageData[0]?.data?.text_third_part_main;
       const matchShortCode = searchCharts(third_text);
-      // console.log(replaceTextPart(matchShortCode, third_text));
+      // (replaceTextPart(matchShortCode, third_text));
 
-      // console.log(replacedTexts, "hello");
+      // (replacedTexts, "hello");
 
-      // console.log(categorySlug)
+      // (categorySlug)
       PageToRender = (
         <GuidePage
           slug={slug}
@@ -72,7 +72,7 @@ export default async function PageSwitch({
         product?.category_id
       );
 
-      // console.log(productCatAttribute , "productCatAttribute");
+      // (productCatAttribute , "productCatAttribute");
       const getProductCompare = await getCompareProductByCatID(
         product?.category_id,
         slug
@@ -82,7 +82,7 @@ export default async function PageSwitch({
         categorySlug,
         slug
       );
-      console.log(productCatAttribute);
+      (productCatAttribute);
       PageToRender = (
         <ProductPage
           slug={slug}
@@ -98,17 +98,17 @@ export default async function PageSwitch({
       PageToRender = <CategoryArchive slug={slug} ArchiveData={pageData} />;
       break;
     case "ProductCategory":
-      // console.log(pageData);
+      // (pageData);
       PageToRender = (
         <ProductCategoryArchivePage slug={slug} categoryData={pageData} />
       );
       break;
     case "Compare":
       const compareData = pageData[0]?.data;
-      console.log(pageData[0], "compareData");
-      console.log(pageData[1], "xxx");
+      (pageData[0], "compareData");
+      (pageData[1], "xxx");
 
-      // console.log(compareData?.category_url)
+      // (compareData?.category_url)
 
       const graphComparisonProsCons = await getGraphComparisonProsCons(
         pageData,
@@ -192,7 +192,7 @@ async function getProductForTable(category_url, slug) {
 }
 
 async function getProductCategroyAttributes(category_id) {
-  // console.log(category_id);
+  // (category_id);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/${category_id}/attributes`,
     {
@@ -211,7 +211,7 @@ async function getProductCategroyAttributes(category_id) {
 }
 
 async function getCompareProductByCatID(category_id, slug) {
-  // console.log(slug,category_id);
+  // (slug,category_id);
   // ${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${id}`
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/product/compare-product/${category_id}?product=${slug}`,

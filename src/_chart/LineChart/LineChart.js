@@ -2,8 +2,8 @@ import * as React from "react";
 import * as d3 from "d3";
 
 function lineChart(svgRef, lineChartData,page_phase) {
-  console.log(lineChartData?.page_phase)
-  // console.log(lineChartData?.lineChartData[0], "xxx");
+  (lineChartData?.page_phase)
+  // (lineChartData?.lineChartData[0], "xxx");
   let date_time_store = "";
   if (lineChartData?.lineChartData[0]?.format === "Y-m-d") {
     date_time_store = "%Y-%m-%d";
@@ -21,7 +21,7 @@ function lineChart(svgRef, lineChartData,page_phase) {
   const parseDate = d3.timeParse(date_time_store);
   const europeanDateFormat = date_time_store;
 
-  // console.log(lineChartData);
+  // (lineChartData);
   const data = lineChartData?.lineChartData.map((chartData) => ({
     name: chartData.name,
     values: chartData.values?.map((value) => ({
@@ -37,7 +37,7 @@ function lineChart(svgRef, lineChartData,page_phase) {
   ];
 
   dates.forEach((date) => {
-    // console.log(
+    // (
     //   date.toDateString(),
     //   "is a",
     //   [
@@ -52,7 +52,7 @@ function lineChart(svgRef, lineChartData,page_phase) {
     // );
   });
 
-  // console.log(sundays);
+  // (sundays);
 
   const svg = d3.select(svgRef.current);
   const width = 1020;
@@ -77,7 +77,7 @@ function lineChart(svgRef, lineChartData,page_phase) {
   const intervalWeeks = 2;
 
   const lastSunday = d3.timeSunday.floor(maxX); // Get the last Sunday from the maxX date
-  // console.log(lastSunday)
+  // (lastSunday)
   const firstSunday = d3.timeSunday.offset(
     lastSunday,
     -numWeeks * intervalWeeks
@@ -85,27 +85,27 @@ function lineChart(svgRef, lineChartData,page_phase) {
   const middleSunday1 = d3.timeSunday.offset(lastSunday, -8 * intervalWeeks); // Get the Sunday 8 weeks ago
   const middleSunday2 = d3.timeSunday.offset(lastSunday, -16 * intervalWeeks); // Get the Sunday 16 weeks ago
 
-  // console.log(firstSunday, middleSunday1, middleSunday2, lastSund4564456445465456454545ay);
+  // (firstSunday, middleSunday1, middleSunday2, lastSund4564456445465456454545ay);
 
-  // console.log(yIntervals);
+  // (yIntervals);
   const xScale = d3
     .scaleTime()
     .domain([d3.timeWeek.offset(maxX, -24), maxX]) // Show data for the last 24 weeks
     .range([0, 700 - margin]);
 
   const [minY, maxY] = d3.extent(data[0].values, (d) => d.price);
-  // console.log(maxY);
+  // (maxY);
   const maxDifference = maxY / 15;
-  // console.log(maxDifference);
+  // (maxDifference);
   const maxPlusDifference = Math.round(maxY) + Math.round(maxDifference);
-  // console.log(maxPlusDifference);
+  // (maxPlusDifference);
 
   const maxInterval = Math.round(maxPlusDifference);
-  // console.log(maxInterval);
+  // (maxInterval);
   const minInterval = Math.max(0, Math.round(minY - maxDifference));
-  // console.log(maxInterval, minInterval);
+  // (maxInterval, minInterval);
   const intervalDifference = (maxInterval - minInterval) / 5;
-  // console.log(intervalDifference);
+  // (intervalDifference);
 
   const yIntervals = [
     maxInterval,
@@ -117,8 +117,8 @@ function lineChart(svgRef, lineChartData,page_phase) {
   ];
   const yIntervalsInt = yIntervals.map((value) => parseInt(value));
   // [0, 200, 400, 600, 800, 980];
-  // console.log(yIntervals);
-  // console.log(yIntervalsInt);
+  // (yIntervals);
+  // (yIntervalsInt);
   const isMobileScreen = window.innerWidth <= 768;
   // Day
   const yScale = d3
@@ -139,7 +139,7 @@ function lineChart(svgRef, lineChartData,page_phase) {
     .tickFormat(d3.timeFormat(europeanDateFormat))
     .tickPadding(10);
 
-  // console.log(yIntervalsInt);
+  // (yIntervalsInt);
   // .ticks(d3.timeWeek.every(1)) // Set the interval between ticks to 1 week
   // .tickValues([firstSunday, middleSunday2, middleSunday1, lastSunday]); // Optionally, set specific tick values
 

@@ -2,7 +2,7 @@ import PageSwitch from "@/app/_components/PageSwitch";
 import NotFound from "../not-found";
 export default async function Page({ params: { category } }) {
   const slugType = await getSlugType(category);
-  // console.log(slugType, "hello");
+  // (slugType, "hello");
   if (slugType.type) {
     const pageData = await fetchDataBasedOnPageType(category, slugType.type);
     if (pageData != null) {
@@ -40,7 +40,7 @@ async function getSlugType(category) {
 }
 
 async function getSlugMetaData(category) {
-  // console.log(category)
+  // (category)
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/meta-data/${category}`,
     {
@@ -81,10 +81,10 @@ export async function generateMetadata({ params: { category } }) {
 
   try {
     const response = await getSlugMetaData(category);
-    // console.log(response);
+    // (response);
     if (response && response.data) {
       meta_data = response.data;
-      // console.log(meta_data);
+      // (meta_data);
     }
   } catch (error) {
     console.error("Error fetching metadata:", error);

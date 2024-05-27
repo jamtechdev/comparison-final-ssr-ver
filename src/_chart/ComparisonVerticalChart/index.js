@@ -31,8 +31,8 @@ function ComparisonVerticalChart(props) {
   data.forEach((item, index) => {
     if (item.selected === 1) {
       count++;
-      // console.log(item);
-      // console.log(count, index);
+      // (item);
+      // (count, index);
       if (count === 1) fristIndex = index;
       if (count === 2) secondIndex = index;
       if (count === 3) thirdIndex = index;
@@ -159,7 +159,7 @@ function ComparisonVerticalChart(props) {
     .attr("y", (d) => yScale(d.value))
     .attr("height", (d) => height - yScale(d.value))
     .style("fill", (d, i) => {
-      // console.log(d.product_id);
+      // (d.product_id);
       if (d.selected === 1 && d.product_id?.[0] === 1) {
         return "rgb(67, 126, 206)";
       } else if (d.selected === 1 && d.product_id?.[0] === 2) {
@@ -210,7 +210,7 @@ function ComparisonVerticalChart(props) {
 
   // remove object were products is undefined
   let filteredData = data.filter((item) => item.products?.length > 0);
-  // console.log(filteredData, "filter");
+  // (filteredData, "filter");
   const table = legendContainer.append("table");
   const tbody = table.append("tbody");
   const rows = tbody.selectAll("tr").data(filteredData).enter().append("tr");
@@ -235,8 +235,8 @@ function ComparisonVerticalChart(props) {
         // Case when d is an array containing [color, product_name]
         const [colorName, productName] = d;
 
-        // console.log(colorName); // Log the color name
-        // console.log(productName); // Log the product name
+        // (colorName); // Log the color name
+        // (productName); // Log the product name
 
         // Append div for color and span for product name
         d3.select(this)
@@ -252,7 +252,7 @@ function ComparisonVerticalChart(props) {
           .text(productName);
       } else {
         // Case when d is just a color name or a product name
-        // console.log(d); // Log the value of d
+        // (d); // Log the value of d
 
         // Append div for color or span for product name based on the index i
         if (i === 0) {

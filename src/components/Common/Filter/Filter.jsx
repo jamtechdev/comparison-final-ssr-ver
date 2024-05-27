@@ -16,7 +16,7 @@ export default function Filter({
   searchParam,
   orderBy,
 }) {
-  // console.log(guidePhraseData);
+  // (guidePhraseData);
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({});
@@ -29,7 +29,7 @@ export default function Filter({
     maxVal: 0,
   });
   let price = categoryAttributes?.price;
-  // console.log(price);
+  // (price);
   let brands = categoryAttributes?.brands;
   let productCount = categoryAttributes?.attributes;
   let attributeCategories = categoryAttributes?.attribute_categories;
@@ -152,7 +152,7 @@ export default function Filter({
     router.push(`?${currentParams.toString()}`, { scroll: false });
   };
 
-  // console.log(sliderValues);
+  // (sliderValues);
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
     delete updatedParams[key];
     currentParams.delete([key]);
@@ -203,7 +203,7 @@ export default function Filter({
           if (brandValues) {
             brandValues.map((item) => {
               handelFilterActions("brand", "brand", { brand: item }, false);
-              console.log(item);
+              (item);
               document.getElementById(`${item}`).checked = false;
             });
           }
@@ -252,7 +252,7 @@ export default function Filter({
           } else {
             filteredArrayOfAttributeValues = [];
           }
-          // console.log(arrayToGetFilteredObject, "checkNeet");
+          // (arrayToGetFilteredObject, "checkNeet");
 
           let countAttribute = 1;
           if (filteredArrayOfAttributeValues?.type == "dropdown") {
@@ -265,7 +265,7 @@ export default function Filter({
               const value = filteredArrayOfAttributeValues?.values[0];
               handelFilterActions("radioSwitch", removedParam, "no", false);
               document.getElementById(`${removedParam}`).checked = false;
-              // console.log("Radio switch", removedParam)
+              // ("Radio switch", removedParam)
             } else {
               {
                 filteredArrayOfAttributeValues?.values?.map(
@@ -326,11 +326,11 @@ export default function Filter({
             // setSliderValues(newFilters);
 
             // thumb thumb--left ${classForSlider}
-            // console.log(sliderValues);
+            // (sliderValues);
             // const { [removedParam]: omit, ...OldFilters } = sliderValues;
-            // console.log(OldFilters, "OldFilters");
+            // (OldFilters, "OldFilters");
             // setSliderValues(OldFilters);
-            // console.log(sliderValues, min, max, removedParam);
+            // (sliderValues, min, max, removedParam);
 
             handelFilterActions(
               "range",
@@ -339,8 +339,8 @@ export default function Filter({
               false
             );
             // alert(removedParam);
-            // console.log(sliderValues);
-            // console.log(minn, maxx, removedParam);
+            // (sliderValues);
+            // (minn, maxx, removedParam);
             const leftThumb = document.getElementById(
               `thumb thumb--left ${removedParam}`
             );
@@ -352,14 +352,14 @@ export default function Filter({
 
             if (leftThumb) {
               leftThumb.value = 0;
-              // console.log(leftThumb,"neetx");
+              // (leftThumb,"neetx");
               // // If you want the slider's position to update immediately,
               // // you may need to trigger a change event manually
               leftThumb.dispatchEvent(new Event("change", { bubbles: true }));
             }
             if (rightThumb) {
               rightThumb.value = 900;
-              // console.log(rightThumb,"neetx");
+              // (rightThumb,"neetx");
               // // If you want the slider's position to update immediately,
               // // you may need to trigger a change event manually
               rightThumb.dispatchEvent(new Event("change", { bubbles: true }));
@@ -381,7 +381,7 @@ export default function Filter({
   }, [removedParam]);
 
   useEffect(() => {
-    // console.log(orderBy, "order");
+    // (orderBy, "order");
     orderBy.ischecked == true
       ? handelFilterActions("sort", "sort", `${orderBy.value}`, true)
       : handelFilterActions("sort", "sort", `${orderBy.value}`, false);
@@ -397,7 +397,7 @@ export default function Filter({
       <div className="filter-section">
         <div className="tech-features-price">
           {guidePhraseData && guidePhraseData?.price}
-          {/* {console.log(guidePhraseData?.price, "price")} */}
+          {/* {(guidePhraseData?.price, "price")} */}
 
           {isMobile
             ? price?.min_price != null && (
@@ -423,7 +423,7 @@ export default function Filter({
                   max={initialPriceRange?.max_price}
                   unit="€"
                   onChange={({ min, max }) => {
-                    // console.log(min,max)
+                    // (min,max)
                     handelFilterActions(
                       "price",
                       "price",
@@ -517,7 +517,7 @@ export default function Filter({
                       }}
                     />
                   </div>
-                  // console.log(brand)
+                  // (brand)
                   //   <Form.Check
                   //   required
                   //   label={
@@ -586,12 +586,12 @@ export default function Filter({
       {/* Dynaimc Value Accordians */}
       {attributeCategories?.map((category, index) => {
         let countAttribute = 1;
-        // console.log(category)
+        // (category)
         return (
           <div className="filter-section" key={index}>
             <div className="tech-features">{category.name}</div>
             <Accordion className="filter-accordion">
-              {/* {console.log(category?.attributes, "checking attributes")} */}
+              {/* {(category?.attributes, "checking attributes")} */}
               {category?.attributes
                 ?.sort((a, b) => a.position - b.position)
                 ?.map((attribute, attrIndex) => {
@@ -601,10 +601,10 @@ export default function Filter({
                   ) {
                     let filteredArrayOfAttributeValues =
                       getFilteredAttributeValues(attribute);
-                    // console.log(filteredArrayOfAttributeValues, "Checking");
+                    // (filteredArrayOfAttributeValues, "Checking");
                     // const uniqueValuesSet = new Set(filteredArrayOfAttributeValues?.values);
                     // const uniqueValues = Array.from(uniqueValuesSet);
-                    // console.log(uniqueValues,"uniqueValues")
+                    // (uniqueValues,"uniqueValues")
 
                     if (filteredArrayOfAttributeValues?.type == "dropdown") {
                       countAttribute++;
@@ -614,7 +614,7 @@ export default function Filter({
                         filteredArrayOfAttributeValues.values[0] == "yes"
                       ) {
                         const value = filteredArrayOfAttributeValues.values[0];
-                        // console.log(value);
+                        // (value);
                         const groupName = `${category.name}-${attribute.name}`;
                         return (
                           <Accordion.Item eventKey={attrIndex} key={attrIndex}>
@@ -665,7 +665,7 @@ export default function Filter({
                                   const uniqueValues = Array.isArray(value)
                                     ? [...new Set(value.flat())]
                                     : [value];
-                                  // console.log(value, "next");
+                                  // (value, "next");
 
                                   return (
                                     <div
@@ -733,7 +733,7 @@ export default function Filter({
                             <i className="ri-arrow-down-s-fill"></i>
                           </Accordion.Header>
                           <Accordion.Body>
-                            {/* {console.log(filteredArrayOfAttributeValues,"neext")} */}
+                            {/* {(filteredArrayOfAttributeValues,"neext")} */}
                             {isMobile ? (
                               <MultiRangeMobileSlider
                                 // value={filters[filter.id] ? filters[filter.id].min : filter.min}
@@ -765,7 +765,7 @@ export default function Filter({
                               />
                             ) : (
                               <>
-                                {/* {console.log(sliderValues[attribute.name].min)} */}
+                                {/* {(sliderValues[attribute.name].min)} */}
                                 <MultiRangeSliderAttributes
                                   rangeVal={
                                     sliderValues[attribute.name]

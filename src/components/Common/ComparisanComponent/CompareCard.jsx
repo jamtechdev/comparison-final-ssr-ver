@@ -32,7 +32,7 @@ const CompareCard = ({
     }
     return value;
   };
-  // console.log(productPhaseData && productPhaseData);
+  // (productPhaseData && productPhaseData);
   const urlChange = (i) => {
     let x = window.location.pathname.split("/")[2].split("-vs-");
     // Create a new array without the element at the specified index
@@ -114,7 +114,7 @@ const CompareCard = ({
             ></i>
           </div>
           <div className="comparison-product-spec">
-            {/* {console.log(compareProduct?.price_websites)} */}
+            {/* {(compareProduct?.price_websites)} */}
             {compareProduct?.price_websites?.length > 0 ? (
               <>
                 <div className="comparison-product-item">
