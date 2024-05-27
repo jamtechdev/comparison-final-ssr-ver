@@ -186,7 +186,7 @@ const QuestionIcon = ({
               )}
               {<ProductPage /> && productPhaseData && (
                 <b>
-                  {productPhaseData.importance_text}:{""}
+                  {productPhaseData.importance_text}: {""}
                 </b>
               )}
               {attributes?.importance}
@@ -196,12 +196,12 @@ const QuestionIcon = ({
             <p className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
-                  {guidePhraseData.good_value_text}:{""}
+                  {guidePhraseData.good_value_text}: {""}
                 </b>
               )}
               {<ProductPage /> && productPhaseData && (
                 <b>
-                  {productPhaseData.good_value_text}:{""}
+                  {productPhaseData.good_value_text}: {""}
                 </b>
               )}
               {/* <b>Good value: </b> */}

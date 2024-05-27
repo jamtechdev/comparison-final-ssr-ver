@@ -1286,6 +1286,7 @@ function ProductPage({
           />
         </Container>
       </section>
+      {console.log([productCatAttributes?.data])}
       <CompareDropDown
         categorySlug={categorySlug}
         attributeDropDown={[...productCatAttributes?.data].reverse()}

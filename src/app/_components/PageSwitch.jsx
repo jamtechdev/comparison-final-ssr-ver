@@ -82,7 +82,7 @@ export default async function PageSwitch({
         categorySlug,
         slug
       );
-      // console.log(productCatAttribute);
+      console.log(productCatAttribute);
       PageToRender = (
         <ProductPage
           slug={slug}

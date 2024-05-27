@@ -127,7 +127,7 @@ function CompareDropDown({
                       .sort((a, b) => a?.position - b?.position)
                       ?.map((attribute, index) => (
                         <option key={index} value={index}>
-                          {attribute.name}
+                          {attribute.phase}
                         </option>
                       ))}
                   </Form.Select>
