@@ -2097,6 +2097,12 @@
   .mobile-table-section .table-section-desktop .compare-container tbody tr td{
     border-right: none !important;
   }  
+  .mobile-table-section .table-section-desktop .compare-container tbody tr td[colspan="2"]{
+    border-left: none !important;
+  }
+  .mobile-table-section .table-section-desktop .compare-container tbody .show_more_row td{
+    border-left: none !important;
+  }
   .mobile-table-section .table-section-desktop .compare-container tbody tr td,
   .mobile-table-section .table-section-desktop .compare-container thead tr th {
     /* border-left: none; */
