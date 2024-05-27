@@ -305,7 +305,7 @@ function ProductPage({
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
-          (innerHTML);
+          innerHTML;
 
           element.innerHTML = innerHTML;
           dispatch(storeTextPartShortCode({ content: innerHTML }));
@@ -332,7 +332,29 @@ function ProductPage({
   const getProductTextPartShortcode = useSelector(
     (state) => state.comparePro.text_part_main?.content
   );
+  // pros/cons
+  const [apiData, setApiData] = useState(null);
 
+  useEffect(() => {
+    const headers = {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+    };
+
+    const secondApiUrl = `${process.env.NEXT_PUBLIC_API_URL}/generate-chart/${categorySlug}?permalink2=${slug}&permalink1=average`;
+
+    fetch(secondApiUrl, {
+      method: "GET",
+      headers: headers,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // (data);
+        setApiData(data?.data); // Assuming data from the second API call is directly usable
+      })
+      .catch((error) => {
+        console.error("Error fetching data from second API:", error);
+      });
+  }, []);
   return (
     <>
       <section className="product-header">

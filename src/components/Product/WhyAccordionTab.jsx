@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useEffect, useState } from "react";
 import {
   Accordion,
@@ -27,8 +27,8 @@ const WhyAccordionTab = React.memo(
     const [activetab, setActiveTab] = useState("tab-1");
     const { isMobile } = useScreenSize();
     const [apiData, setApiData] = useState(null);
-    // (apiData);
-    // (categorySlug)
+    // console.log(apiData);
+    // console.log(categorySlug)
 
     useEffect(() => {
       const headers = {
@@ -43,7 +43,7 @@ const WhyAccordionTab = React.memo(
       })
         .then((response) => response.json())
         .then((data) => {
-          // (data);
+          // console.log(data);
           setApiData(data?.data); // Assuming data from the second API call is directly usable
         })
         .catch((error) => {
@@ -51,7 +51,7 @@ const WhyAccordionTab = React.memo(
         });
     }, []);
 
-    // (apiData && apiData?.sets);
+    // console.log(apiData && apiData?.sets);
     const handleTabChange = (key) => {
       setActiveTab(key);
     };
@@ -91,7 +91,7 @@ const WhyAccordionTab = React.memo(
     // this funcation spilt the vs value from ApiData
     const splitVsValue = (value) => {
       const splitValue = value && value.trim().split("vs");
-      // (splitValue[0])
+      // console.log(splitValue[0])
       const boldedPart = `<strong>${splitValue[0]}</strong>`;
       if (splitValue?.length > 2) {
         return `${boldedPart} vs ${splitValue[1]} vs ${splitValue[2]}`;
@@ -121,7 +121,7 @@ const WhyAccordionTab = React.memo(
         button.style.setProperty("--color-bg", getColor[index]);
       });
     }, []);
-    // (activetab);
+    // console.log(activetab);
     return (
       <Row>
         <Col md={12} lg={6}>
@@ -135,7 +135,7 @@ const WhyAccordionTab = React.memo(
             <Tab eventKey="tab-1" title={product && product?.name}>
               {activetab === "tab-1" && (
                 <div className="graph-tab-content" id="productGraph">
-                  {/* {(apiData?.sets, "checking")} */}
+                  {/* {console.log(apiData?.sets, "checking")} */}
                   {apiData && (
                     <div class="shortcode_table_scroll">
                       <ProductPageGraph data={apiData?.sets} activeTab={0} />
@@ -194,7 +194,7 @@ const WhyAccordionTab = React.memo(
                                   ?.map((item, index) => {
                                     return (
                                       <li key={index}>
-                                        {/* {(item?.hover_phase)} */}
+                                        {/* {console.log(item?.hover_phase)} */}
                                         <span
                                           className={`${
                                             item?.hover_phase !== null
@@ -292,7 +292,7 @@ const WhyAccordionTab = React.memo(
                               product?.general?.pros?.map((item, index) => {
                                 return (
                                   <li key={index}>
-                                    {/* {(item)} */}
+                                    {/* {console.log(item)} */}
                                     <span
                                       className={`${
                                         item?.hover_phase !== null
@@ -539,7 +539,7 @@ const WhyAccordionTab = React.memo(
                               product?.general?.cons?.map((item, index) => {
                                 return (
                                   <li key={index}>
-                                    {/* {(item)} */}
+                                    {/* {console.log(item)} */}
                                     <span
                                       className={`${
                                         item?.hover_phase !== null
