@@ -23,9 +23,17 @@ function ProductTabs({
         {
           <Container>
             <Row>
-              <Col md={12}>
-                <h2 className="site-main-heading">{productPhaseData}</h2>
-              </Col>
+              {productReview?.length > 0 ||
+              expertReview?.length > 0 ||
+              videoReview?.length > 0 ? (
+                <Col md={12}>
+                  <h2 className="site-main-heading">{productPhaseData}</h2>
+                </Col>
+              ) : (
+                ""
+              )}
+              
+              
 
               <Col md={12} className="site_tabs_hide">
                 <Tabs
