@@ -15,7 +15,7 @@ function CompareDropDown({
   pageType,
 }) {
   // console.log(product);
-  // console.log(attributeDropDown);
+  console.log(attributeDropDown);
 
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null
@@ -24,7 +24,7 @@ function CompareDropDown({
   const [selectedAttribute, setSelectedAttribute] = useState(
     (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
   );
-  console.log(attributeDropDown)
+  console.log(selectedItem)
 
   useEffect(() => {
     const containerDivs = document.querySelectorAll(".container-divs");
