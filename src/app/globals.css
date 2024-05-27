@@ -2469,16 +2469,26 @@ tr:first-child th {
   line-height: 1.3;
 }
 
-.mobile-table-section .table-section-desktop .compare-container thead tr.catchy-title-mobile-view th{
+.mobile-table-section
+  .table-section-desktop
+  .compare-container
+  thead
+  tr.catchy-title-mobile-view
+  th {
   padding: 0 !important;
   vertical-align: bottom !important;
 }
 
-.catchy-title-mobile-view th .best-tag-product{
+.catchy-title-mobile-view th .best-tag-product {
   position: relative !important ;
   width: 100% !important;
 }
 
-#mobile-compare-tabler thead tr.catchy-title-mobile-view th{
+#mobile-compare-tabler thead tr.catchy-title-mobile-view th {
   padding: 0 !important;
+}
+.legendBoxBarChart {
+  position: relative;
+  top: 130px;
+  right: 100px;
 }

@@ -201,7 +201,7 @@ function ComparisonVerticalChart(props) {
 
   // loop data and add product name with color
   const legendMainContainer = d3
-    .select(`.chart_Append0`)
+    .select(`.barChart`)
     .attr("class", "parentBarDiv");
 
   const legendContainer = legendMainContainer
