@@ -82,7 +82,7 @@ export default async function PageSwitch({
         categorySlug,
         slug
       );
-      // console.log(getProConsForAccordion?.data);
+      // console.log(productCatAttribute);
       PageToRender = (
         <ProductPage
           slug={slug}

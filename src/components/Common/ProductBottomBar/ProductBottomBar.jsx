@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import CompareModal from "../Comparison/CompareModal";
 
-function ProductBottomBar({ favSlider }) {
+function ProductBottomBar({ favSlider ,productPhase}) {
   const [isOpen, setIsOpen] = useState(false);
   const openCompareModel = () => {
     setIsOpen(true);
@@ -14,7 +14,7 @@ function ProductBottomBar({ favSlider }) {
     <>
       <div onClick={openCompareModel} className="product-bottom-bar">
         <i class="ri-add-circle-fill"></i>
-        <p>Compare</p>
+        <p>{productPhase?.page_phases?.comparison_on_bottom}</p>
       </div>
       {isOpen && (
         <CompareModal

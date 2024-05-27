@@ -59,7 +59,9 @@ const CompareCard = ({
               height={50}
               alt="compare product"
             />
-            <p>add a product to compare</p>
+            <p>
+              {productPhaseData && productPhaseData?.add_product_to_comparison}
+            </p>
           </div>
         </div>
       ) : (
@@ -158,17 +160,17 @@ const CompareCard = ({
                     />
                     {compareProduct?.price_websites[1]?.price != null && (
                       <span>
-                      {" "}
-                      <a
-                        href={`/link?p=${btoa(
-                          compareProduct?.price_websites[1]?.url
-                        )}`}
-                        style={{ color: "#fff" }}
-                      >
                         {" "}
-                        {compareProduct?.price_websites[1]?.price} €{" "}
-                      </a>
-                    </span>
+                        <a
+                          href={`/link?p=${btoa(
+                            compareProduct?.price_websites[1]?.url
+                          )}`}
+                          style={{ color: "#fff" }}
+                        >
+                          {" "}
+                          {compareProduct?.price_websites[1]?.price} €{" "}
+                        </a>
+                      </span>
                     )}
                   </div>
                 )}

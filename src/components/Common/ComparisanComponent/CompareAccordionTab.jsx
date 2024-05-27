@@ -50,7 +50,6 @@ const CompareAccordionTab = React.memo(
         }
       }
     };
-
     const handleTabChange = (eventKey) => {
       // console.log(eventKey);
       setActiveTab(eventKey);
@@ -927,18 +926,23 @@ const CompareAccordionTab = React.memo(
                               >
                                 {comparePhaseData && comparePhaseData?.total}
                               </Nav.Link>
-                            </Nav.Item> 
-                            <Nav.Item>
-                              <Nav.Link
-                                eventKey="general"
-                                onClick={() =>
-                                  handleAccordionChange("general", "cons")
-                                }
-                              >
-                                {comparePhaseData &&
-                                  comparePhaseData?.page_phases?.general}
-                              </Nav.Link>
                             </Nav.Item>
+                            {/* {console.log(
+                              comparePhaseData && comparePhaseData?.general
+                            )} */}
+                            {apiData?.general?.cons?.length > 0 && (
+                              <Nav.Item>
+                                <Nav.Link
+                                  eventKey="general"
+                                  onClick={() =>
+                                    handleAccordionChange("general", "cons")
+                                  }
+                                >
+                                  {comparePhaseData &&
+                                    comparePhaseData?.general}
+                                </Nav.Link>
+                              </Nav.Item>
+                            )}
 
                             {apiData &&
                               Object.keys(apiData?.average_cons).map(

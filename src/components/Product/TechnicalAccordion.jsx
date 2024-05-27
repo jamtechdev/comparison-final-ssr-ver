@@ -581,6 +581,7 @@ const TechnicalAccordion = React.memo(
                   </div>
                 </div>
               </div>
+
               <div className="spec-section">
                 <div className="spec-item">
                   <div className="spec-col">
@@ -588,63 +589,126 @@ const TechnicalAccordion = React.memo(
                       className="query ranking-tooltip-title"
                       onMouseOver={adjustTooltipPosition}
                     >
-                      {productPhaseData &&
+                     {productPhaseData &&
                         productPhaseData?.ratio_quality_price_points}
-                      <QuestionIcon
-                        attributes={product?.ratio_qulitiy_points_descriptions}
-                        productPhaseData={productPhaseData}
-                      />
+                      <span className="">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 19C12.8284 19 13.5 19.6716 13.5 20.5C13.5 21.3284 12.8284 22 12 22C11.1716 22 10.5 21.3284 10.5 20.5C10.5 19.6716 11.1716 19 12 19ZM12 2C15.3137 2 18 4.68629 18 8C18 10.1646 17.2474 11.2907 15.3259 12.9231C13.3986 14.5604 13 15.2969 13 17H11C11 14.526 11.787 13.3052 14.031 11.3989C15.5479 10.1102 16 9.43374 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8V9H6V8C6 4.68629 8.68629 2 12 2Z"></path>
+                        </svg>
+                      </span>
+                      <div
+                        className="tooltip-display-content"
+                        ref={tooltipRef}
+                        style={{
+                          left: isMobile ? "50%" : 0,
+                          transform: isMobile
+                            ? "translateX(-20%)"
+                            : "translateX(-10%)",
+                          width: isMobile ? "200px" : "250px",
+                        }}
+                      >
+                        {product?.ratio_qulitiy_points_descriptions.description && (
+                          <p className="mb-2">
+                            <b>
+                              {product && product?.page_phases?.what_it_is}:{" "}
+                            </b>
+                            {product?.ratio_qulitiy_points_descriptions?.description}
+                          </p>
+                        )}
+                        {product?.ratio_qulitiy_points_descriptions.when_matters && (
+                          <p className="mb-2">
+                            <b>
+                              {product && product?.page_phases?.when_it_matters}
+                              :{" "}
+                            </b>
+                            {product?.ratio_qulitiy_points_descriptions?.when_matters}
+                          </p>
+                        )}
+                        <p>
+                          <b>
+                            {product && product?.page_phases?.score_components}:
+                          </b>
+                        </p>
+                        {product?.ratio_qulitiy_points_descriptions.score_components &&
+                          product?.ratio_qulitiy_points_descriptions.score_components?.map(
+                            (data, index) => {
+                              return (
+                                <React.Fragment key={index}>
+                                  <div className="scroe_section" key={index}>
+                                    <p className="text-end">
+                                      {`${parseFloat(data?.importance).toFixed(
+                                        1
+                                      )}%`}
+                                    </p>
+                                    <div
+                                      className="score-count"
+                                      style={{
+                                        background:
+                                          data?.attribute_evaluation >= 7.5
+                                            ? "#093673"
+                                            : data?.attribute_evaluation >= 5 &&
+                                              data?.attribute_evaluation < 7.5
+                                            ? "#437ECE"
+                                            : "#85B2F1",
+                                      }}
+                                    >
+                                      {`${
+                                        parseFloat(
+                                          data?.attribute_evaluation
+                                        ) === 10
+                                          ? parseInt(data?.attribute_evaluation)
+                                          : parseFloat(
+                                              data?.attribute_evaluation
+                                            ).toFixed(1)
+                                      }`}
+                                    </div>
+                                    <p>{data?.attribute_category}</p>
+                                  </div>
+                                </React.Fragment>
+                              );
+                            }
+                          )}
+                      </div>
                     </div>
                   </div>
-                  <div className="spec-col ">
-                    <div
+                  <div className="spec-col">
+                    <span
                       className={`${
-                        product?.ratio_quality_price_points_phase !== ""
-                          ? "tooltip-title"
-                          : ""
+                        product?.reviews_phase !== "" ? "tooltip-title" : ""
                       }`}
                       style={{
                         color:
-                          product.ratio_quality_price_points_better_then *
-                            100 >=
-                          70
+                          product.reviews_is_better_than * 100 >= 70
                             ? "#437ece"
-                            : product.ratio_quality_price_points_worse_then *
-                                100 >
-                              70
+                            : product.reviews_is_worse_than * 100 > 70
                             ? "#ce434b"
                             : "#27304e",
                         fontSize: "15px",
                         textDecoration:
-                          product.ratio_quality_price_points_phase !== ""
-                            ? "underline"
-                            : "",
+                          product.reviews_phase !== "" ? "underline" : "",
                         textDecorationStyle:
-                          product.ratio_quality_price_points_phase !== ""
-                            ? "dotted"
-                            : "",
+                          product.reviews_phase !== "" ? "dotted" : "",
                         textDecorationThickness: "1.5px",
                         textDecorationColor:
-                          product.ratio_quality_price_points_better_then *
-                            100 >=
-                          70
+                          product.reviews_is_better_than * 100 >= 70
                             ? "#437ece"
-                            : product.ratio_quality_price_points_worse_then *
-                                100 >
-                              70
+                            : product.reviews_is_worse_than * 100 > 70
                             ? "#ce434b"
                             : "#27304e",
                         textUnderlineOffset: "5px",
                       }}
                     >
-                      {product.ratio_quality_price_points}
-                      <ProsConsToolTip
-                        hover_phrase={product.ratio_quality_price_points_phase}
-                      />
-                    </div>
+                      {formatValue(product.reviews)}
+                      <ProsConsToolTip hover_phrase={product.reviews_phase} />
+                    </span>
                   </div>
                 </div>
               </div>
+
+             
             </Accordion.Body>
           </Accordion.Item>
           {product &&

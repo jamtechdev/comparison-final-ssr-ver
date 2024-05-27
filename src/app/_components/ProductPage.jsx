@@ -58,7 +58,7 @@ function ProductPage({
   const productsWithAttributeGroup = {};
   const productCopy = { ...productData[0].data }; // Create a shallow copy to avoid modifying the original data
   const productAttributes = {};
-  // console.log( productData[0].data,'"xxx")')
+  // console.log( productCatAttributes?.data)
   productData[0].data?.attributes
     ?.sort(
       (a, b) => a?.attribute_category_position - b?.attribute_category_position
@@ -305,7 +305,7 @@ function ProductPage({
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
-          // console.log(innerHTML);
+          console.log(innerHTML);
 
           element.innerHTML = innerHTML;
           dispatch(storeTextPartShortCode({ content: innerHTML }));
@@ -2150,7 +2150,7 @@ function ProductPage({
       )}
       <GraphReplacer />
 
-      <ProductBottomBar favSlider={product && product} />
+      <ProductBottomBar favSlider={product && product} productPhase={product} />
     </>
   );
 }

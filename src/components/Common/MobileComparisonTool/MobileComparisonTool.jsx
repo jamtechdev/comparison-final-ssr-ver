@@ -148,7 +148,7 @@ export default function MobileComparisonTool({
                         style={{ cursor: "pointer" }}
                         onClick={() => urlChange(index)}
                       >
-                        <i className="ri-close-line"></i> Remove
+                        <i className="ri-close-line"></i> {productPhaseData?.page_phases?.remove_product_text}
                       </span>
                     </div>
                     {item?.price_websites?.length > 0 ? (
@@ -233,7 +233,7 @@ export default function MobileComparisonTool({
       <Row>
         <Col md={12} className="text-center mb-3">
           <Button className="site_main_btn" onClick={() => setIsOpen(true)}>
-            Add Product
+            {productPhaseData && productPhaseData?.page_phases?.add_product_text}
           </Button>
         </Col>
       </Row>

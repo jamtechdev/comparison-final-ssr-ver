@@ -247,7 +247,7 @@ function CompareDiv({
       observer.disconnect();
     };
   }, []);
-  console.log(contentWithIds);
+  // console.log(contentWithIds);
 
   return (
     <>
@@ -269,11 +269,17 @@ function CompareDiv({
               />
             </Col>
             <Col md={12}>
+              {console.log(bestAlternative?.page_phases)}
               <h1 className="site-main-heading">
                 {compareProDataFirst?.name} vs {compareProDataSec?.name}{" "}
                 {compareProDataThird?.name && `vs ${compareProDataThird?.name}`}
               </h1>
             </Col>
+          </Row>
+          <Row className="w-100 m-0">
+            <div className="col-md-12">
+              <p className="product-inner-content">{bestAlternative?.text}</p>
+            </div>
           </Row>
         </Container>
       </section>
@@ -338,7 +344,6 @@ function CompareDiv({
                   handelRemoveProductFormComparison
                 }
                 productPhaseData={bestAlternative && bestAlternative}
-
               />
             </Col>
           </Row>

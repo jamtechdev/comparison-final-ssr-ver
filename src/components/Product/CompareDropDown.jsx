@@ -24,7 +24,7 @@ function CompareDropDown({
   const [selectedAttribute, setSelectedAttribute] = useState(
     (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
   );
-  // console.log(selectedAttribute)
+  console.log(attributeDropDown)
 
   useEffect(() => {
     const containerDivs = document.querySelectorAll(".container-divs");

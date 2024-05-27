@@ -75,7 +75,7 @@ export default function GuidePage({
   };
   const handelSetFilterActive = (status) => {
     setIsFilterActive(status);
-    // console.log(status,"check status")
+    // console.log(status,"check status")a
   };
   useEffect(() => {
     setPrevSearcParam(searchParams);
@@ -189,10 +189,10 @@ export default function GuidePage({
     // console.log(sortAttribute, "neet");
     let param = JSON.parse(sortAttribute);
 
-    console.log(param.rangeAttributes);
+    // console.log(param.rangeAttributes);
     if (param.algo) {
       const currentUrl = new URL(window.location.href);
-      console.log(currentUrl);
+      // console.log(currentUrl);
       const searchParam = new URLSearchParams(currentUrl.search);
       const sortValue = `${param.algo},${param.rangeAttributes}`;
       // console.log(sortValue);

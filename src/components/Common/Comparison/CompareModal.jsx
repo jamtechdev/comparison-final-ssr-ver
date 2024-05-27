@@ -18,7 +18,7 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
   const [categoryId, setCategoryId] = useState(
     reduxData?.category ? reduxData?.category : undefined
   );
-  console.log(favSlider,"check favslider")
+  // console.log(favSlider,"check favslider")
 
   const handelCloseCompareModel = () => {
     setIsOpen(false);
@@ -135,6 +135,7 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
                 <i className="ri-close-circle-line close_icon"></i>
               </span>
             </Col>
+            {console.log(favSlider&&favSlider?.page_phases?.add_to_comparison)}
             <Col md={12}>
               <h2 className="site-main-heading">{favSlider&&favSlider?.page_phases?.add_to_comparison}</h2>
               <CompareForm

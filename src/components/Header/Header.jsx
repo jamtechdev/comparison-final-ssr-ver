@@ -283,6 +283,7 @@
             </div>
           </nav>
         </nav>
+        {/* {console.log(headerPhase)} */}
         {isOpen && <CompareModal favSlider={headerPhase} setIsOpen={setIsOpen} />}
       </header>
     );
