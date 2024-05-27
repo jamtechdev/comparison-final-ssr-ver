@@ -1925,6 +1925,21 @@
 /* responsive-css-end */
 
 @media (max-width: 768px) {
+  .isSticky .best-list-item li:not(.d-flex), .isSticky .not-availabel{
+    grid-template-columns:calc(100% - 0px) !important
+  }
+  .isSticky .best-list-item li:not(.d-flex) > * img{
+    margin: auto !important;
+  }
+  #mobile-compare-tablerBody .best-price-section:not(.ranking) .best-list-item li:not(.d-flex), #mobile-compare-tablerBody .not-availabel{
+    grid-template-columns:calc(100% - 0px) !important
+  }
+  #mobile-compare-tablerBody .best-price-section:not(.ranking) .best-list-item li:not(.d-flex) img{
+    margin: auto !important;
+  }
+  .legendBoxBarChart{
+    position: static !important;
+  }
   .compare-container thead tr th {
     padding: 12px 0 !important;
     min-width: auto !important;

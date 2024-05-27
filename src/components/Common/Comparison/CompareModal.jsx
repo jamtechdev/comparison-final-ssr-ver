@@ -10,7 +10,7 @@ import {
 } from "@/redux/features/compareProduct/compareProSlice";
 import toast, { Toaster } from "react-hot-toast";
 import formatValue from "@/_helpers/formatValue";
-const CompareModal = ({ setIsOpen, location, favSlider  }) => {
+const CompareModal = ({ setIsOpen, location, favSlider }) => {
   const dispatch = useDispatch();
   const reduxData = useSelector((state) => state.comparePro.compareProduct)[0];
   // (reduxData);
@@ -135,9 +135,11 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
                 <i className="ri-close-circle-line close_icon"></i>
               </span>
             </Col>
-            {/* {(favSlider&&favSlider?.page_phases?.add_to_comparison)} */}
+
             <Col md={12}>
-              <h2 className="site-main-heading">{favSlider&&favSlider?.page_phases?.add_to_comparison}</h2>
+              <h2 className="site-main-heading">
+                {favSlider && favSlider?.page_phases?.add_to_comparison}
+              </h2>
               <CompareForm
                 location="ON_MODEL"
                 favSlider={favSlider && favSlider?.page_phases}
@@ -150,10 +152,11 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
       </div>
       {oftenProducts?.length > 0 && (
         <Container className="mt-4">
-          {/* {(favSlider)} */}
           <Row>
             <Col md={12}>
-              <h2 className="site-main-heading">{favSlider?.page_phases?.often_compared}</h2>
+              <h2 className="site-main-heading">
+                {favSlider?.page_phases?.often_compared}
+              </h2>
             </Col>
           </Row>
           {reduxData?.productFirst !== null && (
@@ -189,7 +192,6 @@ const CompareModal = ({ setIsOpen, location, favSlider  }) => {
                             <span className="text-wrapper">{item?.name}</span>
                           </div>
 
-                          {/* <p dangerouslySetInnerHTML={{ __html: item?.text_part}}></p> */}
                           <p>{item?.category || ""}</p>
                         </div>
                         <span

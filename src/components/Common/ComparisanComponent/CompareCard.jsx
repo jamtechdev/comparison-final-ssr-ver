@@ -32,7 +32,7 @@ const CompareCard = ({
     }
     return value;
   };
-  // (productPhaseData && productPhaseData);
+  // console.log(productPhaseData && productPhaseData);
   const urlChange = (i) => {
     let x = window.location.pathname.split("/")[2].split("-vs-");
     // Create a new array without the element at the specified index
@@ -59,9 +59,7 @@ const CompareCard = ({
               height={50}
               alt="compare product"
             />
-            <p>
-              {productPhaseData && productPhaseData?.add_product_to_comparison}
-            </p>
+            <p>{productPhaseData&&productPhaseData?.add_product_to_compare}</p>
           </div>
         </div>
       ) : (
@@ -114,7 +112,7 @@ const CompareCard = ({
             ></i>
           </div>
           <div className="comparison-product-spec">
-            {/* {(compareProduct?.price_websites)} */}
+            {/* {console.log(compareProduct?.price_websites)} */}
             {compareProduct?.price_websites?.length > 0 ? (
               <>
                 <div className="comparison-product-item">
@@ -160,17 +158,17 @@ const CompareCard = ({
                     />
                     {compareProduct?.price_websites[1]?.price != null && (
                       <span>
+                      {" "}
+                      <a
+                        href={`/link?p=${btoa(
+                          compareProduct?.price_websites[1]?.url
+                        )}`}
+                        style={{ color: "#fff" }}
+                      >
                         {" "}
-                        <a
-                          href={`/link?p=${btoa(
-                            compareProduct?.price_websites[1]?.url
-                          )}`}
-                          style={{ color: "#fff" }}
-                        >
-                          {" "}
-                          {compareProduct?.price_websites[1]?.price} €{" "}
-                        </a>
-                      </span>
+                        {compareProduct?.price_websites[1]?.price} €{" "}
+                      </a>
+                    </span>
                     )}
                   </div>
                 )}

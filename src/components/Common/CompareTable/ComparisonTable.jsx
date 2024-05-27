@@ -425,7 +425,7 @@
           </thead>
           <tbody id="tbody">
             <tr className="">
-              {(comparisonPhaseData)}
+              {/* {(comparisonPhaseData)} */}
               <th>
                 <p>{comparisonPhaseData && comparisonPhaseData?.image}</p>
               </th>

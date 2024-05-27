@@ -174,7 +174,7 @@ function CompareDiv({
         // (res?.data?.data);
       })
       .catch((err) => {
-        (err);
+        err;
       });
   }, []);
 
@@ -224,7 +224,7 @@ function CompareDiv({
           innerHTML = innerHTML.replace(shortCodepatternsRE, (match) => {
             return `<span class="chart-placeholder" data-shortcode="${match}">${match}</span>`;
           });
-          (innerHTML);
+          innerHTML;
 
           element.innerHTML = innerHTML;
           dispatch(storeTextPartShortCode({ content: innerHTML }));
@@ -269,7 +269,7 @@ function CompareDiv({
               />
             </Col>
             <Col md={12}>
-              {(bestAlternative?.page_phases)}
+              {/* {bestAlternative?.page_phases} */}
               <h1 className="site-main-heading">
                 {compareProDataFirst?.name} vs {compareProDataSec?.name}{" "}
                 {compareProDataThird?.name && `vs ${compareProDataThird?.name}`}
@@ -369,7 +369,6 @@ function CompareDiv({
             )}
         </Container>
       </section>
-
       <section className="ptb-80 bg-color">
         <Container>
           <Row>
@@ -393,8 +392,6 @@ function CompareDiv({
           />
         </Container>
       </section>
-
-      {/* {(bestAlternative?.text_part)} */}
       {bestAlternative && bestAlternative?.text_part !== null && (
         <section className="contentSec my-3">
           <Container>
@@ -466,7 +463,6 @@ function CompareDiv({
           </Container>
         </section>
       )}
-      {/* {(bestAlternative?.should_buy_product_one)} */}
       {bestAlternative &&
         bestAlternative?.should_buy_product_one?.length > 0 && (
           <section className="ptb-80 bg-color">
@@ -549,7 +545,6 @@ function CompareDiv({
             </Container>
           </section>
         )}
-
       <section className="ptb-80">
         <Container>
           <Row>
@@ -587,6 +582,7 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
+      
       <section className="mobile-table-section">
         {/* {isMobile ? (
           <Container>
