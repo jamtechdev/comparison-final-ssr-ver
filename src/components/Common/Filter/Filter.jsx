@@ -45,142 +45,122 @@ export default function Filter({
 
   const { isMobile } = useScreenSize();
 
-  const handelFilterActions = useCallback(
-    (filterName, key, value, isChecked = false) => {
-      // console.log(filterName, key, value, "neet");
-      const currentParams = new URLSearchParams(searchParams.toString());
-      const url = new URL(window.location.href);
-      if(key == 'page'){
-        updatedParams.page = value;
-      }
-      switch (filterName) {
-        case "price":
-          if (!isChecked) {
-            deleteQueryFormURL(key, updatedParams, currentParams, url);
-          } else {
-            updatedParams.price = value;
-          }
-          break;
-        case "variant":
-          if (value) {
-            updatedParams.variant = value;
-          } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url);
-            deleteQueryFormURL("direct", updatedParams, currentParams, url);
-          }
-          break;
-        case "available":
-          if (value) {
-            updatedParams.available = value;
-          } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url);
-          }
+  const handelFilterActions = (filterName, key, value, isChecked = false) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    const url = new URL(window.location.href);
 
-          break;
-
-        case "page":
-          if (value) {
-            updatedParams.page = value;
-          } 
-console.log(url , key)
-          break;
-        case "brand":
-          if (isChecked) {
-            if (Object.values(value).length > 0) {
-              let existingValue = url.searchParams.get([key]);
-              updatedParams[key] = existingValue
-                ? `${existingValue},${Object.values(value).join()}`
-                : Object.values(value).join();
-            } else {
-              deleteQueryFormURL(key, updatedParams, currentParams, url);
-            }
-          } else {
+    switch (filterName) {
+      case "price":
+        if (!isChecked) {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        } else {
+          updatedParams.price = value;
+        }
+        break;
+      case "variant":
+        if (value) {
+          updatedParams.variant = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+          deleteQueryFormURL("direct", updatedParams, currentParams, url);
+        }
+        break;
+      case "available":
+        if (value) {
+          updatedParams.available = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        }
+        break;
+      case "brand":
+        if (isChecked) {
+          if (Object.values(value).length > 0) {
             let existingValue = url.searchParams.get([key]);
-            let valuesArray = existingValue ? existingValue.split(",") : [];
-            let valueToRemove = Object.values(value)[0];
-            valuesArray = valuesArray.filter((v) => v != valueToRemove);
-            const updatedValue = valuesArray.join(",");
-            if (updatedValue) {
-              updatedParams[key] = updatedValue;
-            } else {
-              deleteQueryFormURL(key, updatedParams, currentParams, url);
-            }
-          }
-          break;
-        case "radioSwitch":
-          if (isChecked) {
-            updatedParams[key] = value;
+            updatedParams[key] = existingValue
+              ? `${existingValue},${Object.values(value).join()}`
+              : Object.values(value).join();
           } else {
             deleteQueryFormURL(key, updatedParams, currentParams, url);
           }
-          break;
-        case "range":
-          if (!isChecked) {
+        } else {
+          let existingValue = url.searchParams.get([key]);
+          let valuesArray = existingValue ? existingValue.split(",") : [];
+          let valueToRemove = Object.values(value)[0];
+          valuesArray = valuesArray.filter((v) => v != valueToRemove);
+          const updatedValue = valuesArray.join(",");
+          if (updatedValue) {
+            updatedParams[key] = updatedValue;
+          } else {
             deleteQueryFormURL(key, updatedParams, currentParams, url);
-          } else {
-            updatedParams[key] = value;
           }
-          break;
-        case "sort":
-          if (isChecked) {
-            updatedParams.sort = value;
-          } else {
-            deleteQueryFormURL(key, updatedParams, currentParams, url); // yet to do
-          }
-          break;
-        case "dropdown":
-          if (isChecked) {
-            if (Object.values(value).length > 0) {
-              let existingValue = url.searchParams.get([key]);
-              updatedParams[key] = existingValue
-                ? `${existingValue},${Object.values(value).join()}`
-                : Object.values(value).join();
-            } else {
-              deleteQueryFormURL(key, updatedParams, currentParams, url);
-            }
-          } else {
+        }
+        break;
+      case "radioSwitch":
+        if (isChecked) {
+          updatedParams[key] = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        }
+        break;
+      case "range":
+        if (!isChecked) {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        } else {
+          updatedParams[key] = value;
+        }
+        break;
+      case "sort":
+        if (isChecked) {
+          updatedParams.sort = value;
+        } else {
+          deleteQueryFormURL(key, updatedParams, currentParams, url);
+        }
+        break;
+      case "dropdown":
+        if (isChecked) {
+          if (Object.values(value).length > 0) {
             let existingValue = url.searchParams.get([key]);
-            let valuesArray = existingValue ? existingValue.split(",") : [];
-            let valueToRemove = Object.values(value)[0];
-            valuesArray = valuesArray.filter((v) => v != valueToRemove);
-            const updatedValue = valuesArray.join(",");
-            if (updatedValue) {
-              updatedParams[key] = updatedValue;
-            } else {
-              deleteQueryFormURL(key, updatedParams, currentParams, url);
-            }
+            updatedParams[key] = existingValue
+              ? `${existingValue},${Object.values(value).join()}`
+              : Object.values(value).join();
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
           }
-          break;
-        default:
-          return;
-      }
-      console.log(updatedParams, currentParams, url);
-      Object.entries(updatedParams).forEach(([paramKey, paramValue]) => {
-        currentParams.set(paramKey, paramValue);
-        url.searchParams.set(paramKey, paramValue);
-      });
-      // Update the URL without triggering a page reload (hack)
-      window.history.pushState({}, "", url.toString());
-      // console.log(currentParams);
-      // console.log(currentParams.toString());
+        } else {
+          let existingValue = url.searchParams.get([key]);
+          let valuesArray = existingValue ? existingValue.split(",") : [];
+          let valueToRemove = Object.values(value)[0];
+          valuesArray = valuesArray.filter((v) => v != valueToRemove);
+          const updatedValue = valuesArray.join(",");
+          if (updatedValue) {
+            updatedParams[key] = updatedValue;
+          } else {
+            deleteQueryFormURL(key, updatedParams, currentParams, url);
+          }
+        }
+        break;
+      default:
+        return;
+    }
 
-      //call the next router for srr
-      router.push(`?${currentParams.toString()}`, { scroll: false });
-    },
-    [removedParam]
-  );
+    Object.entries(updatedParams).forEach(([paramKey, paramValue]) => {
+      currentParams.set(paramKey, paramValue);
+      url.searchParams.set(paramKey, paramValue);
+    });
+
+    window.history.pushState({}, "", url.toString());
+    router.push(`?${currentParams.toString()}`, { scroll: false });
+  };
+
   // console.log(sliderValues);
   const deleteQueryFormURL = (key, updatedParams, currentParams, url) => {
-    console.log(key, updatedParams, currentParams, url);
     delete updatedParams[key];
     currentParams.delete([key]);
     url.searchParams.delete([key]);
   };
-  console.log(removedParam);
 
   useEffect(() => {
     if (removedParam) {
-      console.log(removedParam);
       if (searchParam?.direct) {
         const filteredKeys = Object.keys(searchParam).filter(
           (key) => key !== "direct"
@@ -223,7 +203,7 @@ console.log(url , key)
           if (brandValues) {
             brandValues.map((item) => {
               handelFilterActions("brand", "brand", { brand: item }, false);
-              // console.log(item);
+              console.log(item);
               document.getElementById(`${item}`).checked = false;
             });
           }
@@ -246,9 +226,6 @@ console.log(url , key)
         }
         if (removedParam == "sort") {
           handelFilterActions("sort", "sort", ``, false);
-        }
-        if (removedParam == "page") {
-          handelFilterActions("page", "page", `2`, false);
         }
         if (
           removedParam !== "available" &&
