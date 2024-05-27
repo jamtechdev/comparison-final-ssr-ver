@@ -74,14 +74,14 @@ function ExperReviwes({ expertReview, page_phase }) {
   // (expertReview);
   return (
     <>
-    <section className="expert-reviews">
+    <section className="product-slider review-slider-3">
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}
         loop={true}
         navigation={{
-          nextEl: ".expert_reviews_slider .swiper-next",
-          prevEl: ".expert_reviews_slider .swiper-prev",
+          nextEl: ".expert_reviews_slider.swiper-next",
+          prevEl: ".expert_reviews_slider.swiper-prev",
         }}
         pagination={true}
         breakpoints={{
@@ -264,20 +264,21 @@ function ExperReviwes({ expertReview, page_phase }) {
             </SwiperSlide>
           );
         })}
-        
-      </Swiper>
-      {expertReview?.length > 3 ? (
+         {expertReview?.length > 3 ? (
         <>
-          <span className="expert_reviews_slider swiper-prev" style={{ left: "0px" }}>
+          <span className="expert_reviews_slider swiper-prev" style={{ left: "-18px" }}>
             <i className="ri-arrow-left-s-line"></i>
           </span>
-          <span className="expert_reviews_slider swiper-next" style={{ right: "0px" }}>
+          <span className="expert_reviews_slider swiper-next" style={{ right: "-18px" }}>
             <i className="ri-arrow-right-s-line"></i>
           </span>
         </>
       ) : (
         ""
       )}
+        
+      </Swiper>
+     
       
       </section>
     </>
