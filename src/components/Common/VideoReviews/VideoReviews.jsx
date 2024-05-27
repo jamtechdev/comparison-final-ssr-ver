@@ -11,52 +11,52 @@ function VideoReviews({ videoReview }) {
   // (videoReview?.length);
   return (
     <>
-      {" "}
-      <Swiper
-        modules={[Navigation, Pagination]}
-        spaceBetween={30}
-        loop={true}
-        navigation={{
-          nextEl: ".video_review_slider .swiper-next",
-          prevEl: ".video_review_slider .swiper-prev",
-        }}
-        pagination={true}
-        breakpoints={{
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 10,
-          },
-          1200: {
-            slidesPerView: 3,
-            spaceBetween: 10,
-          },
-        }}
-        className="video_review_slider"
-      >
-        {videoReview?.map((data, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <iframe
-                id="video"
-                width="100%"
-                height="250"
-                src={`${data?.url}`}
-                frameborder="0"
-                allowfullscreen
-              ></iframe>
-            </SwiperSlide>
-          );
-        })}
+      <section className="product-slider review-slider-3">
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={30}
+          loop={true}
+          navigation={{
+            nextEl: ".video_review_slider.swiper-next",
+            prevEl: ".video_review_slider.swiper-prev",
+          }}
+          pagination={true}
+          breakpoints={{
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+            1200: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+          }}
+          className="video_review_slider"
+        >
+          {videoReview?.map((data, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <iframe
+                  id="video"
+                  width="100%"
+                  height="250"
+                  src={`${data?.url}`}
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </SwiperSlide>
+            );
+          })}
 
-        {/* {blogPageType == "listPage" &&
+          {/* {blogPageType == "listPage" &&
         blogDataList &&
         blogDataList?.map(function (item, index) {
           return (
@@ -91,20 +91,20 @@ function VideoReviews({ videoReview }) {
             </SwiperSlide>
           );
         })} */}
-       
-      </Swiper>
-      {videoReview?.length > 3 ? (
+        </Swiper>
+        {videoReview?.length > 3 ? (
           <>
-            <span className="swiper-prev">
+            <span className="video_review_slider swiper-prev">
               <i className="ri-arrow-left-s-line"></i>
             </span>
-            <span className="swiper-next">
+            <span className="video_review_slider swiper-next">
               <i className="ri-arrow-right-s-line"></i>
             </span>
           </>
         ) : (
           ""
         )}
+      </section>
     </>
   );
 }
