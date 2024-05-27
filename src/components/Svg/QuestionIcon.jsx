@@ -113,12 +113,12 @@ const QuestionIcon = ({
             <div className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
-                  {guidePhraseData.score_components}:{""}
+                  {guidePhraseData.score_components}: {""}
                 </b>
               )}
               {<ProductPage /> && productPhaseData && (
                 <b>
-                  {productPhaseData.score_components}:{""}
+                  {productPhaseData.score_components}: {""}
                 </b>
               )}
               {<CompareDiv /> && comparePhaseData && (

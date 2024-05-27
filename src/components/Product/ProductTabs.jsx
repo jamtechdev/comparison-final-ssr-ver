@@ -32,12 +32,18 @@ function ProductTabs({
               ) : (
                 ""
               )}
-              
-              
 
               <Col md={12} className="site_tabs_hide">
                 <Tabs
-                  defaultActiveKey="tab-1"
+                  defaultActiveKey={
+                    productReview && productReview.length > 0
+                      ? "tab-1"
+                      : expertReview && expertReview.length > 0
+                      ? "tab-2"
+                      : videoReview && videoReview.length > 0
+                      ? "tab-3"
+                      : "tab-1"
+                  }
                   id="Review-tab"
                   className="mb-3 site_tabs site_tabs_hide"
                 >
