@@ -14,15 +14,15 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
 
   const navigationClassPrefix = `-${indexSlider}`;
 
-  const prevButtonClass = `${navigationClassPrefix}-prev`;
-  const nextButtonClass = `${navigationClassPrefix}-next`;
+  const prevButtonClass = `prev-${navigationClassPrefix}`;
+  const nextButtonClass = `next-${navigationClassPrefix}`;
 
   return (
     <div className="product-slider m-0">
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={30}
-    loop={true}
+        loop={true}
         rewind={true}
         navigation={{
           nextEl: `.${nextButtonClass}`,
@@ -56,12 +56,12 @@ export default function ProductSlider({ favSlider, slug, indexSlider }) {
           </SwiperSlide>
         ))}
       </Swiper>
-      {(isMobile && favSlider.length > 2) || (!isMobile && favSlider.length > 6) && (
+      {(isMobile && favSlider.length > 2) || (!isMobile && favSlider.length > 6) ? (
         <>
           <span className={`swiper-prev ${navigationClassPrefix}-prev`}><i className="ri-arrow-left-s-line"></i></span>
           <span className={`swiper-next ${navigationClassPrefix}-next`}><i className="ri-arrow-right-s-line"></i></span>
         </>
-      )}
+      ) : null}
     </div>
   );
 }
