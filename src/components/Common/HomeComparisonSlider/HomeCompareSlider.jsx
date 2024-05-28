@@ -31,8 +31,8 @@ export default function HomeCompareSlider({products,page_phase}) {
         spaceBetween={30}
         loop={true}
         navigation={{
-          nextEl: ".comparisons-slider .swiper-next",
-          prevEl: ".comparisons-slider .swiper-prev",
+          nextEl: ".main-compaison-next",
+          prevEl: ".main-compaison-prev",
         }}
         pagination={true}
         breakpoints={{
@@ -156,13 +156,13 @@ export default function HomeCompareSlider({products,page_phase}) {
           })}
       </Swiper>
       {/* {(filteredComparisons?.length)} */}
-      {filteredComparisons?.length > 3 && (
+      {filteredComparisons?.length > 1 && (
         <>
           {" "}
-          <span className="swiper-prev">
+          <span className="main-compaison-prev swiper-prev">
             <i className="ri-arrow-left-s-line"></i>
           </span>
-          <span className="swiper-next">
+          <span className="main-compaison-next swiper-next">
             <i className="ri-arrow-right-s-line"></i>
           </span>
         </>

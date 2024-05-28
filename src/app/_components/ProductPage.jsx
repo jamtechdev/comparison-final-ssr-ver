@@ -923,7 +923,8 @@ function ProductPage({
                     className="see_all_btn px-5"
                     onClick={handleShowAllRanking}
                   >
-                   {product?.page_phases?.show_all} <i className="ri-arrow-down-s-line"></i>
+                    {product?.page_phases?.show_all}{" "}
+                    <i className="ri-arrow-down-s-line"></i>
                   </Button>
                 )}
               </div>
@@ -960,7 +961,7 @@ function ProductPage({
                                 <a
                                   href={`/${item?.category_url}/${item?.permalink}`}
                                 >
-                                  <small>{item.guide_name}</small>
+                                  <small>{item.guide_short_name}</small>
                                 </a>
                               </p>
                             </div>
@@ -1212,16 +1213,16 @@ function ProductPage({
                             }}
                           >
                             {data?.value >= 10
-                              ? data?.value.toFixed(0)
-                              : data?.value.toFixed(1)}
+                              ? formatValue(data?.value)
+                              : formatValue(data?.value)}
                             {/* {formatValue(8.125)} */}
                             {/* {attributeValues?.final_points?.toFixed(
                        1
                      )} */}
                           </span>
-                          <h4 className="attribute__title">
+                          <span className="attribute__title">
                             <b>{data?.title} </b>
-                          </h4>
+                          </span>
                         </div>
                         <div className="attribute__card__body">
                           <div
@@ -1514,9 +1515,10 @@ function ProductPage({
                                               : "#85B2F1",
                                         }}
                                       >
-                                        {product?.attributes[
-                                          attribute
-                                        ][0].attribute_evaluation.toFixed(1)}
+                                        {formatValue(
+                                          product?.attributes[attribute][0]
+                                            .attribute_evaluation
+                                        )}
                                       </span>
                                     )}
 
@@ -1608,20 +1610,17 @@ function ProductPage({
                                                     : "#85B2F1",
                                               }}
                                             >
-                                              {attributeValues?.final_points >=
-                                              10
-                                                ? formatValue(
-                                                    attributeValues?.final_points
-                                                  )
-                                                : formatValue(
-                                                    attributeValues?.final_points
-                                                  )}
+                                              {formatValue(
+                                                attributeValues?.final_points.toFixed(
+                                                  1
+                                                )
+                                              )}
                                               {/* {formatValue(8.125)} */}
                                               {/* {attributeValues?.final_points?.toFixed(
                                                       1
                                                     )} */}
                                             </span>
-                                            <h4 className="attribute__title">
+                                            <span className="attribute__title">
                                               <b>
                                                 {attributeValues?.attribute}:{" "}
                                               </b>
@@ -1638,7 +1637,7 @@ function ProductPage({
                                                   : attributeValues.unit != null
                                                   ? attributeValues.unit
                                                   : "")}
-                                            </h4>
+                                            </span>
                                           </div>
                                           <div className="attribute__card__body">
                                             <div
@@ -1802,7 +1801,7 @@ function ProductPage({
                                                       1
                                                     )} */}
                                             </span>
-                                            <h4 className="attribute__title">
+                                            <span className="attribute__title">
                                               <b>
                                                 {attributeValues?.attribute}:{" "}
                                               </b>
@@ -1819,7 +1818,7 @@ function ProductPage({
                                                   : attributeValues.unit != null
                                                   ? attributeValues.unit
                                                   : "")}
-                                            </h4>
+                                            </span>
                                           </div>
                                           <div className="attribute__card__body">
                                             <div
@@ -1936,7 +1935,7 @@ function ProductPage({
                                         <a
                                           href={`/${item?.category_url}/${item?.permalink}`}
                                         >
-                                          <small>{item.guide_name}</small>
+                                          <small>{item?.guide_short_name}</small>
                                         </a>
                                       </p>
                                     </div>
@@ -1949,7 +1948,8 @@ function ProductPage({
                             className="see_all_btn"
                             onClick={handleShowAllRanking}
                           >
-                           {product?.page_phases?.show_all} <i className="ri-arrow-down-s-line"></i>
+                            {product?.page_phases?.show_all}{" "}
+                            <i className="ri-arrow-down-s-line"></i>
                           </Button>
                         )}
                       </div>
@@ -1967,9 +1967,9 @@ function ProductPage({
             >
               <Col md={6}>
                 <div className="pros-corns-section pros light-background">
-                  <h3 className="pros-header">
+                  <h2 className="pros-header">
                     {product && product?.page_phases?.pros}
-                  </h3>
+                  </h2>
                   <ul>
                     {product &&
                       product?.top_pros?.slice(0, 10).map((data, key) => {
@@ -1989,9 +1989,9 @@ function ProductPage({
               </Col>
               <Col md={6}>
                 <div className="pros-corns-section corns light-background">
-                  <h3 className="pros-header">
+                  <h2 className="pros-header">
                     {product && product?.page_phases?.cons}
-                  </h3>
+                  </h2>
                   <ul className="cross">
                     {product &&
                       product?.top_cons?.map((data, key) => {

@@ -369,6 +369,7 @@ export default function MobileCompareTable({
                 return product?.map((data, tIndex) => {
                   // (currentIndex, "check currentIndex");
                   // (product, "check products");
+                  // console.log(data?.currency)
                   return (
                     <th key={tIndex}>
                       <p className="device-name">
@@ -417,7 +418,7 @@ export default function MobileCompareTable({
                                       {/* <span className="txt">NOT AVAILABLE</span> */}
                                       <i>N/A</i>
                                       <span className="price">
-                                        ~ {data?.price} €
+                                        ~ {data?.price} 
                                       </span>
                                     </div>
                                   )}
@@ -453,7 +454,7 @@ export default function MobileCompareTable({
                                                       price_data.url
                                                     )}`}
                                                   >
-                                                    {price_data?.price} €
+                                                    {price_data?.price} {data?.currency} 
                                                   </a>
                                                 </span>
                                               </>
@@ -705,7 +706,7 @@ export default function MobileCompareTable({
                                                     priceData.url
                                                   )}`}
                                                 >
-                                                  {priceData?.price} €
+                                                  {priceData?.price} {data?.currency}
                                                 </a>
                                               </span>
                                             </>

@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { useRouter, useSearchParams } from "next/navigation";
 import ProductListing from "../ProductListing/ProductListing";
 
-const GuidePagination = ({ pagination }) => {
+const GuidePagination = ({ pagination, productPhaseData }) => {
   const { current_page, total_pages } = pagination;
   const [currentPage, setCurrentPage] = useState(current_page || 1);
   const router = useRouter();
@@ -24,9 +24,9 @@ const GuidePagination = ({ pagination }) => {
     }
     let newPage;
 
-    if (page === "Previous") {
+    if (page === productPhaseData?.previous_page) {
       newPage = currentPage - 1;
-    } else if (page === "Next") {
+    } else if (page === productPhaseData?.next_page) {
       newPage = currentPage + 1;
     } else {
       newPage = page;
@@ -50,7 +50,7 @@ const GuidePagination = ({ pagination }) => {
 
   if (total_pages > 0) {
     if (currentPage !== 1) {
-      pagesArray.push("Previous");
+      pagesArray.push(productPhaseData?.previous_page);
     }
 
     if (total_pages <= 5) {
@@ -74,7 +74,7 @@ const GuidePagination = ({ pagination }) => {
     }
 
     if (currentPage !== total_pages) {
-      pagesArray.push("Next");
+      pagesArray.push(productPhaseData?.next_page);
     }
   }
 
@@ -89,7 +89,9 @@ const GuidePagination = ({ pagination }) => {
                 className={
                   item === currentPage
                     ? "page_active"
-                    : item === "..." || item === "Previous" || item === "Next"
+                    : item === "..." ||
+                      item === productPhaseData?.previous_page ||
+                      item === productPhaseData?.next_page
                     ? "page_default"
                     : ""
                 }

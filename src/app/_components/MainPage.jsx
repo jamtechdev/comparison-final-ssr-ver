@@ -309,12 +309,12 @@ export default function MainPage({ bannerCounts, favSlider }) {
                         )}
                         {/* <ReviewSlider favSlider={data?.popular_reviews} /> */}
                       </Tab>
-                      <Tab
+                      {/* <Tab
                         eventKey="tab-2"
                         title={`${favSlider && favSlider?.latest_reviews_text}`}
                       >
                         <ReviewSlider favSlider={data?.latest_reviews} />
-                      </Tab>
+                      </Tab> */}
                     </Tabs>
                   </Col>
                 </Row>

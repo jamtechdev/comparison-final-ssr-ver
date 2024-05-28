@@ -921,13 +921,13 @@ export default function GuidePage({
               )}
 
               {productPagination?.total_pages > 1 && (
-                <GuidePagination pagination={productPagination} />
+                <GuidePagination pagination={productPagination}  productPhaseData={guide?.page_phases} />
               )}
             </Row>
           </Col>
         </Row>
       </Container>
-      {console.log(guide?.page_phases?.similar_guides)}
+      {/* {console.log(guide?.page_phases?.similar_guides)} */}
 
       <section className="ptb-25">
         <Container>
@@ -1025,7 +1025,7 @@ export default function GuidePage({
               </h2>
             </Col>
           </Row>
-          <GuidePageTextArea guide={guide} />
+          <GuidePageTextArea guide={guide}  />
         </Container>
       </section>
       <section className="ptb-25 mobite-mb-20">
