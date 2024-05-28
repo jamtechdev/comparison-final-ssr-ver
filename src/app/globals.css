@@ -2213,7 +2213,7 @@ svg.base__svg-container {
   width: 100%;
 }
 .content-para ol {
-  list-style: auto !important;
+  list-style: decimal !important;
 }
 .content-para ul {
   list-style: disc !important;
