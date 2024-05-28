@@ -694,8 +694,8 @@
 
 .compare-accordion .accordion-button .show-btn:hover,
 .compare-accordion .accordion-button .hide-btn:hover {
-  background: #326ebf;
-  color: #f4f7fb;
+  /* background: #326ebf; */
+  /* color: #f4f7fb; */
   border: 1px solid #326ebf;
 }
 

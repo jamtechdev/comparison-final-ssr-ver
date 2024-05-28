@@ -923,7 +923,7 @@ function ProductPage({
                     className="see_all_btn px-5"
                     onClick={handleShowAllRanking}
                   >
-                    See All <i className="ri-arrow-down-s-line"></i>
+                   {product?.page_phases?.show_all} <i className="ri-arrow-down-s-line"></i>
                   </Button>
                 )}
               </div>
@@ -973,6 +973,9 @@ function ProductPage({
                   <Button
                     className="see_all_btn"
                     onClick={handleShowAllRanking}
+                    style={{
+                      visibility: showFullRanking ? "hidden" : "visible",
+                    }}
                   >
                     {product?.page_phases?.show_all}{" "}
                     <i className="ri-arrow-down-s-line"></i>
@@ -1607,11 +1610,11 @@ function ProductPage({
                                             >
                                               {attributeValues?.final_points >=
                                               10
-                                                ? attributeValues?.final_points.toFixed(
-                                                    0
+                                                ? formatValue(
+                                                    attributeValues?.final_points
                                                   )
-                                                : attributeValues?.final_points.toFixed(
-                                                    1
+                                                : formatValue(
+                                                    attributeValues?.final_points
                                                   )}
                                               {/* {formatValue(8.125)} */}
                                               {/* {attributeValues?.final_points?.toFixed(
@@ -1690,9 +1693,10 @@ function ProductPage({
                                             : "#85B2F1",
                                       }}
                                     >
-                                      {product?.attributes[
-                                        attribute
-                                      ][0].attribute_evaluation.toFixed(1)}
+                                      {formatValue(
+                                        product?.attributes[attribute][0]
+                                          .attribute_evaluation
+                                      )}
                                     </span>
                                     <h3 className="attribute__title">
                                       {attribute}
@@ -1787,11 +1791,11 @@ function ProductPage({
                                             >
                                               {attributeValues?.final_points >=
                                               10
-                                                ? attributeValues?.final_points.toFixed(
-                                                    0
+                                                ? formatValue(
+                                                    attributeValues?.final_points
                                                   )
-                                                : attributeValues?.final_points.toFixed(
-                                                    1
+                                                : formatValue(
+                                                    attributeValues?.final_points
                                                   )}
                                               {/* {formatValue(8.125)} */}
                                               {/* {attributeValues?.final_points?.toFixed(
@@ -1900,7 +1904,8 @@ function ProductPage({
                             className="see_all_btn"
                             onClick={() => setShowFullPrice(!showFullPrice)}
                           >
-                            See All <i className="ri-arrow-down-s-line"></i>
+                            {product?.page_phases?.show_all}
+                            <i className="ri-arrow-down-s-line"></i>
                           </Button>
                         )}
                       </div>
@@ -1944,7 +1949,7 @@ function ProductPage({
                             className="see_all_btn"
                             onClick={handleShowAllRanking}
                           >
-                            See All <i className="ri-arrow-down-s-line"></i>
+                           {product?.page_phases?.show_all} <i className="ri-arrow-down-s-line"></i>
                           </Button>
                         )}
                       </div>

@@ -7,24 +7,32 @@ import { Navigation, Pagination } from "swiper/modules";
 import { useCallback, useState } from "react";
 import formatValue from "@/_helpers/formatValue";
 
-export default function MobileExpertReview({ expertReview }) {
+export default function MobileExpertReview({ expertReview, page_phase }) {
   const [expandedId, setExpandedId] = useState(null);
-  const getEvaluation = (score) => {
-    if (score >= 9) {
-      return "Outstanding";
-    } else if (score >= 8) {
-      return "Excellent";
-    } else if (score >= 7) {
-      return "Very good";
-    } else if (score >= 5) {
-      return "Good";
-    } else if (score >= 3) {
-      return "Fair";
-    } else if (score >= 1) {
-      return "Poor";
-    }
-    return "Poor"; // Handle other cases as needed
+
+  const getProductPhase = (phase) => {
+    return phase?.split("|");
   };
+  const getEvaluationPhase = getProductPhase(page_phase?.evaluation);
+  // (getEvaluationPhase)
+  const getEvaluation = (score) => {
+    // these pharse will change in future
+    if (score >= 9) {
+      return getEvaluationPhase[0];
+    } else if (score >= 8) {
+      return getEvaluationPhase[1];
+    } else if (score >= 7) {
+      return getEvaluationPhase[2];
+    } else if (score >= 5) {
+      return getEvaluationPhase[3];
+    } else if (score >= 3) {
+      return getEvaluationPhase[4];
+    } else if (score >= 1) {
+      return getEvaluationPhase[5];
+    }
+    return getEvaluationPhase[5]; // Handle other cases as needed
+  };
+
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -221,7 +229,9 @@ export default function MobileExpertReview({ expertReview }) {
                               cursor: "pointer",
                             }}
                           >
-                            {isTranslateExpanded ? "Read less" : "Read more"}
+                            {isTranslating
+                              ? `${page_phase?.show_original}`
+                              : `${page_phase?.translate}`}
                           </span>
                         )}
                       </p>
@@ -242,7 +252,9 @@ export default function MobileExpertReview({ expertReview }) {
                               cursor: "pointer",
                             }}
                           >
-                            {isExpanded ? "Read less" : "Read more"}
+                            {isExpanded
+                              ? `${page_phase?.read_less}`
+                              : `${page_phase?.read_more}`}
                           </span>
                         )}
                       </p>
@@ -255,7 +267,9 @@ export default function MobileExpertReview({ expertReview }) {
                       onClick={toggleTranslate}
                       style={{ cursor: "pointer" }}
                     >
-                      {isTranslating ? "Show original" : "Translate"}
+                      {isTranslating
+                        ? `${page_phase?.show_original}`
+                        : `${page_phase?.translate}`}
                     </span>
                   )}
 
@@ -267,17 +281,17 @@ export default function MobileExpertReview({ expertReview }) {
         })}
       </Swiper>
       {expertReview?.length > 3 ? (
-          <>
-            <span className="expert_reviews_slider swiper-prev">
-              <i className="ri-arrow-left-s-line"></i>
-            </span>
-            <span className="expert_reviews_slider swiper-next">
-              <i className="ri-arrow-right-s-line"></i>
-            </span>
-          </>
-        ) : (
-          ""
-        )}
+        <>
+          <span className="expert_reviews_slider swiper-prev">
+            <i className="ri-arrow-left-s-line"></i>
+          </span>
+          <span className="expert_reviews_slider swiper-next">
+            <i className="ri-arrow-right-s-line"></i>
+          </span>
+        </>
+      ) : (
+        ""
+      )}
     </section>
   );
 }

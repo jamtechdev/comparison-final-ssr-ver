@@ -242,6 +242,7 @@ const WhyAccordionTab = React.memo(
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                           product={product}
+                                          productPhaseData={page_phase}
                                         />
 
                                         <small
@@ -326,6 +327,7 @@ const WhyAccordionTab = React.memo(
                                     <QuestionIcon
                                       attributes={item?.when_matters}
                                       product={product}
+                                      productPhaseData={page_phase}
                                     />
 
                                     <small className="d-block tooltip-title">
@@ -404,6 +406,7 @@ const WhyAccordionTab = React.memo(
                                       <QuestionIcon
                                         attributes={item?.when_matters}
                                         product={product}
+                                        productPhaseData={page_phase}
                                       />
 
                                       <small className="d-block tooltip-title invisible">
@@ -573,6 +576,7 @@ const WhyAccordionTab = React.memo(
                                     <QuestionIcon
                                       attributes={item?.when_matters}
                                       product={product}
+                                      productPhaseData={page_phase}
                                     />
 
                                     <small className="d-block tooltip-title">
@@ -648,6 +652,7 @@ const WhyAccordionTab = React.memo(
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                           product={product}
+                                          productPhaseData={page_phase}
                                         />
 
                                         <small className="d-block tooltip-title">
@@ -727,6 +732,7 @@ const WhyAccordionTab = React.memo(
                                         <QuestionIcon
                                           attributes={item?.when_matters}
                                           product={product}
+                                          productPhaseData={page_phase}
                                         />
                                         <small className="d-block tooltip-title">
                                           {item?.hover_phase && (

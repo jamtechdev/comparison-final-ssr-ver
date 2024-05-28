@@ -83,7 +83,7 @@ export default async function PageSwitch({
         categorySlug,
         slug
       );
-      (productCatAttribute);
+      productCatAttribute;
       PageToRender = (
         <ProductPageSSR
           slug={slug}
@@ -106,8 +106,8 @@ export default async function PageSwitch({
       break;
     case "Compare":
       const compareData = pageData[0]?.data;
-      (pageData[0], "compareData");
-      (pageData[1], "xxx");
+      pageData[0], "compareData";
+      pageData[1], "xxx";
 
       // (compareData?.category_url)
 
@@ -129,8 +129,6 @@ export default async function PageSwitch({
           categroyAttributes={compareDataCatAttribute}
           graphComparisonProsCons={graphComparisonProsCons}
           getComparisonPhase={getComparisonPhase?.data}
-          
-          
         />
       );
       break;
@@ -181,7 +179,8 @@ async function getCategoryAttributes(category_id, slug) {
 
 async function getComparePhaseData(category_id, slug) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/compare/products?slug=${slug}`,{
+    `${process.env.NEXT_PUBLIC_API_URL}/compare/products?slug=${slug}`,
+    {
       next: { revalidate: 10 },
       cache: "no-cache",
       method: "GET",
@@ -194,7 +193,6 @@ async function getComparePhaseData(category_id, slug) {
   if (!response.ok) {
   }
   return response.json();
-  
 }
 async function getProductForTable(category_url, slug) {
   const response = await fetch(

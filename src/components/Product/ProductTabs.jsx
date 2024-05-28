@@ -7,6 +7,7 @@ import Rating from "../Common/Rating/Rating";
 import ProductReviewTab from "./ProductReviewTab";
 import VideoReviews from "../Common/VideoReviews/VideoReviews";
 import MobileAccordion from "../Common/MobileAccordion/mobileAccordion";
+import useScreenSize from "@/_helpers/useScreenSize";
 
 function ProductTabs({
   productReview,
@@ -16,6 +17,7 @@ function ProductTabs({
   page_phase,
 }) {
   // (productReview, expertReview, videoReview);
+  const { isMobile } = useScreenSize();
   return (
     <>
       {" "}
@@ -75,13 +77,17 @@ function ProductTabs({
                   )}
                 </Tabs>
               </Col>
-              <Col md={12} className="">
-                <MobileAccordion
-                  productReview={productReview}
-                  expertReview={expertReview}
-                  videoReview={videoReview}
-                />
-              </Col>
+
+              {isMobile && (
+                <Col md={12} className="">
+                  <MobileAccordion
+                    productReview={productReview}
+                    expertReview={expertReview}
+                    videoReview={videoReview}
+                    page_phase={page_phase}
+                  />
+                </Col>
+              )}
             </Row>
           </Container>
         }

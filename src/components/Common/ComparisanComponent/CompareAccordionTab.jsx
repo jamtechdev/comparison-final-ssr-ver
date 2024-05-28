@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import {
   Accordion,
@@ -12,7 +11,6 @@ import {
   Tab,
   Tabs,
 } from "react-bootstrap";
-
 
 // import ProsConsToolTip from "@/component/Svg/ProsConsToolTip";
 import QuestionIcon from "@/components/Svg/QuestionIcon";
@@ -35,7 +33,6 @@ const CompareAccordionTab = React.memo(
 
     const handleAccordionChange = (value, key) => {
       if (key == "pros") {
-        
         if (value == "total") {
           setTabValue({ ...tabvalue, pros: "total" });
         } else if (value === "general") {
@@ -237,7 +234,7 @@ const CompareAccordionTab = React.memo(
     useEffect(() => {
       handleAccordionChange("total", "pros");
     }, [activatab]);
-
+    console.log(apiData);
     return (
       <>
         <Row>
@@ -279,10 +276,14 @@ const CompareAccordionTab = React.memo(
                   <h3 class="font-20">
                     {" "}
                     {sendProductProps?.length > 2
-                      ? comparePhaseData &&
-                        comparePhaseData?.three_products_better_then
-                      : comparePhaseData &&
-                        comparePhaseData?.two_products_better_then}
+                      ? activatab === "tab-3"
+                        ? apiData?.three_products_better_then
+                        : activatab === "tab-2"
+                        ? apiData?.three_products_better_then
+                        : apiData?.three_products_better_then
+                      : activatab === "tab-2"
+                      ? apiData?.two_products_better_then
+                      : apiData?.two_products_better_then}
                   </h3>
 
                   <div className="show-btn">
@@ -624,10 +625,14 @@ const CompareAccordionTab = React.memo(
                   <h3 class="font-20">
                     {" "}
                     {sendProductProps?.length > 2
-                      ? comparePhaseData &&
-                        comparePhaseData?.three_products_worse_then
-                      : comparePhaseData &&
-                        comparePhaseData?.two_products_worse_then}
+                      ? activatab === "tab-3"
+                        ? apiData?.three_products_worse_then
+                        : activatab === "tab-2"
+                        ? apiData?.three_products_worse_then
+                        : apiData?.three_products_worse_then
+                      : activatab === "tab-2"
+                      ? apiData?.two_products_worse_then
+                      : apiData?.two_products_worse_then}
                   </h3>
 
                   <div className="show-btn">
