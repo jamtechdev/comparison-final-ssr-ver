@@ -2492,3 +2492,6 @@ tr:first-child th {
   top: 130px;
   right: 100px;
 }
+.custom-spinner .spinner-border {
+  color: #093673 !important;
+}

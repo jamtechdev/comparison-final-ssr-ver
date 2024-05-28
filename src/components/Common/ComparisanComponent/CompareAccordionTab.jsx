@@ -25,6 +25,7 @@ const CompareAccordionTab = React.memo(
     const [apiData, setApiData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [graphData, setGraphData] = useState(null);
+    const [activeAccordionTab, setActiveAccordionTab] = useState(null);
 
     // extract the permalink from the sendProductProps
     const extractedUrls = sendProductProps.map((entry) => entry?.permalink);
@@ -34,6 +35,7 @@ const CompareAccordionTab = React.memo(
 
     const handleAccordionChange = (value, key) => {
       if (key == "pros") {
+        
         if (value == "total") {
           setTabValue({ ...tabvalue, pros: "total" });
         } else if (value === "general") {

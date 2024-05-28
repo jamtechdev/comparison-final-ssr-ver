@@ -6,6 +6,7 @@ import ProductCategoryArchivePage from "./ProductCategoryArchivePage";
 import Comparison from "./Comparison";
 import SinglePage from "./SinglePage";
 import AboutPage from "./AboutPage";
+import ProductPageSSR from "./ProductPageSSR";
 export default async function PageSwitch({
   PageType,
   slug,
@@ -84,7 +85,7 @@ export default async function PageSwitch({
       );
       (productCatAttribute);
       PageToRender = (
-        <ProductPage
+        <ProductPageSSR
           slug={slug}
           categorySlug={categorySlug}
           productData={pageData}

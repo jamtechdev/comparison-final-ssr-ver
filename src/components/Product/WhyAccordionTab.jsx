@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   Accordion,
@@ -22,7 +21,7 @@ import useScreenSize from "@/_helpers/useScreenSize";
 import { color } from "d3";
 
 const WhyAccordionTab = React.memo(
-  ({ categorySlug, product, pageType, slug , page_phase }) => {
+  ({ categorySlug, product, pageType, slug, page_phase }) => {
     const [tabvalue, setTabValue] = useState({ pros: "total", cons: "total" });
     const [activetab, setActiveTab] = useState("tab-1");
     const { isMobile } = useScreenSize();
@@ -455,7 +454,7 @@ const WhyAccordionTab = React.memo(
                                 handleAccordionChange("total", "pros")
                               }
                             >
-                               {product && product?.page_phases?.total}
+                              {product && product?.page_phases?.total}
                             </Nav.Link>
                           </Nav.Item>
                           {product?.general?.pros?.length > 0 && (
@@ -767,7 +766,7 @@ const WhyAccordionTab = React.memo(
                               )
                             ) : (
                               <p className="text-center pt-2 pb-2 font-5 font-bold">
-                               {page_phase?.no_cons_found}
+                                {page_phase?.no_cons_found}
                               </p>
                             )}
                           </ul>
@@ -783,8 +782,8 @@ const WhyAccordionTab = React.memo(
                               onClick={() =>
                                 handleAccordionChange("total", "cons")
                               }
-                            > 
-                             {product && product?.page_phases?.total}
+                            >
+                              {product && product?.page_phases?.total}
                             </Nav.Link>
                           </Nav.Item>
                           {product?.general?.cons?.length > 0 && (

@@ -1,10 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
-import Image from "next/image";
-import useChart from "@/hooks/useChart";
+import { Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import axios from "axios";
-import useComparisonChart from "@/hooks/useComparisonChart";
 import ShowGraphChart from "@/hooks/ShowGraphChart";
 
 function CompareDropDown({
@@ -14,9 +11,6 @@ function CompareDropDown({
   slug,
   pageType,
 }) {
-  // (product);
-
-
   const [selectedItem, setSelectedItem] = useState(
     attributeDropDown[0] || null
   );
@@ -24,7 +18,7 @@ function CompareDropDown({
   const [selectedAttribute, setSelectedAttribute] = useState(
     (attributeDropDown[0] && attributeDropDown[0].attributes[0]) || null
   );
-
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const containerDivs = document.querySelectorAll(".container-divs");
@@ -36,6 +30,7 @@ function CompareDropDown({
 
   useEffect(() => {
     if (selectedAttribute) {
+      setLoading(true);
       const config = {
         headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
       };
@@ -46,7 +41,9 @@ function CompareDropDown({
         )
         .then((res) => {
           setChart(res.data.data);
-        });
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
     }
 
     const containerDivss = document.getElementsByClassName("container-divs");
@@ -75,14 +72,13 @@ function CompareDropDown({
     const selectedAttribute = selectedItem.attributes[selectedAttributeIndex];
     setSelectedAttribute(selectedAttribute);
   };
-  // testing
+
   useEffect(() => {
     if (chart) {
-      ShowGraphChart(chart, ".compareWithOther" , pageType ,slug);
+      ShowGraphChart(chart, ".compareWithOther", pageType, slug);
     }
   }, [chart]);
 
-  // useComparisonChart(chart, pageType, slug);
   return (
     <>
       <section className="ptb-80">
@@ -133,7 +129,6 @@ function CompareDropDown({
                   </Form.Select>
                 )}
               </div>
-              {/* {(selectedAttribute)} */}
               {selectedAttribute?.name !== "Price" && (
                 <p className="text-end para_content_text mt-3">
                   {selectedAttribute && (
@@ -153,23 +148,24 @@ function CompareDropDown({
               )}
             </Col>
             <Col md={8} lg={8}>
-              <span className="compareWithOther"></span>
-              <div className="barData"></div>
-              {/* <h6 className="addClassData">
-                [pie-chart;Overall1;Robot Vacuum Cleaners;Runtime:0-300;Can mop]
-              </h6> */}
-              {/* <Image
-                className="graph-bar"
-                src="/images/graph-bar.png"
-                width={0}
-                height={0}
-                alt=""
-                sizes="100%"
-              /> */}
+              {loading ? (
+                <div
+                  className="d-flex justify-content-center align-items-center"
+                  style={{ height: "100%" }}
+                >
+                  <Spinner
+                    animation="border"
+                    variant="primary"
+                    className="custom-spinner"
+                  />
+                </div>
+              ) : (
+                <>
+                  <span className="compareWithOther"></span>
+                  <div className="barData"></div>
+                </>
+              )}
             </Col>
-            {/* <Col md={2} lg={2}>
-              <div className="barData"></div>
-            </Col> */}
           </Row>
         </Container>
       </section>
