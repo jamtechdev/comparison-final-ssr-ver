@@ -189,6 +189,11 @@ const QuestionIcon = ({
                   {productPhaseData.importance_text}: {""}
                 </b>
               )}
+              {<CompareDiv /> && comparePhaseData && (
+                <b>
+                  {comparePhaseData.importance_text}:{""}{" "}
+                </b>
+              )}
               {attributes?.importance}
             </p>
           )}
@@ -202,6 +207,11 @@ const QuestionIcon = ({
               {<ProductPage /> && productPhaseData && (
                 <b>
                   {productPhaseData.good_value_text}: {""}
+                </b>
+              )}
+              {<CompareDiv /> && comparePhaseData && (
+                <b>
+                  {comparePhaseData.good_value_text}:{""}{" "}
                 </b>
               )}
               {/* <b>Good value: </b> */}
