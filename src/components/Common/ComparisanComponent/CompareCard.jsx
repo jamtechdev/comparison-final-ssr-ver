@@ -9,6 +9,7 @@ const CompareCard = ({
   setIsOpen,
   handelRemoveProductFormComparison,
 }) => {
+  console.log(productPhaseData)
   const handelRemoveProduct = (index) => {
     handelRemoveProductFormComparison(index);
   };
@@ -67,6 +68,7 @@ const CompareCard = ({
           {productScoreLabelIndex !== "" &&
             productScoreLabelIndex === productIndex && (
               <div className="comparison-tag">
+                
                 {productPhaseData && productPhaseData?.winner}
               </div>
             )}

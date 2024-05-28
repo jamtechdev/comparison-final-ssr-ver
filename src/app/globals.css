@@ -119,7 +119,7 @@ p {
   list-style-type: disc !important;
 }
 .attribute__card__body ol {
-  list-style-type: auto !important;
+  list-style-type: decimal !important;
 }
 
 .para_content_text ol {

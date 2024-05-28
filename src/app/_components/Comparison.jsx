@@ -8,16 +8,20 @@ function Comparison({
   comparisonData,
   categroyAttributes,
   graphComparisonProsCons,
+  getComparisonPhase
 }) {
   return (
     <>
+   
       <CompareDiv
         slug={slug}
         categorySlug={categorySlug}
         comparisonData={comparisonData}
         categroyAttributes={categroyAttributes?.data}
         graphComparisonProsCons={graphComparisonProsCons?.data}
+        getComparisonPhase={getComparisonPhase}
       />
+      
     </>
   );
 }

@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+
 import React, { useEffect, useRef, useState } from "react";
 import {
   Accordion,
@@ -12,7 +12,7 @@ import {
   Tab,
   Tabs,
 } from "react-bootstrap";
-import Image from "next/image";
+
 
 // import ProsConsToolTip from "@/component/Svg/ProsConsToolTip";
 import QuestionIcon from "@/components/Svg/QuestionIcon";
