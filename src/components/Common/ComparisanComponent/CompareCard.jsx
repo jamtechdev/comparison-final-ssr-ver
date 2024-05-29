@@ -9,7 +9,7 @@ const CompareCard = ({
   setIsOpen,
   handelRemoveProductFormComparison,
 }) => {
-  console.log(productPhaseData)
+  // console.log(productPhaseData)
   const handelRemoveProduct = (index) => {
     handelRemoveProductFormComparison(index);
   };

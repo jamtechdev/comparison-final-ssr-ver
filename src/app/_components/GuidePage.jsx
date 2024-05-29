@@ -509,7 +509,8 @@ export default function GuidePage({
               <div className="header--section">
                 <span style={{ fontSize: "1rem" }}>
                   {" "}
-                  <i className="ri-equalizer-line"></i> Filter
+                  <i className="ri-equalizer-line"></i>{" "}
+                  {guide?.page_phases?.filter_text}
                 </span>
                 <i class="ri-close-circle-line" onClick={closeClick}></i>
               </div>
@@ -530,7 +531,7 @@ export default function GuidePage({
                 onClick={closeClick}
               >
                 {/* <i className="ri-close-fill"></i> */}
-                See Product
+                {guide?.page_phases?.see_product_text}
               </Button>
             </div>
           </Col>
@@ -543,7 +544,7 @@ export default function GuidePage({
                   onClick={openClick}
                 >
                   <i className="ri-filter-line"></i>
-                  Filter
+                  {guide?.page_phases?.filter_text}
                 </Button>
               </Col>
               <Col sm={6} xs={6}>
@@ -921,7 +922,10 @@ export default function GuidePage({
               )}
 
               {productPagination?.total_pages > 1 && (
-                <GuidePagination pagination={productPagination}  productPhaseData={guide?.page_phases} />
+                <GuidePagination
+                  pagination={productPagination}
+                  productPhaseData={guide?.page_phases}
+                />
               )}
             </Row>
           </Col>
@@ -1025,7 +1029,7 @@ export default function GuidePage({
               </h2>
             </Col>
           </Row>
-          <GuidePageTextArea guide={guide}  />
+          <GuidePageTextArea guide={guide} />
         </Container>
       </section>
       <section className="ptb-25 mobite-mb-20">

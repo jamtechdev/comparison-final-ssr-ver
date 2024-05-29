@@ -74,7 +74,7 @@ function GuidePageTextArea({ guide }) {
   return (
     <>
       <Row className="mt-3">
-        <Col md={4} lg={2}>
+        <Col md={3} lg={2}>
           <div className="outline-section">
             <p>{guide && guide?.page_phrases?.outline}</p>
             <OutlineGenerator
@@ -84,7 +84,7 @@ function GuidePageTextArea({ guide }) {
           </div>
         </Col>
 
-        <Col md={8} lg={8}>
+        <Col md={9} lg={8}>
           {getGuideTextPartShortcode !== undefined ? (
             <div
               id="shortCodeText"

@@ -2292,6 +2292,11 @@ div#shortCodeText ul {
   .container-divs .parentBarDiv {
     padding: 0 !important;
   }
+
+  .graph__upperdiv{
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 
 .search__close__btn {
@@ -2494,4 +2499,8 @@ tr:first-child th {
 }
 .custom-spinner .spinner-border {
   color: #093673 !important;
+}
+
+.show-btn.remove_outline_border:focus {
+  outline: none;
 }

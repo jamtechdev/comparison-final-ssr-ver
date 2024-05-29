@@ -6,10 +6,11 @@ import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import formatValue from "@/_helpers/formatValue";
+import useScreenSize from "@/_helpers/useScreenSize";
 
-export default function HomeCompareSlider({products,page_phase}) {
+export default function HomeCompareSlider({ products, page_phase }) {
   const router = useRouter();
-(page_phase)
+  page_phase;
   const getColorBasedOnScore = (score) => {
     if (score >= 7.5) {
       return "#093673";
@@ -24,6 +25,7 @@ export default function HomeCompareSlider({products,page_phase}) {
     (comparison) => comparison.verdict_text !== null
   );
   // (filteredComparisons,"checking filtered data")
+  const { isMobile } = useScreenSize();
   return (
     <section className="comparisons-slider">
       <Swiper
@@ -76,16 +78,18 @@ export default function HomeCompareSlider({products,page_phase}) {
                         height={0}
                         sizes="100%"
                         alt={item?.product_first}
-                      />  
-                      
+                      />
+
                       {item?.product_first_overall_counted_score >
                         item?.product_second_overall_counted_score && (
-                        <div className="winner__badge">{page_phase?.winner}</div>
+                        <div className="winner__badge">
+                          {page_phase?.winner}
+                        </div>
                       )}
                       <div className="footer_content">
                         <span>{item?.product_first}</span>
                       </div>
-                      
+
                       <span
                         className="rating_count"
                         style={{
@@ -145,7 +149,7 @@ export default function HomeCompareSlider({products,page_phase}) {
 
                       <span style={{ cursor: "pointer" }}>
                         <a href={`/${item?.category_url}/${item?.permalink}`}>
-                         {page_phase?.comparison_see_full}
+                          {page_phase?.comparison_see_full}
                         </a>
                       </span>
                     </div>
@@ -155,8 +159,18 @@ export default function HomeCompareSlider({products,page_phase}) {
             );
           })}
       </Swiper>
-      {/* {(filteredComparisons?.length)} */}
-      {filteredComparisons?.length > 1 && (
+      {isMobile && filteredComparisons?.length > 1 && (
+        <>
+          {" "}
+          <span className="main-compaison-prev swiper-prev">
+            <i className="ri-arrow-left-s-line"></i>
+          </span>
+          <span className="main-compaison-next swiper-next">
+            <i className="ri-arrow-right-s-line"></i>
+          </span>
+        </>
+      )}
+      {!isMobile && filteredComparisons?.length > 3 && (
         <>
           {" "}
           <span className="main-compaison-prev swiper-prev">

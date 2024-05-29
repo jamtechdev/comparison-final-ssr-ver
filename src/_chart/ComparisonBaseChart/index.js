@@ -99,6 +99,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
 
     return (
       <div
+        className="graph__upperdiv"
         style={{
           "align-items": "center",
           // "flex-direction": "column",
@@ -111,7 +112,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
         </span>
         <div
           className="base__container"
-          style={{ width: "500px", height: 180 }}
+          // style={{ width: "500px", height: 180 }}
         >
           <svg
             viewBox={`40 90 510 100`}

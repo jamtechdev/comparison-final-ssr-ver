@@ -60,6 +60,64 @@
     max-width: 100% !important;
   }
 
+  body .sidebar-width {
+    position: fixed;
+    z-index: 1000;
+    height: 100%;
+    background: #fff;
+    width: 90%;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px !important;
+    transform: translateX(-100%);
+    transition: 0.5s;
+  }
+
+  body .sidebar--open {
+    transform: translateX(0%);
+    transition: 0.5s;
+  }
+
+  .filter--sidebar--open {
+    overflow: hidden;
+  }
+
+  .filter--sidebar--open::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #0000007a;
+    z-index: 1000;
+  }
+
+  
+  .header--section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .header--section i {
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  .header--section h6 i {
+    font-size: 22px !important;
+  }
+
+  .filter-container {
+    height: calc(100vh - 100px) !important;
+    top: 0 !important;
+  }
+  .mobile__filter {
+    padding: 10px 12px !important;
+  }
+
   body .main-content {
     width: calc(100% - 0px) !important;
   }
@@ -781,9 +839,9 @@
   .logo-header .logo {
     width: 125px !important;
   }
-  .mobile_logo {
+  /* .mobile_logo {
     padding-left: 22px !important;
-  }
+  } */
 
   /* Product Page Start  */
 
@@ -1925,15 +1983,15 @@
 /* responsive-css-end */
 
 @media (max-width: 768px) {
-  .isSticky .best-list-item li:not(.d-flex), .isSticky .not-availabel{
+  /* .isSticky .best-list-item li:not(.d-flex), .isSticky .not-availabel{
     grid-template-columns:calc(100% - 0px) !important
-  }
+  } */
   .isSticky .best-list-item li:not(.d-flex) > * img{
     margin: auto !important;
   }
-  #mobile-compare-tablerBody .best-price-section:not(.ranking) .best-list-item li:not(.d-flex), #mobile-compare-tablerBody .not-availabel{
+  /* #mobile-compare-tablerBody .best-price-section:not(.ranking) .best-list-item li:not(.d-flex), #mobile-compare-tablerBody .not-availabel{
     grid-template-columns:calc(100% - 0px) !important
-  }
+  } */
   #mobile-compare-tablerBody .best-price-section:not(.ranking) .best-list-item li:not(.d-flex) img{
     margin: auto !important;
   }
@@ -2324,5 +2382,17 @@
 
   #mobile-compare-tabler thead tr th {
     padding: 0 12px !important;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  table.isSticky .best-list-item li:not(.d-flex) a, .isSticky .not-availabel .price{
+    font-size: 14px !important;
+    padding: 0 !important;
+  }
+
+  #mobile-compare-tablerBody .best-price-section:not(.ranking) .best-list-item li:not(.d-flex) a, #mobile-compare-tablerBody .not-availabel .price{
+    font-size: 14px !important;
+    padding: 0 !important;
   }
 }

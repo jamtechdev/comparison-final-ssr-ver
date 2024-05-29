@@ -234,7 +234,7 @@ const CompareAccordionTab = React.memo(
     useEffect(() => {
       handleAccordionChange("total", "pros");
     }, [activatab]);
-    console.log(apiData);
+    // console.log(apiData);
     return (
       <>
         <Row>
@@ -286,7 +286,7 @@ const CompareAccordionTab = React.memo(
                       : apiData?.two_products_better_then}
                   </h3>
 
-                  <div className="show-btn">
+                  <div className="show-btn remove_outline_border">
                     {comparePhaseData && comparePhaseData?.show_all}{" "}
                     <i className="ri-arrow-down-s-line"></i>
                   </div>

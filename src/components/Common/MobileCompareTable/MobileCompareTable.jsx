@@ -285,7 +285,7 @@ export default function MobileCompareTable({
   };
 
   const findProductsScoreLabelIndex = (products) => {
-    if (products.length === 0) {
+    if (products?.length === 0) {
       return "";
     }
     const maxScore = Math.max(...products?.map((obj) => obj.overall_score));
@@ -295,9 +295,7 @@ export default function MobileCompareTable({
 
     return winningProductIndex.length === 1 ? winningProductIndex[0] : -1000;
   };
-  const productScoreLabelIndex = findProductsScoreLabelIndex(chunkedData[0]);
-  // (chunkedData)
-  // (productScoreLabelIndex);
+  const productScoreLabelIndex = findProductsScoreLabelIndex(finalProducts);
 
   return (
     <section className="comparisons-slider">
@@ -340,17 +338,28 @@ export default function MobileCompareTable({
                           </span>
                         </th>
                       )}
-                      {type === "compare" && (
-                        <th>
-                          {productScoreLabelIndex !== "" &&
-                            productScoreLabelIndex === tIndex && (
-                              <span className="best-tag-product">
-                                {productPhaseData && productPhaseData?.winner}
-                                {/* {data?.winner} */}
-                              </span>
-                            )}
-                        </th>
-                      )}
+                      {type === "compare" &&
+                        (chunkedData?.length > 1 ? (
+                          <th>
+                            {productScoreLabelIndex !== "" &&
+                              productScoreLabelIndex === currentIndex + 1 && (
+                                <span className="best-tag-product">
+                                  {productPhaseData && productPhaseData?.winner}
+                                  {/* {data?.winner} */}
+                                </span>
+                              )}
+                          </th>
+                        ) : (
+                          <th>
+                            {productScoreLabelIndex !== "" &&
+                              productScoreLabelIndex === tIndex && (
+                                <span className="best-tag-product">
+                                  {productPhaseData && productPhaseData?.winner}
+                                  {/* {data?.winner} */}
+                                </span>
+                              )}
+                          </th>
+                        ))}
                     </>
                   );
                 });
@@ -418,7 +427,7 @@ export default function MobileCompareTable({
                                       {/* <span className="txt">NOT AVAILABLE</span> */}
                                       <i>N/A</i>
                                       <span className="price">
-                                        ~ {data?.price} 
+                                        ~ {data?.price}
                                       </span>
                                     </div>
                                   )}
@@ -454,7 +463,8 @@ export default function MobileCompareTable({
                                                       price_data.url
                                                     )}`}
                                                   >
-                                                    {price_data?.price} {data?.currency} 
+                                                    {price_data?.price}{" "}
+                                                    {data?.currency}
                                                   </a>
                                                 </span>
                                               </>
@@ -567,6 +577,7 @@ export default function MobileCompareTable({
           className="product-slider"
         >
           {chunkedData?.map((slider_data, swiperIndex) => {
+            // console.log(slider_data?.length)
             return (
               <SwiperSlide key={swiperIndex}>
                 <Table className="compare-container">
@@ -591,18 +602,32 @@ export default function MobileCompareTable({
                                 </span>
                               </th>
                             )}
-                            {type === "compare" && (
-                              <th>
-                                {productScoreLabelIndex !== "" &&
-                                  productScoreLabelIndex === dIndex && (
-                                    <span className="best-tag-product">
-                                      {productPhaseData &&
-                                        productPhaseData?.winner}
-                                      {/* {data?.winner} */}
-                                    </span>
-                                  )}
-                              </th>
-                            )}
+                            {/* {console.log(chunkedData?.length)} */}
+                            {type === "compare" &&
+                              (chunkedData?.length > 1 ? (
+                                <th>
+                                  {productScoreLabelIndex !== "" &&
+                                    productScoreLabelIndex ===
+                                      currentIndex + 1 && (
+                                      <span className="best-tag-product">
+                                        {productPhaseData &&
+                                          productPhaseData?.winner}
+                                        {/* {data?.winner} */}
+                                      </span>
+                                    )}
+                                </th>
+                              ) : (
+                                <th>
+                                  {productScoreLabelIndex !== "" &&
+                                    productScoreLabelIndex === dIndex && (
+                                      <span className="best-tag-product">
+                                        {productPhaseData &&
+                                          productPhaseData?.winner}
+                                        {/* {data?.winner} */}
+                                      </span>
+                                    )}
+                                </th>
+                              ))}
                           </>
                         );
                       })}
@@ -706,7 +731,8 @@ export default function MobileCompareTable({
                                                     priceData.url
                                                   )}`}
                                                 >
-                                                  {priceData?.price} {data?.currency}
+                                                  {priceData?.price}{" "}
+                                                  {data?.currency}
                                                 </a>
                                               </span>
                                             </>

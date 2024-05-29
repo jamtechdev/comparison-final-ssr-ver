@@ -158,7 +158,7 @@ const WhyAccordionTab = React.memo(
             </Tab>
           </Tabs>
         </Col>
-        <Col md={12} lg={6}>
+        <Col md={12} lg={6}>  
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
@@ -167,7 +167,7 @@ const WhyAccordionTab = React.memo(
                   {/* Why is {product && product?.name} BETTER than{" "}
                   {product && product?.average_title}? */}
                 </h3>
-                <div className="show-btn">
+                <div className="show-btn ">
                   {product && product?.page_phases?.show_all}
                   <i className="ri-arrow-down-s-line"></i>
                 </div>
