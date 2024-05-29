@@ -2494,8 +2494,8 @@ tr:first-child th {
 }
 .legendBoxBarChart {
   position: relative;
-  top: 130px;
-  right: 100px;
+  top: 124px;
+  right: 65px;
 }
 .custom-spinner .spinner-border {
   color: #093673 !important;

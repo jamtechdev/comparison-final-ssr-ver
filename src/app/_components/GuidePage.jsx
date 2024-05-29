@@ -997,7 +997,7 @@ export default function GuidePage({
             </h2>
           </Container>
         ) : null}
-        <Container className="p-0">
+        <Container className="p-0 p-md-4">
           <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
               {

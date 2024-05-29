@@ -12,7 +12,7 @@ const useScreenSize = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const isMobile = width <= 768; // Adjust breakpoint as needed
+  const isMobile = width <= 992; // Adjust breakpoint as needed
 
   return { width, isMobile };
 };

@@ -353,6 +353,8 @@ const CompareAccordionTab = React.memo(
                                               </>
                                             )}
                                           </span>
+                                          {/* {console.log(comparePhaseData,"neet")} */}
+
                                           <QuestionIcon
                                             attributes={item?.when_matters}
                                             comparePhaseData={comparePhaseData}

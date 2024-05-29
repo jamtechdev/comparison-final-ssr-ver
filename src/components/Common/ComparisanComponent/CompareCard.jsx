@@ -60,7 +60,9 @@ const CompareCard = ({
               height={50}
               alt="compare product"
             />
-            <p>{productPhaseData&&productPhaseData?.add_product_to_compare}</p>
+            <p>
+              {productPhaseData && productPhaseData?.add_product_to_compare}
+            </p>
           </div>
         </div>
       ) : (
@@ -68,7 +70,6 @@ const CompareCard = ({
           {productScoreLabelIndex !== "" &&
             productScoreLabelIndex === productIndex && (
               <div className="comparison-tag">
-                
                 {productPhaseData && productPhaseData?.winner}
               </div>
             )}
@@ -140,7 +141,8 @@ const CompareCard = ({
                         style={{ color: "#fff" }}
                       >
                         {" "}
-                        {compareProduct?.price_websites[0]?.price} €{" "}
+                        {/* {console.log(compareProduct?.currency)} */}
+                        {compareProduct?.price_websites[0]?.price} {compareProduct?.currency}{" "}
                       </a>
                     </span>
                   )}
@@ -160,17 +162,17 @@ const CompareCard = ({
                     />
                     {compareProduct?.price_websites[1]?.price != null && (
                       <span>
-                      {" "}
-                      <a
-                        href={`/link?p=${btoa(
-                          compareProduct?.price_websites[1]?.url
-                        )}`}
-                        style={{ color: "#fff" }}
-                      >
                         {" "}
-                        {compareProduct?.price_websites[1]?.price} €{" "}
-                      </a>
-                    </span>
+                        <a
+                          href={`/link?p=${btoa(
+                            compareProduct?.price_websites[1]?.url
+                          )}`}
+                          style={{ color: "#fff" }}
+                        >
+                          {" "}
+                          {compareProduct?.price_websites[1]?.price} {compareProduct?.currency}{" "}
+                        </a>
+                      </span>
                     )}
                   </div>
                 )}
@@ -180,7 +182,7 @@ const CompareCard = ({
                 <div className="not-availabel">
                   {/* <span className="txt">NOT AVAILABLE</span> */}
                   <i>N/A</i>
-                  <span className="price">~ {compareProduct?.price} €</span>
+                  <span className="price">~ {compareProduct?.price} {compareProduct?.currency}</span>
                 </div>
               </>
             )}

@@ -41,7 +41,7 @@ export default function MainComparision({products,pages_phase}) {
             spaceBetween: 10,
           },
           768: {
-            slidesPerView: 1,
+            slidesPerView: 2,
             spaceBetween: 10,
           },
           1024: {

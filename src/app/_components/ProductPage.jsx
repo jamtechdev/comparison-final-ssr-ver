@@ -1212,9 +1212,8 @@ function ProductPage({
                                   : "#85B2F1",
                             }}
                           >
-                            {data?.value >= 10
-                              ? formatValue(data?.value)
-                              : formatValue(data?.value)}
+                            {formatValue(data?.value)}
+
                             {/* {formatValue(8.125)} */}
                             {/* {attributeValues?.final_points?.toFixed(
                        1
@@ -1611,9 +1610,7 @@ function ProductPage({
                                               }}
                                             >
                                               {formatValue(
-                                                attributeValues?.final_points.toFixed(
-                                                  1
-                                                )
+                                                attributeValues?.final_points
                                               )}
                                               {/* {formatValue(8.125)} */}
                                               {/* {attributeValues?.final_points?.toFixed(
@@ -1935,7 +1932,9 @@ function ProductPage({
                                         <a
                                           href={`/${item?.category_url}/${item?.permalink}`}
                                         >
-                                          <small>{item?.guide_short_name}</small>
+                                          <small>
+                                            {item?.guide_short_name}
+                                          </small>
                                         </a>
                                       </p>
                                     </div>
@@ -1943,15 +1942,37 @@ function ProductPage({
                                 );
                               })}
                         </ul>
-                        {product?.guide_ratings.length > 4 && (
+
+                        {product?.guide_ratings?.length > 5 && (
                           <Button
                             className="see_all_btn"
                             onClick={handleShowAllRanking}
+                            style={{
+                              visibility: showFullRanking
+                                ? "hidden"
+                                : "visible",
+                            }}
                           >
                             {product?.page_phases?.show_all}{" "}
                             <i className="ri-arrow-down-s-line"></i>
                           </Button>
                         )}
+                        {showFullRanking &&
+                          product?.guide_ratings?.length > 5 && (
+                            <Button
+                              className="see_all_btn "
+                              onClick={handleShowAllRanking}
+                            >
+                              {product?.page_phases?.hide_all}{" "}
+                              <i
+                                className={
+                                  showFullRanking
+                                    ? "ri-arrow-up-s-line"
+                                    : "ri-arrow-down-s-line"
+                                }
+                              ></i>
+                            </Button>
+                          )}
                       </div>
                     </Col>
                   </Row>

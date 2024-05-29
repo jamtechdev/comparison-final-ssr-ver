@@ -16,18 +16,21 @@ export default function ProductSliderBlog({ favSlider }) {
           .map(function (item, index) {
             // (favSlider,"checking sidebar")
             return (
-              <div className="product-card mb-3" key={index}>  
-                <img
-                   src={
-                    item.bannerImage == null
-                      ? `/images/nofound.png`
-                      : item?.bannerImage
-                  }
-                  width={0}
-                  height={0}
-                  sizes="100%"
-                  alt=""
-                />
+              <div className="product-card mb-3" key={index}>
+                <a href={`/${item?.category_url}/${item?.permalink}`}>
+                  <img
+                    src={
+                      item.bannerImage == null
+                        ? `/images/nofound.png`
+                        : item?.bannerImage
+                    }
+                    width={0}
+                    height={0}
+                    sizes="100%"
+                    alt=""
+                  />
+                </a>
+
                 <span>
                   {" "}
                   <a
@@ -37,11 +40,8 @@ export default function ProductSliderBlog({ favSlider }) {
                     {item?.short_name || item?.guide_name}
                   </a>
                 </span>
-                
               </div>
-              
             );
-            
           })}
     </section>
   );
