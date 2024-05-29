@@ -1991,6 +1991,10 @@
   /* #mobile-compare-tablerBody .best-price-section:not(.ranking) .best-list-item li:not(.d-flex), #mobile-compare-tablerBody .not-availabel{
     grid-template-columns:calc(100% - 0px) !important
   } */
+
+  .tooltip-title:hover .tooltip-display-content {
+    margin-left: -120px;
+  }
   #mobile-compare-tablerBody
     .best-price-section:not(.ranking)
     .best-list-item
@@ -2449,5 +2453,5 @@
     padding: 12px !important;
     background: #fff;
     border-bottom: 2px solid #ddd !important;
-}
+  }
 }

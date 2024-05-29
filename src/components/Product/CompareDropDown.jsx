@@ -46,18 +46,18 @@ function CompareDropDown({
         .catch(() => setLoading(false));
     }
 
-    const containerDivss = document.getElementsByClassName("container-divs");
-    for (let i = 0; i < containerDivss.length; i++) {
-      containerDivss[i].remove();
-    }
-    const legendBoxDivs = document.getElementsByClassName("legendBox");
-    for (let i = 0; i < legendBoxDivs.length; i++) {
-      legendBoxDivs[i].remove();
-    }
-    const parentDivs = document.getElementsByClassName("parentBarDiv");
-    for (let i = 0; i < parentDivs.length; i++) {
-      parentDivs[i].remove();
-    }
+    // const containerDivss = document.getElementsByClassName("container-divs");
+    // for (let i = 0; i < containerDivss.length; i++) {
+    //   containerDivss[i].remove();
+    // }
+    // const legendBoxDivs = document.getElementsByClassName("legendBox");
+    // for (let i = 0; i < legendBoxDivs.length; i++) {
+    //   legendBoxDivs[i].remove();
+    // }
+    // const parentDivs = document.getElementsByClassName("parentBarDiv");
+    // for (let i = 0; i < parentDivs.length; i++) {
+    //   parentDivs[i].remove();
+    // }
   }, [selectedAttribute]);
 
   const handleItemChange = (e) => {

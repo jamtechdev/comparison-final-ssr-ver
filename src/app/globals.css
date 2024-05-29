@@ -1905,6 +1905,7 @@ h4.attribute__title {
   opacity: 90% !important;
   color: var(--primary-color);
   margin-left: 10px !important;
+  font-size: 18px;
 }
 
 .attribute__card__body p {
@@ -2174,7 +2175,8 @@ h4.attribute__title {
 .legendBoxBarChart table tr td {
   display: flex;
   align-items: center;
-  padding: 5px 0;
+  padding: 2px 0;
+  width: 200px;
 }
 
 .p-top-20 {
@@ -2293,7 +2295,7 @@ div#shortCodeText ul {
     padding: 0 !important;
   }
 
-  .graph__upperdiv{
+  .graph__upperdiv {
     flex-direction: column;
     gap: 15px;
   }
@@ -2494,8 +2496,10 @@ tr:first-child th {
 }
 .legendBoxBarChart {
   position: relative;
-  top: 124px;
-  right: 65px;
+  top: 0px;
+  /* display: flex; */
+  right: 150px;
+  float: right;
 }
 .custom-spinner .spinner-border {
   color: #093673 !important;

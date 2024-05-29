@@ -682,8 +682,9 @@ export default function GuidePage({
                   <div className="tooltip-title">
                     {" "}
                     {guide && guide?.page_phases?.hide_similar}
-                    {/* <div className="tooltip-display-content">
-                      </div> */}
+                    <div className="tooltip-display-content">
+                      <p>{guide?.page_phases?.hide_similar_hover_phrase}</p>
+                    </div>
                     <div className="custom-switch form-switch">
                       <input
                         required=""
