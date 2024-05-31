@@ -1051,6 +1051,17 @@ const ProductCompareTable = React.memo(
                                       </p>
                                     )}
                                     
+                                    {catAttribute?.good_value && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.good_value_text}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.good_value}
+                                      </p>
+                                    )}
+                                    
                                   </div>
                                 )}
                               </div>
