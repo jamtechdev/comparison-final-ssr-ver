@@ -2012,6 +2012,7 @@
     width: 100%;
     max-width: 250px;
     float: none;
+    padding: 20px 0 0;
   }
   .compare-container thead tr th {
     padding: 12px 0 !important;
