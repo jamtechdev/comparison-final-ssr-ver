@@ -115,7 +115,7 @@ const ComparisonBaseChart = (drawChart, extraProps) => {
           style={{ height: 180 }}
         >
           <svg
-            viewBox={`40 90 510 100`}
+            viewBox={`40 50 510 100`}
             ref={svgRef}
             className={classnames("base__svg-container", svgContainerClass)}
           />

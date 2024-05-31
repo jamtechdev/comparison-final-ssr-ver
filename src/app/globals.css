@@ -2496,7 +2496,7 @@ tr:first-child th {
 }
 .legendBoxBarChart {
   position: relative;
-  top: 0px;
+  top: 40px;
   /* display: flex; */
   right: 150px;
   float: right;
