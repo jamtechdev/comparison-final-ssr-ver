@@ -61,7 +61,7 @@ const CompareCard = ({
               alt="compare product"
             />
             <p>
-              {productPhaseData && productPhaseData?.add_product_to_compare}
+              {productPhaseData && productPhaseData?.add_product_to_comparison}
             </p>
           </div>
         </div>

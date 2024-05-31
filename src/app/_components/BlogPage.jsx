@@ -227,34 +227,39 @@ export default function BlogPage({ slug, blogData, categorySlug }) {
           </div>
         </Container>
       </section>
-      <section className="blog-slides">
-        <Container>
-          <Row className="my-3">
-            <Col md={12}>
-              <h2 className="heading-primary secondary blog-post">
-                {blogData[0]?.data?.page_phases?.blog_posts}
-              </h2>
-            </Col>
-            <Col md={12}>
-              <BlogSlider blogData={blogData[0]?.data?.related_blogs} />
-            </Col>
-          </Row>
-        </Container>
-      </section>
-      <section>
-        <Container>
-          <Row className="my-3">
-            <Col md={12}>
-              <h2 className="heading-primary secondary related-guides">
-                {blogData[0]?.data?.page_phases?.related_guides_bottom}
-              </h2>
-            </Col>
-            <Col md={12}>
-              <ProductSlider favSlider={blogData[0]?.data?.related_guides} />
-            </Col>
-          </Row>
-        </Container>
-      </section>
+      {blogData && blogData[0]?.data?.related_blogs?.length > 0 && (
+        <section className="blog-slides">
+          <Container>
+            <Row className="my-3">
+              <Col md={12}>
+                <h2 className="heading-primary secondary blog-post">
+                  {blogData[0]?.data?.page_phases?.blog_posts}
+                </h2>
+              </Col>
+              <Col md={12}>
+                <BlogSlider blogData={blogData[0]?.data?.related_blogs} />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
+
+      {blogData && blogData[0]?.data?.related_guides?.length > 0 && (
+        <section>
+          <Container>
+            <Row className="my-3">
+              <Col md={12}>
+                <h2 className="heading-primary secondary related-guides">
+                  {blogData[0]?.data?.page_phases?.related_guides_bottom}
+                </h2>
+              </Col>
+              <Col md={12}>
+                <ProductSlider favSlider={blogData[0]?.data?.related_guides} />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      )}
 
       <GraphReplacer />
     </>
