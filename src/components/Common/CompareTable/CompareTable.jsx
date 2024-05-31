@@ -316,7 +316,7 @@ const CompareTable = React.memo(
                     {/* {(product)} */}
                     {product?.assigned_title && (
                       <span className="best-tag-product">
-                      {product?.assigned_title}
+                        {product?.assigned_title}
                       </span>
                     )}
 
@@ -1071,6 +1071,28 @@ const CompareTable = React.memo(
                                           :{" "}
                                         </b>{" "}
                                         {catAttribute?.when_matters}
+                                      </p>
+                                    )}
+
+                                    {catAttribute?.importance && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {guidePhraseData &&
+                                            guidePhraseData?.importance_text}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.importance}
+                                      </p>
+                                    )}
+
+                                    {catAttribute?.good_value && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {guidePhraseData &&
+                                            guidePhraseData?.good_value_text}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.good_value}
                                       </p>
                                     )}
                                   </div>

@@ -988,6 +988,28 @@
                                         {catAttribute?.when_matters}
                                       </p>
                                     )}
+
+                                  {catAttribute?.importance && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {comparisonPhaseData &&
+                                            comparisonPhaseData?.importance_text}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.importance}
+                                      </p>
+                                    )}
+                                    
+                                    {catAttribute?.good_value && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {comparisonPhaseData &&
+                                            comparisonPhaseData?.good_value_text}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.good_value}
+                                      </p>
+                                    )}
                                   </div>
                                 )}
                               </div>
