@@ -58,7 +58,7 @@ function AuthorPage({ slug, authorData }) {
             {authorData?.latest_guides?.length > 0 && (
               <Col md={12}>
                 <h2 className="heading-primary secondary related-guides">
-                  Latest Guides
+                  {authorData && authorData?.page_phases?.latest_guide_text || 'Latest Guides' }
                 </h2>
               </Col>
             )}
@@ -99,7 +99,7 @@ function AuthorPage({ slug, authorData }) {
               <>
                 <Col md={12}>
                   <h2 className="heading-primary secondary blog-post">
-                    Related Blog Posts
+                  {authorData && authorData?.page_phases?.related_blog_posts_text || 'Related Blog Posts'}
                   </h2>
                 </Col>
                 <Col md={12}>
