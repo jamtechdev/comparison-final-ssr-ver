@@ -2008,7 +2008,10 @@
   }
   .legendBoxBarChart {
     position: static !important;
-    margin: 30px 0 0;
+    margin: 0px auto 0;
+    width: 100%;
+    max-width: 250px;
+    float: none;
   }
   .compare-container thead tr th {
     padding: 12px 0 !important;

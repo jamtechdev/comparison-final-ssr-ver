@@ -99,7 +99,6 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
           )}
           {attributes.score_components &&
             attributes.score_components?.map((data, index) => {
-              console.log(data, "attribe")
               const roundedNumber = parseFloat(data?.attribute_evaluation);
               // {(data?.attribute_evaluation)}
               const formattedNumber =
