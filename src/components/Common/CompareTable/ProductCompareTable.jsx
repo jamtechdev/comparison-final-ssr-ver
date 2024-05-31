@@ -1039,6 +1039,18 @@ const ProductCompareTable = React.memo(
                                         {catAttribute?.when_matters}
                                       </p>
                                     )}
+
+                                    {catAttribute?.importance && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.importance_text}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.importance}
+                                      </p>
+                                    )}
+                                    
                                   </div>
                                 )}
                               </div>

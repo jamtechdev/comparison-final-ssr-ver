@@ -2233,6 +2233,15 @@ export default function Product({
                               Object.keys(
                                 getAttributeHalf(attributesClearly, "first")
                               ).map((attribute, index) => {
+                                if(attributesClearly.attributes_new[
+                                  attribute
+                                ][0]?.attribute_category.name == "Performance"){
+                                  
+                                  console.log(guidePhraseData, "attribute" ,attributesClearly.attributes_new[
+                                    attribute
+                                  ][0]?.attribute_category );
+                                  
+                                }
                                 return (
                                   <Fragment key={index}>
                                     <Accordion.Item

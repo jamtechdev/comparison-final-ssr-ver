@@ -11,7 +11,7 @@ function CategoryArchive({ slug, ArchiveData }) {
           <Row>
             <Col md={12}>
               <BreadCrumb
-                // productPhaseData={categoryData?.page_phases}
+                productPhaseData={ArchiveData[0].data}
                 firstPageName={""}
                 secondPageName={{
                   name:

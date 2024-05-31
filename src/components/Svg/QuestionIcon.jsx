@@ -64,11 +64,11 @@ const QuestionIcon = ({
                   {guidePhraseData.what_it_is}:{""}
                 </b>
               )}
-              {<ProductPage /> && productPhaseData && (
+              {/* {<ProductPage /> && productPhaseData && (
                 <b>
                   {productPhaseData.what_it_is}:{""}
                 </b>
-              )}
+              )} */}
               {<CompareDiv /> && comparePhaseData && (
                 <b>
                   {comparePhaseData.what_it_is}:{""}
@@ -90,11 +90,11 @@ const QuestionIcon = ({
                   {guidePhraseData.when_it_matters}:{""}
                 </b>
               )}
-              {<ProductPage /> && productPhaseData && (
+              {/* {<ProductPage /> && productPhaseData && (
                 <b>
                   {productPhaseData.when_it_matters}:{""}
                 </b>
-              )}
+              )} */}
               {<CompareDiv /> && comparePhaseData && (
                 <b>
                   {comparePhaseData.when_it_matters}:{""}{" "}

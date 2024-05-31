@@ -1461,6 +1461,10 @@
   .swiper-next {
     top: -10%;
   }
+  .comparisons-slider .swiper-prev,
+  .comparisons-slider .swiper-next {
+    top: 0 !important;
+  }
   .compare-container .count.dark-color,
   .compare-container .count {
     display: inline-block;
@@ -1482,7 +1486,7 @@
   }
   .catchy_titles_section.row span.catchy_titles_section_title,
   .catchy_titles_section.row span.catchy_titles_section_product_name span {
-    line-height: 20px !important;
+    line-height: 24px !important;
   }
   .sidebar_filter {
     margin: 15px 0;
@@ -2004,6 +2008,7 @@
   }
   .legendBoxBarChart {
     position: static !important;
+    margin: 30px 0 0;
   }
   .compare-container thead tr th {
     padding: 12px 0 !important;

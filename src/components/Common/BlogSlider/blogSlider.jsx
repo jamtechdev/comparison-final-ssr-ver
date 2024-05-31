@@ -118,28 +118,27 @@ export default function BlogSlider({ blogData, blogPageType, blogDataList }) {
             );
           })} */}
       </Swiper>
-
-      {isMobile && blogData?.length > 2 && (
-        <>
-          <span className="swiper-prev">
-            <i className="ri-arrow-left-s-line"></i>
-          </span>
-          <span className="swiper-next">
-            <i className="ri-arrow-right-s-line"></i>
-          </span>
-        </>
-      )}
-      {!isMobile && (
-        <>
-          {" "}
-          <span className="swiper-prev">
-            <i className="ri-arrow-left-s-line"></i>
-          </span>
-          <span className="swiper-next">
-            <i className="ri-arrow-right-s-line"></i>
-          </span>
-        </>
-      )}
+      {blogData &&
+        blogData?.length > 2 &&
+        (isMobile ? (
+          <>
+            <span className="swiper-prev">
+              <i className="ri-arrow-left-s-line"></i>
+            </span>
+            <span className="swiper-next">
+              <i className="ri-arrow-right-s-line"></i>
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="swiper-prev">
+              <i className="ri-arrow-left-s-line"></i>
+            </span>
+            <span className="swiper-next">
+              <i className="ri-arrow-right-s-line"></i>
+            </span>
+          </>
+        ))}
     </section>
   );
 }

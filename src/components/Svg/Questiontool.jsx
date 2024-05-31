@@ -99,10 +99,11 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
           )}
           {attributes.score_components &&
             attributes.score_components?.map((data, index) => {
+              console.log(data, "attribe")
               const roundedNumber = parseFloat(data?.attribute_evaluation);
               // {(data?.attribute_evaluation)}
               const formattedNumber =
-                roundedNumber > 9
+                roundedNumber == 10
                   ? Math.floor(roundedNumber)
                   : roundedNumber.toFixed(1);
               return (
@@ -129,14 +130,15 @@ const Questiontool = ({ productPhaseData, attributes, guidePhraseData }) => {
                   </span>
                   <p style={{ textTransform: "none" }}>
                     {" "}
-                    {data?.attribute_category
+                    {/* {data?.attribute_category
                       ?.replace(/-/g, " ")
                       .charAt(0)
                       .toUpperCase() +
                       data?.attribute_category
                         ?.replace(/-/g, " ")
                         .slice(1)
-                        .toLowerCase()}
+                        .toLowerCase()} */}
+                    {data?.attribute_category}
                   </p>
                 </div>
               );
