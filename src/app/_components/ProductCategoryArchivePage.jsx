@@ -40,7 +40,9 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
               {/*-------------POPULAR GUIDE -------------------*/}
               <Row className="py-3">
                 <Col md={12}>
-                  <h2 className="heading-primary secondary">{categoryData[0]?.data?.page_phases?.popular_guide_heading}</h2>
+                  <h2 className="heading-primary secondary">
+                    {categoryData[0]?.data?.page_phases?.popular_guide_heading}
+                  </h2>
                 </Col>
                 {/* if data found */}
                 {categoryData[0]?.data?.popular_guides?.length > 0 && (
@@ -99,7 +101,10 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 <Row className="py-3">
                   <Col md={12}>
                     <h2 className="heading-primary secondary">
-                    {categoryData[0]?.data?.page_phases?.popular_review_heading}
+                      {
+                        categoryData[0]?.data?.page_phases
+                          ?.popular_review_heading
+                      }
                     </h2>
                   </Col>
                   {/* if data found */}
@@ -109,9 +114,8 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                       {/* {(categoryData[0]?.data?.popular_reviews?.length)} */}
                       {categoryData[0]?.data?.popular_reviews?.length > 0 &&
                         // categoryData[0]?.data?.popular_reviews?.slice(0, 12)?.map(
-                        categoryData[0]?.data?.popular_reviews
-                          ?.slice(0, 12)
-                          ?.map((item, index) => {
+                        categoryData[0]?.data?.popular_reviews?.map(
+                          (item, index) => {
                             return (
                               <Col
                                 lg={2}
@@ -163,7 +167,8 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                                 </a>
                               </Col>
                             );
-                          })}
+                          }
+                        )}
                     </Row>
                   </Col>
                   {/* if no data found */}
@@ -177,7 +182,12 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
               {categoryData[0]?.data?.tested_blogs?.length > 0 && (
                 <Row className="py-3">
                   <Col md={12}>
-                    <h2 className="heading-primary secondary">{categoryData[0]?.data?.page_phases?.popular_article_heading}</h2>
+                    <h2 className="heading-primary secondary">
+                      {
+                        categoryData[0]?.data?.page_phases
+                          ?.popular_article_heading
+                      }
+                    </h2>
                   </Col>
                   {/* if data found */}
 
@@ -241,7 +251,10 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                 <Row className="py-3">
                   <Col md={12}>
                     <h2 className="heading-primary secondary">
-                    {categoryData[0]?.data?.page_phases?.popular_article_heading}
+                      {
+                        categoryData[0]?.data?.page_phases
+                          ?.popular_article_heading
+                      }
                     </h2>
                   </Col>
                   {/* if data found */}
