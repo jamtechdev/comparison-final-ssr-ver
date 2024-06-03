@@ -50,6 +50,7 @@ const ProductCategoryArchivePage = ({ slug, categoryData }) => {
                         categoryData[0]?.data?.popular_guides?.map(
                           (item, index) => {
                             // (categoryData,"check category")
+                            // console.log(item , 'neetxy');
                             return (
                               <Col
                                 lg={2}

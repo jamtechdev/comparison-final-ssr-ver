@@ -13,8 +13,9 @@ const useScreenSize = () => {
   }, []);
 
   const isMobile = width <= 992; // Adjust breakpoint as needed
+  const isSmallDevice = width <= 768;
 
-  return { width, isMobile };
+  return { width, isMobile, isSmallDevice };
 };
 
 export default useScreenSize;

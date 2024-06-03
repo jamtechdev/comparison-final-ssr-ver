@@ -25,7 +25,7 @@ export default function HomeCompareSlider({ products, page_phase }) {
     (comparison) => comparison.verdict_text !== null
   );
   // (filteredComparisons,"checking filtered data")
-  const { isMobile } = useScreenSize();
+  const { isMobile, isSmallDevice } = useScreenSize();
   return (
     <section className="comparisons-slider">
       <Swiper
@@ -159,7 +159,19 @@ export default function HomeCompareSlider({ products, page_phase }) {
             );
           })}
       </Swiper>
-      {isMobile && filteredComparisons?.length > 1 && (
+      {isSmallDevice && filteredComparisons?.length > 1 && (
+        <>
+          {" "}
+          <span className="main-compaison-prev swiper-prev">
+            <i className="ri-arrow-left-s-line"></i>
+          </span>
+          <span className="main-compaison-next swiper-next">
+            <i className="ri-arrow-right-s-line"></i>
+          </span>
+        </>
+      )}
+
+      {isMobile && filteredComparisons?.length > 2 && (
         <>
           {" "}
           <span className="main-compaison-prev swiper-prev">

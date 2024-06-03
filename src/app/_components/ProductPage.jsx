@@ -1439,7 +1439,7 @@ function ProductPage({
           {product?.display_product_review === true && (
             <>
               <Row className="mt-3">
-                <Col md={4} lg={2}>
+                <Col md={2} lg={2}>
                   <div className="outline-section  attribute_card_outline-section">
                     <OutlineGenerator
                       blogData={product?.text_part}
@@ -1449,7 +1449,7 @@ function ProductPage({
                     <ProductPageOutline product={product} />
                   </div>
                 </Col>
-                <Col md={8} lg={10}>
+                <Col md={10} lg={10}>
                   <Row>
                     <Col md={12}>
                       <h2 className="site-main-heading">
@@ -1928,7 +1928,7 @@ function ProductPage({
                                       />
                                       {/* {(item)} */}
                                       <p>
-                                        #.{item.position} in_{" "}
+                                        {item.position} in_{" "}
                                         <a
                                           href={`/${item?.category_url}/${item?.permalink}`}
                                         >

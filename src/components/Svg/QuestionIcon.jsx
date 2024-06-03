@@ -181,7 +181,7 @@ const QuestionIcon = ({
             <p className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
-                  {guidePhraseData.importance_text}:{""}
+                  {guidePhraseData.importance_text}: {""}
                 </b>
               )}
               {<ProductPage /> && productPhaseData && (

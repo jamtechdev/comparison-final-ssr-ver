@@ -376,6 +376,7 @@ const CompareAccordionTab = React.memo(
                                               </>
                                             )}
                                           </small>
+                                          {/* {console.log(item?.vs)} */}
                                           <small>
                                             {item?.difference_value === "yes" ||
                                             item?.difference_value === "no" ||
