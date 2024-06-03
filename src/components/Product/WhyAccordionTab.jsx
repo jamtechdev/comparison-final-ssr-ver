@@ -28,6 +28,7 @@ const WhyAccordionTab = React.memo(
     const [apiData, setApiData] = useState(null);
     // console.log(apiData);
     // console.log(categorySlug)
+    console.log(tabvalue);
 
     useEffect(() => {
       const headers = {
@@ -98,7 +99,7 @@ const WhyAccordionTab = React.memo(
         return `${boldedPart} vs ${splitValue[1]}`;
       }
     };
-
+    
     useEffect(() => {
       const getColor = ["#437ECE", "#FF8F0B", "#28A28C"];
       // Find all buttons that are children of an element with role="presentation" add attribute
@@ -120,7 +121,7 @@ const WhyAccordionTab = React.memo(
         button.style.setProperty("--color-bg", getColor[index]);
       });
     }, []);
-    // console.log(activetab);
+    console.log(product);
     return (
       <Row>
         <Col md={12} lg={6}>
@@ -158,7 +159,7 @@ const WhyAccordionTab = React.memo(
             </Tab>
           </Tabs>
         </Col>
-        <Col md={12} lg={6}>  
+        <Col md={12} lg={6}>
           <Accordion defaultActiveKey="1" className="compare-accordion p-0">
             <Accordion.Item eventKey="1">
               <Accordion.Header as="div">
@@ -192,7 +193,16 @@ const WhyAccordionTab = React.memo(
                                   ?.slice(0, 8)
                                   ?.map((item, index) => {
                                     return (
-                                      <li key={index}>
+                                      <li
+                                        key={index}
+                                        style={{
+                                          display: `${
+                                            tabvalue?.pros == "total"
+                                              ? "block"
+                                              : "none"
+                                          }`,
+                                        }}
+                                      >
                                         {/* {console.log(item?.hover_phase)} */}
                                         <span
                                           className={`${
@@ -286,12 +296,20 @@ const WhyAccordionTab = React.memo(
                                   })
                               : ""}
                             {/* Gernal props */}
+
                             {product &&
-                              product?.general?.pros &&
-                              tabvalue?.pros == "general" &&
                               product?.general?.pros?.map((item, index) => {
                                 return (
-                                  <li key={index}>
+                                  <li
+                                    key={index}
+                                    style={{
+                                      display: `${
+                                        tabvalue?.pros == "general"
+                                          ? "block"
+                                          : "none"
+                                      }`,
+                                    }}
+                                  >
                                     {/* {console.log(item)} */}
                                     <span
                                       className={`${
@@ -363,13 +381,18 @@ const WhyAccordionTab = React.memo(
                                   </li>
                                 );
                               })}
-                            {product?.average_pros[tabvalue?.pros]?.length >
-                            0 ? (
-                              product?.average_pros[tabvalue?.pros]
-                                ?.slice(0, 8)
-                                ?.map((item, index) => {
-                                  return (
-                                    <li key={index}>
+                            {product &&
+                              product?.average_pros?.Cleaning?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:
+                                          tabvalue?.pros == "Cleaning" 
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
                                       <span
                                         className={`${
                                           item?.hover_phase !== null
@@ -408,7 +431,6 @@ const WhyAccordionTab = React.memo(
                                         product={product}
                                         productPhaseData={page_phase}
                                       />
-
                                       <small className="d-block tooltip-title invisible">
                                         {item?.hover_phase && (
                                           <>
@@ -438,11 +460,413 @@ const WhyAccordionTab = React.memo(
                                         )}
                                       </small>
                                     </li>
-                                  );
-                                })
-                            ) : (
-                              <p></p>
-                            )}
+                                );
+                              })}
+                              {product &&
+                              product?.average_pros?.Battery?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.pros == "Battery"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>1
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_pros?.['Control & Mapping']?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.pros == "Control & Mapping"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_pros?.Navigation?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.pros == "Navigation"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_pros?.Mopping?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.pros == "Mopping"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_pros?.Design?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.pros == "Design"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
                           </ul>
                         </Tab.Pane>
                       </Tab.Content>
@@ -534,13 +958,130 @@ const WhyAccordionTab = React.memo(
                     <Col md={8} xl={8} className="dividers">
                       <Tab.Content className="compare-tab-content">
                         <Tab.Pane eventKey={tabvalue?.cons}>
-                          <ul className="compare-crons">
+                          <ul className="compare-cron">
+                            {product && tabvalue?.cons == "total"
+                              ? product?.total_average_cons
+                                  ?.slice(0, 8)
+                                  ?.map((item, index) => {
+                                    return (
+                                      <li
+                                        key={index}
+                                        style={{
+                                          display: `${
+                                            tabvalue?.cons == "total"
+                                              ? "block"
+                                              : "none"
+                                          }`,
+                                        }}
+                                      >
+                                        
+                                        {/* {console.log(item?.hover_phase)} */}
+                                        <span
+                                          className={`${
+                                            item?.hover_phase !== null
+                                              ? "tooltip-title"
+                                              : ""
+                                          }`}
+                                          style={{
+                                            textDecoration:
+                                              item?.hover_phase !== null
+                                                ? ""
+                                                : "dotted",
+                                          }}
+                                        >
+                                          {typeof item?.difference_value ==
+                                          "number"
+                                            ? item?.difference
+                                            : item?.phrase}
+
+                                          {item?.hover_phase && (
+                                            <>
+                                              <div
+                                                className="tooltip-display-content"
+                                                style={{
+                                                  left: isMobile ? "50%" : 0,
+                                                  transform: isMobile
+                                                    ? "translateX(-60%)"
+                                                    : "translateX(-10%)",
+                                                  width: isMobile
+                                                    ? "190px"
+                                                    : "250px",
+                                                }}
+                                              >
+                                                <span
+                                                  className="mb-2 prosconsColor"
+                                                  dangerouslySetInnerHTML={{
+                                                    __html: item?.hover_phase,
+                                                  }}
+                                                >
+                                                  {/* {item?.hover_phase} */}
+                                                </span>
+                                              </div>
+                                            </>
+                                          )}
+                                        </span>
+
+                                        <QuestionIcon
+                                          attributes={item?.when_matters}
+                                          product={product}
+                                          productPhaseData={page_phase}
+                                        />
+
+                                        <small
+                                          className={`${
+                                            item?.hover_phase !== ""
+                                              ? "d-block tooltip-title"
+                                              : "d-block"
+                                          }`}
+                                        >
+                                          {item?.hover_phase && (
+                                            <>
+                                              <span className="tooltip-display-content">
+                                                <span
+                                                  className="mb-2 prosconsColor"
+                                                  dangerouslySetInnerHTML={{
+                                                    __html: item?.hover_phase,
+                                                  }}
+                                                >
+                                                  {/* {item?.hover_phase} */}
+                                                </span>
+                                              </span>
+                                            </>
+                                          )}
+                                        </small>
+                                        <small>
+                                          {item?.difference_value === "yes" ||
+                                          item?.difference_value === "no" ||
+                                          item?.difference_value === 0 ||
+                                          item?.difference_value === null ? (
+                                            ""
+                                          ) : (
+                                            <span
+                                              dangerouslySetInnerHTML={{
+                                                __html: splitVsValue(item?.vs),
+                                              }}
+                                            ></span>
+                                          )}
+                                        </small>
+                                      </li>
+                                    );
+                                  })
+                              : ""}
+                            {/* Gernal props */}
+
                             {product &&
-                            product?.general?.cons &&
-                            tabvalue?.cons == "general" ? (
                               product?.general?.cons?.map((item, index) => {
                                 return (
-                                  <li key={index}>
+                                  <li
+                                    key={index}
+                                    style={{
+                                      display: `${
+                                        tabvalue?.cons == "general"
+                                          ? "block"
+                                          : "none"
+                                      }`,
+                                    }}
+                                  >
                                     {/* {console.log(item)} */}
                                     <span
                                       className={`${
@@ -611,170 +1152,495 @@ const WhyAccordionTab = React.memo(
                                     </small>
                                   </li>
                                 );
-                              })
-                            ) : product?.total_average_cons?.length > 0 ? (
-                              product && tabvalue?.cons == "total" ? (
-                                product?.total_average_cons?.map(
-                                  (item, index) => {
-                                    return (
-                                      <li key={index}>
-                                        <span
-                                          className={`${
+                              })}
+                            {product &&
+                              product?.average_cons?.Cleaning?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:
+                                          tabvalue?.cons == "Cleaning" 
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
                                             item?.hover_phase !== null
-                                              ? "tooltip-title"
-                                              : ""
-                                          }`}
-                                          style={{
-                                            textDecoration:
-                                              item?.hover_phase !== null
-                                                ? ""
-                                                : "dotted",
-                                          }}
-                                        >
-                                          {typeof item?.difference_value ==
-                                          "number"
-                                            ? item?.difference
-                                            : item?.phrase}
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
 
-                                          {item?.hover_phase && (
-                                            <>
-                                              <div className="tooltip-display-content">
-                                                <span
-                                                  className="mb-2 prosconsColor"
-                                                  dangerouslySetInnerHTML={{
-                                                    __html: item?.hover_phase,
-                                                  }}
-                                                ></span>
-                                              </div>
-                                            </>
-                                          )}
-                                        </span>
-                                        <QuestionIcon
-                                          attributes={item?.when_matters}
-                                          product={product}
-                                          productPhaseData={page_phase}
-                                        />
-
-                                        <small className="d-block tooltip-title">
-                                          {item?.hover_phase && (
-                                            <>
-                                              <span className="tooltip-display-content">
-                                                <span
-                                                  className="mb-2 prosconsColor"
-                                                  dangerouslySetInnerHTML={{
-                                                    __html: item?.hover_phase,
-                                                  }}
-                                                >
-                                                  {/* {item?.hover_phase} */}
-                                                </span>
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
                                               </span>
-                                            </>
-                                          )}
-                                        </small>
-                                        <small>
-                                          {item?.difference_value === "yes" ||
-                                          item?.difference_value === "no" ||
-                                          item?.difference_value === 0 ||
-                                          item?.difference_value === null ? (
-                                            ""
-                                          ) : (
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
                                             <span
-                                              dangerouslySetInnerHTML={{
-                                                __html: splitVsValue(item?.vs),
-                                              }}
-                                            ></span>
-                                          )}
-                                        </small>
-                                      </li>
-                                    );
-                                  }
-                                )
-                              ) : product?.average_cons[tabvalue?.cons]
-                                  ?.length > 0 ? (
-                                product?.average_cons[tabvalue?.cons]
-                                  ?.slice(0, 8)
-                                  ?.map((item, index) => {
-                                    return (
-                                      <li key={index}>
-                                        <span
-                                          className={`${
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_cons?.Battery?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.cons == "Battery"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
                                             item?.hover_phase !== null
-                                              ? "tooltip-title"
-                                              : ""
-                                          }`}
-                                          style={{
-                                            textDecoration:
-                                              item?.hover_phase !== null
-                                                ? ""
-                                                : "dotted",
-                                          }}
-                                        >
-                                          {typeof item?.difference_value ==
-                                          "number"
-                                            ? item?.difference
-                                            : item?.phrase}
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
 
-                                          {item?.hover_phase && (
-                                            <>
-                                              <div className="tooltip-display-content">
-                                                <span
-                                                  className="mb-2 prosconsColor"
-                                                  dangerouslySetInnerHTML={{
-                                                    __html: item?.hover_phase,
-                                                  }}
-                                                >
-                                                  {/* {item?.hover_phase} */}
-                                                </span>
-                                              </div>
-                                            </>
-                                          )}
-                                        </span>
-                                        <QuestionIcon
-                                          attributes={item?.when_matters}
-                                          product={product}
-                                          productPhaseData={page_phase}
-                                        />
-                                        <small className="d-block tooltip-title">
-                                          {item?.hover_phase && (
-                                            <>
-                                              <span className="tooltip-display-content">
-                                                <span
-                                                  className="mb-2 prosconsColor"
-                                                  dangerouslySetInnerHTML={{
-                                                    __html: item?.hover_phase,
-                                                  }}
-                                                >
-                                                  {/* {item?.hover_phase} */}
-                                                </span>
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
                                               </span>
-                                            </>
-                                          )}
-                                        </small>
-                                        <small>
-                                          {item?.difference_value === "yes" ||
-                                          item?.difference_value === "no" ||
-                                          item?.difference_value === 0 ||
-                                          item?.difference_value === null ? (
-                                            ""
-                                          ) : (
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>1
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
                                             <span
-                                              dangerouslySetInnerHTML={{
-                                                __html: splitVsValue(item?.vs),
-                                              }}
-                                            ></span>
-                                          )}
-                                        </small>
-                                      </li>
-                                    );
-                                  })
-                              ) : (
-                                <p>{page_phase?.no_cons_found}</p>
-                              )
-                            ) : (
-                              <p className="text-center pt-2 pb-2 font-5 font-bold">
-                                {page_phase?.no_cons_found}
-                              </p>
-                            )}
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_cons?.['Control & Mapping']?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.cons == "Control & Mapping"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_cons?.Navigation?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.cons == "Navigation"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_cons?.Mopping?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.cons == "Mopping"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
+                              {product &&
+                              product?.average_cons?.Design?.map((item, index) => {
+                                return (
+                                  <li
+                                      key={index}
+                                      style={{
+                                        display:                                        
+                                          tabvalue?.cons == "Design"
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          item?.hover_phase !== null
+                                            ? "tooltip-title"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            item?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof item?.difference_value ==
+                                        "number"
+                                          ? item?.difference
+                                          : item?.phrase}
+
+                                        {item?.hover_phase && (
+                                          <>
+                                            <div className="tooltip-display-content">
+                                              <span
+                                                className="mb-2 prosconsColor"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item?.hover_phase,
+                                                }}
+                                              >
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                        productPhaseData={page_phase}
+                                      />
+                                      <small className="d-block tooltip-title invisible">
+                                        {item?.hover_phase && (
+                                          <>
+                                            <span
+                                              className="toolt
+                                            ip-display-content"
+                                            >
+                                              <span className="mb-2 prosconsColor">
+                                                {/* {item?.hover_phase} */}
+                                              </span>
+                                            </span>
+                                          </>
+                                        )}
+                                      </small>
+                                      <small>
+                                        {item?.difference_value === "yes" ||
+                                        item?.difference_value === "no" ||
+                                        item?.difference_value === 0 ||
+                                        item?.difference_value === null ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(item?.vs),
+                                            }}
+                                          ></span>
+                                        )}
+                                      </small>
+                                    </li>
+                                );
+                              })}
                           </ul>
                         </Tab.Pane>
                       </Tab.Content>
