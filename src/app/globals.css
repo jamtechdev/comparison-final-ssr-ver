@@ -2509,36 +2509,63 @@ tr:first-child th {
   outline: none;
 }
 
-@media(max-width:992px){
-  table#mobile-compare-tabler.isSticky.compare-container thead{
+@media (max-width: 992px) and (min-width: 768px) {
+  table#mobile-compare-tabler.isSticky.compare-container thead {
     width: 100% !important;
     display: block !important;
   }
 
-  table#mobile-compare-tabler.isSticky.compare-container thead tr{
+  table#mobile-compare-tabler.isSticky.compare-container thead tr {
     display: grid !important;
     grid-template-columns: 50% 50% !important;
   }
 
-  table#mobile-compare-tabler.isSticky.compare-container thead tr > *{
+  table#mobile-compare-tabler.isSticky.compare-container thead tr > * {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 100% !important;
     padding: 3px !important;
   }
 
-  table#mobile-compare-tabler.isSticky.compare-container thead tr.catchy-title-mobile-view th .best-tag-product {
+  table#mobile-compare-tabler.isSticky.compare-container
+    thead
+    tr.catchy-title-mobile-view
+    th
+    .best-tag-product {
     position: relative !important;
     width: 100% !important;
     bottom: 0 !important;
-}
-table#mobile-compare-tabler.isSticky.compare-container thead tr th .device-name .compare_image{
+  }
+  table#mobile-compare-tabler.isSticky.compare-container
+    thead
+    tr
+    th
+    .device-name
+    .compare_image {
     display: block !important;
-}
-.swiper-prev {
-  left: -8px !important;
-}
-.swiper-next {
-  right: -8px !important;
-}
+  }
+
+  table#mobile-compare-tabler.isSticky.compare-container
+    thead
+    tr
+    th
+    .not-availabel
+    .price,
+  table#mobile-compare-tabler.isSticky.compare-container
+    thead
+    tr
+    th
+    .best-list-item
+    li
+    a {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+  }
+
+  .swiper-prev {
+    left: -8px !important;
+  }
+  .swiper-next {
+    right: -8px !important;
+  }
 }
