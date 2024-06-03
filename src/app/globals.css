@@ -2525,4 +2525,10 @@ tr:first-child th {
     max-width: 100% !important;
     min-width: 100% !important;
   }
+
+  table#mobile-compare-tabler.isSticky.compare-container thead tr.catchy-title-mobile-view th .best-tag-product {
+    position: relative !important;
+    width: 100% !important;
+    bottom: 0 !important;
+}
 }
