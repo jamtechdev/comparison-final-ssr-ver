@@ -2114,7 +2114,7 @@ function ProductPage({
         ) : null}
 
         <Container className="p-0">
-          <Row className="table-section-desktop p-0 m-0">
+          <Row className="table-section-desktop product__page p-0 m-0">
             <Col md={12} className="p-0">
               {/* {(compareByCatID?.data?.length)} */}
               {
