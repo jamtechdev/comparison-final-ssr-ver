@@ -181,6 +181,9 @@ thead.nonSticky tr th:first-child,
 .product__page .compare-container thead tr th .device-name > * {
   width: 50%;
 }
+.product__page .compare-container thead tr th .device-name > * a{
+  max-width: 100% !important;
+}
 .compare-container thead tr th .device-name a {
   position: absolute;
   width: 100%;
