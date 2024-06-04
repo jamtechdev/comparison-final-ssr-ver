@@ -2530,7 +2530,7 @@ tr:first-child th {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 100% !important;
-    padding: 3px !important;
+    padding: 0 3px !important;
   }
 
   table#mobile-compare-tabler.isSticky.compare-container
@@ -2574,4 +2574,12 @@ tr:first-child th {
   .swiper-next {
     right: -8px !important;
   }
+  .legendBoxBarChart {
+    position: static !important;
+    margin: 0px auto 0;
+    width: 100%;
+    max-width: 250px;
+    float: none;
+    padding: 70px 0px 0 75px;
+}
 }

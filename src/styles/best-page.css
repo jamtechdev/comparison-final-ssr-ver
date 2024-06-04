@@ -178,6 +178,9 @@ thead.nonSticky tr th:first-child,
   cursor: pointer;
   position: relative;
 }
+.compare-container thead tr th .device-name > * {
+  width: 50%;
+}
 .compare-container thead tr th .device-name a {
   position: absolute;
   width: 100%;

@@ -999,7 +999,7 @@ export default function GuidePage({
           </Container>
         ) : null}
         <Container className="p-0 p-md-4">
-          <Row className="table-section-desktop p-0">
+          <Row className="table-section-desktop p-0 m-0">
             <Col md={12} className="p-0">
               {
                 isMobile ? (
