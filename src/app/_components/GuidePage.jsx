@@ -301,25 +301,25 @@ export default function GuidePage({
   // (order)
 
   // (products,"neet");
-  // const swapPriceWebsites = (data) => {
-  //   // Similar logic to sort elements based on price_websites
-  //   const splitData = order?.value.split(",");
-  //   const currentParams = new URLSearchParams(searchParams.toString());
-  //   // (order.value);
+  const swapPriceWebsites = (data) => {
+    // Similar logic to sort elements based on price_websites
+    const splitData = order?.value.split(",");
+    const currentParams = new URLSearchParams(searchParams.toString());
+    // (order.value);
 
-  //   // (splitData[0]);
-  //   if (splitData[0] === "available") {
-  //     const sortedData = data.sort((a, b) => b.overall_score - a.overall_score);
-  //     return [...sortedData];
-  //   } else {
-  //     const withWebsites = data.filter((item) => item.price_websites?.length);
-  //     const withoutWebsites = data.filter(
-  //       (item) => !item.price_websites?.length
-  //     );
-  //     return [...withWebsites, ...withoutWebsites];
-  //   }
-  // };
-  // const sortedData = swapPriceWebsites(products);
+    // (splitData[0]);
+    if (splitData[0] === "available") {
+      const sortedData = data.sort((a, b) => b.overall_score - a.overall_score);
+      return [...sortedData];
+    } else {
+      const withWebsites = data.filter((item) => item.price_websites?.length);
+      const withoutWebsites = data.filter(
+        (item) => !item.price_websites?.length
+      );
+      return [...withWebsites, ...withoutWebsites];
+    }
+  };
+  const sortedData = swapPriceWebsites(products);
 
   // (sortedData);
 
@@ -894,7 +894,7 @@ export default function GuidePage({
                     text_before_listing={guide?.text_before_listing}
                     text_after_listing={guide?.text_after_listing}
                     productPositionArray={productPosition}
-                    products={products && products}
+                    products={sortedData && sortedData}
                     handleToggleCollapse={handleToggleCollapse}
                     handleManageCollapsedDiv={handleManageCollapsedDiv}
                     slug={slug}
@@ -999,7 +999,7 @@ export default function GuidePage({
           </Container>
         ) : null}
         <Container className="p-0 p-md-4">
-          <Row className="table-section-desktop p-0 m-0">
+          <Row className="table-section-desktop p-0">
             <Col md={12} className="p-0">
               {
                 isMobile ? (

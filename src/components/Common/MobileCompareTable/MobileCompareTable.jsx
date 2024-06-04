@@ -365,7 +365,7 @@ export default function MobileCompareTable({
                 });
               })}
 
-            <th></th>
+            {/* <th></th> */}
           </tr>
           <tr>
             {chunkedData
