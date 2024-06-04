@@ -24,7 +24,6 @@ const ProductCompareTable = React.memo(
     const [winPos, setWinPos] = useState(false);
     const [stickyWith, setStickyWidth] = useState(true);
     const [afterTableSticky, setAfterTableSticky] = useState(false);
-    const [showAllAttributes, setShowAllAttributes] = useState(false);
     const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
       const [isSticky, setIsSticky] = useState(false);
       const [afterTableSticky, setAfterTableSticky] = useState(false);
@@ -931,9 +930,14 @@ const ProductCompareTable = React.memo(
               );
             })}
             {removeLastObjectFromCategory.map((category, categoryIndex) => {
+              const isHidden = fullTable === 2 && categoryIndex >= 2;
               return (
                 <Fragment key={categoryIndex}>
-                  <tr className="tr-bg-color">
+                  <tr
+                    className={`tr-bg-color ${
+                      isHidden ? "display_none" : "display_block"
+                    }`}
+                  >
                     <th>
                       <div className="tooltip-title">
                         {category.name}
@@ -1004,8 +1008,17 @@ const ProductCompareTable = React.memo(
                     ?.sort((a, b) => a.position - b.position)
 
                     .map((catAttribute, catAttributeIndex) => {
+                      const isHidden =
+                        fullTable !== 2 &&
+                        catAttributeIndex >= initialNoOfCategories;
+                        console.log(isHidden)
                       return (
-                        <tr key={catAttributeIndex} className={categoryIndex}>
+                        <tr
+                          key={catAttributeIndex}
+                          className={
+                            isHidden ? "display_none" : "display_block"
+                          }
+                        >
                           <th className="sub-inner-padding">
                             <div className="tooltip-title">
                               {catAttribute.name}

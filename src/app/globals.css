@@ -2508,8 +2508,12 @@ tr:first-child th {
 .show-btn.remove_outline_border:focus {
   outline: none;
 }
-
-
+.display_none {
+  display: none;
+}
+.display_block {
+  visibility: visible;
+}
 
 @media (max-width: 992px) and (min-width: 768px) {
   table#mobile-compare-tabler.isSticky.compare-container thead {
@@ -2571,6 +2575,3 @@ tr:first-child th {
     right: -8px !important;
   }
 }
-
-
-
