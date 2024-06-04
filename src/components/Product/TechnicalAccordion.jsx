@@ -120,6 +120,17 @@ const TechnicalAccordion = React.memo(
         .split(/[/?#]/)[0];
       return domain;
     };
+
+    const [showFullData, setShowFullData] = useState(false);
+    const toggleShowFullData = () => {
+      setShowFullData(!showFullData);
+    };
+
+    const [showAllAttributes, setShowAllAttributes] = useState(false);
+
+    const handleShowMore = () => {
+      setShowAllAttributes(true);
+    };
     return (
       <>
         <Accordion className="table-accordion w-50 p-0 left-accordion">
@@ -589,7 +600,7 @@ const TechnicalAccordion = React.memo(
                       className="query ranking-tooltip-title"
                       onMouseOver={adjustTooltipPosition}
                     >
-                     {productPhaseData &&
+                      {productPhaseData &&
                         productPhaseData?.ratio_quality_price_points}
                       <span className="">
                         <svg
@@ -610,21 +621,29 @@ const TechnicalAccordion = React.memo(
                           width: isMobile ? "200px" : "250px",
                         }}
                       >
-                        {product?.ratio_qulitiy_points_descriptions.description && (
+                        {product?.ratio_qulitiy_points_descriptions
+                          .description && (
                           <p className="mb-2">
                             <b>
                               {product && product?.page_phases?.what_it_is}:{" "}
                             </b>
-                            {product?.ratio_qulitiy_points_descriptions?.description}
+                            {
+                              product?.ratio_qulitiy_points_descriptions
+                                ?.description
+                            }
                           </p>
                         )}
-                        {product?.ratio_qulitiy_points_descriptions.when_matters && (
+                        {product?.ratio_qulitiy_points_descriptions
+                          .when_matters && (
                           <p className="mb-2">
                             <b>
                               {product && product?.page_phases?.when_it_matters}
                               :{" "}
                             </b>
-                            {product?.ratio_qulitiy_points_descriptions?.when_matters}
+                            {
+                              product?.ratio_qulitiy_points_descriptions
+                                ?.when_matters
+                            }
                           </p>
                         )}
                         <p>
@@ -632,7 +651,8 @@ const TechnicalAccordion = React.memo(
                             {product && product?.page_phases?.score_components}:
                           </b>
                         </p>
-                        {product?.ratio_qulitiy_points_descriptions.score_components &&
+                        {product?.ratio_qulitiy_points_descriptions
+                          .score_components &&
                           product?.ratio_qulitiy_points_descriptions.score_components?.map(
                             (data, index) => {
                               return (
@@ -707,8 +727,6 @@ const TechnicalAccordion = React.memo(
                   </div>
                 </div>
               </div>
-
-             
             </Accordion.Body>
           </Accordion.Item>
           {product &&
@@ -766,21 +784,18 @@ const TechnicalAccordion = React.memo(
                       </Accordion.Header>
                       <Accordion.Body>
                         {loading == false ? (
-                          product.attributes[attribute]
-                            .slice(
-                              0,
-                              displayedAttributesCount[product.name] &&
-                                displayedAttributesCount[product.name][
-                                  attribute
-                                ]
-                                ? displayedAttributesCount[product.name][
-                                    attribute
-                                  ]
-                                : initialDisplay
-                            )
-                            .map((attributeValues, valueIndex) => (
+                          product.attributes[attribute].map(
+                            (attributeValues, valueIndex) => (
                               <React.Fragment key={valueIndex}>
-                                <div className="spec-section" key={valueIndex}>
+                                <div
+                                  className="spec-section"
+                                  style={{
+                                    display:
+                                      showAllAttributes || valueIndex < 5
+                                        ? "block"
+                                        : "none",
+                                  }}
+                                >
                                   <div className="spec-item">
                                     <div className="spec-col">
                                       <div className="query">
@@ -1022,7 +1037,8 @@ const TechnicalAccordion = React.memo(
                                   </div>
                                 </div>
                               </React.Fragment>
-                            ))
+                            )
+                          )
                         ) : (
                           <Skeleton
                             height={35}
@@ -1043,21 +1059,12 @@ const TechnicalAccordion = React.memo(
                                 ? displayedAttributesCount[product.name][
                                     attribute
                                   ]
-                                : initialDisplay) && (
+                                : initialDisplay) &&
+                            !showAllAttributes && (
                               <span
                                 className="show_more"
-                                onClick={() => {
-                                  setloading(true),
-                                    handleDisplayedAttributesCount(
-                                      product.name,
-                                      attribute
-                                    );
-                                  setTimeout(() => {
-                                    setloading(false);
-                                  }, 600);
-                                }}
+                                onClick={handleShowMore}
                               >
-                                {/* {"SHOW MORE "} */}
                                 {productPhaseData && productPhaseData?.show_all}
                                 <i
                                   className={`ri-${
@@ -1127,20 +1134,20 @@ const TechnicalAccordion = React.memo(
                     </Accordion.Header>
                     <Accordion.Body>
                       {loading == false ? (
-                        product.attributes[attribute]
-                          .slice(
-                            0,
-                            displayedAttributesCount[product.name] &&
-                              displayedAttributesCount[product.name][attribute]
-                              ? displayedAttributesCount[product.name][
-                                  attribute
-                                ]
-                              : initialDisplay
-                          )
-                          .map((attributeValues, valueIndex) => (
+                        product.attributes[attribute].map(
+                          (attributeValues, valueIndex) => (
                             <React.Fragment key={valueIndex}>
                               {/* {(attributeValues)} */}
-                              <div className="spec-section" key={valueIndex}>
+                              <div
+                                className="spec-section"
+                                key={valueIndex}
+                                style={{
+                                  display:
+                                    showAllAttributes || valueIndex < 5
+                                      ? "block"
+                                      : "none",
+                                }}
+                              >
                                 <div className="spec-item">
                                   <div className="spec-col">
                                     <div className="query">
@@ -1415,7 +1422,8 @@ const TechnicalAccordion = React.memo(
                                 </div>
                               </div>
                             </React.Fragment>
-                          ))
+                          )
+                        )
                       ) : (
                         <Skeleton
                           height={35}
@@ -1436,21 +1444,12 @@ const TechnicalAccordion = React.memo(
                               ? displayedAttributesCount[product.name][
                                   attribute
                                 ]
-                              : initialDisplay) && (
+                              : initialDisplay) &&
+                          !showAllAttributes && (
                             <span
                               className="show_more"
-                              onClick={() => {
-                                setloading(true),
-                                  handleDisplayedAttributesCount(
-                                    product.name,
-                                    attribute
-                                  );
-                                setTimeout(() => {
-                                  setloading(false);
-                                }, 600);
-                              }}
+                              onClick={handleShowMore}
                             >
-                              {/* {"SHOW MORE "} */}
                               {productPhaseData && productPhaseData?.show_all}
                               <i
                                 className={`ri-${

@@ -47,6 +47,7 @@ function CompareDiv({
   graphComparisonProsCons,
   slug,
   categorySlug,
+  getComparisonPhase,
 }) {
   // const router = useRouter();
   const dispatch = useDispatch();
@@ -248,7 +249,7 @@ function CompareDiv({
     };
   }, []);
   // (contentWithIds);
-
+  console.log(getComparisonPhase?.text);
   return (
     <>
       <section className="product-header">
@@ -256,7 +257,7 @@ function CompareDiv({
           <Row className="align-items-center">
             <Col md={12}>
               <BreadCrumb
-                productPhaseData={bestAlternative?.page_phases}
+                productPhaseData={getComparisonPhase?.page_phases}
                 pageType="comparision"
                 firstPageName={categorySlug}
                 secondPageName={`${compareProDataFirst?.name || ""} vs ${
@@ -278,7 +279,9 @@ function CompareDiv({
           </Row>
           <Row className="w-100 m-0">
             <div className="col-md-12">
-              <p className="product-inner-content">{bestAlternative?.text}</p>
+              <p className="product-inner-content">
+                {getComparisonPhase?.text}
+              </p>
             </div>
           </Row>
         </Container>
@@ -292,7 +295,7 @@ function CompareDiv({
                 {/* {(bestAlternative?.page_phases)} */}
                 <CompareCard
                   productPhaseData={
-                    bestAlternative && bestAlternative?.page_phases
+                    getComparisonPhase && getComparisonPhase?.page_phases
                   }
                   compareProduct={compareProDataFirst}
                   products={products}
@@ -309,7 +312,7 @@ function CompareDiv({
                 {/* {(bestAlternative,"hello")} */}
                 <CompareCard
                   productPhaseData={
-                    bestAlternative && bestAlternative?.page_phases
+                    getComparisonPhase && getComparisonPhase?.page_phases
                   }
                   compareProduct={compareProDataSec}
                   products={products}
@@ -325,7 +328,7 @@ function CompareDiv({
                 {/* Third Card */}
                 <CompareCard
                   productPhaseData={
-                    bestAlternative && bestAlternative?.page_phases
+                    getComparisonPhase && getComparisonPhase?.page_phases
                   }
                   compareProduct={compareProDataThird}
                   products={products}
@@ -343,25 +346,25 @@ function CompareDiv({
                 handelRemoveProductFormComparison={
                   handelRemoveProductFormComparison
                 }
-                productPhaseData={bestAlternative && bestAlternative}
+                productPhaseData={getComparisonPhase && getComparisonPhase}
               />
             </Col>
           </Row>
           {/* {(bestAlternative,"hello mahi")} */}
           {/* {(bestAlternative?.page_phases)} */}
-          {bestAlternative?.verdict_text &&
-            bestAlternative?.verdict_text &&
-            bestAlternative?.verdict_text !== "" &&
-            bestAlternative?.verdict_text !== null && (
+          {getComparisonPhase?.verdict_text &&
+            getComparisonPhase?.verdict_text &&
+            getComparisonPhase?.verdict_text !== "" &&
+            getComparisonPhase?.verdict_text !== null && (
               <Row>
                 <div className="box__content__section">
                   <h2 class="site-main-heading">
-                    {bestAlternative?.page_phases?.verdict_text_heading}
+                    {getComparisonPhase?.page_phases?.verdict_text_heading}
                   </h2>
                   <div
                     className="box__content__section__textarea"
                     dangerouslySetInnerHTML={{
-                      __html: bestAlternative?.verdict_text,
+                      __html: getComparisonPhase?.verdict_text,
                     }}
                   ></div>
                 </div>
@@ -375,16 +378,17 @@ function CompareDiv({
             <Col md={12}>
               <h2 className="site-main-heading">
                 {comparisonData?.length > 2
-                  ? bestAlternative &&
-                    bestAlternative?.page_phases
+                  ? getComparisonPhase &&
+                    getComparisonPhase?.page_phases
                       ?.three_products_graph_comparison
-                  : bestAlternative &&
-                    bestAlternative?.page_phases?.two_products_graph_comparison}
+                  : getComparisonPhase &&
+                    getComparisonPhase?.page_phases
+                      ?.two_products_graph_comparison}
               </h2>
             </Col>
           </Row>
           <CompareAccordionTab
-            comparePhaseData={bestAlternative?.page_phases}
+            comparePhaseData={getComparisonPhase?.page_phases}
             sendProductProps={comparisonProductData}
             categorySlug={categorySlug}
             product={graphComparisonProsCons}
@@ -392,19 +396,20 @@ function CompareDiv({
           />
         </Container>
       </section>
-      {bestAlternative && bestAlternative?.text_part !== null && (
+      {getComparisonPhase && getComparisonPhase?.text_part !== null && (
         <section className="contentSec my-3">
           <Container>
             <div className="custom-row">
               <div className="left-side-bar">
                 <div className="outline-section">
                   <p>
-                    {bestAlternative && bestAlternative?.page_phases?.outline}
+                    {getComparisonPhase &&
+                      getComparisonPhase?.page_phases?.outline}
                   </p>
-                  {bestAlternative?.text_part && (
+                  {getComparisonPhase?.text_part && (
                     <ComparisionOutlineGenerator
                       currentIndexId={activeOutlineId}
-                      blogData={bestAlternative?.text_part}
+                      blogData={getComparisonPhase?.text_part}
                     />
                   )}
                 </div>
@@ -448,13 +453,13 @@ function CompareDiv({
                 <Row className="mt-3">
                   <Col md={12}>
                     <div className="heading-primary secondary mb-2">
-                      {bestAlternative &&
-                        bestAlternative?.page_phases?.related_guides_sidebar}
+                      {getComparisonPhase &&
+                        getComparisonPhase?.page_phases?.related_guides_sidebar}
                     </div>
                   </Col>
                   <Col md={12}>
                     <ProductSliderBlog
-                      favSlider={bestAlternative?.related_guides}
+                      favSlider={getComparisonPhase?.related_guides}
                     />
                   </Col>
                 </Row>
@@ -463,17 +468,19 @@ function CompareDiv({
           </Container>
         </section>
       )}
-      {bestAlternative &&
-        bestAlternative?.should_buy_product_one?.length > 0 && (
+      {getComparisonPhase &&
+        getComparisonPhase?.should_buy_product_one?.length > 0 && (
           <section className="ptb-80 bg-color">
             <Container>
               <Row>
                 <Col md={12}>
                   <h2 className="site-main-heading">
                     {comparisonData?.length > 2
-                      ? bestAlternative?.page_phases?.three_products_should_buy
-                      : bestAlternative &&
-                        bestAlternative?.page_phases?.two_products_should_buy}
+                      ? getComparisonPhase?.page_phases
+                          ?.three_products_should_buy
+                      : getComparisonPhase &&
+                        getComparisonPhase?.page_phases
+                          ?.two_products_should_buy}
                     {/* Should You Buy {compareProDataFirst?.name} or{" "}
                     {compareProDataSec?.name}{" "}
                     {compareProDataThird?.name &&
@@ -582,7 +589,7 @@ function CompareDiv({
           </Row>
         </Container>
       </section>
-      
+
       <section className="mobile-table-section">
         {/* {isMobile ? (
           <Container>

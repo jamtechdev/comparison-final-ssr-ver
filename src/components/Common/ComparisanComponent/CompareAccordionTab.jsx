@@ -481,6 +481,83 @@ const CompareAccordionTab = React.memo(
                                   );
                                 })}
 
+                             
+                              {apiData &&
+                                Object.values(apiData?.average_pros)?.map(
+                                  (item, index) => {
+                                    return item?.map((itemx, index) => {
+                                      return (
+                                        <li
+                                          key={index}
+                                          style={{
+                                            display:
+                                              Object.values(
+                                                apiData?.average_pros
+                                              )[index] === tabvalue.pros
+                                                ? "block"
+                                                : "none",
+                                          }}
+                                        >
+                                          <span
+                                            className={`${
+                                              itemx?.hover_phase !== null
+                                                ? "tooltip-title nexxt"
+                                                : ""
+                                            }`}
+                                            style={{
+                                              textDecoration:
+                                                itemx?.hover_phase !== null
+                                                  ? ""
+                                                  : "dotted",
+                                            }}
+                                          >
+                                            {typeof itemx?.difference_value ===
+                                            "number"
+                                              ? itemx?.difference
+                                              : itemx?.phrase}
+                                            {itemx?.hover_phase && (
+                                              <div className="tooltip-display-content">
+                                                <span
+                                                  className="mb-2 prosconsColor"
+                                                  dangerouslySetInnerHTML={{
+                                                    __html: itemx?.hover_phase,
+                                                  }}
+                                                />
+                                              </div>
+                                            )}
+                                          </span>
+                                          <QuestionIcon
+                                            attributes={itemx?.when_matters}
+                                            comparePhaseData={comparePhaseData}
+                                          />
+                                          {itemx?.hover_phase && (
+                                            <small className="d-block tooltip-title invisible">
+                                              <span className="tooltip-display-content">
+                                                <span className="mb-2 prosconsColor">
+                                                  {/* {itemx?.hover_phase} */}
+                                                </span>
+                                              </span>
+                                            </small>
+                                          )}
+                                          {/* <small>
+                                        {["yes", "no", 0, null].includes(
+                                          itemx?.difference_value
+                                        ) ? (
+                                          ""
+                                        ) : (
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: splitVsValue(itemx?.vs),
+                                            }}
+                                          />
+                                        )}
+                                      </small> */}
+                                        </li>
+                                      );
+                                    });
+                                  }
+                                )}
+
                               {apiData?.average_pros[tabvalue?.pros]?.length >
                               0 ? (
                                 apiData?.average_pros[tabvalue?.pros]
