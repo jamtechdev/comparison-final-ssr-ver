@@ -229,7 +229,7 @@ async function fetchDataBasedOnPageType(
         `${process.env.NEXT_PUBLIC_API_URL}/guide/${category}/${slug}`,
         productApiUrl,
       ];
-      // console.log(apiUrls);
+      console.log(apiUrls);
 
       break;
     case "Blog":
