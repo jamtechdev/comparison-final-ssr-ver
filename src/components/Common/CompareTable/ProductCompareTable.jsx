@@ -24,6 +24,7 @@ const ProductCompareTable = React.memo(
     const [winPos, setWinPos] = useState(false);
     const [stickyWith, setStickyWidth] = useState(true);
     const [afterTableSticky, setAfterTableSticky] = useState(false);
+    const [showAllAttributes, setShowAllAttributes] = useState(false);
     const useDetectSticky = (ref, observerSettings = { threshold: [1] }) => {
       const [isSticky, setIsSticky] = useState(false);
       const [afterTableSticky, setAfterTableSticky] = useState(false);
@@ -321,7 +322,7 @@ const ProductCompareTable = React.memo(
                     {/* {(product)} */}
                     {index === 0 && (
                       <span className="best-tag-product">
-             {productPhaseData?.compared}
+                        {productPhaseData?.compared}
                         {/* {product?.assigned_title} */}
                       </span>
                     )}
@@ -334,7 +335,7 @@ const ProductCompareTable = React.memo(
                         {" "}
                       </a>
                       <small className="product-name-small">
-                       {product?.name}
+                        {product?.name}
                       </small>
 
                       <img
@@ -344,7 +345,6 @@ const ProductCompareTable = React.memo(
                             ? product?.mini_image
                             : "/images/nofound.png"
                         }
-                        
                         width={0}
                         height={0}
                         alt={`${product?.permalink}`}
@@ -930,167 +930,160 @@ const ProductCompareTable = React.memo(
                 </tr>
               );
             })}
-            {removeLastObjectFromCategory
-              ?.slice(0, fullTable || 2)
-              .map((category, categoryIndex) => {
-                return (
-                  <Fragment key={categoryIndex}>
-                    <tr className="tr-bg-color">
-                      <th>
-                        <div className="tooltip-title">
-                          {category.name}
-                          {(category.description || category.when_matters) && (
-                            <div className="tooltip-display-content">
-                              {category?.description && (
-                                <p className="mb-2">
-                                  <b>
-                                    {productPhaseData &&
-                                      productPhaseData?.what_it_is}
-                                    :{" "}
-                                  </b>
-                                  {category?.description}
-                                </p>
-                              )}
-
-                              {category?.when_matters && (
-                                <p className="mb-2">
-                                  <b>
-                                    {productPhaseData &&
-                                      productPhaseData?.when_it_matters}
-                                    :{" "}
-                                  </b>{" "}
-                                  {category?.when_matters}
-                                </p>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      </th>
-                      {finalProducts
-                        .slice(0, defaultNo)
-                        .map((product, productIndex) => {
-                          return (
-                            <td key={productIndex}>
-                              <span
-                                className="count"
-                                style={{
-                                  background:
-                                    product.attributes[
-                                      category?.name
-                                    ]?.[0]?.attribute_evaluation?.toFixed(1) >=
-                                    7.5
-                                      ? "#093673"
-                                      : product.attributes[
-                                          category?.name
-                                        ]?.[0]?.attribute_evaluation?.toFixed(
-                                          1
-                                        ) >= 5 &&
-                                        product.attributes[
-                                          category?.name
-                                        ]?.[0]?.attribute_evaluation?.toFixed(
-                                          1
-                                        ) < 7.5
-                                      ? "#437ECE"
-                                      : "#85B2F1",
-                                }}
-                              >
-                                {/* {(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
-                                {product.attributes[
-                                  category.name
-                                ]?.[0].attribute_evaluation?.toFixed(1)}{" "}
-                              </span>
-                            </td>
-                          );
-                        })}
-                    </tr>
-                    {category.attributes
-                      ?.sort((a, b) => a.position - b.position)
-                      .slice(
-                        0,
-                        pagination[category.name] || initialNoOfCategories
-                      )
-                      .map((catAttribute, catAttributeIndex) => {
-                        return (
-                          <tr key={catAttributeIndex} className="">
-                            <th className="sub-inner-padding">
-                              <div className="tooltip-title">
-                                {catAttribute.name}
-                                {(catAttribute.description ||
-                                  catAttribute.when_matters) && (
-                                  <div className="tooltip-display-content">
-                                    {catAttribute?.description && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.what_it_is}
-                                          :{" "}
-                                        </b>
-                                        {catAttribute?.description}
-                                      </p>
-                                    )}
-
-                                    {catAttribute?.when_matters && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.when_it_matters}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.when_matters}
-                                      </p>
-                                    )}
-
-                                    {catAttribute?.importance && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.importance_text}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.importance}
-                                      </p>
-                                    )}
-                                    
-                                    {catAttribute?.good_value && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.good_value_text}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.good_value}
-                                      </p>
-                                    )}
-                                    
-                                  </div>
-                                )}
-                              </div>
-                            </th>
-                            {addAsterisksToTopValue(
-                              defaultNo,
-                              category,
-                              catAttribute
+            {removeLastObjectFromCategory.map((category, categoryIndex) => {
+              return (
+                <Fragment key={categoryIndex}>
+                  <tr className="tr-bg-color">
+                    <th>
+                      <div className="tooltip-title">
+                        {category.name}
+                        {(category.description || category.when_matters) && (
+                          <div className="tooltip-display-content">
+                            {category?.description && (
+                              <p className="mb-2">
+                                <b>
+                                  {productPhaseData &&
+                                    productPhaseData?.what_it_is}
+                                  :{" "}
+                                </b>
+                                {category?.description}
+                              </p>
                             )}
-                          </tr>
+
+                            {category?.when_matters && (
+                              <p className="mb-2">
+                                <b>
+                                  {productPhaseData &&
+                                    productPhaseData?.when_it_matters}
+                                  :{" "}
+                                </b>{" "}
+                                {category?.when_matters}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </th>
+                    {finalProducts
+                      .slice(0, defaultNo)
+                      .map((product, productIndex) => {
+                        return (
+                          <td key={productIndex}>
+                            <span
+                              className="count"
+                              style={{
+                                background:
+                                  product.attributes[
+                                    category?.name
+                                  ]?.[0]?.attribute_evaluation?.toFixed(1) >=
+                                  7.5
+                                    ? "#093673"
+                                    : product.attributes[
+                                        category?.name
+                                      ]?.[0]?.attribute_evaluation?.toFixed(
+                                        1
+                                      ) >= 5 &&
+                                      product.attributes[
+                                        category?.name
+                                      ]?.[0]?.attribute_evaluation?.toFixed(1) <
+                                        7.5
+                                    ? "#437ECE"
+                                    : "#85B2F1",
+                              }}
+                            >
+                              {/* {(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
+                              {product.attributes[
+                                category.name
+                              ]?.[0].attribute_evaluation?.toFixed(1)}{" "}
+                            </span>
+                          </td>
                         );
                       })}
-                    {category.attributes.length >
-                      (pagination[category.name] || initialNoOfCategories) && (
-                      <tr className="text-center show_more_row">
-                        <td colSpan="6">
-                          <span
-                            className="show_more"
-                            onClick={() => handlePagination(category.name)}
-                          >
-                            {productPhaseData &&
-                                        productPhaseData?.show_all}{" "} <i className="ri-add-line"></i>
-                          </span>
-                        </td>
-                      </tr>
-                    )}
-                  </Fragment>
-                );
-              })}
+                  </tr>
+                  {category.attributes
+                    ?.sort((a, b) => a.position - b.position)
+
+                    .map((catAttribute, catAttributeIndex) => {
+                      return (
+                        <tr key={catAttributeIndex} className={categoryIndex}>
+                          <th className="sub-inner-padding">
+                            <div className="tooltip-title">
+                              {catAttribute.name}
+                              {(catAttribute.description ||
+                                catAttribute.when_matters) && (
+                                <div className="tooltip-display-content">
+                                  {catAttribute?.description && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.what_it_is}
+                                        :{" "}
+                                      </b>
+                                      {catAttribute?.description}
+                                    </p>
+                                  )}
+
+                                  {catAttribute?.when_matters && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.when_it_matters}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.when_matters}
+                                    </p>
+                                  )}
+
+                                  {catAttribute?.importance && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.importance_text}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.importance}
+                                    </p>
+                                  )}
+
+                                  {catAttribute?.good_value && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.good_value_text}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.good_value}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </th>
+                          {addAsterisksToTopValue(
+                            defaultNo,
+                            category,
+                            catAttribute
+                          )}
+                        </tr>
+                      );
+                    })}
+                  {category.attributes.length >
+                    (pagination[category.name] || initialNoOfCategories) && (
+                    <tr className="text-center show_more_row">
+                      <td colSpan="6">
+                        <span
+                          className="show_more"
+                          onClick={() => handlePagination(category.name)}
+                        >
+                          {productPhaseData && productPhaseData?.show_all}{" "}
+                          <i className="ri-add-line"></i>
+                        </span>
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
+              );
+            })}
           </tbody>
         </Table>
 

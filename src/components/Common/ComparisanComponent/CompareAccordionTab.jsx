@@ -501,7 +501,7 @@ const CompareAccordionTab = React.memo(
                                           <span
                                             className={`${
                                               itemx?.hover_phase !== null
-                                                ? "tooltip-title nexxt"
+                                                ? "tooltip-title"
                                                 : ""
                                             }`}
                                             style={{
