@@ -604,6 +604,80 @@ const WhyAccordionTab = React.memo(
                       <Tab.Content className="compare-tab-content">
                         <Tab.Pane eventKey={tabvalue?.cons}>
                           <ul className="compare-crons">
+                            {Object.values(product?.average_cons)?.map(
+                              (item, index) => {
+                                return item?.map((itemx, index) => {
+                                  return (
+                                    <li
+                                      key={index}
+                                      style={{
+                                        display:
+                                          Object.values(product?.average_cons)[
+                                            index
+                                          ] === tabvalue.cons
+                                            ? "block"
+                                            : "none",
+                                      }}
+                                    >
+                                      <span
+                                        className={`${
+                                          itemx?.hover_phase !== null
+                                            ? "tooltip-title xxnnet"
+                                            : ""
+                                        }`}
+                                        style={{
+                                          textDecoration:
+                                            itemx?.hover_phase !== null
+                                              ? ""
+                                              : "dotted",
+                                        }}
+                                      >
+                                        {typeof itemx?.difference_value ===
+                                        "number"
+                                          ? itemx?.difference
+                                          : itemx?.phrase}
+                                        {itemx?.hover_phase && (
+                                          <div className="tooltip-display-content">
+                                            <span
+                                              className="mb-2 prosconsColor"
+                                              dangerouslySetInnerHTML={{
+                                                __html: itemx?.hover_phase,
+                                              }}
+                                            />
+                                          </div>
+                                        )}
+                                      </span>
+                                      <QuestionIcon
+                                        attributes={itemx?.when_matters}
+                                        product={product}
+                                      />
+                                      {itemx?.hover_phase && (
+                                        <small className="d-block tooltip-title invisible">
+                                          <span className="tooltip-display-content">
+                                            <span className="mb-2 prosconsColor">
+                                              {/* {itemx?.hover_phase} */}
+                                            </span>
+                                          </span>
+                                        </small>
+                                      )}
+                                      {/* <small>
+                                          {["yes", "no", 0, null].includes(
+                                            itemx?.difference_value
+                                          ) ? (
+                                            ""
+                                          ) : (
+                                            <span
+                                              dangerouslySetInnerHTML={{
+                                                __html: splitVsValue(itemx?.vs),
+                                              }}
+                                            />
+                                          )}
+                                        </small> */}
+                                    </li>
+                                  );
+                                });
+                              }
+                            )}
                             {product &&
                             product?.general?.cons &&
                             tabvalue?.cons == "general" ? (
@@ -758,81 +832,6 @@ const WhyAccordionTab = React.memo(
                                 )
                               ) : (
                                 <>
-                                  {Object.values(product?.average_cons)?.map(
-                                    (item, index) => {
-                                      return item?.map((itemx, index) => {
-                                        return (
-                                          <li
-                                            key={index}
-                                            style={{
-                                              display:
-                                                Object.values(
-                                                  product?.average_cons
-                                                )[index] === tabvalue.cons
-                                                  ? "block"
-                                                  : "none",
-                                            }}
-                                          >
-                                            <span
-                                              className={`${
-                                                itemx?.hover_phase !== null
-                                                  ? "tooltip-title"
-                                                  : ""
-                                              }`}
-                                              style={{
-                                                textDecoration:
-                                                  itemx?.hover_phase !== null
-                                                    ? ""
-                                                    : "dotted",
-                                              }}
-                                            >
-                                              {typeof itemx?.difference_value ===
-                                              "number"
-                                                ? itemx?.difference
-                                                : itemx?.phrase}
-                                              {itemx?.hover_phase && (
-                                                <div className="tooltip-display-content">
-                                                  <span
-                                                    className="mb-2 prosconsColor"
-                                                    dangerouslySetInnerHTML={{
-                                                      __html:
-                                                        itemx?.hover_phase,
-                                                    }}
-                                                  />
-                                                </div>
-                                              )}
-                                            </span>
-                                            <QuestionIcon
-                                              attributes={itemx?.when_matters}
-                                              product={product}
-                                            />
-                                            {itemx?.hover_phase && (
-                                              <small className="d-block tooltip-title invisible">
-                                                <span className="tooltip-display-content">
-                                                  <span className="mb-2 prosconsColor">
-                                                    {/* {itemx?.hover_phase} */}
-                                                  </span>
-                                                </span>
-                                              </small>
-                                            )}
-                                            {/* <small>
-                                          {["yes", "no", 0, null].includes(
-                                            itemx?.difference_value
-                                          ) ? (
-                                            ""
-                                          ) : (
-                                            <span
-                                              dangerouslySetInnerHTML={{
-                                                __html: splitVsValue(itemx?.vs),
-                                              }}
-                                            />
-                                          )}
-                                        </small> */}
-                                          </li>
-                                        );
-                                      });
-                                    }
-                                  )}
                                   {product?.average_cons[tabvalue?.cons]
                                     ?.length > 0 ? (
                                     product?.average_cons[tabvalue?.cons]
