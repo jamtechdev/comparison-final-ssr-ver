@@ -108,6 +108,10 @@ const ProductCompareTable = React.memo(
       return null;
     };
 
+    const [showAllAttributes, setShowAllAttributes] = useState(false);
+    const handleShowAllAttributes = () => {
+      setShowAllAttributes(true);
+    };
     const handlePagination = (categoryName) => {
       let updatedPage =
         pagination[categoryName] + initialNoOfCategories ||
@@ -1009,14 +1013,14 @@ const ProductCompareTable = React.memo(
 
                     .map((catAttribute, catAttributeIndex) => {
                       const isHidden =
-                        fullTable !== 2 &&
-                        catAttributeIndex >= initialNoOfCategories;
-                        console.log(isHidden)
+                        fullTable === 2 && catAttributeIndex >= 4;
                       return (
                         <tr
                           key={catAttributeIndex}
                           className={
-                            isHidden ? "display_none" : "display_block"
+                            isHidden || showAllAttributes
+                              ? "display_none"
+                              : "display_block"
                           }
                         >
                           <th className="sub-inner-padding">
@@ -1086,7 +1090,7 @@ const ProductCompareTable = React.memo(
                       <td colSpan="6">
                         <span
                           className="show_more"
-                          onClick={() => handlePagination(category.name)}
+                          onClick={() => handleShowAllAttributes}
                         >
                           {productPhaseData && productPhaseData?.show_all}{" "}
                           <i className="ri-add-line"></i>

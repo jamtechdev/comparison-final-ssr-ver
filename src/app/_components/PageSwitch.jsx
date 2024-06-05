@@ -120,6 +120,11 @@ export default async function PageSwitch({
         compareData?.category_id
       );
       const getComparisonPhase = await getComparePhaseData(categorySlug, slug);
+      const getProsConsforVsPage = await getProsConsForVsPage(
+        categorySlug,
+        slug
+      );
+      console.log(getProsConsforVsPage);
       // console.log(getComparisonPhase?.data?.page_phases)
       PageToRender = (
         <Comparison
@@ -128,7 +133,8 @@ export default async function PageSwitch({
           comparisonData={pageData}
           categroyAttributes={compareDataCatAttribute}
           graphComparisonProsCons={graphComparisonProsCons}
-          getComparisonPhase={getComparisonPhase?.data}
+          getComparisonPhase={getComparisonPhase}
+          getProsConsforVsPage={getProsConsforVsPage}
         />
       );
       break;
@@ -194,6 +200,90 @@ async function getComparePhaseData(category_id, slug) {
   }
   return response.json();
 }
+
+async function getProsConsForVsPage(categorySlug, slug) {
+  const splitSlug = slug.split("-vs-");
+  if (splitSlug.length === 2) {
+    const [firstPermalink, secondPermalink] = splitSlug;
+    // console.log(firstPermalink, secondPermalink);
+
+    const apiFirstUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/average/${categorySlug}?permalink1=${firstPermalink}&permalink2=${secondPermalink}`;
+    const apiSecondUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/average/${categorySlug}?permalink1=${secondPermalink}&permalink2=${firstPermalink}`;
+
+    const options = {
+      next: { revalidate: 10 },
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      },
+    };
+
+    try {
+      const [apiFirst, apiSecond] = await Promise.all([
+        fetch(apiFirstUrl, options),
+        fetch(apiSecondUrl, options),
+      ]);
+
+      if (!apiFirst.ok || !apiSecond.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const apiFirstJson = await apiFirst.json();
+      const apiSecondJson = await apiSecond.json();
+
+      return { apiFirst: apiFirstJson, apiSecond: apiSecondJson };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return { error: "Failed to fetch data" };
+    }
+  }
+  if (splitSlug.length === 3) {
+    const [firstPermalink, secondPermalink, thirdPermalik] = splitSlug;
+    // console.log(firstPermalink, secondPermalink, thirdPermalik);
+
+    const apiFirstUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/average/${categorySlug}?permalink1=${firstPermalink}&permalink2=${secondPermalink}&permalink3=${thirdPermalik}`;
+    const apiSecondUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/average/${categorySlug}?permalink1=${secondPermalink}&permalink2=${firstPermalink}&permalink3=${thirdPermalik}`;
+    const apiThirdUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/average/${categorySlug}?permalink1=${thirdPermalik}&permalink2=${secondPermalink}&permalink3=${firstPermalink}`;
+
+    const options = {
+      next: { revalidate: 10 },
+      cache: "no-cache",
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+      },
+    };
+
+    try {
+      const [apiFirst, apiSecond, apiThird] = await Promise.all([
+        fetch(apiFirstUrl, options),
+        fetch(apiSecondUrl, options),
+        fetch(apiThirdUrl, options),
+      ]);
+
+      if (!apiFirst.ok || !apiSecond.ok || !apiThird.ok) {
+        throw new Error("Failed to fetch datas");
+      }
+
+      const apiFirstJson = await apiFirst.json();
+      const apiSecondJson = await apiSecond.json();
+      const apiThirdJson = await apiThird.json();
+
+      return {
+        apiFirst: apiFirstJson,
+        apiSecond: apiSecondJson,
+        apiThird: apiThirdJson,
+      };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return { error: "Failed to fetch data" };
+    }
+  }
+}
+
 async function getProductForTable(category_url, slug) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/guide/products-table/${category_url}/${slug}`,

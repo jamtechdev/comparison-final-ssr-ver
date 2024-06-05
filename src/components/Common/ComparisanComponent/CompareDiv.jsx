@@ -42,12 +42,13 @@ import CompareRealtedGuide from "@/components/Product/CompareRealtedGuide";
 import useScreenSize from "@/_helpers/useScreenSize";
 import GraphReplacer from "@/_helpers/GraphReplacer";
 function CompareDiv({
+  slug,
+  categorySlug,
   comparisonData,
   categroyAttributes,
   graphComparisonProsCons,
-  slug,
-  categorySlug,
   getComparisonPhase,
+  getProsConsforVsPage,
 }) {
   // const router = useRouter();
   const dispatch = useDispatch();
@@ -387,12 +388,16 @@ function CompareDiv({
               </h2>
             </Col>
           </Row>
+        
+         
           <CompareAccordionTab
             comparePhaseData={getComparisonPhase?.page_phases}
             sendProductProps={comparisonProductData}
             categorySlug={categorySlug}
             product={graphComparisonProsCons}
             pageType={"comparison"}
+            getComparisonPhase={getComparisonPhase}
+            getProsConsforVsPage={getProsConsforVsPage}
           />
         </Container>
       </section>

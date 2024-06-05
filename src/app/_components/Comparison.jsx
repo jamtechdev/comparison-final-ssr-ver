@@ -8,7 +8,8 @@ function Comparison({
   comparisonData,
   categroyAttributes,
   graphComparisonProsCons,
-  getComparisonPhase
+  getComparisonPhase,
+  getProsConsforVsPage
 }) {
   return (
     <>
@@ -19,7 +20,8 @@ function Comparison({
         comparisonData={comparisonData}
         categroyAttributes={categroyAttributes?.data}
         graphComparisonProsCons={graphComparisonProsCons?.data}
-        getComparisonPhase={getComparisonPhase}
+        getComparisonPhase={getComparisonPhase?.data}
+        getProsConsforVsPage={getProsConsforVsPage}
       />
       
     </>
