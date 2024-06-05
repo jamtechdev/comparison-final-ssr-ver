@@ -196,7 +196,7 @@
       ).length;
 
       arrayOfObjects.forEach((obj) => {
-        obj.star &&
+        obj?.star &&
           obj.attribute_value !== "?" &&
           obj.attribute_value !== "-" &&
           (obj.attribute_value = obj?.attribute_value + "⭐");

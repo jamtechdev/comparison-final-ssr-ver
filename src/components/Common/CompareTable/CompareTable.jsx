@@ -179,7 +179,7 @@ const CompareTable = React.memo(
 
       //  if (occurrences === 1 || occurrences === 2)
       arrayOfObjects.forEach((obj) => {
-        obj.star &&
+        obj?.star &&
           obj.attribute_value !== "?" &&
           obj.attribute_value !== "-" &&
           (obj.attribute_value = obj?.attribute_value + "⭐");

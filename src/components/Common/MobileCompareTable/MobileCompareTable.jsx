@@ -195,7 +195,7 @@ export default function MobileCompareTable({
     // Adjust this function according to your context as I don't have the complete code
     // It would be good to ensure that you have the required variables (finalProducts) in scope.
     arrayOfObjects.forEach((obj) => {
-      obj.star &&
+      obj?.star &&
         obj.attribute_value !== "?" &&
         obj.attribute_value !== "-" &&
         (obj.attribute_value = obj?.attribute_value + "⭐");

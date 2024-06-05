@@ -108,10 +108,17 @@ const ProductCompareTable = React.memo(
       return null;
     };
 
-    const [showAllAttributes, setShowAllAttributes] = useState(false);
-    const handleShowAllAttributes = () => {
-      setShowAllAttributes(true);
+    const [showAllAttributes, setShowAllAttributes] = useState({});
+
+    const initialNoOfAttributes = 5; // Number of attributes to display initially
+
+    const handleShowAllAttributes = (categoryName) => {
+      setShowAllAttributes((prev) => ({
+        ...prev,
+        [categoryName]: !prev[categoryName],
+      }));
     };
+
     const handlePagination = (categoryName) => {
       let updatedPage =
         pagination[categoryName] + initialNoOfCategories ||
@@ -208,7 +215,7 @@ const ProductCompareTable = React.memo(
       // const topValue = numericValues[0];
 
       arrayOfObjects.forEach((obj) => {
-        obj.star &&
+        obj?.star &&
           obj.attribute_value !== "?" &&
           obj.attribute_value !== "-" &&
           (obj.attribute_value = obj?.attribute_value + "⭐");
@@ -1010,17 +1017,15 @@ const ProductCompareTable = React.memo(
                   </tr>
                   {category.attributes
                     ?.sort((a, b) => a.position - b.position)
-
                     .map((catAttribute, catAttributeIndex) => {
                       const isHidden =
-                        fullTable === 2 && catAttributeIndex >= 4;
+                        !showAllAttributes[category.name] &&
+                        catAttributeIndex >= initialNoOfAttributes;
                       return (
                         <tr
                           key={catAttributeIndex}
                           className={
-                            isHidden || showAllAttributes
-                              ? "display_none"
-                              : "display_block"
+                            isHidden ? "display_none" : "display_block"
                           }
                         >
                           <th className="sub-inner-padding">
@@ -1084,13 +1089,12 @@ const ProductCompareTable = React.memo(
                         </tr>
                       );
                     })}
-                  {category.attributes.length >
-                    (pagination[category.name] || initialNoOfCategories) && (
+                  {category.attributes.length > initialNoOfAttributes && (
                     <tr className="text-center show_more_row">
                       <td colSpan="6">
                         <span
                           className="show_more"
-                          onClick={() => handleShowAllAttributes}
+                          onClick={() => handleShowAllAttributes(category.name)}
                         >
                           {productPhaseData && productPhaseData?.show_all}{" "}
                           <i className="ri-add-line"></i>
