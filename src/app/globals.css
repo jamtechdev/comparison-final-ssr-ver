@@ -2582,4 +2582,7 @@ tr:first-child th {
     float: none;
     padding: 70px 0px 0 75px;
 }
+#mobile-compare-tabler .device-name a{
+  max-width: 250px !important;
+}
 }
