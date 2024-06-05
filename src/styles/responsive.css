@@ -2463,4 +2463,8 @@
     background: #fff;
     border-bottom: 2px solid #ddd !important;
   }
+  .box__content_padding {
+    padding: 0px 12px !important;
+  }
 }
+

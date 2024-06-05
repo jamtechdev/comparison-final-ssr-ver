@@ -13,7 +13,7 @@ import { deleteCompareProduct } from "@/redux/features/compareProduct/comparePro
 export default function MobileComparisonTool({
   compareProduct,
   handelRemoveProductFormComparison,
-  productPhaseData
+  productPhaseData,
 }) {
   const [swiperRef, setSwiperRef] = useState();
 
@@ -112,13 +112,17 @@ export default function MobileComparisonTool({
               return (
                 <SwiperSlide key={index}>
                   <div className="comparison-wrapper">
-                    {isWinner && <div className="comparison-tag">{productPhaseData?.page_phases?.winner}</div>}
+                    {isWinner && (
+                      <div className="comparison-tag">
+                        {productPhaseData?.page_phases?.winner}
+                      </div>
+                    )}
                     {/* {(item)} */}
                     <div className="comparison-card">
                       <img
                         src={
-                          item?.mini_image
-                            ? item?.mini_image
+                          item?.main_image
+                            ? item?.main_image
                             : "/images/nofound.png"
                         }
                         width={0}
@@ -148,7 +152,8 @@ export default function MobileComparisonTool({
                         style={{ cursor: "pointer" }}
                         onClick={() => urlChange(index)}
                       >
-                        <i className="ri-close-line"></i> {productPhaseData?.page_phases?.remove_product_text}
+                        <i className="ri-close-line"></i>{" "}
+                        {productPhaseData?.page_phases?.remove_product_text}
                       </span>
                     </div>
                     {item?.price_websites?.length > 0 ? (
@@ -233,11 +238,18 @@ export default function MobileComparisonTool({
       <Row>
         <Col md={12} className="text-center mb-3">
           <Button className="site_main_btn" onClick={() => setIsOpen(true)}>
-            {productPhaseData && productPhaseData?.page_phases?.add_product_text}
+            {productPhaseData &&
+              productPhaseData?.page_phases?.add_product_text}
           </Button>
         </Col>
       </Row>
-      {isOpen && <CompareModal setIsOpen={setIsOpen} location={""} favSlider={productPhaseData} />}
+      {isOpen && (
+        <CompareModal
+          setIsOpen={setIsOpen}
+          location={""}
+          favSlider={productPhaseData}
+        />
+      )}
     </>
   );
 }

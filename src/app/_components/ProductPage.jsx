@@ -1180,7 +1180,7 @@ function ProductPage({
               )}
           </Row>
           {product?.vedict_text !== null && (
-            <Row>
+            <Row className="box__content_padding">
               <div className="box__content__section">
                 <h2 class="site-main-heading">
                   {product?.page_phases?.verdict_text_heading}

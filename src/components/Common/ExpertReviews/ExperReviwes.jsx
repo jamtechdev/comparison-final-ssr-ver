@@ -70,7 +70,7 @@ function ExperReviwes({ expertReview, page_phase }) {
       .split(/[/?#]/)[0];
     return domain;
   };
-console.log(expertReview?.length)
+// console.log(expertReview?.length)
   // (expertReview);
   return (
     <>
@@ -78,7 +78,7 @@ console.log(expertReview?.length)
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={30}
-          loop={false}
+          loop={true}
           navigation={{
             nextEl: ".expert_reviews_slider.swiper-next",
             prevEl: ".expert_reviews_slider.swiper-prev",
