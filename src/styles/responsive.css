@@ -2289,9 +2289,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  :root {
+  /* :root {
     --SLICE-WIDTH: 95% !important;
-  }
+  } */
   .guide-page-tested {
     left: auto !important;
   }
@@ -2466,5 +2466,8 @@
   .box__content_padding {
     padding: 0px 12px !important;
   }
+  :root {
+    --SLICE-WIDTH: 100% !important;
+}
 }
 
