@@ -329,15 +329,17 @@ export default function MobileCompareTable({
                           </span>
                         </th>
                       )}
-                      {type === "product" && tIndex === 0 && (
-                        <th>
-                          <span class="best-tag-product">
-                            {type === "product" &&
-                              tIndex === 0 &&
-                              productPhaseData?.compared}
-                          </span>
-                        </th>
-                      )}
+                      {type === "product" &&
+                        tIndex === 0 &&
+                        currentIndex === 0 && (
+                          <th>
+                            <span class="best-tag-product">
+                              {type === "product" &&
+                                currentIndex === 0 &&
+                                productPhaseData?.compared}
+                            </span>
+                          </th>
+                        )}
                       {type === "compare" &&
                         (chunkedData?.length > 1 ? (
                           <th>
@@ -593,15 +595,17 @@ export default function MobileCompareTable({
                                 </span>
                               </th>
                             )}
-                            {type === "product" && dIndex === 0 && (
-                              <th>
-                                <span class="best-tag-product">
-                                  {type === "product" &&
-                                    dIndex === 0 &&
-                                    productPhaseData?.compared}
-                                </span>
-                              </th>
-                            )}
+                            {type === "product" &&
+                              dIndex === 0 &&
+                              currentIndex === 0 && (
+                                <th>
+                                  <span class="best-tag-product">
+                                    {type === "product" &&
+                                      currentIndex === 0 &&
+                                      productPhaseData?.compared}
+                                  </span>
+                                </th>
+                              )}
                             {/* {console.log(chunkedData?.length)} */}
                             {type === "compare" &&
                               (chunkedData?.length > 1 ? (
