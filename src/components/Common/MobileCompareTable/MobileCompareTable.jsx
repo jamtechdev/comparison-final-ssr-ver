@@ -319,6 +319,8 @@ export default function MobileCompareTable({
                 return product?.map((data, tIndex) => {
                   // (currentIndex, "check currentIndex");
                   // (product, "check products");
+                  const globalIndex = currentIndex * 2 + tIndex;
+                  // console.log(globalIndex)
 
                   return (
                     <>
@@ -344,7 +346,7 @@ export default function MobileCompareTable({
                         (chunkedData?.length > 1 ? (
                           <th>
                             {productScoreLabelIndex !== "" &&
-                              productScoreLabelIndex === currentIndex + 1 && (
+                              productScoreLabelIndex === globalIndex && (
                                 <span className="best-tag-product">
                                   {productPhaseData && productPhaseData?.winner}
                                   {/* {data?.winner} */}
@@ -586,6 +588,8 @@ export default function MobileCompareTable({
                   <thead data-sticky-header-offset-y ref={ref}>
                     <tr className="catchy-title-mobile-view">
                       {slider_data?.map((data, dIndex) => {
+                        const globalIndex = swiperIndex * 2 + dIndex;
+                        // console.log(globalIndex, "globalIndex");
                         return (
                           <>
                             {type === "guide" && (
@@ -606,13 +610,16 @@ export default function MobileCompareTable({
                                   </span>
                                 </th>
                               )}
-                            {/* {console.log(chunkedData?.length)} */}
+
                             {type === "compare" &&
                               (chunkedData?.length > 1 ? (
                                 <th>
+                                  {/* {console.log(
+                                    productScoreLabelIndex === currentIndex
+                                  )} */}
                                   {productScoreLabelIndex !== "" &&
                                     productScoreLabelIndex ===
-                                      currentIndex + 1 && (
+                                      globalIndex  && (
                                       <span className="best-tag-product">
                                         {productPhaseData &&
                                           productPhaseData?.winner}
