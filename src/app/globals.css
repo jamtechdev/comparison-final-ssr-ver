@@ -2498,7 +2498,7 @@ tr:first-child th {
   position: relative;
   top: 80px;
   /* display: flex; */
-  right: 200px;
+  right: 220px;
   float: right;
 }
 .custom-spinner .spinner-border {
