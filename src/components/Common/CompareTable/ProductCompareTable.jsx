@@ -133,7 +133,12 @@ const ProductCompareTable = React.memo(
     // These funcation for add  Star on table value which was better than other
     // **start**
 
-    const addAsterisksToTopValue = (defaultNo, category, catAttribute, isHiddenShow = false) => {
+    const addAsterisksToTopValue = (
+      defaultNo,
+      category,
+      catAttribute,
+      isHiddenShow = false
+    ) => {
       const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
       const filterData = copiedFinalProducts
         .slice(0, defaultNo)
@@ -227,9 +232,10 @@ const ProductCompareTable = React.memo(
       return (
         <>
           {arrayOfObjects.map((item, attrIndex) => (
-            <td key={attrIndex}   className={
-              isHiddenShow  ? "display_none" : "display_block"
-            }>
+            <td
+              key={attrIndex}
+              className={isHiddenShow ? "display_none" : "display_block"}
+            >
               {item?.attribute_value.includes("⭐") ? (
                 <>
                   <div>
@@ -1021,88 +1027,90 @@ const ProductCompareTable = React.memo(
 
                   {/* here cat start  */}
 
-                  {
-                    category.attributes
-                      ?.sort((a, b) => a.position - b.position)
-                      .map((catAttribute, catAttributeIndex) => {
-                        isHiddenShow =
-                          !showAllAttributes[category.name] &&
-                          catAttributeIndex >= initialNoOfAttributes;
-                        return (
-                          <tr
-                            key={catAttributeIndex}
+                  {category.attributes
+                    ?.sort((a, b) => a.position - b.position)
+                    .map((catAttribute, catAttributeIndex) => {
+                      isHiddenShow =
+                        !showAllAttributes[category.name] &&
+                        catAttributeIndex >= initialNoOfAttributes;
+                      return (
+                        <tr
+                          key={catAttributeIndex}
+                          className={
+                            isHiddenTop ? "display_none" : "display_block"
+                          }
+                        >
+                          <th
                             className={
-                              isHiddenTop  ? "display_none" : "display_block"
+                              isHiddenShow
+                                ? "display_none sub-inner-padding "
+                                : "display_block sub-inner-padding"
                             }
                           >
-                            <th 
-                              className={
-                                isHiddenShow  ? "display_none sub-inner-padding " : "display_block sub-inner-padding"
-                              }
-                            >
-                              <div className="tooltip-title">
-                                {catAttribute.name}
-                                {(catAttribute.description ||
-                                  catAttribute.when_matters) && (
-                                  <div className="tooltip-display-content">
-                                    {catAttribute?.description && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.what_it_is}
-                                          :{" "}
-                                        </b>
-                                        {catAttribute?.description}
-                                      </p>
-                                    )}
+                            <div className="tooltip-title">
+                              {catAttribute.name}
+                              {(catAttribute.description ||
+                                catAttribute.when_matters) && (
+                                <div className="tooltip-display-content">
+                                  {catAttribute?.description && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.what_it_is}
+                                        :{" "}
+                                      </b>
+                                      {catAttribute?.description}
+                                    </p>
+                                  )}
 
-                                    {catAttribute?.when_matters && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.when_it_matters}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.when_matters}
-                                      </p>
-                                    )}
+                                  {catAttribute?.when_matters && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.when_it_matters}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.when_matters}
+                                    </p>
+                                  )}
 
-                                    {catAttribute?.importance && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.importance_text}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.importance}
-                                      </p>
-                                    )}
+                                  {catAttribute?.importance && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.importance_text}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.importance}
+                                    </p>
+                                  )}
 
-                                    {catAttribute?.good_value && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {productPhaseData &&
-                                            productPhaseData?.good_value_text}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.good_value}
-                                      </p>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            </th>
-                            {addAsterisksToTopValue(
-                              defaultNo,
-                              category,
-                              catAttribute,
-                              isHiddenShow
-                            )}
-                          </tr>
-                        );
-                      })}
+                                  {catAttribute?.good_value && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {productPhaseData &&
+                                          productPhaseData?.good_value_text}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.good_value}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </th>
+                          {addAsterisksToTopValue(
+                            defaultNo,
+                            category,
+                            catAttribute,
+                            isHiddenShow
+                          )}
+                        </tr>
+                      );
+                    })}
 
-                  {!isHiddenTop && isHiddenShow &&
+                  {!isHiddenTop &&
+                    isHiddenShow &&
                     category.attributes.length > initialNoOfAttributes && (
                       <tr className="text-center show_more_row">
                         <td colSpan="6">

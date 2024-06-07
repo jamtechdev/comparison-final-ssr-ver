@@ -113,7 +113,12 @@ const CompareTable = React.memo(
       setFullTable(categoryAttributes?.length);
     };
 
-    const addAsterisksToTopValue = (defaultNo, category, catAttribute) => {
+    const addAsterisksToTopValue = (
+      defaultNo,
+      category,
+      catAttribute,
+      isHiddenShow = false
+    ) => {
       const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
       const filterData = copiedFinalProducts
         .slice(0, defaultNo)
@@ -215,7 +220,10 @@ const CompareTable = React.memo(
       return (
         <>
           {arrayOfObjects.map((item, attrIndex) => (
-            <td key={attrIndex}>
+            <td
+              key={attrIndex}
+              className={isHiddenShow ? "display_none" : "display_block"}
+            >
               {item?.attribute_value.includes("⭐") ? (
                 <>
                   <div>
@@ -1059,12 +1067,16 @@ const CompareTable = React.memo(
                         <tr
                           key={catAttributeIndex}
                           className={
-                            isHiddenShow
-                              ? "display_none"
-                              : "display_block"
+                            isHiddenTop ? "display_none" : "display_block"
                           }
                         >
-                          <th className="sub-inner-padding xx_neet">
+                          <th
+                            className={
+                              isHiddenShow
+                                ? "display_none sub-inner-padding "
+                                : "display_block sub-inner-padding"
+                            }
+                          >
                             <div className="tooltip-title">
                               {catAttribute.name}
                               {(catAttribute.description ||
@@ -1120,7 +1132,8 @@ const CompareTable = React.memo(
                           {addAsterisksToTopValue(
                             defaultNo,
                             category,
-                            catAttribute
+                            catAttribute,
+                            isHiddenShow
                           )}
                         </tr>
                       );
