@@ -322,11 +322,13 @@ const WhyAccordionTab = React.memo(
                                         </>
                                       )}
                                     </span>
-
-                                    <QuestionIcon
-                                      attributes={item?.when_matters}
-                                      product={product}
-                                    />
+                                   
+                                    {item?.when_matters?.description && (
+                                      <QuestionIcon
+                                        attributes={item?.when_matters}
+                                        product={product}
+                                      />
+                                    )}
 
                                     <small className="d-block tooltip-title">
                                       {item?.hover_phase && (

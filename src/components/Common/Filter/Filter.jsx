@@ -17,6 +17,7 @@ export default function Filter({
   orderBy,
 }) {
   // (guidePhraseData);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sliderValues, setSliderValues] = useState({});
@@ -203,7 +204,7 @@ export default function Filter({
           if (brandValues) {
             brandValues.map((item) => {
               handelFilterActions("brand", "brand", { brand: item }, false);
-              (item);
+              item;
               document.getElementById(`${item}`).checked = false;
             });
           }
@@ -405,7 +406,7 @@ export default function Filter({
                   rangeVal={sliderPriceValues}
                   min={price?.min_price}
                   max={price?.max_price}
-                  unit="€"
+                  unit={guidePhraseData?.currency}
                   onChange={({ min, max }) => {
                     handelFilterActions(
                       "price",
@@ -421,7 +422,7 @@ export default function Filter({
                   rangeVal={sliderPriceValues}
                   min={initialPriceRange?.min_price}
                   max={initialPriceRange?.max_price}
-                  unit="€"
+                  unit={guidePhraseData?.currency}
                   onChange={({ min, max }) => {
                     // (min,max)
                     handelFilterActions(

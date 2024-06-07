@@ -1288,9 +1288,6 @@ const TechnicalAccordion = React.memo(
                                                   {
                                                     attributeValues?.info_not_verified_text
                                                   }
-                                                  {
-                                                    attributeValues?.info_not_verified_text
-                                                  }
                                                 </div>
                                               </div>
                                             )}

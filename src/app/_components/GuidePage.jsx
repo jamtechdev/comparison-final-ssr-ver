@@ -1032,6 +1032,7 @@ export default function GuidePage({
           </Row>
           <GuidePageTextArea guide={guide} />
         </Container>
+        {/* {console.log(guide?.page_phases?.currency)} */}
       </section>
       <section className="ptb-25 mobite-mb-20">
         <Container>
