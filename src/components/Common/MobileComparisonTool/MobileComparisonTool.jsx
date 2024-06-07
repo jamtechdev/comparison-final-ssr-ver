@@ -181,7 +181,8 @@ export default function MobileComparisonTool({
                                 style={{ color: "#fff" }}
                               >
                                 {" "}
-                                {item?.price_websites[0]?.price} €{" "}
+                                {item?.price_websites[0]?.price}{" "}
+                                {item?.currency}{" "}
                               </a>
                             </span>
                           )}
@@ -208,7 +209,7 @@ export default function MobileComparisonTool({
                         <div className="not-availabel">
                           {/* <span className="txt">NOT AVAILABLE</span> */}
                           <i>N/A</i>
-                          <span className="price">~ {item?.price} €</span>
+                          <span className="price">~ {item?.price} {item?.currency}</span>
                         </div>
                       </>
                     )}
