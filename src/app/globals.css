@@ -2581,8 +2581,16 @@ tr:first-child th {
     max-width: 250px;
     float: none;
     padding: 70px 0px 0 75px;
+  }
+  #mobile-compare-tabler .device-name a {
+    max-width: 250px !important;
+  }
 }
-#mobile-compare-tabler .device-name a{
-  max-width: 250px !important;
+
+.hide-some .conditional-attribute {
+  display: none;
 }
+
+.show-all .conditional-attribute {
+  display: table-row;
 }

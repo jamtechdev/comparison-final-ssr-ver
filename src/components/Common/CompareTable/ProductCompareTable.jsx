@@ -133,7 +133,7 @@ const ProductCompareTable = React.memo(
     // These funcation for add  Star on table value which was better than other
     // **start**
 
-    const addAsterisksToTopValue = (defaultNo, category, catAttribute) => {
+    const addAsterisksToTopValue = (defaultNo, category, catAttribute, isHiddenShow = false) => {
       const copiedFinalProducts = JSON.parse(JSON.stringify(finalProducts));
       const filterData = copiedFinalProducts
         .slice(0, defaultNo)
@@ -227,7 +227,9 @@ const ProductCompareTable = React.memo(
       return (
         <>
           {arrayOfObjects.map((item, attrIndex) => (
-            <td key={attrIndex}>
+            <td key={attrIndex}   className={
+              isHiddenShow  ? "display_none" : "display_block"
+            }>
               {item?.attribute_value.includes("⭐") ? (
                 <>
                   <div>
@@ -1019,7 +1021,7 @@ const ProductCompareTable = React.memo(
 
                   {/* here cat start  */}
 
-                  {!isHiddenTop &&
+                  {
                     category.attributes
                       ?.sort((a, b) => a.position - b.position)
                       .map((catAttribute, catAttributeIndex) => {
@@ -1030,10 +1032,14 @@ const ProductCompareTable = React.memo(
                           <tr
                             key={catAttributeIndex}
                             className={
-                              isHiddenShow ? "display_none" : "display_block"
+                              isHiddenTop  ? "display_none" : "display_block"
                             }
                           >
-                            <th className="sub-inner-padding">
+                            <th 
+                              className={
+                                isHiddenShow  ? "display_none sub-inner-padding " : "display_block sub-inner-padding"
+                              }
+                            >
                               <div className="tooltip-title">
                                 {catAttribute.name}
                                 {(catAttribute.description ||
@@ -1089,7 +1095,8 @@ const ProductCompareTable = React.memo(
                             {addAsterisksToTopValue(
                               defaultNo,
                               category,
-                              catAttribute
+                              catAttribute,
+                              isHiddenShow
                             )}
                           </tr>
                         );

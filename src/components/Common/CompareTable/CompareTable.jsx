@@ -93,6 +93,14 @@ const CompareTable = React.memo(
       }
       return null;
     };
+    const [showAllAttributes, setShowAllAttributes] = useState({});
+
+    const handleShowAllAttributes = (categoryName) => {
+      setShowAllAttributes((prev) => ({
+        ...prev,
+        [categoryName]: !prev[categoryName],
+      }));
+    };
 
     const handlePagination = (categoryName) => {
       let updatedPage =
@@ -960,170 +968,183 @@ const CompareTable = React.memo(
             })}
             {/* {(categoryAttributes)} */}
 
-            {categoryAttributes
-              ?.slice(0, fullTable || 2)
-              .map((category, categoryIndex) => {
-                return (
-                  <Fragment key={categoryIndex}>
-                    <tr className="tr-bg-color">
-                      <th>
-                        <div className="tooltip-title">
-                          {category.name}
-                          {(category.description || category.when_matters) && (
-                            <div className="tooltip-display-content">
-                              {category?.description && (
-                                <p className="mb-2">
-                                  <b>
-                                    {guidePhraseData &&
-                                      guidePhraseData?.when_it_matters}
-                                    :{" "}
-                                  </b>
-                                  {category?.description}
-                                </p>
-                              )}
-
-                              {category?.when_matters && (
-                                <p className="mb-2">
-                                  <b>
-                                    {guidePhraseData &&
-                                      guidePhraseData?.when_it_matters}
-                                    :{" "}
-                                  </b>{" "}
-                                  {category?.when_matters}
-                                </p>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      </th>
-                      {finalProducts
-                        .slice(0, defaultNo)
-                        .map((product, productIndex) => {
-                          return (
-                            <td key={productIndex}>
-                              <span
-                                className="count"
-                                style={{
-                                  background:
-                                    product.attributes[category.name] &&
-                                    product.attributes[category.name].length >
-                                      0 &&
-                                    product.attributes[
-                                      category.name
-                                    ]?.[0].attribute_evaluation?.toFixed(1) >=
-                                      7.5
-                                      ? "#093673"
-                                      : product.attributes[
-                                          category.name
-                                        ]?.[0].attribute_evaluation?.toFixed(
-                                          1
-                                        ) >= 5 &&
-                                        product.attributes[
-                                          category.name
-                                        ]?.[0].attribute_evaluation?.toFixed(
-                                          1
-                                        ) < 7.5
-                                      ? "#437ECE"
-                                      : " #85B2F1",
-                                }}
-                              >
-                                {/* {(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
-                                {product.attributes[
-                                  category.name
-                                ]?.[0]?.attribute_evaluation?.toFixed(1)}{" "}
-                              </span>
-                            </td>
-                          );
-                        })}
-                    </tr>
-                    {/* {(category.attributes)} */}
-                    {category.attributes
-                      ?.sort((a, b) => a.position - b.position)
-                      .slice(
-                        0,
-                        pagination[category.name] || initialNoOfCategories
-                      )
-                      .map((catAttribute, catAttributeIndex) => {
-                        return (
-                          <tr key={catAttributeIndex} className="">
-                            <th className="sub-inner-padding">
-                              <div className="tooltip-title">
-                                {catAttribute.name}
-                                {(catAttribute.description ||
-                                  catAttribute.when_matters) && (
-                                  <div className="tooltip-display-content">
-                                    {catAttribute?.description && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {guidePhraseData &&
-                                            guidePhraseData?.what_it_is}
-                                          :{" "}
-                                        </b>
-                                        {catAttribute?.description}
-                                      </p>
-                                    )}
-
-                                    {catAttribute?.when_matters && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {guidePhraseData &&
-                                            guidePhraseData?.when_it_matters}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.when_matters}
-                                      </p>
-                                    )}
-
-                                    {catAttribute?.importance && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {guidePhraseData &&
-                                            guidePhraseData?.importance_text}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.importance}
-                                      </p>
-                                    )}
-
-                                    {catAttribute?.good_value && (
-                                      <p className="mb-2">
-                                        <b>
-                                          {guidePhraseData &&
-                                            guidePhraseData?.good_value_text}
-                                          :{" "}
-                                        </b>{" "}
-                                        {catAttribute?.good_value}
-                                      </p>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            </th>
-                            {addAsterisksToTopValue(
-                              defaultNo,
-                              category,
-                              catAttribute
+            {categoryAttributes?.map((category, categoryIndex) => {
+              const isHiddenTop = fullTable === 2 && categoryIndex >= 2;
+              let isHiddenShow = true;
+              return (
+                <Fragment key={categoryIndex}>
+                  {/* ${
+                      isHiddenTop ? "display_none" : "display_block"
+                    }`*/}
+                  <tr
+                    className={`tr-bg-color  ${
+                      isHiddenTop ? "display_none" : "display_block"
+                    } `}
+                  >
+                    <th>
+                      <div className="tooltip-title">
+                        {category.name}
+                        {(category.description || category.when_matters) && (
+                          <div className="tooltip-display-content">
+                            {category?.description && (
+                              <p className="mb-2">
+                                <b>
+                                  {guidePhraseData &&
+                                    guidePhraseData?.when_it_matters}
+                                  :{" "}
+                                </b>
+                                {category?.description}
+                              </p>
                             )}
-                          </tr>
+
+                            {category?.when_matters && (
+                              <p className="mb-2">
+                                <b>
+                                  {guidePhraseData &&
+                                    guidePhraseData?.when_it_matters}
+                                  :{" "}
+                                </b>{" "}
+                                {category?.when_matters}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </th>
+                    {finalProducts
+                      .slice(0, defaultNo)
+                      .map((product, productIndex) => {
+                        return (
+                          <td key={productIndex}>
+                            <span
+                              className="count"
+                              style={{
+                                background:
+                                  product.attributes[category.name] &&
+                                  product.attributes[category.name].length >
+                                    0 &&
+                                  product.attributes[
+                                    category.name
+                                  ]?.[0].attribute_evaluation?.toFixed(1) >= 7.5
+                                    ? "#093673"
+                                    : product.attributes[
+                                        category.name
+                                      ]?.[0].attribute_evaluation?.toFixed(1) >=
+                                        5 &&
+                                      product.attributes[
+                                        category.name
+                                      ]?.[0].attribute_evaluation?.toFixed(1) <
+                                        7.5
+                                    ? "#437ECE"
+                                    : " #85B2F1",
+                              }}
+                            >
+                              {/* {(product.attributes[category.name].unit && product.attributes[category.name].unit )} */}
+                              {product.attributes[
+                                category.name
+                              ]?.[0]?.attribute_evaluation?.toFixed(1)}{" "}
+                            </span>
+                          </td>
                         );
                       })}
-                    {category.attributes.length >
-                      (pagination[category.name] || initialNoOfCategories) && (
+                  </tr>
+                  {/* {(category.attributes)} */}
+                  {category.attributes
+                    ?.sort((a, b) => a.position - b.position)
+                    ?.map((catAttribute, catAttributeIndex) => {
+                      isHiddenShow =
+                        !showAllAttributes[category.name] &&
+                        catAttributeIndex >= initialNoOfCategories;
+                      return (
+                        <tr
+                          key={catAttributeIndex}
+                          className={
+                            isHiddenShow
+                              ? "display_none"
+                              : "display_block"
+                          }
+                        >
+                          <th className="sub-inner-padding xx_neet">
+                            <div className="tooltip-title">
+                              {catAttribute.name}
+                              {(catAttribute.description ||
+                                catAttribute.when_matters) && (
+                                <div className="tooltip-display-content">
+                                  {catAttribute?.description && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {guidePhraseData &&
+                                          guidePhraseData?.what_it_is}
+                                        :{" "}
+                                      </b>
+                                      {catAttribute?.description}
+                                    </p>
+                                  )}
+
+                                  {catAttribute?.when_matters && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {guidePhraseData &&
+                                          guidePhraseData?.when_it_matters}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.when_matters}
+                                    </p>
+                                  )}
+
+                                  {catAttribute?.importance && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {guidePhraseData &&
+                                          guidePhraseData?.importance_text}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.importance}
+                                    </p>
+                                  )}
+
+                                  {catAttribute?.good_value && (
+                                    <p className="mb-2">
+                                      <b>
+                                        {guidePhraseData &&
+                                          guidePhraseData?.good_value_text}
+                                        :{" "}
+                                      </b>{" "}
+                                      {catAttribute?.good_value}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </th>
+                          {addAsterisksToTopValue(
+                            defaultNo,
+                            category,
+                            catAttribute
+                          )}
+                        </tr>
+                      );
+                    })}
+                  {!isHiddenTop &&
+                    isHiddenShow &&
+                    category.attributes.length > initialNoOfCategories && (
                       <tr className="text-center show_more_row">
                         <td colSpan="6">
                           <span
                             className="show_more"
-                            onClick={() => handlePagination(category.name)}
+                            onClick={() =>
+                              handleShowAllAttributes(category.name)
+                            }
                           >
                             {guidePhraseData && guidePhraseData?.show_all}{" "}
-                            <i className="ri-add-line"></i>
+                            <i className="ri-add-line"></i>{" "}
                           </span>
                         </td>
                       </tr>
                     )}
-                  </Fragment>
-                );
-              })}
+                </Fragment>
+              );
+            })}
           </tbody>
         </Table>
         {fullTable == 2 && (
