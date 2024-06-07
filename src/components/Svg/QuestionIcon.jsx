@@ -191,7 +191,7 @@ const QuestionIcon = ({
               )}
               {<WhyAccordionTab /> && product && (
                 <b>
-                  {product?.page_phases?.importance_text}:{""}
+                  {product?.page_phases?.importance_text}:{""}{" "}
                 </b>
               )}
               {<CompareDiv /> && comparePhaseData && (
@@ -206,17 +206,17 @@ const QuestionIcon = ({
             <p className="mb-2">
               {<Product /> && guidePhraseData && (
                 <b>
-                  {guidePhraseData.good_value_text}: {""}
+                  {guidePhraseData.good_value_text}:{""}{" "}
                 </b>
               )}
               {<ProductPage /> && productPhaseData && (
                 <b>
-                  {productPhaseData.good_value_text}: {""}
+                  {productPhaseData.good_value_text}:{""}{" "}
                 </b>
               )}
               {<WhyAccordionTab /> && product && (
                 <b>
-                  {product?.page_phases?.good_value_text}:{""}
+                  {product?.page_phases?.good_value_text}:{""}{" "}
                 </b>
               )}
               {<CompareDiv /> && comparePhaseData && (

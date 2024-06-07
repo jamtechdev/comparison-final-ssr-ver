@@ -1525,6 +1525,7 @@ function ProductPage({
                                       {attribute}
                                     </h3>
                                     <Questiontool
+                                      productPhaseData={product?.page_phases}
                                       attributes={
                                         product.attributes[attribute][0]
                                           ?.attribute_category
