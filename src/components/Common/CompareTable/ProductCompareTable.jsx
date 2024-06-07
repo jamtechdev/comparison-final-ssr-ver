@@ -941,12 +941,13 @@ const ProductCompareTable = React.memo(
               );
             })}
             {removeLastObjectFromCategory.map((category, categoryIndex) => {
-              const isHidden = fullTable === 2 && categoryIndex >= 2;
+              const isHiddenTop = fullTable === 2 && categoryIndex >= 2;
+              let isHiddenShow = true;
               return (
                 <Fragment key={categoryIndex}>
                   <tr
                     className={`tr-bg-color ${
-                      isHidden ? "display_none" : "display_block"
+                      isHiddenTop ? "display_none" : "display_block"
                     }`}
                   >
                     <th>
@@ -1015,93 +1016,103 @@ const ProductCompareTable = React.memo(
                         );
                       })}
                   </tr>
-                  {category.attributes
-                    ?.sort((a, b) => a.position - b.position)
-                    .map((catAttribute, catAttributeIndex) => {
-                      const isHidden =
-                        !showAllAttributes[category.name] &&
-                        catAttributeIndex >= initialNoOfAttributes;
-                      return (
-                        <tr
-                          key={catAttributeIndex}
-                          className={
-                            isHidden ? "display_none" : "display_block"
-                          }
-                        >
-                          <th className="sub-inner-padding">
-                            <div className="tooltip-title">
-                              {catAttribute.name}
-                              {(catAttribute.description ||
-                                catAttribute.when_matters) && (
-                                <div className="tooltip-display-content">
-                                  {catAttribute?.description && (
-                                    <p className="mb-2">
-                                      <b>
-                                        {productPhaseData &&
-                                          productPhaseData?.what_it_is}
-                                        :{" "}
-                                      </b>
-                                      {catAttribute?.description}
-                                    </p>
-                                  )}
 
-                                  {catAttribute?.when_matters && (
-                                    <p className="mb-2">
-                                      <b>
-                                        {productPhaseData &&
-                                          productPhaseData?.when_it_matters}
-                                        :{" "}
-                                      </b>{" "}
-                                      {catAttribute?.when_matters}
-                                    </p>
-                                  )}
+                  {/* here cat start  */}
 
-                                  {catAttribute?.importance && (
-                                    <p className="mb-2">
-                                      <b>
-                                        {productPhaseData &&
-                                          productPhaseData?.importance_text}
-                                        :{" "}
-                                      </b>{" "}
-                                      {catAttribute?.importance}
-                                    </p>
-                                  )}
+                  {!isHiddenTop &&
+                    category.attributes
+                      ?.sort((a, b) => a.position - b.position)
+                      .map((catAttribute, catAttributeIndex) => {
+                        isHiddenShow =
+                          !showAllAttributes[category.name] &&
+                          catAttributeIndex >= initialNoOfAttributes;
+                        return (
+                          <tr
+                            key={catAttributeIndex}
+                            className={
+                              isHiddenShow ? "display_none" : "display_block"
+                            }
+                          >
+                            <th className="sub-inner-padding">
+                              <div className="tooltip-title">
+                                {catAttribute.name}
+                                {(catAttribute.description ||
+                                  catAttribute.when_matters) && (
+                                  <div className="tooltip-display-content">
+                                    {catAttribute?.description && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.what_it_is}
+                                          :{" "}
+                                        </b>
+                                        {catAttribute?.description}
+                                      </p>
+                                    )}
 
-                                  {catAttribute?.good_value && (
-                                    <p className="mb-2">
-                                      <b>
-                                        {productPhaseData &&
-                                          productPhaseData?.good_value_text}
-                                        :{" "}
-                                      </b>{" "}
-                                      {catAttribute?.good_value}
-                                    </p>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          </th>
-                          {addAsterisksToTopValue(
-                            defaultNo,
-                            category,
-                            catAttribute
-                          )}
-                        </tr>
-                      );
-                    })}
-                  {category.attributes.length > initialNoOfAttributes && (
-                    <tr className="text-center show_more_row">
-                      <td colSpan="6">
-                        <span
-                          className="show_more"
-                          onClick={() => handleShowAllAttributes(category.name)}
-                        >
-                          {productPhaseData && productPhaseData?.show_all}{" "}
-                          <i className="ri-add-line"></i>
-                        </span>
-                      </td>
-                    </tr>
-                  )}
+                                    {catAttribute?.when_matters && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.when_it_matters}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.when_matters}
+                                      </p>
+                                    )}
+
+                                    {catAttribute?.importance && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.importance_text}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.importance}
+                                      </p>
+                                    )}
+
+                                    {catAttribute?.good_value && (
+                                      <p className="mb-2">
+                                        <b>
+                                          {productPhaseData &&
+                                            productPhaseData?.good_value_text}
+                                          :{" "}
+                                        </b>{" "}
+                                        {catAttribute?.good_value}
+                                      </p>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            </th>
+                            {addAsterisksToTopValue(
+                              defaultNo,
+                              category,
+                              catAttribute
+                            )}
+                          </tr>
+                        );
+                      })}
+
+                  {!isHiddenTop && isHiddenShow &&
+                    category.attributes.length > initialNoOfAttributes && (
+                      <tr className="text-center show_more_row">
+                        <td colSpan="6">
+                          <span
+                            className="show_more"
+                            onClick={() =>
+                              handleShowAllAttributes(category.name)
+                            }
+                          >
+                            {productPhaseData && productPhaseData?.show_all}{" "}
+                            <i className="ri-add-line"></i>{" "}
+                          </span>
+                        </td>
+                      </tr>
+                    )}
+
+                  {/* shpow more end  */}
                 </Fragment>
               );
             })}
